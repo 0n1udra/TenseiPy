@@ -12,19 +12,12 @@ def wait(): # pauses game, press 'enter' to continue
 # hides errors
 class devNull(): pass
 # sys.stderr = devNull
-
 # Variables
 # t = niceness, 0 = nice, 1 = mean
-t = 0
-timeSlept = 12
-back = "Go back"
-Menu = "Back to main menu"
-
+t, timeSlept, back, Menu = 0, 12, "Go back", "Back to main menu"
 # GAME#		####################################################################################################################################
-
 class Game1:  # jump off, ask time, go to hell ..
     def __init__(self): self.Game_1() # init function calles 'Game_1' when 'Game1' class is called
-
     def Game_1(self):  # jumping off
         # Text        #####         #####         #####         #####         #####
                 # you're falling
@@ -38,7 +31,6 @@ class Game1:  # jump off, ask time, go to hell ..
                 # time inpur error
         G1_err = ["That didn't work", "That didn't work jackass, tray a gain"]
         #####         #####         #####         #####         #####        #####
-
         for i in range(len(G1)): print(G1[t][i]), sleep(5)
             # falling to you're DOOM, still falling, what time is it
         wait(), clear()
@@ -52,11 +44,8 @@ class Game1:  # jump off, ask time, go to hell ..
                         # that did nothing, falling..falling..falling, splat you dead, Game over
                     input("quit > ")
                     exit()
-            except:
-                print(G1_err[t]), check()
+            except: print(G1_err[t]), check()
         check(inp)
-
-
     def Game_1_2(self):  # in hell
         # Text        #####         #####         #####         #####         #####
                 # Game_1_2 Hell
@@ -77,10 +66,7 @@ class Game1:  # jump off, ask time, go to hell ..
         G12_err = ["dunno what that was, can't use it. Sorry, try again",
                    "OK you know that won't work, stop wasting my fucking time asshole!!!. My time is much much much much more important then your's!!. so type something in, useful!"]
         #####         #####         #####         #####         #####        #####
-
-        for i in range(len(G12)):
-            print(G12[t][i])
-            sleep(3)
+        for i in range(len(G12)): print(G12[t][i]), sleep(3)
             # going to hell, offer the make a pack, HELL LEVEL 1
         clear()
         print("\n", G12[t][3])  # now in hell, see Satan
@@ -92,13 +78,10 @@ class Game1:  # jump off, ask time, go to hell ..
         inp = input("Soooo > ")  # input for this level
         try:
             inp = int(inp)
-            exit()
-            run[x]()
+            exit(), run[x]()
         except: print(G12_err[t]), input() # error
-
 class Game2:  # Game 2, ask rock, ground,
     def __init__(self): self.Game_2()
-
     def Game_2(self):  # ask rock to go to ground
         # Text        #####         #####         #####         #####         #####
                 # how to ask rock
@@ -133,7 +116,6 @@ class Game2:  # Game 2, ask rock, ground,
                            3: "uh NO, go fuck you're self instead", 4: "Why the fuck would I need money? Dumbass!",
                            5: "Hey you cunt! don't ever fucking talk to me like that, or you're going be in pain for enternity(I know the Devil)"}}
         #####         #####         #####         #####         #####        #####
-
         clear()
         print("\n", G2_a[t])  # How would you like to ask
         print("\n1. nicely, 2. Rudely, 3. Sassy, 4. Bribe, .")
@@ -143,26 +125,16 @@ class Game2:  # Game 2, ask rock, ground,
         wait()
         print(G2_r[t], "\n > ", rockAnswers[t][x])  # rock responds
         wait()
-        if x == 1:
-            print("\n", G2_g[t])  # on ground now
-            wait()
-            self.Game_2_1()  # goes to Game_2_1
-        else:
-            print("\n", G2_e[t])  # got you nowhere
-            wait()
-            self.Game_2()  # re-runs the program(Game_2)
-
+        if x == 1: print("\n", G2_g[t]), wait(), self.Game_2_1()  # now on ground, goes to Game_2_1
+        else: print("\n", G2_e[t]), wait(), self.Game_2()  #got you no where,  re-runs the program(Game_2)
     def Game_2_1(self):  # on the ground
         # Text        #####         #####         #####         #####         #####
         G2_1_M = []
         #####         #####         #####         #####         #####        #####
-
         for i in range(len(G2_1_M)): print(i,')',G2_1_M[t][i])
         wait(), exit()
-
 class Game3:  # Game 3, yelling
     def __init__(self): self.Game_3()
-
     def Game_3(self):
         # Text        #####         #####         #####         #####         #####
                 # now yelling at rock
@@ -175,23 +147,17 @@ class Game3:  # Game 3, yelling
         print(G3_1[t])  # .............
         input("That got did nothing, try something else > ")
         wait(), exit()
-
 class Game4:  # Game_4, Begging
     def __init__(self): self.Game_4()
-
     def Game_4(self):
         # Text        #####         #####         #####         #####         #####
-        G4 = []
-        G4_M = []
+        G4 = [], G4_M = []
         #####         #####         #####         #####         #####        #####
-
         print(G4[t])
         for i in range(len(G4_M[t])): print(i,')',G4_M[i])
         wait()
-
 class Game5:  # Game 5, sleep, dream, ..
     def __init__(self): self.Game_5()
-
     def Game_5(self):  # sleeping
         # Text        #####         #####         #####         #####         #####
                 # going to bed
@@ -206,7 +172,6 @@ class Game5:  # Game 5, sleep, dream, ..
         G51_4 = ["Morning, you slept in total of > ",
                  "Morning bitch(hope now you can think of something better to do), you have wasted total > "]
         #####         #####         #####         #####         #####        #####
-
         global timeSlept
         print(G51[t])  # thinking can't get off, go to bed
         print(G51_2[t])  # now sleeping
@@ -224,12 +189,8 @@ class Game5:  # Game 5, sleep, dream, ..
         print(G51_4[t], timeSlept, "hours")  # Morning, timed slept
         wait()
         timeSlept = timeSlept + 12 * 1.5  # adds time to total time slept
-        if timeSlept > 84:  # checks to see if you slept over 84 hours
-            self.Game_5_1()
-        else:
-            clear()
-            Menu()
-
+        if timeSlept > 84: self.Game_5_1() # checks to see if you slept over 84 hours
+        else: clear(), Menu()
     def Game_5_1(self):  # dream
         # Text        #####         #####         #####         #####         #####
                 # now in dream world, congrats
@@ -246,12 +207,8 @@ class Game5:  # Game 5, sleep, dream, ..
         G52_M_1 = ["this place look and smell nice, look huge lollipops, rainbows, and candy!",
                    "FUCK! this place have lolli-shits and rainbow bullshit!\nI guess this is going to look like hell in a moment!"]
         #####         #####         #####         #####         #####        #####
-
-        for i in range(len(G52_M)):
-            print(i,')',G52_M[t][i])
-        print(G52[t])
-        print(G52_S[t])
-        print(G52_M_1[t])
+        for i in range(len(G52_M)): print(i,')',G52_M[t][i])
+        print(G52[t]), print(G52_S[t]), print(G52_M_1[t])
         inp = input(G52_i[t])
 
 class Quit:
@@ -276,7 +233,6 @@ class LoadingScreens:
 
 class Startup:
     def __init__(self): self.Niceness()
-
     def Start_menu(self):
         clear()
         # Text        #####         #####         #####         #####         #####
@@ -300,14 +256,9 @@ class Startup:
         inp = input("choose > ")  # ask user to for what option they want to do, and then goes and runs it
         try:
             inp = int(inp) # tries to convert input to integer
-            if inp > 4:
-                print(extra[inp][t])
-                self.Start_menu()
+            if inp > 4: print(extra[inp][t]), self.Start_menu()
             else: run[inp]() # runs the game with the input
-        except:
-            input(Sm_err[t])
-            self.Start_menu()
-
+        except: input(Sm_err[t]), self.Start_menu() # gives error, then goes back to main menu
     def Niceness(self):  # ask user if they want the game to be nice or mean, mean is real mean
         global t
         clear()
@@ -319,9 +270,6 @@ class Startup:
             t = inp # sets the niceness of the game
             # loadingSc[inp]() # runs the loading screen for mean or nice
             self.Start_menu() # this is so if i don't want a loading scren it well go streight to the menu
-        except: # if what inputted doesn't work this runs
-            input("try again > ")
-            self.Niceness()
-
+        except: input("try again > "),  self.Niceness() # if what inputted doesn't work this runs
 Startup()
 ###################################################################################################################################################
