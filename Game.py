@@ -12,7 +12,6 @@ def wait(): # pauses game, press 'enter' to continue
 # hides errors
 class devNull(): pass
 # sys.stderr = devNull
-print("yolo")
 # Variables
 # t = niceness, 0 = nice, 1 = mean
 t, timeSlept, back, Menu = 0, 12, "Go back", "Back to main menu"
