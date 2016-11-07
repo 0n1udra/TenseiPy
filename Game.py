@@ -7,8 +7,7 @@ def sleep(amount): time.sleep(amount) # sleep funciton does the same as time.sle
 def sudo(command): os.system(command) # quick os command, so i don't have to type os.system(command)
 def clear(): print("\n" * 50) # clear clears the screen
 def wait(): # pauses game, press 'enter' to continue
-    Wait = ["Press 'Enter' to continue", "Press 'Enter' to continue(is that to complicated for you?)"]
-    input(Wait[t])
+    Wait = ["Press 'Enter' to continue > ", "Press 'Enter'! > "], input(Wait[t])
 # hides errors
 class devNull(): pass
 # sys.stderr = devNull
@@ -21,31 +20,33 @@ class Game1:  # jump off, ask time, go to hell ..
     def Game_1(self):  # jumping off
         # Text        #####         #####         #####         #####         #####
                 # you're falling
-        G1 = [["You're now falling to your DOOM!", "Still falling", "How long has it been? do you have the time?"],
+        G1 = [["You're now falling to", "Still falling", "Any last words?"],
               ["You're now falling, nice job DUMBASS!", "still fucking falling to you're death",
-               "Damn how long has it been, what's the time"]]
+               "Any last pathetic words?"]]
                 # ask for time
-        G1_2 = [["Thanks, that did nothing", "Falling...Falling...Falling", "SPLA..you dead!", "GAME OVER"],
-                ["Really you thought the time was important, idiot", "Die already", "Splat....now you're dead, LOL",
+        G1_2 = [["Thanks, that did nothing", "Falling...Falling...Falling", "SPLAT...you dead!", "GAME OVER"],
+                ["Those words didn't make any difference", "Die already", "Splat....now you're dead, LOL",
                  "GAME OVER BITCH!"]]
                 # time inpur error
         G1_err = ["That didn't work", "That didn't work jackass, tray a gain"]
-        #####         #####         #####         #####         #####        #####
+       		# keywords to go to Hell
+        G1_H_kw = ["hell!", "satan"]
+	#####         #####         #####         #####         #####        #####
         for i in range(len(G1)): print(G1[t][i]), sleep(5)
             # falling to you're DOOM, still falling, what time is it
         wait(), clear()
-        inp = input("time? > ")
-        def check(inp):
+        inp = input("Word(s) > ")
+        while True:
             try:
                 inp = str(inp)
-                if inp == "6:66": self.Game_1_2()
+                if inp.lower() in G1_H_kw: 
+                    self.Game_1_2()
+                    break
                 else:
                     for i in range(len(G1_2)): print(G1_2[t][i]), sleep(3) # prints the options, and sleeps for 3 seconds between each print
                         # that did nothing, falling..falling..falling, splat you dead, Game over
-                    input("quit > ")
-                    exit()
+                    input("quit > "), exit()
             except: print(G1_err[t]), check()
-        check(inp)
     def Game_1_2(self):  # in hell
         # Text        #####         #####         #####         #####         #####
                 # Game_1_2 Hell
@@ -69,17 +70,16 @@ class Game1:  # jump off, ask time, go to hell ..
         for i in range(len(G12)): print(G12[t][i]), sleep(3)
             # going to hell, offer the make a pack, HELL LEVEL 1
         clear()
-        print("\n", G12[t][3])  # now in hell, see Satan
-        print("\n", G12[t][4])  # what are you going to do now
+        print("\n", G12[t][3]), print("\n", G12[t][4])  #1 Now in Hell, see satan. 2 what are you going to do now
         wait(), clear()
         for i in range(len(G12_M)): print(i,')',G12_M[t][i])
             # 0 attempt to sneak away, 1, beg for soul, 2 stay for ever.
-        run = []
-        inp = input("Soooo > ")  # input for this level
+        run, inp = [], input("Soo > ") # 1 input options. 2 input for this level
         try:
             inp = int(inp)
             exit(), run[x]()
-        except: print(G12_err[t]), input() # error
+        except: 
+            print(G12_err[t]), input() # error
 class Game2:  # Game 2, ask rock, ground,
     def __init__(self): self.Game_2()
     def Game_2(self):  # ask rock to go to ground
@@ -210,27 +210,22 @@ class Game5:  # Game 5, sleep, dream, ..
         for i in range(len(G52_M)): print(i,')',G52_M[t][i])
         print(G52[t]), print(G52_S[t]), print(G52_M_1[t])
         inp = input(G52_i[t])
-
 class Quit:
     def __init__(self):
         Qt = ["goodbye, thanks for playing :)",
               "are you quiting becuase you suck or some other reason, anyway bye bye wimp"]
-        input(Qt[t], "> ")
-        quit()
+        input(Qt[t], "> "), quit()
 # STARTUP#		#####################################################################################################################################
-
 class LoadingScreens:
     def Loading_screen_0():  # nice loading screen, <(^.^)> (kirby)
         clear()
         Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', 'WELCOME']
         for i in range(len(Kirby)): print(i), sleep(2)
         input("CONTINUE > ")
-
     def Loading_screen_1():  # mean loading screen, it's in binary(each section is a letter)
         Binary = ['LOADING \n','01000100', ' 01001001',' 01000011',' 01001011',' 01001000','  01000001', ' 01000100', ' 00100001']
         for i in range(len(Binary)): print(i), sleep(2)
         input("lol, don't try to translate it! CONTINUE >")
-
 class Startup:
     def __init__(self): self.Niceness()
     def Start_menu(self):
@@ -256,8 +251,8 @@ class Startup:
         inp = input("choose > ")  # ask user to for what option they want to do, and then goes and runs it
         try:
             inp = int(inp) # tries to convert input to integer
-            if inp > 4: print(extra[inp][t]), self.Start_menu()
-            else: run[inp]() # runs the game with the input
+            if inp > 4: print(extra[inp][t]), self.Start_menu() # cheks to see if input goes to extras
+            else: run[inp]() # runs the game that corresponds to input
         except: input(Sm_err[t]), self.Start_menu() # gives error, then goes back to main menu
     def Niceness(self):  # ask user if they want the game to be nice or mean, mean is real mean
         global t
@@ -266,8 +261,7 @@ class Startup:
         inp = input("0) nice. 1) mean > ")
         loadingSc = [LoadingScreens.Loading_screen_0, LoadingScreens.Loading_screen_1] # list of the different loading screens
         try:
-            inp = int(inp)
-            t = inp # sets the niceness of the game
+            t = int(inp) # sets the niceness of the game
             # loadingSc[inp]() # runs the loading screen for mean or nice
             self.Start_menu() # this is so if i don't want a loading scren it well go streight to the menu
         except: input("try again > "),  self.Niceness() # if what inputted doesn't work this runs
