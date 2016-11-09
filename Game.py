@@ -44,7 +44,7 @@ class Game1:  # jump off, ask time, go to hell ..
 		# time inpur error
 		G1_err = ["That didn't work : "]
 		# keywords to go to Hell. kw = keywords
-		G1_H_kw = ["hell!", "satan"]
+		G1_H_kw = ["Dark Lord Satan, I offer thee my soul!", "1", "2"]
 		#####         #####         #####         #####         #####        #####
 
 		for i in range(len(G1)): print(G1[t][i]), sleep(5)
@@ -331,7 +331,7 @@ class Startup:
 		print("NOTE: ':' means press enter with no input. '>' means input something\n")
 		print("Do you want to play nice or mean?")
 		inp = input("0) nice. 1) mean > ")
-		loadingSc = [LoadingScreens.Loading_screen_0, LoadingScreens.Loading_screen_1]  # list of the different loading screens
+		loadingSc = [LoadingScreens.Loading_screen_0] # LoadingScreens.Loading_screen_1]  # list of the different loading screens
 		try:
 			t = int(inp)  # sets the niceness of the game
 			# loadingSc[inp]() # runs the loading screen for mean or nice
