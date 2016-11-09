@@ -1,9 +1,16 @@
 # SETUP#		#########################################################################################################################################
 # libraries I use
-import random
-from time import sleep
+import random, sys
+# sys is for errors
+import time #from time import sleep # this is temporary
 # time is for the delays and pauses
+# hides errors, puts errors to devNull, which 'pass', does nothing
+class devNull(): pass
+sys.stderr = devNull()
 
+def sleep(x): # temporary, to remove pauses
+    x = None
+    time.sleep(0)
 # makes typing easier, shortcuts
 def pr(string): print(string, end=' ')
 # prints text on same line, so i don't have to add "end=' '" to each line of print
@@ -15,21 +22,16 @@ def wait(): input(": ")
 # pauses game, press 'enter' to continue
 
 def game_Over():
+    inp = input("Would you like to continue? > ")
     try: # this is if somebody inputs something that is not usable it goes to except, instead of crasing
-        inp = str(input("Would you like ot continue? > "))
         if inp in ('y', 'yes'):
             Startup()
         else:
             print("Thanks for playing!")
             exit()
-    except:
-        print("That didn't work : ")
-        game_Over()
+    except: pass
 
 def error(): input("That didn't work : ") # simple error message
-# hides errors, puts errors to devNull, which 'pass', does nothing
-class devNull(): pass
-# sys.stderr = devNull
 
 # Variables
 timeSlept = 12 # sets timeSlept variable, starts at 12,
@@ -50,26 +52,22 @@ class Game1:  # jump off rock > ask for last words > go to hell or die ..
         # thanks that did nothing > falling..falling > SPLAT > GAME OVER
         G1_2 = ["Thanks, that did nothing", "Falling...Falling...Falling", "SPLAT...you dead!", "GAME OVER"]
         # keywords to go to Hell. kw = keywords
-        G1_H_kw = ["Dark Lord Satan, I offer thee my soul!", "1", "2"]
+        G1_H_kw = ["dark lord satan, i offer thee my soul", "test", "1"]
         #####         #####         #####         #####         #####        #####
 
         clear()
         for i in range(len(G1)):
             print(G1[i]) # Prints >> falling to you're DOOM >  still falling > any last words
             sleep(4) # waits for 4 seconds after everytime it loops and prints text
-        wait() # waits until you press 'Enter', calling wait function
-        clear() # clears the screen
 
         inp = input("Word(s) > ") # ask for last words before you die
-
         if inp.lower() in G1_H_kw: # checks if you entered a keyword from the keyword list(G2_H_kw)
             self.Game_1_2() # if so, it starts the next game
         else:
             for i in range(len(G1_2)): # if you didn't input keywords it prints..
                 print(G1_2[i]) # Prints >> thanks that did nothing > Falling.. > SPLAT > GAME OVER
                 sleep(3) # pauses for 3 seconds every loop
-            input("quit : ")
-            exit() # exits game
+            game_Over() # exits game
 
     def Game_1_2(self):  # in hell
         # Text        #####         #####         #####         #####         #####
@@ -102,6 +100,7 @@ class Game1:  # jump off rock > ask for last words > go to hell or die ..
             exit()
         except:
             error()
+            self.Game_1_2()
 
 class Game2:  # Game 2, ask rock, ground,
 
