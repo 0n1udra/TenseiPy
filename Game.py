@@ -120,22 +120,13 @@ class Game2:  # Game 2, ask rock, ground,
 						  2: "Fly down to the ground right now, or i'll spit on  you",
 						  3: "you better fly down there right now or i'm going to whoop you up real good(in a sassy way)",
 						  4: "i'll give you whatever you want except wanting me to stay here",
-						  5: "if you don't let me down right now i'll kill your family and then you!"},
-					  1: {1: "Can you please get yo ass down to the ground(I said please",
-						  2: "Get you're ass down to the ground right now!",
-						  3: "Fuck sassy, I want ground, get me off",
-						  4: "You want money, I don't have money. fuck off, and get me down!",
-						  5: "If you don't get me down right now i'll fuck you up and then you're family(if you have one), then piss on you and then shit on you! soo? deal?"}}
+						  5: "if you don't let me down right now i'll kill your family and then you!"}}
 		rockAnswers = {0: {1: "OK fine",
 						   2: "then I'll drop you from 100ft",
 						   3: "oh don't you talk to me like that(in a sassy rock way(i guess))",
 						   4: "I wish to stay here and you can move to the right 1ft, and you won't be in the same place",
-						   5: "Then i'll find you fimily and murder then and then the human race! MWHAHAHAHAHA!!!"},
-					   1: {1: "Fuck you man, but fine, get you're ass outta here",
-						   2: "FUCK OFF! go back to sleep, you may or may not be alive tomorrow!",
-						   3: "uh NO, go fuck you're self instead",
-						   4: "Why the fuck would I need money? Dumbass!",
-						   5: "Hey you cunt! don't ever fucking talk to me like that, or you're going be in pain for enternity(I know the Devil)"}}
+						   5: "Then i'll find you fimily and murder then and then the human race! MWHAHAHAHAHA!!!"}}
+
 		#####         #####         #####         #####         #####        #####
 		clear()
 
