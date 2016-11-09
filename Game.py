@@ -47,55 +47,55 @@ timeSlept = 12 # sets timeSlept variable, starts at 12,
 # leave the text in the lists, because later when the game is finished i'm going to add another version of the text
 
 # GAME#		####################################################################################################################################
-class Game1:  # jump off rock > ask for last words > go to hell or die ..
+class Game0:  # jump off rock > ask for last words > go to hell or die ..
 
-    def __init__(self): self.Game_1()  # init function calles 'Game_1' when 'Game1' class is called
+    def __init__(self): self.Game_0()  # init function calles 'Game_0' when 'Game0' class is called
 
-    def Game_1(self):  # jumping off
+    def Game_0(self):  # jumping off
         # Text        #####         #####         #####         #####         #####
         # you're falling >  still falling > any last words?
-        G1 = ["You're now falling to you're DOOM", "Still falling", "Any last words?"]
+        G0 = ["You're now falling to you're DOOM", "Still falling", "Any last words?"]
         # thanks that did nothing > falling..falling > SPLAT > GAME OVER
-        G1_2 = ["Thanks, that did nothing", "Falling...Falling...Falling", "SPLAT...you dead!", "GAME OVER"]
+        G0_1 = ["Thanks, that did nothing", "Falling...Falling...Falling", "SPLAT...you dead!", "GAME OVER"]
         # keywords to go to Hell. kw = keywords
-        G1_H_kw = ["dark lord satan, i offer thee my soul", "test", "1"]
+        G0_H_kw = ["dark lord satan, i offer thee my soul", "test", "1"]
         #####         #####         #####         #####         #####        #####
 
         clear()
-        for i in range(len(G1)):
-            print(G1[i]) # Prints >> falling to you're DOOM >  still falling > any last words
+        for i in range(len(G0)):
+            print(G0[i]) # Prints >> falling to you're DOOM >  still falling > any last words
             sleep(4) # waits for 4 seconds after everytime it loops and prints text
 
         inp = input("Word(s) > ") # ask for last words before you die
-        if inp.lower() in G1_H_kw: # checks if you entered a keyword from the keyword list(G2_H_kw)
-            self.Game_1_2() # if so, it starts the next game
+        if inp.lower() in G0_H_kw: # checks if you entered a keyword from the keyword list(G2_H_kw)
+            self.Game_0_1() # if so, it starts the next game
         else:
-            for i in range(len(G1_2)): # if you didn't input keywords it prints..
-                print(G1_2[i]) # Prints >> thanks that did nothing > Falling.. > SPLAT > GAME OVER
+            for i in range(len(G0_1)): # if you didn't input keywords it prints..
+                print(G0_1[i]) # Prints >> thanks that did nothing > Falling.. > SPLAT > GAME OVER
                 sleep(3) # pauses for 3 seconds every loop
             game_Over() # exits game
 
-    def Game_1_2(self):  # in hell
+    def Game_0_1(self):  # in hell
         # Text        #####         #####         #####         #####         #####
-            # Game_1_2 Hell
+            # Game_0_1 Hell
                 # offer soul to Satan > going to hell > HELL LEVEL 1 > you see Satan on his throne > what are you going ot do now?
-        G12 = ["You offer to make a pack with Satan to save you're soul", "Now you're going to hell", "HELL LEVEL ",
+        G01 = ["You offer to make a pack with Satan to save you're soul", "Now you're going to hell", "HELL LEVEL ",
                "Youre now in Hell, and first thing you see is Satan sitting on dark throne",
                "What the hell ya going to do now?"]
                 # Hell level input
-        G12_M = ["Attempt to sneak away", "Beg for soul back even though you just sold it",
+        G01_M = ["Attempt to sneak away", "Beg for soul back even though you just sold it",
                  "Live for enternity in Hell"]
         #####         #####         #####         #####         #####        #####
-        for i in range(len(G12)):
-            print(G12[i])
+        for i in range(len(G01)):
+            print(G01[i])
             sleep(3)
         # going to hell > offer the make a pack > HELL LEVEL
 
         clear()
-        print("\n", G12[3])  # Now in Hell, see satan.
-        print("\n", G12[4])  # what are you going to do now
-        for i in range(len(G12_M)):
-            print(i, ')', G12_M[i])
+        print("\n", G01[3])  # Now in Hell, see satan.
+        print("\n", G01[4])  # what are you going to do now
+        for i in range(len(G01_M)):
+            print(i, ')', G01_M[i])
         # 0 attempt to sneak away, 1, beg for soul, 2 stay for ever.
         print_Back()
         run = [] # input options
@@ -107,21 +107,21 @@ class Game1:  # jump off rock > ask for last words > go to hell or die ..
             exit()
         except:
             error()
-            self.Game_1_2()
+            self.Game_0_1()
 
-class Game2:  # Game 2, ask rock, ground,
+class Game1:  # Game 2, ask rock, ground,
 
-    def __init__(self): self.Game_2()
+    def __init__(self): self.Game_1()
 
-    def Game_2(self):  # ask rock to go to ground
+    def Game_1(self):  # ask rock to go to ground
         # Text        #####         #####         #####         #####         #####
             # asking rock to fly down
                 # how to ask rock
         G2_a = ["How would you like to ask the rock to fly down?"]
-                # Game_2 asking, and responding. y, you, r, rock
+                # Game_1 asking, and responding. y, you, r, rock
         G2_y = ["You told the rock "]
         G2_r = ["The rock says  "]
-             # Game_2 else response
+             # Game_1 else response
         G2_e = ["Well that got you nowhere! "]
              # Ways to ask rock, and rock responses
         waysTooAsk =  {1: "May you please fly down to the ground, thank you",
@@ -147,20 +147,20 @@ class Game2:  # Game 2, ask rock, ground,
             x = int(inp)
             input_Back(inp, Startup)
         except:
-            self.Game_2()  # if it fails, it runs this code(Game_2) again
+            self.Game_1()  # if it fails, it runs this code(Game_1) again
 
         print(G2_y[0], "\n >> ", waysTooAsk[x])  # you say >
         wait()
         print(G2_r[0], "\n >> ", rockAnswers[x])  # rock responds with >
         wait()
         if x == 1: # if you choose option 1 you go to the ground
-            self.Game_2_1()  # starts the next game 'Game_2_1'
+            self.Game_1_1()  # starts the next game 'Game_1_1'
         else:
             input("\n", G2_e[0])  # prints got you nowhere
             wait()
-            Game2() # re-runs the program(Game_2)
+            Game1() # re-runs the program(Game_1)
 
-    def Game_2_1(self):  # on the ground
+    def Game_1_1(self):  # on the ground
         # Text        #####         #####         #####         #####         #####
             # Story. on ground now
         G21_S = ["YAY you're on the ground now, so now what?"]
@@ -174,16 +174,16 @@ class Game2:  # Game 2, ask rock, ground,
         inp = input()
         try:
             inp = int(inp)
-            input_Back(inp, Game2)
+            input_Back(inp, Game1)
         except: pass
         wait()
         Startup()
 
-class Game3:  # Game 3, yelling
+class Game2: # yelling > nothing
 
-    def __init__(self): self.Game_3()
+    def __init__(self): self.Game_2()
 
-    def Game_3(self):
+    def Game_2(self): 
         # Text        #####         #####         #####         #####         #####
         # now yelling at rock
         G3 = ["You are now yelling at the rock!"]
@@ -198,11 +198,11 @@ class Game3:  # Game 3, yelling
         wait()
         Startup()
 
-class Game4:  # Game_4, Begging
+class Game3:  # Begging > nothing
 
-    def __init__(self): self.Game_4()
+    def __init__(self): self.Game_3()
 
-    def Game_4(self):
+    def Game_3(self):
         # Text        #####         #####         #####         #####         #####
         G4 = []
         G4_M = []
@@ -213,45 +213,45 @@ class Game4:  # Game_4, Begging
             print(i, ')', G4_M[i])
         wait()
 
-class Game5:  # Game 5, sleep, dream, ..
+class Game4:  # Sleep > Dreamworld > ..
 
-    def __init__(self): self.Game_5()
+    def __init__(self): self.Game_4()
 
-    def Game_5(self):  # sleeping
+    def Game_4(self):  # sleeping
         global timeSlept
         clear()
         # Text        #####         #####         #####         #####         #####
             # going to bed
         G5 = ["You are thinking that you can't get off this rock so you decide to go to bed"]
             # you"re now sleeping
-        G5_2 = ["You're now sleeping"]
+        G5_1 = ["You're now sleeping"]
             # hope you rested well
-        G5_3 = ["Hope you rested well"]
+        G5_2 = ["Hope you rested well"]
             # morning
-        G5_4 = ["Morning, you slept in total of > "]
+        G5_3 = ["Morning, you slept in total of > "]
         G5_Snores = ['zz', 'ZzZ', 'ZZzz', 'zzZzZ', 'ZzZzzZ']
         #####         #####         #####         #####         #####        #####
 
         print(G5)  # thinking can't get off
-        print(G5_2)  # go to bed. 2 now sleeping
+        print(G5_1)  # go to bed. 2 now sleeping
         amount = random.randint(1, 5)  # this generates random number 1-10
             # random number is to print 'z'(s) in random number of times, just because
         for i in range(5):  # loops the print statment 5 times
-            print(G5_Snores * amount) # prints zz(s) from the list by a random amount
+            print(G5_Snores[i] * amount) # prints zz(s) from the list by a random amount
         #	sleep(amoun)
-        print(G5_3)  # rested well message
+        print(G5_2)  # rested well message
         sleep(.3)  # pauses for 5secs
-        print(G5_4, timeSlept, "hours")  # prints morning message and tells you how long you slept for in total
+        print(G5_3, timeSlept, "hours")  # prints morning message and tells you how long you slept for in total
         wait()
         timeSlept = timeSlept + 12 * 1.2  # adds time to total time slept,
         # ^ everytime you sleep, you longer you sleep. 1.2x longer everytime
         if timeSlept > 84:  # checks to see if you slept over 84 hours
-            self.Game_5_1()  # if you slept for more then 84 hours, you go to dreamworld
+            self.Game_4_1()  # if you slept for more then 84 hours, you go to dreamworld
         else:  # else you it goes back to main menu
             clear()
             Startup() # go to main menu
 
-    def Game_5_1(self):  # dream
+    def Game_4_1(self):  # dream
         clear()
         # Text        #####         #####         #####         #####         #####
             # Dreamworld
@@ -321,15 +321,15 @@ class Startup:
         for i in range(len(Sm)):
             print(i, ')', Sm[i])  # this makes it easy to print out all of the options for the menu, instad of using print over and over again
         # 0 jump off, 1 yell at rock, 2 beg rock, 3 sleep, 4 quit
-        run = [Game1, Game2, Game3, Game4, Game5, Quit]  # list of the functions for the different options
+        run = [Game0, Game1, Game2, Game3, Game4, Quit]  # list of the functions for the different options
         inp = input("choose > ")  # ask user to for what option they want to do, and then goes and runs it
 
         try:  # try and except is for when you know you're code might break,
             # if the 'try' code fails the program goes to except, instead of crashing
             inp = int(inp)  # tries to convert input to integer
-            if inp > 4:
+            if inp > 5:
                 print(extra[inp])
-                self.Start_menu()  # cheks to see if input goes to extras
+                self.Start_menu()  # checks to see if what you inputed is a extra
             else:
                 run[inp]()  # runs the game that corresponds to input
         except:
