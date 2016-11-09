@@ -21,6 +21,14 @@ def clear(): print("\n" * 50)
 def wait(): input(": ")
 # pauses game, press 'enter' to continue
 
+def print_Back():
+    print("99 ) Go back")
+    print("100 ) Main menu")
+def input_Back(x, pos):
+    if x == 99: pos()
+    elif x == 100: Startup()
+    else: pass
+
 def game_Over():
     inp = input("Would you like to continue? > ")
     try: # this is if somebody inputs something that is not usable it goes to except, instead of crasing
@@ -35,8 +43,6 @@ def error(): input("That didn't work : ") # simple error message
 
 # Variables
 timeSlept = 12 # sets timeSlept variable, starts at 12,
-back = "Go back"
-Menu = "Back to main menu"
 
 # leave the text in the lists, because later when the game is finished i'm going to add another version of the text
 
@@ -91,11 +97,12 @@ class Game1:  # jump off rock > ask for last words > go to hell or die ..
         for i in range(len(G12_M)):
             print(i, ')', G12_M[i])
         # 0 attempt to sneak away, 1, beg for soul, 2 stay for ever.
-
+        print_Back()
         run = [] # input options
         inp  = input("Soo > ")  # input for this level
         try:
             inp = int(inp)
+            input_Back(inp, Startup)  # runs input_Back function, for if you want to go back to main menu
             run[x]()
             exit()
         except:
@@ -112,58 +119,63 @@ class Game2:  # Game 2, ask rock, ground,
                 # how to ask rock
         G2_a = ["How would you like to ask the rock to fly down?"]
                 # Game_2 asking, and responding. y, you, r, rock
-        G2_y = ["You told the rock"]
-        G2_r = ["The rock says"]
-             # Game_2 on the ground
-        G2_g = ["YAY you're on the ground now, so now what?"]
+        G2_y = ["You told the rock "]
+        G2_r = ["The rock says  "]
              # Game_2 else response
-        G2_e = ["Well that got you nowhere! : "]
+        G2_e = ["Well that got you nowhere! "]
              # Ways to ask rock, and rock responses
-        waysTooAsk = {0: {1: "May you please fly down to the ground, thank you",
+        waysTooAsk =  {1: "May you please fly down to the ground, thank you",
                           2: "Fly down to the ground right now, or i'll spit on  you",
                           3: "you better fly down there right now or i'm going to whoop you up real good(in a sassy way)",
                           4: "i'll give you whatever you want except wanting me to stay here",
-                          5: "if you don't let me down right now i'll kill your family and then you!"}}
-        rockAnswers = {0: {1: "OK fine",
+                          5: "if you don't let me down right now i'll kill your family and then you!"}
+        rockAnswers =  {1: "OK fine",
                            2: "then I'll drop you from 100ft",
                            3: "oh don't you talk to me like that(in a sassy rock way(i guess))",
                            4: "I wish to stay here and you can move to the right 1ft, and you won't be in the same place",
-                           5: "Then i'll find you fimily and murder then and then the human race! MWHAHAHAHAHA!!!"}}
+                           5: "Then i'll find you fimaly and murder then and then the human race! MWHAHAHAHAHA!!!"}
 
         #####         #####         #####         #####         #####        #####
         clear()
 
         print("\n", G2_a)  # How would you like to ask
         print("\n1. nicely, 2. Rudely, 3. Sassy, 4. Bribe, .")
+        print_Back()
 
-        ask_input = input("Choose one > ")
+        inp = input("Choose one > ")
         try:  # tries to convert the input to a usable integer for this part
-            x = int(ask_input)
+            x = int(inp)
+            input_Back(inp, Startup)
         except:
             self.Game_2()  # if it fails, it runs this code(Game_2) again
 
-        print(G2_y, "\n > ", waysTooAsk[x])  # you say
+        print(G2_y[0], "\n >> ", waysTooAsk[x])  # you say >
         wait()
-        print(G2_r, "\n > ", rockAnswers[x])  # rock responds
+        print(G2_r[0], "\n >> ", rockAnswers[x])  # rock responds with >
         wait()
-        if x == 1:
-            print("\n", G2_g)  # prints 'you're on the ground'
-            wait()  # pasues
+        if x == 1: # if you choose option 1 you go to the ground
             self.Game_2_1()  # starts the next game 'Game_2_1'
-
         else:
-            print("\n", G2_e)  # prints got you nowhere
-            wait()  # waits for enter, to continue
-            self.Game_2()  # re-runs the program(Game_2)
+            input("\n", G2_e[0])  # prints got you nowhere
+            wait()
+            Game2() # re-runs the program(Game_2)
 
     def Game_2_1(self):  # on the ground
         # Text        #####         #####         #####         #####         #####
-        G2_1_M = []
+            # Story. on ground now
+        G21_S = ["YAY you're on the ground now, so now what?"]
+        G2_1_M = ["Go back to rock"]
         #####         #####         #####         #####         #####        #####
-
+        clear()
+        print(G21_S[0])
         for i in range(len(G2_1_M)):
             print(i, ')', G2_1_M[i])
-
+        print_Back()
+        inp = input()
+        try:
+            inp = int(inp)
+            input_Back(inp, Game2)
+        except: pass
         wait()
         Startup()
 
