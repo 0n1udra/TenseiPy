@@ -1,17 +1,20 @@
 # SETUP#		#########################################################################################################################################
+
 # libraries I use
 import random, sys
-# sys is for errors
+            # sys is for errors
+
 import time #from time import sleep # this is temporary
 # time is for the delays and pauses
+
 # hides errors, puts errors to devNull, which 'pass', does nothing
 class devNull(): pass
-sys.stderr = devNull()
+#sys.stderr = devNull()
 
 def sleep(x): # temporary, to remove pauses
     x = None
     time.sleep(0)
-# makes typing easier, shortcuts
+
 def pr(string): print(string, end=' ')
 # prints text on same line, so i don't have to add "end=' '" to each line of print
 
@@ -32,17 +35,13 @@ def input_Back(x, pos):
 def game_Over():
     inp = input("Would you like to continue? > ")
     try: # this is if somebody inputs something that is not usable it goes to except, instead of crasing
-        if inp in ('y', 'yes'):
-            Startup()
-        else:
+        if inp in ('y', 'yes'): Startup() # if inputted 'y' or 'yes' it goes back to main menu
+        else: # if anything else, it quits the game
             print("Thanks for playing!")
             exit()
     except: pass
 
 def error(): input("That didn't work : ") # simple error message
-
-# Variables
-timeSlept = 12 # sets timeSlept variable, starts at 12,
 
 # leave the text in the lists, because later when the game is finished i'm going to add another version of the text
 
@@ -53,11 +52,11 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
 
     def Game_0(self):  # jumping off
         # Text        #####         #####         #####         #####         #####
-        # you're falling >  still falling > any last words?
+            # you're falling >  still falling > any last words?
         G0 = ["You're now falling to you're DOOM", "Still falling", "Any last words?"]
-        # thanks that did nothing > falling..falling > SPLAT > GAME OVER
+            # thanks that did nothing > falling..falling > SPLAT > GAME OVER
         G0_1 = ["Thanks, that did nothing", "Falling...Falling...Falling", "SPLAT...you dead!", "GAME OVER"]
-        # keywords to go to Hell. kw = keywords
+            # keywords to go to Hell. kw = keywords
         G0_H_kw = ["dark lord satan, i offer thee my soul", "test", "1"]
         #####         #####         #####         #####         #####        #####
 
@@ -67,6 +66,7 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
             sleep(4) # waits for 4 seconds after everytime it loops and prints text
 
         inp = input("Word(s) > ") # ask for last words before you die
+
         if inp.lower() in G0_H_kw: # checks if you entered a keyword from the keyword list(G2_H_kw)
             self.Game_0_1() # if so, it starts the next game
         else:
@@ -86,6 +86,7 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
         G01_M = ["Attempt to sneak away", "Beg for soul back even though you just sold it",
                  "Live for enternity in Hell"]
         #####         #####         #####         #####         #####        #####
+
         for i in range(len(G01)):
             print(G01[i])
             sleep(3)
@@ -97,9 +98,11 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
         for i in range(len(G01_M)):
             print(i, ')', G01_M[i])
         # 0 attempt to sneak away, 1, beg for soul, 2 stay for ever.
+
         print_Back()
         run = [] # input options
         inp  = input("Soo > ")  # input for this level
+
         try:
             inp = int(inp)
             input_Back(inp, Startup)  # runs input_Back function, for if you want to go back to main menu
@@ -136,6 +139,7 @@ class Game1:  # Game 2, ask rock, ground,
                            5: "Then i'll find you fimaly and murder then and then the human race! MWHAHAHAHAHA!!!"}
 
         #####         #####         #####         #####         #####        #####
+
         clear()
 
         print("\n", G2_a)  # How would you like to ask
@@ -143,6 +147,7 @@ class Game1:  # Game 2, ask rock, ground,
         print_Back()
 
         inp = input("Choose one > ")
+
         try:  # tries to convert the input to a usable integer for this part
             x = int(inp)
             input_Back(inp, Startup)
@@ -153,6 +158,7 @@ class Game1:  # Game 2, ask rock, ground,
         wait()
         print(G2_r[0], "\n >> ", rockAnswers[x])  # rock responds with >
         wait()
+
         if x == 1: # if you choose option 1 you go to the ground
             self.Game_1_1()  # starts the next game 'Game_1_1'
         else:
@@ -166,16 +172,20 @@ class Game1:  # Game 2, ask rock, ground,
         G21_S = ["YAY you're on the ground now, so now what?"]
         G2_1_M = ["Go back to rock"]
         #####         #####         #####         #####         #####        #####
+
         clear()
+
         print(G21_S[0])
         for i in range(len(G2_1_M)):
             print(i, ')', G2_1_M[i])
         print_Back()
+
         inp = input()
         try:
             inp = int(inp)
             input_Back(inp, Game1)
         except: pass
+
         wait()
         Startup()
 
@@ -190,6 +200,7 @@ class Game2: # yelling > nothing
         # .............
         G3_1 = [".................."]
         #####         #####         #####         #####         #####        #####
+
         print(G3)  # yelling at rock
         print("The rock responds : ")
         print(G3_1)  # .............
@@ -214,6 +225,7 @@ class Game3:  # Begging > nothing
         wait()
 
 class Game4:  # Sleep > Dreamworld > ..
+    timeSlept = 12  # sets timeSlept variable, starts at 12,
 
     def __init__(self): self.Game_4()
 
@@ -267,12 +279,15 @@ class Game4:  # Sleep > Dreamworld > ..
 
         for i in range(len(G51_M)):  # loop to print out menu
             print(i, ')', G51_M[i])
+
         print(G51)  # prints  you slept for too long, now in dreamworld
         print(G51_2)  # since you slept for too long you're stuck in dreamworld
         print(G51_M_1)  # extra menu message
+
         inp = input(G51_i)
 
 class Quit:  # quit function, prints message and quits game
+
     def __init__(self):
         input("Thanks for playing : ")
         quit()  # built-in quit funciton
@@ -282,8 +297,8 @@ class Quit:  # quit function, prints message and quits game
 class LoadingScreens:
 
     def Loading_screen_0():  # nice loading screen, <(^.^)> (kirby)
-
         clear()
+
         Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', 'WELCOME']
         # Kirby loading screen items
         for i in range(len(Kirby)):
@@ -296,10 +311,10 @@ class LoadingScreens:
         input("CONTINUE > ")  # waits until user presses 'Enter'
 
 class Startup:
+
     def __init__(self): self.Start_menu()
 
     def Start_menu(self):
-        clear()
         # Text        #####         #####         #####         #####         #####
             # Startup menu/Main menu
         Story = ["You are on a floating rock 1000ft above ground, and all that you have is a bed(for some reason), so what do you do"]
@@ -316,11 +331,15 @@ class Startup:
                  777: ["A blue box well show up soon"]
                  }
         #####         #####         #####         #####         #####        #####
+
+        clear()
+
         print("THE STORY ")
         print(Story)  # the story
         for i in range(len(Sm)):
             print(i, ')', Sm[i])  # this makes it easy to print out all of the options for the menu, instad of using print over and over again
         # 0 jump off, 1 yell at rock, 2 beg rock, 3 sleep, 4 quit
+        
         run = [Game0, Game1, Game2, Game3, Game4, Quit]  # list of the functions for the different options
         inp = input("choose > ")  # ask user to for what option they want to do, and then goes and runs it
 
@@ -329,7 +348,7 @@ class Startup:
             inp = int(inp)  # tries to convert input to integer
             if inp > 5:
                 print(extra[inp])
-                self.Start_menu()  # checks to see if what you inputed is a extra
+                self.Start_menu()  # checks to see if what you inputted is a extra
             else:
                 run[inp]()  # runs the game that corresponds to input
         except:
