@@ -1,0 +1,53 @@
+You're on a rock 1000ft above ground you only have a bed(for some reason)
+OPTIONS:
+1. Jump off
+2. Ask rock to fly down
+3. Yell at rock to go down
+4. Beg rock to fly down
+5. Go to sleep
+6. Quit
+
+
+1. Jump off, then if you ask satan to save you; you go to Hell.
+	OPTIONS:
+	say some last words and die. GAME OVER
+	ask Satan to save you
+		in HELL
+		OPTIONS:
+		1.1 Try to sneak away from Satan(bad idea)
+			...
+		1.2 Ask for soul back
+			....
+		1.3 Stay in Hell forever :)
+			.....
+	
+2. If you ask nicely the rock well fly down, if not nothing happens.
+	OPTIONS:
+	nice, mean, sassy, rude, blackmail
+	
+	Nicely.
+		you're on the ground now. now what?
+		OPTIONS:
+		2.1
+			...
+		2.2
+			....
+		2.3
+			.....
+
+3. Yell at rock to go down, gets you nowhere
+4. Beg at rock gets you nowhere
+
+5. Sleeping, once you slept for more then 84 hours you go into a dreamworld
+	
+	84h+
+	in dreamworld
+	OPTIONS
+	5.1 eat everything
+		...
+	5.2 ...
+		....
+	5.3 ....
+		.....
+
+6. Quit. quits the game

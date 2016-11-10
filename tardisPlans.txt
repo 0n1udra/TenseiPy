@@ -1,0 +1,35 @@
+	Startup
+loading screen
+OPTIONS:
+1. go outside
+2. time traval
+3. explorer
+4. find Doctor
+5. eat
+6. sleep
+7. quit
+
+1. Go outside you are on a Dalek ship, with 1000's of Daleks ready to kill you. How you got there no idea
+	OPTIONS:
+	1.1 Go back in
+		back to main menu
+	1.2 Hide some where and see what the Daleks are up too, 
+
+2. You try to figure out the controls to time travel. but instead you initiated the TARDIS self destruct sequence(some how?). How are you going to stop it.
+	OPTIONS:
+	2.1 Bang on the buttons more
+	3.2 Don't try to stop it
+	3.3 Go outside
+	3.4 Beg then yell at TARDIS to stop 
+
+3. You go and exlporer the Tardis, what do you find
+
+4. You don't know where the Doctor is, so you go and try to find him
+	4.1 Go outside
+	4.2 
+
+5. Go and find something to eat. But you don't know where the kitchen is, try to and explore the TARDIS.
+
+6. You don't know where a bed is. Go and explore.
+
+7. Quit.
