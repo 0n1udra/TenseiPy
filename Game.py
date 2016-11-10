@@ -148,7 +148,6 @@ class Game1:  # Game 2, ask rock, ground,
 
         inp = input("Choose one > ")
 
-        try:  # tries to convert the input to a usable integer for this part
             x = int(inp)
             input_Back(inp, Startup)
         except:
