@@ -3,7 +3,7 @@
 # libraries I use
 import random, sys
             # sys is for errors
-
+from DT_S_lib import *
 import time #from time import sleep # this is temporary
 # time is for the delays and pauses
 
@@ -15,33 +15,6 @@ def sleep(x): # temporary, to remove pauses
     x = None
     time.sleep(0)
 
-def pr(string): print(string, end=' ')
-# prints text on same line, so i don't have to add "end=' '" to each line of print
-
-def clear(): print("\n" * 50)
-# 'clear' clears the screen, by making new lines 50 times
-
-def wait(): input(": ")
-# pauses game, press 'enter' to continue
-
-def print_Back():
-    print("99 ) Go back")
-    print("100 ) Main menu")
-def input_Back(x, pos):
-    if x == 99: pos()
-    elif x == 100: Startup()
-    else: pass
-
-def game_Over():
-    inp = input("Would you like to continue? > ")
-    try: # this is if somebody inputs something that is not usable it goes to except, instead of crasing
-        if inp in ('y', 'yes'): Startup() # if inputted 'y' or 'yes' it goes back to main menu
-        else: # if anything else, it quits the game
-            print("Thanks for playing!")
-            exit()
-    except: pass
-
-def error(): input("That didn't work : ") # simple error message
 
 # leave the text in the lists, because later when the game is finished i'm going to add another version of the text
 
@@ -294,25 +267,16 @@ class Quit:  # quit function, prints message and quits game
 
 # STARTUP#		#####################################################################################################################################
 
-class LoadingScreens:
-
-    def Loading_screen_0():  # nice loading screen, <(^.^)> (kirby)
-        clear()
-
-        Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', 'WELCOME']
-        # Kirby loading screen items
-        for i in range(len(Kirby)):
-            print(i)
-            sleep(2)
-        # finds the length of the 'Kirby' list, so it knows how long to loop.
-        # then for each item in list it gives it the variable 'i'; just for one loop.
-        # then on next loop it changes the 'i' value to the next item in list, then prints it out, each loop it pauses for 2sec
-
-        input("CONTINUE > ")  # waits until user presses 'Enter'
-
 class Startup:
 
-    def __init__(self): self.Start_menu()
+    def __init__(self):
+        # loading screen data, inputs list to 'loading_Screen' function from DT_S_lib
+        Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', 'WELCOME']
+        # Kirby loading screen items
+        loading_Screen(Kirby)
+
+        input("CONTINUE to rock > ")  # waits until user presses 'Enter'
+        self.Start_menu()
 
     def Start_menu(self):
         # Text        #####         #####         #####         #####         #####
