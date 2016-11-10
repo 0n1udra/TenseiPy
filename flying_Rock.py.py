@@ -267,7 +267,7 @@ class Quit:  # quit function, prints message and quits game
 
 # STARTUP#		#####################################################################################################################################
 
-class Startup:
+class Startup:d
 
     def __init__(self):
         # loading screen data, inputs list to 'loading_Screen' function from DT_S_lib
