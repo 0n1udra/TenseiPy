@@ -1,5 +1,6 @@
+STORY:
 You're on a rock 1000ft above ground you only have a bed(for some reason)
-OPTIONS:
+MENU OPTIONS:
 1. Jump off
 2. Ask rock to fly down
 3. Yell at rock to go down
