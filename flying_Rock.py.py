@@ -314,7 +314,6 @@ class Startup:
         #####         #####         #####         #####         #####        #####
 
         clear()
-        print("nope")
         print("THE STORY ")
         print(Story)  # the story
         for i in range(len(Sm)):
