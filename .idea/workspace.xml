@@ -4,14 +4,18 @@
     <bookmark url="file://$PROJECT_DIR$/TARDIS.py" line="17" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="from kirbyhub">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.py" afterPath="$PROJECT_DIR$/Test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flying_Rock.py.py" afterPath="$PROJECT_DIR$/flying_Rock.py.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tardisPlans.txt" afterPath="$PROJECT_DIR$/tardisPlans.txt" />
+    </list>
+    <list id="318ba0a6-5dae-4f86-8033-0342d39b1a2c" name="Ignore" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Games.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,110 +30,91 @@
     <favorites_list name="Games" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="flyingrockPlans.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="flying_Rock.py.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/flying_Rock.py.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="316" column="19" selection-start-line="316" selection-start-column="19" selection-end-line="316" selection-end-column="19" />
-              <folding>
-                <element signature="e#167#185#0" expanded="true" />
-                <element signature="e#418#422#0" expanded="false" />
-                <element signature="e#496#522#0" expanded="false" />
-                <element signature="e#883#958#0" expanded="false" />
-                <element signature="e#1005#2377#0" expanded="false" />
-                <element signature="e#2422#3958#0" expanded="false" />
-                <element signature="e#2671#2918#0" expanded="false" />
-                <element signature="e#2970#3092#0" expanded="false" />
-                <element signature="e#4007#7095#0" expanded="false" />
-                <element signature="e#4027#4040#0" expanded="false" />
-                <element signature="e#4100#6455#0" expanded="false" />
-                <element signature="e#4610#5073#0" expanded="false" />
-                <element signature="e#5097#5510#0" expanded="false" />
-                <element signature="e#6506#7095#0" expanded="false" />
-                <element signature="e#6991#7040#0" expanded="false" />
-                <element signature="e#7135#7709#0" expanded="false" />
-                <element signature="e#7155#7168#0" expanded="false" />
-                <element signature="e#7201#7709#0" expanded="false" />
-                <element signature="e#7201#7276#0" expanded="false" />
-                <element signature="e#7750#8117#0" expanded="false" />
-                <element signature="e#7770#7783#0" expanded="false" />
-                <element signature="e#8163#11069#0" expanded="false" />
-                <element signature="e#11643#11744#0" expanded="false" />
-                <element signature="e#11671#11742#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TARDIS.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TARDIS.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DT_S_lib.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding>
-                <element signature="e#181#215#0" expanded="false" />
-                <element signature="e#247#293#0" expanded="false" />
-                <element signature="e#351#423#0" expanded="false" />
-                <element signature="e#513#600#0" expanded="false" />
-                <element signature="e#644#1055#0" expanded="false" />
-                <element signature="e#1149#1580#0" expanded="false" />
-                <element signature="e#1599#1650#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="turtle.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="e#314#435#0" expanded="false" />
-                <element signature="e#471#560#0" expanded="false" />
-                <element signature="e#580#836#0" expanded="false" />
-                <element signature="e#888#1071#0" expanded="false" />
-                <element signature="e#1138#1466#0" expanded="false" />
-                <element signature="e#1485#1651#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="TARDIS.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/TARDIS.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="41">
+                  <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tardisPlans.txt" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="483">
+                  <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DT_S_lib.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="147">
+                  <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#181#215#0" expanded="false" />
+                    <element signature="e#247#293#0" expanded="false" />
+                    <element signature="e#351#423#0" expanded="false" />
+                    <element signature="e#513#600#0" expanded="false" />
+                    <element signature="e#644#1055#0" expanded="false" />
+                    <element signature="e#1149#1580#0" expanded="false" />
+                    <element signature="e#1599#1650#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="turtle.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/turtle.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="Test.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="130">
+                  <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#282#403#0" expanded="false" />
+                    <element signature="e#439#528#0" expanded="false" />
+                    <element signature="e#1169#1335#0" expanded="false" />
+                    <element signature="e#1368#1388#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -147,11 +132,13 @@
       <list>
         <option value="$PROJECT_DIR$/DT's_Slib.py" />
         <option value="$PROJECT_DIR$/flyingrockPlans.txt" />
-        <option value="$PROJECT_DIR$/../Learning/TGC/turtle.py" />
         <option value="$PROJECT_DIR$/DT_S_lib.py" />
         <option value="$PROJECT_DIR$/TARDIS.py" />
-        <option value="$PROJECT_DIR$/Test.py" />
         <option value="$PROJECT_DIR$/flying_Rock.py.py" />
+        <option value="$PROJECT_DIR$/tardisPlans.txt" />
+        <option value="$PROJECT_DIR$/../Learning/TGC/turtle.py" />
+        <option value="$PROJECT_DIR$/Test.py" />
+        <option value="$PROJECT_DIR$/turtle.py" />
       </list>
     </option>
   </component>
@@ -187,15 +174,32 @@
     </navigator>
     <panes>
       <pane id="ProjectPane">
-        <subPane />
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
       </pane>
       <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_63435a79518b44808827aa3194b76bea96231189/mingw32/bin/git.exe" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Learning" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="467" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -214,7 +218,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1156" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
-  <component name="RunManager" selected="Python.TARDIS">
+  <component name="RunManager" selected="Python.Test">
     <configuration default="false" name="flying_Rock.py" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -425,10 +429,10 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.TARDIS" />
-        <item index="1" class="java.lang.String" itemvalue="Python.flying_Rock.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Test" />
-        <item index="3" class="java.lang.String" itemvalue="Python.turtle" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.turtle" />
+        <item index="2" class="java.lang.String" itemvalue="Python.flying_Rock.py" />
+        <item index="3" class="java.lang.String" itemvalue="Python.TARDIS" />
       </list>
     </recent_temporary>
   </component>
@@ -441,6 +445,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="" />
+      <changelist id="318ba0a6-5dae-4f86-8033-0342d39b1a2c" name="Ignore" comment="" />
       <created>1478796801617</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -460,7 +465,21 @@
       <option name="project" value="LOCAL" />
       <updated>1479176055897</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="from kirbyhub">
+      <created>1479178400744</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1479178400744</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ranamed classes, Game1 &gt; Game0, Game2 &gt; Game1, etc">
+      <created>1479178644028</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1479178644028</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -473,16 +492,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="22" width="1936" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24839744" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5904711" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32275712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3217012" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -492,6 +510,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -533,15 +552,19 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="LIMIT_HISTORY" value="false" />
     <option name="MAXIMUM_HISTORY_ROWS" value="1120" />
     <MESSAGE value="Moved menu function from rock game to DT_S_lib. reformating in DT_S_lib" />
     <MESSAGE value="added lololololol" />
-    <option name="LAST_COMMIT_MESSAGE" value="added lololololol" />
+    <MESSAGE value="from kirbyhub" />
+    <MESSAGE value="ranamed classes, Game1 &gt; Game0, Game2 &gt; Game1, etc" />
+    <option name="LAST_COMMIT_MESSAGE" value="ranamed classes, Game1 &gt; Game0, Game2 &gt; Game1, etc" />
+    <option name="PRESELECT_EXISTING_CHANGELIST" value="false" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -550,24 +573,23 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+    <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="504">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5649">
-          <caret line="269" column="15" selection-start-line="269" selection-start-column="15" selection-end-line="269" selection-end-column="15" />
+        <state relative-caret-position="315">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding>
             <element signature="e#167#185#0" expanded="true" />
             <element signature="e#418#422#0" expanded="false" />
             <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
             <element signature="e#883#958#0" expanded="false" />
             <element signature="e#1005#2377#0" expanded="false" />
             <element signature="e#2422#3958#0" expanded="false" />
@@ -587,8 +609,98 @@
             <element signature="e#7750#8117#0" expanded="false" />
             <element signature="e#7770#7783#0" expanded="false" />
             <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
             <element signature="e#11643#11744#0" expanded="false" />
             <element signature="e#11671#11742#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#181#215#0" expanded="false" />
+            <element signature="e#247#293#0" expanded="false" />
+            <element signature="e#351#423#0" expanded="false" />
+            <element signature="e#513#600#0" expanded="false" />
+            <element signature="e#644#1055#0" expanded="false" />
+            <element signature="e#1149#1580#0" expanded="false" />
+            <element signature="e#1599#1650#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flying_Rock.py.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5649">
+          <caret line="269" column="15" selection-start-line="269" selection-start-column="15" selection-end-line="269" selection-end-column="15" />
+          <folding>
+            <element signature="e#167#185#0" expanded="true" />
+            <element signature="e#418#422#0" expanded="false" />
+            <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
+            <element signature="e#883#958#0" expanded="false" />
+            <element signature="e#1005#2377#0" expanded="false" />
+            <element signature="e#2422#3958#0" expanded="false" />
+            <element signature="e#2671#2918#0" expanded="false" />
+            <element signature="e#2970#3092#0" expanded="false" />
+            <element signature="e#4007#7095#0" expanded="false" />
+            <element signature="e#4027#4040#0" expanded="false" />
+            <element signature="e#4100#6455#0" expanded="false" />
+            <element signature="e#4610#5073#0" expanded="false" />
+            <element signature="e#5097#5510#0" expanded="false" />
+            <element signature="e#6506#7095#0" expanded="false" />
+            <element signature="e#6991#7040#0" expanded="false" />
+            <element signature="e#7135#7709#0" expanded="false" />
+            <element signature="e#7155#7168#0" expanded="false" />
+            <element signature="e#7201#7709#0" expanded="false" />
+            <element signature="e#7201#7276#0" expanded="false" />
+            <element signature="e#7750#8117#0" expanded="false" />
+            <element signature="e#7770#7783#0" expanded="false" />
+            <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
+            <element signature="e#11643#11744#0" expanded="false" />
+            <element signature="e#11671#11742#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -643,6 +755,7 @@
             <element signature="e#167#185#0" expanded="true" />
             <element signature="e#418#422#0" expanded="false" />
             <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
             <element signature="e#883#958#0" expanded="false" />
             <element signature="e#1005#2377#0" expanded="false" />
             <element signature="e#2422#3958#0" expanded="false" />
@@ -662,8 +775,10 @@
             <element signature="e#7750#8117#0" expanded="false" />
             <element signature="e#7770#7783#0" expanded="false" />
             <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
             <element signature="e#11643#11744#0" expanded="false" />
             <element signature="e#11671#11742#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -701,42 +816,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DT's_Slib.py" />
-    <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="e#314#435#0" expanded="false" />
-            <element signature="e#471#560#0" expanded="false" />
-            <element signature="e#580#836#0" expanded="false" />
-            <element signature="e#888#1071#0" expanded="false" />
-            <element signature="e#1138#1466#0" expanded="false" />
-            <element signature="e#1485#1651#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="147">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#181#215#0" expanded="false" />
@@ -750,22 +832,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="316" column="19" selection-start-line="316" selection-start-column="19" selection-end-line="316" selection-end-column="19" />
+        <state relative-caret-position="311">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#167#185#0" expanded="true" />
             <element signature="e#418#422#0" expanded="false" />
             <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
             <element signature="e#883#958#0" expanded="false" />
             <element signature="e#1005#2377#0" expanded="false" />
             <element signature="e#2422#3958#0" expanded="false" />
@@ -785,9 +860,61 @@
             <element signature="e#7750#8117#0" expanded="false" />
             <element signature="e#7770#7783#0" expanded="false" />
             <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
             <element signature="e#11643#11744#0" expanded="false" />
             <element signature="e#11671#11742#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/turtle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

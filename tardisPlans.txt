@@ -13,12 +13,18 @@ OPTIONS:
 	OPTIONS:
 	1.1 Go back in
 		back to main menu
-	1.2 Hide some where and see what the Daleks are up too, 
+	1.2 Hide somewhere, and see what the Daleks are up too,
+	    there planning to take over the earth(again).
+	    OPTIONS:
+
 
 2. You try to figure out the controls to time travel. but instead you initiated the TARDIS self destruct sequence(some how?). How are you going to stop it.
 	OPTIONS:
 	2.1 Bang on the buttons more
+	    Tardis self destruct countdown goes to 0
+	        You die and the universe explodes
 	3.2 Don't try to stop it
+
 	3.3 Go outside
 	3.4 Beg then yell at TARDIS to stop 
 
