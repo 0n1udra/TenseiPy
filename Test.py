@@ -1,2 +1,1 @@
-from sys import stdout
-write("HI")
+print("lololololololol")
