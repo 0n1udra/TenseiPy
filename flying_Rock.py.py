@@ -15,10 +15,10 @@ def sleep(x): # temporary, to remove pauses
     x = None
     time.sleep(0)
 
-
 # leave the text in the lists, because later when the game is finished i'm going to add another version of the text
 
 # GAME#		####################################################################################################################################
+
 class Game0:  # jump off rock > ask for last words > go to hell or die ..
 
     def __init__(self): self.Game_0()  # init function calles 'Game_0' when 'Game0' class is called
@@ -69,7 +69,7 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
         print("\n", G01[3])  # Now in Hell, see satan.
         print("\n", G01[4])  # what are you going to do now
         for i in range(len(G01_M)):
-            print(i, ')', G01_M[i])
+            print(str(i) + ')', G01_M[i])
         # 0 attempt to sneak away, 1, beg for soul, 2 stay for ever.
 
         print_Back()
@@ -150,7 +150,7 @@ class Game1:  # Game 2, ask rock, ground,
 
         print(G21_S[0])
         for i in range(len(G2_1_M)):
-            print(i, ')', G2_1_M[i])
+            print(str(i) + ')', G2_1_M[i])
         print_Back()
 
         inp = input()
@@ -194,7 +194,7 @@ class Game3:  # Begging > nothing
 
         print(G4)
         for i in range(len(G4_M)):
-            print(i, ')', G4_M[i])
+            print(str(i) + ')', G4_M[i])
         wait()
 
 class Game4:  # Sleep > Dreamworld > ..
@@ -251,7 +251,7 @@ class Game4:  # Sleep > Dreamworld > ..
         #####         #####         #####         #####         #####        #####
 
         for i in range(len(G51_M)):  # loop to print out menu
-            print(i, ')', G51_M[i])
+            print(str(i) + ')', G51_M[i])
 
         print(G51)  # prints  you slept for too long, now in dreamworld
         print(G51_2)  # since you slept for too long you're stuck in dreamworld
@@ -259,6 +259,20 @@ class Game4:  # Sleep > Dreamworld > ..
 
         inp = input(G51_i)
 
+class extras:
+    
+    def __init__(self): self.super_Secret()
+    
+    def super_Secret(self):
+        # Text        #####         #####         #####         #####         #####
+        sS_M = ["Yell for TARDIS", "1", "2"]
+        #####         #####         #####         #####         #####        #####
+
+        print("Welcome to the super secret, but ain't so secret menu!")
+        print("Here are some extra options")
+        for i in range(len(sS_M)):
+            print(str(i) + ")", sS_M[i])
+    
 class Quit:  # quit function, prints message and quits game
 
     def __init__(self):
@@ -267,11 +281,13 @@ class Quit:  # quit function, prints message and quits game
 
 # STARTUP#		#####################################################################################################################################
 
-class Startup:d
+class Startup:
 
     def __init__(self):
+        # Starts the program, first runs the loading screen, then runs the Start_menu function
+
         # loading screen data, inputs list to 'loading_Screen' function from DT_S_lib
-        Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', 'WELCOME']
+        Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', ' WELCOME']
         # Kirby loading screen items
         loading_Screen(Kirby)
 
@@ -288,6 +304,7 @@ class Startup:d
               "Yell at rock(need changing)",
               "Beg rock to go down(need changing)",
               "Go to sleep(need work)",
+              "Super Secret Menu!",
               "Quit"]
                 # in the main menu punch in these numbers, it well print these.
         extra = {69: ["really!?!?"],
@@ -301,10 +318,10 @@ class Startup:d
         print("THE STORY ")
         print(Story)  # the story
         for i in range(len(Sm)):
-            print(i, ')', Sm[i])  # this makes it easy to print out all of the options for the menu, instad of using print over and over again
+            print(str(i) + ')', Sm[i])  # this makes it easy to print out all of the options for the menu, instad of using print over and over again
         # 0 jump off, 1 yell at rock, 2 beg rock, 3 sleep, 4 quit
 
-        run = [Game0, Game1, Game2, Game3, Game4, Quit]  # list of the functions for the different options
+        run = [Game0, Game1, Game2, Game3, Game4, extras, Quit]  # list of the functions for the different options
         inp = input("choose > ")  # ask user to for what option they want to do, and then goes and runs it
 
         try:  # try and except is for when you know you're code might break,
