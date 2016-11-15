@@ -7,6 +7,7 @@
     <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.py" afterPath="$PROJECT_DIR$/Test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flying_Rock.py.py" afterPath="$PROJECT_DIR$/flying_Rock.py.py" />
     </list>
     <ignored path="Games.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,23 +30,22 @@
       <file leaf-file-name="flyingrockPlans.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
+            <state relative-caret-position="0">
               <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="flying_Rock.py.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="flying_Rock.py.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flying_Rock.py.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-594">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="199">
+              <caret line="316" column="19" selection-start-line="316" selection-start-column="19" selection-end-line="316" selection-end-column="19" />
               <folding>
                 <element signature="e#167#185#0" expanded="true" />
                 <element signature="e#418#422#0" expanded="false" />
                 <element signature="e#496#522#0" expanded="false" />
-                <element signature="e#863#3958#0" expanded="false" />
                 <element signature="e#883#958#0" expanded="false" />
                 <element signature="e#1005#2377#0" expanded="false" />
                 <element signature="e#2422#3958#0" expanded="false" />
@@ -65,11 +65,8 @@
                 <element signature="e#7750#8117#0" expanded="false" />
                 <element signature="e#7770#7783#0" expanded="false" />
                 <element signature="e#8163#11069#0" expanded="false" />
-                <element signature="e#11094#11572#0" expanded="false" />
                 <element signature="e#11643#11744#0" expanded="false" />
                 <element signature="e#11671#11742#0" expanded="false" />
-                <element signature="e#13077#13212#0" expanded="false" />
-                <element signature="e#14115#14215#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -78,7 +75,7 @@
       <file leaf-file-name="TARDIS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TARDIS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="0">
               <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -90,7 +87,7 @@
       <file leaf-file-name="DT_S_lib.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
+            <state relative-caret-position="0">
               <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="e#181#215#0" expanded="false" />
@@ -105,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -118,7 +115,7 @@
       <file leaf-file-name="turtle.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="0">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
                 <element signature="e#314#435#0" expanded="false" />
@@ -151,10 +148,10 @@
         <option value="$PROJECT_DIR$/DT's_Slib.py" />
         <option value="$PROJECT_DIR$/flyingrockPlans.txt" />
         <option value="$PROJECT_DIR$/../Learning/TGC/turtle.py" />
-        <option value="$PROJECT_DIR$/flying_Rock.py.py" />
         <option value="$PROJECT_DIR$/DT_S_lib.py" />
         <option value="$PROJECT_DIR$/TARDIS.py" />
         <option value="$PROJECT_DIR$/Test.py" />
+        <option value="$PROJECT_DIR$/flying_Rock.py.py" />
       </list>
     </option>
   </component>
@@ -164,11 +161,11 @@
     <option name="width" value="1936" />
     <option name="height" value="1066" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
@@ -198,7 +195,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_63435a79518b44808827aa3194b76bea96231189/mingw32/bin/git.exe" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="467" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -456,29 +453,45 @@
       <option name="project" value="LOCAL" />
       <updated>1479175755509</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added lololololol">
+      <created>1479176055897</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1479176055897</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32362458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5904711" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32275712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39824945" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -489,7 +502,15 @@
           <value>
             <State>
               <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
+                <collection>
+                  <UserGroup>
+                    <option name="users">
+                      <list>
+                        <option value="AMagickNarwhal" />
+                      </list>
+                    </option>
+                  </UserGroup>
+                </collection>
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
@@ -512,8 +533,11 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="LIMIT_HISTORY" value="false" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1120" />
     <MESSAGE value="Moved menu function from rock game to DT_S_lib. reformating in DT_S_lib" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved menu function from rock game to DT_S_lib. reformating in DT_S_lib" />
+    <MESSAGE value="added lololololol" />
+    <option name="LAST_COMMIT_MESSAGE" value="added lololololol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -544,7 +568,6 @@
             <element signature="e#167#185#0" expanded="true" />
             <element signature="e#418#422#0" expanded="false" />
             <element signature="e#496#522#0" expanded="false" />
-            <element signature="e#863#3958#0" expanded="false" />
             <element signature="e#883#958#0" expanded="false" />
             <element signature="e#1005#2377#0" expanded="false" />
             <element signature="e#2422#3958#0" expanded="false" />
@@ -564,11 +587,8 @@
             <element signature="e#7750#8117#0" expanded="false" />
             <element signature="e#7770#7783#0" expanded="false" />
             <element signature="e#8163#11069#0" expanded="false" />
-            <element signature="e#11094#11572#0" expanded="false" />
             <element signature="e#11643#11744#0" expanded="false" />
             <element signature="e#11671#11742#0" expanded="false" />
-            <element signature="e#13077#13212#0" expanded="false" />
-            <element signature="e#14115#14215#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -623,7 +643,6 @@
             <element signature="e#167#185#0" expanded="true" />
             <element signature="e#418#422#0" expanded="false" />
             <element signature="e#496#522#0" expanded="false" />
-            <element signature="e#863#3958#0" expanded="false" />
             <element signature="e#883#958#0" expanded="false" />
             <element signature="e#1005#2377#0" expanded="false" />
             <element signature="e#2422#3958#0" expanded="false" />
@@ -643,11 +662,8 @@
             <element signature="e#7750#8117#0" expanded="false" />
             <element signature="e#7770#7783#0" expanded="false" />
             <element signature="e#8163#11069#0" expanded="false" />
-            <element signature="e#11094#11572#0" expanded="false" />
             <element signature="e#11643#11744#0" expanded="false" />
             <element signature="e#11671#11742#0" expanded="false" />
-            <element signature="e#13077#13212#0" expanded="false" />
-            <element signature="e#14115#14215#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -687,7 +703,7 @@
     <entry file="file://$PROJECT_DIR$/DT's_Slib.py" />
     <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
             <element signature="e#314#435#0" expanded="false" />
@@ -702,7 +718,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
+        <state relative-caret-position="0">
           <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
           <folding />
         </state>
@@ -710,7 +726,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TARDIS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -720,7 +736,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
+        <state relative-caret-position="0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#181#215#0" expanded="false" />
@@ -734,15 +750,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-594">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="199">
+          <caret line="316" column="19" selection-start-line="316" selection-start-column="19" selection-end-line="316" selection-end-column="19" />
           <folding>
             <element signature="e#167#185#0" expanded="true" />
             <element signature="e#418#422#0" expanded="false" />
             <element signature="e#496#522#0" expanded="false" />
-            <element signature="e#863#3958#0" expanded="false" />
             <element signature="e#883#958#0" expanded="false" />
             <element signature="e#1005#2377#0" expanded="false" />
             <element signature="e#2422#3958#0" expanded="false" />
@@ -762,22 +785,26 @@
             <element signature="e#7750#8117#0" expanded="false" />
             <element signature="e#7770#7783#0" expanded="false" />
             <element signature="e#8163#11069#0" expanded="false" />
-            <element signature="e#11094#11572#0" expanded="false" />
             <element signature="e#11643#11744#0" expanded="false" />
             <element signature="e#11671#11742#0" expanded="false" />
-            <element signature="e#13077#13212#0" expanded="false" />
-            <element signature="e#14115#14215#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

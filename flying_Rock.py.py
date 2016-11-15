@@ -314,7 +314,7 @@ class Startup:
         #####         #####         #####         #####         #####        #####
 
         clear()
-
+        print("nope")
         print("THE STORY ")
         print(Story)  # the story
         for i in range(len(Sm)):
@@ -337,6 +337,5 @@ class Startup:
             self.Start_menu()  # gives error, then goes back to main menu
 
 
-if __name__ == '__main__': # checks if this script is being run directly, if not it runs nothing, if so it runs 'Start()'
-    Startup()  # starts the program, without this it won't run
+Startup()
 ###################################################################################################################################################
