@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/TARDIS.py" line="17" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="from kirbyhub">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flying_Rock.py.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="" />
     <list id="318ba0a6-5dae-4f86-8033-0342d39b1a2c" name="Ignore" comment="" />
     <ignored path="Games.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +39,8 @@
       <file leaf-file-name="flying_Rock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flying_Rock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="42">
+              <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -452,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479178644028</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changes&#10;">
+      <created>1480364256921</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1480364256921</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -532,7 +536,8 @@
     <MESSAGE value="added lololololol" />
     <MESSAGE value="from kirbyhub" />
     <MESSAGE value="ranamed classes, Game1 &gt; Game0, Game2 &gt; Game1, etc" />
-    <option name="LAST_COMMIT_MESSAGE" value="ranamed classes, Game1 &gt; Game0, Game2 &gt; Game1, etc" />
+    <MESSAGE value="changes&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes&#10;" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="false" />
   </component>
   <component name="XDebuggerManager">
@@ -867,8 +872,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="42">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
           <folding />
         </state>
       </provider>
