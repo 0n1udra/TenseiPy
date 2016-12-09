@@ -4,7 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/TARDIS.py" line="17" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="" />
+    <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DT_S_lib.py" afterPath="$PROJECT_DIR$/DT_S_lib.py" />
+    </list>
     <list id="318ba0a6-5dae-4f86-8033-0342d39b1a2c" name="Ignore" comment="" />
     <ignored path="Games.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,7 +30,7 @@
       <file leaf-file-name="TARDIS.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TARDIS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
+            <state relative-caret-position="50">
               <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -36,12 +39,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="flying_Rock.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="flying_Rock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flying_Rock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-              <folding />
+            <state relative-caret-position="399">
+              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding>
+                <element signature="e#167#185#0" expanded="true" />
+                <element signature="e#496#522#0" expanded="false" />
+                <element signature="e#863#3958#0" expanded="false" />
+                <element signature="e#4007#7095#0" expanded="false" />
+                <element signature="e#7135#7709#0" expanded="false" />
+                <element signature="e#7750#8117#0" expanded="false" />
+                <element signature="e#8163#11069#0" expanded="false" />
+                <element signature="e#11094#11572#0" expanded="false" />
+                <element signature="e#11643#11744#0" expanded="false" />
+                <element signature="e#11911#14412#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,19 +70,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DT_S_lib.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DT_S_lib.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
+            <state relative-caret-position="84">
               <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
-                <element signature="e#181#215#0" expanded="false" />
-                <element signature="e#247#293#0" expanded="false" />
-                <element signature="e#351#423#0" expanded="false" />
-                <element signature="e#513#600#0" expanded="false" />
-                <element signature="e#644#1055#0" expanded="false" />
-                <element signature="e#1149#1580#0" expanded="false" />
-                <element signature="e#1599#1650#0" expanded="false" />
+                <element signature="e#64#141#0" expanded="false" />
+                <element signature="e#341#413#0" expanded="false" />
+                <element signature="e#504#565#0" expanded="false" />
+                <element signature="e#611#1022#0" expanded="false" />
+                <element signature="e#1116#1527#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -102,21 +114,22 @@
       <list>
         <option value="$PROJECT_DIR$/DT's_Slib.py" />
         <option value="$PROJECT_DIR$/flyingrockPlans.txt" />
-        <option value="$PROJECT_DIR$/DT_S_lib.py" />
         <option value="$PROJECT_DIR$/TARDIS.py" />
         <option value="$PROJECT_DIR$/flying_Rock.py.py" />
         <option value="$PROJECT_DIR$/tardisPlans.txt" />
         <option value="$PROJECT_DIR$/../Learning/TGC/turtle.py" />
         <option value="$PROJECT_DIR$/Test.py" />
         <option value="$PROJECT_DIR$/turtle.py" />
+        <option value="$PROJECT_DIR$/DT_S_lib.py" />
+        <option value="$PROJECT_DIR$/flying_Rock.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="22" />
-    <option name="width" value="1840" />
-    <option name="height" value="1012" />
+    <option name="x" value="1817" />
+    <option name="y" value="391" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -144,27 +157,10 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Games" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Games" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Games" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -469,10 +465,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="1840" height="1012" extended-state="6" />
+    <frame x="1817" y="391" width="974" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2480315" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24768518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5904711" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -542,7 +538,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -551,6 +547,124 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flying_Rock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#167#185#0" expanded="true" />
+            <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
+            <element signature="e#4007#7095#0" expanded="false" />
+            <element signature="e#7135#7709#0" expanded="false" />
+            <element signature="e#7750#8117#0" expanded="false" />
+            <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
+            <element signature="e#11643#11744#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flying_Rock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#167#185#0" expanded="true" />
+            <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
+            <element signature="e#4007#7095#0" expanded="false" />
+            <element signature="e#7135#7709#0" expanded="false" />
+            <element signature="e#7750#8117#0" expanded="false" />
+            <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
+            <element signature="e#11643#11744#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TARDIS.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -574,13 +688,11 @@
         <state relative-caret-position="147">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -616,13 +728,11 @@
         <state relative-caret-position="147">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -658,13 +768,11 @@
         <state relative-caret-position="147">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -707,13 +815,11 @@
         <state relative-caret-position="147">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -750,13 +856,11 @@
         <state relative-caret-position="210">
           <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -792,13 +896,11 @@
         <state relative-caret-position="210">
           <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -836,22 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#181#215#0" expanded="false" />
-            <element signature="e#247#293#0" expanded="false" />
-            <element signature="e#351#423#0" expanded="false" />
-            <element signature="e#513#600#0" expanded="false" />
-            <element signature="e#644#1055#0" expanded="false" />
-            <element signature="e#1149#1580#0" expanded="false" />
-            <element signature="e#1599#1650#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -862,7 +948,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TARDIS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
+        <state relative-caret-position="50">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -872,9 +958,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding />
+        <state relative-caret-position="399">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding>
+            <element signature="e#167#185#0" expanded="true" />
+            <element signature="e#496#522#0" expanded="false" />
+            <element signature="e#863#3958#0" expanded="false" />
+            <element signature="e#4007#7095#0" expanded="false" />
+            <element signature="e#7135#7709#0" expanded="false" />
+            <element signature="e#7750#8117#0" expanded="false" />
+            <element signature="e#8163#11069#0" expanded="false" />
+            <element signature="e#11094#11572#0" expanded="false" />
+            <element signature="e#11643#11744#0" expanded="false" />
+            <element signature="e#11911#14412#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#64#141#0" expanded="false" />
+            <element signature="e#341#413#0" expanded="false" />
+            <element signature="e#504#565#0" expanded="false" />
+            <element signature="e#611#1022#0" expanded="false" />
+            <element signature="e#1116#1527#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
