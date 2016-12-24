@@ -18,9 +18,9 @@ MENU OPTIONS:
 		1.1 Try to sneak away from Satan(bad idea)
 			You fail. Miserably.
 		1.2 Ask for soul back
-			....
+			Satan laughs and asks, "Now why would I give you your soul back?"
 		1.3 Stay in Hell forever :)
-			.....
+			Game over. Enjoy your eternity of pain.
 	
 2. If you ask nicely the rock well fly down, if not nothing happens.
 	OPTIONS:
@@ -44,12 +44,12 @@ MENU OPTIONS:
 	84h+
 	in dreamworld
 	OPTIONS
-	5.1 eat everything
-		...
-	5.2 ...
-		....
-	5.3 ....
-		.....
+	5.1 Eat everything blue
+		You hallucinate that you are floating and there are pink seahorses swimming in the air around you.
+	5.2 Eat everything red
+		You have a vision that you were falling and you say "Dark Lord Satan, I offer thee my soul!" and then you appear before satan in hell
+	5.3 Eat everything there
+		Your stomach explodes and you die because that's a fuck ton of stuff
 
 6. Quit. quits the game
 
