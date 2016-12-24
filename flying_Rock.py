@@ -289,7 +289,7 @@ class Startup:
         # loading screen data, inputs list to 'loading_Screen' function from DT_S_lib
         Kirby = ['LOADING ', '<', '(', '^', '.', '^', ')', '>', ' ', '\n:', ')', ' WELCOME']
         # Kirby loading screen items
-        loading_Screen(Kirby)
+        #loading_Screen(Kirby)
 
         input("CONTINUE to rock > ")  # waits until user presses 'Enter'
         self.Start_menu()

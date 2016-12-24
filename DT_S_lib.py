@@ -15,11 +15,11 @@ def wait(): input(" :") # pauses game, until press 'enter'
 # game back and main menu options
 def print_Back():
     print("99 ) Go back")
-    print("100 ) Main menu") # prints menu options
+    print("100 ) Main menu") # prints menu options☻
 
 def input_Back(x, pos): # check if input is 99 to go back, or 100 to go to main menu
-    if x == 99: pos()
-    elif x == 100: Startup()
+    if x == 99: act1()
+    elif x == 100: act2()
     else: pass
 
 # loading screen
