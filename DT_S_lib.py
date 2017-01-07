@@ -1,6 +1,6 @@
 import sys, os, time, random
 
-# Game menu
+# Game menu≠≠≠≠–≠
 def game_Menu(x):
     print("MENU")
     for i in range(len(x)):
