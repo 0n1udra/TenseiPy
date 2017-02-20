@@ -11,6 +11,20 @@ import time #from time import sleep # this is temporary
 class devNull(): pass
 #sys.stderr = devNull()
 
+#####   #####   #####   #####
+# tts's everything. the game speaks
+def Say(Str):
+    os.system('say -v daniel %s' %Str)
+
+
+#####   #####   #####
+# This makes sure the tts works on mac
+TTS = ("If this is not speaking to you, something went wrong!!!")
+print(TTS)
+Say(TTS)
+wait()
+
+
 #pauses for short time
 def sleep(x): # temporary, to remove pauses
     x = None
@@ -37,6 +51,7 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
         clear()
         for i in range(len(G0)):
             print(G0[i]) # Prints >> falling to you're DOOM >  still falling > any last words
+            Say(G0[i])
             sleep(4) # waits for 4 seconds after everytime it loops and prints text
 
         inp = input("Word(s) > ") # ask for last words before you die
@@ -46,6 +61,7 @@ class Game0:  # jump off rock > ask for last words > go to hell or die ..
         else:
             for i in range(len(G0_1)): # if you didn't input keywords it prints..
                 print(G0_1[i]) # Prints >> thanks that did nothing > Falling.. > SPLAT > GAME OVER
+                Say(G0_1[i])
                 sleep(3) # pauses for 3 seconds every loop
             game_Over() # exits game
 
@@ -226,7 +242,7 @@ class Game4:  # Sleep > Dreamworld > ..
             print(G5_Snores[i] * amount) # prints zz(s) from the list by a random amount
         #	sleep(amoun)
         print(G5_2)  # rested well message
-        sleep(.3)  # pauses for 5secs
+        sleep(.5)  # pauses for 5secs
         print(G5_3, timeSlept, "hours")  # prints morning message and tells you how long you slept for in total
         wait()
         timeSlept = timeSlept + 12 * 1.2  # adds time to total time slept,
