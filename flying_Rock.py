@@ -20,7 +20,7 @@ def sleep(x): # temporary, to remove pauses
 
 # GAME#		####################################################################################################################################
 
-class Game0:  # jump off rock > ask for last words > go to hell or die ..
+class Game_0:  # jump off rock > ask for last words > go to hell or die ..
 
     def __init__(self): self.Game_0()  # init function calles 'Game_0' when 'Game0' class is called
 
