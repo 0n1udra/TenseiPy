@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DT_S_lib.py" afterPath="$PROJECT_DIR$/DT_S_lib.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.py" afterPath="$PROJECT_DIR$/Test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flying_Rock.py" afterPath="$PROJECT_DIR$/flying_Rock.py" />
     </list>
     <list id="318ba0a6-5dae-4f86-8033-0342d39b1a2c" name="Ignore" comment="" />
     <ignored path="Games.iws" />
@@ -44,8 +41,8 @@
       <file leaf-file-name="flying_Rock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flying_Rock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="187" column="17" lean-forward="true" selection-start-line="187" selection-start-column="17" selection-end-line="187" selection-end-column="17" />
+            <state relative-caret-position="939">
+              <caret line="317" column="40" lean-forward="true" selection-start-line="317" selection-start-column="40" selection-end-line="317" selection-end-column="40" />
               <folding>
                 <element signature="e#167#186#0" expanded="true" />
                 <element signature="e#4223#7497#0" expanded="false" />
@@ -179,7 +176,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="467" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="467" />
@@ -493,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480364256921</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="changes&#10;">
+      <created>1489416359655</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1489416359655</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -507,7 +511,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="0" width="1916" height="1200" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16597077" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -924,8 +928,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="187" column="17" lean-forward="true" selection-start-line="187" selection-start-column="17" selection-end-line="187" selection-end-column="17" />
+        <state relative-caret-position="939">
+          <caret line="317" column="40" lean-forward="true" selection-start-line="317" selection-start-column="40" selection-end-line="317" selection-end-column="40" />
           <folding>
             <element signature="e#167#186#0" expanded="true" />
             <element signature="e#4223#7497#0" expanded="false" />
