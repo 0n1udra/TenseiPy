@@ -1,2 +1,3 @@
-from colorama import *
-print(Fore.MAGENTA + 'hi')
+print("HI")
+exit()
+print("BYE")
