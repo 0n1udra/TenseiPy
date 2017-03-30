@@ -10,12 +10,13 @@ class devNull(): pass
 #sys.stderr = devNull()
 
 langOpt = 0
+# 0 for normal, 1 for mean(I mean MEAN)
 
 # leave the text in the lists, because later when the game is finished i'm going to add another version of the text
 
 #       GAME 0-4		####################################################################################################################################
 
-# ----- Game 0 -----
+# ----- Game 0 ----- jump off rock > ask for last words > go to hell or dies..
 def game_0():  # jumping off
     # Text      -----       -----       -----       -----       -----       -----       #
         # you're falling >  still falling > any last words?
@@ -83,7 +84,8 @@ def game_0_1():  # in hell
         DT.error()
         game_0_1()
 
-# ----- Game 1 -----
+# ----- Game 1 ----- ask rock, ground,
+
 def game_1():  # ask rock to go to ground
     # Text      -----       -----       -----       -----       -----       #
         # asking rock to fly down
@@ -156,7 +158,7 @@ def game_1_1():  # on the ground
     DT.wait()
     start_Menu()
 
-# ----- Game 2 -----
+# ----- Game 2 ----- yelling > nothing
 def game_2():
     # Text  -----       -----       -----       -----       -----       -----       #
     # now yelling at rock
@@ -173,7 +175,7 @@ def game_2():
     DT.wait()
     start_Menu()
 
-# ----- Game 3 -----
+# ----- Game 3 ----- Begging > nothing
 def game_3():
     # Text  -----       -----       -----       -----       -----       @
     story = []
@@ -186,7 +188,7 @@ def game_3():
 
     DT.wait()
 
-# ----- Game 4 -----
+# ----- Game 4 ----- Sleep > Dreamworld > ..
 timeSlept = 12  # sets timeSlept variable, starts at 12,
 
 def game_4():  # sleeping
@@ -258,7 +260,7 @@ def super_Secret():
     print("Here are some extra options")
     DT.game_Menu(*secretMenu)
     
-# ----- Quit -----
+# ----- Quit ----- quit function, prints message and quits game
 def QUIT():
     quitText = ["Thanks for playing!", ""]
     input(quitText[langOpt])
