@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/TARDIS.py" line="17" mnemonic="3" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="8e4c8985-c4f1-4c72-8d38-1d871010867c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flying_Rock.py" afterPath="$PROJECT_DIR$/flying_Rock.py" />
     </list>
     <list id="318ba0a6-5dae-4f86-8033-0342d39b1a2c" name="Ignore" comment="" />
@@ -27,25 +23,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TARDIS.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TARDIS.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="flying_Rock.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flying_Rock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+            <state relative-caret-position="612">
+              <caret line="333" column="18" lean-forward="false" selection-start-line="333" selection-start-column="18" selection-end-line="333" selection-end-column="18" />
               <folding>
+                <element signature="n#!!doc" expanded="false" />
                 <element signature="e#167#186#0" expanded="true" />
+                <element signature="e#232#311#0" expanded="false" />
+                <element signature="e#396#400#0" expanded="false" />
+                <element signature="e#438#477#0" expanded="false" />
+                <element signature="e#874#2279#0" expanded="false" />
+                <element signature="e#874#959#0" expanded="false" />
+                <element signature="e#1580#1758#0" expanded="false" />
+                <element signature="e#2006#2279#0" expanded="false" />
+                <element signature="e#2099#2250#0" expanded="false" />
+                <element signature="e#2313#3962#0" expanded="false" />
+                <element signature="e#2313#2398#0" expanded="false" />
+                <element signature="e#2538#2784#0" expanded="false" />
+                <element signature="e#2539#2779#0" expanded="false" />
+                <element signature="e#2834#2957#0" expanded="false" />
+                <element signature="e#2835#2952#0" expanded="false" />
+                <element signature="e#3118#3200#0" expanded="false" />
+                <element signature="e#3590#3910#0" expanded="false" />
+                <element signature="e#3931#3960#0" expanded="false" />
+                <element signature="e#4049#6406#0" expanded="false" />
+                <element signature="e#4049#4122#0" expanded="false" />
+                <element signature="e#4550#5023#0" expanded="false" />
+                <element signature="e#4551#4998#0" expanded="false" />
+                <element signature="e#5043#5467#0" expanded="false" />
+                <element signature="e#5044#5441#0" expanded="false" />
+                <element signature="e#5796#5874#0" expanded="false" />
+                <element signature="e#6278#6406#0" expanded="false" />
+                <element signature="e#6446#6994#0" expanded="false" />
+                <element signature="e#6446#6519#0" expanded="false" />
+                <element signature="e#6874#6937#0" expanded="false" />
+                <element signature="e#7054#7577#0" expanded="false" />
+                <element signature="e#7054#7135#0" expanded="false" />
+                <element signature="e#7637#7905#0" expanded="false" />
+                <element signature="e#8041#9579#0" expanded="false" />
+                <element signature="e#8077#8146#0" expanded="false" />
+                <element signature="e#8183#8277#0" expanded="false" />
+                <element signature="e#9530#9579#0" expanded="false" />
+                <element signature="e#9611#10637#0" expanded="false" />
+                <element signature="e#9626#9711#0" expanded="false" />
+                <element signature="e#9910#10019#0" expanded="false" />
+                <element signature="e#10639#10798#0" expanded="false" />
+                <element signature="e#10845#11205#0" expanded="false" />
+                <element signature="e#11292#11488#0" expanded="false" />
+                <element signature="e#11510#11930#0" expanded="false" />
+                <element signature="e#11528#11614#0" expanded="false" />
+                <element signature="e#12251#12501#0" expanded="false" />
+                <element signature="e#12252#12495#0" expanded="false" />
+                <element signature="e#12590#12713#0" expanded="false" />
+                <element signature="e#13028#13055#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -54,20 +86,8 @@
       <file leaf-file-name="DT_S_lib.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-              <folding>
-                <element signature="e#2463#2657#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tardisPlans.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+            <state relative-caret-position="-700">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,7 +96,7 @@
       <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
+            <state relative-caret-position="32">
               <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
@@ -133,7 +153,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="375" />
+    <option name="x" value="322" />
+    <option name="y" value="8" />
     <option name="width" value="1544" />
     <option name="height" value="1200" />
   </component>
@@ -155,6 +176,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -170,7 +192,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -201,7 +222,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Test">
+  <component name="RunManager" selected="Python.flying_Rock">
     <configuration default="false" name="flying_Rock.py" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -430,8 +451,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.flying_Rock" />
+        <item index="0" class="java.lang.String" itemvalue="Python.flying_Rock" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Test" />
         <item index="2" class="java.lang.String" itemvalue="Python.turtle" />
         <item index="3" class="java.lang.String" itemvalue="Python.flying_Rock.py" />
         <item index="4" class="java.lang.String" itemvalue="Python.TARDIS" />
@@ -509,27 +530,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="375" y="0" width="1544" height="1200" extended-state="0" />
-    <editor active="true" />
+    <frame x="322" y="8" width="1544" height="1200" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17434211" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.174" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5904711" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31945702" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947807" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39824945" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32003397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39824945" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -591,13 +612,7 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -606,41 +621,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
     <entry file="file://$PROJECT_DIR$/flying_Rock.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
+            <element signature="n#!!doc" expanded="false" />
             <element signature="e#167#186#0" expanded="true" />
+            <element signature="e#232#311#0" expanded="false" />
+            <element signature="e#396#400#0" expanded="false" />
+            <element signature="e#438#477#0" expanded="false" />
+            <element signature="e#874#2279#0" expanded="false" />
+            <element signature="e#874#959#0" expanded="false" />
+            <element signature="e#1580#1758#0" expanded="false" />
+            <element signature="e#2006#2279#0" expanded="false" />
+            <element signature="e#2099#2250#0" expanded="false" />
+            <element signature="e#2313#3962#0" expanded="false" />
+            <element signature="e#2313#2398#0" expanded="false" />
+            <element signature="e#2538#2784#0" expanded="false" />
+            <element signature="e#2539#2779#0" expanded="false" />
+            <element signature="e#2834#2957#0" expanded="false" />
+            <element signature="e#2835#2952#0" expanded="false" />
+            <element signature="e#3118#3200#0" expanded="false" />
+            <element signature="e#3590#3910#0" expanded="false" />
+            <element signature="e#3931#3960#0" expanded="false" />
+            <element signature="e#4049#6406#0" expanded="false" />
+            <element signature="e#4049#4122#0" expanded="false" />
+            <element signature="e#4550#5023#0" expanded="false" />
+            <element signature="e#4551#4998#0" expanded="false" />
+            <element signature="e#5043#5467#0" expanded="false" />
+            <element signature="e#5044#5441#0" expanded="false" />
+            <element signature="e#5796#5874#0" expanded="false" />
+            <element signature="e#6278#6406#0" expanded="false" />
+            <element signature="e#6446#6994#0" expanded="false" />
+            <element signature="e#6446#6519#0" expanded="false" />
+            <element signature="e#6874#6937#0" expanded="false" />
+            <element signature="e#7054#7577#0" expanded="false" />
+            <element signature="e#7054#7135#0" expanded="false" />
+            <element signature="e#7637#7905#0" expanded="false" />
+            <element signature="e#8041#9579#0" expanded="false" />
+            <element signature="e#8077#8146#0" expanded="false" />
+            <element signature="e#8183#8277#0" expanded="false" />
+            <element signature="e#9530#9579#0" expanded="false" />
+            <element signature="e#9611#10637#0" expanded="false" />
+            <element signature="e#9626#9711#0" expanded="false" />
+            <element signature="e#9910#10019#0" expanded="false" />
+            <element signature="e#10639#10798#0" expanded="false" />
+            <element signature="e#10845#11205#0" expanded="false" />
+            <element signature="e#11292#11488#0" expanded="false" />
+            <element signature="e#11510#11930#0" expanded="false" />
+            <element signature="e#11528#11614#0" expanded="false" />
+            <element signature="e#12251#12501#0" expanded="false" />
+            <element signature="e#12252#12495#0" expanded="false" />
+            <element signature="e#12590#12713#0" expanded="false" />
+            <element signature="e#13028#13055#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt" />
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -649,41 +690,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
     <entry file="file://$PROJECT_DIR$/flying_Rock.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="n#!!doc" expanded="false" />
             <element signature="e#167#186#0" expanded="true" />
+            <element signature="e#232#311#0" expanded="false" />
+            <element signature="e#396#400#0" expanded="false" />
+            <element signature="e#438#477#0" expanded="false" />
+            <element signature="e#874#2279#0" expanded="false" />
+            <element signature="e#874#959#0" expanded="false" />
+            <element signature="e#1580#1758#0" expanded="false" />
+            <element signature="e#2006#2279#0" expanded="false" />
+            <element signature="e#2099#2250#0" expanded="false" />
+            <element signature="e#2313#3962#0" expanded="false" />
+            <element signature="e#2313#2398#0" expanded="false" />
+            <element signature="e#2538#2784#0" expanded="false" />
+            <element signature="e#2539#2779#0" expanded="false" />
+            <element signature="e#2834#2957#0" expanded="false" />
+            <element signature="e#2835#2952#0" expanded="false" />
+            <element signature="e#3118#3200#0" expanded="false" />
+            <element signature="e#3590#3910#0" expanded="false" />
+            <element signature="e#3931#3960#0" expanded="false" />
+            <element signature="e#4049#6406#0" expanded="false" />
+            <element signature="e#4049#4122#0" expanded="false" />
+            <element signature="e#4550#5023#0" expanded="false" />
+            <element signature="e#4551#4998#0" expanded="false" />
+            <element signature="e#5043#5467#0" expanded="false" />
+            <element signature="e#5044#5441#0" expanded="false" />
+            <element signature="e#5796#5874#0" expanded="false" />
+            <element signature="e#6278#6406#0" expanded="false" />
+            <element signature="e#6446#6994#0" expanded="false" />
+            <element signature="e#6446#6519#0" expanded="false" />
+            <element signature="e#6874#6937#0" expanded="false" />
+            <element signature="e#7054#7577#0" expanded="false" />
+            <element signature="e#7054#7135#0" expanded="false" />
+            <element signature="e#7637#7905#0" expanded="false" />
+            <element signature="e#8041#9579#0" expanded="false" />
+            <element signature="e#8077#8146#0" expanded="false" />
+            <element signature="e#8183#8277#0" expanded="false" />
+            <element signature="e#9530#9579#0" expanded="false" />
+            <element signature="e#9611#10637#0" expanded="false" />
+            <element signature="e#9626#9711#0" expanded="false" />
+            <element signature="e#9910#10019#0" expanded="false" />
+            <element signature="e#10639#10798#0" expanded="false" />
+            <element signature="e#10845#11205#0" expanded="false" />
+            <element signature="e#11292#11488#0" expanded="false" />
+            <element signature="e#11510#11930#0" expanded="false" />
+            <element signature="e#11528#11614#0" expanded="false" />
+            <element signature="e#12251#12501#0" expanded="false" />
+            <element signature="e#12252#12495#0" expanded="false" />
+            <element signature="e#12590#12713#0" expanded="false" />
+            <element signature="e#13028#13055#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt" />
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -692,31 +759,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt" />
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -725,31 +770,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt" />
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -758,31 +781,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt" />
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/turtle.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -800,23 +801,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flying_Rock.py.py" />
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -826,16 +812,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py" />
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
     <entry file="file://$PROJECT_DIR$/flying_Rock.py.py" />
     <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -844,13 +821,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -859,16 +830,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
     <entry file="file://$PROJECT_DIR$/flying_Rock.py.py" />
     <entry file="file://$PROJECT_DIR$/flyingrockPlans.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -877,13 +839,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DT_S_lib.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -903,49 +859,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../Learning/TGC/turtle.py" />
     <entry file="file://$PROJECT_DIR$/turtle.py" />
-    <entry file="file://$PROJECT_DIR$/TARDIS.py">
+    <entry file="file://$PROJECT_DIR$/TARDIS.py" />
+    <entry file="file://$PROJECT_DIR$/tardisPlans.txt" />
+    <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flying_Rock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding>
-            <element signature="e#167#186#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="32">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DT_S_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+        <state relative-caret-position="-700">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flying_Rock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="333" column="18" lean-forward="false" selection-start-line="333" selection-start-column="18" selection-end-line="333" selection-end-column="18" />
           <folding>
-            <element signature="e#2463#2657#0" expanded="false" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#167#186#0" expanded="true" />
+            <element signature="e#232#311#0" expanded="false" />
+            <element signature="e#396#400#0" expanded="false" />
+            <element signature="e#438#477#0" expanded="false" />
+            <element signature="e#874#2279#0" expanded="false" />
+            <element signature="e#874#959#0" expanded="false" />
+            <element signature="e#1580#1758#0" expanded="false" />
+            <element signature="e#2006#2279#0" expanded="false" />
+            <element signature="e#2099#2250#0" expanded="false" />
+            <element signature="e#2313#3962#0" expanded="false" />
+            <element signature="e#2313#2398#0" expanded="false" />
+            <element signature="e#2538#2784#0" expanded="false" />
+            <element signature="e#2539#2779#0" expanded="false" />
+            <element signature="e#2834#2957#0" expanded="false" />
+            <element signature="e#2835#2952#0" expanded="false" />
+            <element signature="e#3118#3200#0" expanded="false" />
+            <element signature="e#3590#3910#0" expanded="false" />
+            <element signature="e#3931#3960#0" expanded="false" />
+            <element signature="e#4049#6406#0" expanded="false" />
+            <element signature="e#4049#4122#0" expanded="false" />
+            <element signature="e#4550#5023#0" expanded="false" />
+            <element signature="e#4551#4998#0" expanded="false" />
+            <element signature="e#5043#5467#0" expanded="false" />
+            <element signature="e#5044#5441#0" expanded="false" />
+            <element signature="e#5796#5874#0" expanded="false" />
+            <element signature="e#6278#6406#0" expanded="false" />
+            <element signature="e#6446#6994#0" expanded="false" />
+            <element signature="e#6446#6519#0" expanded="false" />
+            <element signature="e#6874#6937#0" expanded="false" />
+            <element signature="e#7054#7577#0" expanded="false" />
+            <element signature="e#7054#7135#0" expanded="false" />
+            <element signature="e#7637#7905#0" expanded="false" />
+            <element signature="e#8041#9579#0" expanded="false" />
+            <element signature="e#8077#8146#0" expanded="false" />
+            <element signature="e#8183#8277#0" expanded="false" />
+            <element signature="e#9530#9579#0" expanded="false" />
+            <element signature="e#9611#10637#0" expanded="false" />
+            <element signature="e#9626#9711#0" expanded="false" />
+            <element signature="e#9910#10019#0" expanded="false" />
+            <element signature="e#10639#10798#0" expanded="false" />
+            <element signature="e#10845#11205#0" expanded="false" />
+            <element signature="e#11292#11488#0" expanded="false" />
+            <element signature="e#11510#11930#0" expanded="false" />
+            <element signature="e#11528#11614#0" expanded="false" />
+            <element signature="e#12251#12501#0" expanded="false" />
+            <element signature="e#12252#12495#0" expanded="false" />
+            <element signature="e#12590#12713#0" expanded="false" />
+            <element signature="e#13028#13055#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tardisPlans.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

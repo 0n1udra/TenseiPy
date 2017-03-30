@@ -17,7 +17,11 @@ langOpt = 0
 #       GAME 0-4		####################################################################################################################################
 
 # ----- Game 0 ----- jump off rock > ask for last words > go to hell or dies..
+
+c = DT.c()
+
 def game_0():  # jumping off
+
     # Text      -----       -----       -----       -----       -----       -----       #
         # you're falling >  still falling > any last words?
     falling = [["You're now falling to you're DOOM", "Still falling", "Any last words?"],[]]
@@ -44,6 +48,7 @@ def game_0():  # jumping off
         QUIT() # exits game
 
 def game_0_1():  # in hell
+
     # Text      -----       -----       -----       -----       -----       -----       #
             # offer soul to Satan > going to hell > HELL LEVEL 1 > you see Satan on his throne > what are you going ot do now?
     story = [["You offer to make a pack with Satan to save you're soul", "Now you're going to hell", "HELL LEVEL ",
@@ -87,6 +92,7 @@ def game_0_1():  # in hell
 # ----- Game 1 ----- ask rock, ground,
 
 def game_1():  # ask rock to go to ground
+
     # Text      -----       -----       -----       -----       -----       #
         # asking rock to fly down
             # how to ask rock
@@ -136,6 +142,7 @@ def game_1():  # ask rock to go to ground
         game_1() # re-runs the program(game_1())
 
 def game_1_1():  # on the ground
+
     # Text      -----       -----       -----       -----       -----       #
         # Story. on ground now
     story = ["YAY you're on the ground now, so now what?", '']
@@ -153,13 +160,15 @@ def game_1_1():  # on the ground
     try:
         inp = int(inp)
         DT.input_Back(inp, start_Menu(), game_1)
-    except: pass
+    except:
+        pass
 
     DT.wait()
     start_Menu()
 
 # ----- Game 2 ----- yelling > nothing
 def game_2():
+
     # Text  -----       -----       -----       -----       -----       -----       #
     # now yelling at rock
     youSay = ["You are now yelling at the rock!", '']
@@ -177,6 +186,7 @@ def game_2():
 
 # ----- Game 3 ----- Begging > nothing
 def game_3():
+
     # Text  -----       -----       -----       -----       -----       @
     story = []
     menuOptions = [[], []]
@@ -192,6 +202,7 @@ def game_3():
 timeSlept = 12  # sets timeSlept variable, starts at 12,
 
 def game_4():  # sleeping
+
     global timeSlept
     DT.clear()
     # Text  -----       -----       -----       -----       -----       #
@@ -221,12 +232,14 @@ def game_4():  # sleeping
 
     timeSlept = timeSlept + 12 * 1.2  # adds time to total time slept,
     # ^ every time you sleep, the you longer you sleep. 1.2x longer every time
-    if timeSlept > 84: game_4_1()  # if you slept for more then 84 hours, you go to dreamworld
+    if timeSlept > 84:
+        game_4_1()  # if you slept for more then 84 hours, you go to dreamworld
     else:  # else you it goes back to main menu
         DT.clear()
         start_Menu() # go to main menu
 
 def game_4_1():  # dream
+
     DT.clear()
     # Text      -----       -----       -----       -----       -----       -----       #
         # Dreamworld
@@ -252,6 +265,7 @@ def game_4_1():  # dream
 
 # ----- Extra -----
 def super_Secret():
+
     # Text -----        -----       -----       -----       -----       -----       #
     secretMenu = ["Yell for TARDIS", "1", "2"]
     #   -----       -----       -----       -----       -----       -----       @
@@ -262,11 +276,13 @@ def super_Secret():
     
 # ----- Quit ----- quit function, prints message and quits game
 def QUIT():
+
     quitText = ["Thanks for playing!", ""]
     input(quitText[langOpt])
     exit()  # built-in exit function to exit the script, quit() was also a built-in function, until this function overwritten it
 
 def Loading():
+
     DT.c.resetA()
     # Starts the program, first runs the loading screen, then runs the Start_menu function
 
@@ -279,6 +295,7 @@ def Loading():
     start_Menu()
 
 def start_Menu():
+
     # Text      -----   -----       -----       -----       -----       #
         # Startup menu/Main menu
     Story = ["You are on a floating rock 1000ft above ground, and all that you have is a bed(for some reason), so what do you do", '']
@@ -298,7 +315,7 @@ def start_Menu():
     #         -----     -----         -----         -----        -----      #
 
     DT.clear()
-
+    c.resetA()
     print("THE STORY\n" +  Story[langOpt])  # the story
 
     # this is well print the game menu, by inputting the list options, it'll print out the number and )
@@ -314,10 +331,11 @@ def start_Menu():
     try:  # try and except is for when you know you're code might break,
         # if the 'try' code fails the program goes to except, instead of crashing
         inp = int(inp)  # tries to convert input to integer
-        if inp > 5:
+        if inp > 6:
             print(extra[inp])
             start_Menu()  # checks to see if what you inputted is a extra
-        else: run[inp]()  # runs the game that corresponds to input
+        else:
+            run[inp]()  # runs the game that corresponds to input
     except:
         DT.error()
         start_Menu() # gives error, then goes back to main menu
