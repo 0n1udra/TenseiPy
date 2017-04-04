@@ -1,2 +1,6 @@
-.idea
+.idea/
 *.xml
+.idea/*
+*.pyc
+__pycache__/
+__pycache__/*
