@@ -3,7 +3,7 @@
 # libraries I use
 import random, sys
             # sys is for errors
-from DT_S_lib import *
+from DT_lib import *
 import time #from time import sleep # this is temporary
 # time is for the delays and pauses
 
