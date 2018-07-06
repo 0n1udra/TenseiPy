@@ -13,7 +13,7 @@ def option_Menu(x):
 
 
 def sleep(x): # temporary, to remove pauses
-    time.sleep(0)
+    time.sleep(1)
 
 
 def print_Text(text, sleepTime=2):
@@ -61,7 +61,7 @@ def game_Over(start):
         exit()
 
 def error():
-    input("That didn't work > ")
+    input("That didn't work. Enter> ")
 
 # makes sure this program doesn't run, if runned directly
 if(__name__ == '__main__'):

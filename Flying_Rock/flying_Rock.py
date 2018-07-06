@@ -17,7 +17,7 @@ langOpt = 0
 def game_0():  # jumping off
     falling = [["You're now falling to you're DOOM", "Still falling", "Any last words?"],
                []]
-    thanks = [["Thanks, that did nothing", "Falling...Falling...Falling", "SPLAT...you dead!", "GAME OVER"],
+    thanks = [["Thanks, that did nothing", "Falling...", "Falling...", "Falling", "SPLAT...you're now dead!", "GAME OVER!"],
               []]
     keywordsToHell = [["dark lord satan, i offer thee my soul", "test", "1"],
                       []]
@@ -31,13 +31,13 @@ def game_0():  # jumping off
         game_0_1() # TOO HELL!
     else:
         DT.print_Text(thanks, 3) # GAME OVER
-        QUIT()
+        DT.game_Over(start_Menu)
 
 # HELL
 def game_0_1():
     story = [["You offer to make a pack with Satan to save you're soul", "Now you're going to hell", "HELL LEVEL ",
               "You're now in Hell, and first thing you see is Satan sitting on dark throne",
-              "What the hell ya going to do now?"],
+              "What the hell are you going to do now?"],
 
              []]
     menuOptions = [["Attempt to sneak away", "Beg for soul back even though you just sold it",
@@ -224,11 +224,12 @@ def super_Secret():
 
     print("Welcome to the super secret, but ain't so secret anymore I guess")
     print("Here are some extra options")
-    DT.game_Menu(*secretMenu)
+    DT.option_Menu(secretMenu)
+    # TODO secret menu
 
 # ----- Quit ----- quit function, prints message and quits game
 def QUIT():
-    quitText = ["Thanks for playing!", ""]
+    quitText = [["Thanks for playing! Enter>"], [""]]
     input(quitText[langOpt])
     exit()
 
