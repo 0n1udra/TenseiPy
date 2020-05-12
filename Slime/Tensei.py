@@ -1,4 +1,5 @@
 
+from items import *
 from skills import *
 
 class Scene_Template:
@@ -7,11 +8,14 @@ class Scene_Template:
         self.SceneStart()
 
     def Actions(self, usrInp, actions, funcs):
+        usrInp = usrInp.lower()
+        actions.extend([['stats', 'attributes', 'attrs'], ['inventory', 'inv', 'stomach']])
+        funcs.extend([slime.showAttributes, slime.showInventory])
         # Runs through each function available
         for i in range(len(funcs)):
             for j in actions[i]:
                 # Checks if user input matches one of the available actions
-                if usrInp.lower() in j:
+                if usrInp in j:
                     # Runs corresponding function
                     funcs[i]()
 #            if usrInp.lower() in actions[i]:
@@ -24,60 +28,6 @@ class Scene_Template:
         pass
 
 
-
-
-class Inventory:
-    def __init__(self):
-
-        self.playerInventory = {
-
-        'Ultimate Skill' : [],
-        'Unique Skill' : [],
-        'Special Skill' : [],
-        'Extra Skill' : [],
-        'Intrinsic Skill' : [],
-        'Battle Skill' : [],
-        'Common Skill' : [],
-        'Daily Skill' : [],
-        'Composite Skill' : [],
-        'Resistence' : [],
-        'Attribute' : [],
-        'Mana' : []
-        }
-
-    def showIventory(self):
-        print()
-        # Prints players current skills, will not print out every type of skill unless player has said skills
-        for k, v in self.playerInventory.items():
-            if v: # Checks if player has this type of skill
-                print(f'{k}:')
-                for i in v:
-                    print(f'\t{i}')
-
-    def addInventory(self, item):
-        self.playerInventory[item.skillLevel].append(item)
-        print(item.acquired())
-
-
-    def removeInventory(self, item):
-        for k, v in self.playerInventory.items():
-            if v:
-                if item in v:
-                    # Finds corresponding item, and removes it from inventory
-                    self.playerInventory[k].remove(item)
-
-    def skillUpgrade(self, skillFrom, skillTo):
-        for k, v in self.playerInventory.items():
-            if v:
-                for i in v:
-                    if i.name in skillFrom.name:
-                        # Removes skill from inventory
-                        self.playerInventory[k].remove(i)
-
-        print(f'<<{skillFrom.skillLevel} [{skillFrom}] upgrading to {skillTo.skillLevel} [{skillTo}]...>>')
-        self.addInventory(skillTo)
-
-
 class Scene_Intro(Scene_Template):
 
 
@@ -86,18 +36,16 @@ class Scene_Intro(Scene_Template):
         #TODO Add Skill
 
         print("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
-        slime.addInventory(Predator_Skill())
+        slime.addAttribute(Predator_Skill())
 
         print("<<Confirmation Complete. Acquiring extra skill [Sage]...>>")
-        slime.addInventory(Sage_Skill())
+        slime.addAttribute(Sage_Skill())
         
         print("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
         slime.skillUpgrade(Sage_Skill(), Great_Sage_Skill())
 
 
-
-        print("\n-----Current Skills-----")
-        print(slime.showIventory())
+        print(slime.showAttributes())
 
         print("\nYou wake up, or at least you think you are 'awake'.")
         print("It's so dark, where is this.")
@@ -111,7 +59,7 @@ class Scene_Intro(Scene_Template):
 
         #actions = [MoveArms, MoveLegs]
         print("\nAvailable Actions: Move Arms, Move Legs")
-        self.usrInp = input("\n> ")
+        self.usrInp = 'move' #input("\n> ")
         self.Actions(self.usrInp, [['move arms', 'twitch arms'], ['move legs']], [self.MoveArms, self.MoveLegs])
 
         print("hm? eh? My limbs don't seem to be responding!?")
@@ -132,7 +80,7 @@ class Scene_Intro(Scene_Template):
         print("Eh.. Wait a moment... Let's calm down and confirm my appearance")
 
         print("\nAvailable Actions: Move, Puyo")
-        self.usrInp = input("\n> ")
+        self.usrInp = 'move'#input("\n> ")
         self.Actions(self.usrInp, [['squash', 'move', 'twitch'],['puyoo', 'poyo']], [self.squash, self.puyo])
 
         print("It's probably is like this!")
@@ -141,7 +89,31 @@ class Scene_Intro(Scene_Template):
         print("And this sort of elastic feeling")
         print("***Although Minami Satoru didn't want to admint it***")
         print("***He has reincarrnated into a slime!***")
-        
+
+        print("puyo, puyoyoyo.... stretch....bounce")
+        print("It's been a long time since I've accepted myself as a slime")
+        print("I've gotten used to this elastic body")
+        print("I can't feel heat nor cold. Even after bumping into rocks I'll quickly self regenerate")
+        print("And there was no need for sleep or eat either")
+        print("It's just very lonely")
+        print("This is the only problem I can't solve, so i started eating grass in order to pass time")
+
+        print("\nAvailable Actions: Eat Grass, Move, Wonder, Puyo!")
+        self.usrInp = input("\n> ")
+        self.Actions(self.usrInp, [['eat grass'], ['move', 'wonder']], [self.eatGrass, self.puyo])
+
+        print("I've ate what seems like a lot of grass, and yet I haven't pooped yet")
+        print("So where did all the grass go?")
+        print("<<Answer. They are stored inside the unique skill [Predator]'s stomach sack>>")
+        print("Whoa, somebody actually answered!?!")
+        print("<<Also, the current spaced used is less than 1%")
+        slime.addInventory(Grass_Item(), capacity=0.9)
+
+
+    def eatGrass(self):
+        print("Ooooweeee more grass!")
+
+
     def squash(self):
         print("hehhhh")
         print("Is that so....")
