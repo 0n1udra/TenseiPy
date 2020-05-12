@@ -59,7 +59,8 @@ class Inventory:
         for k, v in self.playerInventory.items():
             if v:
                 if item in v:
-                    print("Test")
+                    # Finds corresponding item, and removes it from inventory
+                    self.playerInventory[k].remove(item)
 
 class Scene_Intro(Scene_Template):
 
@@ -72,7 +73,7 @@ class Scene_Intro(Scene_Template):
         Sage_Skill.acquireSkill(slime)
         print(slime.showIventory())
 
-        slime.playerInventory['Extra Skills'].remove(Sage_Skill)
+        slime.removeInventory(Sage_Skill)
         print(slime.showIventory())
         print("\nYou wake up, or at least you think you are 'awake'")
 
