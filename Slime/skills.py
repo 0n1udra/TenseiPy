@@ -2,7 +2,7 @@
 class Inventory:
     def __init__(self):
 
-        inventoryCapacity = 0
+        self.inventoryCapacity = 0
 
         self.playerAttributes = {
 
@@ -37,6 +37,7 @@ class Inventory:
                 print(f'{k}:')
                 for i in v:
                     print(f'\t{i}')
+
         print('\n-----Attributes/Skills-----\n')
 
     def addAttribute(self, item):
@@ -71,10 +72,13 @@ class Inventory:
                 print(f'{k}:')
                 for i in v:
                     print(f'\t{i}')
+        print(f'\nCapacity: {self.inventoryCapacity}%')
         print('\n-----Inventory-----\n')
 
     def addInventory(self, item, amount=0, capacity=0):
         self.playerInventory[item.itemType].append(item)
+
+        self.inventoryCapacity = capacity
         #print(item.acquired())
 
 
