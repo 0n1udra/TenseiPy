@@ -31,18 +31,18 @@ class Inventory:
 
         self.playerInventory = {
 
-        'Ultimate Skills' : [],
-        'Unique Skills' : [],
-        'Special Skills' : [],
-        'Extra Skills' : [],
-        'Intrinsic Skills' : [],
-        'Battle Skills' : [],
-        'Common Skills' : [],
-        'Daily Skills' : [],
-        'Composite Skills' : [],
-        'Resistences' : [],
-        'Attributes' : [],
-        'Manas' : []
+        'Ultimate Skill' : [],
+        'Unique Skill' : [],
+        'Special Skill' : [],
+        'Extra Skill' : [],
+        'Intrinsic Skill' : [],
+        'Battle Skill' : [],
+        'Common Skill' : [],
+        'Daily Skill' : [],
+        'Composite Skill' : [],
+        'Resistence' : [],
+        'Attribute' : [],
+        'Mana' : []
         }
 
     def showIventory(self):
@@ -52,8 +52,12 @@ class Inventory:
             if v: # Checks if player has this type of skill
                 print(f'{k}:')
                 for i in v:
-                    i = i.__str__(self)
                     print(f'\t{i}')
+
+    def addInventory(self, item):
+        self.playerInventory[item.skillLevel].append(item)
+        print(item.acquired())
+
 
     def removeInventory(self, item):
         for k, v in self.playerInventory.items():
@@ -68,13 +72,12 @@ class Scene_Intro(Scene_Template):
     def SceneStart(self):
         print("Current Skills:")
         print("<<Confirmation Complete. Acquiring Skill [Predator]>>")
-        Predator_Skill.acquireSkill(slime)
+        slime.addInventory(Predator_Skill())
 
-        Sage_Skill.acquireSkill(slime)
+        slime.addInventory(Sage_Skill())
+
         print(slime.showIventory())
 
-        slime.removeInventory(Sage_Skill)
-        print(slime.showIventory())
         print("\nYou wake up, or at least you think you are 'awake'")
 
         #actions = [MoveArms, MoveLegs]

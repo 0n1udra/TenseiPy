@@ -1,50 +1,52 @@
 class Skill:
     def __init__(self):
-        self.skillLevel = None
-        self.skillPower = 0
+        self.name = ''
+        self.skillLevel = 0
+        self.acquredMsg = ''
 
-        self.predate = True
+        self.skillPower = 0
         self.energy = 0
 
-    def acquireSkill(self):
-        pass
+        self.predate = True
 
+    def acquired(self):
+        return(self.acquiredMsg)
 
-class Unique_Skill(Skill):
-    def init(self):
-        self.skillLevel = 'Unique Skill'
+    def __str__(self):
+        return(self.name)
 
-class Extra_Skill(Skill):
-    pass
 
 
 ##### Extra Skills #####
 
-class Sage_Skill(Extra_Skill):
-    def __str__(self):
-        return("Sage")
+class Sage_Skill(Skill):
+    def __init__(self):
+        Skill.__init__(self)
 
-    def acquireSkill(self):
-        self.playerInventory['Extra Skills'].append(Sage_Skill)
-        print("<<Extra skill [Sage] successfully acquired>>")
+        self.name = 'Sage'
+        self.skillLevel = 'Extra Skill'
+        self.acquiredMsg = "<<Extra skill: [Sage] has been successfully acquired>>"
+
+
 
 ##### Unique Skills #####
 
-class Predator_Skill(Unique_Skill):
-    
+class Predator_Skill(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+
+        self.name = 'Predator'
+        self.skillLevel = 'Unique Skill'
+        self.acquiredMsg = "<<Unqiue skill [Predator] successfully acquired>>"
+
+
+
+class Great_Sage_Skill(Skill):
+    def init(self):
+        pass
 
     def acquireSkill(self):
-        self.playerInventory['Unique Skills'].append(Predator_Skill)
-        print("<<Unqiue skill [Predator] successfully acquired>>")
-
-    def __str__(self):
-        return("Predator")
-
-
-class Great_Sage_Skill(Sage_Skill, Unique_Skill):
-
-    def acquireSkill(self):
-        self.playerInventory['Unique Skills'].append(Great_Sage_Skill)
+        self.playerInventory['Unique Skill'].append(Great_Sage_Skill)
         print("<<Unqiue skill [Great Sage] successfully acquired>>")
 
     def __str__(self):
