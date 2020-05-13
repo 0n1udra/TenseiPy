@@ -15,8 +15,6 @@ else:
     t2, t3, t4, t5 = 2, 3, 4, 5  # Custom Sleep times
 
 
-
-
 def sprint(sleepTime, Msg):
     print(Msg)
     sleep(sleepTime)
@@ -29,24 +27,33 @@ class Scene_Template:
         self.SceneStart()
 
 
-    def runFuncs(self, usrInp, actions, funcs):
-        for i in range(len(funcs)):
-            for j in actions[i]:
-                if usrInp in j:
-                    funcs[i]()
-                    return
-
-    def actionMenu(self, msg, actions, funcs):
-        menuActions = [['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach']]
-        menuActionsFlat = [val for sub in menuActions for val in sub]
-        menuFuncs = [slime.showAttributes, slime.showInventory]
+    def runFuncs(self, msg, actions, funcs):
+        contGame = False
         print("\nAvailable Actions:", msg, ' | stats, inv')
         self.usrInp = input("\n> ").lower()
-        while self.usrInp in menuActionsFlat:
-            self.runFuncs(self.usrInp, menuActions, menuFuncs)
-            self.actionMenu(msg, actions, funcs)
+        for i in range(len(funcs)):
+            for j in actions[i]:
+                if self.usrInp == j:
+                    if i == 0:
+                        funcs[i]()
+                        contGame = True
+                        break
+                    else:
+                        funcs[i]()
+                        contGame = False
+
+        if not contGame:
+            self.runFuncs(msg, actions, funcs)
         else:
-            self.runFuncs(self.usrInp, actions, funcs)
+            return
+        
+
+
+    def actionMenu(self, msg, actions, funcs):
+        actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach']])
+        funcs.extend([slime.showAttributes, slime.showInventory])
+        self.runFuncs(msg, actions, funcs)
+
 
 # Manga, Chapter 1
 class Scene_Intro(Scene_Template):
@@ -81,7 +88,7 @@ class Scene_Intro(Scene_Template):
         sprint(t3, "Is it already past the curfew? I should First call the nurse...")
 
         self.actionMenu("Move Arms, Move Legs",
-                        [['move arms', 'twitch arms'], ['move legs']],
+                        [['move arms', 'move'], ['twitch leg']],
                         [self.MoveArms, self.MoveLegs])
 
         sprint(t2, "hm? eh? My limbs don't seem to be responding!?")
@@ -112,7 +119,6 @@ class Scene_Intro(Scene_Template):
         sprint(t3, "***He has reincarrnated into a slime!***")
 
         sprint(t3, ascii.slime)
-
 
         sprint(t3, "puyo, puyoyoyo.... stretch....bounce")
         sprint(t4, "It's been a long time since I've accepted myself as a slime.")
@@ -165,20 +171,36 @@ class Scene_Intro(Scene_Template):
         sprint(t2, "I'll have to be friendly")
         sprint(t3, "But how do I even reply?")
         sprint(t3, "It's not like I have a means to speak")
-        sprint(t2, "*Hey can you just replay?*")
+        sprint(t2, "*Hey can you just reply?*")
+
+        self.actionMenu('"Shut it baldy", ',
+                        [['baldy', 'shut it baldy'], ['move', 'wonder']],
+                        [self.baldy, self.shutit, self.puyo])
+
+
+        sprint(t2, "Don't be so inconsiderate BALDY!! (ahh, how annoying).")
+        sprint(t2, "*BALDY, HA ,HAHAHA, SEEMS LIKE YOU WANT TO DIE!!!*")
+        sprint(t2, "Was I heard?")
+        sprint(t5, "Sorry!, I never expected to be able to speak with anything other than my skill by thought...")
+        sprint(t3, "Right now I am in a state that's unable to see anythinn....um you are?")
+        sprint(t2, "*This is telapathy*")
+        sprint(t3, "*Mmmmm, My name is....*")
         
 
     
 
         self.actionMenu('Puyo!',
                         ['move', 'wonder'],
-                        [self.eatGrass, self.puyo])
+                        [self.puyo])
+
+    def shutit(self):
+        sprint(t3, "*OHOHO, So you want to die, you maggot!*")
 
     def baldy(self):
-        sprint("*BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!*")
+        sprint(t3, "*BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!*")
 
     def eatGrass(self):
-        print("Ooooweeee more grass!")
+        sprint(t2, "Ooooweeee more grass!")
 
 
     def squash(self):
