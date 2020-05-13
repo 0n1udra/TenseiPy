@@ -8,7 +8,7 @@ import ascii
 
 debug = True
 if debug:
-    usrInpDebug = True
+    usrInpDebug = False
     def sleep(x): pass
     ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
     t2 = t3 = t4 = t5 = t6 = 0
@@ -50,8 +50,17 @@ class Scene_Template:
         if usrInpDebug:
             self.usrInp = actions[0][0]
         else:
-            print("\nAvailable Actions:", msg, ' | stats(attributes), inv(entory), exit')
+            print("\nAvailable Actions:", msg, ' | stats(attributes), inv(entory), info <skill/obj>, exit')
             self.usrInp = input("\n> ").lower()
+
+        ### Get info on skills, times, etc
+        if 'info' in self.usrInp:
+            try:
+                inputSkill = ' '.join(self.usrInp.lower().split()[1:])
+                # Can only get info if item exist in rimuru characte
+                rimuru.SkillInfo(inputSkill, rimuru)
+            except:
+                print("NOTE: info Usage example (case sensitive): info predator")
 
         contGame = False
         for i in range(len(funcs)):

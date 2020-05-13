@@ -2,6 +2,9 @@ class Skill:
     def __init__(self):
         self.name = ''
         self.skillLevel = ''
+
+        self.description = ''
+        self.abilities = ''
         self.acquredMsg = ''
 
         self.skillPower = 0
@@ -28,11 +31,11 @@ class Predator_Skill(Skill):
         self.skillLevel = 'Unique Skill'
         self.AcquiredMsgMsg = "<<Unique skill [Predator] successfully Acquired.>>"
         self.abilities = """
-        Predation   -- Aborts target
-        Analysis    -- Analysis absorbed target
-        Stomach     -- Stores absorbed target
-        Mimicry     -- Mimics targets appearance. Use targets abilities if analysis was successful
-        Isolation   -- Isolates harmful objects
+IIPredation   -- Aborts target
+Analysis    -- Analysis absorbed target
+Stomach     -- Stores absorbed target
+Mimicry     -- Mimics targets appearance. Use targets abilities if analysis was successful
+Isolation   -- Isolates harmful objects
         """
 
         stomach = {
@@ -67,6 +70,11 @@ class Great_Sage_Skill(Skill):
         self.name = 'Great Sage'
         self.skillLevel = 'Unique Skill'
         self.AcquiredMsgMsg = "<<Unique skill [Great Sage] Acquired.>>"
+        self.description = "GREAT SAGE DESCRIPTION"
+        self.abilities = """
+
+            TESTY
+        """
 
 ##### Extra Skills #####
 
