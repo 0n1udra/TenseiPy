@@ -20,6 +20,5 @@ NOTE: Game will display ASCII art, adjust window size accordingly.
 # Layout
 - Intro (Cave)
   - -In Progress-
-
-
+  
 ![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)
