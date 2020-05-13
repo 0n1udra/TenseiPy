@@ -2,17 +2,20 @@
 from items import *
 from skills import *
 
-#from time import sleep
-from sleep import *
-
 # ASCII Art
 import ascii
 
-ascii.slime = ''
-ascii.great_sage = ''
+debug = True
+if debug:
+    from sleep import sleep
+    ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
+    t2 = t3 = t4 = t5 = 0
+else:
+    from time import sleep
+    t2, t3, t4, t5 = 2, 3, 4, 5  # Custom Sleep times
 
-# Sleep times
-t2, t3, t4, t5 = 2, 3, 4, 5
+
+
 
 def sprint(sleepTime, Msg):
     print(Msg)
@@ -24,6 +27,7 @@ class Scene_Template:
 
     def __init__(self):
         self.SceneStart()
+
 
     def runFuncs(self, usrInp, actions, funcs):
         for i in range(len(funcs)):
@@ -160,14 +164,18 @@ class Scene_Intro(Scene_Template):
         sprint(t4, "This is the first conversation I'm having since reincarnating into a slime.")
         sprint(t2, "I'll have to be friendly")
         sprint(t3, "But how do I even reply?")
-
-
+        sprint(t3, "It's not like I have a means to speak")
+        sprint(t2, "*Hey can you just replay?*")
+        
 
     
 
         self.actionMenu('Puyo!',
                         ['move', 'wonder'],
                         [self.eatGrass, self.puyo])
+
+    def baldy(self):
+        sprint("*BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!*")
 
     def eatGrass(self):
         print("Ooooweeee more grass!")
