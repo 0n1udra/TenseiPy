@@ -28,7 +28,6 @@ class Scene_Template:
     def __init__(self):
         self.SceneStart()
 
-
     def runFuncs(self, msg, actions, funcs):
         if usrInpDebug:
             self.usrInp = actions[0][0]
@@ -64,7 +63,6 @@ class Scene_Template:
     def tbc(self):
         print("---TO BE CONTINUED---")
 
-
 # Manga, Chapter 1
 class Scene_Intro(Scene_Template):
 
@@ -72,6 +70,7 @@ class Scene_Intro(Scene_Template):
         sprint(t2, ascii.great_sage)
 
         sprint(t3, "NOTE: You can access inventory/attributes whenever input is possible, (stats, inv)")
+        sprint(t3, "NOTE: ASCII art will be displayed, set window size accordingly")
 
         sprint(t3, "<<Confirmation Complete. Constructing a body that does not require blood...>>")
         #TODO Add Skill
@@ -181,13 +180,13 @@ class Scene_Intro(Scene_Template):
         sprint(t3, "It's not like I have a means to speak")
         sprint(t2, "*Hey can you just reply?*")
 
-        self.actionMenu('"Shut it baldy", ',
+        self.actionMenu('"Shut it baldy"',
                         [['baldy', 'shut it baldy'], ['move', 'wonder']],
                         [self.baldy, self.puyo])
 
 
         sprint(t2, "Don't be so inconsiderate BALDY!! (ahh, how annoying).")
-        sprint(t2, "*BALDY, HA ,HAHAHA, SEEMS LIKE YOU WANT TO DIE!!!*")
+        sprint(t2, "*BALDY, HA, HAHAHA, SEEMS LIKE YOU WANT TO DIE!!!*")
         sprint(t2, "Was I heard?")
         sprint(t5, "Sorry!, I never expected to be able to speak with anything other than my skill by thought...")
         sprint(t3, "Right now I am in a state that's unable to see anythinn....um you are?")
@@ -207,11 +206,7 @@ class Scene_Intro(Scene_Template):
         sprint(t3, "I sense something floating, is this the so called magic essence?")
         slime.addAttribute(Magic_Perception_Skill())
 
-        tbc()
-
-        self.actionMenu('Puyo!',
-                        ['move', 'wonder'],
-                        [self.puyo])
+        self.tbc()
 
     def shutit(self):
         sprint(t3, "*OHOHO, So you want to die, you maggot!*")

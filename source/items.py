@@ -1,5 +1,5 @@
-    class Item:
-        def __init__(self):
+class Item:
+    def __init__(self):
         self.name = ''
         self.itemType = ''
         self.description = ''
