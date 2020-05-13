@@ -13,6 +13,7 @@ Python text adventure game based off of Tensei Slime managa. (Voice lines are no
 
 
 # Layout
-
+- Intro (Cave)
+  - -In Progress-
 
 
