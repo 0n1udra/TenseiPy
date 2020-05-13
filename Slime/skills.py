@@ -109,18 +109,6 @@ class Skill:
         return(self.name)
 
 
-
-##### Extra Skills #####
-
-class Sage_Skill(Skill):
-    def __init__(self):
-        Skill.__init__(self)
-
-        self.name = 'Sage'
-        self.skillLevel = 'Extra Skill'
-        self.acquiredMsg = "<<Extra skill: [Sage] has been successfully acquired.>>"
-
-
 ##### Unique Skills #####
 
 class Predator_Skill(Skill):
@@ -138,4 +126,24 @@ class Great_Sage_Skill(Skill):
         self.name = 'Great Sage'
         self.skillLevel = 'Unique Skill'
         self.acquiredMsg = "<<Unqiue skill [Great Sage] acquired.>>"
+
+##### Extra Skills #####
+
+class Sage_Skill(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+
+        self.name = 'Sage'
+        self.skillLevel = 'Extra Skill'
+        self.acquiredMsg = "<<Extra skill: [Sage] has been successfully acquired.>>"
+
+
+##### Common Skills #####
+
+class Hydraulic_Propulsion(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Hydraulic Propulsion'
+        self.skillLevel = 'Common Skill'
+        self.acquiredMsg = '<<Skill [Hydraulic Propulsion] acquired.>>'
 
