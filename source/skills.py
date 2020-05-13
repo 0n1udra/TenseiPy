@@ -137,6 +137,15 @@ class Sage_Skill(Skill):
         self.skillLevel = 'Extra Skill'
         self.acquiredMsg = "<<Extra skill: [Sage] has been successfully acquired.>>"
 
+class Magic_Perception_Skill(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+
+        self.name = 'Magic Perception'
+        self.skillLevel = 'Extra Skill'
+        self.acquiredMsg = "<<Extra skill: [Magic Perception] acquired.>>"
+
+
 
 ##### Common Skills #####
 

@@ -7,10 +7,12 @@ import ascii
 
 debug = True
 if debug:
+    usrInpDebug = True
     def sleep(x): pass
     ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
     t2 = t3 = t4 = t5 = 0
 else:
+    usrInpDebug = False
     from time import sleep
     t2, t3, t4, t5 = 2, 3, 4, 5  # Custom Sleep times
 
@@ -28,9 +30,15 @@ class Scene_Template:
 
 
     def runFuncs(self, msg, actions, funcs):
+        
+        print(actions[0][0])
+        if usrInpDebug:
+            self.usrInp = actions[0][0]
+        else:
+            print("\nAvailable Actions:", msg, ' | stats, inv')
+            self.usrInp = input("\n> ").lower()
+
         contGame = False
-        print("\nAvailable Actions:", msg, ' | stats, inv')
-        self.usrInp = input("\n> ").lower()
         for i in range(len(funcs)):
             for j in actions[i]:
                 if self.usrInp == j:
@@ -175,7 +183,7 @@ class Scene_Intro(Scene_Template):
 
         self.actionMenu('"Shut it baldy", ',
                         [['baldy', 'shut it baldy'], ['move', 'wonder']],
-                        [self.baldy, self.shutit, self.puyo])
+                        [self.baldy, self.puyo])
 
 
         sprint(t2, "Don't be so inconsiderate BALDY!! (ahh, how annoying).")
@@ -185,7 +193,26 @@ class Scene_Intro(Scene_Template):
         sprint(t3, "Right now I am in a state that's unable to see anythinn....um you are?")
         sprint(t2, "*This is telapathy*")
         sprint(t3, "*Mmmmm, My name is....*")
+        sprint(t2, "*It's Hard to converse if you can't see...*")
+        sprint(t2, "*Aliright, I'll help you see*")
+        sprint(t2, "eh?")
+        sprint(t2, "*Just don't be scared when you see my true form*")
+        sprint(t5, "*There is something called [Magic Perception], it allows you to perceive the surrounding magic essence*")
+        sprint(t2, "Magic essence?...")
+        sprint(t5, "<<Answer. This world is covered with magic essence for example, the body of a slime can move because it absorbs magic essence.>>")
+        sprint(t5, "*If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill*")
+        sprint(t3, "*With that you will be able to 'see' and 'hear'*")
+        sprint(t3, "Eh--- this feels really complicated")
+        sprint(t3, "Well, it won't hurt to try (will it?)")
+        sprint(t3, "I sense something floating, is this the so called magic essence?")
+        slime.addAttribute(Magic_Perception_Skill())
+
         
+
+
+        
+
+
 
     
 
