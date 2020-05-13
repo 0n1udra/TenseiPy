@@ -1,4 +1,3 @@
-
 class Inventory:
     def __init__(self):
 
@@ -81,15 +80,12 @@ class Inventory:
         self.inventoryCapacity = capacity
         #print(item.acquired())
 
-
     def removeInventory(self, item):
         for k, v in self.playerIventory.items():
             if v:
                 if item in v:
                     # Finds corresponding item, and removes it from inventory
                     self.playerAttributes[k].remove(item)
-
-    #####
 
 class Skill:
     def __init__(self):
@@ -144,8 +140,6 @@ class Magic_Perception_Skill(Skill):
         self.name = 'Magic Perception'
         self.skillLevel = 'Extra Skill'
         self.acquiredMsg = "<<Extra skill: [Magic Perception] acquired.>>"
-
-
 
 ##### Common Skills #####
 

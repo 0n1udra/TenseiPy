@@ -1,5 +1,5 @@
-class Item:
-    def __init__(self):
+    class Item:
+        def __init__(self):
         self.name = ''
         self.itemType = ''
         self.description = ''
@@ -9,9 +9,6 @@ class Item:
 
     def __str__(self):
         return(self.name)
-
-
-
 
 class Grass_Item(Item):
     def __init__(self):

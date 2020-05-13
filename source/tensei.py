@@ -5,7 +5,7 @@ from skills import *
 # ASCII Art
 import ascii
 
-debug = True
+debug = False
 if debug:
     usrInpDebug = True
     def sleep(x): pass
@@ -30,12 +30,10 @@ class Scene_Template:
 
 
     def runFuncs(self, msg, actions, funcs):
-        
-        print(actions[0][0])
         if usrInpDebug:
             self.usrInp = actions[0][0]
         else:
-            print("\nAvailable Actions:", msg, ' | stats, inv')
+            print("\nAvailable Actions:", msg, ' | stats(attributes), inv(entory), exit')
             self.usrInp = input("\n> ").lower()
 
         contGame = False
@@ -54,19 +52,21 @@ class Scene_Template:
             self.runFuncs(msg, actions, funcs)
         else:
             return
-        
-
 
     def actionMenu(self, msg, actions, funcs):
-        actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach']])
-        funcs.extend([slime.showAttributes, slime.showInventory])
+        actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
+        funcs.extend([slime.showAttributes, slime.showInventory, self.exitGame])
         self.runFuncs(msg, actions, funcs)
+
+    def exitGame(self):
+        exit()
+
+    def tbc(self):
+        print("---TO BE CONTINUED---")
 
 
 # Manga, Chapter 1
 class Scene_Intro(Scene_Template):
-
-    def sleep(self): pass
 
     def SceneStart(self):
         sprint(t2, ascii.great_sage)
@@ -207,14 +207,7 @@ class Scene_Intro(Scene_Template):
         sprint(t3, "I sense something floating, is this the so called magic essence?")
         slime.addAttribute(Magic_Perception_Skill())
 
-        
-
-
-        
-
-
-
-    
+        tbc()
 
         self.actionMenu('Puyo!',
                         ['move', 'wonder'],
