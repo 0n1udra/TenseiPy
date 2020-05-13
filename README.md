@@ -7,6 +7,7 @@ Python text adventure game based off of Tensei Slime managa. (Voice lines are no
 1. Go to either Mac/Unix or Win folder depending on your device
 2. Click on latest file
 3. Click Download
+
 NOTE: Game will display ASCII art, adjust window size accordingly.
 
 # TODO
