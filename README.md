@@ -5,7 +5,7 @@ Python text adventure game based off of Tensei Slime managa. (Voice lines are no
 
 
 
-# TODO:
+# TODO
 *Add save functionality
 *Touch up debug mode
 *Add skills, and Items
