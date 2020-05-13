@@ -26,7 +26,39 @@ class Predator_Skill(Skill):
 
         self.name = 'Predator'
         self.skillLevel = 'Unique Skill'
-        self.AcquiredMsgMsg = "<<Unqiue skill [Predator] successfully AcquiredMsg.>>"
+        self.AcquiredMsgMsg = "<<Unique skill [Predator] successfully Acquired.>>"
+        self.abilities = """
+        Predation   -- Aborts target
+        Analysis    -- Analysis absorbed target
+        Stomach     -- Stores absorbed target
+        Mimicry     -- Mimics targets appearance. Use targets abilities if analysis was successful
+        Isolation   -- Isolates harmful objects
+        """
+
+        stomach = {
+                "Organic": {},
+                "Material": {},
+                "Isolation": {},
+                }
+
+    def Predation(self):
+        print("USE PREDATOR")
+
+    def Mimicry(self):
+        print("USE MIMICRY")
+
+    def Stomach(self):
+        print("USE STOMACH")
+
+    def Mimicry(self):
+        print("USE MIMICRY")
+
+    def Analysis(self):
+        print("USE ANALYSIS")
+
+    def Isolation(self):
+        print("USE ISOLATION")
+
 
 class Great_Sage_Skill(Skill):
     def __init__(self):
@@ -34,7 +66,7 @@ class Great_Sage_Skill(Skill):
 
         self.name = 'Great Sage'
         self.skillLevel = 'Unique Skill'
-        self.AcquiredMsgMsg = "<<Unqiue skill [Great Sage] AcquiredMsg.>>"
+        self.AcquiredMsgMsg = "<<Unique skill [Great Sage] Acquired.>>"
 
 ##### Extra Skills #####
 
@@ -44,7 +76,7 @@ class Sage_Skill(Skill):
 
         self.name = 'Sage'
         self.skillLevel = 'Extra Skill'
-        self.AcquiredMsgMsg = "<<Extra skill: [Sage] has been successfully AcquiredMsg.>>"
+        self.AcquiredMsgMsg = "<<Extra skill: [Sage] has been successfully Acquired.>>"
 
 class Magic_Perception_Skill(Skill):
     def __init__(self):
@@ -52,7 +84,7 @@ class Magic_Perception_Skill(Skill):
 
         self.name = 'Magic Perception'
         self.skillLevel = 'Extra Skill'
-        self.AcquiredMsgMsg = "<<Extra skill: [Magic Perception] AcquiredMsg.>>"
+        self.AcquiredMsgMsg = "<<Extra skill: [Magic Perception] Acquired.>>"
 
 ##### Common Skills #####
 
@@ -61,5 +93,5 @@ class Hydraulic_Propulsion(Skill):
         Skill.__init__(self)
         self.name = 'Hydraulic Propulsion'
         self.skillLevel = 'Common Skill'
-        self.AcquiredMsgMsg = '<<Skill [Hydraulic Propulsion] AcquiredMsg.>>'
+        self.AcquiredMsgMsg = '<<Skill [Hydraulic Propulsion] Acquired.>>'
 

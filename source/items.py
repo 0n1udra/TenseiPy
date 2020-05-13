@@ -22,4 +22,4 @@ class Grass_Item(Item):
         self.itemType = 'Material'
 
         self.description = "Magicule infused grass, found in Valdora's cave"
-        self.acquiredMsg = 'Magicule grass acquired'
+        self.acquiredMsg = '<Magicule grass acquired>'
