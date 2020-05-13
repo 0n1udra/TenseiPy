@@ -1,4 +1,4 @@
-![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)# TenseiPy
+# TenseiPy
 
 Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)
 Python text adventure game based off of Tensei Slime managa. (Voice lines are not 100% accurate)
@@ -22,3 +22,4 @@ NOTE: Game will display ASCII art, adjust window size accordingly.
   - -In Progress-
 
 
+![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)
