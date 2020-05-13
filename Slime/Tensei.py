@@ -5,7 +5,7 @@ from skills import *
 # ASCII Art
 import ascii
 
-debug = True
+debug = False
 if debug:
     from sleep import sleep
     ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
@@ -54,9 +54,9 @@ class Scene_Intro(Scene_Template):
     def sleep(self): pass
 
     def SceneStart(self):
-        sprint(t3, "NOTE: You can access inventory/attributes whenever input is possible, (stats, inv)")
-
         sprint(t2, ascii.great_sage)
+
+        sprint(t3, "NOTE: You can access inventory/attributes whenever input is possible, (stats, inv)")
 
         sprint(t3, "<<Confirmation Complete. Constructing a body that does not require blood...>>")
         #TODO Add Skill
