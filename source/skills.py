@@ -1,92 +1,3 @@
-class Inventory:
-    def __init__(self):
-
-        self.inventoryCapacity = 0
-
-        self.playerAttributes = {
-
-        'Ultimate Skill' : [],
-        'Unique Skill' : [],
-        'Special Skill' : [],
-        'Extra Skill' : [],
-        'Intrinsic Skill' : [],
-        'Battle Skill' : [],
-        'Common Skill' : [],
-        'Daily Skill' : [],
-        'Composite Skill' : [],
-        'Resistence' : [],
-        'Attribute' : [],
-        'Mana' : [],
-        }
-
-        self.playerInventory = {
-        'Items' : [],
-        'Material' : [],
-        'Potions' : [],
-        'Misc' : [],
-
-        }
-
-    ##### Attributes #####
-    def showAttributes(self):
-        print('\n-----Attributes/Skills-----\n')
-        # Prints players current skills, will not print out every type of skill unless player has said skills
-        for k, v in self.playerAttributes.items():
-            if v: # Checks if player has this type of skill
-                print(f'{k}:')
-                for i in v:
-                    print(f'\t{i}')
-
-        print('\n-----Attributes/Skills-----\n')
-
-    def addAttribute(self, item):
-        self.playerAttributes[item.skillLevel].append(item)
-        print(item.acquired())
-
-
-    def removeAttribute(self, item):
-        for k, v in self.playerAttributes.items():
-            if v:
-                if item in v:
-                    # Finds corresponding item, and removes it from inventory
-                    self.playerAttributes[k].remove(item)
-
-
-    def skillUpgrade(self, skillFrom, skillTo):
-        for k, v in self.playerAttributes.items():
-            if v:
-                for i in v:
-                    if i.name in skillFrom.name:
-                        # Removes skill from inventory
-                        self.playerAttributes[k].remove(i)
-        print(f'<<{skillFrom.skillLevel} [{skillFrom}] upgrading to {skillTo.skillLevel} [{skillTo}]...>>')
-        self.addAttribute(skillTo)
-
-
-    ##### Inventory #####
-    def showInventory(self):
-        print('\n-----Inventory-----\n')
-        for k, v in self.playerInventory.items():
-            if v:
-                print(f'{k}:')
-                for i in v:
-                    print(f'\t{i}')
-        print(f'\nCapacity: {self.inventoryCapacity}%')
-        print('\n-----Inventory-----\n')
-
-    def addInventory(self, item, amount=0, capacity=0):
-        self.playerInventory[item.itemType].append(item)
-
-        self.inventoryCapacity = capacity
-        #print(item.acquired())
-
-    def removeInventory(self, item):
-        for k, v in self.playerIventory.items():
-            if v:
-                if item in v:
-                    # Finds corresponding item, and removes it from inventory
-                    self.playerAttributes[k].remove(item)
-
 class Skill:
     def __init__(self):
         self.name = ''
@@ -96,10 +7,12 @@ class Skill:
         self.skillPower = 0
         self.energy = 0
 
+        self.subSkills = {}
+
         self.predate = True
 
-    def acquired(self):
-        return(self.acquiredMsg)
+    def AcquiredMsg(self):
+        return(self.AcquiredMsgMsg)
 
     def __str__(self):
         return(self.name)
@@ -113,7 +26,7 @@ class Predator_Skill(Skill):
 
         self.name = 'Predator'
         self.skillLevel = 'Unique Skill'
-        self.acquiredMsg = "<<Unqiue skill [Predator] successfully acquired.>>"
+        self.AcquiredMsgMsg = "<<Unqiue skill [Predator] successfully AcquiredMsg.>>"
 
 class Great_Sage_Skill(Skill):
     def __init__(self):
@@ -121,7 +34,7 @@ class Great_Sage_Skill(Skill):
 
         self.name = 'Great Sage'
         self.skillLevel = 'Unique Skill'
-        self.acquiredMsg = "<<Unqiue skill [Great Sage] acquired.>>"
+        self.AcquiredMsgMsg = "<<Unqiue skill [Great Sage] AcquiredMsg.>>"
 
 ##### Extra Skills #####
 
@@ -131,7 +44,7 @@ class Sage_Skill(Skill):
 
         self.name = 'Sage'
         self.skillLevel = 'Extra Skill'
-        self.acquiredMsg = "<<Extra skill: [Sage] has been successfully acquired.>>"
+        self.AcquiredMsgMsg = "<<Extra skill: [Sage] has been successfully AcquiredMsg.>>"
 
 class Magic_Perception_Skill(Skill):
     def __init__(self):
@@ -139,7 +52,7 @@ class Magic_Perception_Skill(Skill):
 
         self.name = 'Magic Perception'
         self.skillLevel = 'Extra Skill'
-        self.acquiredMsg = "<<Extra skill: [Magic Perception] acquired.>>"
+        self.AcquiredMsgMsg = "<<Extra skill: [Magic Perception] AcquiredMsg.>>"
 
 ##### Common Skills #####
 
@@ -148,5 +61,5 @@ class Hydraulic_Propulsion(Skill):
         Skill.__init__(self)
         self.name = 'Hydraulic Propulsion'
         self.skillLevel = 'Common Skill'
-        self.acquiredMsg = '<<Skill [Hydraulic Propulsion] acquired.>>'
+        self.AcquiredMsgMsg = '<<Skill [Hydraulic Propulsion] AcquiredMsg.>>'
 

@@ -4,11 +4,16 @@ class Item:
         self.itemType = ''
         self.description = ''
 
-    def description(self):
+    def ItemDescription(self):
         return(self.description)
+
+    def AcquiredMsg(self):
+        return(self.acquiredMsg)
 
     def __str__(self):
         return(self.name)
+
+
 
 class Grass_Item(Item):
     def __init__(self):
@@ -17,3 +22,4 @@ class Grass_Item(Item):
         self.itemType = 'Material'
 
         self.description = "Magicule infused grass, found in Valdora's cave"
+        self.acquiredMsg = 'Magicule grass acquired'
