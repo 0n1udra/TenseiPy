@@ -6,9 +6,9 @@ from character import *
 # ASCII Art
 import ascii
 
-debug = True
+debug = False
 if debug:
-    usrInpDebug = False
+    usrInpDebug = True
     def sleep(x): pass
     ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
     t2 = t3 = t4 = t5 = t6 = 0
@@ -95,6 +95,8 @@ class Scene_Intro(Scene_Template):
 
     def SceneStart(self):
         sprint(ascii.great_sage)
+        sleep(1)
+        sprint("...")
 
         sprint("NOTE: You can access inventory/attributes whenever input is possible, (stats, inv)")
         sprint("NOTE: ASCII art will be displayed, set window size accordingly")
@@ -121,7 +123,7 @@ class Scene_Intro(Scene_Template):
         sprint("I can't see anything, I can't hear anything.")
         sprint("Is it already past the curfew? I should First call the nurse...")
 
-        self.ActionMenu("Move Arms, Move Legs",
+        self.ActionMenu("Move Arms, Twitch Legs",
                         [['move arms', 'move'], ['twitch leg']],
                         [self.MoveArms, self.MoveLegs])
 
@@ -131,7 +133,7 @@ class Scene_Intro(Scene_Template):
         sprint("Hey hey hey, Give me a break already... AH!?")
 
         sprint("I moved!?")
-        sprint("Below my abdomen (?), is that grass?")
+        sprint("Below my abdomen(?), is that grass?")
         sprint("I don't smell anything at all")
         sprint("There is also no sense of sight, hearing, and smell. There is only touch... What about taste?")
         sprint("Alright, Let's try to taste it")
@@ -141,7 +143,7 @@ class Scene_Intro(Scene_Template):
         sprint("Eh.. Wait a moment... Let's calm down and confirm my appearance.")
 
         self.ActionMenu('Move, Puyo',
-                        [['squash', 'move', 'twitch'],['puyoo', 'poyo']],
+                        [['squash', 'move', 'twitch'],['puyo', 'poyo']],
                         [self.squash, self.puyo])
 
         sprint("It's probably is like this!")
@@ -152,7 +154,8 @@ class Scene_Intro(Scene_Template):
         sprint("***Although Minami Satoru didn't want to admins it.***")
         sprint("***He has reincarnated into a slime!***")
 
-        sprint(ascii.slime)
+        print(ascii.slime)
+        sleep(3)
 
         sprint("puyo, puyoyoyo.... stretch....bounce")
         sprint("It's been a long time since I've accepted myself as a slime.")
@@ -171,7 +174,7 @@ class Scene_Intro(Scene_Template):
         sprint("So where did all the grass go?")
         sprint("<<Answer. They are stored inside the unique skill [Predator]'s stomach sack.>>")
         sprint("Whoa, somebody actually answered!?!")
-        sprint("<<Also, the current spaced used is less than 1%.>>")
+        sprint("<<Note, the current spaced used is less than 1%.>>")
         sprint("I've heard this before, this voice that sounded computer synthesized....")
         sprint("W-w-w-who is it?")
         sprint("<<Answer. This is the unique skill [Great Sage]'s effect.>>")
@@ -211,9 +214,7 @@ class Scene_Intro(Scene_Template):
                         [['baldy', 'shut it baldy'], ['move', 'wonder']],
                         [self.baldy, self.puyo])
 
-
         sprint("Don't be so inconsiderate BALDY!! (ahh, how annoying).")
-        sprint("*BALDY, HA, HAHAHA, SEEMS LIKE YOU WANT TO DIE!!!*")
         sprint("Was I heard?")
         sprint("Sorry!, I never expected to be able to speak with anything other than my skill by thought...")
         sprint("Right now I am in a state that's unable to see anythin....um you are?")
@@ -228,12 +229,35 @@ class Scene_Intro(Scene_Template):
         sprint("<<Answer. This world is covered with magic essence for example, the body of a rimuru can move because it absorbs magic essence.>>")
         sprint("*If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill*")
         sprint("*With that you will be able to 'see' and 'hear'*")
-        sprint("Eh--- this feels really complicated")
+        sprint("Eh... this feels really complicated")
         sprint("Well, it won't hurt to try (will it?)")
         sprint("I sense something floating, is this the so called magic essence?")
         rimuru.AddAttribute(Magic_Perception_Skill())
 
+        sprint("Ehh, just like that heh?")
+        sprint("<<Suggestion, in order to organize large amount of information, suggest activating linking [Great Sage] with [Magic Perception].>>")
+        sprint("<<Activate [Magic Perception]?>>")
+
+        self.ActionMenu('"Activate Magic Perception"',
+                        [['activate magic perception', 'activate magic sense'], ['move', 'wonder']],
+                        [self.MagicPerception, self.puyo])
+        
+
+        sprint("OH!")
+        sprint("Hmmmmmmmm")
+        sprint("I can see. I CAN SEE!")
+        sprint("*Seems like you did it*")
+        sprint("Yes thank you!")
+        sprint("*Then let me introduce myself again*")
+    
+
+
         self.TBC()
+
+    def MagicPerception(self):
+        sprint('...')
+        print(ascii.magic_perception)
+        sleep(2)
 
     def shutit(self):
         sprint("*OHOHO, So you want to die, you maggot!*")
