@@ -18,7 +18,7 @@ class Character:
             'Composite Skill' : {},
             'Resistence' : {},
             'Attribute' : {},
-            'Mana' : {},
+            'Manas' : {},
             }
 
         self.inventory = {
@@ -46,9 +46,10 @@ class Character:
             for sName, skill in skills.items():
                 if showSkill.lower() == sName.lower():
                     try:
-                        print(self.attributes[sLvl][sName].abilities)
+                        print(self.attributes[sLvl][sName].info)
                     except:
-                        print("No available ability info for", sName)
+                        print("No available description for", sName)
+
 
 
     def AddAttribute(self, item):

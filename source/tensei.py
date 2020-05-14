@@ -50,7 +50,7 @@ class Scene_Template:
         if usrInpDebug:
             self.usrInp = actions[0][0]
         else:
-            print("\nAvailable Actions:", msg, ' | stats(attributes), inv(entory), info <skill/obj>, exit')
+            print("\nAvailable Actions:", msg, '| stats(attributes), inv(entory), info <skill/obj>, exit')
             self.usrInp = input("\n> ").lower()
 
         ### Get info on skills, times, etc
