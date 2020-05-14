@@ -40,13 +40,24 @@ class Character:
 
         print('\n-----Attributes/Skills-----\n')
 
+
+    def ShowInfo(self, showSkill, character=None):
+        for sLvl, skills in self.attributes.items():
+            for sName, skill in skills.items():
+                if showSkill.lower() == sName.lower():
+                    try:
+                        print(self.attributes[sLvl][sName].abilities)
+                    except:
+                        print("No available ability info for", sName)
+
+
     def AddAttribute(self, item):
         self.attributes[item.skillLevel][item.name] = item
         print(item.AcquiredMsg())
 
 
     def RemoveAttribute(self, item):
-        for sLvl, skill in self.attributes.items():
+        for sLvl, skills in self.attributes.items():
             for sName, skill in skills.items():
                 if item in skill:
                     # Finds corresponding item, and removes it from inventory
@@ -62,7 +73,6 @@ class Character:
                     break
         print(f'<<{skillFrom.skillLevel} [{skillFrom}] upgrading to {skillTo.skillLevel} [{skillTo}]...>>')
         self.AddAttribute(skillTo)
-
 
     ##### Inventory #####
     def showInventory(self):

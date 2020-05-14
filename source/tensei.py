@@ -58,9 +58,9 @@ class Scene_Template:
             try:
                 inputSkill = ' '.join(self.usrInp.lower().split()[1:])
                 # Can only get info if item exist in rimuru characte
-                rimuru.SkillInfo(inputSkill, rimuru)
             except:
                 print("NOTE: info Usage example (case sensitive): info predator")
+            rimuru.ShowInfo(inputSkill, rimuru)
 
         contGame = False
         for i in range(len(funcs)):

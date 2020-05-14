@@ -31,11 +31,11 @@ class Predator_Skill(Skill):
         self.skillLevel = 'Unique Skill'
         self.AcquiredMsgMsg = "<<Unique skill [Predator] successfully Acquired.>>"
         self.abilities = """
-IIPredation   -- Aborts target
-Analysis    -- Analysis absorbed target
-Stomach     -- Stores absorbed target
-Mimicry     -- Mimics targets appearance. Use targets abilities if analysis was successful
-Isolation   -- Isolates harmful objects
+    Predation   -- Aborts target
+    Analysis    -- Analysis absorbed target
+    Stomach     -- Stores absorbed target
+    Mimicry     -- Mimics targets appearance. Use targets abilities if analysis was successful
+    Isolation   -- Isolates harmful objects
         """
 
         stomach = {
@@ -72,8 +72,10 @@ class Great_Sage_Skill(Skill):
         self.AcquiredMsgMsg = "<<Unique skill [Great Sage] Acquired.>>"
         self.description = "GREAT SAGE DESCRIPTION"
         self.abilities = """
+    Auto Battle Mode -- Great sage can battle on behalf of user of permission granted
 
-            TESTY
+    Thought Acceleration, Analytical Appraisal, Parallel Processing, Chant Annulment, All of Creation, Analysis
+
         """
 
 ##### Extra Skills #####
