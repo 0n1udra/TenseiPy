@@ -1,100 +1,9 @@
-
-from items import *
-from skills import *
-from character import *
-
-# ASCII Art
-import ascii
-
-debug = True
-if debug:
-    usrInpDebug = True
-    def sleep(x): pass
-    #ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
-    t2 = t3 = t4 = t5 = t6 = 0
-else:
-    usrInpDebug = False
-    from time import sleep
-    t2, t3, t4, t5, t6 = 2, 3, 4, 5, 6  # Custom Sleep times
-
-
-def sprint(Msg):
-    msgLen = len(str(Msg))
-    if msgLen > 70:
-        sTime = t6
-    elif msgLen > 60 and msgLen > 70:
-        sTime = t5
-    elif msgLen > 50 and msgLen > 40:
-        sTime = t4
-    elif msgLen > 40 and msgLen > 20:
-        sTime = t3
-    elif msgLen < 10:
-        sTime = t2
-    else:
-        sTime = t2
-    print(Msg)
-    sleep(sTime)
-
-# TODO add disable sleep function natively
-
-class Scene_Template:
-
-    # <MSG> -- Acquired item, etc
-    # <<MSG>>  --  Great Sage (Raphael, Ciel)
-    # <<<MSG>>>  --  Voice of the World
-
-    def __init__(self):
-        self.SceneStart()
-
-    def RunFuncs(self, msg, actions, funcs):
-        if usrInpDebug:
-            self.usrInp = actions[0][0]
-        else:
-            print("\nAvailable Actions:", msg, '| stats(attributes), inv(entory), info <skill/obj>, exit')
-            self.usrInp = input("\n> ").lower()
-
-        ### Get info on skills, times, etc
-        if 'info' in self.usrInp:
-            try:
-                inputSkill = ' '.join(self.usrInp.lower().split()[1:])
-                # Can only get info if item exist in rimuru characte
-            except:
-                print("NOTE: info Usage example (case sensitive): info predator")
-            rimuru.ShowInfo(inputSkill, rimuru)
-
-        contGame = False
-        for i in range(len(funcs)):
-            for j in actions[i]:
-                if self.usrInp == j:
-                    if i == 0:
-                        funcs[i]()
-                        contGame = True
-                        break
-                    else:
-                        funcs[i]()
-                        contGame = False
-
-        if not contGame:
-            self.RunFuncs(msg, actions, funcs)
-        else:
-            return
-
-    def ActionMenu(self, msg, actions, funcs):
-        actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
-        funcs.extend([rimuru.ShowAttributes, rimuru.showInventory, self.ExitGame])
-        self.RunFuncs(msg, actions, funcs)
-
-    def ExitGame(self):
-        exit()
-
-    def TBC(self):
-        print("---TO BE CONTINUED---")
+from tensei_0 import *
 
 # Manga, Chapter 1
-class Scene_Intro(Scene_Template):
-
-    def SceneStart(self):
-        print(ascii.great_sage)
+def Chapter1():
+    
+        print(slimeArt.great_sage)
         sleep(1)
         sprint("...")
 
@@ -105,7 +14,7 @@ class Scene_Intro(Scene_Template):
         #TODO Add Skill
         sprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
         rimuru.AddAttribute(Predator_Skill())
-        sprint("<<Confirmation Complete. Acquiring extra skill [Sage]...>>")
+        sprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
         rimuru.AddAttribute(Sage_Skill())
         sprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
         sprint('...')
@@ -123,9 +32,9 @@ class Scene_Intro(Scene_Template):
         sprint("I can't see anything, I can't hear anything.")
         sprint("Is it already past the curfew? I should First call the nurse...")
 
-        self.ActionMenu("Move Arms, Twitch Legs",
+        ActionMenu("Move Arms, Twitch Legs",
                         [['move arms', 'move'], ['twitch leg']],
-                        [self.MoveArms, self.MoveLegs])
+                        [MoveArms, MoveLegs])
 
         sprint("hm? eh? My limbs don't seem to be responding!?")
         sprint("That's not possible I was only stabbed, my arms and legs should be all gone...")
@@ -142,9 +51,9 @@ class Scene_Intro(Scene_Template):
         sprint("WAIT A MINUTE, this isn't even human anymore!!?!")
         sprint("Eh.. Wait a moment... Let's calm down and confirm my appearance.")
 
-        self.ActionMenu('Move, Puyo',
+        ActionMenu('Move, Puyo',
                         [['squash', 'move', 'twitch'],['puyo', 'poyo']],
-                        [self.squash, self.puyo])
+                        [squash, puyo])
 
         sprint("It's probably is like this!")
         sprint("Wait what kind of joke is this! Who would accept something like this!!")
@@ -154,30 +63,30 @@ class Scene_Intro(Scene_Template):
         sprint("***Although Minami Satoru didn't want to admins it.***")
         sprint("***He has reincarnated into a slime!***")
 
-        print(ascii.slime)
+        print(slimeArt.slime)
         sleep(3)
 
         sprint("puyo, puyoyoyo.... stretch....bounce")
-        sprint("It's been a long time since I've accepted myself as a slime.")
+        sprint("It's been a long time since I've accepted myas a slime.")
         sprint("I've gotten used to this elastic body.")
-        sprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly self regenerate.")
+        sprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
         sprint("And there was no need for sleep or eat either.")
         sprint("It's just very lonely")
         sprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
 
-        self.ActionMenu('Eat Grass, Move, Wonder, Puyo',
+        ActionMenu('Eat Grass, Move, Wonder, Puyo',
                         [['eat grass'], ['move', 'wonder']],
-                        [self.eatGrass, self.puyo])
+                        [eatGrass, puyo])
 
         sprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet")
         rimuru.AddInventory(Grass_Item(), capacity=0.9)
         sprint("So where did all the grass go?")
-        sprint("<<Answer. They are stored inside the unique skill [Predator]'s stomach sack.>>")
+        sprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
         sprint("Whoa, somebody actually answered!?!")
         sprint("<<Note, the current spaced used is less than 1%.>>")
         sprint("I've heard this before, this voice that sounded computer synthesized....")
         sprint("W-w-w-who is it?")
-        sprint("<<Answer. This is the unique skill [Great Sage]'s effect.>>")
+        sprint("<<Answer. This is the Unique Skill [Great Sage]'s effect.>>")
         sprint("<<Because the ability had adapted, so it can quickly answer you.>>")
 
         sprint("Unique skill [Great Sage] heh?")
@@ -194,13 +103,13 @@ class Scene_Intro(Scene_Template):
         sprint("Great sage how painful is it to suffocate to death!?")
         sprint("<<Answer. A slime's body does not need oxygen.>>")
         sprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
-        sprint("Lets try swallowing large amounts of water and propelling myself by spitting out a water jet!")
+        sprint("Lets try swallowing large amounts of water and propelling myby spitting out a water jet!")
         sprint("I hope this works")
         rimuru.AddAttribute(Hydraulic_Propulsion())
         sleep(t2)
 
         sprint("*Can you hear me little one.*")
-        sprint("Whaaaa? What was that, I almost pissed myself.")
+        sprint("Whaaaa? What was that, I almost pissed my")
         sprint("Who's that speaking to me!?")
         sprint("It's not Great Sage, so who is it?")
         sprint("This is bad, I'm getting nervous.")
@@ -210,9 +119,9 @@ class Scene_Intro(Scene_Template):
         sprint("It's not like I have a means to speak")
         sprint("*Hey can you just reply?*")
 
-        self.ActionMenu('"Shut it baldy"',
+        ActionMenu('Shut it baldy',
                         [['baldy', 'shut it baldy'], ['move', 'wonder']],
-                        [self.baldy, self.puyo])
+                        [baldy, puyo])
 
         sprint("Don't be so inconsiderate BALDY!! (ahh, how annoying).")
         sprint("Was I heard?")
@@ -238,9 +147,9 @@ class Scene_Intro(Scene_Template):
         sprint("<<Suggestion, in order to organize large amount of information, suggest activating linking [Great Sage] with [Magic Perception].>>")
         sprint("<<Activate [Magic Perception]?>>")
 
-        self.ActionMenu('"Activate Magic Perception."',
+        ActionMenu('Activate Magic Perception.',
                         [['activate magic perception', 'activate magic sense'], ['move', 'wonder']],
-                        [self.MagicPerception, self.puyo])
+                        [MagicPerception, puyo])
         
 
         sprint("OH!")
@@ -248,9 +157,9 @@ class Scene_Intro(Scene_Template):
         sprint("I can see. I CAN SEE!")
         sprint("*Seems like you did it*")
         sprint("Yes thank you!")
-        sprint("*Then let me introduce myself again*")
+        sprint("*Then let me introduce myagain*")
         sprint("My name is Storm Dragon Veldora.*")
-        print(ascii.cave_veldora)
+        print(slimeArt.cave_veldora)
         sleep(2)
         sprint("*I am one of the four True Dragons of this world.*")
         sprint("HOLY SHIT, is that a dragon?")
@@ -304,57 +213,47 @@ class Scene_Intro(Scene_Template):
         sprint("He actually likes it?")
         sprint("*From now on I'll be Veldora Tempest!*")
         sprint("*And as for you.... How about Rimuru.*")
-        sprint("Rimuru- Alright, get out of there as quick as you can!")
-        sprint("Veldora- *Leave it to me. Until we meet again*")
+        sprint("Alright, get out of there as quick as you can!")
+        sprint("*Leave it to me. Until we meet again*")
         sprint("<<Use Unique skill [Predator]?>>")
 
-        self.ActionMenu('"Activate Predator, Puyo"',
-                        [['activate magic perception', 'activate magic sense'], ['move', 'wonder']],
-                        [self.PredateVeldora, self.puyo])
+        ActionMenu('Activate Predator, Puyo',
+                        [['activate predator', 'predate veldora'], ['move', 'wonder']],
+                        [PredateVeldora, puyo])
+
+        sprint("<<Start analyzing the Unique Skill [Infinity Prison]?>>")
+        sprint("Yes, please take care of it [Great Sage].")
+        sprint("Now where is the exit?")
+
+def PredateVeldora():
+    sprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
+
+def MagicPerception():
+    sprint('...')
+    print(slimeArt.magic_perception)
+    sleep(2)
+
+def shutit():
+    sprint("*OHOHO, So you want to die, you maggot!*")
+
+def baldy():
+    sprint("*BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!*")
+
+def eatGrass():
+    sprint("Ooooweeee more grass!")
 
 
+def squash():
+    sprint("hehhhh")
+    sprint("Is that so....")
+    sprint("hmmmmmm, mhmmmm")
 
+def puyo():
+    sprint("Puyo!")
 
+def MoveLegs():
+    sprint("You can't feel any legs to move, what is happening?")
 
-
-
-
-
-
-        self.TBC()
-
-    def PredateVeldora(self):
-        sprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
-
-    def MagicPerception(self):
-        sprint('...')
-        print(ascii.magic_perception)
-        sleep(2)
-
-    def shutit(self):
-        sprint("*OHOHO, So you want to die, you maggot!*")
-
-    def baldy(self):
-        sprint("*BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!*")
-
-    def eatGrass(self):
-        sprint("Ooooweeee more grass!")
-
-
-    def squash(self):
-        sprint("hehhhh")
-        sprint("Is that so....")
-        sprint("hmmmmmm, mhmmmm")
-
-    def puyo(self):
-        sprint("Puyo!")
-
-    def MoveLegs(self):
-        sprint("You can't feel any legs to move, what is happening?")
-
-    def MoveArms(self):
+def MoveArms():
         sprint("Where are my arms, I can't feel them!")
-
-rimuru = Rimuru_Tempest()
-start = Scene_Intro()
 
