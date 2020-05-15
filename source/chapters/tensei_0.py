@@ -7,7 +7,7 @@ from character import *
 # ASCII Art
 import slime_art
 
-debug = True
+debug = False
 if debug:
     usrInpDebug = False
     def sleep(x): pass
@@ -19,7 +19,7 @@ else:
     t2, t3, t4, t5, t6 = 1, 2, 3, 4, 4  # Custom Sleep times
 
     # Lets user choose to disable text delay, without breaking debug code
-    print("Enable text delay?")
+    print("Disable text delay?")
     setSleep = str(input("\n(Y)es/(N)o> "))
     if setSleep.lower() in ['yes', 'y']:
         t2 = t3 = t4 = t5 = t6 = 0
@@ -56,7 +56,7 @@ def RunFuncs(msg, actions, funcs):
     if usrInpDebug:
         usrInp = actions[0][0]
     else:
-        print("\nAvailable Actions:", msg, '| stats(attributes), inv(entory), info <skill/obj>, exit')
+        print("\nAvailable Actions:", ', '.join(msg), '| stats(attributes), inv(entory), info <skill/obj>, exit')
         usrInp = input("\n> ").lower()
         print()
 
@@ -71,20 +71,23 @@ def RunFuncs(msg, actions, funcs):
 
     contGame = False
     for i in range(len(funcs)):
+        contAction = ''
         for j in actions[i]:
-            if usrInp == j:
-                if i == 0:
+            try:
+                contAction = msg[i][0]
+            except: pass
+            if usrInp == j.lower():
+                if contAction == '*':
                     funcs[i]()
                     contGame = True
                     break
                 else:
                     funcs[i]()
                     contGame = False
-
-    if not contGame:
+        if contGame: break
+    if contGame: return
+    else: 
         RunFuncs(msg, actions, funcs)
-    else:
-        return
 
 def ActionMenu(msg, actions, funcs):
     actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
@@ -99,3 +102,4 @@ def TBC():
 
 
 rimuru = Rimuru_Tempest()
+veldora = Veldora_Tempest()

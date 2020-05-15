@@ -47,7 +47,6 @@ class Character:
 -----Attributes/Skills-----
 Name: {self.name} {self.familyName}
 Species: {self.species}
-
 """
         print(attrBanner)
         # Prints players current skills, will not print out every type of skill unless player has said skills
@@ -118,10 +117,15 @@ class Veldora_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = "Veldora"
+        self.itemType = 'Misc'
+
         self.info = """
     Species: True Dragon
     Title: Storm Dragon
     Rank: Disaster Special S
     Status: Alive
     """
+
+    def AcquiredMsg(self):
+        return(f"<<Acquired Veldora {self.familyName}>>")
 
