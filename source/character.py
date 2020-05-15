@@ -1,3 +1,7 @@
+def ssprint(Msg):
+    print(f'    {Msg}\n')
+
+
 class Character:
     def __init__(self):
         self.name = ''
@@ -54,7 +58,7 @@ class Character:
 
     def AddAttribute(self, item):
         self.attributes[item.skillLevel][item.name] = item
-        print(item.AcquiredMsg())
+        ssprint(item.AcquiredMsg())
 
 
     def RemoveAttribute(self, item):
@@ -72,7 +76,7 @@ class Character:
                     # Removes skill from inventory
                     del self.attributes[sLvl][sName]
                     break
-        print(f'<<{skillFrom.skillLevel} [{skillFrom}] upgrading to {skillTo.skillLevel} [{skillTo}]...>>')
+        ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] upgrading to {skillTo.skillLevel} [{skillTo}]...>>')
         self.AddAttribute(skillTo)
 
     ##### Inventory #####
@@ -89,7 +93,7 @@ class Character:
     def AddInventory(self, item, amount=0, capacity=0):
         self.inventory[item.itemType][item.name] = item
         self.inventoryCapacity = capacity
-        print(item.AcquiredMsg())
+        ssprint(item.AcquiredMsg())
 
     def RemoveInventory(self, item):
         for iName, item in self.inventory.items():

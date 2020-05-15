@@ -7,7 +7,7 @@ from character import *
 # ASCII Art
 import slime_art
 
-debug = True
+debug = False
 if debug:
     usrInpDebug = True
     def sleep(x): pass
@@ -34,7 +34,11 @@ def sprint(Msg):
     else:
         sTime = t2
     print(Msg)
+    print()
     sleep(sTime)
+
+def ssprint(Msg):
+    sprint(f'    {Msg}')
 
 # <MSG> -- Acquired item, etc
 # <<MSG>>  --  Great Sage (Raphael, Ciel)
