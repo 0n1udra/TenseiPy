@@ -7,17 +7,24 @@ from character import *
 # ASCII Art
 import slime_art
 
-debug = False
+debug = True
 if debug:
-    usrInpDebug = True
+    usrInpDebug = False
     def sleep(x): pass
     #ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
     t2 = t3 = t4 = t5 = t6 = 0
 else:
     usrInpDebug = False
     from time import sleep
-    t2, t3, t4, t5, t6 = 2, 3, 4, 5, 6  # Custom Sleep times
+    t2, t3, t4, t5, t6 = 1, 2, 3, 4, 4  # Custom Sleep times
 
+    # Lets user choose to disable text delay, without breaking debug code
+    print("Enable text delay?")
+    setSleep = str(input("\n(Y)es/(N)o> "))
+    if setSleep.lower() in ['yes', 'y']:
+        t2 = t3 = t4 = t5 = t6 = 0
+    else:
+        pass
 
 def sprint(Msg):
     msgLen = len(str(Msg))
@@ -51,6 +58,7 @@ def RunFuncs(msg, actions, funcs):
     else:
         print("\nAvailable Actions:", msg, '| stats(attributes), inv(entory), info <skill/obj>, exit')
         usrInp = input("\n> ").lower()
+        print()
 
     ### Get info on skills, times, etc
     if 'info' in usrInp:
@@ -80,7 +88,7 @@ def RunFuncs(msg, actions, funcs):
 
 def ActionMenu(msg, actions, funcs):
     actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
-    funcs.extend([rimuru.ShowAttributes, rimuru.showInventory, ExitGame])
+    funcs.extend([rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
     RunFuncs(msg, actions, funcs)
 
 def ExitGame():

@@ -89,22 +89,28 @@ class Predator_Skill(Skill):
     Type: Unique Skill
 
     Description:
-        ???
+        Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and Isolation.
 
     Abilities:
         Predation   
-            - Aborts target
+            - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
+              The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
         Analysis    
-            - Analysis absorbed target
+            - The absorbed target is studied and analyzed. Craftable items can then be produced. 
+              If the required materials are present, duplicates can be produced. 
+              In the case of successful skill or magic analysis, the same technique can be acquired.
         Stomach     
-            - Stores absorbed target
+            - The target can be stored. Items produced via Analysis can also be stored. There is no storage time limit.
+              However, there is a capacity limit.
         Mimicry     
-            - Mimics targets appearance. Use targets abilities if analysis was successful
+            - Replicate the target's appearance. The skills and abilities used by the target can also be used. 
+              However, this depends on the successful analysis and acquisition of relative information regarding the target.
         Isolation   
-            - Isolates harmful objects
+            - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
+
 
     Evolution:
-        Predator > Gluttony > Gluttonous King Beelzebuth > Void God Azathoth
+        Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth
         """
 
         stomach = {
@@ -144,17 +150,38 @@ class Great_Sage_Skill(Skill):
     Type: Extra Skill
 
     Description:
-        Great Sage is a Conceptual Intelligence that has a heartless and emotionless personality 
+        A Conceptual Intelligence that has a heartless and emotionless personality 
         and is solely driven by purely logical computations. It cares for nobody but the benefit 
-        of its master, Rimuru, even going so far as to hide things from Rimuru if it deems it 
-        beneficial to him in the long run.
+        of its master, even going so far as to hide things from master if it deems it beneficial in the long run.
 
     Abilities:
-        Auto Battle Mode 
-            - Great sage can battle on behalf of user of permission granted
+        Thought Acceleration
+            - Raises thought-processing speed by a thousand times.
 
-        Thought Acceleration(1k), Analytical Appraisal, Parallel Processing, Chant Annulment, 
-        All of Creation, Analysis
+        Analytical Appraisal
+            - The ability to analyze and appraise a target.
+
+        Parallel Processing
+            - The ability to detach thoughts and analysis of phenomena. 
+            - Detached thoughts are also under the effects of Thought Acceleration.
+
+        Chant Annulment
+            - When using magic, the chant is no longer necessary.
+
+        All of Creation
+            - The ability to comprehend any non-concealed phenomenon in this world. 
+              Depending on the things the user understands and the information the user knows about, additional information can be inferred. 
+              In other words, the user needs to see it (the phenomenon) at least once.
+
+        Analysis
+            - The absorbed target is studied and analyzed. Craftable items can then be produced. 
+              If the required materials are present, duplicates can be produced. 
+              In the case of successful skill or magic analysis, the same technique can be acquired. 
+            - Originally a part of Unique Skill [Predator] was transferred over to [Great Sage] when [Predator] evolved into Unique Skill Gluttony.
+
+        Auto Battle Mode
+            - By giving permission to [Great Sage], The master can let it control his body temporarily
+
 
     Evolution:
         Sage > Great Sage > Raphael > Ciel
@@ -187,7 +214,8 @@ class Magic_Perception_Skill(Skill):
             the skill is rather simple.
 
             With this skill, one can see 360 degrees around them, without a single blind-spot. With this, 
-            even if one's eyes and ears are crushed, one can continue combat. Ambushes become impossible. It's an indispensable skill.
+            even if one's eyes and ears are crushed, one can continue combat. 
+            Ambushes become nearly impossible. It's an indispensable skill.
         """
 
 # ===== Common Skills =====

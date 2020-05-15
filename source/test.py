@@ -1,10 +1,7 @@
-class test:
-    def __init__(self):
-        print("Test init")
+test = 'hi'
+text = f"""
+lol
+{test}
 
-class subTest(test):
-    def __init__(self):
-        test.__init__(self)
-        print("Test Sub")
-
-x = subTest()
+"""
+print(text)
