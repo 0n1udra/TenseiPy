@@ -1,9 +1,9 @@
-from tensei_0 import *
+from chapters import *
 
 # Manga, Chapter 1
 def Chapter1():
     
-        print(slimeArt.great_sage)
+        print(slime_art.great_sage)
         sleep(1)
         sprint("...")
 
@@ -63,7 +63,7 @@ def Chapter1():
         sprint("***Although Minami Satoru didn't want to admins it.***")
         sprint("***He has reincarnated into a slime!***")
 
-        print(slimeArt.slime)
+        print(slime_art.slime)
         sleep(3)
 
         sprint("puyo, puyoyoyo.... stretch....bounce")
@@ -159,7 +159,7 @@ def Chapter1():
         sprint("Yes thank you!")
         sprint("*Then let me introduce myagain*")
         sprint("My name is Storm Dragon Veldora.*")
-        print(slimeArt.cave_veldora)
+        print(slime_art.cave_veldora)
         sleep(2)
         sprint("*I am one of the four True Dragons of this world.*")
         sprint("HOLY SHIT, is that a dragon?")
@@ -230,7 +230,7 @@ def PredateVeldora():
 
 def MagicPerception():
     sprint('...')
-    print(slimeArt.magic_perception)
+    print(slime_art.magic_perception)
     sleep(2)
 
 def shutit():

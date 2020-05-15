@@ -5,7 +5,7 @@ from character import *
 
 
 # ASCII Art
-import slimeArt
+import slime_art
 
 debug = True
 if debug:

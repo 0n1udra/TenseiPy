@@ -1,6 +1,4 @@
-from tensei_0 import *
-from tensei_1 import *
-from tensei_2 import *
+from chapters import *
 
 
 Chapter1()
