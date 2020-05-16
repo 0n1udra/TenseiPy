@@ -1,3 +1,4 @@
+from skills import *
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
@@ -121,8 +122,9 @@ class Rimuru_Tempest(Character):
         self.info = """
 
     """
-        self.startState = [Absorb_Skill(), Absorb_Dissolve_Skill()]
+        self.startState = [Self_Regeneration_Skill(), Absorb_Dissolve_Skill()]
         for i in self.startState:
+            self.AddAttribute(i)
 
 class Veldora_Tempest(Character):
     def __init__(self):

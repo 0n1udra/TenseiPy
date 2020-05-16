@@ -244,13 +244,13 @@ class Hydraulic_Propulsion(Skill):
 # ===== Intrinsic Skills =====
 class Absorb_Dissolve_Skill(Skill):
     def __init__(self):
-        Skill.__init__(Self)
+        Skill.__init__(self)
         self.name = 'Absorb / Dissolve'
         self.skillLevel = 'Intrinsic Skill'
 
 class Self_Regeneration_Skill(Skill):
     def __init__(self):
-        Skill.__init__(Self)
+        Skill.__init__(self)
         self.name = 'Self-Regeneration'
         self.skillLevel = 'Intrinsic Skill'
 

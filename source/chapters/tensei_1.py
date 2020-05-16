@@ -5,10 +5,6 @@ from run import *
 def Chapter1(game):
     rimuru = game.LoadGame()
 
-    print(game)
-    print(rimuru, 'hi')
-
-
     print()
     instructions = """
 NOTE: 
