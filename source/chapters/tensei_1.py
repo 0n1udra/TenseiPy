@@ -1,8 +1,12 @@
 from chapters import *
 from run import *
 
+
+
+
 # Manga, Chapter 1
 def Chapter1(game):
+    global rimuru
     rimuru = game.LoadGame()
 
     print()
@@ -17,7 +21,7 @@ NOTE:
     usrcont = input("Press Enter to continue > ")
     print()
 
-    sprint("...")
+    sprint(".....")
     sleep(1)
     print(slime_art.great_sage)
     sleep(1)
@@ -65,7 +69,7 @@ NOTE:
     ssprint("***He has reincarnated into a slime!***")
 
     print(slime_art.slime)
-    sleep(3)
+    sleep(1)
 
     ssprint("puyo, puyoyoyo.... stretch....bounce")
     ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
@@ -265,7 +269,7 @@ def MeetDragon():
 def ActivateMagicPerception():
     sprint('...')
     print(slime_art.magic_perception)
-    sleep(2)
+    sleep(1)
     rimuru.AddAttribute(Magic_Perception_Skill())
     sprint("OH!")
     sprint("Hmmmmmmmm")
@@ -376,3 +380,14 @@ def NoAnalysis():
 
 
 
+def ActionMenu(msg, actions, funcs):
+    global rimuru
+    actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
+    funcs.extend([rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
+    RunFuncs(msg, actions, funcs)
+
+def ExitGame():
+    exit()
+
+def TBC():
+    print("---TO BE CONTINUED---")

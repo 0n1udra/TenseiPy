@@ -21,7 +21,7 @@ class Character:
             'Common Skill' : {},
             'Daily Skill' : {},
             'Composite Skill' : {},
-            'Resistence' : {},
+            'Resistance' : {},
             'Attribute' : {},
             'Manas' : {},
             }
@@ -102,7 +102,7 @@ Species: {self.species}
         self.inventory[item.itemType][item.name] = item
         self.inventoryCapacity += capacity
         ssprint(item.AcquiredMsg())
-        ssprint(f'<Inventory Capacity:, {self.inventoryCapacity}%>')
+        ssprint(f'<Inventory Capacity:, {self.inventoryCapacity:.2f}%>')
 
     def RemoveInventory(self, item):
         for iName, item in self.inventory.items():
@@ -122,7 +122,8 @@ class Rimuru_Tempest(Character):
         self.info = """
 
     """
-        self.startState = [Self_Regeneration_Skill(), Absorb_Dissolve_Skill()]
+        self.startState = [Self_Regeneration_Skill(), Absorb_Dissolve_Skill(), 
+                Resist_Pain(), Resist_Melee(), Resist_Electricity(), Resist_Temperature()]
         for i in self.startState:
             self.AddAttribute(i)
 
