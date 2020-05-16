@@ -51,15 +51,14 @@ def Chapter1():
         ssprint("hm? eh? My limbs don't seem to be responding!?")
         ssprint("That's not possible I was only stabbed, my arms and legs should be all fine... Right?...")
         ssprint("Don't tell me I was paralyzed because my nerves were cut?")
-        ssprint("Hey hey hey, Give me a break already... AH!?")
-        ssprint("I moved!? Below my abdomen(?), is that grass?")
+        ssprint("Hey hey hey, Give me a break already... AH!? I moved!? Below my abdomen(?), is that grass?")
         ssprint("There is also no sense of sight, hearing, and smell. There is only 'touch'... What about taste?")
         ssprint("Alright, Let's try to taste it. Actually! Where the fuck is my mouth?")
         ssprint("The grass melted. Is it being absorbed after melting?")
         ssprint("WAIT A MINUTE, am I even human anymore!!?! Eh.. Let's calm down and confirm my appearance.")
 
-        ActionMenu(['*Move', 'Poyo'],
-                    [['move', 'twitch'],['puyo', 'poyo']],
+        ActionMenu(['*Move', 'Puyo'],
+                    [['move', 'twitch'],['puyo', 'puyo']],
                     [Squish, puyo])
 
         ssprint("Wait what kind of joke is this! Who would accept something like this!!")
@@ -77,9 +76,9 @@ def Chapter1():
         ssprint("And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
         ssprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
 
-        ActionMenu(['*Eat grass', 'Move', 'Wonder', 'Poyo'],
-                    [['eat grass', 'absorb grass'], ['move', 'wonder', 'puyo']],
-                    [EatGrass, puyo])
+        ActionMenu(['*Eat grass', 'Wonder', 'Puyo'],
+                    [['eat grass', 'absorb grass'], ['wonder'], ['puyo']],
+                    [EatGrass, wonder, puyo])
 
         ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
         ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
@@ -91,12 +90,12 @@ def Chapter1():
         ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
 
         ActionMenu(['*Skills?', 'Great Sage?', 'Predator?', 'Eat grass', 'Wonder'],
-                    [['skills?', 'what are skills?'], ['great sage?', 'What is Great Sage?'], ['predator?', 'What is predator?'], ['eat grass', 'gras'], ['wonder', 'move']],
-                    [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, EatGrass, puyo])
+                    [['skills?'], ['great sage?'], ['predator?'], ['eat grass', 'gras'], ['wonder', 'move']],
+                    [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, EatGrass, wonder])
 
 
         ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
-        ssprint("Although it's a skill, I now have someone to talk to.")
+        ssprint("Even if it's a skill, I now have someone to talk to.")
         ssprint("***Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water***")
         ssprint("I'm going to die! SHIT! I've finally reincarnated and I'm already going to die!")
         ssprint("Great sage how painful is it to suffocate to death!?")
@@ -109,8 +108,8 @@ def Chapter1():
         ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
 
         ActionMenu(['*Follow voice', '*Hello?', '*Shut it Baldy', 'Eat grass', 'Wonder'],
-                    [['follow voice', 'locate voice'], ['hello?', 'hello', "who's that?"], ['shut it Baldy'], ['eat grass', 'grass'], ['wonder', 'puyo']], 
-                    [FollowVoice, Hello, Baldy, EatGrass, puyo])
+                    [['follow voice', 'locate voice'], ['hello?', 'hello', "who's that?"], ['shut it Baldy'], ['eat grass', 'grass'], ['wonder']], 
+                    [FollowVoice, Hello, Baldy, EatGrass, wonder])
 
 
 
@@ -140,6 +139,9 @@ def puyo():
 
 def Explore():
     ssprint("Oh, look, more grass. Wow!")
+
+def wonder():
+    sprint("I've found more grass!")
 
 # ===== What are Skills =====
 def WhatAreSkills():
@@ -190,7 +192,6 @@ def RespondTo():
     sprint("I never expected to be able to speak with anything other than my skill by thought...")
     sprint("Right now I am in a state that's unable to see anythin....Ummmm you are?.")
     sprint("*This is telepathy. It's Hard to converse if you can't see... Alright, I'll help you see.*")
-    sprint("eh?")
     sprint("*Just don't be scared when you see my true form. There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.*")
     sprint("Magic essence?...")
     ssprint("<<Answer. This world is covered with magic essence for example, the body of a rimuru can move because it absorbs magic essence.>>")
@@ -203,8 +204,8 @@ def RespondTo():
     ssprint("<<Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception].>>")
     ssprint("<<Activate [Magic Perception]?>>")
 
-    ActionMenu(['*Activate Magic Perception'],
-                [['activate magic perception', 'activate magic sense'], ['move', 'wonder']],
+    ActionMenu(['*Activate Magic Perception', 'Puyo'],
+                [['activate magic perception', 'activate magic sense'], ['move', 'puyo']],
                 [ActivateMagicPerception, puyo])
 
     sprint("*Then shall I introduce myself, again?*")
@@ -214,7 +215,7 @@ def RespondTo():
                 [MeetDragon, Please])
         
 def ContinueConv():
-    sprint("So you are a reincarnate from another world, hmmmm... This type of reincarnation is very rare.*")
+    sprint("*So you are a reincarnate from another world, hmmmm... This type of reincarnation is very rare.*")
     sprint("I wonder if there are more Japanese people here.")
     sprint("*...Is that so, are you leaving now?*")
     ssprint("Why does he look so sad?")
@@ -241,7 +242,7 @@ def DontTrust():
 
 def Hello():
     sprint("*Keep following my voice little one.*")
-    ActionMenu(['*Follow voice', '*Shut it Baldy', 'Eat grass', 'Wonder'],
+    ActionMenu(['*Follow voice', '*Shut it Baldy', 'Eat grass', 'Puyo'],
                 [['follow voice', 'locate voice'], ['shut it baldy'], ['eat grass', 'grass'], ['wonder', 'puyo']], 
                 [FollowVoice, Baldy, EatGrass, puyo])
 
@@ -297,7 +298,6 @@ def FriendDragon():
 def HelpSeal():
     ssprint("[Great Sage]?")
     ssprint("<<Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks.>>")
-    sprint("Is that so...")
     ssprint("<<Note, possible solution may be...")
     sprint("*Hey don't just only talk to your own skill.*")
     sprint("Jealous?")
@@ -311,7 +311,7 @@ def HelpSeal():
     sprint("*ku hahaha*")
     sprint("*HAHAHAHAHAHAHA*")
     ssprint("Ummmm, did he just use the 3 stage laugh...?")
-    sprint("My life is in your hands.*")
+    sprint("*My life is in your hands.*")
     sprint("Wow how trusting of you.")
     sprint("*Well... The alternative is to stay in this cave for the rest of my time.*")
     sprint("I'll use predator to swallow you now.")
@@ -342,13 +342,13 @@ def HelpSeal():
     ssprint("<<Use Unique skill [Predator]?>>")
 
     ActionMenu(['*Activate Predator', 'Puyo'],
-                    [['activate predator', 'predate veldora'], ['move', 'wonder']],
+                    [['activate predator', 'predate veldora'], ['move', 'wonder', 'puyo']],
                     [PredateVeldora, puyo])
 
     ssprint("<<Start analyzing the Unique Skill [Infinity Prison]?>>")
 
     ActionMenu(['*Yes', '*No', 'Eat grass', 'Wonder', 'Puyo'],
-                    [['yes', 'y'], ['no', 'n'], ['eat grass', 'grass'], ['move', 'wonder']],
+                    [['yes', 'y'], ['no', 'n'], ['eat grass', 'grass'], ['move', 'wonder', 'puyo']],
                     [StartAnalysis, NoAnalysis, EatGrass, puyo])
 
 
