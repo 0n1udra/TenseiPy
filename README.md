@@ -8,6 +8,11 @@ Python text adventure game based off of Tensei Slime managa. (Voice lines are no
 2. Click on latest file
 3. Click Download
 
+For Macs:
+1. Double click the .cpgz file to extract the game. 
+2. Then run game
+3. You might have to click Open Anyway under System Preferences > Security & Privacy > General 
+
 NOTE: Game will display ASCII art, adjust window size accordingly.
 
 # TODO
