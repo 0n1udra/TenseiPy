@@ -1,119 +1,120 @@
 from chapters import *
+from run import *
 
-def testy():
-    print("OH")
 # Manga, Chapter 1
-def Chapter1():
-    
+def Chapter1(game):
+    rimuru = game.LoadGame()
+
+    print(game)
+    print(rimuru, 'hi')
 
 
-        print()
-        print("----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------")
-        instructions = """
-    NOTE: 
-        - ASCII art will be displayed, set window size accordingly (Full screen for best results)
-        - You can access inventory/attributes whenever input is possible, (stats, inv)
-        - Actions starting with * will continue the story (do NOT add * when inputting). try the other options first maybe, see what happens, idc
-        - Input is not case sensitive, but some symbols may need to be used.
-        """
-        print(instructions)
-        usrcont = input("Press Enter to continue > ")
-        print()
+    print()
+    instructions = """
+NOTE: 
+    - ASCII art will be displayed, set window size accordingly (Full screen for best results)
+    - You can access inventory/attributes whenever input is possible, (stats, inv)
+    - Actions starting with * will continue the story (do NOT add * when inputting). try the other options first maybe, see what happens, idc
+    - Input is not case sensitive, but some symbols may need to be used.
+    """
+    print(instructions)
+    usrcont = input("Press Enter to continue > ")
+    print()
 
-        sprint("...")
-        sleep(1)
-        print(slime_art.great_sage)
-        sleep(1)
-
-
-        ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
-        #TODO Add Skill
-        ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
-        rimuru.AddAttribute(Predator_Skill())
-        ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
-        rimuru.AddAttribute(Sage_Skill())
-        ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
-        sprint('.....')
-        rimuru.SkillUpgrade(Sage_Skill(), Great_Sage_Skill())
-        sleep(t3)
-
-        sprint(rimuru.ShowAttributes())
-
-        ssprint(".....")
-        ssprint("It's so dark, where is this. What happened to me?")
-        ssprint("I remembered that I got stabbed while protecting Tamura. Was I... saved?")
-        ssprint("That said is this the hospital bed? I can't see anything, I can't hear anything.")
-
-        ActionMenu(["*Move arms", "*Twitch legs"],
-                    [['move arms', 'move'], ['twitch legs']],
-                    [MoveArms, MoveLegs])
-
-        ssprint("hm? eh? My limbs don't seem to be responding!?")
-        ssprint("That's not possible I was only stabbed, my arms and legs should be all fine... Right?...")
-        ssprint("Don't tell me I was paralyzed because my nerves were cut?")
-        ssprint("Hey hey hey, Give me a break already... AH!? I moved!? Below my abdomen(?), is that grass?")
-        ssprint("There is also no sense of sight, hearing, and smell. There is only 'touch'... What about taste?")
-        ssprint("Alright, Let's try to taste it. Actually! Where the fuck is my mouth?")
-        ssprint("The grass melted. Is it being absorbed after melting?")
-        ssprint("WAIT A MINUTE, am I even human anymore!!?! Eh.. Let's calm down and confirm my appearance.")
-
-        ActionMenu(['*Move', 'Puyo'],
-                    [['move', 'twitch'],['puyo', 'puyo']],
-                    [Squish, puyo])
-
-        ssprint("Wait what kind of joke is this! Who would accept something like this!!")
-        ssprint("ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
-
-        ssprint("***Although Minami Satoru didn't want to admins it.***")
-        ssprint("***He has reincarnated into a slime!***")
-
-        print(slime_art.slime)
-        sleep(3)
-
-        ssprint("puyo, puyoyoyo.... stretch....bounce")
-        ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
-        ssprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
-        ssprint("And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
-        ssprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
-
-        ActionMenu(['*Eat grass', 'Wonder', 'Puyo'],
-                    [['eat grass', 'absorb grass'], ['wonder'], ['puyo']],
-                    [EatGrass, wonder, puyo])
-
-        ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
-        ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
-        ssprint("Whoa, somebody actually answered!?!")
-        ssprint("<<Note, the current spaced used is less than 1%.>>")
-        sprint("I've heard this before, this voice that sounded computer synthesized.... Who is that?")
-        ssprint("<<Answer. This is the Unique Skill [Great Sage], the ability has adapted, so it can quickly answer you.>>")
-        ssprint("[Great Sage]? [Predator]? heh?!")
-        ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
-
-        ActionMenu(['*Skills?', 'Great Sage?', 'Predator?', 'Eat grass', 'Wonder'],
-                    [['skills?'], ['great sage?'], ['predator?'], ['eat grass', 'gras'], ['wonder', 'move']],
-                    [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, EatGrass, wonder])
+    sprint("...")
+    sleep(1)
+    print(slime_art.great_sage)
+    sleep(1)
 
 
-        ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
-        ssprint("Even if it's a skill, I now have someone to talk to.")
-        ssprint("***Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water***")
-        ssprint("I'm going to die! SHIT! I've finally reincarnated and I'm already going to die!")
-        ssprint("Great sage how painful is it to suffocate to death!?")
-        ssprint("<<Answer. A slime's body does not need oxygen.>>")
-        ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
+    ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
+    #TODO Add Skill
+    ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
+    rimuru.AddAttribute(Predator_Skill())
+    ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
+    rimuru.AddAttribute(Sage_Skill())
+    ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
+    sprint('.....')
+    rimuru.SkillUpgrade(Sage_Skill(), Great_Sage_Skill())
+    sleep(t3)
+
+    sprint(rimuru.ShowAttributes())
+
+    ssprint(".....")
+    ssprint("It's so dark, where is this. What happened to me?")
+    ssprint("I remembered that I got stabbed while protecting Tamura. Was I... saved?")
+    ssprint("That said is this the hospital bed? I can't see anything, I can't hear anything.")
+
+    ActionMenu(["*Move arms", "*Twitch legs"],
+                [['move arms', 'move'], ['twitch legs']],
+                [MoveArms, MoveLegs])
+
+    ssprint("hm? eh? My limbs don't seem to be responding!?")
+    ssprint("That's not possible I was only stabbed, my arms and legs should be all fine... Right?...")
+    ssprint("Don't tell me I was paralyzed because my nerves were cut?")
+    ssprint("Hey hey hey, Give me a break already... AH!? I moved!? Below my abdomen(?), is that grass?")
+    ssprint("There is also no sense of sight, hearing, and smell. There is only 'touch'... What about taste?")
+    ssprint("Alright, Let's try to taste it. Actually! Where the fuck is my mouth?")
+    ssprint("The grass melted. Is it being absorbed after melting?")
+    ssprint("WAIT A MINUTE, am I even human anymore!!?! Eh.. Let's calm down and confirm my appearance.")
+
+    ActionMenu(['*Move', 'Puyo'],
+                [['move', 'twitch'],['puyo', 'puyo']],
+                [Squish, puyo])
+
+    ssprint("Wait what kind of joke is this! Who would accept something like this!!")
+    ssprint("ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
+
+    ssprint("***Although Minami Satoru didn't want to admins it.***")
+    ssprint("***He has reincarnated into a slime!***")
+
+    print(slime_art.slime)
+    sleep(3)
+
+    ssprint("puyo, puyoyoyo.... stretch....bounce")
+    ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
+    ssprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
+    ssprint("And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
+    ssprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
+
+    ActionMenu(['*Eat grass', 'Wonder', 'Puyo'],
+                [['eat grass', 'absorb grass'], ['wonder'], ['puyo']],
+                [EatGrass, wonder, puyo])
+
+    ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
+    ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
+    ssprint("Whoa, somebody actually answered!?!")
+    ssprint("<<Note, the current spaced used is less than 1%.>>")
+    sprint("I've heard this before, this voice that sounded computer synthesized.... Who is that?")
+    ssprint("<<Answer. This is the Unique Skill [Great Sage], the ability has adapted, so it can quickly answer you.>>")
+    ssprint("[Great Sage]? [Predator]? heh?!")
+    ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
+
+    ActionMenu(['*Skills?', 'Great Sage?', 'Predator?', 'Eat grass', 'Wonder'],
+                [['skills?'], ['great sage?'], ['predator?'], ['eat grass', 'gras'], ['wonder', 'move']],
+                [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, EatGrass, wonder])
 
 
-        sprint("*Can you hear me little one.*")
-        ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
-        ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
+    ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
+    ssprint("Even if it's a skill, I now have someone to talk to.")
+    ssprint("***Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water***")
+    ssprint("I'm going to die! SHIT! I've finally reincarnated and I'm already going to die!")
+    ssprint("Great sage how painful is it to suffocate to death!?")
+    ssprint("<<Answer. A slime's body does not need oxygen.>>")
+    ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
 
-        ActionMenu(['*Follow voice', '*Hello?', '*Shut it Baldy', 'Eat grass', 'Wonder'],
-                    [['follow voice', 'locate voice'], ['hello?', 'hello', "who's that?"], ['shut it Baldy'], ['eat grass', 'grass'], ['wonder']], 
-                    [FollowVoice, Hello, Baldy, EatGrass, wonder])
+
+    sprint("*Can you hear me little one.*")
+    ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
+    ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
+
+    ActionMenu(['*Follow voice', '*Hello?', '*Shut it Baldy', 'Eat grass', 'Wonder'],
+                [['follow voice', 'locate voice'], ['hello?', 'hello', "who's that?"], ['shut it Baldy'], ['eat grass', 'grass'], ['wonder']], 
+                [FollowVoice, Hello, Baldy, EatGrass, wonder])
 
 
 
-        ssprint("Now where to now?")
+    ssprint("Now where to now?")
 
 
 

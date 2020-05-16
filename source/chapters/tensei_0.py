@@ -1,12 +1,16 @@
-
 from items import *
 from skills import *
 from character import *
-
+import pickle as p
 
 # ASCII Art
 import slime_art
 
+rimuru = None
+
+print("----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
+
+# ========== Debug ========== debug = False
 debug = False
 if debug:
     usrInpDebug = False
@@ -20,12 +24,49 @@ else:
 
     # Lets user choose to disable text delay, without breaking debug code
     print("Disable text delay?")
-    setSleep = str(input("\n(Y)es/(N)o> "))
+    setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         t2 = t3 = t4 = t5 = t6 = 0
     else:
         pass
 
+
+class Game_Saves():
+    def __init__(self):
+        self.gameProgress = []
+        self.LoadGame()
+
+    def LoadGame(self):
+        global rimuru
+        try:
+            playerSave = p.load(open('chapters/player_save.p', 'rb'))
+        except:
+            print("LOADED")
+
+        print()
+        try:
+            rimuru = playerSave.rimuru
+            print("INFO: Loaded game save")
+        except:
+            rimuru = Rimuru_Tempest()
+            print("INFO: Creating new game save")
+
+        try:
+            self.gameProgress = playerSave.gameProgress
+            print("INFO: Continuing story")
+        except:
+            print("INFO: Starting at beginning")
+        print()
+        return rimuru
+
+    def SaveGame(self):
+        pass
+    
+
+    def SaveDelete(self):
+        pass
+
+# ========== Print ==========
 def sprint(Msg):
     msgLen = len(str(Msg))
     if msgLen > 70:
@@ -52,6 +93,7 @@ def ssprint(Msg):
 # <<<MSG>>>  --  Voice of the World
 
 
+# ========== Input ==========
 def RunFuncs(msg, actions, funcs):
     if usrInpDebug:
         usrInp = actions[0][0]
@@ -73,17 +115,17 @@ def RunFuncs(msg, actions, funcs):
     for i in range(len(funcs)):
         contAction = ''
         for j in actions[i]:
-            try:
-                contAction = msg[i][0]
-            except: pass
-            if usrInp == j.lower():
-                if contAction == '*':
-                    funcs[i]()
-                    contGame = True
-                    break
-                else:
-                    funcs[i]()
-                    contGame = False
+           try:
+               contAction = msg[i][0]
+           except: pass
+           if usrInp == j.lower():
+               if contAction == '*':
+                   funcs[i]()
+                   contGame = True
+                   break
+               else:
+                   funcs[i]()
+                   contGame = False
         if contGame: break
     if contGame: return
     else: 
@@ -94,6 +136,8 @@ def ActionMenu(msg, actions, funcs):
     funcs.extend([rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
     RunFuncs(msg, actions, funcs)
 
+
+# ========== Extra ==========
 def ExitGame():
     exit()
 
@@ -101,5 +145,6 @@ def TBC():
     print("---TO BE CONTINUED---")
 
 
-rimuru = Rimuru_Tempest()
 veldora = Veldora_Tempest()
+
+    

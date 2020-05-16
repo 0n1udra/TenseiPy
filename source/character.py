@@ -37,7 +37,14 @@ class Character:
             for sName, skill in skills.items():
                 if showSkill.lower() == sName.lower():
                     try:
-                        print(self.attributes[sLvl][sName].info)
+                        skill = self.attributes[sLvl][sName]
+                        print(f"""
+    Name: {skill.name}
+
+
+
+    """)
+    
                     except:
                         print("No available description for", sName)
 
@@ -59,7 +66,9 @@ Species: {self.species}
 
     def AddAttribute(self, item):
         self.attributes[item.skillLevel][item.name] = item
-        ssprint(item.AcquiredMsg())
+        try:
+            ssprint(item.AcquiredMsg())
+        except: pass
 
     def RemoveAttribute(self, item):
         for sLvl, skills in self.attributes.items():
@@ -112,6 +121,8 @@ class Rimuru_Tempest(Character):
         self.info = """
 
     """
+        self.startState = [Absorb_Skill(), Absorb_Dissolve_Skill()]
+        for i in self.startState:
 
 class Veldora_Tempest(Character):
     def __init__(self):
