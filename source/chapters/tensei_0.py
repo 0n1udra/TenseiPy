@@ -1,12 +1,10 @@
 from items import *
 from skills import *
 from character import *
-import pickle as p
 
 # ASCII Art
 import slime_art
 
-rimuru = None
 
 print("----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
 
@@ -30,41 +28,6 @@ else:
     else:
         pass
 
-
-class Game_Saves():
-    def __init__(self):
-        self.gameProgress = []
-        self.LoadGame()
-
-    def LoadGame(self):
-        global rimuru
-        try:
-            playerSave = p.load(open('chapters/player_save.p', 'rb'))
-        except:
-            print("LOADED")
-
-        print()
-        try:
-            rimuru = playerSave.rimuru
-            print("INFO: Loaded game save")
-        except:
-            rimuru = Rimuru_Tempest()
-            print("INFO: Creating new game save")
-
-        try:
-            self.gameProgress = playerSave.gameProgress
-            print("INFO: Continuing story")
-        except:
-            print("INFO: Starting at beginning")
-        print()
-        return rimuru
-
-    def SaveGame(self):
-        pass
-    
-
-    def SaveDelete(self):
-        pass
 
 # ========== Print ==========
 def sprint(Msg):
@@ -136,8 +99,6 @@ def ActionMenu(msg, actions, funcs):
     funcs.extend([rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
     RunFuncs(msg, actions, funcs)
 
-
-# ========== Extra ==========
 def ExitGame():
     exit()
 
