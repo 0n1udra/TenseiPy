@@ -1,4 +1,6 @@
 from skills import *
+from items import *
+
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
@@ -33,21 +35,27 @@ class Character:
             'Misc' : {},
         }
 
-    def ShowInfo(self, showSkill, character=None):
-        for sLvl, skills in self.attributes.items():
-            for sName, skill in skills.items():
-                if showSkill.lower() == sName.lower():
-                    try:
-                        skill = self.attributes[sLvl][sName]
-                        print(f"""
-    Name: {skill.name}
+    def ShowInfo(self, usrInp, character=None):
+        try:
+            for sLvl, skills in self.attributes.items():
+                for sName, skill in skills.items():
+                    if usrInp.lower() == sName.lower():
+                        try:
+                            print(self.attributes[sLvl][sName].info)
+                        except:
+                            print("No available description for", sName)
+        except: pass
 
+        try:
+            for iType, items in self.inventory.items():
+                for iName, iObj  in items.items():
+                    if usrInp.lower() == iName.lower():
+                        try:
+                            print(self.inventory[iType][iName].info)
+                        except:
+                            print("No available description for", iName)
+        except: pass
 
-
-    """)
-    
-                    except:
-                        print("No available description for", sName)
 
     ##### Attributes #####
     def ShowAttributes(self):
@@ -68,7 +76,7 @@ Species: {self.species}
     def AddAttribute(self, item):
         self.attributes[item.skillLevel][item.name] = item
         try:
-            ssprint(item.AcquiredMsg())
+            ssprint(item.acquiredMsg)
         except: pass
 
     def RemoveAttribute(self, item):
@@ -85,8 +93,9 @@ Species: {self.species}
                     # Removes skill from inventory
                     del self.attributes[sLvl][sName]
                     break
-        ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] upgrading to {skillTo.skillLevel} [{skillTo}]...>>')
+        ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] evolving to {skillTo.skillLevel} [{skillTo}]...>>')
         self.AddAttribute(skillTo)
+
 
     ##### Inventory #####
     def ShowInventory(self):
@@ -122,6 +131,7 @@ class Rimuru_Tempest(Character):
         self.info = """
 
     """
+    def StartState(self):
         self.startState = [Self_Regeneration_Skill(), Absorb_Dissolve_Skill(), 
                 Resist_Pain(), Resist_Melee(), Resist_Electricity(), Resist_Temperature()]
         for i in self.startState:
@@ -142,4 +152,7 @@ class Veldora_Tempest(Character):
 
     def AcquiredMsg(self):
         return(f"<<Acquired Veldora {self.familyName}>>")
+
+rimuru = Rimuru_Tempest()
+veldora = Veldora_Tempest()
 

@@ -1,10 +1,5 @@
-from items import *
 from skills import *
-from character import *
-
-# ASCII Art
-import slime_art
-
+from run import rimuru
 
 print("----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
 
@@ -25,8 +20,7 @@ else:
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         t2 = t3 = t4 = t5 = t6 = 0
-    else:
-        pass
+    else: pass
 
 
 # ========== Print ==========
@@ -44,24 +38,21 @@ def sprint(Msg):
         sTime = t2
     else:
         sTime = t2
-    print(Msg)
-    print()
+    print(Msg, '\n')
     sleep(sTime)
 
 def ssprint(Msg):
     sprint(f'    {Msg}')
 
-# <MSG> -- Acquired item, etc
-# <<MSG>>  --  Great Sage (Raphael, Ciel)
-# <<<MSG>>>  --  Voice of the World
-
 
 # ========== Input ==========
 def RunFuncs(msg, actions, funcs):
-    if usrInpDebug:
+    if usrInpDebug: 
         usrInp = actions[0][0]
     else:
-        print("\nAvailable Actions:", ', '.join(msg), '| stats(attributes), inv(entory), info <skill/obj>, exit')
+        # Adds () around actions, (*action)
+        options = ', '.join('(' + i + ')' for i in msg)
+        print("\nAvailable Actions:", options, '| inv, stats, help')
         usrInp = input("\n> ").lower()
         print()
 
@@ -71,9 +62,10 @@ def RunFuncs(msg, actions, funcs):
             inputSkill = ' '.join(usrInp.lower().split()[1:])
             # Can only get info if item exist in rimuru characte
         except:
-            print("NOTE: info Usage example (case sensitive): info predator")
-        rimuru.ShowInfo(inputSkill, rimuru)
+            print("NOTE: info Usage example: info great sage")
+        rimuru.ShowInfo(inputSkill)
 
+    # If action has *, continues story
     contGame = False
     for i in range(len(funcs)):
         contAction = ''
@@ -95,17 +87,29 @@ def RunFuncs(msg, actions, funcs):
         RunFuncs(msg, actions, funcs)
 
 def ActionMenu(msg, actions, funcs):
-    actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
-    funcs.extend([rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
+    actions.extend([['help'], ['stats'], ['inv', 'stomach'], ['exit']])
+    funcs.extend([ShowHelp, rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
     RunFuncs(msg, actions, funcs)
 
+def ShowHelp():
+    print("""
+    Commands:
+        inv   -- Show inventory
+        stats -- Show skills and resistances
+        info  -- Show info on skill or item. ex. info great sage
+        help  -- Show this help page
+        exit  -- Exit game
+
+    Game Dialogue:
+        *Message*       -- Telepathy
+        <Message>       -- Acquired item, etc
+        <<Message>>     -- Great Sage (Raphael, Ciel)
+        <<<Message>>>   -- Voice of the World
+    """)
 def ExitGame():
     exit()
 
 def TBC():
     print("---TO BE CONTINUED---")
-
-
-veldora = Veldora_Tempest()
 
     

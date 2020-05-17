@@ -14,12 +14,12 @@ class Item:
         return(self.name)
 
 
-
-class Grass_Item(Item):
+# ========== Materials ==========
+class Hipokte_Grass(Item):
     def __init__(self):
         Item.__init__(self)
-        self.name = 'Magicule Grass'
+        self.name = 'Hipokte Grass'
         self.itemType = 'Material'
 
-        self.description = "Magicule infused grass, found in Valdora's cave"
-        self.acquiredMsg = '<Magicule grass acquired>'
+        self.info = "Magicule infused grass, found in locations with high Magicule concentration"
+        self.acquiredMsg = '<Hipotke Grass acquired>'
