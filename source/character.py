@@ -59,12 +59,10 @@ class Character:
 
     ##### Attributes #####
     def ShowAttributes(self):
-        attrBanner = f"""
+        print(f"""
 -----Attributes/Skills-----
 Name: {self.name} {self.familyName}
-Species: {self.species}
-"""
-        print(attrBanner)
+""")
         # Prints players current skills, will not print out every type of skill unless player has said skills
         for sLvl, skills in self.attributes.items():
             if skills: # Checks if player has this type of skill
@@ -127,8 +125,8 @@ class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Slime'
-        self.species = 'Slime'
         self.info = """
+    Species: Slime
 
     """
     def StartState(self):
@@ -137,21 +135,23 @@ class Rimuru_Tempest(Character):
         for i in self.startState:
             self.AddAttribute(i)
 
-class Veldora_Tempest(Character):
+class Veldora_Tempest():
     def __init__(self):
-        Character.__init__(self)
         self.name = "Veldora"
         self.itemType = 'Misc'
+        self.familyName = ''
 
-        self.info = """
+
+    def AcquiredMsg(self):
+        self.info = f"""
+    Name: Veldora {self.familyName}
     Species: True Dragon
     Title: Storm Dragon
     Rank: Disaster Special S
     Status: Alive
     """
-
-    def AcquiredMsg(self):
         return(f"<<Acquired Veldora {self.familyName}>>")
+        
 
 rimuru = Rimuru_Tempest()
 veldora = Veldora_Tempest()
