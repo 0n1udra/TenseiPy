@@ -21,5 +21,5 @@ class Hipokte_Grass(Item):
         self.name = 'Hipokte Grass'
         self.itemType = 'Material'
 
-        self.info = "Magicule infused grass, found in locations with high Magicule concentration"
+        self.info = "\tMagicule infused grass, found in locations with high Magicule concentration"
         self.acquiredMsg = '<Hipotke Grass acquired>'

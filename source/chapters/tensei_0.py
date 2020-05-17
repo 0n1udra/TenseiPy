@@ -9,14 +9,14 @@ if debug:
     usrInpDebug = False
     def sleep(x): pass
     #ascii.great_sage, ascii.slime = 'GREAT_SAGE', 'SLIME'
-    t2 = t3 = t4 = t5 = t6 = 0
+    t1 = t2 = t3 = t4 = t5 = t6 = 0
 else:
     usrInpDebug = False
     from time import sleep
-    t2, t3, t4, t5, t6 = 1, 2, 3, 4, 4  # Custom Sleep times
+    t1, t2, t3, t4, t5, t6 = 1, 1, 2, 3, 4, 4  # Custom Sleep times
 
     # Lets user choose to disable text delay, without breaking debug code
-    print("Disable text delay?")
+    print("Disable text delay? Recommend leaving enabled for easier reading.")
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         t2 = t3 = t4 = t5 = t6 = 0
@@ -111,5 +111,6 @@ def ExitGame():
 
 def TBC():
     print("---TO BE CONTINUED---")
+    input("Press Enter to exit > ")
 
     

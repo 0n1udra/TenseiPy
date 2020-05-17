@@ -9,14 +9,14 @@ def Chapter1():
 NOTE: 
     - Set window size for ASCII art accordingly (Fullscreen recommended)
     - Access help, inventory and skills with help, inv and stats
-    - * actions continues story (do NOT actually input *, or ()). Try the other actions first maybe, see what happens, idc
+    - * actions continues story (do NOT actually input *, or ()). Try the other actions first maybe, see what happens
     """
     print(instructions)
     usrcont = input("Press Enter to continue > ")
     print()
 
     sprint(".....")
-    sleep(1)
+    sleep(t1)
     print(slime_art.great_sage)
     sleep(2)
 
@@ -33,7 +33,7 @@ NOTE:
     rimuru.SkillUpgrade(Sage_Skill(), Great_Sage_Skill())
     sleep(t3)
 
-    sprint(rimuru.ShowAttributes())
+    print(rimuru.ShowAttributes())
 
     ssprint(".....")
     ssprint("It's so dark, where is this. What happened to me?")
@@ -64,7 +64,7 @@ NOTE:
     ssprint("***He has reincarnated into a slime!***")
 
     print(slime_art.slime)
-    sleep(2)
+    sleep(t2)
 
     ssprint("Puyo, Puyoyoyo.... stretch....bounce")
     ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
@@ -260,7 +260,7 @@ def Baldy():
 def MeetDragon():
     sprint("My name is Storm Dragon Veldora!*")
     print(slime_art.cave_veldora)
-    sleep(2)
+    sleep(t2)
 
     sprint("*I am one of the four True Dragons of this world.*")
     sprint("HOLY SHIT, you're a real dragon!")
@@ -271,7 +271,7 @@ def MeetDragon():
 def ActivateMagicPerception():
     sprint('...')
     print(slime_art.magic_perception)
-    sleep(2)
+    sleep(t2)
     rimuru.AddAttribute(Magic_Perception_Skill())
     sprint("OH!")
     sprint("Hmmmmmmmm")
@@ -336,9 +336,6 @@ def HelpSeal():
     rimuru.name = rimuruName
 
     sprint(f"*How about {rimuru.name} {rimuru.familyName}")
-    rimuru.ShowAttributes()
-    rimuru.ShowInventory()
-    print()
 
     sprint("Alright, get out of there as quick as you can!")
     sprint("*Leave it to me. Until we meet again*")
@@ -348,12 +345,20 @@ def HelpSeal():
                     [['activate predator', 'predate veldora'], ['move', 'Wonder', 'Puyo']],
                     [PredateVeldora, Puyo])
 
+    rimuru.ShowAttributes()
+    rimuru.ShowInventory()
+    print()
+
     ssprint("<<Start analyzing the Unique Skill [Infinity Prison]?>>")
 
     ActionMenu(['*Yes', '*No', 'Eat grass', 'Wonder', 'Puyo'],
                     [['yes'], ['no'], ['eat grass'], ['Wonder', 'Puyo']],
                     [StartAnalysis, NoAnalysis, EatGrass, Puyo])
 
+def PredateVeldora():
+    ssprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
+    ssprint("***The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal***")
+    rimuru.AddInventory(veldora, capacity=10)
 
 def LeaveSeal():
     sprint("*Hey, you're really going to leave your new friend in here? :'(*")
@@ -361,11 +366,6 @@ def LeaveSeal():
     ActionMenu(['*Help friend', '*Leave friend'],
                 [['help friend'], ['leave friend']],
                 [HelpSeal, LeaveCave])
-
-def PredateVeldora():
-    ssprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
-    ssprint("***The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal***")
-    rimuru.AddInventory(veldora, capacity=10)
 
 # === Start Analyse ===
 def StartAnalysis():
