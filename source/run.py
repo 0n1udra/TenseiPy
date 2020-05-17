@@ -1,8 +1,12 @@
 from chapters import *
+<<<<<<< HEAD
 from items import *
 from character import *
 import pickle as p
 import slime_art
+=======
+import pickle as p
+>>>>>>> master
 
 class Game_Saves():
     def __init__(self):
@@ -12,7 +16,12 @@ class Game_Saves():
         global rimuru
         try:
             playerSave = p.load(open('chapters/player_save.p', 'rb'))
+<<<<<<< HEAD
         except: pass
+=======
+        except:
+            print("LOADED")
+>>>>>>> master
 
         print()
         try:
@@ -41,6 +50,10 @@ class Game_Saves():
 if __name__ == '__main__':
     currentGame = Game_Saves()
     currentGame.gameProgress[0] = Chapter1
+<<<<<<< HEAD
     currentGame.gameProgress[0]()
 
 
+=======
+    currentGame.gameProgress[0](currentGame)
+>>>>>>> master

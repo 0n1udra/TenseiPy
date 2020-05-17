@@ -11,7 +11,13 @@ class Skill:
         self.energy = 0
 
         self.active = True
+<<<<<<< HEAD
         # Able to predate
+=======
+
+        self.subSkills = {}
+
+>>>>>>> master
         self.predate = True
 
 
@@ -28,6 +34,10 @@ class Resistance(Skill):
         Skill.__init__(self)
         self.skillLevel = 'Resistance'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 # ===== Manas =====
 class Ciel_Skill(Skill):
@@ -59,7 +69,11 @@ class Raphael_Skill(Skill):
 
         self.name = 'Great Sage'
         self.skillLevel = 'Unique Skill'
+<<<<<<< HEAD
         self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
+=======
+        self.AcquiredMsgMsg = "<<Unique Skill [Great Sage] Acquired.>>"
+>>>>>>> master
         self.info = """
     Name: [Wisdom King Raphael]
     Type: Ultimate Skill
@@ -82,7 +96,11 @@ class Predator_Skill(Skill):
         Skill.__init__(self)
         self.name = 'Predator'
         self.skillLevel = 'Unique Skill'
+<<<<<<< HEAD
         self.acquiredMsg = "<<Unique Skill [Predator] successfully Acquired.>>"
+=======
+        self.AcquiredMsgMsg = "<<Unique Skill [Predator] successfully Acquired.>>"
+>>>>>>> master
         self.info = """
     Name: [Predator]
     Type: Unique Skill
@@ -137,7 +155,11 @@ class Great_Sage_Skill(Skill):
 
         self.name = 'Great Sage'
         self.skillLevel = 'Unique Skill'
+<<<<<<< HEAD
         self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
+=======
+        self.AcquiredMsgMsg = "<<Unique Skill [Great Sage] Acquired.>>"
+>>>>>>> master
         self.info = """
     Name: [Great Sage]
     Type: Extra Skill
@@ -187,7 +209,11 @@ class Sage_Skill(Skill):
 
         self.name = 'Sage'
         self.skillLevel = 'Extra Skill'
+<<<<<<< HEAD
         self.acquiredMsg = "<<Extra Skill: [Sage] has been successfully Acquired.>>"
+=======
+        self.AcquiredMsgMsg = "<<Extra Skill: [Sage] has been successfully Acquired.>>"
+>>>>>>> master
 
 class Magic_Perception_Skill(Skill):
     def __init__(self):
@@ -195,7 +221,11 @@ class Magic_Perception_Skill(Skill):
 
         self.name = 'Magic Perception'
         self.skillLevel = 'Extra Skill'
+<<<<<<< HEAD
         self.acquiredMsg = "<<Extra Skill: [Magic Perception] Acquired.>>"
+=======
+        self.AcquiredMsgMsg = "<<Extra Skill: [Magic Perception] Acquired.>>"
+>>>>>>> master
 
         self = """
         Name: [Magic Perception], [Magic Sense]
@@ -216,6 +246,7 @@ class Water_Manipulation_Skill(Skill):
         self.name = "Water Manipulation"
         self.skillLevel = 'Extra Skill'
         self.acauiredMsg = '<<Extra Skill [Water Manipulation] acquired.>>'
+<<<<<<< HEAD
         self.info = """
         Name: Water Manipulation
         Type: Extra Skill
@@ -223,6 +254,12 @@ class Water_Manipulation_Skill(Skill):
         Description:
             learned Hydraulic Propulsion, Water Current Control, and Water Blade, the three Skills were fused and evolved into Water Manipulation.
         """
+=======
+
+
+
+# ===== Common Skills =====
+>>>>>>> master
 
 
 # ===== Common Skills =====
@@ -231,7 +268,11 @@ class Hydraulic_Propulsion(Skill):
         Skill.__init__(self)
         self.name = 'Hydraulic Propulsion'
         self.skillLevel = 'Common Skill'
+<<<<<<< HEAD
         self.acquiredMsg = '<<Common Skill [Hydraulic Propulsion] Acquired.>>'  
+=======
+        self.AcquiredMsgMsg = '<<Common Skill [Hydraulic Propulsion] Acquired.>>'  
+>>>>>>> master
         self.info = """
     Name: [Hydraulic Propulsion]
     Type: Common Skill
@@ -328,3 +369,37 @@ class Resist_Temperature(Resistance):
         """
 
 
+# ========== Resistances ==========
+
+class Resist_Pain(Resistance):
+    def __init__(self):
+        Resistance.__init__(self)
+        self.name = 'Pain Resist'
+        self.description = 'Tolerance-type Skill that grants immunity to physical pain sensation. However, you still take damage'
+
+
+class Resist_Melee(Resistance):
+    def __init__(self):
+        Resistance.__init__(self)
+        self.name = 'Melee Resist'
+        self.description = 'Tolerance-type Skill that grants resistance to any types of physical attacks. Imbued into a layer of Multilayer Barrier, doubling the resistance effect'
+
+class Resist_Electricity(Resistance):
+    def __init__(self):
+        Resistance.__init__(self)
+        self.name = 'Electricity Resist'
+        self.description = 'Tolerance-type Skill that grants resistance to electricity-types of attacks. Imbued into a layer of Multilayer Barrier, doubling the resistance effect.'
+
+class Resist_Temperature(Resistance):
+    def __init__(self):
+        Resistance.__init__(self)
+        self.name = 'Temperature Resist'
+        self.description = 'Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. Imbued into a layer of Multilayer Barrier, doubling the resistance effect.'
+
+
+
+
+
+
+
+        
