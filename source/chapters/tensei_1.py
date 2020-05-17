@@ -1,17 +1,8 @@
 from run import *
 from chapters.tensei_0 import *
 
-
-
-
 # Manga, Chapter 1
-<<<<<<< HEAD
 def Chapter1():
-=======
-def Chapter1(game):
-    global rimuru
-    rimuru = game.LoadGame()
->>>>>>> master
 
     print()
     instructions = """
@@ -73,11 +64,7 @@ NOTE:
     ssprint("***He has reincarnated into a slime!***")
 
     print(slime_art.slime)
-<<<<<<< HEAD
     sleep(2)
-=======
-    sleep(1)
->>>>>>> master
 
     ssprint("Puyo, Puyoyoyo.... stretch....bounce")
     ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
@@ -284,7 +271,7 @@ def MeetDragon():
 def ActivateMagicPerception():
     sprint('...')
     print(slime_art.magic_perception)
-    sleep(1)
+    sleep(2)
     rimuru.AddAttribute(Magic_Perception_Skill())
     sprint("OH!")
     sprint("Hmmmmmmmm")
@@ -387,19 +374,3 @@ def StartAnalysis():
 def NoAnalysis():
     sprint("Ummmmm, I guess he's imprisoned in my stomach now forever....")
 
-<<<<<<< HEAD
-=======
-
-
-def ActionMenu(msg, actions, funcs):
-    global rimuru
-    actions.extend([['stat', 'stats', 'attributes', 'attrs', 'attr'], ['storage', 'inventory', 'inv', 'stomach'], ['stop', 'exit', 'quit']])
-    funcs.extend([rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
-    RunFuncs(msg, actions, funcs)
-
-def ExitGame():
-    exit()
-
-def TBC():
-    print("---TO BE CONTINUED---")
->>>>>>> master

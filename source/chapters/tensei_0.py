@@ -1,13 +1,5 @@
 from skills import *
-<<<<<<< HEAD
 from run import rimuru
-=======
-from character import *
-
-# ASCII Art
-import slime_art
-
->>>>>>> master
 
 print("----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
 
@@ -28,12 +20,7 @@ else:
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         t2 = t3 = t4 = t5 = t6 = 0
-<<<<<<< HEAD
     else: pass
-=======
-    else:
-        pass
->>>>>>> master
 
 
 # ========== Print ==========
@@ -104,7 +91,6 @@ def ActionMenu(msg, actions, funcs):
     funcs.extend([ShowHelp, rimuru.ShowAttributes, rimuru.ShowInventory, ExitGame])
     RunFuncs(msg, actions, funcs)
 
-<<<<<<< HEAD
 def ShowHelp():
     print("""
     Commands:
@@ -120,8 +106,6 @@ def ShowHelp():
         <<Message>>     -- Great Sage (Raphael, Ciel)
         <<<Message>>>   -- Voice of the World
     """)
-=======
->>>>>>> master
 def ExitGame():
     exit()
 

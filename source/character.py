@@ -131,10 +131,7 @@ class Rimuru_Tempest(Character):
         self.info = """
 
     """
-<<<<<<< HEAD
     def StartState(self):
-=======
->>>>>>> master
         self.startState = [Self_Regeneration_Skill(), Absorb_Dissolve_Skill(), 
                 Resist_Pain(), Resist_Melee(), Resist_Electricity(), Resist_Temperature()]
         for i in self.startState:
