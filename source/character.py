@@ -13,6 +13,8 @@ class Character:
 
         self.inventoryCapacity = 0
 
+        self.storyProgress = [None]
+
         self.attributes = {
             'Ultimate Skill' : {},
             'Unique Skill' : {},
@@ -34,6 +36,11 @@ class Character:
             'Potions' : {},
             'Misc' : {},
         }
+
+    def SetName(self, inpName, character):
+        character.name = inpName
+
+
 
     def ShowInfo(self, usrInp, character=None):
         try:
@@ -118,8 +125,7 @@ Name: {self.name} {self.familyName}
                     # Finds corresponding item, and removes it from inventory
                     self.attributes[k].remove(item)
 
-    def SetName(self, inpName, character):
-        character.name = inpName
+
 
 class Rimuru_Tempest(Character):
     def __init__(self):
@@ -152,7 +158,5 @@ class Veldora_Tempest():
     """
         return(f"<<Acquired Veldora {self.familyName}>>")
         
-
-rimuru = Rimuru_Tempest()
 veldora = Veldora_Tempest()
 

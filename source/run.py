@@ -1,46 +1,33 @@
+from character import *
 from chapters import *
 from items import *
-from character import *
-import pickle as p
 import slime_art
+import pickle as p
 
-class Game_Saves():
-    def __init__(self):
-        self.gameProgress = [Chapter1]
+rimuru = None
+def SaveGame(character):
+    p.dump(character, open('player_save.p', 'wb'))
+    print("Game Saved to: player_save.p")
+    
+def DeleteSave():
+    pass
 
-    def LoadGame(self):
-        global rimuru
+def LoadGame():
+    global rimuru
+    if rimuru == None:
         try:
-            playerSave = p.load(open('chapters/player_save.p', 'rb'))
-        except: pass
-
-        print()
-        try:
-            rimuru = playerSave.rimuru
-            print("INFO: Loaded game save")
+            rimuru = UpdateCharacter(p.load(open('player_save.p', 'rb')))
+            rimuru.ShowInventory()
+            print("Loaded Player Save\n")
         except:
             rimuru = Rimuru_Tempest()
-            print("INFO: Creating new game save")
-
-        try:
-            self.gameProgress = playerSave.gameProgress
-            print("INFO: Continuing story")
-        except:
-            print("INFO: Starting at beginning")
-        print()
-        return rimuru
-
-    def SaveGame(self):
-        pass
-    
-
-    def SaveDelete(self):
-        pass
-
+    return rimuru
+LoadGame()
 
 if __name__ == '__main__':
-    currentGame = Game_Saves()
-    currentGame.gameProgress[0] = Chapter1
-    currentGame.gameProgress[0]()
+    StartBanner()
+    rimuru = LoadGame()
+    rimuru.storyProgress[0] = Chapter1
+    rimuru.storyProgress[-1](rimuru)
 
 

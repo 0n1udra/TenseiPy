@@ -1,18 +1,10 @@
-from run import *
 from chapters.tensei_0 import *
+from chapters.tensei_2 import Chapter2
+from run import *
 
 # Manga, Chapter 1
-def Chapter1():
+def Chapter1(save):
 
-    print()
-    instructions = """
-NOTE: 
-    - Set window size for ASCII art accordingly (Fullscreen recommended)
-    - Access help, inventory and skills with help, inv and stats
-    - * actions continues story (do NOT actually input *, or ()). Try the other actions first maybe, see what happens
-    """
-    print(instructions)
-    usrcont = input("Press Enter to continue > ")
     print()
 
     def StartChapter1():
@@ -77,6 +69,7 @@ NOTE:
                     [['eat grass'], ['Wonder'], ['Puyo']],
                     [EatGrass, Wonder, Puyo])
 
+
         ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
         ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
         ssprint("Whoa, somebody actually answered!?!")
@@ -90,7 +83,6 @@ NOTE:
                     [['skills?'], ['great sage?'], ['predator?'], ['eat grass', 'gras'], ['Wonder', 'move']],
                     [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, EatGrass, Wonder])
 
-
         ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
         ssprint("Even if it's a skill, I now have someone to talk to.")
         ssprint("***Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water***")
@@ -98,7 +90,6 @@ NOTE:
         ssprint("Great sage how painful is it to suffocate to death!?")
         ssprint("<<Answer. A slime's body does not need oxygen.>>")
         ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
-
 
         sprint("*Can you hear me little one.*")
         ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
@@ -110,8 +101,8 @@ NOTE:
 
 
         ssprint("Now where to now?")
-        TBC()
 
+        ContinueStory(Chapter2)
 
 
     # ===== Move =====

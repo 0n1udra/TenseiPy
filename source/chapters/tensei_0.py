@@ -1,7 +1,5 @@
 from skills import *
-from run import rimuru
-
-print("----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
+from run import *
 
 # ========== Debug ========== debug = False
 debug = False
@@ -14,14 +12,38 @@ else:
     usrInpDebug = False
     from time import sleep
     t1, t2, t3, t4, t5, t6 = 1, 1, 2, 3, 4, 4  # Custom Sleep times
-
     # Lets user choose to disable text delay, without breaking debug code
-    print("Disable text delay? Recommend leaving enabled for easier reading.")
+    print("\nDisable text delay? Recommend leaving enabled for easier reading.")
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         t2 = t3 = t4 = t5 = t6 = 0
     else: pass
 
+
+def StartBanner():
+    print("\n----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
+    instructions = """
+NOTE: 
+    - Set window size for ASCII art accordingly (Fullscreen recommended)
+    - Access help, inventory and skills with help, inv and stats
+    - * actions continues story (do NOT actually input *, or ()). Try the other actions first maybe, see what happens
+    """
+    print(instructions)
+    usrcont = input("Press Enter to continue > ")
+    print()
+
+
+def ContinueStory(nextChapter):
+    print("Continue to next chapter?")
+    usrInp = input("Y/N > ")
+    if usrInp.lower() == 'y':
+        rimuru.storyProgress.append(nextChapter)
+        SaveGame(rimuru)
+        nextChapter(rimuru)
+    else:
+        rimuru.storyProgress.append(nextChapter)
+        SaveGame(rimuru)
+        exit()
 
 # ========== Print ==========
 def sprint(Msg):
@@ -106,6 +128,7 @@ def ShowHelp():
         <<Message>>     -- Great Sage (Raphael, Ciel)
         <<<Message>>>   -- Voice of the World
     """)
+
 def ExitGame():
     exit()
 
