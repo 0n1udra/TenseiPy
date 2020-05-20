@@ -1,15 +1,14 @@
-from chapters.tensei_0 import *
+from start_game import *
 from chapters.tensei_2 import Chapter2
-from run import *
 
 # Manga, Chapter 1
-def Chapter1(save):
+def Chapter1(rimuru):
 
     print()
 
     def StartChapter1():
         sprint(".....")
-        sleep(t1)
+        sleep(1)
         print(slime_art.great_sage)
         sleep(2)
 
@@ -18,13 +17,13 @@ def Chapter1(save):
 
         #TODO Add Skill
         ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
-        rimuru.AddAttribute(Predator_Skill())
+        rimuru.AddAttribute(skills.Predator_Skill())
         ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
-        rimuru.AddAttribute(Sage_Skill())
+        rimuru.AddAttribute(skills.Sage_Skill())
         ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
         sprint('.....')
-        rimuru.SkillUpgrade(Sage_Skill(), Great_Sage_Skill())
-        sleep(t3)
+        rimuru.SkillUpgrade(skills.Sage_Skill(), skills.Great_Sage_Skill())
+        sleep(3)
 
         print(rimuru.ShowAttributes())
 
@@ -57,7 +56,7 @@ def Chapter1(save):
         ssprint("***He has reincarnated into a slime!***")
 
         print(slime_art.slime)
-        sleep(t2)
+        sleep(2)
 
         ssprint("Puyo, Puyoyoyo.... stretch....bounce")
         ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
@@ -102,7 +101,7 @@ def Chapter1(save):
 
         ssprint("Now where to now?")
 
-        ContinueStory(Chapter2)
+        ContinueStory(rimuru, Chapter2)
 
 
     # ===== Move =====
@@ -114,7 +113,7 @@ def Chapter1(save):
 
     def EatGrass():
         ssprint("Ooooweeee more grass!")
-        rimuru.AddInventory(Hipokte_Grass(), capacity=0.01)
+        rimuru.AddInventory(items.Hipokte_Grass(), capacity=0.01)
 
     def Squish():
         ssprint("hehhhh")
@@ -154,8 +153,8 @@ def Chapter1(save):
                     [EscapeWater, StayInWater])
 
     def PredateWater():
-            rimuru.AddAttribute(Hydraulic_Propulsion())
-            sleep(t2)
+            rimuru.AddAttribute(skills.Hydraulic_Propulsion())
+            sleep(2)
             ssprint("Finally, I'm back on land")
 
 
@@ -252,7 +251,7 @@ def Chapter1(save):
     def MeetDragon():
         sprint("My name is Storm Dragon Veldora!*")
         print(slime_art.cave_veldora)
-        sleep(t2)
+        sleep(2)
 
         sprint("*I am one of the four True Dragons of this world.*")
         sprint("HOLY SHIT, you're a real dragon!")
@@ -263,8 +262,8 @@ def Chapter1(save):
     def ActivateMagicPerception():
         sprint('...')
         print(slime_art.magic_perception)
-        sleep(t2)
-        rimuru.AddAttribute(Magic_Perception_Skill())
+        sleep(2)
+        rimuru.AddAttribute(skills.Magic_Perception_Skill())
         sprint("OH!")
         sprint("Hmmmmmmmm")
         sprint("I can see. I CAN SEE!")
@@ -314,14 +313,14 @@ def Chapter1(save):
         sprint("Like a last name? hmmmmm...")
 
         veldoraLName = str(input("\nLast Name > "))
-        veldora.familyName = veldoraLName
+        characters.veldora.familyName = veldoraLName
         rimuru.familyName = veldoraLName
         print()
 
-        sprint(f"Hmmmmmm... How about {veldora.familyName}")
+        sprint(f"Hmmmmmm... How about {characters.veldora.familyName}")
         sprint("*What a good name!*")
         sprint("He actually likes it?")
-        sprint(f"*From now on I'll be Veldora {veldora.familyName}*")
+        sprint(f"*From now on I'll be Veldora {characters.veldora.familyName}*")
         sprint("*And as for you...*")
 
         rimuruName = str(input("\nName > "))
@@ -350,7 +349,7 @@ def Chapter1(save):
     def PredateVeldora():
         ssprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
         ssprint("***The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal***")
-        rimuru.AddInventory(veldora, capacity=10)
+        rimuru.AddInventory(characters.veldora, capacity=10)
 
     def LeaveSeal():
         sprint("*Hey, you're really going to leave your new friend in here? :'(*")
