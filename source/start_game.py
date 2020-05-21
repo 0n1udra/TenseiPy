@@ -155,10 +155,11 @@ if __name__ == '__main__':
     print("\nDisable text delay? (Recommend leaving enabled for easier reading)")
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
-        print("Text delay ENABLED")
+        print("Text Delay: DISABLED")
     else:
         rimuru.textDelay = False
-        print("Text delay DISABLED")
+        print("Text Delay: ENABLED")
+    sleep(1)
 
     rimuru.storyProgress[0] = tensei1.Chapter1
     rimuru.storyProgress[-1](rimuru)

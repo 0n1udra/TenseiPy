@@ -113,7 +113,7 @@ def Chapter1(rimuru):
 
     def EatGrass():
         ssprint("Ooooweeee more grass!")
-        rimuru.AddInventory(items.Hipokte_Grass(), capacity=0.01)
+        rimuru.AddInventory(items.Hipokte_Grass())
 
     def Squish():
         ssprint("hehhhh")
@@ -349,7 +349,7 @@ def Chapter1(rimuru):
     def PredateVeldora():
         ssprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
         ssprint("***The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal***")
-        rimuru.AddInventory(characters.veldora, capacity=10)
+        rimuru.AddInventory(characters.veldora)
 
     def LeaveSeal():
         sprint("*Hey, you're really going to leave your new friend in here? :'(*")

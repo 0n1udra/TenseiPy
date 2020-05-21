@@ -1,7 +1,7 @@
-import start_game
+from start_game import *
 
 def Chapter2(rimuru):
-    print("Hello")
+    sprint('test')
 
 
 
