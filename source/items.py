@@ -3,7 +3,7 @@ class Item:
         self.name = ''
         self.itemType = ''
         self.amount = 0
-        self.addAmount = 0 # Amount to add when calling AddInventory()
+        self.addAmount = 1 # Amount to add when calling AddInventory()
         self.capacity = 0
         self.description = ''
 
@@ -27,20 +27,31 @@ class Hipokte_Grass(Item):
         self.addAmount = 5
         self.amount = 0
         self.capacity = 0.01
-        self.info = "\tMagicule infused grass, found in locations with high Magicule concentration"
+        self.info = """
+    Description:
+        Magicule infused grass, found in locations with high Magicule concentration.
+
+    Usage:
+        Mainly used for making healing potions.
+
+"""
 
 
-class magic_ore(Item):
+
+class Magic_Ore(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Magic Ore'
         self.itemType = 'Material'
         self.addAmount = 5
         self.amount = 0
+        self.capacity = 0.1
         self.info = """
-        Magic Ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
+    Description:
+        Magic ores form around high concentration of magic essence.
+        Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
 
-        Between magic ores and regular ores, there is one decisive point that sets them apart. 
-        Without exception, magic ores will only form around high concentration of magic essence
-        """
+    Usage:
+        Mainly used for making magic items and magic reinforced weapons and armor.
+    """
         

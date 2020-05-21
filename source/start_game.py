@@ -18,7 +18,7 @@ def LoadGame(path):
 
 def SaveGame(rimuru):
     pickle.dump(rimuru, open(characters.rimuru.savePath, 'wb'))
-    print("Game Saved to: player_save.p")
+    print("Game Saved To: player_save.p")
 
 
 def ContinueStory(rimuru, nextChapter):
@@ -131,6 +131,7 @@ def ShowHelp():
 
     Game Dialogue:
         *Message*       -- Telepathy
+        ***Message***   -- Story progression
         <Message>       -- Acquired item, etc
         <<Message>>     -- Great Sage (Raphael, Ciel)
         <<<Message>>>   -- Voice of the World
@@ -160,6 +161,7 @@ if __name__ == '__main__':
         rimuru.textDelay = False
         print("Text Delay: ENABLED")
     sleep(1)
+    print("\n\n")
 
     rimuru.storyProgress[0] = tensei1.Chapter1
     rimuru.storyProgress[-1](rimuru)

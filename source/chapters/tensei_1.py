@@ -4,8 +4,6 @@ from chapters.tensei_2 import Chapter2
 # Manga, Chapter 1
 def Chapter1(rimuru):
 
-    print()
-
     def StartChapter1():
         sprint(".....")
         sleep(1)
@@ -99,7 +97,7 @@ def Chapter1(rimuru):
                     [FollowVoice, Hello, Baldy, EatGrass, Wonder])
 
 
-        ssprint("Now where to now?")
+        ssprint("Where to now?")
 
         ContinueStory(rimuru, Chapter2)
 
@@ -148,8 +146,8 @@ def Chapter1(rimuru):
 
     def StayInWater():
         sprint(".....")
-        AcrtionMenu(['*Find a way out', 'Stay'],
-                    [['find a way out', 'escape'], ['stay']],
+        AcrtionMenu(['*Find way out', 'Stay'],
+                    [['find way out', 'escape'], ['stay']],
                     [EscapeWater, StayInWater])
 
     def PredateWater():

@@ -149,6 +149,8 @@ class Veldora_Tempest():
         self.itemType = 'Misc'
         self.familyName = ''
         self.capacity = 10
+        self.amount = 0
+        self.addAmount = 1
 
 
     def AcquiredMsg(self):

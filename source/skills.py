@@ -248,7 +248,7 @@ class Hydraulic_Propulsion(Skill):
 class Absorb_Dissolve_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
-        self.name = 'Absorb / Dissolve'
+        self.name = 'Absorb/Dissolve'
         self.skillLevel = 'Intrinsic Skill'
         self.info = """
     Name: Absorb and Dissolve
