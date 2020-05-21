@@ -112,24 +112,6 @@ class Predator_Skill(Skill):
         Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth
         """
 
-    def Predation(self):
-        print("USE PREDATOR")
-
-    def Mimicry(self):
-        print("USE MIMICRY")
-
-    def Stomach(self):
-        print("USE STOMACH")
-
-    def Mimicry(self):
-        print("USE MIMICRY")
-
-    def Analysis(self):
-        print("USE ANALYSIS")
-
-    def Isolation(self):
-        print("USE ISOLATION")
-
 
 class Great_Sage_Skill(Skill):
     def __init__(self):

@@ -50,8 +50,8 @@ def Chapter1(rimuru):
         ssprint("Wait what kind of joke is this! Who would accept something like this!!")
         ssprint("ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
 
-        ssprint("***Although Minami Satoru didn't want to admins it.***")
-        ssprint("***He has reincarnated into a slime!***")
+        ssprint("~Although Minami Satoru didn't want to admins it.~")
+        ssprint("~He has reincarnated into a slime!~")
 
         print(slime_art.slime)
         sleep(2)
@@ -82,13 +82,13 @@ def Chapter1(rimuru):
 
         ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
         ssprint("Even if it's a skill, I now have someone to talk to.")
-        ssprint("***Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water***")
+        ssprint("~Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water~")
         ssprint("I'm going to die! SHIT! I've finally reincarnated and I'm already going to die!")
         ssprint("Great sage how painful is it to suffocate to death!?")
         ssprint("<<Answer. A slime's body does not need oxygen.>>")
         ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
 
-        sprint("*Can you hear me little one.*")
+        sprint("~Can you hear me little one.~")
         ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
         ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
 
@@ -161,25 +161,25 @@ def Chapter1(rimuru):
     def FollowVoice():
         ssprint("Let's try to find where that voice is coming from")
         ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
-        sprint("*Hey can you just reply?*")
+        sprint("~Hey can you just reply?~")
         ssprint("Was I sensed somehow?")
         ActionMenu(['*Respond', 'Ignore', 'Eat grass', 'Explore'], 
                     [['respond'], ['ignore'], ['eat grass'], ['explore']],
                     [RespondTo, IgnoreDragon, EatGrass, Explore]),
 
     def IgnoreDragon():
-        sprint("*Hey, are you just going to keep ignoreing me?*")
+        sprint("~Hey, are you just going to keep ignoreing me?~")
 
     def RespondTo():
 
         sprint("I never expected to be able to speak with anything other than my skill by thought...")
         sprint("Right now I am in a state that's unable to see anythin....Ummmm you are?.")
-        sprint("*This is telepathy. It's Hard to converse if you can't see... Alright, I'll help you see.*")
-        sprint("*Just don't be scared when you see my true form. There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.*")
+        sprint("~This is telepathy. It's Hard to converse if you can't see... Alright, I'll help you see.~")
+        sprint("~Just don't be scared when you see my true form. There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.~")
         sprint("Magic essence?...")
         ssprint("<<Answer. This world is covered with magic essence for example, the body of a rimuru can move because it absorbs magic essence.>>")
-        sprint("*If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill.*")
-        sprint("*With that you will be able to 'see' and 'hear'.*")
+        sprint("~If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill.~")
+        sprint("~With that you will be able to 'see' and 'hear'.~")
         sprint("Eh... this feels really complicated. Wellllll, it won't hurt to try... Will it?).")
         sprint("I sense something floating, is this the so called magic essence?")
 
@@ -191,19 +191,19 @@ def Chapter1(rimuru):
                     [['activate magic perception', 'activate magic sense'], ['move', 'Puyo']],
                     [ActivateMagicPerception, Puyo])
 
-        sprint("*Then shall I introduce myself, again?*")
+        sprint("~Then shall I introduce myself, again?~")
 
         ActionMenu(['*Sure', '*Nah'],
                     [['sure', 'yes'], ['nah', 'no']],
                     [MeetDragon, Please])
             
     def ContinueConv():
-        sprint("*So you are a reincarnate from another world, hmmmm... This type of reincarnation is very rare.*")
+        sprint("~So you are a reincarnate from another world, hmmmm... This type of reincarnation is very rare.~")
         sprint("I Wonder if there are more Japanese people here.")
-        sprint("*...Is that so, are you leaving now?*")
+        sprint("~...Is that so, are you leaving now?~")
         ssprint("Why does he look so sad?")
-        sprint("*I am unable to move from this spot. I was sealed here for over 300 years.*")
-        sprint("*By a short, slender, silver-black haired girl. With Snow-white skin and small apple red lips...*")
+        sprint("~I am unable to move from this spot. I was sealed here for over 300 years.~")
+        sprint("~By a short, slender, silver-black haired girl. With Snow-white skin and small apple red lips...~")
         ssprint("Wow, how observant of him.... and, uh, why is he sealed away???")
 
         ActionMenu(['*Become friends', '*Leave'],
@@ -212,15 +212,15 @@ def Chapter1(rimuru):
 
     def LeaveDragon():
         sprint("...")
-        sprint("*Wait where are you going?*")
+        sprint("~Wait where are you going?~")
         sprint("You seem pretty suspicious...")
-        sprint("*Oh, really... Is there anything I can do to ease your mind?*")
+        sprint("~Oh, really... Is there anything I can do to ease your mind?~")
         ActionMenu(["*I don't trust you", '*Ok, fine'],
                     [["i don't trust you"], ['ok, fine', 'ok', 'ok fine']],
                     [DontTrust, FriendDragon])
 
     def DontTrust():
-        sprint("*Oh, c'mon I'm trustworthy!*")
+        sprint("~Oh, c'mon I'm trustworthy!~")
         sprint("Ummmmm...")
         ActionMenu(['*Trust', '*Leave'],
                     [['trust'], ['leave']],
@@ -228,33 +228,33 @@ def Chapter1(rimuru):
 
     def LeaveCave():
         sprint("Ok. So I'm leaving now.")
-        sprint("*Wow, how mean of you. I bestow you much more then mere sight and you treat me like this!*")
-        sprint("*Just remember. If, I Storm Dragon Veldora, ever escape this miserable cave. I will find you and repay your kindness!*")
+        sprint("~Wow, how mean of you. I bestow you much more then mere sight and you treat me like this!~")
+        sprint("~Just remember. If, I Storm Dragon Veldora, ever escape this miserable cave. I will find you and repay your kindness!~")
         sprint("Ye, sure. Bye.")
 
     def Hello():
-        sprint("*Keep following my voice little one.*")
+        sprint("~Keep following my voice little one.~")
         ActionMenu(['*Follow voice', '*Shut it Baldy', 'Eat grass', 'Puyo'],
                     [['follow voice'], ['shut it baldy'], ['eat grass', 'grass'], ['Wonder', 'Puyo']], 
                     [FollowVoice, Baldy, EatGrass, Puyo])
 
     def ShutIt():
-        sprint("*OHOHO, So you want to die, you little shit!*")
+        sprint("~OHOHO, So you want to die, you little shit!~")
         RespondTo()
 
     def Baldy():
-        ssprint("*BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!*")
+        ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!~")
         RespondTo()
 
     def MeetDragon():
-        sprint("My name is Storm Dragon Veldora!*")
+        sprint("My name is Storm Dragon Veldora!~")
         print(slime_art.cave_veldora)
         sleep(2)
 
-        sprint("*I am one of the four True Dragons of this world.*")
+        sprint("~I am one of the four True Dragons of this world.~")
         sprint("HOLY SHIT, you're a real dragon!")
-        sprint("*Didn't I tell you not to get scared.*")
-        ssprint("***even with the scary appearance, the little slime and dragon started chatting.***")
+        sprint("~Didn't I tell you not to get scared.~")
+        ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
         ContinueConv()
 
     def ActivateMagicPerception():
@@ -265,22 +265,22 @@ def Chapter1(rimuru):
         sprint("OH!")
         sprint("Hmmmmmmmm")
         sprint("I can see. I CAN SEE!")
-        sprint("*Seems like you did it*")
+        sprint("~Seems like you did it~")
         sprint("Yes thank you!")
 
     def Please():
-        sprint("*Please!?*")
+        sprint("~Please!?~")
         ActionMenu(["*Fine", '*No'],
                     [['yes', 'fine'], ['no', 'nah']],
                     [MeetDragon, ContinueConv])
 
     def FriendDragon():
         sprint("Okay... sooo, you want to be friends?")
-        sprint("*HAHAHA, WHAT?! A mere slime wants to be friends with the great Storm Dragon Veldora!?*")
+        sprint("~HAHAHA, WHAT?! A mere slime wants to be friends with the great Storm Dragon Veldora!?~")
         sprint("Wellll... If you don't want to, that's fine too.")
-        sprint("*WHAAAAAAT, Who said we could not!*")
+        sprint("~WHAAAAAAT, Who said we could not!~")
         sprint("I guess I won't have a reason to come back here again, huh.")
-        sprint("*Wait. I guess it can't be helped. I'll become your friend!.*")
+        sprint("~Wait. I guess it can't be helped. I'll become your friend!.~")
         sprint("Great. Now I guess I should help you with this seal eh?")
 
         ActionMenu(['*Help with seal', '*Leave'], 
@@ -291,23 +291,23 @@ def Chapter1(rimuru):
         ssprint("[Great Sage]?")
         ssprint("<<Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks.>>")
         ssprint("<<Note, possible solution may be...")
-        sprint("*Hey don't just only talk to your own skill.*")
+        sprint("~Hey don't just only talk to your own skill.~")
         sprint("Jealous?")
         sprint("It might be possible if we both analyze [Infinity Prison] inside and out")
-        sprint("*My skills were sealed away as well, I can't use analyze.*")
+        sprint("~My skills were sealed away as well, I can't use analyze.~")
         sprint("If you give me the information [Great Sage] can analyze your side as well")
-        sprint("*Won't that take a long time, didn't you want to go find other reincarnates from your world*")
+        sprint("~Won't that take a long time, didn't you want to go find other reincarnates from your world~")
         sprint("I have a suggestion. How would you like to")
         sprint("get in my stomach.")
-        sprint("*hahaha*")
-        sprint("*ku hahaha*")
-        sprint("*HAHAHAHAHAHAHA*")
+        sprint("~hahaha~")
+        sprint("~ku hahaha~")
+        sprint("~HAHAHAHAHAHAHA~")
         ssprint("Ummmm, did he just use the 3 stage laugh...?")
-        sprint("*My life is in your hands.*")
+        sprint("~My life is in your hands.~")
         sprint("Wow how trusting of you.")
-        sprint("*Well... The alternative is to stay in this cave for the rest of my time.*")
+        sprint("~Well... The alternative is to stay in this cave for the rest of my time.~")
         sprint("I'll use predator to swallow you now.")
-        sprint("*Before that, let me give you a name. You think of a name for both of us.*")
+        sprint("~Before that, let me give you a name. You think of a name for both of us.~")
         sprint("Like a last name? hmmmmm...")
 
         veldoraLName = str(input("\nLast Name > "))
@@ -316,10 +316,10 @@ def Chapter1(rimuru):
         print()
 
         sprint(f"Hmmmmmm... How about {characters.veldora.familyName}")
-        sprint("*What a good name!*")
+        sprint("~What a good name!~")
         sprint("He actually likes it?")
-        sprint(f"*From now on I'll be Veldora {characters.veldora.familyName}*")
-        sprint("*And as for you...*")
+        sprint(f"*From now on I'll be Veldora {characters.veldora.familyName}~")
+        sprint("~And as for you...~")
 
         rimuruName = str(input("\nName > "))
         rimuru.name = rimuruName
@@ -327,7 +327,7 @@ def Chapter1(rimuru):
         sprint(f"*How about {rimuru.name} {rimuru.familyName}")
 
         sprint("Alright, get out of there as quick as you can!")
-        sprint("*Leave it to me. Until we meet again*")
+        sprint("~Leave it to me. Until we meet again~")
         ssprint("<<Use Unique skill [Predator]?>>")
 
         ActionMenu(['*Activate Predator', 'Puyo'],
@@ -345,13 +345,12 @@ def Chapter1(rimuru):
                         [StartAnalysis, NoAnalysis, EatGrass, Puyo])
 
     def PredateVeldora():
-        ssprint("***Rimuru quickly swallows Veldora and his seal with [Predator]***")
-        ssprint("***The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal***")
+        ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~")
         rimuru.AddInventory(characters.veldora)
 
     def LeaveSeal():
-        sprint("*Hey, you're really going to leave your new friend in here? :'(*")
-        sprint("*Please... Comeback, I'm sorry if I scared you! Please! I've been here all alone for over 300 years!*")
+        sprint("~Hey, you're really going to leave your new friend in here? :'(~")
+        sprint("~Please... Comeback, I'm sorry if I scared you! Please! I've been here all alone for over 300 years!~")
         ActionMenu(['*Help friend', '*Leave friend'],
                     [['help friend'], ['leave friend']],
                     [HelpSeal, LeaveCave])

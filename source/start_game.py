@@ -130,8 +130,8 @@ def ShowHelp():
         exit  -- Exit game
 
     Game Dialogue:
-        *Message*       -- Telepathy
-        ***Message***   -- Story progression
+        ~Message~       -- Telepathy
+        *Message*       -- Story progression
         <Message>       -- Acquired item, etc
         <<Message>>     -- Great Sage (Raphael, Ciel)
         <<<Message>>>   -- Voice of the World

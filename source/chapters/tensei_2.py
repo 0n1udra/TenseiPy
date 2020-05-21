@@ -10,7 +10,7 @@ def Chapter2(rimuru):
 
 
         sprint("Now with magic perception I can finally find my way out of this cave")
-        sprint("***But before finding the exit, some small monsters started taking a interest in the little slime***")
+        sprint("*But before finding the exit, some small monsters started taking a interest in the little slime*")
 
 
 
