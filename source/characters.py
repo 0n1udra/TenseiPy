@@ -108,14 +108,18 @@ Name: {self.name} {self.familyName}
             if iType:
                 print(f'{iType}:')
                 for iName, iObj in item.items():
-                    print(f'\t{iName}')
+                    print(f'\t{self.inventory[iType][iName].amount}x {iName}')
         print(f'\nCapacity: {self.inventoryCapacity}%\n')
 
-    def AddInventory(self, item, amount=0, capacity=0):
-        self.inventory[item.itemType][item.name] = item
-        self.inventoryCapacity += capacity
-        ssprint(item.AcquiredMsg())
-        ssprint(f'<Inventory Capacity:, {self.inventoryCapacity:.2f}%>')
+    def AddInventory(self, item):
+        try:
+            self.inventory[item.itemType][item.name].amount += item.addAmount
+        except:
+            self.inventory[item.itemType][item.name] = item
+            self.inventory[item.itemType][item.name].amount += item.addAmount
+        self.inventoryCapacity += item.capacity
+        ssprint(item.AcquiredMsg() + f' | Total: {self.inventory[item.itemType][item.name].amount}>')
+        ssprint(f'<Inventory Capacity: {self.inventoryCapacity:.2f}%>')
 
     def RemoveInventory(self, item):
         for iName, item in self.inventory.items():
@@ -144,6 +148,7 @@ class Veldora_Tempest():
         self.name = "Veldora"
         self.itemType = 'Misc'
         self.familyName = ''
+        self.capacity = 10
 
 
     def AcquiredMsg(self):
