@@ -9,12 +9,15 @@ class Character:
         self.familyName = ''
         self.species = ''
         self.info = ''
+        self.level = ''
 
         self.inventoryCapacity = 0
 
         self.storyProgress = [None]
         self.savePath = ''
         self.textDelay = True
+
+        self.lastCommand = ''
 
         self.attributes = {
             'Ultimate Skill' : {},
@@ -37,6 +40,28 @@ class Character:
             'Potions' : {},
             'Misc' : {},
         }
+
+
+
+    # Predator Ability
+    def AddMimicry(self, character):
+        self.attributes['Unique Skill']['Mimic'].mimics[character.level].append(character)
+        print(f'New mimicry available: {character.name}')
+
+    def CanMimic(self, character):
+        if character == 'reset':
+            self.mimic = 'Slime'
+            self.attributes['Unique Skill']['Mimic'].active = False
+            print("<Mimicry Reset>")
+        else:
+            for lvl, lvlList in self.attributes['Unique Skill']['Mimic'].mimics.items():
+                for name in lvlList:
+                    if character == name.name.lower():
+                        self.mimic = name.name
+                        print(f'<Now Mimicking: {name.name}>')
+                        self.attributes['Unique Skill']['Mimic'].active = True
+                        break
+
 
     def SetName(self, inpName, character):
         character.name = inpName
@@ -68,13 +93,19 @@ class Character:
         print(f"""
 -----Attributes/Skills-----
 Name: {self.name} {self.familyName}
+Mimic: {self.mimic}
 """)
         # Prints players current skills, will not print out every type of skill unless player has said skills
         for sLvl, skills in self.attributes.items():
             if skills: # Checks if player has this type of skill
                 print(f'{sLvl}:')
-                for sName, sOb in skills.items():
-                    print(f'\t{sName}')
+                for sName, sObj in skills.items():
+                    if sObj.active:
+                        print(f'\t{sName} (Active)')
+                    elif sObj.passive:
+                        print(f'\t{sName} (Passive)')
+                    else:
+                        print(f'\t{sName}')
         print()
 
     def AddAttribute(self, item):
@@ -133,12 +164,13 @@ class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Slime'
+        self.mimic = 'Slime'
         self.info = """
     Species: Slime
 
     """
     def StartState(self):
-        self.startState = [skills.Self_Regeneration_Skill(), skills.Absorb_Dissolve_Skill(), 
+        self.startState = [skills.Predator_Mimicry_Skill(), skills.Self_Regeneration(), skills.Absorb_Dissolve(), 
                 skills.Resist_Pain(), skills.Resist_Melee(), skills.Resist_Electricity(), skills.Resist_Temperature()]
         for i in self.startState:
             self.AddAttribute(i)
@@ -171,4 +203,17 @@ def UpdateCharacter(character):
 
 
 veldora = Veldora_Tempest()
+
+
+class Tempest_Serpent(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = 'Tempest Serpent'
+        self.level = 'A-'
+        self.info = ''
+        self.attributes = {
+                'Intrinsic Skill': [skills.Sense_Heat_Source(), skills.Poisonous_Breath()],
+                }
+
+
 
