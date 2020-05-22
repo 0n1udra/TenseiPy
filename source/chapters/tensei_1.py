@@ -6,9 +6,7 @@ def Chapter1(rimuru):
 
     def StartChapter1():
         sprint(".....")
-        sleep(1)
-        print(slime_art.great_sage)
-        sleep(2)
+        sprint(slime_art.great_sage)
 
         ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
         rimuru.StartState()
@@ -21,7 +19,6 @@ def Chapter1(rimuru):
         ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
         sprint('.....')
         rimuru.SkillUpgrade(skills.Sage_Skill(), skills.Great_Sage_Skill())
-        sleep(3)
 
         print(rimuru.ShowAttributes())
 
@@ -53,8 +50,7 @@ def Chapter1(rimuru):
         ssprint("~Although Minami Satoru didn't want to admins it.~")
         ssprint("~He has reincarnated into a slime!~")
 
-        print(slime_art.slime)
-        sleep(2)
+        sprint(slime_art.slime)
 
         ssprint("Puyo, Puyoyoyo.... stretch....bounce")
         ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
@@ -152,7 +148,6 @@ def Chapter1(rimuru):
 
     def PredateWater():
             rimuru.AddAttribute(skills.Hydraulic_Propulsion())
-            sleep(2)
             ssprint("Finally, I'm back on land")
 
 
@@ -248,8 +243,7 @@ def Chapter1(rimuru):
 
     def MeetDragon():
         sprint("My name is Storm Dragon Veldora!~")
-        print(slime_art.cave_veldora)
-        sleep(2)
+        sprint(slime_art.cave_veldora)
 
         sprint("~I am one of the four True Dragons of this world.~")
         sprint("HOLY SHIT, you're a real dragon!")
@@ -259,9 +253,8 @@ def Chapter1(rimuru):
 
     def ActivateMagicPerception():
         sprint('...')
-        print(slime_art.magic_perception)
-        sleep(2)
-        rimuru.AddAttribute(skills.Magic_Perception_Skill())
+        sprint(slime_art.magic_perception)
+        rimuru.AddAttribute(skills.Magic_Perception())
         sprint("OH!")
         sprint("Hmmmmmmmm")
         sprint("I can see. I CAN SEE!")
@@ -318,13 +311,13 @@ def Chapter1(rimuru):
         sprint(f"Hmmmmmm... How about {characters.veldora.familyName}")
         sprint("~What a good name!~")
         sprint("He actually likes it?")
-        sprint(f"*From now on I'll be Veldora {characters.veldora.familyName}~")
+        sprint(f"~From now on I'll be Veldora {characters.veldora.familyName}~")
         sprint("~And as for you...~")
 
         rimuruName = str(input("\nName > "))
         rimuru.name = rimuruName
 
-        sprint(f"*How about {rimuru.name} {rimuru.familyName}")
+        sprint(f"~How about {rimuru.name} {rimuru.familyName}")
 
         sprint("Alright, get out of there as quick as you can!")
         sprint("~Leave it to me. Until we meet again~")
