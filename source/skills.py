@@ -10,7 +10,8 @@ class Skill:
         self.skillPower = 0
         self.energy = 0
 
-        self.active = True
+        self.active = False
+        self.passive = False
         # Able to predate
         self.predate = True
 
@@ -29,7 +30,8 @@ class Resistance(Skill):
         self.skillLevel = 'Resistance'
 
 
-# ===== Manas =====
+
+#                    ========== Manas ==========
 class Ciel_Skill(Skill):
     def __init__(self):
         Skill__init__(self)
@@ -57,8 +59,8 @@ class Raphael_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
 
-        self.name = 'Great Sage'
-        self.skillLevel = 'Unique Skill'
+        self.name = 'Wisdom King Raphael'
+        self.skillLevel = 'Ultimate Skill'
         self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
         self.info = """
     Name: [Wisdom King Raphael]
@@ -72,11 +74,39 @@ class Raphael_Skill(Skill):
             - Great sage can battle on behalf of user of permission granted
 
     Evolution:
-        Sage > Great Sage > Raphael > Ciel
+        Sage > Great Sage > Wisdom King Raphael > Ciel
         """
 
 
-# ===== Unique Skills =====
+
+#                    ========== Unique Skills ==========
+class Predator_Mimicry_Skill(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Mimic'
+        self.type = 'Passive'
+        self.active = False
+        self.skillLevel = 'Unique Skill'
+        self.mimics = {
+                'A+': [],
+                'A': [],
+                'A-': [],
+                'B+': [],
+                'Special': [],
+                }
+
+    def AddMimicy(self, character):
+        self.mimics.append(character)
+
+    @property
+    def info(self):
+        for lvl, lvlList in self.mimics.items():
+            print(f'{lvl} :')
+            for name in lvlList:
+                print(f'\t{name.name}')
+        print("\n'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
+                
+    
 class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -162,7 +192,9 @@ class Great_Sage_Skill(Skill):
         Sage > Great Sage > Raphael > Ciel
         """
 
-# ===== Extra Skills =====
+
+
+#                    ========== Extra Skills ==========
 class Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -171,7 +203,7 @@ class Sage_Skill(Skill):
         self.skillLevel = 'Extra Skill'
         self.acquiredMsg = "<<Extra Skill: [Sage] has been successfully Acquired.>>"
 
-class Magic_Perception_Skill(Skill):
+class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
 
@@ -192,7 +224,7 @@ class Magic_Perception_Skill(Skill):
             Ambushes become nearly impossible. It's an indispensable skill.
         """
 
-class Water_Manipulation_Skill(Skill):
+class Water_Manipulation(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = "Water Manipulation"
@@ -207,7 +239,8 @@ class Water_Manipulation_Skill(Skill):
         """
 
 
-# ===== Common Skills =====
+
+#                    ========== Common Skills ==========
 class Hydraulic_Propulsion(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -226,8 +259,34 @@ class Hydraulic_Propulsion(Skill):
         > Law Manipulation
         """
 
-# ===== Intrinsic Skills =====
-class Absorb_Dissolve_Skill(Skill):
+
+class Water_Blade(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Water Blade'
+        self.skillLevel = 'Common Skill'
+        self.acquiredMsg = "<<Skill [Water Blade] acquired.>>"
+        self.info = """
+    Description:
+        Shoot out a small water bullet.
+    """
+
+
+class Water_Bullet(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Water Bullet'
+        self.skillLevel = 'Common Skill'
+        self.acquiredMsg = "<<Skill [Water Bullet] acquired.>>"
+        self.info = """
+    Description:
+        Shoot out a thin water blade with tremendous cutting power.
+        """
+
+
+
+#                    ========== Intrinsic Skills ==========
+class Absorb_Dissolve(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Absorb/Dissolve'
@@ -240,7 +299,7 @@ class Absorb_Dissolve_Skill(Skill):
         Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.
         """
 
-class Self_Regeneration_Skill(Skill):
+class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
@@ -256,11 +315,39 @@ class Self_Regeneration_Skill(Skill):
         """
 
 
-# ========== Resistances ==========
+# ========== Tempest Serpent
+class Sense_Heat_Source(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Sense Heat Source'
+        self.skillLevel = 'Intrinsic Skill'
+        self.info = """
+    Name: Sense Heat Source
+    Type: Intrinsic Skill
+
+    Description:
+        """
+
+class Poisonous_Breath(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Poisonous Breath'
+        self.skillLevel = 'Intrinsic Skill'
+        self.info = """
+    Name: Self-Regeneration
+    Type: Intrinsic Skill
+
+    Description:
+        """
+
+
+
+#                    ========== Resistances ==========
 class Resist_Pain(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Pain Resist'
+        self.passive = True
         self.acquiredMsg = "<<[Pain Resist] acquired.>>"
         self.info = """
     Name: Pain Resist
@@ -274,6 +361,7 @@ class Resist_Melee(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Melee Resist'
+        self.passive = True
         self.acquiredMsg = "<<[Melee Resist] acquired.>>"
         self.info = """
     Name: Pain Resist
@@ -287,6 +375,7 @@ class Resist_Electricity(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Electricity Resist'
+        self.passive = True
         self.acquiredMsg = "<<[Electricity Resist] acquired.>>"
         self.info = """
     Name: Electricity Resist
@@ -300,6 +389,7 @@ class Resist_Temperature(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Temperature Resist'
+        self.passive = True
         self.acquiredMsg = "<<[Temperature Resist] acquired.>>"
         self.info = """
     Name: Temperature Resist

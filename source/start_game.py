@@ -4,7 +4,7 @@ import pickle, sys, os
 from time import sleep
 
 usrInpDebug = False
-debug = False
+
 
 #                    ========== Game Saves ==========
 def LoadGame(path):
@@ -20,6 +20,11 @@ def SaveGame(rimuru):
     pickle.dump(rimuru, open(characters.rimuru.savePath, 'wb'))
     print("Game Saved To: player_save.p")
 
+def DeleteGame(rimuru):
+    try:
+        os.remove(rimuru.savePath)
+        print("Resetting Game. Deleted player_save.p")
+    except: pass
 
 def ContinueStory(rimuru, nextChapter):
     print("Continue to next chapter?")
@@ -52,9 +57,9 @@ def StartBanner():
 def sprint(Msg):
     msgLen = len(str(Msg))
     if not characters.rimuru.textDelay:
-        if msgLen > 70:
-            sTime = 4
-        elif msgLen > 60 and msgLen > 70:
+        if msgLen > 100:
+            sTime = 1
+        elif msgLen > 70 and msgLen > 80:
             sTime = 4
         elif msgLen > 50 and msgLen > 40:
             sTime = 3
@@ -64,6 +69,7 @@ def sprint(Msg):
             sTime = 2
         elif msgLen < 5:
             sTime = 1
+        else: sTime = 1
     else:
         sTime = 0
 
@@ -81,7 +87,7 @@ def RunFuncs(msg, actions, funcs):
     else:
         # Adds () around actions, (*action)
         options = ', '.join('(' + i + ')' for i in msg)
-        print("\nAvailable Actions:", options, '| inv, stats, help')
+        print("\nActions:", options, f'| {characters.rimuru.mimic}, inv/stats, help')
         usrInp = input("\n> ").lower()
         print()
 
@@ -94,6 +100,10 @@ def RunFuncs(msg, actions, funcs):
             print("NOTE: info Usage example: info great sage")
         characters.rimuru.ShowInfo(inputSkill)
 
+    elif 'mimic' in usrInp:
+        usrMimic = ' '.join(usrInp.split()[1:])
+        characters.rimuru.CanMimic(usrMimic)
+
     # If action has *, continues story
     contGame = False
     for i in range(len(funcs)):
@@ -102,13 +112,17 @@ def RunFuncs(msg, actions, funcs):
            try:
                contAction = msg[i][0]
            except: pass
+           # Checks if valid command
            if usrInp == j.lower():
+               # Checks if command continues story
                if contAction == '*':
                    funcs[i]()
                    contGame = True
+                   characters.rimuru.lastCommand = usrInp
                    break
                else:
                    funcs[i]()
+                   characters.rimuru.lastCommand = usrInp
                    contGame = False
         if contGame: break
     if contGame: return
@@ -123,12 +137,16 @@ def ActionMenu(msg, actions, funcs):
 def ShowHelp():
     print("""
     Commands:
-        inv   -- Show inventory
-        stats -- Show skills and resistances
-        info  -- Show info on skill, item or character. ex. info great sage, info hipokte grass, info veldora
-        help  -- Show this help page
-        exit  -- Exit game
+        inv             -- Show inventory
+        stats           -- Show skills and resistances
+        info            -- Show info on skill, item or character. Ex. info great sage, info hipokte grass, info veldora
+        help            -- Show this help page
+        exit            -- Exit game
 
+    Abilities:
+        mimic <___>     -- Mimics appearance of already predated being. Ex. mimic tempest serpent
+          - info mimic  -- Shows available mimicries
+        
     Game Dialogue:
         ~Message~       -- Telepathy
         *Message*       -- Story progression

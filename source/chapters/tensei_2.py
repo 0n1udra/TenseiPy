@@ -13,13 +13,40 @@ def Chapter2(rimuru):
         sprint("*But before finding the exit, some small monsters started taking a interest in the little slime*")
 
 
+        sprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
+        sprint("I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder")
+
+        ssprint("<Choose ability to learn and use on serpent>")
+        ActionMenu(["*Water Blade Serpent", "*Water Bullet Serpent"],
+                    [["water blade serpent"], ['water bullet serpent']],
+                    [LearnWaterBlade, LearnWaterBullet])
+        
+
+        sprint("Wow, what a powerful attack. I probably shouldn't use that so openly")
+
+        ActionMenu(['*Predate Serpent', '*Move on'],
+                    [['predate serpent'], ['move on']],
+                    [PredateSerpent, MoveOn])
+
+        
 
 
 
+        #DeleteGame(rimuru)
 
 
 
+    def MoveOn():
+        sprint("I'll just leave it I guess, and continue finding my way out")
 
+
+    def LearnWaterBlade():
+        rimuru.AddAttribute(skills.Water_Blade())
+        sprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use high pressure water as an attack also")
+
+    def LearnWaterBullet():
+        rimuru.AddAttribute(skills.Water_Bullet())
+        sprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack also")
 
 
     def EatOre():
