@@ -4,7 +4,7 @@ class Item:
         self.itemType = ''
         self.amount = 0
         self.addAmount = 1 # Amount to add when calling AddInventory()
-        self.capacity = 0
+        self.capacityUse = 0
         self.description = ''
 
     def ItemDescription(self):
@@ -26,16 +26,14 @@ class Hipokte_Grass(Item):
         self.itemType = 'Material'
         self.addAmount = 5
         self.amount = 0
-        self.capacity = 0.01
+        self.capacityUse = 0.01
         self.info = """
     Description:
         Magicule infused grass, found in locations with high Magicule concentration.
 
     Usage:
         Mainly used for making healing potions.
-
 """
-
 
 
 class Magic_Ore(Item):
@@ -45,7 +43,7 @@ class Magic_Ore(Item):
         self.itemType = 'Material'
         self.addAmount = 5
         self.amount = 0
-        self.capacity = 0.1
+        self.capacityUse = 0.1
         self.info = """
     Description:
         Magic ores form around high concentration of magic essence.
