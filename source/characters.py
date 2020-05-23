@@ -48,12 +48,25 @@ class Character:
         character.name = inpName
 
     def ShowInfo(self, usrInp, character=None):
-        for i in (*self.AttributesGenerator(), *self.InventoryGenerator()):
-            if i.name.lower() == usrInp:
-                print(i.info)
+        if rimuru.mimicObj == None:
+            generators = (*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator())
+        else:
+            generators = (*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator(), *self.AttributesGenerator(False, rimuru.mimicObj))
+
+        try:
+            for i in generators:
+                if i.name.lower() == usrInp:
+                    print(i.info)
+        except: pass
 
 
     # ========== Predator Functions
+    def MimicGenerator(self):
+        for lvl, lvlList in self.attributes['Unique Skill']['Mimic'].mimics.items():
+            for name in lvlList:
+                yield name
+
+
     def AddMimicry(self, character):
         self.attributes['Unique Skill']['Mimic'].mimics[character.level].append(character)
         print(f'New mimicry available: {character.name}')
@@ -61,32 +74,39 @@ class Character:
     def CanMimic(self, character):
         if character == 'reset':
             self.mimic = 'Slime'
+            self.mimicObj = None
             self.attributes['Unique Skill']['Mimic'].active = False
             print("<Mimicry Reset>")
         else:
-            for lvl, lvlList in self.attributes['Unique Skill']['Mimic'].mimics.items():
-                for name in lvlList:
-                    if character == name.name.lower():
-                        self.mimic = name.name
-                        print(f'<Now Mimicking: {name.name}>')
-                        self.attributes['Unique Skill']['Mimic'].active = True
-                        break
+            for i in self.MimicGenerator():
+                if character == i.name.lower():
+                    self.mimic = i.name
+                    self.mimicObj = i
+                    self.attributes['Unique Skill']['Mimic'].active = True
+                    print(f'<Now Mimicking: {i.name}>')
+                    break
 
 
     # ========== Attribute Functions
-    def AttributesGenerator(self, output=False):
-        for skillType, skills in self.attributes.items():
+    def AttributesGenerator(self, output=False, character=None):
+        if not character:
+            character = self.attributes
+        else:
+            character = character.attributes
+
+        for skillType, skills in character.items():
             # Only shows yields skill type if skill list is not empty
             if output and skills:
                 yield(f'{skillType}:')
+
             for skillName, skillObject in skills.items():
                 if output: 
                     if skillObject.active:
-                        yield(f'\t{skillObject.name} (Active)')
+                        yield(f'\t{skillName} (Active)')
                     elif skillObject.passive:
-                        yield(f'\t{skillObject.name} (Passive)')
+                        yield(f'\t{skillName} (Passive)')
                     else:
-                        yield(f'\t{skillObject.name}')
+                        yield(f'\t{skillName}')
                 else: 
                     yield(skillObject)
 
@@ -94,15 +114,23 @@ class Character:
         print(f"""
 -----Attributes/Skills-----
 Name: {self.name} {self.familyName}
-Mimic: {self.mimic}\n
 """)
         for i in self.AttributesGenerator(True):
             print(i)
 
+        if self.mimic != 'Slime':
+            for i in self.MimicGenerator():
+                print("\n-----Mimicry-----\n", end='')
+                print(f"Mimicking: {self.mimic}\n")
+                for j in self.AttributesGenerator(True, Tempest_Serpent()):
+                    print(j)
+
+
     def AddAttribute(self, item):
         self.attributes[item.level][item.name] = item
         # Tries to print skill acquisition message
-        try: ssprint(item.acquiredMsg)
+        try: 
+            ssprint(item.acquiredMsg)
         except: pass
 
     def RemoveAttribute(self, skill):
@@ -121,7 +149,7 @@ Mimic: {self.mimic}\n
                 yield(f'{itemType}:')
             for itemName, itemObject in items.items():
                 if output:
-                    yield(f'\t{self.inventory[itemType][itemName].amount}x {itemName}')
+                    yield(f'\t{self.inventory[itemType][itemName].amount}x {itemObject.name}')
                 else: 
                     yield(itemObject)
 
@@ -143,7 +171,7 @@ Mimic: {self.mimic}\n
 
     def RemoveInventory(self, item):
         try:
-            self.inventory[item.itemType].remove(item.name)
+            self.inventory[item.itemType].remove(item)
         except:
             print(f'<Error deleting {item.name} from inventory>')
 
@@ -155,6 +183,7 @@ class Rimuru_Tempest(Character):
         Character.__init__(self)
         self.name = 'Slime'
         self.mimic = 'Slime'
+        self.mimicObj = None
         self.info = """
     Species: Slime
 
@@ -173,8 +202,7 @@ class Veldora_Tempest(Character):
         self.familyName = ''
         self.capacityUse = 10
 
-    @property
-    def acquiredMsg(self):
+    def AcquiredMsg(self):
         self.info = f"""
     Name: Veldora {self.familyName}
     Species: True Dragon
@@ -189,10 +217,15 @@ class Tempest_Serpent(Character):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
         self.level = 'A-'
-        self.info = ''
-        self.attributes = {
-                'Intrinsic Skill': [skills.Sense_Heat_Source(), skills.Poisonous_Breath()],
-                }
+        self.info = """
+Species: Tempest Serpent
+Rank: A-
+"""
+        
+        self.startState = [skills.Sense_Heat_Source(), skills.Poisonous_Breath()]
+        for i in self.startState:
+            self.AddAttribute(i)
+
 
 # ========== Rimuru
 rimuru = None
