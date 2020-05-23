@@ -34,6 +34,9 @@ def Chapter2(rimuru):
 
         #DeleteGame(rimuru)
 
+    def PredateSerpent():
+        sprint("Eww. I might as well predate it, see if I get anything out of it")
+        rimuru.AddMimicry(characters.Tempest_Serpent())
 
 
     def MoveOn():

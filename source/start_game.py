@@ -145,7 +145,7 @@ def ShowHelp():
 
     Abilities:
         mimic <___>     -- Mimics appearance of already predated being. Ex. mimic tempest serpent
-          - info mimic  -- Shows available mimicries
+          - info mimic  -- Shows available mimicries. Use info to get monster abilities, Ex. info Tempest Serpent
         
     Game Dialogue:
         ~Message~       -- Telepathy

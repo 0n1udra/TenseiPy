@@ -15,7 +15,6 @@ class Skill:
         # Able to predate
         self.predate = True
 
-
         self.subSkills = {}
 
     def AcquiredMsg(self):

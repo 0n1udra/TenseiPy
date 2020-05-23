@@ -27,6 +27,7 @@ def Chapter1(rimuru):
         ssprint("I remembered that I got stabbed while protecting Tamura. Was I... saved?")
         ssprint("That said is this the hospital bed? I can't see anything, I can't hear anything.")
 
+        rimuru.AddMimicry(characters.Tempest_Serpent())
         ActionMenu(["*Move arms", "*Twitch legs"],
                     [['move arms', 'move'], ['twitch legs']],
                     [MoveArms, MoveLegs])
