@@ -1,7 +1,7 @@
 class Skill:
     def __init__(self):
         self.name = ''
-        self.skillLevel = ''
+        self.level = ''
 
         self.description = ''
         self.abilities = ''
@@ -27,7 +27,7 @@ class Skill:
 class Resistance(Skill):
     def __init__(self):
         Skill.__init__(self)
-        self.skillLevel = 'Resistance'
+        self.level = 'Resistance'
 
 
 
@@ -36,7 +36,7 @@ class Ciel_Skill(Skill):
     def __init__(self):
         Skill__init__(self)
         self.name = 'Ciel'
-        self.skillLevel = 'Manas'
+        self.level = 'Manas'
         self.acquiredMsg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
         self.info = """
     Name: [Ciel]
@@ -60,7 +60,7 @@ class Raphael_Skill(Skill):
         Skill.__init__(self)
 
         self.name = 'Wisdom King Raphael'
-        self.skillLevel = 'Ultimate Skill'
+        self.level = 'Ultimate Skill'
         self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
         self.info = """
     Name: [Wisdom King Raphael]
@@ -86,7 +86,7 @@ class Predator_Mimicry_Skill(Skill):
         self.name = 'Mimic'
         self.type = 'Passive'
         self.active = False
-        self.skillLevel = 'Unique Skill'
+        self.level = 'Unique Skill'
         self.mimics = {
                 'A+': [],
                 'A': [],
@@ -111,7 +111,7 @@ class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Predator'
-        self.skillLevel = 'Unique Skill'
+        self.level = 'Unique Skill'
         self.acquiredMsg = "<<Unique Skill [Predator] successfully Acquired.>>"
         self.info = """
     Name: [Predator]
@@ -148,7 +148,7 @@ class Great_Sage_Skill(Skill):
         Skill.__init__(self)
 
         self.name = 'Great Sage'
-        self.skillLevel = 'Unique Skill'
+        self.level = 'Unique Skill'
         self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
         self.info = """
     Name: [Great Sage]
@@ -200,7 +200,7 @@ class Sage_Skill(Skill):
         Skill.__init__(self)
 
         self.name = 'Sage'
-        self.skillLevel = 'Extra Skill'
+        self.level = 'Extra Skill'
         self.acquiredMsg = "<<Extra Skill: [Sage] has been successfully Acquired.>>"
 
 class Magic_Perception(Skill):
@@ -208,7 +208,7 @@ class Magic_Perception(Skill):
         Skill.__init__(self)
 
         self.name = 'Magic Perception'
-        self.skillLevel = 'Extra Skill'
+        self.level = 'Extra Skill'
         self.acquiredMsg = "<<Extra Skill: [Magic Perception] Acquired.>>"
 
         self = """
@@ -228,7 +228,7 @@ class Water_Manipulation(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = "Water Manipulation"
-        self.skillLevel = 'Extra Skill'
+        self.level = 'Extra Skill'
         self.acauiredMsg = '<<Extra Skill [Water Manipulation] acquired.>>'
         self.info = """
         Name: Water Manipulation
@@ -245,7 +245,7 @@ class Hydraulic_Propulsion(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Hydraulic Propulsion'
-        self.skillLevel = 'Common Skill'
+        self.level = 'Common Skill'
         self.acquiredMsg = '<<Common Skill [Hydraulic Propulsion] Acquired.>>'  
         self.info = """
     Name: [Hydraulic Propulsion]
@@ -264,7 +264,7 @@ class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Blade'
-        self.skillLevel = 'Common Skill'
+        self.level = 'Common Skill'
         self.acquiredMsg = "<<Skill [Water Blade] acquired.>>"
         self.info = """
     Description:
@@ -276,7 +276,7 @@ class Water_Bullet(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Bullet'
-        self.skillLevel = 'Common Skill'
+        self.level = 'Common Skill'
         self.acquiredMsg = "<<Skill [Water Bullet] acquired.>>"
         self.info = """
     Description:
@@ -290,7 +290,7 @@ class Absorb_Dissolve(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Absorb/Dissolve'
-        self.skillLevel = 'Intrinsic Skill'
+        self.level = 'Intrinsic Skill'
         self.info = """
     Name: Absorb and Dissolve
     Type: Intrinsic Skill
@@ -303,7 +303,7 @@ class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
-        self.skillLevel = 'Intrinsic Skill'
+        self.level = 'Intrinsic Skill'
         self.info = """
     Name: Self-Regeneration
     Type: Intrinsic Skill
@@ -320,7 +320,7 @@ class Sense_Heat_Source(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Sense Heat Source'
-        self.skillLevel = 'Intrinsic Skill'
+        self.level = 'Intrinsic Skill'
         self.info = """
     Name: Sense Heat Source
     Type: Intrinsic Skill
@@ -332,7 +332,7 @@ class Poisonous_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Poisonous Breath'
-        self.skillLevel = 'Intrinsic Skill'
+        self.level = 'Intrinsic Skill'
         self.info = """
     Name: Self-Regeneration
     Type: Intrinsic Skill
