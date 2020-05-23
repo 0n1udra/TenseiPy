@@ -10,14 +10,17 @@ class Character:
         self.species = ''
         self.info = ''
         self.level = ''
-
         self.inventoryCapacity = 0
 
         self.storyProgress = [None]
         self.savePath = ''
         self.textDelay = True
-
         self.lastCommand = ''
+
+        # For predation
+        self.amount = 0
+        self.addAmount = 1
+        self.capacityUse = 0
 
         self.attributes = {
             'Ultimate Skill' : {},
@@ -25,7 +28,6 @@ class Character:
             'Special Skill' : {},
             'Extra Skill' : {},
             'Intrinsic Skill' : {},
-            'Battle Skill' : {},
             'Common Skill' : {},
             'Daily Skill' : {},
             'Composite Skill' : {},
@@ -42,8 +44,16 @@ class Character:
         }
 
 
+    def SetName(self, inpName, character):
+        character.name = inpName
 
-    # Predator Ability
+    def ShowInfo(self, usrInp, character=None):
+        for i in (*self.AttributesGenerator(), *self.InventoryGenerator()):
+            if i.name.lower() == usrInp:
+                print(i.info)
+
+
+    # ========== Predator Functions
     def AddMimicry(self, character):
         self.attributes['Unique Skill']['Mimic'].mimics[character.level].append(character)
         print(f'New mimicry available: {character.name}')
@@ -63,84 +73,63 @@ class Character:
                         break
 
 
-    def SetName(self, inpName, character):
-        character.name = inpName
+    # ========== Attribute Functions
+    def AttributesGenerator(self, output=False):
+        for skillType, skills in self.attributes.items():
+            # Only shows yields skill type if skill list is not empty
+            if output and skills:
+                yield(f'{skillType}:')
+            for skillName, skillObject in skills.items():
+                if output: 
+                    if skillObject.active:
+                        yield(f'\t{skillObject.name} (Active)')
+                    elif skillObject.passive:
+                        yield(f'\t{skillObject.name} (Passive)')
+                    else:
+                        yield(f'\t{skillObject.name}')
+                else: 
+                    yield(skillObject)
 
-    def ShowInfo(self, usrInp, character=None):
-        try:
-            for sLvl, skills in self.attributes.items():
-                for sName, skill in skills.items():
-                    if usrInp.lower() == sName.lower():
-                        try:
-                            print(self.attributes[sLvl][sName].info)
-                        except:
-                            print("No available description for", sName)
-        except: pass
-
-        try:
-            for iType, items in self.inventory.items():
-                for iName, iObj  in items.items():
-                    if usrInp.lower() == iName.lower():
-                        try:
-                            print(self.inventory[iType][iName].info)
-                        except:
-                            print("No available description for", iName)
-        except: pass
-
-
-    ##### Attributes #####
     def ShowAttributes(self):
         print(f"""
 -----Attributes/Skills-----
 Name: {self.name} {self.familyName}
-Mimic: {self.mimic}
+Mimic: {self.mimic}\n
 """)
-        # Prints players current skills, will not print out every type of skill unless player has said skills
-        for sLvl, skills in self.attributes.items():
-            if skills: # Checks if player has this type of skill
-                print(f'{sLvl}:')
-                for sName, sObj in skills.items():
-                    if sObj.active:
-                        print(f'\t{sName} (Active)')
-                    elif sObj.passive:
-                        print(f'\t{sName} (Passive)')
-                    else:
-                        print(f'\t{sName}')
-        print()
+        for i in self.AttributesGenerator(True):
+            print(i)
 
     def AddAttribute(self, item):
-        self.attributes[item.skillLevel][item.name] = item
-        try:
-            ssprint(item.acquiredMsg)
+        self.attributes[item.level][item.name] = item
+        # Tries to print skill acquisition message
+        try: ssprint(item.acquiredMsg)
         except: pass
 
-    def RemoveAttribute(self, item):
-        for sLvl, skills in self.attributes.items():
-            for sName, skill in skills.items():
-                if item in skill:
-                    # Finds corresponding item, and removes it from inventory
-                    del self.attributes[sLvl][sName]
+    def RemoveAttribute(self, skill):
+        del self.attributes[skill.level][skill.name]
 
     def SkillUpgrade(self, skillFrom, skillTo):
-        for sLvl, skills in self.attributes.items():
-            for sName, skill in skills.items():
-                if sName in skillFrom.name:
-                    # Removes skill from inventory
-                    del self.attributes[sLvl][sName]
-                    break
-        ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] evolving to {skillTo.skillLevel} [{skillTo}]...>>')
+        self.RemoveAttribute(skillFrom)
+        ssprint(f'<<{skillFrom.level} [{skillFrom}] evolving to {skillTo.level} [{skillTo}]...>>')
         self.AddAttribute(skillTo)
 
 
-    ##### Inventory #####
+    # ========== Inventory Functions
+    def InventoryGenerator(self, output=False):
+        for itemType, items in self.inventory.items():
+            if output and items:
+                yield(f'{itemType}:')
+            for itemName, itemObject in items.items():
+                if output:
+                    yield(f'\t{self.inventory[itemType][itemName].amount}x {itemName}')
+                else: 
+                    yield(itemObject)
+
     def ShowInventory(self):
-        print('\n-----Inventory-----\n')
-        for iType, item in self.inventory.items():
-            if iType:
-                print(f'{iType}:')
-                for iName, iObj in item.items():
-                    print(f'\t{self.inventory[iType][iName].amount}x {iName}')
-        print(f'\nCapacity: {self.inventoryCapacity}%\n')
+        print('\n-----Inventory-----')
+        print(f'Capacity: {self.inventoryCapacity}%\n')
+        for i in self.InventoryGenerator(True):
+            print(i)
 
     def AddInventory(self, item):
         try:
@@ -148,18 +137,19 @@ Mimic: {self.mimic}
         except:
             self.inventory[item.itemType][item.name] = item
             self.inventory[item.itemType][item.name].amount += item.addAmount
-        self.inventoryCapacity += item.capacity
+        self.inventoryCapacity += item.capacityUse
         ssprint(item.AcquiredMsg() + f' | Total: {self.inventory[item.itemType][item.name].amount}>')
         ssprint(f'<Inventory Capacity: {self.inventoryCapacity:.2f}%>')
 
     def RemoveInventory(self, item):
-        for iName, item in self.inventory.items():
-            if item:
-                if item in item:
-                    # Finds corresponding item, and removes it from inventory
-                    self.attributes[k].remove(item)
+        try:
+            self.inventory[item.itemType].remove(item.name)
+        except:
+            print(f'<Error deleting {item.name} from inventory>')
 
 
+
+#                    ========== Characters ==========
 class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
@@ -175,17 +165,16 @@ class Rimuru_Tempest(Character):
         for i in self.startState:
             self.AddAttribute(i)
 
-class Veldora_Tempest():
+class Veldora_Tempest(Character):
     def __init__(self):
+        Character.__init__(self)
         self.name = "Veldora"
         self.itemType = 'Misc'
         self.familyName = ''
-        self.capacity = 10
-        self.amount = 0
-        self.addAmount = 1
+        self.capacityUse = 10
 
-
-    def AcquiredMsg(self):
+    @property
+    def acquiredMsg(self):
         self.info = f"""
     Name: Veldora {self.familyName}
     Species: True Dragon
@@ -194,16 +183,6 @@ class Veldora_Tempest():
     Status: Alive
     """
         return(f"<<Acquired Veldora {self.familyName}>>")
-        
-rimuru = None
-def UpdateCharacter(character):
-    global rimuru
-    rimuru = character
-    return rimuru
-
-
-veldora = Veldora_Tempest()
-
 
 class Tempest_Serpent(Character):
     def __init__(self):
@@ -215,5 +194,10 @@ class Tempest_Serpent(Character):
                 'Intrinsic Skill': [skills.Sense_Heat_Source(), skills.Poisonous_Breath()],
                 }
 
-
-
+# ========== Rimuru
+rimuru = None
+def UpdateCharacter(character):
+    global rimuru
+    rimuru = character
+    return rimuru
+veldora = Veldora_Tempest()
