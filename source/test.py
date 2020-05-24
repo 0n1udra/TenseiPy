@@ -1,9 +1,4 @@
-def testy():
-    print("testy")
-
-x = {
-        'dict1':[testy],
-        'dict2':[]
-        }
-
-x['dict1'].index(testy)()
+x = ['hi']
+x2 = ['bye', 'test']
+x += x2
+print(x)

@@ -28,8 +28,6 @@ def Chapter2(rimuru):
                     [['predate serpent'], ['move on']],
                     [PredateSerpent, MoveOn])
 
-        
-
 
 
         #DeleteGame(rimuru)

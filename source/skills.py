@@ -9,6 +9,8 @@ class Skill:
 
         self.skillPower = 0
         self.energy = 0
+        self.damageType = ''
+        self.damageLevel = 1
 
         self.active = False
         self.passive = False
@@ -145,7 +147,6 @@ class Predator_Skill(Skill):
 class Great_Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
-
         self.name = 'Great Sage'
         self.level = 'Unique Skill'
         self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
@@ -197,7 +198,6 @@ class Great_Sage_Skill(Skill):
 class Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
-
         self.name = 'Sage'
         self.level = 'Extra Skill'
         self.acquiredMsg = "<<Extra Skill: [Sage] has been successfully Acquired.>>"
@@ -205,11 +205,9 @@ class Sage_Skill(Skill):
 class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
-
         self.name = 'Magic Perception'
         self.level = 'Extra Skill'
         self.acquiredMsg = "<<Extra Skill: [Magic Perception] Acquired.>>"
-
         self = """
         Name: [Magic Perception], [Magic Sense]
         Type: Extra Skill
@@ -264,6 +262,8 @@ class Water_Blade(Skill):
         Skill.__init__(self)
         self.name = 'Water Blade'
         self.level = 'Common Skill'
+        self.damageType = 'Melee'
+        self.damageLevel = 3
         self.acquiredMsg = "<<Skill [Water Blade] acquired.>>"
         self.info = """
     Description:
@@ -277,6 +277,8 @@ class Water_Bullet(Skill):
         self.name = 'Water Bullet'
         self.level = 'Common Skill'
         self.acquiredMsg = "<<Skill [Water Bullet] acquired.>>"
+        self.damageType = 'Melee'
+        self.damageLevel = 3
         self.info = """
     Description:
         Shoot out a thin water blade with tremendous cutting power.
@@ -332,6 +334,8 @@ class Poisonous_Breath(Skill):
         Skill.__init__(self)
         self.name = 'Poisonous Breath'
         self.level = 'Intrinsic Skill'
+        self.damageType = 'Poison'
+        self.damageLevel = 2
         self.info = """
     Name: Self-Regeneration
     Type: Intrinsic Skill

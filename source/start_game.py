@@ -100,9 +100,14 @@ def RunFuncs(msg, actions, funcs):
             print("NOTE: info Usage example: info great sage")
         characters.rimuru.ShowInfo(inputSkill)
 
+    splitInput = ' '.join(usrInp.split()[1:])
     elif 'mimic' in usrInp:
-        usrMimic = ' '.join(usrInp.split()[1:])
-        characters.rimuru.CanMimic(usrMimic)
+        characters.rimuru.CanMimic(splitInput)
+    elif 'attack with' in usrInp:
+        characters.rimuru.CanAttack(splitInput[1:])
+    elif 'predate' in usrInp:
+        characters.rimuru.CanPredate(splitInput)
+
 
     # If action has *, continues story
     contGame = False
