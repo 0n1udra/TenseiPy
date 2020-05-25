@@ -146,15 +146,23 @@ class Character:
                 else: 
                     yield(skillObject)
 
-    def ShowAttributes(self):
+    def ShowAttributes(self, character=None):
+        if not character:
+            character = rimuru
+        else:
+            # Get stats for other monsters
+            for i in self.MimicGenerator():
+                if i.name.lower() == character.lower():
+                    character = i
         print(f"""
 -----Attributes/Skills-----
-Name: {self.name} {self.familyName}
+Name: {character.name} {character.familyName}
 """)
-        for i in self.AttributesGenerator(output=True):
+        for i in self.AttributesGenerator(character, output=True):
             print(i)
 
-        if self.mimicObject:
+        # Only shows mimicry info when not looking at stats of other monsters or in mimicry
+        if self.mimicObject and not character:
             print("\n-----Mimicry-----\n", end='')
             print(f"Mimicking: {self.mimic}\n")
             for j in self.AttributesGenerator(Tempest_Serpent(), True):
@@ -256,6 +264,9 @@ class Tempest_Serpent(Character):
         self.info = """
 Species: Tempest Serpent
 Rank: A-
+
+Appearance:
+    The snake has a large, jet-black body with thorned scales and tough skin.
 """
         
         self.startState = [skills.Sense_Heat_Source(), skills.Poisonous_Breath()]

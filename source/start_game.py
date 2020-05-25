@@ -3,7 +3,7 @@ import chapters.tensei_1 as tensei1
 import pickle, sys, os
 from time import sleep
 
-usrInpDebug = False
+usrInpDebug = True
 
 #                    ========== Game Saves ==========
 def LoadGame(path):
@@ -98,6 +98,10 @@ def RunFuncs(msg, actions, funcs, target=None):
             characters.rimuru.ShowInfo(splitInput)
         except:
             print("Info usage example: info great sage")
+    elif 'stats' in usrInp:
+        try:
+            characters.rimuru.ShowAttributes(splitInput)
+        except: pass
     elif 'mimic' in usrInp:
         characters.rimuru.CanMimic(splitInput)
     elif 'attack with' in usrInp:
@@ -145,14 +149,16 @@ def ShowHelp():
     print("""
     Commands:
         inv             -- Show inventory
-        stats           -- Show skills and resistances
-        info            -- Show info on skill, item or character. Ex. info great sage, info hipokte grass, info veldora
+        stats           -- Show skills and resistances. 
+          - stats <___> -- Stats for monsters you have predated. E.g. stats tempest serpent
+        info            -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
         help            -- Show this help page
         exit            -- Exit game
 
     Abilities:
-        mimic <___>     -- Mimics appearance of already predated being. Ex. mimic tempest serpent
-          - info mimic  -- Shows available mimicries. Use info to get monster abilities, Ex. info Tempest Serpent
+        mimic <___>     -- Mimics appearance of already predated being. E.g. mimic tempest serpent
+          - info mimic  -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
+          - mimic reset -- Resets mimic (Back to slime)
         
     Game Dialogue:
         ~Message~       -- Telepathy
