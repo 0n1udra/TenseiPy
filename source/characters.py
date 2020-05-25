@@ -44,13 +44,11 @@ class Character:
             'Misc' : {},
         }
 
-
     def SetName(self, inpName, character):
         character.name = inpName
 
     def ShowInfo(self, usrInp, character=None):
         generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
-        
         # Adds mimicked monster abilities 
         if rimuru.mimicObject:
             generators.extend(self.AttributesGenerator(rimuru.mimicObject))
@@ -96,7 +94,6 @@ class Character:
         return attacked, attackSuccess
 
 
-
     # ========== Predator Functions
     def MimicGenerator(self):
         for lvl, lvlList in self.attributes['Unique Skill']['Mimic'].mimics.items():
@@ -125,7 +122,6 @@ class Character:
 
     # ========== Attribute Functions
     def AttributesGenerator(self, target=None, output=False):
-
         character = self.attributes
         if target:
             character = target.attributes
@@ -149,11 +145,14 @@ class Character:
     def ShowAttributes(self, character=None):
         if not character:
             character = rimuru
+            showMimic = True
         else:
+            showMimic = False
             # Get stats for other monsters
             for i in self.MimicGenerator():
                 if i.name.lower() == character.lower():
                     character = i
+
         print(f"""
 -----Attributes/Skills-----
 Name: {character.name} {character.familyName}
@@ -162,10 +161,10 @@ Name: {character.name} {character.familyName}
             print(i)
 
         # Only shows mimicry info when not looking at stats of other monsters or in mimicry
-        if self.mimicObject and not character:
-            print("\n-----Mimicry-----\n", end='')
+        if self.mimicObject and showMimic:
+            print("\n-----Mimicry-----")
             print(f"Mimicking: {self.mimic}\n")
-            for j in self.AttributesGenerator(Tempest_Serpent(), True):
+            for j in self.AttributesGenerator(self.mimicObject, True):
                 print(j)
 
 

@@ -3,7 +3,7 @@ import chapters.tensei_1 as tensei1
 import pickle, sys, os
 from time import sleep
 
-usrInpDebug = True
+usrInpDebug = False
 
 #                    ========== Game Saves ==========
 def LoadGame(path):
@@ -141,8 +141,8 @@ def RunFuncs(msg, actions, funcs, target=None):
         RunFuncs(msg, actions, funcs, target)
 
 def ActionMenu(msg, actions, funcs, target=None):
-    actions.extend([['help'], ['stats'], ['inv', 'stomach'], ['exit']])
-    funcs.extend([ShowHelp, characters.rimuru.ShowAttributes, characters.rimuru.ShowInventory, ExitGame])
+    actions.extend([['help'], ['inv'], ['exit']])
+    funcs.extend([ShowHelp, characters.rimuru.ShowInventory, ExitGame])
     RunFuncs(msg, actions, funcs, target)
 
 def ShowHelp():

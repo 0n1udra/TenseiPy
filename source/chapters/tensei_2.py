@@ -5,6 +5,7 @@ def Chapter2(rimuru):
     serpent = characters.Tempest_Serpent()
 
     def StartChapter2():
+        rimuru.AddMimicry(characters.Tempest_Serpent())
         sprint("Oh, what's this? Looks like some kind of ore.")
         ActionMenu(['*predate ore', '*Move on'], 
                     [['predate ore'], ['move on']],
@@ -27,18 +28,23 @@ def Chapter2(rimuru):
 
         sprint("Alright, lets try out this new skill.")
 
-        attackSuccess = ActionMenu(['*Attack with ___',],
+        ActionMenu(['*Attack with ___',],
                     [['attack with aspoijf'], []],
                     [AttackSerpent, FailedSerpent], serpent)
 
 
 
-
         sprint("I wonder what else is in this cave.")
 
+        ActionMenu(['Wonder',],
+                    [['wonder']],
+                    [Wonder])
 
         #DeleteGame(rimuru)
 
+
+    def Wonder():
+        sprint("Wondering")
 
     def AttackSerpent():
         sprint("Wow, what a powerful attack. I probably shouldn't use that so openly.")
@@ -50,7 +56,7 @@ def Chapter2(rimuru):
         sprint("Uh, How did that not work...")
 
         attackSuccess = ActionMenu(['*Attack with ___'],
-                    [['attack with ;lkjp'], []],
+                    [['attack with'], []],
                     [AttackSerpent, FailedSerpent], serpent)
 
     def PredateSerpent():
