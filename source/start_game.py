@@ -5,7 +5,6 @@ from time import sleep
 
 usrInpDebug = False
 
-
 #                    ========== Game Saves ==========
 def LoadGame(path):
     global rimuru
@@ -81,7 +80,7 @@ def ssprint(Msg):
 
 
 #                    ========== Game Input ==========
-def RunFuncs(msg, actions, funcs):
+def RunFuncs(msg, actions, funcs, target=None):
     if usrInpDebug: 
         usrInp = actions[0][0]
     else:
@@ -91,53 +90,56 @@ def RunFuncs(msg, actions, funcs):
         usrInp = input("\n> ").lower()
         print()
 
-    ### Get info on skills, times, etc
+    contGame = attacked = attackSuccess = False
+    # Get info on skills, times, etc
+    splitInput = ' '.join(usrInp.split()[1:])
     if 'info' in usrInp:
         try:
-            inputSkill = ' '.join(usrInp.lower().split()[1:])
-            # Can only get info if item exist in rimuru characte
+            characters.rimuru.ShowInfo(splitInput)
         except:
-            print("NOTE: info Usage example: info great sage")
-        characters.rimuru.ShowInfo(inputSkill)
-
-    splitInput = ' '.join(usrInp.split()[1:])
+            print("Info usage example: info great sage")
     elif 'mimic' in usrInp:
         characters.rimuru.CanMimic(splitInput)
     elif 'attack with' in usrInp:
-        characters.rimuru.CanAttack(splitInput[1:])
-    elif 'predate' in usrInp:
-        characters.rimuru.CanPredate(splitInput)
-
+        splitInput = ' '.join(usrInp.split()[2:])
+        attacked, attackSuccess = characters.rimuru.CanAttack(splitInput, target)
 
     # If action has *, continues story
-    contGame = False
     for i in range(len(funcs)):
         contAction = ''
         for j in actions[i]:
-           try:
-               contAction = msg[i][0]
-           except: pass
+            try:
+                contAction = msg[i][0]
+            except: pass
            # Checks if valid command
-           if usrInp == j.lower():
+            if usrInp == j.lower():
                # Checks if command continues story
-               if contAction == '*':
-                   funcs[i]()
-                   contGame = True
-                   characters.rimuru.lastCommand = usrInp
-                   break
-               else:
-                   funcs[i]()
-                   characters.rimuru.lastCommand = usrInp
-                   contGame = False
-        if contGame: break
-    if contGame: return
-    else: 
-        RunFuncs(msg, actions, funcs)
+                if contAction == '*':
+                    funcs[i]()
+                    contGame = True
+                    characters.rimuru.lastCommand = usrInp
+                    return attackSuccess
+                    break
+                else:
+                    funcs[i]()
+                    characters.rimuru.lastCommand = usrInp
+                    contGame = False
+        if attacked and not attackSuccess:
+            funcs[1]()
+            contGame = True
+        elif attacked and attackSuccess:
+            funcs[0]()
+            contGame = True
 
-def ActionMenu(msg, actions, funcs):
+        if contGame: break
+    
+    else: 
+        RunFuncs(msg, actions, funcs, target)
+
+def ActionMenu(msg, actions, funcs, target=None):
     actions.extend([['help'], ['stats'], ['inv', 'stomach'], ['exit']])
     funcs.extend([ShowHelp, characters.rimuru.ShowAttributes, characters.rimuru.ShowInventory, ExitGame])
-    RunFuncs(msg, actions, funcs)
+    RunFuncs(msg, actions, funcs, target)
 
 def ShowHelp():
     print("""

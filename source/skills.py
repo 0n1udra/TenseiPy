@@ -29,6 +29,7 @@ class Resistance(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.level = 'Resistance'
+        self.resistTypess = []
 
 
 
@@ -364,6 +365,7 @@ class Resist_Melee(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Melee Resist'
+        self.resistTypes = ['Melee']
         self.passive = True
         self.acquiredMsg = "<<[Melee Resist] acquired.>>"
         self.info = """
@@ -378,6 +380,7 @@ class Resist_Electricity(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Electricity Resist'
+        self.resistTypes = ['Electricity']
         self.passive = True
         self.acquiredMsg = "<<[Electricity Resist] acquired.>>"
         self.info = """
@@ -393,6 +396,7 @@ class Resist_Temperature(Resistance):
         Resistance.__init__(self)
         self.name = 'Temperature Resist'
         self.passive = True
+        self.resistTypes = ['hot', 'cold', 'temperature']
         self.acquiredMsg = "<<[Temperature Resist] acquired.>>"
         self.info = """
     Name: Temperature Resist
@@ -402,4 +406,19 @@ class Resist_Temperature(Resistance):
         Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         """
 
+class Resist_Poison(Resistance):
+    def __init__(self):
+        Resistance.__init__(self)
+        self.name = 'Poison Resist'
+        self.resistTypes = ['Poison']
+        self.passive = True
+        self.acquiredMsg = "<<[Poison Resist] acquired.>>"
+        self.info = """
+    Name: Poison Resist
+    Type: Resistance
 
+    Description:
+        Tolerance-type Skill that grants resistance to poison-types of attacks. 
+        Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
+        """
+    

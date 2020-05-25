@@ -50,36 +50,52 @@ class Character:
 
     def ShowInfo(self, usrInp, character=None):
         generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
-        if not rimuru.mimicObject == None:
-            generators.extend(self.AttributesGenerator(False, rimuru.mimicObject))
+        
+        # Adds mimicked monster abilities 
+        if rimuru.mimicObject:
+            generators.extend(self.AttributesGenerator(rimuru.mimicObject))
 
         try:
             for i in generators:
-                if i.name.lower() == usrInp:
+                if i.name.lower() == usrInp.lower():
                     print(i.info)
         except: pass
 
 
     # ========== Attack
-    def CheckResistance(self, character=None):
-        for resistance in character['Resistance'].items():
-            yield resistance
+    def CheckResistance(self, checkResist, character=None):
+        # Checks if character has resistance attribute
+        for resistName, resistObject in character.attributes['Resistance'].items():
+            for resist in resistObject.resistTypes:
+                if resist.lower() == checkResist.lower():
+                    return True
+                    break
 
-    def CanAttackA(self, attack, target):
-        if self.mimicObject:
-            for i in self.AttributesGenerator(self.mimicObject):
-                if attack == i.name:
-                    if CheckResistance(target) != i.damageType:
-                        if target.level <= i.damageLevel:
-                            return True
-                            break
-                        else:
-                            print("<Target is too high of a level for that attack")
+    def CanAttack(self, attack, target=None):
+        attacked = attackSuccess = False
+        if attack == '':
+            return False, False
+        generators = [*self.AttributesGenerator(self.mimicObject)]
+        if rimuru.mimicObject:
+            generators.extend(self.AttributesGenerator(rimuru.mimicObject))
+
+        for i in generators:
+            if attack == i.name.lower():
+                if not self.CheckResistance(i.damageType, target):
+                    if target.level <= i.damageLevel:
+                        attackSuccess = attacked = True
+                        break
                     else:
-                        print(f'<Target has resistance to {i.damageType}>'))
+                        print("\t<Target is too high of a level for that attack\n")
+                        attacked = True
+                        break
+                else:
+                    print(f'\t<<Note, target has resistance to {i.damageType}>\n')
+                    attacked = True
+                    break
+        return attacked, attackSuccess
 
 
-        
 
     # ========== Predator Functions
     def MimicGenerator(self):
@@ -89,7 +105,7 @@ class Character:
 
     def AddMimicry(self, character):
         self.attributes['Unique Skill']['Mimic'].mimics[character.rank].append(character)
-        print(f'New mimicry available: {character.name}')
+        print(f'\t<<Note, new mimicry available: {character.name}.>>\n')
 
     def CanMimic(self, character):
         if character == 'reset':
@@ -108,11 +124,11 @@ class Character:
 
 
     # ========== Attribute Functions
-    def AttributesGenerator(self, output=False, character=None):
-        if character:
-            character = character.attributes
-        else:
-            character = self.attributes
+    def AttributesGenerator(self, target=None, output=False):
+
+        character = self.attributes
+        if target:
+            character = target.attributes
 
         for skillType, skills in character.items():
             # Only shows yields skill type if skill list is not empty
@@ -135,29 +151,29 @@ class Character:
 -----Attributes/Skills-----
 Name: {self.name} {self.familyName}
 """)
-        for i in self.AttributesGenerator(True):
+        for i in self.AttributesGenerator(output=True):
             print(i)
 
         if self.mimicObject:
             print("\n-----Mimicry-----\n", end='')
             print(f"Mimicking: {self.mimic}\n")
-            for j in self.AttributesGenerator(True, Tempest_Serpent()):
+            for j in self.AttributesGenerator(Tempest_Serpent(), True):
                 print(j)
 
 
     def AddAttribute(self, item):
-        self.attributes[item.rank][item.name] = item
+        self.attributes[item.level][item.name] = item
         # Tries to print skill acquisition message
         try: 
             ssprint(item.acquiredMsg)
         except: pass
 
     def RemoveAttribute(self, skill):
-        del self.attributes[skill.rank][skill.name]
+        del self.attributes[skill.level][skill.name]
 
     def SkillUpgrade(self, skillFrom, skillTo):
         self.RemoveAttribute(skillFrom)
-        ssprint(f'<<{skillFrom.rank} [{skillFrom}] evolving to {skillTo.rank} [{skillTo}]...>>')
+        ssprint(f'<<{skillFrom.level} [{skillFrom}] evolving to {skillTo.level} [{skillTo}]...>>')
         self.AddAttribute(skillTo)
 
 
@@ -231,6 +247,7 @@ class Veldora_Tempest(Character):
     """
         return(f"<<Acquired Veldora {self.familyName}>>")
 
+# ========== Low Level
 class Tempest_Serpent(Character):
     def __init__(self):
         Character.__init__(self)
