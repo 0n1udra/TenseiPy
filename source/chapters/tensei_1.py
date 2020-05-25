@@ -28,6 +28,7 @@ def Chapter1(rimuru):
         ssprint("That said is this the hospital bed? I can't see anything, I can't hear anything.")
 
         rimuru.AddMimicry(characters.Tempest_Serpent())
+
         ActionMenu(["*Move arms", "*Twitch legs"],
                     [['move arms', 'move'], ['twitch legs']],
                     [MoveArms, MoveLegs])
@@ -59,9 +60,9 @@ def Chapter1(rimuru):
         ssprint("And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
         ssprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
 
-        ActionMenu(['*Eat grass', 'Wonder', 'Puyo'],
-                    [['eat grass'], ['Wonder'], ['Puyo']],
-                    [EatGrass, Wonder, Puyo])
+        ActionMenu(['*Predate grass', 'Wonder', 'Puyo'],
+                    [['predate grass'], ['Wonder'], ['Puyo']],
+                    [PredateGrass, Wonder, Puyo])
 
 
         ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
@@ -73,9 +74,9 @@ def Chapter1(rimuru):
         ssprint("[Great Sage]? [Predator]? heh?!")
         ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
 
-        ActionMenu(['*Skills?', 'Great Sage?', 'Predator?', 'Eat grass', 'Wonder'],
-                    [['skills?'], ['great sage?'], ['predator?'], ['eat grass', 'gras'], ['Wonder', 'move']],
-                    [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, EatGrass, Wonder])
+        ActionMenu(['*Skills?', 'Great Sage?', 'Predator?', 'Predate grass', 'Wonder'],
+                    [['skills?'], ['great sage?'], ['predator?'], ['predate grass', 'gras'], ['Wonder', 'move']],
+                    [WhatAreSkills, WhatIsGreatSage, WhatIsPredator, PredateGrass, Wonder])
 
         ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
         ssprint("Even if it's a skill, I now have someone to talk to.")
@@ -89,9 +90,9 @@ def Chapter1(rimuru):
         ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
         ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
 
-        ActionMenu(['*Follow voice', '*Hello?', '*Shut it Baldy', 'Eat grass', 'Wonder'],
-                    [['follow voice'], ['hello?'], ['shut it Baldy'], ['eat grass'], ['Wonder']], 
-                    [FollowVoice, Hello, Baldy, EatGrass, Wonder])
+        ActionMenu(['*Follow voice', '*Hello?', '*Shut it Baldy', 'Predate grass', 'Wonder'],
+                    [['follow voice'], ['hello?'], ['shut it Baldy'], ['predate grass'], ['Wonder']], 
+                    [FollowVoice, Hello, Baldy, PredateGrass, Wonder])
 
 
         ssprint("Where to now?")
@@ -106,7 +107,7 @@ def Chapter1(rimuru):
     def MoveArms():
         ssprint("Where are my arms, I can't feel them!")
 
-    def EatGrass():
+    def PredateGrass():
         ssprint("Ooooweeee more grass!")
         rimuru.AddInventory(items.Hipokte_Grass())
 
@@ -159,9 +160,9 @@ def Chapter1(rimuru):
         ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
         sprint("~Hey can you just reply?~")
         ssprint("Was I sensed somehow?")
-        ActionMenu(['*Respond', 'Ignore', 'Eat grass', 'Explore'], 
-                    [['respond'], ['ignore'], ['eat grass'], ['explore']],
-                    [RespondTo, IgnoreDragon, EatGrass, Explore]),
+        ActionMenu(['*Respond', 'Ignore', 'Predate grass', 'Explore'], 
+                    [['respond'], ['ignore'], ['predate grass'], ['explore']],
+                    [RespondTo, IgnoreDragon, PredateGrass, Explore]),
 
     def IgnoreDragon():
         sprint("~Hey, are you just going to keep ignoreing me?~")
@@ -230,9 +231,9 @@ def Chapter1(rimuru):
 
     def Hello():
         sprint("~Keep following my voice little one.~")
-        ActionMenu(['*Follow voice', '*Shut it Baldy', 'Eat grass', 'Puyo'],
-                    [['follow voice'], ['shut it baldy'], ['eat grass', 'grass'], ['Wonder', 'Puyo']], 
-                    [FollowVoice, Baldy, EatGrass, Puyo])
+        ActionMenu(['*Follow voice', '*Shut it Baldy', 'Predate grass', 'Puyo'],
+                    [['follow voice'], ['shut it baldy'], ['predate grass', 'grass'], ['Wonder', 'Puyo']], 
+                    [FollowVoice, Baldy, PredateGrass, Puyo])
 
     def ShutIt():
         sprint("~OHOHO, So you want to die, you little shit!~")
@@ -324,23 +325,23 @@ def Chapter1(rimuru):
         sprint("~Leave it to me. Until we meet again~")
         ssprint("<<Use Unique skill [Predator]?>>")
 
-        ActionMenu(['*Activate Predator', 'Puyo'],
-                        [['activate predator', 'predate veldora'], ['move', 'Wonder', 'Puyo']],
-                        [PredateVeldora, Puyo])
+        ActionMenu(['*Predator Veldora', '*Leave cave', 'Puyo'],
+                        [['predate veldora'], ['leave cave'], ['Wonder', 'Puyo']],
+                        [PredateVeldora, LeaveCave, Puyo])
 
-        rimuru.ShowAttributes()
-        rimuru.ShowInventory()
-        print()
 
         ssprint("<<Start analyzing the Unique Skill [Infinity Prison]?>>")
 
-        ActionMenu(['*Yes', '*No', 'Eat grass', 'Wonder', 'Puyo'],
-                        [['yes'], ['no'], ['eat grass'], ['Wonder', 'Puyo']],
-                        [StartAnalysis, NoAnalysis, EatGrass, Puyo])
+        ActionMenu(['*Yes', '*No', 'Predate grass', 'Wonder', 'Puyo'],
+                        [['yes'], ['no'], ['predate grass'], ['Wonder', 'Puyo']],
+                        [StartAnalysis, NoAnalysis, PredateGrass, Puyo])
 
     def PredateVeldora():
         ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~")
         rimuru.AddInventory(characters.veldora)
+        rimuru.ShowAttributes()
+        rimuru.ShowInventory()
+        print()
 
     def LeaveSeal():
         sprint("~Hey, you're really going to leave your new friend in here? :'(~")
