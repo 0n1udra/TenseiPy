@@ -1,3 +1,4 @@
+import characters
 class Skill:
     def __init__(self):
         self.name = 'N/A'
@@ -288,6 +289,11 @@ class Sense_Heat_Source(Skill):
         '''
         self.UpdateInfo()
 
+    def UseSkill(self):
+        print("\t-----Nearby Heat Sources-----")
+        for i in characters.rimuru.currentMobs:
+            print(f'\t{i.name}')
+
 class Poisonous_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -299,6 +305,59 @@ class Poisonous_Breath(Skill):
         A powerful breath-type poison (corrosion) attack. 
         Affects an area seven meters in front of the user in a 120-degree radius.
         '''
+        self.UpdateInfo()
+
+# ========== Giant Bat
+class Vampirism_Skill(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Vampirism'
+        self.skillLevel = 'Intrinsic Skill'
+        self.damageType = 'Melee'
+        self.damageLevel = 4
+        self.description = "By sucking the target's blood the user can temporarily gain its Skills."
+        self.UpdateInfo()
+
+class Ultrasound_Waves(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Ultrasound Waves'
+        self.skillLevel = 'Intrinsic Skill'
+        self.damageType = 'Melee'
+        self.damageLevel = 4
+        self.description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
+        self.UpdateInfo()
+
+# ========== Evil Centipede
+class Paralyzing_Breath(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Paralyzing Breath'
+        self.skillLevel = 'Intrinsic Skill'
+        self.damageType = 'Poison'
+        self.damageLevel = 5
+        self.description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
+        self.UpdateInfo()
+
+# ========== Black Spider
+class Sticky_Thread(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Sticky Thread'
+        self.skillLevel = 'Intrinsic Skill'
+        self.damageType = 'Melee'
+        self.damageLevel = 5
+        self.description = "A thin sticky thread that traps enemies and prevent them from moving."
+        self.UpdateInfo()
+
+class Steel_Thread(Skill):
+    def __init__(self):
+        Skill.__init__(self)
+        self.name = 'Steel Thread'
+        self.skillLevel = 'Intrinsic Skill'
+        self.damageType = 'Melee'
+        self.damageLevel = 5
+        self.description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
         self.UpdateInfo()
 
 
