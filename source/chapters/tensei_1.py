@@ -63,6 +63,7 @@ def Chapter1(rimuru):
                     [['predate grass'], ['Wonder'], ['Puyo']],
                     [PredateGrass, Wonder, Puyo])
 
+        rimuru.ShowInfo('hipokte grass')
 
         ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
         ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
@@ -327,7 +328,7 @@ def Chapter1(rimuru):
         sprint("~Leave it to me. Until we meet again~")
         ssprint("<<Use Unique skill [Predator]?>>")
 
-        ActionMenu(['*Predator Veldora', '*Leave cave', 'Puyo'],
+        ActionMenu(['*Predate Veldora', '*Leave cave', 'Puyo'],
                         [['predate veldora'], ['leave cave'], ['Wonder', 'Puyo']],
                         [PredateVeldora, LeaveCave, Puyo])
 

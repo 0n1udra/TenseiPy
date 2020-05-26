@@ -14,7 +14,9 @@ class Character:
         self.divineProtection = 'N/A'
         self.info = 'N/A'
         self.appearance = 'N/A'
+        self.description = 'N/A'
         self.status = 'N/A'
+        self.invisible = False
 
         self.inventoryCapacity = 0
 
@@ -23,6 +25,7 @@ class Character:
         self.savePath = ''
         self.textDelay = True
         self.lastCommand = ''
+        self.currentMobs = []
 
         # For predator
         self.amount = 0
@@ -50,6 +53,7 @@ class Character:
             'Misc' : {},
         }
 
+
     # ========== Info
     def SetName(self, inpName, character):
         character.name = inpName
@@ -66,6 +70,9 @@ class Character:
     Rank: {self.rank}
     Status: {self.status}
     Divine Protection: {self.divineProtection}
+
+    Description:
+        {self.description}
 
     Appearance:
         {self.appearance}
@@ -91,6 +98,18 @@ class Character:
         self.level = level
         self.UpdateInfo()
         ssprint(f"<Leveled up to rank {self.rank}>")
+
+    def UseSkill(self, skill):
+        generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
+        if rimuru.mimicObject:
+            generators.extend(self.AttributesGenerator(rimuru.mimicObject))
+        for i in generators:
+            if skill == i.name.lower():
+                try:
+                    i.UseSkill()
+                except: pass
+                break
+        
 
     # ========== Attack
     def CheckResistance(self, checkResist, character=None):
@@ -138,6 +157,7 @@ class Character:
         else:
             self.attributes['Unique Skill']['Mimic'].mimics[character.rank].append(character)
             ssprint(f'<<Note, new mimicry available: {character.name}.>>')
+            self.ShowInfo(character.name)
 
     def CanMimic(self, character):
         if character == 'reset':
@@ -211,6 +231,7 @@ Name: {character.name} {character.familyName}
             if output:
                 try: 
                     ssprint(item.acquiredMsg)
+                    self.ShowInfo(item.name)
                 except: pass
 
     def RemoveAttribute(self, skill):
@@ -294,14 +315,57 @@ class Tempest_Serpent(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
-        self.Species = 'Tempest Serpent'
+        self.Species = 'Serpent'
         self.level = 6
         self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
+        self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
         
         self.startState = [skills.Sense_Heat_Source(), skills.Poisonous_Breath()]
         self.StartState()
         self.UpdateInfo()
 
+class Giant_Bat(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = 'Giant Bat'
+        self.Species = 'Bat'
+        self.level = 4
+        self.appearance = '''
+        It's a giant bat...
+        Due to its wings that regulate its own gravity, it's capable of flight
+        '''
+        self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
+        self.startState = [skills.Ultrasound_Waves(), skills.Vampirism_Skill()]
+        self.StartState()
+        self.UpdateInfo()
+
+class Evil_Centipede(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = 'Evil Centipede'
+        self.Species = 'Centipede'
+        self.level = 5
+        self.appearance = '''
+        Centipede monstrosity, a giant centipede.
+        '''
+        self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
+        self.startState = [skills.Paralyzing_Breath()]
+        self.StartState()
+        self.UpdateInfo()
+
+class Black_Spider(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = 'Black Spider'
+        self.Species = 'Spider'
+        self.level = 5
+        self.appearance = '''
+        Most of the body is yellow-ish, while the legs are black.
+        '''
+        self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
+        self.startState = [skills.Sticky_Thread(), skills.Steel_Thread()]
+        self.StartState()
+        self.UpdateInfo()
 
 # ========== Rimuru
 rimuru = None

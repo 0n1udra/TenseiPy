@@ -86,7 +86,7 @@ def RunFuncs(msg, actions, funcs, target=None):
     else:
         # Adds () around actions, (*action)
         options = ', '.join('(' + i + ')' for i in msg)
-        print("\nActions:", options, f'| {characters.rimuru.mimic}, inv/stats, help')
+        print("\nActions:", options, f'| {characters.rimuru.mimic}, inv/stats, use, help')
         usrInp = input("\n> ").lower()
         print()
 
@@ -102,6 +102,8 @@ def RunFuncs(msg, actions, funcs, target=None):
         try:
             characters.rimuru.ShowAttributes(splitInput)
         except: pass
+    elif 'use' in usrInp:
+        characters.rimuru.UseSkill(splitInput)
     elif 'mimic' in usrInp:
         characters.rimuru.CanMimic(splitInput)
     elif 'attack with' in usrInp:
@@ -116,7 +118,7 @@ def RunFuncs(msg, actions, funcs, target=None):
                 contAction = msg[i][0]
             except: pass
            # Checks if valid command
-            if usrInp == j.lower():
+            if usrInp.lower() == j.lower():
                # Checks if command continues story
                 if contAction == '*':
                     funcs[i]()
@@ -152,6 +154,7 @@ def ShowHelp():
         inv             -- Show inventory
         stats           -- Show skills and resistances. 
           - stats ___   -- Stats for monsters you have predated. E.g. stats tempest serpent
+        use ___         -- Use a skill. E.g. use sense heat source
         info            -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
         help            -- Show this help page
         exit            -- Exit game
