@@ -5,20 +5,26 @@ def ssprint(Msg):
 
 class Character:
     def __init__(self):
-        self.name = ''
+        self.name = 'N/A'
         self.familyName = ''
-        self.species = ''
-        self.info = ''
-        self.rank = ''
+        self.title = 'N/A'
+        self.species = 'N/A'
+        self.rank = 'N/A'
         self.level = 1
+        self.divineProtection = 'N/A'
+        self.info = 'N/A'
+        self.appearance = 'N/A'
+        self.status = 'N/A'
+
         self.inventoryCapacity = 0
 
+        # Game variables
         self.storyProgress = [None]
         self.savePath = ''
         self.textDelay = True
         self.lastCommand = ''
 
-        # For predation
+        # For predator
         self.amount = 0
         self.addAmount = 1
         self.capacityUse = 0
@@ -44,8 +50,30 @@ class Character:
             'Misc' : {},
         }
 
+    # ========== Info
     def SetName(self, inpName, character):
         character.name = inpName
+
+    def StartState(self):
+        for i in self.startState:
+            self.AddAttribute(i, output=False)
+
+    def UpdateInfo(self):
+        self.info = f"""
+    Name: {self.name} {self.familyName}
+    Title: {self.title}
+    Species: {self.species}
+    Rank: {self.rank}
+    Status: {self.status}
+    Divine Protection: {self.divineProtection}
+
+    Appearance:
+        {self.appearance}
+        """
+
+        # Sets ranking according to level
+        ranking = ['Special S', 'S', 'Special A' ,'A+', 'A', 'A-', 'B', 'C', 'D', 'E', 'F']
+        self.rank = ranking[self.level-1]
 
     def ShowInfo(self, usrInp, character=None):
         generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
@@ -59,6 +87,10 @@ class Character:
                     print(i.info)
         except: pass
 
+    def UpdateRanking(self, level):
+        self.level = level
+        self.UpdateInfo()
+        ssprint(f"<Leveled up to rank {self.rank}>")
 
     # ========== Attack
     def CheckResistance(self, checkResist, character=None):
@@ -84,11 +116,11 @@ class Character:
                         attackSuccess = attacked = True
                         break
                     else:
-                        print("\t<Target is too high of a level for that attack\n")
+                        ssprint("<Target is too high of a level for that attack.>")
                         attacked = True
                         break
                 else:
-                    print(f'\t<<Note, target has resistance to {i.damageType}>\n')
+                    ssprint(f'<<Note, target has resistance to {i.damageType}.>>')
                     attacked = True
                     break
         return attacked, attackSuccess
@@ -102,21 +134,21 @@ class Character:
 
     def AddMimicry(self, character):
         self.attributes['Unique Skill']['Mimic'].mimics[character.rank].append(character)
-        print(f'\t<<Note, new mimicry available: {character.name}.>>\n')
+        ssprint(f'<<Note, new mimicry available: {character.name}.>>')
 
     def CanMimic(self, character):
         if character == 'reset':
             self.mimic = 'Slime'
             self.mimicObject = None
             self.attributes['Unique Skill']['Mimic'].active = False
-            print("<Mimicry Reset>")
+            ssprint("<Mimicry Reset>")
         else:
             for i in self.MimicGenerator():
                 if character == i.name.lower():
                     self.mimic = i.name
                     self.mimicObject = i
                     self.attributes['Unique Skill']['Mimic'].active = True
-                    print(f'<Now Mimicking: {i.name}>')
+                    ssprint(f'<Now Mimicking: {i.name}>')
                     break
 
 
@@ -168,19 +200,25 @@ Name: {character.name} {character.familyName}
                 print(j)
 
 
-    def AddAttribute(self, item):
-        self.attributes[item.level][item.name] = item
-        # Tries to print skill acquisition message
-        try: 
-            ssprint(item.acquiredMsg)
-        except: pass
+    def AddAttribute(self, item, output=True):
+        try:
+            self.attributes[item.skillLevel][item.name]
+        except:
+            self.attributes[item.skillLevel][item.name] = item
+            if output:
+                try: 
+                    ssprint(item.acquiredMsg)
+                except: pass
 
     def RemoveAttribute(self, skill):
-        del self.attributes[skill.level][skill.name]
+        try:
+            del self.attributes[skill.skillLevel][skill.name]
+        except:
+            print("ERROR Deleting attribute. If you're seeing this message, please let developer know")
 
     def SkillUpgrade(self, skillFrom, skillTo):
         self.RemoveAttribute(skillFrom)
-        ssprint(f'<<{skillFrom.level} [{skillFrom}] evolving to {skillTo.level} [{skillTo}]...>>')
+        ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] evolving to {skillTo.skillLevel} [{skillTo}]...>>')
         self.AddAttribute(skillTo)
 
 
@@ -215,7 +253,7 @@ Name: {character.name} {character.familyName}
         try:
             self.inventory[item.itemType].remove(item)
         except:
-            print(f'<Error deleting {item.name} from inventory>')
+            ssprint(f'<Error deleting {item.name} from inventory>')
 
 
 
@@ -225,33 +263,27 @@ class Rimuru_Tempest(Character):
         Character.__init__(self)
         self.name = 'Slime'
         self.mimic = 'Slime'
+        self.level = 7
         self.mimicObject = None
-        self.info = """
-    Species: Slime
-
-    """
-    def StartState(self):
         self.startState = [skills.Predator_Mimicry_Skill(), skills.Self_Regeneration(), skills.Absorb_Dissolve(), 
-                skills.Resist_Pain(), skills.Resist_Melee(), skills.Resist_Electricity(), skills.Resist_Temperature()]
-        for i in self.startState:
-            self.AddAttribute(i)
+                    skills.Resist_Pain(), skills.Resist_Melee(), skills.Resist_Electricity(), skills.Resist_Temperature()]
+        self.UpdateInfo()
+
 
 class Veldora_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = "Veldora"
+        self.title = 'Storm Dragon'
+        self.species = 'True Dragon'
+        self.status = 'Alive'
+        self.level = 11
         self.itemType = 'Misc'
-        self.familyName = ''
         self.capacityUse = 10
+        self.UpdateInfo()
 
     def AcquiredMsg(self):
-        self.info = f"""
-    Name: Veldora {self.familyName}
-    Species: True Dragon
-    Title: Storm Dragon
-    Rank: Disaster Special S
-    Status: Alive
-    """
+        self.UpdateInfo()
         return(f"<<Acquired Veldora {self.familyName}>>")
 
 # ========== Low Level
@@ -259,18 +291,13 @@ class Tempest_Serpent(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
-        self.rank = 'A-'
-        self.info = """
-Species: Tempest Serpent
-Rank: A-
-
-Appearance:
-    The snake has a large, jet-black body with thorned scales and tough skin.
-"""
+        self.Species = 'Tempest Serpent'
+        self.level = 6
+        self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
         
         self.startState = [skills.Sense_Heat_Source(), skills.Poisonous_Breath()]
-        for i in self.startState:
-            self.AddAttribute(i)
+        self.StartState()
+        self.UpdateInfo()
 
 
 # ========== Rimuru
