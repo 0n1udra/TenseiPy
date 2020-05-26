@@ -1,26 +1,41 @@
 class Skill:
     def __init__(self):
-        self.name = ''
-        self.level = ''
-
-        self.description = ''
-        self.abilities = ''
+        self.name = 'N/A'
+        self.type = 'Skill'
+        self.level = 'Common Skill'
+        self.damageLevel = 0
+        self.description = 'N/A'
         self.acquredMsg = ''
-
-        self.skillPower = 0
-        self.energy = 0
-        self.damageType = ''
-        self.damageLevel = 1
+        self.evolution = 'N/A'
+        self.abilities = 'N/A'
 
         self.active = False
         self.passive = False
-        # Able to predate
         self.predate = True
 
         self.subSkills = {}
 
     def AcquiredMsg(self):
         return(self.acquiredMsg)
+
+    def UpdateInfo(self):
+        self.info = f"""
+    Name: {self.name}
+    Type: {self.type}
+    Level: {self.level}
+    Damage: {self.damageLevel}
+
+    Description:
+        {self.description}
+
+    Abilities:
+        {self.abilities}
+
+    Evolution:
+        {self.evolution}
+    """
+
+        self.acquiredMsg = f"<<{self.level} [{self.name}] Acquired.>>"
 
     def __str__(self):
         return(self.name)
@@ -29,8 +44,9 @@ class Resistance(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.level = 'Resistance'
+        self.type = 'Passive'
+        self.passive = True
         self.resistTypess = []
-
 
 
 #                    ========== Manas ==========
@@ -39,21 +55,14 @@ class Ciel_Skill(Skill):
         Skill__init__(self)
         self.name = 'Ciel'
         self.level = 'Manas'
-        self.acquiredMsg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
-        self.info = """
-    Name: [Ciel]
-    Type: Ultimate Skill Core Manas
-
-    Description:
-        Evolved from Wisdom King Raphael
-
-    Abilities:
+        self.description = "Evolved from Wisdom King Raphael."
+        self.abilities = """
         Auto Battle Mode 
             - Great sage can battle on behalf of user of permission granted
-
-    Evolution:
-        Sage > Great Sage > Raphael > Ciel
-    """
+        """
+        self. evolution = "Sage > Great Sage > Raphael > Ciel"
+        self.UpdateInfo()
+        self.acquiredMsg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
 
 
 # ===== Ultimate Skill=====
@@ -63,22 +72,13 @@ class Raphael_Skill(Skill):
 
         self.name = 'Wisdom King Raphael'
         self.level = 'Ultimate Skill'
-        self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
-        self.info = """
-    Name: [Wisdom King Raphael]
-    Type: Ultimate Skill
-
-    Description:
-        Evolved version of Great Sage
-
-    Abilities:
+        self.description = 'Evolved version of Great Sage.'
+        self.abilities = """
         Auto Battle Mode 
             - Great sage can battle on behalf of user of permission granted
-
-    Evolution:
-        Sage > Great Sage > Wisdom King Raphael > Ciel
         """
-
+        self.evolution = "Sage > Great Sage > Wisdom King Raphael > Ciel"
+        self.UpdateInfo()
 
 
 #                    ========== Unique Skills ==========
@@ -86,8 +86,6 @@ class Predator_Mimicry_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Mimic'
-        self.type = 'Passive'
-        self.active = False
         self.level = 'Unique Skill'
         self.mimics = {
                 'A+': [],
@@ -102,27 +100,20 @@ class Predator_Mimicry_Skill(Skill):
 
     @property
     def info(self):
+        print("\t-----Available Mimicry-----")
         for lvl, lvlList in self.mimics.items():
-            print(f'{lvl} :')
+            print(f'\t{lvl} :')
             for name in lvlList:
-                print(f'\t{name.name}')
-        print("\n'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
-                
+                print(f'\t\t{name.name}')
+        print("\n\t'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
     
 class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Predator'
         self.level = 'Unique Skill'
-        self.acquiredMsg = "<<Unique Skill [Predator] successfully Acquired.>>"
-        self.info = """
-    Name: [Predator]
-    Type: Unique Skill
-
-    Description:
-        Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and Isolation.
-
-    Abilities:
+        self.description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
+        self.abilities = """
         Predation   
             - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
               The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
@@ -138,11 +129,10 @@ class Predator_Skill(Skill):
               However, this depends on the successful analysis and acquisition of relative information regarding the target.
         Isolation   
             - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
-
-
-    Evolution:
-        Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth
         """
+        self.evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
+        self.UpdateInfo()
+        self.acquiredMsg = "<<Unique Skill [Predator] successfully Acquired.>>"
 
 
 class Great_Sage_Skill(Skill):
@@ -150,17 +140,12 @@ class Great_Sage_Skill(Skill):
         Skill.__init__(self)
         self.name = 'Great Sage'
         self.level = 'Unique Skill'
-        self.acquiredMsg = "<<Unique Skill [Great Sage] Acquired.>>"
-        self.info = """
-    Name: [Great Sage]
-    Type: Extra Skill
-
-    Description:
+        self.description = '''
         A Conceptual Intelligence that has a heartless and emotionless personality 
         and is solely driven by purely logical computations. It cares for nobody but the benefit 
         of its master, even going so far as to hide things from master if it deems it beneficial in the long run.
-
-    Abilities:
+        '''
+        self.abilities = '''
         Thought Acceleration
             - Raises thought-processing speed by a thousand times.
 
@@ -187,12 +172,10 @@ class Great_Sage_Skill(Skill):
 
         Auto Battle Mode
             - By giving permission to [Great Sage], The master can let it control his body temporarily
-
-
-    Evolution:
-        Sage > Great Sage > Raphael > Ciel
-        """
-
+        '''
+        self.evolution = 'Sage > Great Sage > Raphael > Ciel'
+        self.UpdateInfo()
+        self.acquiredMsg = f'<<Unique Skill [Great Sage] Successfully Acquired!>>'
 
 
 #                    ========== Extra Skills ==========
@@ -201,41 +184,34 @@ class Sage_Skill(Skill):
         Skill.__init__(self)
         self.name = 'Sage'
         self.level = 'Extra Skill'
-        self.acquiredMsg = "<<Extra Skill: [Sage] has been successfully Acquired.>>"
+        self.UpdateInfo()
 
 class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Magic Perception'
         self.level = 'Extra Skill'
-        self.acquiredMsg = "<<Extra Skill: [Magic Perception] Acquired.>>"
-        self = """
-        Name: [Magic Perception], [Magic Sense]
-        Type: Extra Skill
+        self.description = '''
+        One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
+        the skill is rather simple.
 
-        Description: 
-            One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
-            the skill is rather simple.
-
-            With this skill, one can see 360 degrees around them, without a single blind-spot. With this, 
-            even if one's eyes and ears are crushed, one can continue combat. 
-            Ambushes become nearly impossible. It's an indispensable skill.
-        """
+        With this skill, one can see 360 degrees around them, without a single blind-spot. With this, 
+        even if one's eyes and ears are crushed, one can continue combat. 
+        Ambushes become nearly impossible. It's an indispensable skill.
+        '''
+        self.UpdateInfo()
 
 class Water_Manipulation(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = "Water Manipulation"
         self.level = 'Extra Skill'
-        self.acauiredMsg = '<<Extra Skill [Water Manipulation] acquired.>>'
-        self.info = """
-        Name: Water Manipulation
-        Type: Extra Skill
-
-        Description:
-            learned Hydraulic Propulsion, Water Current Control, and Water Blade, the three Skills were fused and evolved into Water Manipulation.
-        """
-
+        self.description = '''
+        After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
+        The three Skills are fused and evolved into Water Manipulation.
+        '''
+        self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+        self.UpdateInfo()
 
 
 #                    ========== Common Skills ==========
@@ -243,48 +219,29 @@ class Hydraulic_Propulsion(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Hydraulic Propulsion'
-        self.level = 'Common Skill'
-        self.acquiredMsg = '<<Common Skill [Hydraulic Propulsion] Acquired.>>'  
-        self.info = """
-    Name: [Hydraulic Propulsion]
-    Type: Common Skill
-
-    Description:
-        Uses pressure to create a powerful water jet that can propel its user through vast distances.
-
-    Evolution:
-        ??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation
-        > Law Manipulation
-        """
-
+        self.escription = 'Uses pressure to create a powerful water jet that can propel its user through vast distances.'
+        self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+        self.UpdateInfo()
 
 class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Blade'
-        self.level = 'Common Skill'
-        self.damageType = 'Melee'
+        self.type = 'Melee'
         self.damageLevel = 3
-        self.acquiredMsg = "<<Skill [Water Blade] acquired.>>"
-        self.info = """
-    Description:
-        Shoot out a small water bullet.
-    """
-
+        self.description = "Shoot out a small powerful water bullet."
+        self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+        self.UpdateInfo()
 
 class Water_Bullet(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Bullet'
-        self.level = 'Common Skill'
-        self.acquiredMsg = "<<Skill [Water Bullet] acquired.>>"
-        self.damageType = 'Melee'
+        self.type = 'Melee'
         self.damageLevel = 3
-        self.info = """
-    Description:
-        Shoot out a thin water blade with tremendous cutting power.
-        """
-
+        self.description = 'Shoot out a thin water blade with tremendous cutting power.'
+        self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+        self.UpdateInfo()
 
 
 #                    ========== Intrinsic Skills ==========
@@ -293,28 +250,21 @@ class Absorb_Dissolve(Skill):
         Skill.__init__(self)
         self.name = 'Absorb/Dissolve'
         self.level = 'Intrinsic Skill'
-        self.info = """
-    Name: Absorb and Dissolve
-    Type: Intrinsic Skill
-
-    Description:
-        Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.
-        """
+        self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
+        self.UpdateInfo()
 
 class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
         self.level = 'Intrinsic Skill'
-        self.info = """
-    Name: Self-Regeneration
-    Type: Intrinsic Skill
-
-    Description:
+        self.description = '''
         Restores the user's damaged body. 
         It can restore even lost limbs as long as it's not a situation where the limbs get continuously chopped off or crushed. 
         The Skill's performance can be enhanced by other Skills.
-        """
+        '''
+        self.evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
+        self.UpdateInfo()
 
 
 # ========== Tempest Serpent
@@ -323,27 +273,24 @@ class Sense_Heat_Source(Skill):
         Skill.__init__(self)
         self.name = 'Sense Heat Source'
         self.level = 'Intrinsic Skill'
-        self.info = """
-    Name: Sense Heat Source
-    Type: Intrinsic Skill
-
-    Description:
-        """
+        self.description = '''
+        Identifies any heat reactions in the local area. 
+        Not affected by any concealing effects.
+        '''
+        self.UpdateInfo()
 
 class Poisonous_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Poisonous Breath'
         self.level = 'Intrinsic Skill'
-        self.damageType = 'Poison'
+        self.type = 'Poison'
         self.damageLevel = 2
-        self.info = """
-    Name: Self-Regeneration
-    Type: Intrinsic Skill
-
-    Description:
-        """
-
+        self.description = '''
+        A powerful breath-type poison (corrosion) attack. 
+        Affects an area seven meters in front of the user in a 120-degree radius.
+        '''
+        self.UpdateInfo()
 
 
 #                    ========== Resistances ==========
@@ -351,74 +298,50 @@ class Resist_Pain(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Pain Resist'
-        self.passive = True
-        self.acquiredMsg = "<<[Pain Resist] acquired.>>"
-        self.info = """
-    Name: Pain Resist
-    Type: Resistance
-
-    Description:
-        Tolerance-type Skill that grants immunity to physical pain sensation. However, you still take damage
-        """
+        self.resistTypes = ['Pain']
+        self.description = '''
+        Tolerance-type Skill that grants immunity to physical pain sensation. 
+        However, you still take damage.
+        '''
+        self.UpdateInfo()
 
 class Resist_Melee(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Melee Resist'
         self.resistTypes = ['Melee']
-        self.passive = True
-        self.acquiredMsg = "<<[Melee Resist] acquired.>>"
-        self.info = """
-    Name: Pain Resist
-    Type: Resistance
-
-    Description:
-        Tolerance-type Skill that grants immunity to physical pain sensation. However, you still take damage
-        """
+        self.description = 'Tolerance-type Skill that grants immunity to melee attacks.'
+        self.UpdateInfo()
 
 class Resist_Electricity(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Electricity Resist'
         self.resistTypes = ['Electricity']
-        self.passive = True
-        self.acquiredMsg = "<<[Electricity Resist] acquired.>>"
-        self.info = """
-    Name: Electricity Resist
-    Type: Resistance
-
-    Description:
-        Tolerance-type Skill that grants resistance to electricity-types of attacks. Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
-        """
+        self.description = '''
+        Tolerance-type Skill that grants resistance to electricity-types of attacks. 
+        Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
+        '''
+        self.UpdateInfo()
 
 class Resist_Temperature(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Temperature Resist'
-        self.passive = True
         self.resistTypes = ['hot', 'cold', 'temperature']
-        self.acquiredMsg = "<<[Temperature Resist] acquired.>>"
-        self.info = """
-    Name: Temperature Resist
-    Type: Resistance
-
-    Description:
-        Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
-        """
+        self.description = '''
+        Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
+        Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
+        '''
+        self.UpdateInfo()
 
 class Resist_Poison(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Poison Resist'
         self.resistTypes = ['Poison']
-        self.passive = True
-        self.acquiredMsg = "<<[Poison Resist] acquired.>>"
-        self.info = """
-    Name: Poison Resist
-    Type: Resistance
-
-    Description:
+        self.description = '''
         Tolerance-type Skill that grants resistance to poison-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
-        """
-    
+        '''
+        self.UpdateInfo()
