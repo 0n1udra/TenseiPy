@@ -125,7 +125,6 @@ class Character:
                     break
         return attacked, attackSuccess
 
-
     # ========== Predator Functions
     def MimicGenerator(self):
         for lvl, lvlList in self.attributes['Unique Skill']['Mimic'].mimics.items():
@@ -133,8 +132,12 @@ class Character:
                 yield name
 
     def AddMimicry(self, character):
-        self.attributes['Unique Skill']['Mimic'].mimics[character.rank].append(character)
-        ssprint(f'<<Note, new mimicry available: {character.name}.>>')
+        for i in self.MimicGenerator():
+            if i.name == character.name:
+                break
+        else:
+            self.attributes['Unique Skill']['Mimic'].mimics[character.rank].append(character)
+            ssprint(f'<<Note, new mimicry available: {character.name}.>>')
 
     def CanMimic(self, character):
         if character == 'reset':
