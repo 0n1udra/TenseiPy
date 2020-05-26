@@ -148,15 +148,16 @@ def ActionMenu(msg, actions, funcs, target=None):
 def ShowHelp():
     print("""
     Commands:
+        attack with ___ -- Attack with a skill you have. E.g. attack with water blade
         inv             -- Show inventory
         stats           -- Show skills and resistances. 
-          - stats <___> -- Stats for monsters you have predated. E.g. stats tempest serpent
+          - stats ___   -- Stats for monsters you have predated. E.g. stats tempest serpent
         info            -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
         help            -- Show this help page
         exit            -- Exit game
 
     Abilities:
-        mimic <___>     -- Mimics appearance of already predated being. E.g. mimic tempest serpent
+        mimic ___     -- Mimics appearance of already predated being. E.g. mimic tempest serpent
           - info mimic  -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
           - mimic reset -- Resets mimic (Back to slime)
         
@@ -166,6 +167,20 @@ def ShowHelp():
         <Message>       -- Acquired item, etc
         <<Message>>     -- Great Sage (Raphael, Ciel)
         <<<Message>>>   -- Voice of the World
+
+    Level/Ranking:
+       Level      Rank         Risk
+        11.     Special S   Catastrophe
+        10.     S           Disaster
+        9.      Special A   Calamity
+        8.      A+          Tragedy
+        7.      A           Hazard
+        6.      A-          Danger
+        5.      B           Pro
+        4.      C           Advance
+        3.      D           Intermediate
+        2.      E           Beginner
+        1.      F           Novice
     """)
 
 #                    ========== Extra ==========

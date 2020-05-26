@@ -1,9 +1,10 @@
 class Skill:
     def __init__(self):
         self.name = 'N/A'
-        self.type = 'Skill'
-        self.level = 'Common Skill'
+        self.type = 'Activatable Skill'
+        self.skillLevel = 'Common Skill'
         self.damageLevel = 0
+        self.damageType = 'N/A'
         self.description = 'N/A'
         self.acquredMsg = ''
         self.evolution = 'N/A'
@@ -22,8 +23,9 @@ class Skill:
         self.info = f"""
     Name: {self.name}
     Type: {self.type}
-    Level: {self.level}
+    Level: {self.skillLevel}
     Damage: {self.damageLevel}
+    Damage Type: {self.damageType}
 
     Description:
         {self.description}
@@ -35,7 +37,7 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquiredMsg = f"<<{self.level} [{self.name}] Acquired.>>"
+        self.acquiredMsg = f"<<{self.skillLevel} [{self.name}] Acquired.>>"
 
     def __str__(self):
         return(self.name)
@@ -43,7 +45,7 @@ class Skill:
 class Resistance(Skill):
     def __init__(self):
         Skill.__init__(self)
-        self.level = 'Resistance'
+        self.skillLevel = 'Resistance'
         self.type = 'Passive'
         self.passive = True
         self.resistTypess = []
@@ -54,7 +56,7 @@ class Ciel_Skill(Skill):
     def __init__(self):
         Skill__init__(self)
         self.name = 'Ciel'
-        self.level = 'Manas'
+        self.skillLevel = 'Manas'
         self.description = "Evolved from Wisdom King Raphael."
         self.abilities = """
         Auto Battle Mode 
@@ -71,7 +73,7 @@ class Raphael_Skill(Skill):
         Skill.__init__(self)
 
         self.name = 'Wisdom King Raphael'
-        self.level = 'Ultimate Skill'
+        self.skillLevel = 'Ultimate Skill'
         self.description = 'Evolved version of Great Sage.'
         self.abilities = """
         Auto Battle Mode 
@@ -86,13 +88,21 @@ class Predator_Mimicry_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Mimic'
-        self.level = 'Unique Skill'
+        self.skillLevel = 'Unique Skill'
         self.mimics = {
+                'Special S': [],
+                'S': [],
+                'Special A': [],
                 'A+': [],
                 'A': [],
                 'A-': [],
-                'B+': [],
-                'Special': [],
+                'B': [],
+                'C': [],
+                'D': [],
+                'E': [],
+                'D': [],
+                'F': [],
+                'Other': [],
                 }
 
     def AddMimicy(self, character):
@@ -111,7 +121,7 @@ class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Predator'
-        self.level = 'Unique Skill'
+        self.skillLevel = 'Unique Skill'
         self.description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
         self.abilities = """
         Predation   
@@ -139,7 +149,7 @@ class Great_Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Great Sage'
-        self.level = 'Unique Skill'
+        self.skillLevel = 'Unique Skill'
         self.description = '''
         A Conceptual Intelligence that has a heartless and emotionless personality 
         and is solely driven by purely logical computations. It cares for nobody but the benefit 
@@ -183,14 +193,14 @@ class Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Sage'
-        self.level = 'Extra Skill'
+        self.skillLevel = 'Extra Skill'
         self.UpdateInfo()
 
 class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Magic Perception'
-        self.level = 'Extra Skill'
+        self.skillLevel = 'Extra Skill'
         self.description = '''
         One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
         the skill is rather simple.
@@ -205,7 +215,7 @@ class Water_Manipulation(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = "Water Manipulation"
-        self.level = 'Extra Skill'
+        self.skillLevel = 'Extra Skill'
         self.description = '''
         After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
         The three Skills are fused and evolved into Water Manipulation.
@@ -227,8 +237,8 @@ class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Blade'
-        self.type = 'Melee'
-        self.damageLevel = 3
+        self.damageType = 'Melee'
+        self.damageLevel = 9
         self.description = "Shoot out a small powerful water bullet."
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.UpdateInfo()
@@ -237,8 +247,8 @@ class Water_Bullet(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Bullet'
-        self.type = 'Melee'
-        self.damageLevel = 3
+        self.damageType = 'Melee'
+        self.damageLevel = 9
         self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.UpdateInfo()
@@ -249,7 +259,7 @@ class Absorb_Dissolve(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Absorb/Dissolve'
-        self.level = 'Intrinsic Skill'
+        self.skillLevel = 'Intrinsic Skill'
         self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
         self.UpdateInfo()
 
@@ -257,7 +267,7 @@ class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
-        self.level = 'Intrinsic Skill'
+        self.skillLevel = 'Intrinsic Skill'
         self.description = '''
         Restores the user's damaged body. 
         It can restore even lost limbs as long as it's not a situation where the limbs get continuously chopped off or crushed. 
@@ -266,13 +276,12 @@ class Self_Regeneration(Skill):
         self.evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
         self.UpdateInfo()
 
-
 # ========== Tempest Serpent
 class Sense_Heat_Source(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Sense Heat Source'
-        self.level = 'Intrinsic Skill'
+        self.skillLevel = 'Intrinsic Skill'
         self.description = '''
         Identifies any heat reactions in the local area. 
         Not affected by any concealing effects.
@@ -283,9 +292,9 @@ class Poisonous_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Poisonous Breath'
-        self.level = 'Intrinsic Skill'
-        self.type = 'Poison'
-        self.damageLevel = 2
+        self.skillLevel = 'Intrinsic Skill'
+        self.damageType = 'Poison'
+        self.damageLevel = 9
         self.description = '''
         A powerful breath-type poison (corrosion) attack. 
         Affects an area seven meters in front of the user in a 120-degree radius.

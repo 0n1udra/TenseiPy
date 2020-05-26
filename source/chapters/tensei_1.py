@@ -307,6 +307,9 @@ def Chapter1(rimuru):
         veldoraLName = str(input("\nLast Name > "))
         characters.veldora.familyName = veldoraLName
         rimuru.familyName = veldoraLName
+        rimuru.divineProtection = 'Storm Crest'
+        ssprint("<Acquired Storm Crest Divine Protection>")
+        rimuru.UpdateRanking(8)
         print()
 
         sprint(f"Hmmmmmm... How about {characters.veldora.familyName}")

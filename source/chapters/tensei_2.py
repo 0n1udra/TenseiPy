@@ -5,20 +5,22 @@ def Chapter2(rimuru):
     serpent = characters.Tempest_Serpent()
 
     def StartChapter2():
-        rimuru.AddMimicry(characters.Tempest_Serpent())
         sprint("Oh, what's this? Looks like some kind of ore.")
         ActionMenu(['*predate ore', '*Move on'], 
                     [['predate ore'], ['move on']],
                     [PredateOre, MoveOn])
+
+        ssprint("<<Answer, analysis shows this is the raw form of Magic Steel. Can be used for crafting weapons, armor, etc.>>")
+        sprint("Ok, might be useful in the future. Guess I should get as much as I can")
 
         sprint("Now with magic perception I can finally find my way out of this cave.")
         sprint("*But before finding the exit, some small monsters started taking a interest in the little slime.*")
 
 
         sprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
+        sprint("Still, it's not as scary as Veldora. I should be able to handle it.")
 
-
-        sprint("I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
+        sprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
 
         ssprint("<Choose ability to learn and use on serpent>")
 
@@ -29,16 +31,14 @@ def Chapter2(rimuru):
         sprint("Alright, lets try out this new skill.")
 
         ActionMenu(['*Attack with ___',],
-                    [['attack with aspoijf'], []],
+                [['attack with :#%^@'], []],
                     [AttackSerpent, FailedSerpent], serpent)
-
-
 
         sprint("I wonder what else is in this cave.")
 
-        ActionMenu(['Wonder',],
-                    [['wonder']],
-                    [Wonder])
+        ActionMenu(['*predate ore'], 
+                    [['predate ore']],
+                    [PredateOre])
 
         #DeleteGame(rimuru)
 
@@ -56,13 +56,15 @@ def Chapter2(rimuru):
         sprint("Uh, How did that not work...")
 
         attackSuccess = ActionMenu(['*Attack with ___'],
-                    [['attack with'], []],
+                [['attack with :#@$^'], []],
                     [AttackSerpent, FailedSerpent], serpent)
 
     def PredateSerpent():
         sprint("Eww. I might as well predate it, see if I get anything out of it")
         rimuru.AddMimicry(characters.Tempest_Serpent())
+        ssprint("<Use info mimic for mimicry info, and stats/info tempest serpent for info on monster>")
 
+        ssprint("<Currently only able to use predated monster skills when using mimicry>")
 
     def MoveOn():
         sprint("I'll just leave it I guess, and continue finding my way out")
@@ -75,11 +77,8 @@ def Chapter2(rimuru):
         rimuru.AddAttribute(skills.Water_Bullet())
         sprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
 
-
     def PredateOre():
         rimuru.AddInventory(items.Magic_Ore())
-        ssprint("<<Answer, analysis shows this is the raw form of Magic Steel. Can be used for crafting weapons, armor and etc.>>")
-        sprint("Ayy, neato. Guess I should get as much as I can")
 
     def MoveOn():
         sprint("pass")
