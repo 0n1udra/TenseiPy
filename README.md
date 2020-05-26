@@ -16,14 +16,16 @@ For Macs:
 NOTE: Game will display ASCII art, adjust window size accordingly.
 
 # TODO
-- Add save functionality
-- Touch up debug mode
 - Add skills, and Items
-- Continue Story...
+- Continue Chapter 2 Story...
 
 
 # Layout
 - Intro (Cave)
-  - -In Progress-
+  - Learn about skills
+  - Meet Veldora
+  - Fight low level mobs
+  
+  
   
 ![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)
