@@ -86,24 +86,22 @@ def RunFuncs(msg, actions, funcs, target=None):
     else:
         # Adds () around actions, (*action)
         options = ', '.join('(' + i + ')' for i in msg)
-        print("\nActions:", options, f'| {characters.rimuru.mimic}, inv/stats, use, help')
+        print("\nActions:", options, f'| {characters.rimuru.mimicking}, inv/stats, use, help')
         usrInp = input("\n> ").lower()
         print()
 
-    contGame = attacked = attackSuccess = False
+    loop = True
+    attacked = attackSuccess = skillSuccess = False
     # Get info on skills, times, etc
     splitInput = ' '.join(usrInp.split()[1:])
     if 'info' in usrInp:
-        try:
-            characters.rimuru.ShowInfo(splitInput)
-        except:
-            print("Info usage example: info great sage")
+        characters.rimuru.ShowInfo(splitInput)
     elif 'stats' in usrInp:
         try:
             characters.rimuru.ShowAttributes(splitInput)
         except: pass
     elif 'use' in usrInp:
-        characters.rimuru.UseSkill(splitInput)
+        skillSuccess = characters.rimuru.UseSkill(splitInput)
     elif 'mimic' in usrInp:
         characters.rimuru.CanMimic(splitInput)
     elif 'attack with' in usrInp:
@@ -122,23 +120,22 @@ def RunFuncs(msg, actions, funcs, target=None):
                # Checks if command continues story
                 if contAction == '*':
                     funcs[i]()
-                    contGame = True
+                    loop = False
                     characters.rimuru.lastCommand = usrInp
-                    return attackSuccess
                     break
                 else:
                     funcs[i]()
                     characters.rimuru.lastCommand = usrInp
-                    contGame = False
-        if attacked and not attackSuccess:
+        if skillSuccess:
+            funcs[0]()
+            loop = False
+        elif attacked and not attackSuccess:
             funcs[1]()
-            contGame = True
         elif attacked and attackSuccess:
             funcs[0]()
-            contGame = True
+            loop = False
 
-        if contGame: break
-    
+        if not loop: break
     else: 
         RunFuncs(msg, actions, funcs, target)
 
