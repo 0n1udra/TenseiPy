@@ -38,8 +38,8 @@ def Chapter2(rimuru):
 
         sprint("I wonder what else is in this cave.")
 
-        ActionMenu(['*Use Sense Heat Source', '*Predate Magic Ore'],
-                [['use sense heat source'], ['predate magic ore']],
+        ActionMenu(['*Use Sense Heat Source', 'Predate Magic Ore'],
+                [['use :$%^'], ['predate magic ore']],
                 [UseSense, PredateOre])
 
         sprint("Are those bats? I wonder...")
@@ -61,7 +61,7 @@ def Chapter2(rimuru):
     # ========== Giant Bat
     def AttackBat():
         sprint("Alright, got it. Now lets see what skills I can learn.")
-        attackSuccess = ActionMenu(['*Predate Giant Bat', '*Predate Magic Ore', '*Move on'],
+        attackSuccess = ActionMenu(['*Predate Giant Bat', 'Predate Magic Ore', '*Move on'],
                         [['predate giant bat'], ['predate magic ore'], ['move on']],
                         [PredateBat, PredateOre, MoveOn])
 
@@ -86,7 +86,7 @@ def Chapter2(rimuru):
         sprint("Oh...? What will that do?")
         ssprint("<<Answer, after predation and using analysis, it is possible to learn the targets skills.>>")
 
-        ActionMenu(['*Predate Tempest Serpent', '*Predate Magic Ore', '*Move on'],
+        ActionMenu(['*Predate Tempest Serpent', 'Predate Magic Ore', '*Move on'],
                         [['predate tempest serpent'], ['predate magic ore'], ['move on']],
                         [PredateSerpent, PredateOre, MoveOn])
 
