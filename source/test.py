@@ -1,6 +1,6 @@
-x = 2
-for i in range(5):
-    if i == x: pass
-    print(i)
-else:
-    print("LOOPY")
+x = 'Hello World'
+print(x)
+print('x.__len__:', x.__len__())
+print('len(x):', len(x))
+print(help(title))
+

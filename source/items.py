@@ -8,6 +8,8 @@ class Item:
         self.capacityUse = 0
         self.description = ''
 
+        self.objectType = 'item'
+
     def ItemDescription(self):
         return(self.description)
 

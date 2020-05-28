@@ -4,7 +4,7 @@ class Skill:
         self.name = 'N/A'
         self.type = 'Activatable Skill'
         self.skillLevel = 'Common Skill'
-        self.damageLevel = 0
+        self.damageLevel = 1
         self.damageType = 'N/A'
         self.description = 'N/A'
         self.acquredMsg = ''
@@ -14,8 +14,9 @@ class Skill:
         self.active = False
         self.passive = False
         self.predate = True
-
         self.subSkills = {}
+
+        self.objectType = 'skill'
 
     def AcquiredMsg(self):
         return(self.acquiredMsg)
@@ -55,7 +56,7 @@ class Resistance(Skill):
 #                    ========== Manas ==========
 class Ciel_Skill(Skill):
     def __init__(self):
-        Skill__init__(self)
+        Skill.__init__(self)
         self.name = 'Ciel'
         self.skillLevel = 'Manas'
         self.description = "Evolved from Wisdom King Raphael."
@@ -292,7 +293,8 @@ class Sense_Heat_Source(Skill):
     def UseSkill(self):
         print("\t-----Nearby Heat Sources-----")
         for i in characters.rimuru.currentMobs:
-            print(f'\t{i.name}')
+            if i.alive:
+                print(f'\t{i.name}')
 
 class Poisonous_Breath(Skill):
     def __init__(self):
@@ -300,7 +302,7 @@ class Poisonous_Breath(Skill):
         self.name = 'Poisonous Breath'
         self.skillLevel = 'Intrinsic Skill'
         self.damageType = 'Poison'
-        self.damageLevel = 9
+        self.damageLevel = 8
         self.description = '''
         A powerful breath-type poison (corrosion) attack. 
         Affects an area seven meters in front of the user in a 120-degree radius.
@@ -324,7 +326,7 @@ class Ultrasound_Waves(Skill):
         self.name = 'Ultrasound Waves'
         self.skillLevel = 'Intrinsic Skill'
         self.damageType = 'Melee'
-        self.damageLevel = 4
+        self.damageLevel = 3
         self.description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
         self.UpdateInfo()
 
@@ -346,9 +348,13 @@ class Sticky_Thread(Skill):
         self.name = 'Sticky Thread'
         self.skillLevel = 'Intrinsic Skill'
         self.damageType = 'Melee'
-        self.damageLevel = 5
+        self.damageLevel = 2
         self.description = "A thin sticky thread that traps enemies and prevent them from moving."
         self.UpdateInfo()
+
+    def UseSkill(self):
+        characters.rimuru.target.movement = False
+
 
 class Steel_Thread(Skill):
     def __init__(self):
