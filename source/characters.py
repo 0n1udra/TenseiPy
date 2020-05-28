@@ -1,4 +1,4 @@
-import skills
+import skills, items
 
 def ssprint(Msg):
     print(f'    {Msg}\n')
@@ -15,10 +15,9 @@ class Character:
         self.info = 'N/A'
         self.appearance = 'N/A'
         self.description = 'N/A'
-        self.status = 'N/A'
+        self.alive = True
         self.invisible = False
-
-        self.inventoryCapacity = 0
+        self.movement = False # If monster is moving too fast for attack, use sticky thread
 
         # Game variables
         self.storyProgress = [None]
@@ -26,11 +25,14 @@ class Character:
         self.textDelay = True
         self.lastCommand = ''
         self.currentMobs = []
+        self.focusTarget = None
 
         # For predator
         self.amount = 0
         self.addAmount = 1
         self.capacityUse = 0
+        self.inventoryCapacity = 0
+        self.objectType = 'character'
 
         self.attributes = {
             'Ultimate Skill' : {},
@@ -53,8 +55,49 @@ class Character:
             'Misc' : {},
         }
 
+    def SetTarget(self, target):
+        if target == 'reset':
+            self.focusTarget = None
+        else:
+            for i in self.currentMobs:
+                if target == i.name.lower():
+                    self.focusTarget = i
+                    ssprint(f"<Focusing {self.focusTarget.name}>")
+                    break
+
+    def TargetDead(self):
+        for i in self.currentMobs:
+            try:
+                if i.name == self.focusTarget.name:
+                    i.alive = False
+                    self.focusTarget = None
+            except: pass
+
 
     # ========== Info
+    def Generators(self, inp, mimic=False, new=False):
+        try:
+            inp = inp.name # If input is an object
+        except: pass
+
+        generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
+        if new:
+            generators = [*items.Item.__subclasses__(), *skills.Skill.__subclasses__(), *Character.__subclasses__()]
+        elif mimic:
+            generators = [*self.MimicGenerator()]
+
+        # Adds mimicked monster abilities if currently using mimic
+        if rimuru.mimicObject:
+                generators.extend(self.AttributesGenerator(rimuru.mimicObject))
+        try:
+            for i in generators:
+                if new: 
+                    i = i()
+                if i.name.lower() == inp.lower():
+                    return i
+                    break
+        except: pass
+
     def SetName(self, inpName, character):
         character.name = inpName
 
@@ -68,7 +111,7 @@ class Character:
     Title: {self.title}
     Species: {self.species}
     Rank: {self.rank}
-    Status: {self.status}
+    Alive: {self.alive}
     Divine Protection: {self.divineProtection}
 
     Description:
@@ -82,29 +125,8 @@ class Character:
         ranking = ['Special S', 'S', 'Special A' ,'A+', 'A', 'A-', 'B', 'C', 'D', 'E', 'F']
         self.rank = ranking[self.level-1]
 
-    def Generators(self, inp, mimic=False):
-        try: inp = inp.name # If input is an object
-        except: pass
-        if mimic:
-            try:
-                for i in self.MimicGenerator():
-                    if i.name.lower() == inp.lower():
-                        return i
-            except: pass
-        else:
-            generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
-            # Adds mimicked monster abilities 
-            if rimuru.mimicObject:
-                generators.extend(self.AttributesGenerator(rimuru.mimicObject))
-            try:
-                for i in generators:
-                    if i.name.lower() == inp.lower():
-                        return i
-                        break
-            except: pass
-
     def ShowInfo(self, usrInp):
-        try: 
+        try:
             print(self.Generators(usrInp).info)
         except: pass
 
@@ -119,36 +141,46 @@ class Character:
             return True
         except: pass
 
-    def UpdateActive(self, skill, active=True):
-        if active:
-            pass
+    def UpdateActive(self, skill, setActive=True):
+        try:
+            self.Generators(skill).active = setActive
+        except: pass
+
 
     # ========== Attack
-    def CheckResistance(self, checkResist, character=None):
+    def CheckResistance(self, attack, character):
         # Checks if character has resistance attribute
         for resistName, resistObject in character.attributes['Resistance'].items():
             for resist in resistObject.resistTypes:
-                if resist.lower() == checkResist.lower():
+                if resist.lower() == attack.lower():
                     return True
                     break
 
-    def CanAttack(self, attack, target=None):
-        attacked = attackSuccess = False
-        if attack == '': return False, False
-
-        try: attack = self.Generators(attack)
+    def CanAttack(self, attack, rimuru=False):
+        try:
+            target = self.focusTarget
         except: pass
+        if rimuru:
+            target = rimuru
+        attacked = attackSuccess = False
+        if attack == '': 
+            return False, False
 
-        if attack:
-            if not self.CheckResistance(attack.damageType, target):
-                if target.level <= attack.damageLevel:
-                    attackSuccess = attacked = True
-                else:
-                    ssprint("<Target is too high of a level for that attack.>")
-                    attacked = True
+        try: 
+            attack = self.Generators(attack)
+        except: 
+            return False, False
+
+        if not self.CheckResistance(attack.damageType, self.focusTarget):
+            if self.focusTarget.level <= attack.damageLevel:
+                self.TargetDead()
+                attackSuccess = attacked = True
             else:
-                ssprint(f'<<Note, target has resistance to {i.damageType}.>>')
+                ssprint("<Target is too high of a level for that attack.>")
                 attacked = True
+        else:
+            ssprint(f'<<Note, target has resistance to {i.damageType}.>>')
+            attacked = True
         return attacked, attackSuccess
 
     # ========== Predator Functions
@@ -157,18 +189,36 @@ class Character:
             for name in lvlList:
                 yield name
 
+    def PredateTarget(self, inpTarget):
+        target = self.Generators(inpTarget)
+        # If target (item/skill) is a new one (have not been added to inv/attr)
+        new = False
+        if not target:
+            target = self.Generators(inpTarget, new=True)
+            new = True
+
+        ssprint(f'<<Information, analysis complete on {target.name}.>>')
+        if target.objectType == 'item':
+            self.AddInventory(target)
+        if target.objectType == 'character':
+            self.AddMimicry(target)
+        if new:
+            self.ShowInfo(target)
+        
+
     def MimicObject(self, active=None):
         mimic = self.attributes['Unique Skill']['Mimic']
-        if active: mimic.active = True
-        elif not active: mimic.active = False
+        if active: 
+            mimic.active = True
+        elif not active: 
+            mimic.active = False
         return mimic
-        
 
     def AddMimicry(self, character):
         if not self.Generators(character, True): # If already have mimic
             self.MimicObject().mimics[character.rank].append(character)
             ssprint(f'<<Note, new mimicry available: {character.name}.>>')
-            self.ShowInfo(character.name)
+            self.ShowInfo(character)
 
     def CanMimic(self, character):
         if character == 'reset':
@@ -185,11 +235,12 @@ class Character:
     # ========== Attribute Functions
     def AttributesGenerator(self, target=None, output=False):
         character = self.attributes
-        if target: character = target.attributes # If no specified character
+        if target: 
+            character = target.attributes # If no specified character
 
         for skillType, skills in character.items():
-            if output and skills: yield(f'{skillType}:') # If output=True prints out skillType
-
+            if output and skills: 
+                yield(f'{skillType}:') # If output=True prints out skillType
             for skillName, skillObject in skills.items():
                 if output: 
                     if skillObject.active:
@@ -207,7 +258,8 @@ class Character:
         else:
             showMimic = False
             # Get stats for other monsters
-            try: character = self.Generators(character, True)
+            try: 
+                character = self.Generators(character, True)
             except: pass
 
         print(f"""
@@ -251,7 +303,8 @@ Name: {character.name} {character.familyName}
     # ========== Inventory Functions
     def InventoryGenerator(self, output=False):
         for itemType, items in self.inventory.items():
-            if output and items: yield(f'{itemType}:') # If output=True prints out itemType also
+            if output and items: 
+                yield(f'{itemType}:') # If output=True prints out itemType also
             for itemName, itemObject in items.items():
                 if output:
                     yield(f'\t{self.inventory[itemType][itemName].amount}x {itemObject.name}')
@@ -299,7 +352,7 @@ class Veldora_Tempest(Character):
         self.name = "Veldora"
         self.title = 'Storm Dragon'
         self.species = 'True Dragon'
-        self.status = 'Alive'
+        self.alive = True
         self.level = 11
         self.itemType = 'Misc'
         self.capacityUse = 10
