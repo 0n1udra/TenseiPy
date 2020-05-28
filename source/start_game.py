@@ -5,6 +5,132 @@ from time import sleep
 
 usrInpDebug = False
 
+#                    ========== Game Input ==========
+def RunFuncs(msg, actions, funcs):
+    if usrInpDebug: 
+        usrInp = actions[0][0]
+    else:
+        # Adds () around actions, (*action)
+        options = ', '.join('(' + i + ')' for i in msg)
+        if characters.rimuru.focusTarget:
+            print(f"\nTarget: {characters.rimuru.focusTarget.name}\nActions:", options, f'| {characters.rimuru.mimicking}, (stats, inv, help)')
+        else:
+            print("\nActions:", options, f'| {characters.rimuru.mimicking}, (stats, inv, help)')
+        usrInp = input("\n> ").lower()
+        print()
+
+    loop = True
+    attacked = attackSuccess = skillSuccess = False
+    # Get info on skills, times, etc
+    splitInput = ' '.join(usrInp.split()[1:])
+    gameActions = {
+            'info': characters.rimuru.ShowInfo,
+            'stats': characters.rimuru.ShowAttributes,
+            'target': characters.rimuru.SetTarget,
+            'predate': characters.rimuru.PredateTarget,
+            'mimic': characters.rimuru.CanMimic, 
+            }
+    try:
+        for k, v in gameActions.items():
+            if k in usrInp:
+                v(splitInput)
+        if 'use' in usrInp:
+            skillSuccess = characters.rimuru.UseSkill(splitInput)
+        elif 'attack with' in usrInp:
+            splitInput = ' '.join(usrInp.split()[2:])
+            attacked, attackSuccess = characters.rimuru.CanAttack(splitInput)
+    except: pass
+
+    # If action has *, continues story
+    for i in range(len(funcs)):
+        contAction = ''
+        for j in actions[i]:
+            try:
+                contAction = msg[i][0]
+            except: pass
+           # Checks if valid command
+            if usrInp.lower() == j.lower():
+               # Checks if command continues story
+                if contAction == '*':
+                    funcs[i]()
+                    loop = False
+                    characters.rimuru.lastCommand = usrInp
+                    break
+                else:
+                    funcs[i]()
+                    characters.rimuru.lastCommand = usrInp
+        if skillSuccess:
+            funcs[0]()
+            loop = False
+        elif attacked and not attackSuccess:
+            funcs[1]()
+        elif attacked and attackSuccess:
+            funcs[0]()
+            loop = False
+
+        if not loop: break
+    else: 
+        RunFuncs(msg, actions, funcs)
+
+def ActionMenu(msg, actions, funcs):
+    actions.extend([['help'], ['inv'], ['exit']])
+    funcs.extend([ShowHelp, characters.rimuru.ShowInventory, ExitGame])
+    RunFuncs(msg, actions, funcs)
+
+def ShowHelp():
+    print("""
+    Commands:
+        target ___      -- Target commands and abilities. E.g. Target Tempest Serpent
+        attack with ___ -- Attack target. E.g. attack with water blade
+        use ___         -- Use skill/items. E.g. use sense heat source
+        stats           -- Show yours skills and resistances. 
+          - stats ___   -- Stats for monsters you have predated. E.g. stats tempest serpent
+        inv             -- Show inventory.
+        info            -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
+          - info mimic  -- Shows available mimicries.
+        help            -- Show this help page.
+        exit            -- Exit game.
+
+    Abilities:
+        mimic ___     -- Mimics appearance of already predated being. E.g. mimic tempest serpent
+          - info mimic  -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
+          - mimic reset -- Resets mimic (Back to slime)
+        
+    Game Dialogue:
+        ~Message~       -- Telepathy
+        *Message*       -- Story progression
+        <Message>       -- Acquired item, etc
+        <<Message>>     -- Great Sage (Raphael, Ciel)
+        <<<Message>>>   -- Voice of the World
+
+    HUD:
+        Target: Currently Focused Target
+        Actions: (ACTIONS) | MIMIC, (Extra Actions)
+
+    Level/Ranking:
+       Level      Rank         Risk
+        11.     Special S   Catastrophe
+        10.     S           Disaster
+        9.      Special A   Calamity
+        8.      A+          Tragedy
+        7.      A           Hazard
+        6.      A-          Danger
+        5.      B           Pro
+        4.      C           Advance
+        3.      D           Intermediate
+        2.      E           Beginner
+        1.      F           Novice
+    """)
+
+#                    ========== Extra ==========
+def ExitGame():
+    exit()
+
+def TBC():
+    print("---TO BE CONTINUED---")
+    input("Press Enter to exit > ")
+
+
 #                    ========== Game Saves ==========
 def LoadGame(path):
     global rimuru
@@ -77,119 +203,6 @@ def sprint(Msg):
 
 def ssprint(Msg):
     sprint(f'    {Msg}')
-
-
-#                    ========== Game Input ==========
-def RunFuncs(msg, actions, funcs, target=None):
-    if usrInpDebug: 
-        usrInp = actions[0][0]
-    else:
-        # Adds () around actions, (*action)
-        options = ', '.join('(' + i + ')' for i in msg)
-        print("\nActions:", options, f'| {characters.rimuru.mimicking}, inv/stats, use, help')
-        usrInp = input("\n> ").lower()
-        print()
-
-    loop = True
-    attacked = attackSuccess = skillSuccess = False
-    # Get info on skills, times, etc
-    splitInput = ' '.join(usrInp.split()[1:])
-    if 'info' in usrInp:
-        characters.rimuru.ShowInfo(splitInput)
-    elif 'stats' in usrInp:
-        try:
-            characters.rimuru.ShowAttributes(splitInput)
-        except: pass
-    elif 'use' in usrInp:
-        skillSuccess = characters.rimuru.UseSkill(splitInput)
-    elif 'mimic' in usrInp:
-        characters.rimuru.CanMimic(splitInput)
-    elif 'attack with' in usrInp:
-        splitInput = ' '.join(usrInp.split()[2:])
-        attacked, attackSuccess = characters.rimuru.CanAttack(splitInput, target)
-
-    # If action has *, continues story
-    for i in range(len(funcs)):
-        contAction = ''
-        for j in actions[i]:
-            try:
-                contAction = msg[i][0]
-            except: pass
-           # Checks if valid command
-            if usrInp.lower() == j.lower():
-               # Checks if command continues story
-                if contAction == '*':
-                    funcs[i]()
-                    loop = False
-                    characters.rimuru.lastCommand = usrInp
-                    break
-                else:
-                    funcs[i]()
-                    characters.rimuru.lastCommand = usrInp
-        if skillSuccess:
-            funcs[0]()
-            loop = False
-        elif attacked and not attackSuccess:
-            funcs[1]()
-        elif attacked and attackSuccess:
-            funcs[0]()
-            loop = False
-
-        if not loop: break
-    else: 
-        RunFuncs(msg, actions, funcs, target)
-
-def ActionMenu(msg, actions, funcs, target=None):
-    actions.extend([['help'], ['inv'], ['exit']])
-    funcs.extend([ShowHelp, characters.rimuru.ShowInventory, ExitGame])
-    RunFuncs(msg, actions, funcs, target)
-
-def ShowHelp():
-    print("""
-    Commands:
-        attack with ___ -- Attack with a skill you have. E.g. attack with water blade
-        inv             -- Show inventory
-        stats           -- Show skills and resistances. 
-          - stats ___   -- Stats for monsters you have predated. E.g. stats tempest serpent
-        use ___         -- Use a skill. E.g. use sense heat source
-        info            -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
-        help            -- Show this help page
-        exit            -- Exit game
-
-    Abilities:
-        mimic ___     -- Mimics appearance of already predated being. E.g. mimic tempest serpent
-          - info mimic  -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
-          - mimic reset -- Resets mimic (Back to slime)
-        
-    Game Dialogue:
-        ~Message~       -- Telepathy
-        *Message*       -- Story progression
-        <Message>       -- Acquired item, etc
-        <<Message>>     -- Great Sage (Raphael, Ciel)
-        <<<Message>>>   -- Voice of the World
-
-    Level/Ranking:
-       Level      Rank         Risk
-        11.     Special S   Catastrophe
-        10.     S           Disaster
-        9.      Special A   Calamity
-        8.      A+          Tragedy
-        7.      A           Hazard
-        6.      A-          Danger
-        5.      B           Pro
-        4.      C           Advance
-        3.      D           Intermediate
-        2.      E           Beginner
-        1.      F           Novice
-    """)
-
-#                    ========== Extra ==========
-def ExitGame():
-    exit()
-
-def TBC():
-    print("---TO BE CONTINUED---")
-    input("Press Enter to exit > ")
 
 if __name__ == '__main__':
     # Get file path depending on Windows or not
