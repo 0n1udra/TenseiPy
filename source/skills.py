@@ -213,6 +213,14 @@ class Magic_Perception(Skill):
         '''
         self.UpdateInfo()
 
+    def UseSkill(self):
+        print("\t<Activated Extra Skill [Magic Perception].>")
+        self.active = True
+        return True
+
+    
+
+
 class Water_Manipulation(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -241,7 +249,7 @@ class Water_Blade(Skill):
         self.name = 'Water Blade'
         self.damageType = 'Melee'
         self.damageLevel = 9
-        self.description = "Shoot out a small powerful water bullet."
+        self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.UpdateInfo()
 
@@ -251,7 +259,7 @@ class Water_Bullet(Skill):
         self.name = 'Water Bullet'
         self.damageType = 'Melee'
         self.damageLevel = 9
-        self.description = 'Shoot out a thin water blade with tremendous cutting power.'
+        self.description = "Shoot out a small powerful water bullet."
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.UpdateInfo()
 
@@ -291,10 +299,13 @@ class Sense_Heat_Source(Skill):
         self.UpdateInfo()
 
     def UseSkill(self):
-        print("\t-----Nearby Heat Sources-----")
-        for i in characters.rimuru.currentMobs:
-            if i.alive:
-                print(f'\t{i.name}')
+        try:
+            print("\t-----Nearby Heat Sources-----")
+            for i in characters.rimuru.currentMobs:
+                if i.alive:
+                    print(f'\t{i.name}')
+            return True
+        except: pass
 
 class Poisonous_Breath(Skill):
     def __init__(self):
@@ -353,7 +364,10 @@ class Sticky_Thread(Skill):
         self.UpdateInfo()
 
     def UseSkill(self):
-        characters.rimuru.target.movement = False
+        try:
+            characters.rimuru.target.movement = False
+            return True
+        except: pass
 
 
 class Steel_Thread(Skill):
