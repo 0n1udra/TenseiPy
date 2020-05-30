@@ -25,7 +25,7 @@ class Character:
         self.textDelay = True
         self.lastCommand = ''
         self.currentMobs = []
-        self.focusTarget = None
+        self.focusTargets = set()
 
         # For predator
         self.amount = 0
@@ -59,21 +59,15 @@ class Character:
         return self.name.lower()
 
 
-    def SetTarget(self, target):
-        if target == 'reset':
-            self.focusTarget = None
+    def SetTarget(self, targets):
+        if 'reset' in targets:
+            self.focusTargets = []
         else:
-            for i in self.currentMobs:
-                if target == i.name.lower():
-                    self.focusTarget = i
-                    ssprint(f"<Focusing {self.focusTarget.name}>")
-                    break
-
-    def TargetDead(self, target):
-            try:
-                target.alive = False
-                self.focusTarget = None
-            except: pass
+            for target in targets.split(','):
+                for i in self.currentMobs:
+                    if i.GetName() in target:
+                        self.focusTargets.add(i)
+                        break
 
 
     # ========== Info
@@ -131,6 +125,13 @@ class Character:
             print(self.Generators(usrInp).info)
         except: pass
 
+    def CheckStatus(self, target):
+        try:
+            for i in self.currentMobs:
+                if target in i.getName():
+                    return True
+        except: pass
+
     def UpdateRanking(self, level):
         self.level = level
         self.UpdateInfo()
@@ -153,7 +154,7 @@ class Character:
                     break
 
     def CanAttack(self, usrInput, rimuru=False):
-        targets, attacks = [], []
+        targets, attacks = self.focusTargets, []
         try:
             splitInput = usrInput.split(',')
         except: 
@@ -161,7 +162,8 @@ class Character:
 
         for i in self.currentMobs:
             if i.GetName() in usrInput and i.alive:
-                targets.append(i)
+                targets.add(i)
+                self.focusTargets.add(i)
 
         for i in splitInput:
             skill = self.Generators(i)
@@ -169,10 +171,8 @@ class Character:
                 if skill.GetName() in i.lower() and skill.objectType == 'skill':
                     attacks.append(self.Generators(skill))
 
-        if self.focusTarget:
-            targets.append(self.focusTarget)
         if 'rimuru' in usrInput:
-            targets.append(rimuru)
+            targets.add(rimuru)
 
         attacked = attackSuccess = False
 
@@ -180,7 +180,7 @@ class Character:
             for currentAttack in attacks:
                 if not self.CheckResistance(currentTarget, currentAttack.damageType):
                     if currentTarget.level <= currentAttack.damageLevel:
-                        self.TargetDead(currentTarget)
+                        currentTarget.alive = False
                         attackSuccess = attacked = True
                         ssprint(f'<Eliminated {currentTarget.name}.>')
                     else:
@@ -313,21 +313,29 @@ class Rimuru_Tempest(Character):
                 yield name
 
     def PredateTarget(self, inpTargets):
-        for i in inpTargets.split(','):
-            target = self.Generators(inpTargets)
-            # If target (item/skill) is a new one (have not been added to inv/attr)
-            if not target:
-                target = self.Generators(inpTargets, new=True)
+        predateTargets = list(self.focusTargets)
+        predateTargets.extend(inpTargets.split(','))
+        for target in predateTargets:
+            try:
+                target = self.Generators(target, new=True)
+                targetName = target.GetName()
+            except:
+                targetName = ''
 
             for mob in self.currentMobs:
-                if not mob.alive and mob.GetName() in i.lower():
-                    self.AddMimicry(mob)
-                    ssprint(f'<<Analysis complete on {mob.name}.>>')
-                    break
+                if not mob.alive:
+                    if mob.GetName() in targetName:
+                        self.AddMimicry(target)
+                        ssprint(f'<<Analysis complete on {mob.name}.>>')
 
-            if target.objectType == 'item':
-                self.AddInventory(target)
-                ssprint(f'<<Analysis on {target.name} successful.>>')
+            try:
+                if target.objectType == 'item':
+                    self.AddInventory(target)
+                    ssprint(f'<<Analysis on {target.name} successful.>>')
+            except: pass
+
+            self.focusTargets = set()
+
 
     def MimicObject(self, active=None):
         mimic = self.attributes['Unique Skill']['Mimic']
