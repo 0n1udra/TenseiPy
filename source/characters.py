@@ -65,12 +65,10 @@ class Character:
                     ssprint(f"<Focusing {self.focusTarget.name}>")
                     break
 
-    def TargetDead(self):
-        for i in self.currentMobs:
+    def TargetDead(self, target):
             try:
-                if i.name == self.focusTarget.name:
-                    i.alive = False
-                    self.focusTarget = None
+                target.alive = False
+                self.focusTarget = None
             except: pass
 
 
@@ -83,7 +81,7 @@ class Character:
         generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
         if new:
             generators = [*items.Item.__subclasses__(), *skills.Skill.__subclasses__(), *Character.__subclasses__()]
-        elif mimic:
+        if mimic:
             generators = [*self.MimicGenerator()]
 
         # Adds mimicked monster abilities if currently using mimic
@@ -93,9 +91,8 @@ class Character:
             for i in generators:
                 if new: 
                     i = i()
-                if i.name.lower() == inp.lower():
+                if i.name.lower() in inp.lower():
                     return i
-                    break
         except: pass
 
     def SetName(self, inpName, character):
@@ -137,18 +134,13 @@ class Character:
 
     def UseSkill(self, skill):
         try:
-            self.Generators(skill).UseSkill()
-            return True
-        except: pass
-
-    def UpdateActive(self, skill, setActive=True):
-        try:
-            self.Generators(skill).active = setActive
+            if self.Generators(skill).UseSkill():
+                return True
         except: pass
 
 
     # ========== Attack
-    def CheckResistance(self, attack, character):
+    def CheckResistance(self, character, attack):
         # Checks if character has resistance attribute
         for resistName, resistObject in character.attributes['Resistance'].items():
             for resist in resistObject.resistTypes:
@@ -156,31 +148,45 @@ class Character:
                     return True
                     break
 
-    def CanAttack(self, attack, rimuru=False):
+    def CanAttack(self, usrInput, rimuru=False):
+        targets, attacks = [], []
         try:
-            target = self.focusTarget
-        except: pass
-        if rimuru:
-            target = rimuru
-        attacked = attackSuccess = False
-        if attack == '': 
-            return False, False
-
-        try: 
-            attack = self.Generators(attack)
+            splitInput = usrInput.split(',')
         except: 
+            splitInput = usrInput
+
+        for i in self.currentMobs:
+            if i.name.lower() in usrInput and i.alive:
+                targets.append(i)
+
+        for i in splitInput:
+            skill = self.Generators(i)
+            if skill:
+                if skill.name.lower() in i.lower() and skill.objectType == 'skill':
+                    attacks.append(self.Generators(skill))
+
+        if self.focusTarget:
+            targets.append(self.focusTarget)
+        if 'rimuru' in usrInput:
+            targets.append(rimuru)
+        attacked = attackSuccess = False
+        if not attacks:
             return False, False
 
-        if not self.CheckResistance(attack.damageType, self.focusTarget):
-            if self.focusTarget.level <= attack.damageLevel:
-                self.TargetDead()
-                attackSuccess = attacked = True
-            else:
-                ssprint("<Target is too high of a level for that attack.>")
-                attacked = True
-        else:
-            ssprint(f'<<Note, target has resistance to {i.damageType}.>>')
-            attacked = True
+        print(targets, attacks)
+        for currentTarget in targets:
+            for currentAttack in attacks:
+                if not self.CheckResistance(currentTarget, currentAttack.damageType):
+                    if currentTarget.level <= currentAttack.damageLevel:
+                        self.TargetDead(currentTarget)
+                        attackSuccess = attacked = True
+                        ssprint(f'<Eliminated {currentTarget.name}.>')
+                    else:
+                        ssprint(f"<{currentTarget.name} level too for that attack.>")
+                        attacked = True
+                else:
+                    ssprint(f'<<Warning,{currentTarget.name} has resistance to {currentAttack.damageType}.>>')
+                    attacked = True
         return attacked, attackSuccess
 
     # ========== Predator Functions
@@ -197,28 +203,25 @@ class Character:
             target = self.Generators(inpTarget, new=True)
             new = True
 
-        ssprint(f'<<Information, analysis complete on {target.name}.>>')
         if target.objectType == 'item':
             self.AddInventory(target)
-        if target.objectType == 'character':
+            ssprint(f'<<Information, analysis on {target.name} successful.>>')
+        if not target.alive and target.objectType == 'character':
             self.AddMimicry(target)
+            ssprint(f'<<Information, analysis complete on {target.name}.>>')
         if new:
             self.ShowInfo(target)
         
 
     def MimicObject(self, active=None):
         mimic = self.attributes['Unique Skill']['Mimic']
-        if active: 
-            mimic.active = True
-        elif not active: 
-            mimic.active = False
+        mimic.active = active
         return mimic
 
     def AddMimicry(self, character):
         if not self.Generators(character, True): # If already have mimic
             self.MimicObject().mimics[character.rank].append(character)
             ssprint(f'<<Note, new mimicry available: {character.name}.>>')
-            self.ShowInfo(character)
 
     def CanMimic(self, character):
         if character == 'reset':
