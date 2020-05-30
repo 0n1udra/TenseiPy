@@ -2,7 +2,7 @@ from start_game import *
 
 def Chapter2(rimuru):
 
-    rimuru.currentMobs = [characters.Tempest_Serpent(), characters.Giant_Bat()]
+    rimuru.currentMobs = [characters.Tempest_Serpent(), characters.Giant_Bat(), characters.Evil_Centipede(), characters.Black_Spider()]
 
     def StartChapter2():
         sprint("Oh, what's this? Looks like some kind of ore.")
@@ -31,8 +31,8 @@ def Chapter2(rimuru):
         sprint("Alright, lets try out this new skill.")
         ssprint("<Target the Tempest Serpent, then attack with your new skill. 'help' for more info.>")
 
-        ActionMenu(['*Attack with ___'],
-                [['attack with :#%^@'], []],
+        ActionMenu(['*Attack'],
+                [['attack :#%^@'], []],
                     [AttackSerpent, FailedSerpent])
 
         sprint("I wonder what else is in this cave.")
@@ -44,15 +44,29 @@ def Chapter2(rimuru):
 
         sprint("Are those bats? I wonder...")
 
-        ActionMenu(['*Attack with ___'],
-                [['attack with $%:@'], []],
-                    [AttackBat, FailedBat])
+        ActionMenu(['*Move on'],
+                [['move on'], []],
+                    [MoveOn])
+
+        sprint("*A Black Spider appears before you*")
+        
+        ActionMenu(['*Attack', '*Find Exit'],
+                [['attack $%:$%$'], ['find exit']],
+                [AttackSpider, FindExit])
+
 
         #DeleteGame(rimuru)
 
         ActionMenu(['*Wonder',],
                 [['Wonder'], []],
                     [Wonder])
+
+    # ========== Black Spider
+    def AttackSpider():
+        pass
+
+    def FindExit():
+        pass
 
     def ContinueStory():
         ssprint("Lets keep moving")
@@ -70,8 +84,8 @@ def Chapter2(rimuru):
 
     def FailedBat():
         sprint("That didn't work...")
-        ActionMenu(['*Attack with ___'],
-                [['attack with $%:@'], []],
+        ActionMenu(['*Attack'],
+                [['attack $%:@'], []],
                     [AttackBat, failedBat])
 
     def PredateBat():
@@ -96,7 +110,7 @@ def Chapter2(rimuru):
         sprint("Uh, How did that not work...")
 
         ActionMenu(['*Attack with ___'],
-                [['attack with :#@$^'], []],
+                [['attack :#@$^'], []],
                     [AttackSerpent, FailedSerpent])
 
     def PredateSerpent():

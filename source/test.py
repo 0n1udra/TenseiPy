@@ -1,6 +1,10 @@
-x = 'Hello World'
-print(x)
-print('x.__len__:', x.__len__())
-print('len(x):', len(x))
-print(help(title))
 
+def gen1(y=False):
+    for i in range(10):
+        yield i
+        if i == 5:
+            break
+
+
+x = [i for i in gen1()]
+print(x)

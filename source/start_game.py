@@ -1,4 +1,4 @@
-import characters, skills, items, slime_art
+import characters, skills, items, slime_art 
 import chapters.tensei_1 as tensei1
 import pickle, sys, os
 from time import sleep
@@ -30,14 +30,16 @@ def RunFuncs(msg, actions, funcs):
             'predate': characters.rimuru.PredateTarget,
             'mimic': characters.rimuru.CanMimic, 
             }
+
     try:
         for k, v in gameActions.items():
             if k in usrInp:
                 v(splitInput)
+
         if 'use' in usrInp:
             skillSuccess = characters.rimuru.UseSkill(splitInput)
-        elif 'attack with' in usrInp:
-            splitInput = ' '.join(usrInp.split()[2:])
+        if 'attack' in usrInp:
+            splitInput = ' '.join(usrInp.split()[1:])
             attacked, attackSuccess = characters.rimuru.CanAttack(splitInput)
     except: pass
 
@@ -80,28 +82,29 @@ def ActionMenu(msg, actions, funcs):
 def ShowHelp():
     print("""
     Commands:
-        target ___      -- Target commands and abilities. E.g. Target Tempest Serpent
-        attack with ___ -- Attack target. E.g. attack with water blade
-        use ___         -- Use skill/items. E.g. use sense heat source
-        stats           -- Show yours skills and resistances. 
-          - stats ___   -- Stats for monsters you have predated. E.g. stats tempest serpent
-        inv             -- Show inventory.
-        info            -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
-          - info mimic  -- Shows available mimicries.
-        help            -- Show this help page.
-        exit            -- Exit game.
+        target TARGET       -- Target commands and abilities. E.g. target tempest serpent
+        attack TARGET SKILL -- Attack target(s) with skill(s). E.g. attack tempest serpent with water blade
+           Multiple targets and attacks separated by comma. E.g. attack tempest serpent, black spider with water blade, poisonous breath
+        use SKILL           -- Use skill/items. E.g. use sense heat source
+        stats               -- Show yours skills and resistances. 
+          - stats TARGET    -- Stats for monsters you have predated. E.g. stats tempest serpent
+        inv                 -- Show inventory.
+        info                -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
+          - info mimic      -- Shows available mimicries.
+        help                -- Show this help page.
+        exit                -- Exit game.
 
     Abilities:
-        mimic ___     -- Mimics appearance of already predated being. E.g. mimic tempest serpent
-          - info mimic  -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
-          - mimic reset -- Resets mimic (Back to slime)
+        mimic ___           -- Mimics appearance of already predated being. E.g. mimic tempest serpent
+          - info mimic      -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
+          - mimic reset     -- Resets mimic (Back to slime)
         
     Game Dialogue:
-        ~Message~       -- Telepathy
-        *Message*       -- Story progression
-        <Message>       -- Acquired item, etc
-        <<Message>>     -- Great Sage (Raphael, Ciel)
-        <<<Message>>>   -- Voice of the World
+        ~Message~           -- Telepathy
+        *Message*           -- Story progression
+        <Message>           -- Acquired item, etc
+        <<Message>>         -- Great Sage (Raphael, Ciel)
+        <<<Message>>>       -- Voice of the World
 
     HUD:
         Target: Currently Focused Target
@@ -181,7 +184,7 @@ def StartBanner():
 # ========== Printing
 def sprint(Msg):
     msgLen = len(str(Msg))
-    if not characters.rimuru.textDelay:
+    if characters.rimuru.textDelay:
         if msgLen > 100:
             sTime = 1
         elif msgLen > 70 and msgLen > 80:
@@ -216,9 +219,10 @@ if __name__ == '__main__':
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         print("Text Delay: DISABLED")
-    else:
         rimuru.textDelay = False
+    else:
         print("Text Delay: ENABLED")
+    rimuru.textDelay = False
     sleep(1)
     print("\n\n")
 

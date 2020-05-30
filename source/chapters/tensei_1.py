@@ -184,8 +184,9 @@ def Chapter1(rimuru):
         ssprint("<<Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception].>>")
         ssprint("<<Activate [Magic Perception]?>>")
 
-        ActionMenu(['*Activate Magic Perception', 'Puyo'],
-                    [['activate magic perception', 'activate magic sense'], ['move', 'Puyo']],
+        rimuru.AddAttribute(skills.Magic_Perception())
+        ActionMenu(['*Use Magic Perception', 'Puyo'],
+                [['use :A$%', 'activate magic sense'], ['move', 'Puyo']],
                     [ActivateMagicPerception, Puyo])
 
         sprint("~Then shall I introduce myself, again?~")
@@ -256,7 +257,6 @@ def Chapter1(rimuru):
     def ActivateMagicPerception():
         sprint('...')
         sprint(slime_art.magic_perception)
-        rimuru.AddAttribute(skills.Magic_Perception())
         sprint("OH!")
         sprint("Hmmmmmmmm")
         sprint("I can see. I CAN SEE!")
