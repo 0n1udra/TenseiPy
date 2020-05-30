@@ -41,8 +41,12 @@ class Skill:
 
         self.acquiredMsg = f"<<{self.skillLevel} [{self.name}] Acquired.>>"
 
+    def GetName(self):
+        return self.name.lower()
+
     def __str__(self):
         return(self.name)
+
 
 class Resistance(Skill):
     def __init__(self):

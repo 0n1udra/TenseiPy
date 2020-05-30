@@ -31,6 +31,9 @@ class Item:
     def __str__(self):
         return(self.name)
 
+    def GetName(self):
+        return self.name.lower()
+
 
 # ========== Materials ==========
 class Hipokte_Grass(Item):
