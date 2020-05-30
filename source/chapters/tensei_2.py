@@ -42,11 +42,12 @@ def Chapter2(rimuru):
                 [['use :$%^'], ['predate magic ore'], ['move on']],
                 [UseSense, PredateOre, ContinueStory])
 
-        sprint("Are those bats? I wonder...")
+        if rimuru.CheckStatus('giant bat'):
+            sprint("Are those bats? I wonder...")
 
-        ActionMenu(['*Move on'],
-                [['move on'], []],
-                    [MoveOn])
+            ActionMenu(['*Attack', '*Move on'],
+                    [['attack $$"%'], ['move on']],
+                    [AttackBat, MoveOn])
 
         sprint("*A Black Spider appears before you*")
         

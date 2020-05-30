@@ -12,10 +12,17 @@ def RunFuncs(msg, actions, funcs):
     else:
         # Adds () around actions, (*action)
         options = ', '.join('(' + i + ')' for i in msg)
-        if characters.rimuru.focusTarget:
-            print(f"\nTarget: {characters.rimuru.focusTarget.name}\nActions:", options, f'| {characters.rimuru.mimicking}, (stats, inv, help)')
+        mimic = characters.rimuru.mimicking
+        try:
+            targets, = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in characters.rimuru.focusTargets]), 
+        except:
+            targets = None
+
+        if targets:
+            print(f'\nTarget:', str(targets))
+            print(f'Actions:', options, f'| {mimic}, (stats, inv, help)')
         else:
-            print("\nActions:", options, f'| {characters.rimuru.mimicking}, (stats, inv, help)')
+            print("\nActions:", options, f'| {mimic}, (stats, inv, help)')
         usrInp = input("\n> ").lower()
         print()
 
@@ -31,16 +38,16 @@ def RunFuncs(msg, actions, funcs):
             'mimic': characters.rimuru.CanMimic, 
             }
 
-    try:
-        for k, v in gameActions.items():
-            if k in usrInp:
-                v(splitInput)
+    for k, v in gameActions.items():
+        if k in usrInp:
+            v(splitInput)
 
-        if 'use' in usrInp:
-            skillSuccess = characters.rimuru.UseSkill(splitInput)
-        if 'attack' in usrInp:
-            splitInput = ' '.join(usrInp.split()[1:])
-            attacked, attackSuccess = characters.rimuru.CanAttack(splitInput)
+    if 'use' in usrInp:
+        skillSuccess = characters.rimuru.UseSkill(splitInput)
+    if 'attack' in usrInp:
+        splitInput = ' '.join(usrInp.split()[1:])
+        attacked, attackSuccess = characters.rimuru.CanAttack(splitInput)
+    try: pass
     except: pass
 
     # If action has *, continues story
@@ -82,33 +89,36 @@ def ActionMenu(msg, actions, funcs):
 def ShowHelp():
     print("""
     Commands:
-        target TARGET       -- Target commands and abilities. E.g. target tempest serpent
-        attack TARGET SKILL -- Attack target(s) with skill(s). E.g. attack tempest serpent with water blade
-           Multiple targets and attacks separated by comma. E.g. attack tempest serpent, black spider with water blade, poisonous breath
-        use SKILL           -- Use skill/items. E.g. use sense heat source
-        stats               -- Show yours skills and resistances. 
-          - stats TARGET    -- Stats for monsters you have predated. E.g. stats tempest serpent
-        inv                 -- Show inventory.
-        info                -- Show info on skill, item or character. E.g. info great sage, info hipokte grass, info veldora
-          - info mimic      -- Shows available mimicries.
-        help                -- Show this help page.
-        exit                -- Exit game.
+        target TARGET(s)            -- Target commands and abilities. E.g. 'target tempest serpent'
+        attack <TARGET> with SKILL  -- Attack optional target(s) with skill(s). E.g. 'attack with water blade', tempest serpent with water blade
+          - Multiple targets and/or attacks separated by comma. E.g. 'attack tempest serpent, black spider with water blade, poisonous breath'
+        use SKILL(s)                -- Use skill/items. E.g. 'use sense heat source'
+        stats                       -- Show yours skills and resistances. 
+          - stats TARGET            -- Stats for monsters you have predated. E.g. 'stats tempest serpent'
+        inv                         -- Show inventory.
+        info                        -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        help                        -- Show this help page.
+        exit                        -- Exit game.
 
     Abilities:
-        mimic ___           -- Mimics appearance of already predated being. E.g. mimic tempest serpent
-          - info mimic      -- Shows available mimicries. Use info to get monster abilities, E.g. info Tempest Serpent
-          - mimic reset     -- Resets mimic (Back to slime)
+        mimic ___                   -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
+          - info mimic              -- Shows available mimicries.
+          - mimic reset             -- Resets mimic (Back to slime)
+        predate <TARGET(s)>         -- Predate target(s). Can be used with 'target' command. E.g. 'predate', 'predate magic ore', 'predate giant bat, black spider'
         
     Game Dialogue:
-        ~Message~           -- Telepathy
-        *Message*           -- Story progression
-        <Message>           -- Acquired item, etc
-        <<Message>>         -- Great Sage (Raphael, Ciel)
-        <<<Message>>>       -- Voice of the World
+        ~Message~                   -- Telepathy
+        *Message*                   -- Story progression
+        <Message>                   -- Acquired item, information, etc
+        <<Message>>                 -- Great Sage (Raphael, Ciel)
+        <<<Message>>>               -- Voice of the World
 
     HUD:
-        Target: Currently Focused Target
-        Actions: (ACTIONS) | MIMIC, (Extra Actions)
+        Target: Currently Focused Target(s)
+        Actions: (ACTION(s)) | MIMIC, (Extra Actions)
+      E.g.
+        Target: Giant Bat, Black Spider
+        Actions: (*Attack), (*Move on) | Tempest Serpent, (stats, inv, help)
 
     Level/Ranking:
        Level      Rank         Risk
