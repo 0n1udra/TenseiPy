@@ -55,6 +55,10 @@ class Character:
             'Misc' : {},
         }
 
+    def GetName(self):
+        return self.name.lower()
+
+
     def SetTarget(self, target):
         if target == 'reset':
             self.focusTarget = None
@@ -91,7 +95,7 @@ class Character:
             for i in generators:
                 if new: 
                     i = i()
-                if i.name.lower() in inp.lower():
+                if i.GetName() in inp.lower():
                     return i
         except: pass
 
@@ -156,24 +160,22 @@ class Character:
             splitInput = usrInput
 
         for i in self.currentMobs:
-            if i.name.lower() in usrInput and i.alive:
+            if i.GetName() in usrInput and i.alive:
                 targets.append(i)
 
         for i in splitInput:
             skill = self.Generators(i)
             if skill:
-                if skill.name.lower() in i.lower() and skill.objectType == 'skill':
+                if skill.GetName() in i.lower() and skill.objectType == 'skill':
                     attacks.append(self.Generators(skill))
 
         if self.focusTarget:
             targets.append(self.focusTarget)
         if 'rimuru' in usrInput:
             targets.append(rimuru)
-        attacked = attackSuccess = False
-        if not attacks:
-            return False, False
 
-        print(targets, attacks)
+        attacked = attackSuccess = False
+
         for currentTarget in targets:
             for currentAttack in attacks:
                 if not self.CheckResistance(currentTarget, currentAttack.damageType):
@@ -188,51 +190,6 @@ class Character:
                     ssprint(f'<<Warning,{currentTarget.name} has resistance to {currentAttack.damageType}.>>')
                     attacked = True
         return attacked, attackSuccess
-
-    # ========== Predator Functions
-    def MimicGenerator(self):
-        for lvl, lvlList in self.MimicObject().mimics.items():
-            for name in lvlList:
-                yield name
-
-    def PredateTarget(self, inpTarget):
-        target = self.Generators(inpTarget)
-        # If target (item/skill) is a new one (have not been added to inv/attr)
-        new = False
-        if not target:
-            target = self.Generators(inpTarget, new=True)
-            new = True
-
-        if target.objectType == 'item':
-            self.AddInventory(target)
-            ssprint(f'<<Information, analysis on {target.name} successful.>>')
-        if not target.alive and target.objectType == 'character':
-            self.AddMimicry(target)
-            ssprint(f'<<Information, analysis complete on {target.name}.>>')
-        if new:
-            self.ShowInfo(target)
-        
-
-    def MimicObject(self, active=None):
-        mimic = self.attributes['Unique Skill']['Mimic']
-        mimic.active = active
-        return mimic
-
-    def AddMimicry(self, character):
-        if not self.Generators(character, True): # If already have mimic
-            self.MimicObject().mimics[character.rank].append(character)
-            ssprint(f'<<Note, new mimicry available: {character.name}.>>')
-
-    def CanMimic(self, character):
-        if character == 'reset':
-            self.mimicking, self.mimicObject = 'Slime', None # Resets mimic variables
-            ssprint("<Mimicry Reset>")
-        else:
-            try: 
-                currentMimic = self.Generators(character, True)
-                self.mimicking, self.mimicObject = currentMimic.name, currentMimic
-                ssprint(f'<Now Mimicking: {currentMimic.name}>')
-            except: pass
 
 
     # ========== Attribute Functions
@@ -325,6 +282,7 @@ Name: {character.name} {character.familyName}
         except:
             self.inventory[item.itemType][item.name] = item
             self.inventory[item.itemType][item.name].amount += item.addAmount
+            self.ShowInfo(item)
         self.inventoryCapacity += item.capacityUse
         ssprint(item.AcquiredMsg() + f' | Total: {self.inventory[item.itemType][item.name].amount}>')
         ssprint(f'<Inventory Capacity: {self.inventoryCapacity:.2f}%>')
@@ -347,6 +305,51 @@ class Rimuru_Tempest(Character):
         self.startState = [skills.Predator_Mimicry_Skill(), skills.Self_Regeneration(), skills.Absorb_Dissolve(), 
                     skills.Resist_Pain(), skills.Resist_Melee(), skills.Resist_Electricity(), skills.Resist_Temperature()]
         self.UpdateInfo()
+
+    # ========== Predator Functions
+    def MimicGenerator(self):
+        for lvl, lvlList in self.MimicObject().mimics.items():
+            for name in lvlList:
+                yield name
+
+    def PredateTarget(self, inpTargets):
+        for i in inpTargets.split(','):
+            target = self.Generators(inpTargets)
+            # If target (item/skill) is a new one (have not been added to inv/attr)
+            if not target:
+                target = self.Generators(inpTargets, new=True)
+
+            for mob in self.currentMobs:
+                if not mob.alive and mob.GetName() in i.lower():
+                    self.AddMimicry(mob)
+                    ssprint(f'<<Analysis complete on {mob.name}.>>')
+                    break
+
+            if target.objectType == 'item':
+                self.AddInventory(target)
+                ssprint(f'<<Analysis on {target.name} successful.>>')
+
+    def MimicObject(self, active=None):
+        mimic = self.attributes['Unique Skill']['Mimic']
+        mimic.active = active
+        return mimic
+
+    def AddMimicry(self, character):
+        if not self.Generators(character, mimic=True): # If already have mimic
+            self.MimicObject().mimics[character.rank].append(character)
+            ssprint(f'<<Note, new mimicry available: {character.name}.>>')
+            self.ShowInfo(character)
+
+    def CanMimic(self, character):
+        if character == 'reset':
+            self.mimicking, self.mimicObject = 'Slime', None # Resets mimic variables
+            ssprint("<Mimicry Reset>")
+        else:
+            try: 
+                currentMimic = self.Generators(character, True)
+                self.mimicking, self.mimicObject = currentMimic.name, currentMimic
+                ssprint(f'<Now Mimicking: {currentMimic.name}>')
+            except: pass
 
 
 class Veldora_Tempest(Character):
