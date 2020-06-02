@@ -89,7 +89,7 @@ def ShowHelp():
     print("""
     Commands:
         target TARGET(s)            -- Target commands and abilities. E.g. 'target tempest serpent'
-        attack <TARGET> with SKILL  -- Attack optional target(s) with skill(s). E.g. 'attack with water blade', tempest serpent with water blade
+        attack <TARGET> with SKILL  -- Attack target(s) (if not already targeting) with skill(s). E.g. 'attack with water blade', 'attack tempest serpent with water blade'
           - Multiple targets and/or attacks separated by comma. E.g. 'attack tempest serpent, black spider with water blade, poisonous breath'
         use SKILL(s)                -- Use skill/items. E.g. 'use sense heat source'
         stats                       -- Show yours skills and resistances. 
@@ -252,7 +252,6 @@ if __name__ == '__main__':
         rimuru.textDelay = False
     else:
         print("Text Delay: ENABLED")
-    rimuru.textDelay = False
     sleep(1)
     print("\n\n")
 
