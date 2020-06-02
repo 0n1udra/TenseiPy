@@ -55,9 +55,6 @@ class Character:
             'Misc' : {},
         }
 
-    def GetName(self):
-        return self.name.lower()
-
 
     def SetTarget(self, targets):
         if 'reset' in targets:
@@ -93,8 +90,8 @@ class Character:
                     return i
         except: pass
 
-    def SetName(self, inpName, character):
-        character.name = inpName
+    def GetName(self):
+        return self.name.lower()
 
     def StartState(self):
         for i in self.startState:
@@ -123,13 +120,6 @@ class Character:
     def ShowInfo(self, usrInp):
         try:
             print(self.Generators(usrInp).info)
-        except: pass
-
-    def CheckStatus(self, target):
-        try:
-            for i in self.currentMobs:
-                if target in i.getName():
-                    return True
         except: pass
 
     def UpdateRanking(self, level):
@@ -282,6 +272,7 @@ Name: {character.name} {character.familyName}
         except:
             self.inventory[item.itemType][item.name] = item
             self.inventory[item.itemType][item.name].amount += item.addAmount
+            ssprint(f'<<Analysis on {item.name} successful.>>')
             self.ShowInfo(item)
         self.inventoryCapacity += item.capacityUse
         ssprint(item.AcquiredMsg() + f' | Total: {self.inventory[item.itemType][item.name].amount}>')
@@ -292,6 +283,7 @@ Name: {character.name} {character.familyName}
             self.inventory[item.itemType].remove(item)
         except:
             ssprint(f'<Error deleting {item.name} from inventory>')
+
 
 
 #                    ========== Characters ==========
@@ -331,11 +323,9 @@ class Rimuru_Tempest(Character):
             try:
                 if target.objectType == 'item':
                     self.AddInventory(target)
-                    ssprint(f'<<Analysis on {target.name} successful.>>')
             except: pass
 
             self.focusTargets = set()
-
 
     def MimicObject(self, active=None):
         mimic = self.attributes['Unique Skill']['Mimic']
