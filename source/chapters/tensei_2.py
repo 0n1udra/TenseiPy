@@ -84,16 +84,16 @@ def Chapter2(rimuru):
         sprint("Adventurer 2: Still reckless of the guildmaster to send us to investigate.")
         sprint("I shouldn't show, they'll probably get scared and attack me")
 
-        ActionMenu(['*Exit cave', '*Say hi', '*Attack ___'],
-                [['exit cave'], ['say hi'], ['attack']],
-                [ExitCave, SayHi, AttackAdventures])
+        ActionMenu(['*Exit cave', '*Say hi'],
+                [['exit cave'], ['say hi']],
+                [ExitCave, SayHi])
         
-        ContinueStory(rimuru, Chapter3)
 
 
     # ========== Exit Cave
     def ExitCave():
         sprint("Finally! I'm out of that cave. Where now to though?")
+        ContinueStory(rimuru, Chapter3)
 
     def FailSlime():
         if CheckHas('veldora'):
