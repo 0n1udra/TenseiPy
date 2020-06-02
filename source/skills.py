@@ -1,4 +1,4 @@
-import characters
+import characters as c
 class Skill:
     def __init__(self):
         self.name = 'N/A'
@@ -305,7 +305,7 @@ class Sense_Heat_Source(Skill):
     def UseSkill(self):
         try:
             print("\t-----Nearby Heat Sources-----")
-            for i in characters.rimuru.currentMobs:
+            for i in c.rimuru.currentMobs:
                 if i.alive:
                     print(f'\t{i.name}')
             return True
@@ -369,7 +369,7 @@ class Sticky_Thread(Skill):
 
     def UseSkill(self):
         try:
-            characters.rimuru.target.movement = False
+            c.rimuru.target.movement = False
             return True
         except: pass
 

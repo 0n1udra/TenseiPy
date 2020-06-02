@@ -306,17 +306,17 @@ def Chapter1(rimuru):
         sprint("Like a last name? hmmmmm...")
 
         veldoraLName = str(input("\nLast Name > "))
-        characters.veldora.familyName = veldoraLName
+        c.veldora.familyName = veldoraLName
         rimuru.familyName = veldoraLName
         rimuru.divineProtection = 'Storm Crest'
         ssprint("<Acquired Storm Crest Divine Protection>")
         rimuru.UpdateRanking(8)
         print()
 
-        sprint(f"Hmmmmmm... How about {characters.veldora.familyName}")
+        sprint(f"Hmmmmmm... How about {c.veldora.familyName}")
         sprint("~What a good name!~")
         sprint("He actually likes it?")
-        sprint(f"~From now on I'll be Veldora {characters.veldora.familyName}~")
+        sprint(f"~From now on I'll be Veldora {c.veldora.familyName}~")
         sprint("~And as for you...~")
 
         rimuruName = str(input("\nName > "))
@@ -341,7 +341,7 @@ def Chapter1(rimuru):
 
     def PredateVeldora():
         ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~")
-        rimuru.AddInventory(characters.veldora)
+        rimuru.AddInventory(c.veldora)
         rimuru.ShowAttributes()
         rimuru.ShowInventory()
         print()
