@@ -96,6 +96,7 @@ def ShowHelp():
           - stats TARGET            -- Stats for monsters you have predated. E.g. 'stats tempest serpent'
         inv                         -- Show inventory.
         info                        -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+                                       NOTE: To get info on skills from a monster, have to be mimicking corresponding monster. E.g. 'info sense heat source'
         help                        -- Show this help page.
         exit                        -- Exit game.
 
@@ -156,6 +157,9 @@ def AddMob(mob):
                 c.rimuru.currentMobs.append(mob)
     else:
         c.rimuru.currentMobs.append(c.rimuru.Generators(mob, new=True))
+
+def NewName(name, character):
+    c.rimuru.SetName(name, character)
 
 
 #                    ========== Extra ==========
