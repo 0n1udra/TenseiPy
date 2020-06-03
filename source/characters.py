@@ -11,7 +11,8 @@ class Character:
         self.species = 'N/A'
         self.rank = 'N/A'
         self.level = 1
-        self.divineProtection = 'N/A'
+        self.blessing = 'N/A'
+        self.giveBlessing = 'N/A'
         self.info = 'N/A'
         self.appearance = 'N/A'
         self.description = 'N/A'
@@ -55,6 +56,9 @@ class Character:
             'Misc' : {},
         }
 
+        self.subs = {
+            }
+
 
     def SetTarget(self, targets):
         if 'reset' in targets:
@@ -92,6 +96,17 @@ class Character:
 
     def GetName(self):
         return self.name.lower()
+
+    def SetName(self, name, character):
+        char = self.Generators(character, subs=True)
+        char.name = name
+        char.blessing = self.giveBlessing
+        if char.species in self.subs:
+            self.subs[char.species].append(char)
+        else:
+            self.subs[char.species] = list([char])
+
+
 
     def StartState(self):
         for i in self.startState:
@@ -292,6 +307,7 @@ class Rimuru_Tempest(Character):
         Character.__init__(self)
         self.name = 'Slime'
         self.mimicking = 'Slime'
+        self.giveBlessing = 'Protection of Tempest'
         self.level = 7
         self.mimicObject = None
         self.startState = [skills.Predator_Mimicry_Skill(), skills.Self_Regeneration(), skills.Absorb_Dissolve(), 
@@ -356,6 +372,7 @@ class Veldora_Tempest(Character):
         self.name = "Veldora"
         self.title = 'Storm Dragon'
         self.species = 'True Dragon'
+        self.blessing = 'Storm Crest'
         self.alive = True
         self.level = 11
         self.itemType = 'Misc'
