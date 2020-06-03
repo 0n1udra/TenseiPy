@@ -7,7 +7,7 @@ from time import sleep
 usrInpDebug = False
 
 #                    ========== Game Input ==========
-def RunFuncs(msg, actions, funcs):
+def RunFuncs(msg, actions, funcs, attackFail=None):
     if usrInpDebug: 
         usrInp = actions[0][0]
     else:
@@ -71,19 +71,19 @@ def RunFuncs(msg, actions, funcs):
             funcs[0]()
             loop = False
         elif attacked and not attackSuccess:
-            funcs[1]()
+            attackFail()
         elif attacked and attackSuccess:
             funcs[0]()
             loop = False
 
         if not loop: break
     else: 
-        RunFuncs(msg, actions, funcs)
+        RunFuncs(msg, actions, funcs, attackFail)
 
-def ActionMenu(msg, actions, funcs):
+def ActionMenu(msg, actions, funcs, attackFail=None):
     actions.extend([['help'], ['inv'], ['exit']])
     funcs.extend([ShowHelp, c.rimuru.ShowInventory, ExitGame])
-    RunFuncs(msg, actions, funcs)
+    RunFuncs(msg, actions, funcs, attackFail)
 
 def ShowHelp():
     print("""
