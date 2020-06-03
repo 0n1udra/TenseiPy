@@ -35,12 +35,12 @@ def Chapter2(rimuru):
         ssprint("<Target the Tempest Serpent, then attack with your new skill. 'help' for more info.>")
 
         ActionMenu(['*Attack ___'],
-                [['attack :#%^@'], []],
-                    [AttackSerpent, FailedSerpent])
+                [['attack :#%^@']],
+                    [AttackSerpent], FailedSerpent)
 
         sprint("I wonder what else is in this cave.")
 
-        AddMob(['giant bat', 'black spider'])
+        AddMob(['giant bat', 'black spider', 'evil spider'])
 
         ssprint("<Use [Predator]'s mimic and tryout Tempest Serpent's [Sense Heat Source].>")
         ActionMenu(['*Use Sense Heat Source', 'Predate Magic Ore', '*Move on'],
@@ -51,25 +51,25 @@ def Chapter2(rimuru):
         ssprint("<<Answer, They are called Giant Bat.>>")
 
         ActionMenu(['*Attack ___'],
-                    [['attack $$"%'], []],
-                    [AttackBat, FailBat])
+                    [['attack $$"%']],
+                    [AttackBat], FailBat)
 
         if CheckStatus('giant spider'):
             sprint("What now...A Spider. Nobody likes spiders, especially giant ones.")
             ssprint("<<Information, These are called Giant Spider.>>")
         
-            ActionMenu(['*Attack ___'],
-                    [['attack $%:$%$'], []],
-                    [AttackSpider, FailSpider])
+            ActionMenu(['*Attack ___', '*Move on'],
+                    [['attack $%:$%$'], ['move on']],
+                    [AttackSpider, MoveOn], FailSpider)
 
-        sprint("For real, now a centipede. I just want to get out of this cave already.")
-        ssprint("<<Information, Analysis shows this a Evil Centipede.>>")
+        if CheckStatus('evil centipede'):
+            sprint("For real, now a centipede. I just want to get out of this cave already.")
+            ssprint("<<Information, Analysis shows this a Evil Centipede.>>")
 
-        AddMob('evil centipede')
 
-        ActionMenu(['*Attack ___'],
-                [['attack $%:$%$'], []],
-                [AttackCentipede, FailCentipede])
+            ActionMenu(['*Attack ___', '*Move on'],
+                    [['attack $%:$%$'], ['move on']],
+                    [AttackCentipede, MoveOn], FailCentipede)
 
         ActionMenu(['*Find exit', 'Predate Magic Ore'],
                 [['find exit'], ['predate magic ore']],
@@ -132,8 +132,8 @@ def Chapter2(rimuru):
     def FailSpider():
         sprint("Didn't work.")
         ActionMenu(['*Attack ___'],
-                [['attack $%:$%$'], []],
-                [AttackSpider, FailSpider])
+                [['attack $%:$%$']],
+                [AttackSpider], FailSpider)
 
     # ========== Giant Bat
     def AttackBat():
@@ -144,8 +144,8 @@ def Chapter2(rimuru):
     def FailBat():
         sprint("That didn't work.")
         ActionMenu(['*Attack ___'],
-                    [['attack $$"%'], []],
-                    [AttackBat, FailBat])
+                    [['attack $$"%']],
+                    [AttackBat], FailBat)
 
     def PredateBat():
         sprint("Now with [Ultrasound Waves] I can communicate with sound, I hope.")
@@ -169,8 +169,8 @@ def Chapter2(rimuru):
         sprint("Uh, How did that not work...")
 
         ActionMenu(['*Attack ___'],
-                [['attack :#@$^'], []],
-                    [AttackSerpent, FailedSerpent])
+                [['attack :#@$^']],
+                    [AttackSerpent], FailedSerpent)
 
     def PredateSerpent():
         ssprint("<Use info mimic for mimicry info, and stats/info tempest serpent for info on monster.>")
@@ -179,7 +179,7 @@ def Chapter2(rimuru):
         sprint("If I encounter another monster, I should use mimicry and try out those serpent's skills.")
 
     def MoveOn():
-        sprint("I'll just leave it I guess, and continue finding my way out.")
+        sprint("I'll just leave it, and continue finding my way out.")
 
     # ========== Learn Water Blade/Bullet
     def LearnWaterBlade():
