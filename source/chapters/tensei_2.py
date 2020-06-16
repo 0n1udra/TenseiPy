@@ -1,8 +1,8 @@
+import skills
 from start_game import *
 from chapters.tensei_3 import Chapter3
 
 def Chapter2(rimuru):
-
 
     def StartChapter2():
         sprint("Oh, what's this? Looks like some kind of ore.")
@@ -87,7 +87,6 @@ def Chapter2(rimuru):
         ActionMenu(['*Exit cave', '*Say hi'],
                 [['exit cave'], ['say hi']],
                 [ExitCave, SayHi])
-        
 
 
     # ========== Exit Cave
@@ -109,15 +108,7 @@ def Chapter2(rimuru):
         ssprint("*The adventurers attacked and killed the little slime monster before he could say anything else.*")
         FailSlime()
 
-
-    def AttackAdventures():
-        ssprint("*The slime's attack did not affect the adventurers at all.*")
-        sprint("Adventurers: AHHHHH MONSTER. KILL IT. KILL IT. KILL IT!!!!")
-        sprint("Well.... That didn't wor....")
-        FailSlime()
-
-
-    # ========== Evil Centipede 
+    # ========== Evil Centipede
     def AttackCentipede():
         sprint('Can I please leave now?!')
         ActionMenu(['*Predate', 'Predate Magic Ore', '*Move on'],
@@ -146,7 +137,6 @@ def Chapter2(rimuru):
         ActionMenu(['*Attack ___'],
                     [['attack $$"%']],
                     [AttackBat], FailBat)
-
     def PredateBat():
         sprint("Now with [Ultrasound Waves] I can communicate with sound, I hope.")
 
@@ -174,7 +164,6 @@ def Chapter2(rimuru):
 
     def PredateSerpent():
         ssprint("<Use info mimic for mimicry info, and stats/info tempest serpent for info on monster.>")
-
         ssprint("<Currently only able to use predated monster's skills when using mimicry.>")
         sprint("If I encounter another monster, I should use mimicry and try out those serpent's skills.")
 

@@ -11,10 +11,10 @@ class Item:
         self.objectType = 'item'
 
     def ItemDescription(self):
-        return(self.description)
+        return self.description
 
     def AcquiredMsg(self):
-        return(f'<Acquired {self.addAmount} {self.name}')
+        return f'<Acquired {self.addAmount} {self.name}'
         # AddInventory function will append ' | Total : x'
 
     def UpdateInfo(self):
@@ -29,7 +29,7 @@ class Item:
     '''
 
     def __str__(self):
-        return(self.name)
+        return self.name
 
     def GetName(self):
         return self.name.lower()

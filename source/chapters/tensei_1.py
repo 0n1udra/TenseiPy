@@ -138,13 +138,13 @@ def Chapter1(rimuru):
     # ===== Escape Water =====
     def EscapeWater():
         ssprint("<<Suggestion, use predator to intake water then expel at high velocity>>")
-        AcrtionMenu(['*Use Predator on water', 'Stay'],
+        ActionMenu(['*Use Predator on water', 'Stay'],
                     [['use predator on water'], ['stay']],
                     [PredateWater, StayInWater])
 
     def StayInWater():
         sprint(".....")
-        AcrtionMenu(['*Find way out', 'Stay'],
+        ActionMenu(['*Find way out', 'Stay'],
                     [['find way out', 'escape'], ['stay']],
                     [EscapeWater, StayInWater])
 
@@ -235,10 +235,6 @@ def Chapter1(rimuru):
         ActionMenu(['*Follow voice', '*Shut it Baldy', 'Predate grass', 'Puyo'],
                     [['follow voice'], ['shut it baldy'], ['predate grass', 'grass'], ['Wonder', 'Puyo']], 
                     [FollowVoice, Baldy, PredateGrass, Puyo])
-
-    def ShutIt():
-        sprint("~OHOHO, So you want to die, you little shit!~")
-        RespondTo()
 
     def Baldy():
         ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!~")

@@ -19,7 +19,7 @@ class Skill:
         self.objectType = 'skill'
 
     def AcquiredMsg(self):
-        return(self.acquiredMsg)
+        return self.acquiredMsg
 
     def UpdateInfo(self):
         self.info = f"""
@@ -45,7 +45,7 @@ class Skill:
         return self.name.lower()
 
     def __str__(self):
-        return(self.name)
+        return self.name
 
 
 class Resistance(Skill):
@@ -106,7 +106,6 @@ class Predator_Mimicry_Skill(Skill):
                 'C': [],
                 'D': [],
                 'E': [],
-                'D': [],
                 'F': [],
                 'Other': [],
                 }

@@ -1,8 +1,8 @@
-import skills, items, slime_art 
-import characters as c
-import chapters.tensei_1 as tensei1
-import pickle, sys, os
+import os, pickle
 from time import sleep
+
+import chapters.tensei_1 as tensei1
+import characters as c
 
 usrInpDebug = False
 
