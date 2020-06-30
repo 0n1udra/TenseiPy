@@ -27,7 +27,8 @@ NOTE: Game will display ASCII art, adjust window size accordingly.
   - Learn about skills
   - Meet Veldora
   - Fight low level mobs
-  
+- Exit Cave
+  - -IN PROGRESS-
   
   
 ![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)
