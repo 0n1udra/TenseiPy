@@ -18,6 +18,8 @@ NOTE: Game will display ASCII art, adjust window size accordingly.
 # TODO
 - Add skills, and Items
 - Continue Chapter 2 Story...
+- Setup monster naming and subordinate functions
+- Attack/Defense mechanics
 
 
 # Layout
