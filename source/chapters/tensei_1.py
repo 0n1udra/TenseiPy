@@ -68,7 +68,7 @@ def Chapter1(rimuru):
         ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
         ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
         ssprint("Whoa, somebody actually answered!?!")
-        ssprint("<<Note, the current spaced used is less than 1%.>>")
+        ssprint("<<Notice, the current spaced used is less than 1%.>>")
         sprint("I've heard this before, this voice that sounded computer synthesized.... Who is that?")
         ssprint("<<Answer. This is the Unique Skill [Great Sage], the ability has adapted, so it can quickly answer you.>>")
         ssprint("[Great Sage]? [Predator]? heh?!")
@@ -281,7 +281,7 @@ def Chapter1(rimuru):
     def HelpSeal():
         ssprint("[Great Sage]?")
         ssprint("<<Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks.>>")
-        ssprint("<<Note, possible solution may be...")
+        ssprint("<<Notice, possible solution may be...")
         sprint("~Hey don't just only talk to your own skill.~")
         sprint("Jealous?")
         sprint("It might be possible if we both analyze [Infinity Prison] inside and out")
