@@ -1,47 +1,46 @@
 import os, pickle
 from time import sleep
-
 import chapters.tensei_1 as tensei1
 import characters as c
 
 usrInpDebug = False
 
 #                    ========== Game Input ==========
-def RunFuncs(msg, actions, funcs, attackFail=None):
-    if usrInpDebug: 
-        usrInp = actions[0][0]
-    else:
-        # Adds () around actions, (*action)
-        options = ', '.join('(' + i + ')' for i in msg)
-        mimic = c.rimuru.mimicking
-        try:
-            targets, = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in c.rimuru.focusTargets]), 
-        except: targets = None
+def ActionMenu(cClass, ):
+    # Gets class functions and subclasses if it doesn't start with __
+    classDir = [i for i in dir(cClass) if i[1] != '_']
+    funcs = [i.replace('_', ' ') for i in classDir]
+    # Functions starting with _ replaced with *, then replaces _ with space
+    actions = [('*' + i[1:]) if i[0] == '_' else i for i in classDir]
+    actions = [i.replace('_', ' ') for i in actions]
 
-        if targets:
-            #print(f'\nTarget:', str(targets))
-            print(f'\nTarget: {targets}\nActions:', options, f'| {mimic}, (stats, inv, help)')
-        else:
-            print("\nActions:", options, f'| {mimic}, (stats, inv, help)')
+    ShowHUD(actions)
+
+    if usrInpDebug: 
+        print(cClass)
+        usrInp = classDir[0].replace('_', ' ')[1:]
+    else:
         usrInp = input("\n> ").lower()
         print()
 
-    loop = True
-    attacked = attackSuccess = skillSuccess = False
     # Get info on skills, times, etc
     splitInput = ' '.join(usrInp.split()[1:])
     gameActions = {
-            'info': c.rimuru.ShowInfo,
             'stats': c.rimuru.ShowAttributes,
             'target': c.rimuru.SetTarget,
             'predate': c.rimuru.PredateTarget,
             'mimic': c.rimuru.CanMimic, 
+            'help': ShowHelp,
+            'inv': c.rimuru.ShowInventory,
+            'exit': exit
             }
 
     for k, v in gameActions.items():
         if k in usrInp:
             v(splitInput)
 
+    if 'info' in usrInp:
+        c.rimuru.ShowInfo(splitInput)
     if 'use' in usrInp:
         skillSuccess = c.rimuru.UseSkill(splitInput)
     if 'attack' in usrInp:
@@ -49,43 +48,49 @@ def RunFuncs(msg, actions, funcs, attackFail=None):
     try: pass
     except: pass
 
+    loop = True
+    attacked = attackSuccess = skillSuccess = False
     # If action has *, continues story
-    for i in range(len(funcs)):
-        contAction = ''
-        for j in actions[i]:
-            try:
-                contAction = msg[i][0]
-            except: pass
-           # Checks if valid command
-            if usrInp.lower() == j.lower():
-               # Checks if command continues story
-                if contAction == '*':
-                    funcs[i]()
-                    loop = False
-                    c.rimuru.lastCommand = usrInp
-                    break
-                else:
-                    funcs[i]()
-                    c.rimuru.lastCommand = usrInp
-        if skillSuccess:
-            funcs[0]()
-            loop = False
-        elif attacked and not attackSuccess:
-            attackFail()
-        elif attacked and attackSuccess:
-            funcs[0]()
-            loop = False
+    for i in actions:
+        runFunc = i.replace('*', '_').replace(' ', '_')
+        runAction = f'cClass.{runFunc}()'
+        if i[0] == '*':
+            if usrInp.lower() == i.lower()[1:]:
+                
+                eval(runAction)
+                try: pass
+                except: pass
+                loop = False
+                break
+        else:
+            if usrInp.lower() == i.lower():
+                eval(runAction)
 
-        if not loop: break
-    else: 
-        RunFuncs(msg, actions, funcs, attackFail)
+    if skillSuccess or (attacked and attackedSuccess):
+        pass
+        loop = False
+    elif attacked and not attackSuccess:
+        attackFail()
 
-def ActionMenu(msg, actions, funcs, attackFail=None):
-    actions.extend([['help'], ['inv'], ['exit']])
-    funcs.extend([ShowHelp, c.rimuru.ShowInventory, ExitGame])
-    RunFuncs(msg, actions, funcs, attackFail)
+    if loop:
+        ActionMenu(cClass)
 
-def ShowHelp():
+def ShowHUD(actions):
+
+    # Adds () around actions, (*action)
+    options = ', '.join('(' + i + ')' for i in actions)
+    mimic = c.rimuru.mimicking
+    try:
+        targets, = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in c.rimuru.focusTargets]), 
+    except: targets = None
+
+    if targets:
+        #print(f'\nTarget:', str(targets))
+        print(f'\nTarget: {targets}\nActions:', options, f'| {mimic}, (stats, inv, help)')
+    else:
+        print("\nActions:", options, f'| {mimic}, (stats, inv, help)')
+
+def ShowHelp(*args):
     print("""
     Commands:
         target TARGET(s)            -- Target commands and abilities. E.g. 'target tempest serpent'
