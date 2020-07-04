@@ -221,8 +221,6 @@ class Magic_Perception(Skill):
         self.active = True
         return True
 
-    
-
 
 class Water_Manipulation(Skill):
     def __init__(self):

@@ -1,10 +1,16 @@
+class Test:
+    def __init__(self):
+        print("STASRT")
+        fun(self)
 
-def gen1(y=False):
-    for i in range(10):
-        yield i
-        if i == 5:
-            break
+    def testClassFunc(self):
+        print("HI")
 
+    def _testFunc(self):
+        print("BYE")
 
-x = [i for i in gen1()]
-print(x)
+    class Hi:
+        def ok():
+            pass
+
+print(dir(Test))
