@@ -1,6 +1,5 @@
 import skills, items
 
-
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
@@ -21,6 +20,7 @@ class Character:
         self.alive = True
         self.invisible = False
         self.movement = False  # If monster is moving too fast for attack, use sticky thread
+        self.evolution = ''
 
         # Game variables
         self.storyProgress = [None]
@@ -75,26 +75,31 @@ class Character:
     def Generators(self, inp, mimic=False, new=False):
         try:
             inp = inp.name  # If input is an object
-        except:
-            pass
+        except: pass
 
-        generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
+        generators = [*self.AttributesGenerator(), *self.InventoryGenerator()]
+        try:
+            generators = [*self.AttributesGenerator(), *self.InventoryGenerator(), *self.MimicGenerator()]
+        except: pass
+
         if new:
             generators = [*items.Item.__subclasses__(), *skills.Skill.__subclasses__(), *Character.__subclasses__()]
         if mimic:
             generators = [*self.MimicGenerator()]
-
         # Adds mimicked monster abilities if currently using mimic
         if rimuru.mimicObject:
             generators.extend(self.AttributesGenerator(rimuru.mimicObject))
-        try:
-            for i in generators:
+        
+        for i in generators:
+            try:
                 if new:
                     i = i()
                 if i.GetName() in inp.lower():
                     return i
-        except:
-            pass
+                    break
+                else:
+                    del i
+            except: pass
 
     def GetName(self):
         return self.name.lower()
@@ -135,8 +140,7 @@ class Character:
     def ShowInfo(self, usrInp):
         try:
             print(self.Generators(usrInp).info)
-        except:
-            pass
+        except: pass
 
     def UpdateRanking(self, level):
         self.level = level
@@ -147,8 +151,7 @@ class Character:
         try:
             if self.Generators(skill).UseSkill():
                 return True
-        except:
-            pass
+        except: pass
 
     # ========== Attack
     def CheckResistance(self, character, attack):
@@ -225,8 +228,7 @@ class Character:
             # Get stats for other monsters
             try:
                 character = self.Generators(character, True)
-            except:
-                pass
+            except: pass
 
         print(f"""
 -----Attributes/Skills-----
@@ -243,27 +245,36 @@ Name: {character.name} {character.familyName}
                 print(f'\t{j}')
 
     def AddAttribute(self, item, showInfo=False, output=True):
+        item = self.Generators(item, new=True)
         try:
             self.attributes[item.skillLevel][item.name]
         except:
-            self.attributes[item.skillLevel][item.name] = item
-            if output:
-                try:
-                    ssprint(item.acquiredMsg)
-                except:
-                    pass
-            if showInfo: self.ShowInfo(item.name)  # Shows skill info
+            if item:
+                self.attributes[item.skillLevel][item.name] = item
+                if output:
+                    try:
+                        ssprint(item.acquiredMsg)
+                    except: pass
+                if showInfo: 
+                    self.ShowInfo(item.name)  # Shows skill info
 
     def RemoveAttribute(self, skill):
+        print(skill)
         try:
+            skill = self.Generators(skill)
             del self.attributes[skill.skillLevel][skill.name]
         except:
             print("ERROR Deleting attribute. If you're seeing this message, please let developer know")
 
     def SkillUpgrade(self, skillFrom, skillTo):
-        self.RemoveAttribute(skillFrom)
-        ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] evolving to {skillTo.skillLevel} [{skillTo}]...>>')
-        self.AddAttribute(skillTo)
+        try:
+            skillFrom = self.Generators(skillFrom)
+            skillTo = self.Generators(skillTo, new=True)
+            self.RemoveAttribute(skillFrom)
+            ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] evolving to {skillTo.skillLevel} [{skillTo}]...>>')
+            self.AddAttribute(skillTo)
+        except:
+            ssprint("<Error upgrading skill>")
 
     # ========== Inventory Functions
     def InventoryGenerator(self, output=False):
@@ -276,22 +287,24 @@ Name: {character.name} {character.familyName}
                 else:
                     yield itemObject
 
-    def ShowInventory(self):
+    def ShowInventory(self, character=None):
         print('\n-----Inventory-----')
         print(f'Capacity: {self.inventoryCapacity}%\n')
         for i in self.InventoryGenerator(True): print(i)  # Prints out inventory items
 
     def AddInventory(self, item):
-        try:
-            self.inventory[item.itemType][item.name].amount += item.addAmount
-        except:
+            #item = self.Generators(item)
+            #self.inventory[item.itemType][item.name].amount += item.addAmount
+        item = self.Generators(item, new=True)
+        if item:
             self.inventory[item.itemType][item.name] = item
             self.inventory[item.itemType][item.name].amount += item.addAmount
             ssprint(f'<<Analysis on {item.name} successful.>>')
             self.ShowInfo(item)
-        self.inventoryCapacity += item.capacityUse
-        ssprint(item.AcquiredMsg() + f' | Total: {self.inventory[item.itemType][item.name].amount}>')
-        ssprint(f'<Inventory Capacity: {self.inventoryCapacity:.2f}%>')
+
+            self.inventoryCapacity += item.capacityUse
+            ssprint(item.AcquiredMsg() + f' | Total: {self.inventory[item.itemType][item.name].amount}>')
+            ssprint(f'<Inventory Capacity: {self.inventoryCapacity:.2f}%>')
 
     def RemoveInventory(self, item):
         try:
@@ -309,9 +322,7 @@ class Rimuru_Tempest(Character):
         self.giveBlessing = 'Protection of Tempest'
         self.level = 7
         self.mimicObject = None
-        self.startState = [skills.Predator_Mimicry_Skill(), skills.Self_Regeneration(), skills.Absorb_Dissolve(),
-                           skills.Resist_Pain(), skills.Resist_Melee(), skills.Resist_Electricity(),
-                           skills.Resist_Temperature()]
+        self.startState = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
         self.UpdateInfo()
 
     # ========== Predator Functions
@@ -339,15 +350,16 @@ class Rimuru_Tempest(Character):
             try:
                 if target.objectType == 'item':
                     self.AddInventory(target)
-            except:
-                pass
+            except: pass
 
             self.focusTargets = set()
 
     def MimicObject(self, active=None):
-        mimic = self.attributes['Unique Skill']['Mimic']
-        mimic.active = active
-        return mimic
+        try:
+            mimic = self.attributes['Unique Skill']['Mimic']
+            mimic.active = active
+            return mimic
+        except: pass
 
     def AddMimicry(self, character):
         if not self.Generators(character, mimic=True):  # If already have mimic
@@ -364,8 +376,7 @@ class Rimuru_Tempest(Character):
                 currentMimic = self.Generators(character, True)
                 self.mimicking, self.mimicObject = currentMimic.name, currentMimic
                 ssprint(f'<Now Mimicking: {currentMimic.name}>')
-            except:
-                pass
+            except: pass
 
 
 class Veldora_Tempest(Character):
@@ -437,6 +448,21 @@ class Black_Spider(Character):
         Character.__init__(self)
         self.name = 'Black Spider'
         self.Species = 'Spider'
+        self.level = 5
+        self.appearance = '''
+        Most of the body is yellow-ish, while the legs are black.
+        '''
+        self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
+        self.startState = [skills.Sticky_Thread(), skills.Steel_Thread()]
+        self.StartState()
+        self.UpdateInfo()
+
+# ========== Wolves
+class Wolf_Pack(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = 'Wolf Pack'
+        self.Species = 'Tempest Wolf'
         self.level = 5
         self.appearance = '''
         Most of the body is yellow-ish, while the legs are black.
