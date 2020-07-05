@@ -6,7 +6,7 @@ def Chapter2(rimuru):
 
     def StartChapter2():
         sprint("Oh, what's this? Looks like some kind of ore.")
-        ActionMenu(['*Predate Magic Ore', '*Move on'], 
+        action_menu(['*Predate Magic Ore', '*Move on'],
                     [['predate magic ore'], ['move on']],
                     [PredateOre, MoveOn])
 
@@ -25,54 +25,54 @@ def Chapter2(rimuru):
 
         ssprint("<Choose ability to learn and use on tempest serpent>")
 
-        ActionMenu(["*Water Blade", "*Water Bullet"],
+        action_menu(["*Water Blade", "*Water Bullet"],
                     [["water blade"], ['water bullet']],
                     [LearnWaterBlade, LearnWaterBullet])
 
-        AddMob('tempest serpent')
+        add_level_mob('tempest serpent')
 
         sprint("Alright, lets try out this new skill.")
         ssprint("<Target the Tempest Serpent, then attack with your new skill. 'help' for more info.>")
 
-        ActionMenu(['*Attack ___'],
-                [['attack :#%^@']],
+        action_menu(['*Attack ___'],
+                    [['attack :#%^@']],
                     [AttackSerpent], FailedSerpent)
 
         sprint("I wonder what else is in this cave.")
 
-        AddMob(['giant bat', 'black spider', 'evil spider'])
+        add_level_mob(['giant bat', 'black spider', 'evil spider'])
 
         ssprint("<Use [Predator]'s mimic and tryout Tempest Serpent's [Sense Heat Source].>")
-        ActionMenu(['*Use Sense Heat Source', 'Predate Magic Ore', '*Move on'],
-                [['use :$%^'], ['predate magic ore'], ['*move on']],
-                [UseSense, PredateOre, StoryContinues])
+        action_menu(['*Use Sense Heat Source', 'Predate Magic Ore', '*Move on'],
+                    [['use :$%^'], ['predate magic ore'], ['*move on']],
+                    [UseSense, PredateOre, StoryContinues])
 
         sprint("Are those bats?")
         ssprint("<<Answer, They are called Giant Bat.>>")
 
-        ActionMenu(['*Attack ___'],
+        action_menu(['*Attack ___'],
                     [['attack $$"%']],
                     [AttackBat], FailBat)
 
-        if CheckStatus('giant spider'):
+        if get_mob_status('giant spider'):
             sprint("What now...A Spider. Nobody likes spiders, especially giant ones.")
             ssprint("<<Information, These are called Giant Spider.>>")
         
-            ActionMenu(['*Attack ___', '*Move on'],
-                    [['attack $%:$%$'], ['move on']],
-                    [AttackSpider, MoveOn], FailSpider)
+            action_menu(['*Attack ___', '*Move on'],
+                        [['attack $%:$%$'], ['move on']],
+                        [AttackSpider, MoveOn], FailSpider)
 
-        if CheckStatus('evil centipede'):
+        if get_mob_status('evil centipede'):
             sprint("For real, now a centipede. I just want to get out of this cave already.")
             ssprint("<<Information, Analysis shows this a Evil Centipede.>>")
 
 
-            ActionMenu(['*Attack ___', '*Move on'],
-                    [['attack $%:$%$'], ['move on']],
-                    [AttackCentipede, MoveOn], FailCentipede)
+            action_menu(['*Attack ___', '*Move on'],
+                        [['attack $%:$%$'], ['move on']],
+                        [AttackCentipede, MoveOn], FailCentipede)
 
-        ActionMenu(['*Find exit', 'Predate Magic Ore'],
-                [['find exit'], ['predate magic ore']],
+        action_menu(['*Find exit', 'Predate Magic Ore'],
+                    [['find exit'], ['predate magic ore']],
                     [Wonder, PredateOre])
 
         sprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
@@ -84,22 +84,22 @@ def Chapter2(rimuru):
         sprint("Adventurer 2: Still reckless of the guildmaster to send us to investigate.")
         sprint("I shouldn't show, they'll probably get scared and attack me")
 
-        ActionMenu(['*Exit cave', '*Say hi'],
-                [['exit cave'], ['say hi']],
-                [ExitCave, SayHi])
+        action_menu(['*Exit cave', '*Say hi'],
+                    [['exit cave'], ['say hi']],
+                    [ExitCave, SayHi])
 
 
     # ========== Exit Cave
     def ExitCave():
         sprint("Finally! I'm out of that cave. Where now to though?")
-        ContinueStory(rimuru, Chapter3)
+        continue_story(rimuru, Chapter3)
 
     def FailSlime():
-        if CheckHas('veldora'):
+        if check_mob_has('veldora'):
             ssprint("*After the little slime died. All of his stomach contents spewed outwards.*")
             ssprint("*Unfortunately this particular slime had somehow absorbed a dragon locked in [Infinity Prison].*")
             ssprint("*The three adventurers where crushed by such a massive object. They Have failed there simple mission*")
-        DeleteGame(rimuru)
+        delete_game_save(rimuru)
 
     def SayHi():
         sprint("HELLO THERE!")
@@ -111,9 +111,9 @@ def Chapter2(rimuru):
     # ========== Evil Centipede
     def AttackCentipede():
         sprint('Can I please leave now?!')
-        ActionMenu(['*Predate', 'Predate Magic Ore', '*Move on'],
-                        [['predate'], ['predate magic ore'], ['move on']],
-                        [PredateSerpent, PredateOre, MoveOn])
+        action_menu(['*Predate', 'Predate Magic Ore', '*Move on'],
+                    [['predate'], ['predate magic ore'], ['move on']],
+                    [PredateSerpent, PredateOre, MoveOn])
     def FailCentipede():
         sprint("Didn't work, huh...")
 
@@ -122,19 +122,19 @@ def Chapter2(rimuru):
         sprint("Took care of that, moving on")
     def FailSpider():
         sprint("Didn't work.")
-        ActionMenu(['*Attack ___'],
-                [['attack $%:$%$']],
-                [AttackSpider], FailSpider)
+        action_menu(['*Attack ___'],
+                    [['attack $%:$%$']],
+                    [AttackSpider], FailSpider)
 
     # ========== Giant Bat
     def AttackBat():
         sprint("Alright, got it. Now lets see what skills I can learn.")
-        ActionMenu(['*Predate', 'Predate Magic Ore', '*Move on'],
+        action_menu(['*Predate', 'Predate Magic Ore', '*Move on'],
                     [['predate'], ['predate magic ore'], ['move on']],
                     [PredateBat, PredateOre, MoveOn])
     def FailBat():
         sprint("That didn't work.")
-        ActionMenu(['*Attack ___'],
+        action_menu(['*Attack ___'],
                     [['attack $$"%']],
                     [AttackBat], FailBat)
     def PredateBat():
@@ -151,15 +151,15 @@ def Chapter2(rimuru):
         sprint("Oh...? What will that do?")
         ssprint("<<Answer, after predation and using analysis, it is possible to learn the targets skills.>>")
 
-        ActionMenu(['*Predate', 'Predate Magic Ore', '*Move on'],
-                        [['predate'], ['predate magic ore'], ['move on']],
-                        [PredateSerpent, PredateOre, MoveOn])
+        action_menu(['*Predate', 'Predate Magic Ore', '*Move on'],
+                    [['predate'], ['predate magic ore'], ['move on']],
+                    [PredateSerpent, PredateOre, MoveOn])
 
     def FailedSerpent():
         sprint("Uh, How did that not work...")
 
-        ActionMenu(['*Attack ___'],
-                [['attack :#@$^']],
+        action_menu(['*Attack ___'],
+                    [['attack :#@$^']],
                     [AttackSerpent], FailedSerpent)
 
     def PredateSerpent():
@@ -172,11 +172,11 @@ def Chapter2(rimuru):
 
     # ========== Learn Water Blade/Bullet
     def LearnWaterBlade():
-        rimuru.AddAttribute(skills.Water_Blade())
+        rimuru.add_attributes(skills.Water_Blade())
         sprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
 
     def LearnWaterBullet():
-        rimuru.AddAttribute(skills.Water_Bullet())
+        rimuru.add_attributes(skills.Water_Bullet())
         sprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
 
     # ========== Magic Ore 

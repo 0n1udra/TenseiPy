@@ -9,21 +9,21 @@ def Chapter1(rimuru):
             sprint(".....")
             sprint(slime_art.great_sage)
             ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
-            rimuru.StartState()
+            rimuru.run_start_state()
             ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
-            rimuru.AddAttribute('Predator')
+            rimuru.add_attributes('Predator')
             ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
-            rimuru.AddAttribute('Sage')
+            rimuru.add_attributes('Sage')
             ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
             sprint('.....')
-            rimuru.SkillUpgrade('Sage', 'Great Sage')
-            print(rimuru.ShowAttributes())
+            rimuru.skill_upgrade('Sage', 'Great Sage')
+            print(rimuru.show_attributes())
 
             ssprint(".....")
             ssprint("It's so dark, where is this. What happened to me?")
             ssprint("I remembered that I got stabbed while protecting Tamura. Was I... saved?")
             ssprint("That said is this the hospital bed? I can't see anything, I can't hear anything.")
-            ActionMenu(self)
+            action_menu(self)
 
         class _move_arms:
             def __init__(self):
@@ -35,7 +35,7 @@ def Chapter1(rimuru):
                 ssprint("Alright, Let's try to taste it. Actually! Where the fuck is my mouth?")
                 ssprint("The grass melted. Is it being absorbed?")
                 ssprint("WAIT A MINUTE, am I even human anymore!!?! Eh.. Let's calm down and confirm my appearance.")
-                ActionMenu(self)
+                action_menu(self)
 
             class _inspect():
                 def __init__(self):
@@ -49,7 +49,7 @@ def Chapter1(rimuru):
                     ssprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
                     ssprint("And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
                     ssprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
-                    ActionMenu(self)
+                    action_menu(self)
 
                 def explore(self):
                     ssprint("Oh, look, more grass. Wow!")
@@ -59,9 +59,9 @@ def Chapter1(rimuru):
 
                 def _predate_grass(self):
                     ssprint("Ooooweeee more grass!")
-                    rimuru.AddInventory('Hipokte Grass')
-                    rimuru.ShowInfo('hipokte grass')
-                    ActionMenu(_learn_skills())
+                    rimuru.add_inventory('Hipokte Grass')
+                    rimuru.show_info('hipokte grass')
+                    action_menu(_learn_skills())
 
 
     class _learn_skills:
@@ -74,13 +74,13 @@ def Chapter1(rimuru):
             ssprint("<<Answer. This is the Unique Skill [Great Sage], the ability has adapted, so it can quickly answer you.>>")
             ssprint("[Great Sage]? [Predator]? heh?!")
             ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
-            ActionMenu(self)
+            action_menu(self)
 
         def info_great_sage(self): pass
         def info_predator(self): pass
 
         def predate_grass(self):
-            rimuru.AddInventory('Hipokte Grass')
+            rimuru.add_inventory('Hipokte Grass')
 
         class _what_are_skills:
             def __init__(self):
@@ -94,15 +94,15 @@ def Chapter1(rimuru):
                 ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
                 ssprint("How can I get out of here?")
                 ssprint("<<Suggestion, use predator to intake water then expel at high velocity.>>")
-                ActionMenu(self)
+                action_menu(self)
 
                 def stay_in_water(self):
                     sprint(".....")
 
                 class _predate_water:
                     def __init__(self):
-                        rimuru.AddAttribute('Hydraulic Propulsion')
-                        ActionMenu(self)
+                        rimuru.add_attributes('Hydraulic Propulsion')
+                        action_menu(self)
 
                     def stay_in_water(self):
                         sprint("..........")
@@ -112,7 +112,7 @@ def Chapter1(rimuru):
                         sprint("~Can you hear me little one.~")
                         ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
                         ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
-                        ActionMenu(Find_Veldora())
+                        action_menu(Find_Veldora())
 
 
     class Find_Veldora:
@@ -121,19 +121,19 @@ def Chapter1(rimuru):
             ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
             ssprint("Was I sensed somehow?")
             sprint("~Hey can you just reply?~")
-            ActionMenu(self)
+            action_menu(self)
 
         def _ignore(self):
             sprint("~Hey, are you just going to keep ignoring me?~")
 
         def _hello(self):
             sprint("~Keep following my voice little one.~")
-            ActionMenu(Respond())
+            action_menu(Respond())
 
         def _shutit_baldy(self):
             ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!!!~")
             ssprint("Oh!")
-            ActionMenu(Respond())
+            action_menu(Respond())
 
     class _leave:
         def __init__(self):
@@ -141,10 +141,10 @@ def Chapter1(rimuru):
             sprint("~Wait where are you going?~")
             sprint("You seem pretty suspicious...")
             sprint("~Oh, really... Is there anything I can do to ease your mind?~")
-            ActionMenu(self)
+            action_menu(self)
 
         def _help_me_see(self):
-            ActionMenu(Respond)
+            action_menu(Respond)
 
         def _leave(self):
             sprint("No, I'm just going to move on.")
@@ -167,8 +167,8 @@ def Chapter1(rimuru):
             sprint("Ehh, just like that heh?")
             ssprint("<<Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception].>>")
             ssprint("<<Activate [Magic Perception]?>>")
-            rimuru.AddAttribute('Magic Perception')
-            ActionMenu(self)
+            rimuru.add_attributes('Magic Perception')
+            action_menu(self)
 
         # ========== Veldora introduce himself
         class _use_magic_perception:
@@ -181,7 +181,7 @@ def Chapter1(rimuru):
                 sprint("~Seems like you did it. You learn quickly little one.~")
                 sprint("Yes, thank you!")
                 sprint("~Then shall I introduce myself, again?~")
-                ActionMenu(self)
+                action_menu(self)
 
             def _yes(self):
                 sprint("My name is Storm Dragon Veldora!~")
@@ -190,11 +190,11 @@ def Chapter1(rimuru):
                 sprint("HOLY SHIT, you're a real dragon!")
                 sprint("~Didn't I tell you not to get scared.~")
                 ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
-                ActionMenu(Become_Friends())
+                action_menu(Become_Friends())
 
             def _no(self):
                 ssprint("~Alright then, I won't. Hmmmmph~")
-                ActionMenu(Become_Friends())
+                action_menu(Become_Friends())
 
     class Become_Friends:
         def __init__(self):
@@ -208,7 +208,7 @@ def Chapter1(rimuru):
 
             def _stay(self):
                 ssprint("~Oh, I'm so glad you decided to stay!.~")
-                ActionMenu(Become_Friends())
+                action_menu(Become_Friends())
 
             def _leave(self):
                 ssprint("~I guess there's nothing I can say or do to make you stay. How rude of you to just leave me here all by myself!~")
@@ -222,7 +222,7 @@ def Chapter1(rimuru):
             sprint("I guess I won't have a reason to come back here again, huh.")
             sprint("~Wait. I guess it can't be helped. I'll become your friend!.~")
             sprint("Great. Now I guess I should help you with this seal eh?")
-            ActionMenu(Help_With_Seal())
+            action_menu(Help_With_Seal())
 
 
     class Help_With_Seal:
@@ -253,7 +253,7 @@ def Chapter1(rimuru):
             rimuru.familyName = veldoraLName
             rimuru.divineProtection = 'Storm Crest'
             ssprint("<Acquired Storm Crest Divine Protection>\n")
-            rimuru.UpdateRanking(8)
+            rimuru.update_ranking(8)
 
             sprint(f"Hmmmmmm... How about {c.veldora.familyName}")
             sprint("~What a good name!~")
@@ -266,16 +266,16 @@ def Chapter1(rimuru):
 
             sprint("~Leave it to me. Until we meet again little one!~")
             ssprint("<<Use Unique skill [Predator]?>>")
-            ActionMenu(self)
+            action_menu(self)
 
         class _predate_veldora:
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
-                rimuru.AddInventory(c.veldora)
-                rimuru.ShowAttributes()
-                rimuru.ShowInventory()
+                rimuru.add_inventory(c.veldora)
+                rimuru.show_attributes()
+                rimuru.show_inventory()
                 ssprint("<<Notice, start analyzing Unique Skill [Infinity Prison]?>>")
-                ActionMenu(self)
+                action_menu(self)
 
             def _start_analysis(self):
                 ssprint("Yes, Please take care of it [Great Sage].")
@@ -290,7 +290,7 @@ def Chapter1(rimuru):
 
     def Leave_Cave():
         ssprint("Time to leave this cave already.")
-        ContinueStory(rimuru, Chapter2)
+        continue_story(rimuru, Chapter2)
     
     Chapter_1()
 

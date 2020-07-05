@@ -10,8 +10,8 @@ def Chapter3(rimuru):
             ssprint("<<Also, sound waves can also be used to communicate your thoughts.>>")
             ssprint("Is that so, let's try that.")
 
-            ActionMenu(self)
-         #   ActionMenu(['*Speak to Goblins', '*Chase Wolves', '*Run'],
+            action_menu(self)
+         #   action_menu(['*Speak to Goblins', '*Chase Wolves', '*Run'],
          #           [['speak to goblins'], ['chase wolves'], ['run']],
          #           [Goblins, Wolves, Run])
 
@@ -33,7 +33,7 @@ def Chapter3(rimuru):
         def __init__(self):
             ssprint("How should I introduce myself?")
 
-      #  ActionMenu(['*Friendly', '*Mad', '*Coerce', '*Attack'],
+      #  action_menu(['*Friendly', '*Mad', '*Coerce', '*Attack'],
       #          [['friendly'], ['mad'], ['coerce'], ['attack #$%']],
       #          [FriendlyGoblin, MadGoblin, CoerceGoblin, AttackGoblin])
 
