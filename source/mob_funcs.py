@@ -1,4 +1,4 @@
-import skills, items
+import skills, items, mobs
 
 def ssprint(Msg):
     print(f'    {Msg}\n')
@@ -61,30 +61,6 @@ class Character:
         self.inventory = {'Items': {}, 'Material': {}, 'Potions': {}, 'Misc': {}}
 
 
-    def set_target(self, targets):
-        '''
-        Adds mobs to focusTargets list from user input.
-
-        Separates user inputted targets via ',' then checks to see if mob is in currentMobs list.
-        If so, adds to setTargets list.
-
-        Args:
-            targets (str):
-                String of target(s) to add to focusTargets (list)
-
-        Usage:
-            > target tempest serpent, giant bat
-        '''
-
-        if 'reset' in targets:
-            self.focusTargets.clear()
-        else:
-            for target in targets.split(','):
-                for i in self.currentMobs:
-                    if i.get_name() in target:
-                        self.focusTargets.add(i)
-                        break
-
     # ========== Info
     def get_object(self, inp, mimic=False, new=False):
         '''
@@ -110,7 +86,7 @@ class Character:
             inp = inp.name
         except: pass
 
-        generators = [*self.get_attributes(), *self.get_inventory(), *self.subordinate_generator()]
+        generators = [*self.attributes_generator(), *self.inventory_generator(), *self.subordinate_generator()]
 
 
 
@@ -131,7 +107,7 @@ class Character:
             generators = [self.mimic_generator()]
         # Adds mimicked monster abilities if currently using mimic.
         if rimuru.mimicObject:
-            generators.extend(self.get_attributes(rimuru.mimicObject))
+            generators.extend(self.attributes_generator(rimuru.mimicObject))
         
         for i in generators:
             try:
@@ -149,38 +125,15 @@ class Character:
 
         return self.name.lower()
 
-    def add_sub(self, name, character):
-        '''
-        Naming subordinates and give blessing.
-
-        Args:
-            name (str):
-                Set name to new subordinates.
-
-            character (str):
-                Character name or object to be named.
-
-        Usage:
-            add_sub('Tempest Wolf', 'Ranga')
-
-        '''
-
-        char = self.get_object(character, sub=True)
-        char.name = name
-        char.blessing = self.giveBlessing
-        if char.species in self.subs:
-            self.subs[char.species].append(char)
-        else:
-            self.subs[char.species] = list([char])
-
     def run_start_state(self):
         '''Adds corresponding starter attributes and items to character.'''
 
         for i in self.startState:
-            self.add_attributes(i, showInfo=False, output=False)
+            self.add_attributes(i, show_msg=False)
 
     def update_info(self):
         '''Updates character information.'''
+
         self.info = f"""
     Name: {self.name} {self.familyName}
     Title: {self.title}
@@ -230,7 +183,7 @@ class Character:
                 New level for character.
 
         Usage:
-            update_ranking('rimuru', 'A+')
+            .update_ranking('rimuru', 'A+')
         '''
 
         try:
@@ -254,12 +207,43 @@ class Character:
                 Object to check if specified character has item, attribute, skill, etc.
 
         Usage:
-            check_mob_has('rimuru', 'resist poison')
+            .check_mob_has('rimuru', 'resist poison')
+
             > rimuru has resist melee
             >>True
         '''
+
         try:
-            self.get_object(character).
+            character = self.get_object(character)
+            check_object = self.get_object(check_object)
+        except:
+            ssprint("<Error checking.>")
+
+        if character and check_object:
+            if character.get_object(check_object):
+                return True:
+
+    def check_resistance(self, character, damage_type):
+        '''
+        Checks if character has resistance.
+
+        Args:
+            character (str):
+                Check if specified character has resistance.
+
+            damage_type (str):
+                Damage type to check resistance to.
+
+        Usage:
+            .check_resistance('rimuru', 'resist pain')
+        '''
+        
+        # Checks if character has resistance attribute
+        for resistName, resistObject in character.attributes['Resistance'].items():
+            for resist in resistObject.resistTypes:
+                if resist.lower() == attack.lower():
+                    return True
+                    break
 
     def use_skill(self, character, skill):
         '''
@@ -273,7 +257,8 @@ class Character:
                 Skill to use by specified character.
 
         Usage:
-            use_skill('rimuru', 'magic perception')
+            .use_skill('rimuru', 'magic perception')
+
             > use magic perception
             > ranga use spatial travel
 
@@ -293,41 +278,90 @@ class Character:
                     return True
             except: pass
 
+
     # ========== Attack
-    def check_resistance(self, character, attack):
-        # Checks if character has resistance attribute
-        for resistName, resistObject in character.attributes['Resistance'].items():
-            for resist in resistObject.resistTypes:
-                if resist.lower() == attack.lower():
-                    return True
-                    break
+    def set_target(self, targets):
+        '''
+        Adds mobs to focusTargets list from user input.
 
-    def can_attack(self, usrInput, rimuru=False):
-        targets, attacks = self.focusTargets, []
+        Separates user inputted targets via ',' then checks to see if mob is in currentMobs list.
+        If so, adds to setTargets list.
+
+        Args:
+            targets (str):
+                String of target(s) to add to focusTargets (list)
+
+        Usage:
+            > target tempest serpent, giant bat
+        '''
+
+        if 'reset' in targets:
+            self.focusTargets.clear()
+        else:
+            for target in targets.split(','):
+                for i in self.currentMobs:
+                    if i.get_name() in target:
+                        self.focusTargets.add(i)
+                        break
+
+    def can_attack(self, targets_and_attacks):
+        '''
+        Checks if can attack, and if it was successful.
+
+        First separates the targets and attacks via splitting up targets_and_attacks by commas ','.
+        Then Adds the targets and attacks to corresponding lists.
+        Checks if target is not too high of a level for attack and doesn't have resistance to said attack.
+        Will return booleans for if attack was attempted and if attack was successful.
+
+        Args:
+            targets (str):
+                Targets to attack, if multiple, separated by comma ','.
+
+        Returns:
+            attacked (bool=False):
+                If attack was attempted.
+
+            attackSuccess (bool=False):
+                If attack was successful.
+
+        Usage:
+            .can_attack('tempest serpent')
+            .can_attack('tempest serpent, giant bat')
+
+            > attack tempest serpent
+            > attack tempest serpent, giant bat
+        '''
+
+        targets = self.focusTargets
+        targets_and_attacks = []
+
+        # Tries to split targets and attacks if there are multiples separated by commas ','.
         try:
-            splitInput = usrInput.split(',')
+            current_targets = targets.split(',')
         except:
-            splitInput = usrInput
+            current_targets = targets
 
+        # If mob is in currentMobs list and is alive, adds to focusTarget list.
         for i in self.currentMobs:
-            if i.get_name() in usrInput and i.alive:
+            if i.get_name() in targets and i.alive:
                 targets.add(i)
                 self.focusTargets.add(i)
 
-        for i in splitInput:
+        # Checks if there are skills in targets_and_attacks list then adds skill object to attacks list.
+        for i in current_targets:
             skill = self.get_object(i)
             if skill:
                 if skill.GetName() in i.lower() and skill.objectType == 'skill':
-                    attacks.append(self.get_object(skill))
+                    targets_and_attacks.append(self.get_object(skill))
 
-        if 'rimuru' in usrInput:
-            targets.add(rimuru)
 
         attacked = attackSuccess = False
 
         for currentTarget in targets:
-            for currentAttack in attacks:
+            for currentAttack in targets_and_attacks:
+                # Checks if target has resistance to current attack.
                 if not self.check_resistance(currentTarget, currentAttack.damageType):
+                    # Checks if target is lower level than current attack.
                     if currentTarget.level <= currentAttack.damageLevel:
                         currentTarget.alive = False
                         attackSuccess = attacked = True
@@ -338,17 +372,36 @@ class Character:
                 else:
                     ssprint(f'<<Warning,{currentTarget.name} has resistance to {currentAttack.damageType}.>>')
                     attacked = True
+
         return attacked, attackSuccess
 
+
     # ========== Attribute Functions
-    def get_attributes(self, target=None, output=False):
+    def attributes_generator(self, character=None, output=False):
+        '''
+        Yields character's attributes (skills/resistances).
+
+        Args:
+            character (bool=None):
+                Specifies character to get attributes from, default is Rimuru (player).
+
+            output (bool=False):
+                Yields friendly string for in game printing.
+
+        Usage:
+            .attributes_generator('ranga', True)
+        '''
+
         character = self.attributes
+
+        # Specify character other than Rimuru.
         if target:
-            character = target.attributes  # If no specified character
+            character = target.attributes
 
         for skillType, skills in character.items():
-            if output and skills:
-                yield f'{skillType}:'  # If output=True prints out skillType
+            if output and skills: 
+                # Prints out skill category (Ultimate, Unique, etc) type also for printing in game.
+                yield f'{skillType}:' 
             for skillName, skillObject in skills.items():
                 if output:
                     if skillObject.active:
@@ -361,63 +414,124 @@ class Character:
                     yield skillObject
 
     def show_attributes(self, character=None):
+        '''
+        Shows character's attributes if data is available.
+
+        Args:
+            character (str=None):
+                Character's attributes to show.
+
+        Usage:
+            .show_attributes('tempest serpent')
+
+            > stats
+            > stats tempest serpent
+        '''
+
+        # If no character was specified, use rimuru (player)
         if not character:
-            character, showMimic = rimuru, True
+            character = rimuru
+            # If currently using Mimic, will show mimicked character's attributes also.
+            showMimic = True
         else:
             showMimic = False
-            # Get stats for other monsters
             try:
-                character = self.get_object(character, True)
+                character = self.get_object(character, mimic=True)
             except: pass
 
         print(f"""
 -----Attributes/Skills-----
 Name: {character.name} {character.familyName}
 """)
-        for i in self.get_attributes(character, output=True):
+        for i in self.attributes_generator(character, output=True):
             print(i)
 
-        # Only shows mimicry info when not looking at stats of other monsters or in mimicry
+        # Only shows mimicry info when not looking at stats of other monsters and is currently using mimicry
         if self.mimicObject and showMimic:
             print("\n\t-----Mimicry-----")
             print(f"\tMimicking: {self.mimicking}\n")
-            for j in self.get_attributes(self.mimicObject, True):
+            for j in self.attributes_generator(self.mimicObject, True):
                 print(f'\t{j}')
 
-    def add_attributes(self, item, showInfo=False, output=True):
-        item = self.get_object(item, new=True)
-        try:
-            self.attributes[item.skillLevel][item.name]
-        except:
-            if item:
-                self.attributes[item.skillLevel][item.name] = item
-                if output:
-                    try:
-                        ssprint(item.acquiredMsg)
-                    except: pass
-                if showInfo: 
-                    self.show_info(item.name)  # Shows skill info
+    def add_attributes(self, attribute, show_msg=True):
+        '''
+        Adds attribute to character.
 
-    def remove_attributes(self, skill):
-        print(skill)
+        Args:
+            attribute (str):
+                Attribute to add to character.
+
+            show_msg (bool=True):
+                Shows attribute's info and acquired msg.
+
+        Usage:
+            .add_attributes('rimuru', 'water blade')
+        '''
+
+        attribute = self.get_object(attribute, new=True)
+        if attribute:
+            if not check_mob_has(attribute):
+                self.attributes[attribute.skillLevel][attribute.name] = attribute
+                if show_acquired_msg:
+                    try:
+                        ssprint(attribute.acquiredMsg)
+                    except: pass
+                if show_info: 
+                    self.show_info(attribute.name)  # Shows skill info
+
+    def remove_attributes(self, attribute):
+        '''
+        Removes attribute.
+        
+        Args:
+            attribute (str):
+                Attribute to remove.
+
+        Usage:
+            .remove_attribute('resist poison')
+        '''
+
         try:
-            skill = self.get_object(skill)
-            del self.attributes[skill.skillLevel][skill.name]
+            attribute = self.get_object(attribute)
+            del self.attributes[attribute.attributeLevel][attribute.name]
         except:
             print("ERROR Deleting attribute. If you're seeing this message, please let developer know")
 
-    def skill_upgrade(self, skillFrom, skillTo):
+    def skill_upgrade(self, skill_from, skill_to):
+        '''
+        Upgrades skill.
+
+        Args:
+            skill_from (str):
+
+            skill_to (str):
+
+        Usage:
+            .skill_upgrade(skill_from, skill_to)
+        '''
+
         try:
-            skillFrom = self.get_object(skillFrom)
-            skillTo = self.get_object(skillTo, new=True)
-            self.remove_attributes(skillFrom)
-            ssprint(f'<<{skillFrom.skillLevel} [{skillFrom}] evolving to {skillTo.skillLevel} [{skillTo}]...>>')
-            self.add_attributes(skillTo)
+            skill_from = self.get_object(skill_from)
+            skill_to = self.get_object(skill_to, new=True)
+            self.remove_attributes(skill_from)
+            ssprint(f'<<{skill_from.skillLevel} [{skill_from}] evolving to {skill_to.skillLevel} [{skill_to}]...>>')
+            self.add_attributes(skill_to)
         except:
             ssprint("<Error upgrading skill>")
 
+
     # ========== Inventory Functions
-    def get_inventory(self, output=False):
+    def inventory_generator(self, output=False):
+        '''
+        Yields all items in character's inventory (Currently only Rimuru).
+
+        Args:
+            output (bool=False):
+                Yields a friendly string for printing in game purposes.
+
+        Usage:
+            .inventory_generator(output=True)
+        '''
         for itemType, items in self.inventory.items():
             if output and items:
                 yield f'{itemType}:'  # If output=True prints out itemType also
@@ -428,13 +542,36 @@ Name: {character.name} {character.familyName}
                     yield itemObject
 
     def show_inventory(self, character=None):
+        '''
+        Prints out inventory items, corresponding category, and capacity.
+
+        Args:
+            character (str):
+                Specify which character's inventory to show.
+
+        Usage:
+            .show_inventory('gobta')
+
+            > inv
+        '''
+
         print('\n-----Inventory-----')
         print(f'Capacity: {self.inventoryCapacity}%\n')
-        for i in self.get_inventory(True): print(i)  # Prints out inventory items
+        for i in self.inventory_generator(output=True): 
+            print(i)  # Prints out inventory items
 
     def add_inventory(self, item):
-            #item = self.get_object(item)
-            #self.inventory[item.itemType][item.name].amount += item.addAmount
+        '''
+        Adds item to character (currently only Rimuru) inventory.
+
+        Args:
+            item (str):
+                Item to add to inventory.
+
+        Usage:
+            .add_inventory('hipokte grass')
+        '''
+
         item = self.get_object(item, new=True)
         if item:
             self.inventory[item.itemType][item.name] = item
@@ -447,11 +584,52 @@ Name: {character.name} {character.familyName}
             ssprint(f'<Inventory Capacity: {self.inventoryCapacity:.2f}%>')
 
     def remove_inventory(self, item):
+        '''
+        Remove item from inventory (Currently only Rimuru).
+
+        Args:
+            item (str):
+                Item to remove from inventory.
+
+        Usage:
+            .remove_inventory('hipokte grass')
+        '''
+
         try:
             self.inventory[item.itemType].remove(item)
         except:
-            ssprint(f'<Error deleting {item.name} from inventory>')
+            ssprint('<Failed removing item from inventory.>')
 
+
+    # ========== Subordinates
+    def subordinates_generator(self, character):
+        '''
+        Yields the subordinates under specified character.
+        '''
+        pass
+
+    def add_sub(self, name, character):
+        '''
+        Naming subordinates and give blessing.
+
+        Args:
+            name (str):
+                Set name to new subordinates.
+
+            character (str):
+                Character name or object to be named.
+
+        Usage:
+            .add_sub('Tempest Wolf', 'Ranga')
+        '''
+
+        char = self.get_object(character, sub=True)
+        char.name = name
+        char.blessing = self.giveBlessing
+        if char.species in self.subs:
+            self.subs[char.species].append(char)
+        else:
+            self.subs[char.species] = list([char])
 
 # ========== Rimuru
 rimuru = None

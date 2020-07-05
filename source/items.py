@@ -3,7 +3,7 @@ class Item:
         self.name = ''
         self.itemType = ''
         self.amount = 0
-        self.addAmount = 1 # Amount to add when calling AddInventory()
+        self.addAmount = 1 # Amount to add when calling add_inventory()
         self.description = ''
         self.capacityUse = 0
         self.description = ''
@@ -15,7 +15,7 @@ class Item:
 
     def AcquiredMsg(self):
         return f'<Acquired {self.addAmount} {self.name}'
-        # AddInventory function will append ' | Total : x'
+        # add_inventory function will append ' | Total : x'
 
     def UpdateInfo(self):
         self.info = f'''

@@ -1,7 +1,6 @@
 class Test:
     def __init__(self):
         print("STASRT")
-        fun(self)
 
     def testClassFunc(self):
         print("HI")
@@ -13,4 +12,5 @@ class Test:
         def ok():
             pass
 
-print(dir(Test))
+li = [1, 2, 5, 6]
+print(*[i for i in li])
