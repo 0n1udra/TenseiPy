@@ -3,94 +3,118 @@ from time import sleep
 import chapters.tensei_1 as tensei1
 import mobs
 
-usrInpDebug = False
+debug_mode = False
 
 #                    ========== Game Input ==========
-def action_menu(cClass, ):
+def action_menu(current_class):
+    """
+    Takes user input and runs corresponding actions.
+
+
+    Args:
+        current_class (obj):
+            Current story progress class object.
+
+    Usage:
+        > inv
+        > stats
+        > attack tempest serpent with water blade
+    """
+
     # Gets class functions and subclasses if it doesn't start with __
-    classDir = [i for i in dir(cClass) if i[1] != '_']
-    funcs = [i.replace('_', ' ') for i in classDir]
+    class_funcs = [i for i in dir(current_class) if i[1] != '_']
+    funcs = [i.replace('_', ' ') for i in class_funcs]
     # Functions starting with _ replaced with *, then replaces _ with space
-    actions = [('*' + i[1:]) if i[0] == '_' else i for i in classDir]
+    actions = [('*' + i[1:]) if i[0] == '_' else i for i in class_funcs]
     actions = [i.replace('_', ' ') for i in actions]
 
     show_hud(actions)
 
-    if usrInpDebug: 
-        print(cClass)
-        usrInp = classDir[0].replace('_', ' ')[1:]
+    if debug_mode:
+        print(current_class)
+        user_input = class_funcs[0].replace('_', ' ')[1:]
     else:
-        usrInp = input("\n> ").lower()
+        user_input = input("\n> ").lower()
         print()
 
     # Get info on skills, times, etc
-    splitInput = ' '.join(usrInp.split()[1:])
-    gameActions = {
-            'stats': mobs.rimuru.show_attributes,
-            'target': mobs.rimuru.set_target,
-            'predate': mobs.rimuru.predate_targets,
-            'mimic': mobs.rimuru.can_mimic,
-            'help': show_help,
-            'inv': mobs.rimuru.show_inventory,
-            'exit': exit
-            }
+    split_user_input = ' '.join(user_input.split()[1:])
+    level_actions = {
+        'stats': mobs.rimuru.show,
+        'target': mobs.rimuru.set_target,
+        'predate': mobs.rimuru.predate_targets,
+        'mimic': mobs.rimuru.use_mimic,
+        'help': show_help,
+        'inv': mobs.rimuru.show,
+        'exit': exit
+    }
 
-    for k, v in gameActions.items():
-        if k in usrInp:
-            v(splitInput)
+    for k, v in level_actions.items():
+        if k in user_input:
+            v(split_user_input)
 
-    if 'info' in usrInp:
-        mobs.rimuru.show_info(splitInput)
-    if 'use' in usrInp:
-        skillSuccess = mobs.rimuru.use_skill(splitInput)
-    if 'attack' in usrInp:
-        attacked, attackSuccess = mobs.rimuru.can_attack(splitInput)
-    try: pass
-    except: pass
+    if 'info' in user_input:
+        mobs.rimuru.show_info(split_user_input)
+    if 'use' in user_input:
+        skill_success = mobs.rimuru.use_skill(split_user_input)
+    if 'attack' in user_input:
+        attacked, attack_success = mobs.rimuru.can_attack(split_user_input)
+    try:
+        pass
+    except:
+        pass
 
     loop = True
-    attacked = attackSuccess = skillSuccess = False
+    attacked = attack_success = skill_success = False
     # If action has *, continues story
     for i in actions:
-        runFunc = i.replace('*', '_').replace(' ', '_')
-        runAction = f'cClass.{runFunc}()'
+        current_action = i.replace('*', '_').replace(' ', '_')
+        run_action = f'current_class.{current_action}()'
         if i[0] == '*':
-            if usrInp.lower() == i.lower()[1:]:
-                
-                eval(runAction)
-                try: pass
-                except: pass
+            if user_input.lower() == i.lower()[1:]:
+
+                eval(run_action)
+                try:
+                    pass
+                except:
+                    pass
                 loop = False
                 break
         else:
-            if usrInp.lower() == i.lower():
-                eval(runAction)
+            if user_input.lower() == i.lower():
+                eval(run_action)
 
-    if skillSuccess or (attacked and attackSuccess):
+    if skill_success or (attacked and attack_success):
         pass
         loop = False
-    elif attacked and not attackSuccess:
+    elif attacked and not attack_success:
         attackFail()
 
     if loop:
-        action_menu(cClass)
+        action_menu(current_class)
+
 
 def show_hud(actions):
+    '''Shows user HUD with available actions and targets (if any).'''
 
     # Adds () around actions, (*action)
     options = ', '.join('(' + i + ')' for i in actions)
-    mimic = mobs.rimuru.mimicking
+    mimicking = mobs.rimuru.current_mimic_name
     try:
-        targets, = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in mobs.rimuru.focusTargets]), 
-    except: targets = None
+        targets, = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in mobs.rimuru.focused_targets]),
+    except:
+        targets = None
 
     if targets:
-        #print(f'\nTarget:', str(targets))
-        print(f'\nTarget: {targets}\nActions:', options, f'| {mimic}, (stats, inv, help)')
+        # print(f'\nTarget:', str(targets))
+        print(f'\nTarget: {targets}\nActions:', options, f'| {mimicking}, (stats, inv, help)')
     else:
-        print("\nActions:", options, f'| {mimic}, (stats, inv, help)')
+        print("\nActions:", options, f'| {mimicking}, (stats, inv, help)')
+
 
 def show_help(*args):
+    '''Shows help page.'''
+
     print("""
     Commands:
         target TARGET(s)            -- Target commands and abilities. E.g. 'target tempest serpent'
@@ -140,64 +164,83 @@ def show_help(*args):
         1.      F           Novice
     """)
 
-# If have attribute or inventory item
-def check_mob_has(item):
-    if mobs.rimuru.get_object(item):
-        return True
 
 # Checks if mob is alive
 def get_mob_status(target):
+    """
+    Returns whether mob in current_mob list is alive.
+
+
+    """
     try:
-        for i in mobs.rimuru.currentMobs:
+        for i in mobs.rimuru.current_level_characters:
             if target.lower() in i.get_name():
                 return True
-    except: pass
+    except:
+        pass
 
-# Add mob(s) to game
-def add_level_mob(mob):
-    if type(mob) == list:
-        for i in mob:
+
+def add_level_mob(level_characters):
+    """
+    Adds new mob to current level in game.
+
+    Args:
+        level_characters: Mob character(s) to add to current level. Can be single mob (string) or multiple (list).
+
+    Usage:
+        .add_level_mob('tempest serpent')
+        .add_level_mob(['tempest serpent', 'giant bat'])
+    """
+    if type(level_characters) == list:
+        for i in level_characters:
             mob = mobs.rimuru.get_object(i, new=True)
             if mob:
-                mobs.rimuru.currentMobs.append(mob)
+                mobs.rimuru.current_level_characters.append(mob)
     else:
-        mobs.rimuru.currentMobs.append(mobs.rimuru.get_object(mob, new=True))
+        mob = mobs.rimuru.get_object(level_characters, new=True)
+        mobs.rimuru.current_level_characters.append(mobs.rimuru.get_object(mob, new=True))
 
 
 #                    ========== Extra ==========
 def tbc():
+    ''' To Be Continued function.'''
     print("---TO BE CONTINUED---")
     input("Press Enter to exit > ")
 
 
 #                    ========== Game Saves ==========
 def load_save_game(path):
-    global rimuru
     try:
         rimuru = pickle.load(open(path, 'rb'))
         print("Loaded Player Save\n")
-    except: 
+    except:
         rimuru = mobs.Rimuru_Tempest()
     return rimuru
 
-def save_game(rimuru):
-    pickle.dump(rimuru, open(mobs.rimuru.savePath, 'wb'))
+
+def save_game(rimuru_object):
+    pickle.dump(rimuru_object, open(rimuru_object.save_path, 'wb'))
     print("Game Saved To: player_save.p")
 
-def delete_game_save(rimuru):
-    try:
-        os.remove(rimuru.savePath)
-        print("Resetting Game. Deleted player_save.p")
-    except: pass
 
-def continue_story(rimuru, nextChapter):
+def delete_game_save(rimuru_object):
+    try:
+        os.remove(rimuru_object.save_path)
+        print("Resetting Game. Deleted player_save.p")
+    except:
+        pass
+
+
+def continue_story(rimuru_object, next_chapter):
     print("Continue to next chapter?")
-    usrInp = input("Y/N > ")
-    mobs.rimuru.storyProgress.append(nextChapter)
-    save_game(rimuru)
-    if usrInp.lower() == 'y':
-        nextChapter(rimuru)
-    else: exit()
+    user_input = input("Y/N > ")
+    rimuru_object.story_progress.append(next_chapter)
+    save_game(rimuru_object)
+    if user_input.lower() == 'y':
+        next_chapter(rimuru_object)
+    else:
+        exit()
+
 
 #                    ========== Game Functions ==========
 def show_start_banner():
@@ -210,14 +253,15 @@ def show_start_banner():
     - Delete player_save.p to reset game progress (includes player inventory and skills)
     """
     print(instructions)
-    mobs.rimuru.show_attributes()
-    mobs.rimuru.show_inventory()
+    mobs.rimuru.show()
+    mobs.rimuru.show()
     print()
+
 
 # ========== Printing
 def sprint(Msg):
     msgLen = len(str(Msg))
-    if mobs.rimuru.textDelay:
+    if mobs.rimuru.text_delay:
         if msgLen > 100:
             sTime = 1
         elif msgLen > 70 and msgLen > 80:
@@ -230,33 +274,36 @@ def sprint(Msg):
             sTime = 2
         elif msgLen < 5:
             sTime = 1
-        else: sTime = 1
+        else:
+            sTime = 1
     else:
         sTime = 0
 
     print(Msg, '\n')
     sleep(sTime)
 
+
 def ssprint(Msg):
     sprint(f'    {Msg}')
 
+
 if __name__ == '__main__':
     # Get file path depending on Windows or not
-    savePath = os.path.dirname(os.path.abspath(__file__)) + '/player_save.p'
+    save_path = os.path.dirname(os.path.abspath(__file__)) + '/player_save.p'
 
-    rimuru = mobs.update_character(load_save_game(savePath))
-    rimuru.savePath = savePath
+    rimuru = mobs.update_character(load_save_game(save_path))
+    rimuru.save_path = save_path
     show_start_banner()
 
     print("\nDisable text delay? (Recommend leaving enabled for easier reading)")
     setSleep = str(input("(Y)es/(N)o > "))
     if setSleep.lower() in ['yes', 'y']:
         print("Text Delay: DISABLED")
-        rimuru.textDelay = False
+        mobs.rimuru.text_delay = False
     else:
         print("Text Delay: ENABLED")
     sleep(1)
     print("\n\n")
 
-    rimuru.storyProgress[0] = tensei1.Chapter1
-    rimuru.storyProgress[-1](rimuru)
+    rimuru.story_progress[0] = tensei1.Chapter1
+    rimuru.story_progress[-1](mobs.rimuru)
