@@ -1,68 +1,122 @@
-from mob funcs import Character
+from character import Character
+
+def ssprint(Msg):
+    print(f'    {Msg}\n')
 
 class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Slime'
-        self.mimicking = 'Slime'
-        self.giveBlessing = 'Protection of Tempest'
+        self.shared_blessing = 'Protection of Tempest'
         self.level = 7
-        self.mimicObject = None
-        self.startState = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
-        self.UpdateInfo()
+        self.current_mimic = None
+        self.current_mimic_name = 'Slime'
+        self.acquired_mimics = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
+                                'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+                                }
+        self.starting_state = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist',
+                               'Electricity Resist']
+        self.Data.update_info()
+
 
     # ========== Predator Functions
-    def get_mimic(self):
-        for lvl, lvlList in self.mimic_object().mimics.items():
-            for name in lvlList:
-                yield name
+    def mimic_generator(self):
+        """
+        Yields available mimic mob objects.
 
-    def predate_targets(self, inpTargets):
-        predateTargets = list(self.focusTargets)
-        predateTargets.extend(inpTargets.split(','))
-        for target in predateTargets:
-            try:
-                target = self.Generators(target, new=True)
-                targetName = target.get_name()
-            except:
-                targetName = ''
+        Returns:
+            Character objects that are in acquired_mimics dictionary.
+        """
+        for level, mimicries_list in self.acquired_mimics.items():
+            for mimic in mimicries_list:
+                yield mimic
 
-            for mob in self.currentMobs:
-                if not mob.alive:
-                    if mob.get_name() in targetName:
-                        self.add_mimicry(target)
-                        ssprint(f'<<Analysis complete on {mob.name}.>>')
+    def predate_targets(self, input_targets):
+        """
+        Predates targets that are being focused. Also adds target mimicry.
 
-            try:
-                if target.objectType == 'item':
-                    self.AddInventory(target)
-            except: pass
+        Args:
+            input_targets: Target to predate.
 
-            self.focusTargets = set()
+        Usage:
+            > predate
+        """
+
+        targets = list(self.focused_targets)
+        targets.extend(input_targets.split(','))
+        for target in targets:
+            target = self.get_object(target, new=True)
+
+            if target:
+                if target.game_object_type == 'item':
+                    self.add(target)
+                else:
+                    # Get's list of c that are on current level.
+                    for mob in self.current_level_characters:
+                        # Checks if current mob is alive and checks of current target is in current_level_characters lsit.
+                        if not mob.alive and mob.get_name() in target.get_name():
+                            self.add_mimic(target)
+
+        self.focused_targets = set()
 
     def mimic_object(self, active=None):
+        """
+
+        Args:
+            active:
+
+        Returns:
+
+        """
         try:
             mimic = self.attributes['Unique Skill']['Mimic']
             mimic.active = active
             return mimic
-        except: pass
+        except:
+            pass
 
-    def add_mimicry(self, character):
-        if not self.Generators(character, mimic=True):  # If already have mimic
-            self.mimic_object().mimics[character.rank].append(character)
-            ssprint(f'<<Note, new mimicry available: {character.name}.>>')
-            self.ShowInfo(character)
+    def add_mimic(self, character):
+        """
+        Adds new monster mimicry.
 
-    def can_mimic(self, character):
+        Args:
+            character: Character to add new mimic.
+
+        Usage:
+            .add_mimic('tempest serpent')
+        """
+        # Checks if already have mimicry.
+        mimic = self.get_object(character, mimic=True)
+        if not mimic:
+            mimic = self.get_object(character, mimic=True)
+
+        if mimic:
+            self.acquired_mimics[mimic.rank].append(self.get_object(character))
+            self.show_info()
+            ssprint(f'<<Notice, new mimicry available: {mimic.name}.>>')
+            ssprint(f'<<Information, analysis on {mimic.name} complete.>>')
+
+    def use_mimic(self, character):
+        """
+        Use mimicry ability.
+
+        Args:
+            character: Game monster to mimic.
+
+        Usage:
+            > mimic tempest serpent
+        """
         if character == 'reset':
-            self.mimicking, self.mimicObject = 'Slime', None  # Resets mimic variables
+            # Resets mimic state (default Slime).
+            self.current_mimic_name = 'Slime'
+            self.current_mimic = None
             ssprint("<Mimicry Reset>")
         else:
-            try:
-                currentMimic = self.Generators(character, True)
-                self.mimicking, self.mimicObject = currentMimic.name, currentMimic
-                ssprint(f'<Now Mimicking: {currentMimic.name}>')
-            except: pass
+            new_mimic = self.get_object(character, mimic=True)
+            if new_mimic:
+                self.current_mimic_name = new_mimic.name
+                self.current_mimic = new_mimic
+                ssprint(f'<Now Mimicking: {new_mimic.name}>')
 
 
 class Veldora_Tempest(Character):
@@ -74,13 +128,9 @@ class Veldora_Tempest(Character):
         self.blessing = 'Storm Crest'
         self.alive = True
         self.level = 11
-        self.itemType = 'Misc'
-        self.capacityUse = 10
-        self.UpdateInfo()
-
-    def acquired_msg(self):
-        self.UpdateInfo()
-        return f"<<Acquired Veldora {self.familyName}>>"
+        self.item_type = 'Misc'
+        self.inventory_add_amount = 10
+        self.Data.update_info()
 
 
 # ========== Low Level
@@ -92,10 +142,9 @@ class Tempest_Serpent(Character):
         self.level = 6
         self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
-
-        self.startState = [skills.Sense_Heat_Source(), skills.Poisonous_Breath()]
-        self.StartState()
-        self.UpdateInfo()
+        self.starting_state = ['sense heat source', 'poisonous breath']
+        self.set_start_state()
+        self.Data.update_info()
 
 
 class Giant_Bat(Character):
@@ -109,9 +158,9 @@ class Giant_Bat(Character):
         Due to its wings that regulate its own gravity, it's capable of flight
         '''
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
-        self.startState = [skills.Ultrasound_Waves(), skills.Vampirism_Skill()]
-        self.StartState()
-        self.UpdateInfo()
+        self.starting_state = ['ultrasound waves', 'vampirism']
+        self.set_start_state()
+        self.Data.update_info()
 
 
 class Evil_Centipede(Character):
@@ -124,9 +173,9 @@ class Evil_Centipede(Character):
         Centipede monstrosity, a giant centipede.
         '''
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
-        self.startState = [skills.Paralyzing_Breath()]
-        self.StartState()
-        self.UpdateInfo()
+        self.starting_state = ['paralyzing breath']
+        self.set_start_state()
+        self.Data.update_info()
 
 
 class Black_Spider(Character):
@@ -139,9 +188,10 @@ class Black_Spider(Character):
         Most of the body is yellow-ish, while the legs are black.
         '''
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
-        self.startState = [skills.Sticky_Thread(), skills.Steel_Thread()]
-        self.StartState()
-        self.UpdateInfo()
+        self.starting_state = ['sticky thread', 'steel thread']
+        self.set_start_state()
+        self.Data.update_info()
+
 
 # ========== Wolves
 class Tempest_Wolf(Character):
@@ -155,6 +205,13 @@ class Tempest_Wolf(Character):
         '''
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
         self.evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
-        self.startState = [skills.Sticky_Thread(), skills.Steel_Thread()]
-        self.StartState()
-        self.UpdateInfo()
+        self.starting_state = []
+        self.set_start_state()
+        self.Data.update_info()
+
+# ========== Rimuru
+rimuru = None
+def update_character(character):
+    global rimuru
+    rimuru = character
+    return rimuru
