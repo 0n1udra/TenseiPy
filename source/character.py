@@ -4,20 +4,22 @@ from inventory import Inventory
 from attributes import Attributes
 from combat import Combat
 from subordintes import Subordinates
-zz
 
 
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
 
-class Character():
+class Character(Info, Attributes, Inventory, Combat, Subordinates):
     def __init__(self):
-        self.Inv = Inventory()
-        self.Data = Info()
-        self.Attrs = Attributes()
-        self.Combat = Combat()
-        self.Subs = Subordinates()
+        Info.__init__(self)
+        Attributes.__init__(self)
+        Inventory.__init__(self)
+        Combat.__init__(self)
+        Subordinates.__init__(self)
+
+        self.starting_state = []
+
         # Game variables.
         self.story_progress = [None]
         self.save_path = ''
@@ -35,15 +37,15 @@ class Character():
         """Adds corresponding starter attributes and items to character."""
 
         for i in self.starting_state:
-            self.add(i, show_acquired_msg=False)
+            self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, inp, mimic=False, new=False):
+    def get_object(self, item, mimic=False, new=False):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
 
         Args:
-            inp: Either string or object instance of the object you want. If object, will get objects .name attribute.
+            item: Either string or object instance of the object you want. If object, will get objects .name attribute.
             mimic: If currently using Mimic ability, will also include mimicked mob attributes.
             new: If first time adding a new object to inventory.
 
@@ -53,15 +55,14 @@ class Character():
 
         # If input is an objects, gets objects name (str).
         try:
-            inp = inp.name
-        except AttributeError:
-            pass
+            item = item.name
+        except: pass
 
-        generators = [*self.generator(), *self.generator(), *self.generator()]
+        generators = [*self.inventory_generator(), *self.attributes_generator()]
 
         try:
             generators.extend([*self.mimic_generator()])
-        except ModuleNotFoundError:
+        except:
             pass
 
         # If object not in inventory. Will need to use __subclasses__ method to find, initialize and add to inventory.
@@ -74,18 +75,19 @@ class Character():
 
         # If currently using Mimic ability.
         if mimic:
-            generators = [self.mimic_generator()]
-        # Adds mimicked monster abilities if currently using mimic.
-        if self.current_mimic:
-            generators.extend(self.generator(self.current_mimic))
+            generators = [*self.mimic_generator()]
+            # Adds mimicked monster abilities if currently using mimic.
+            if self.current_mimic:
+                generators.extend(self.generator(self.current_mimic))
 
         for i in generators:
             if new:
                 i = i()
-            if i.get_name() in inp.lower():
-                return i
-            else:
-                del i
+            if i:
+                if i.get_name() in item.lower():
+                    return i
+                else:
+                    del i
 
     def check_mob_has(self, check_object, character=None):
         """
@@ -112,4 +114,3 @@ class Character():
         if character and check_object:
             if character.get_object(check_object):
                 return True
-

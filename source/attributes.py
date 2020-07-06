@@ -1,5 +1,3 @@
-
-
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
@@ -20,7 +18,7 @@ class Attributes:
             'Manas': {},
         }
 
-    def generator(self, character=None, output=False):
+    def attributes_generator(self, character=None, output=False):
         """
         Yields character's attributes (skills/resistances).
 
@@ -29,13 +27,13 @@ class Attributes:
             output: Yields friendly string for in game printing.
 
         Usage:
-            .generator('ranga', True)
+            .attributes_generator('ranga', True)
         """
 
         # Specify character other than Rimuru.
-        try:
+        if character:
             character = self.get_object(character).attributes
-        except:
+        else:
             character = self.attributes
 
         for skill_type, skills in character.items():
@@ -53,7 +51,7 @@ class Attributes:
                 else:
                     yield skill_object
 
-    def show(self, character=None):
+    def show_attributes(self, character=None):
         """
         Shows character's attributes if data is available.
 
@@ -67,30 +65,28 @@ class Attributes:
             > stats tempest serpent
         """
 
-        # If no character was specified, use rimuru (player)
-        if not character:
-            character = self
-            # If currently using Mimic, will show mimicked character's attributes also.
-            show_mimic_data = True
-        else:
-            show_mimic_data = False
-            character = self.get_object(character, mimic=True)
+        # If no character was specified, else show player stats (rimuru)
+
+        try:
+            character = self.get_object(character)
+        except:
+            pass
 
         print(f"""
   -----Attributes/Skills-----
-  Name: {character.name} {character.family_name}
-  """)
-        for i in self.generator(character, output=True):
+  Name: {self.name} {self.family_name}""")
+
+        for i in self.attributes_generator(character, output=True):
             print(i)
 
         # Only shows mimicry info when not looking at stats of other monsters and is currently using mimicry
-        if self.current_mimic and show_mimic_data:
+        if self.current_mimic:
             print("\n\t-----Mimicry-----")
-            print(f"\tMimicking: {self.current_mimic.name}\n")
-            for j in self.generator(self.current_mimic, True):
+            print(f"Mimicking: {character.current_mimic.name}\n")
+            for j in self.attributes_generator(characterr.current_mimic, True):
                 print(f'\t{j}')
 
-    def add(self, attribute, show_acquired_msg=True, show_skill_info=False):
+    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
         Adds attribute to character.
 
@@ -100,20 +96,20 @@ class Attributes:
             show_skill_info: Shows skill information page.
 
         Usage:
-            .add('rimuru', 'water blade')
+            .add_attribute('rimuru', 'water blade')
         """
 
         attribute = self.get_object(attribute, new=True)
         if attribute:
             if not self.check_mob_has(attribute):
                 self.attributes[attribute.skill_level][attribute.name] = attribute
-        if show_acquired_msg:
-            ssprint(attribute.acquired_msg)
-        if show_skill_info:
-            # Shows skill info
-            self.show_info(attribute.name)
+            if show_acquired_msg:
+                attribute.show_acquired_msg()
+            if show_skill_info:
+                # Shows skill info
+                self.show_info(attribute.name)
 
-    def remove(self, attribute):
+    def remove_attribute(self, attribute):
         """
         Removes attribute.
 
@@ -130,7 +126,7 @@ class Attributes:
         except:
             print("ERROR Deleting attribute. If you're seeing this message, please let developer know")
 
-    def upgrade(self, skill_from, skill_to):
+    def upgrade_attribute(self, skill_from, skill_to):
         """
         Upgrades skill.
 
@@ -145,9 +141,9 @@ class Attributes:
         skill_from = self.get_object(skill_from)
         skill_to = self.get_object(skill_to, new=True)
         if skill_to and skill_from:
-            self.remove(skill_from)
+            self.remove_attribute(skill_from)
             ssprint(f'<<{skill_from.skill_level} [{skill_from}] evolving to {skill_to.skill_level} [{skill_to}]...>>')
-            self.add(skill_to)
+            self.add_attribute(skill_to)
 
     def check_resistance(self, damage_type, target=None):
         """

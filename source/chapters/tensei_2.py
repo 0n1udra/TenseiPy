@@ -2,20 +2,20 @@ import skills
 from start_game import *
 from chapters.tensei_3 import Chapter3
 
-def Chapter2(rimuru):
 
+def Chapter2(rimuru):
     def StartChapter2():
         sprint("Oh, what's this? Looks like some kind of ore.")
         action_menu(['*Predate Magic Ore', '*Move on'],
                     [['predate magic ore'], ['move on']],
                     [PredateOre, MoveOn])
 
-        ssprint("<<Information, analysis shows this is the raw form of Magic Steel. Can be used for crafting weapons, armor, etc.>>")
+        ssprint(
+            "<<Information, analysis shows this is the raw form of Magic Steel. Can be used for crafting weapons, armor, etc.>>")
         sprint("Ok, might be useful in the future. Guess I should get as much as I can")
 
         sprint("Now with magic perception I can finally find my way out of this cave.")
         sprint("*But before finding the exit, some small monsters started taking a interest in the little slime.*")
-
 
         sprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
         ssprint("<<Answer, this is a Tempest Serpent.>>")
@@ -57,7 +57,7 @@ def Chapter2(rimuru):
         if get_mob_status('giant spider'):
             sprint("What now...A Spider. Nobody likes spiders, especially giant ones.")
             ssprint("<<Information, These are called Giant Spider.>>")
-        
+
             action_menu(['*Attack ___', '*Move on'],
                         [['attack $%:$%$'], ['move on']],
                         [AttackSpider, MoveOn], FailSpider)
@@ -65,7 +65,6 @@ def Chapter2(rimuru):
         if get_mob_status('evil centipede'):
             sprint("For real, now a centipede. I just want to get out of this cave already.")
             ssprint("<<Information, Analysis shows this a Evil Centipede.>>")
-
 
             action_menu(['*Attack ___', '*Move on'],
                         [['attack $%:$%$'], ['move on']],
@@ -80,14 +79,14 @@ def Chapter2(rimuru):
         sprint("*The giant pair of doors slowly creeks open, and three adventurers shows themselves.*")
         sprint("What should I do... I can wait and try to sneak past them if they're going in")
         sprint("Adventurer 1: Phew, it's finally open, even the keyhole was rusted.")
-        sprint("Adventurer 2: It is over 300 years old, and nobody is maintaining it. I doubt there's a real dragon in here.")
+        sprint(
+            "Adventurer 2: It is over 300 years old, and nobody is maintaining it. I doubt there's a real dragon in here.")
         sprint("Adventurer 2: Still reckless of the guildmaster to send us to investigate.")
         sprint("I shouldn't show, they'll probably get scared and attack me")
 
         action_menu(['*Exit cave', '*Say hi'],
                     [['exit cave'], ['say hi']],
                     [ExitCave, SayHi])
-
 
     # ========== Exit Cave
     def ExitCave():
@@ -98,7 +97,8 @@ def Chapter2(rimuru):
         if check_mob_has('veldora'):
             ssprint("*After the little slime died. All of his stomach contents spewed outwards.*")
             ssprint("*Unfortunately this particular slime had somehow absorbed a dragon locked in [Infinity Prison].*")
-            ssprint("*The three adventurers where crushed by such a massive object. They Have failed there simple mission*")
+            ssprint(
+                "*The three adventurers where crushed by such a massive object. They Have failed there simple mission*")
         delete_game_save(rimuru)
 
     def SayHi():
@@ -114,12 +114,14 @@ def Chapter2(rimuru):
         action_menu(['*Predate', 'Predate Magic Ore', '*Move on'],
                     [['predate'], ['predate magic ore'], ['move on']],
                     [PredateSerpent, PredateOre, MoveOn])
+
     def FailCentipede():
         sprint("Didn't work, huh...")
 
     # ========== Black Spider
     def AttackSpider():
         sprint("Took care of that, moving on")
+
     def FailSpider():
         sprint("Didn't work.")
         action_menu(['*Attack ___'],
@@ -132,18 +134,20 @@ def Chapter2(rimuru):
         action_menu(['*Predate', 'Predate Magic Ore', '*Move on'],
                     [['predate'], ['predate magic ore'], ['move on']],
                     [PredateBat, PredateOre, MoveOn])
+
     def FailBat():
         sprint("That didn't work.")
         action_menu(['*Attack ___'],
                     [['attack $$"%']],
                     [AttackBat], FailBat)
+
     def PredateBat():
         sprint("Now with [Ultrasound Waves] I can communicate with sound, I hope.")
 
     # ========== Sense heat source
-    def UseSense(): 
+    def UseSense():
         sprint("\nThat's a pretty handy skill. Range isn't very far though.")
-        
+
     # ========== Tempest Serpent
     def AttackSerpent():
         sprint("Wow, what a powerful attack. I probably shouldn't use that so openly.")
@@ -172,20 +176,23 @@ def Chapter2(rimuru):
 
     # ========== Learn Water Blade/Bullet
     def LearnWaterBlade():
-        rimuru.add(skills.Water_Blade())
-        sprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
+        rimuru.add_attribute('water blade')
+        sprint(
+            "Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
 
     def LearnWaterBullet():
-        rimuru.add(skills.Water_Bullet())
-        sprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
+        rimuru.add_attribute('water bullet')
+        sprint(
+            "Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
 
     # ========== Magic Ore 
-    def PredateOre(): pass
+    def PredateOre():
+        pass
 
     def StoryContinues():
         ssprint("Lets keep moving")
 
     def Wonder():
         sprint("Wondering")
-    StartChapter2()
 
+    StartChapter2()

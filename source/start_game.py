@@ -5,6 +5,7 @@ import mobs
 
 debug_mode = False
 
+
 #                    ========== Game Input ==========
 def action_menu(current_class):
     """
@@ -40,12 +41,11 @@ def action_menu(current_class):
     # Get info on skills, times, etc
     split_user_input = ' '.join(user_input.split()[1:])
     level_actions = {
-        'stats': mobs.rimuru.show,
         'target': mobs.rimuru.set_target,
         'predate': mobs.rimuru.predate_targets,
         'mimic': mobs.rimuru.use_mimic,
         'help': show_help,
-        'inv': mobs.rimuru.show,
+        'inv': mobs.rimuru.show_inventory,
         'exit': exit
     }
 
@@ -53,11 +53,13 @@ def action_menu(current_class):
         if k in user_input:
             v(split_user_input)
 
-    if 'info' in user_input:
+    if 'stats' in user_input:
+        mobs.rimuru.show_attributes(split_user_input)
+    elif 'info' in user_input:
         mobs.rimuru.show_info(split_user_input)
-    if 'use' in user_input:
+    elif 'use' in user_input:
         skill_success = mobs.rimuru.use_skill(split_user_input)
-    if 'attack' in user_input:
+    elif 'attack' in user_input:
         attacked, attack_success = mobs.rimuru.can_attack(split_user_input)
     try:
         pass
@@ -253,8 +255,8 @@ def show_start_banner():
     - Delete player_save.p to reset game progress (includes player inventory and skills)
     """
     print(instructions)
-    mobs.rimuru.show()
-    mobs.rimuru.show()
+    rimuru.show_attributes()
+    rimuru.show_inventory()
     print()
 
 

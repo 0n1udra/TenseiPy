@@ -2,6 +2,7 @@ from start_game import *
 from chapters.tensei_2 import Chapter2
 import slime_art
 
+
 # Manga, Chapter 1
 def Chapter1(rimuru):
     class Chapter_1:
@@ -11,13 +12,13 @@ def Chapter1(rimuru):
             ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
             rimuru.set_start_state()
             ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
-            rimuru.add('Predator')
+            rimuru.add_attribute('Predator')
             ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
-            rimuru.add('Sage')
+            rimuru.add_attribute('Sage')
             ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
             sprint('.....')
-            rimuru.upgrade('Sage', 'Great Sage')
-            print(rimuru.show())
+            rimuru.upgrade_attribute('Sage', 'Great Sage')
+            print(rimuru.show_attributes())
 
             ssprint(".....")
             ssprint("It's so dark, where is this. What happened to me?")
@@ -31,7 +32,8 @@ def Chapter1(rimuru):
                 ssprint("hm? eh? My limbs don't seem to be responding!?")
                 ssprint("That's not possible I was only stabbed, my arms and legs should be all fine... Right?...")
                 ssprint("Hey hey hey, Give me a break already... AH!? I moved!? Below my abdomen(?), is that grass?")
-                ssprint("There is also no sense of sight, hearing, and smell. There is only 'touch'... What about taste?")
+                ssprint(
+                    "There is also no sense of sight, hearing, and smell. There is only 'touch'... What about taste?")
                 ssprint("Alright, Let's try to taste it. Actually! Where the fuck is my mouth?")
                 ssprint("The grass melted. Is it being absorbed?")
                 ssprint("WAIT A MINUTE, am I even human anymore!!?! Eh.. Let's calm down and confirm my appearance.")
@@ -40,14 +42,17 @@ def Chapter1(rimuru):
             class _inspect():
                 def __init__(self):
                     ssprint("Wait what kind of joke is this! Who would accept something like this!!")
-                    ssprint("ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
+                    ssprint(
+                        "ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
                     ssprint("*Although Minami Satoru didn't want to admins it.*")
                     ssprint("*He has reincarnated into a slime!*")
                     sprint(slime_art.slime)
                     ssprint("Puyo, Puyoyoyo.... stretch....bounce")
-                    ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
+                    ssprint(
+                        "It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
                     ssprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
-                    ssprint("And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
+                    ssprint(
+                        "And there was no need for sleep or eat either. This body isn't so bad. It's just very lonely.")
                     ssprint("This is the only problem I can't solve, so i started eating grass in order to pass time.")
                     action_menu(self)
 
@@ -59,52 +64,57 @@ def Chapter1(rimuru):
 
                 def _predate_grass(self):
                     ssprint("Ooooweeee more grass!")
-                    rimuru.add('Hipokte Grass')
-                    rimuru.show_info('hipokte grass')
+                    rimuru.add_inventory('Hipokte Grass')
                     action_menu(_learn_skills())
-
 
     class _learn_skills:
         def __init__(self):
-            ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
+            ssprint(
+                "I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
             ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
             ssprint("Whoa, somebody actually answered!?!")
             ssprint("<<Notice, the current spaced used is less than 1%.>>")
             sprint("I've heard this before, this voice that sounded computer synthesized.... Who is that?")
-            ssprint("<<Answer. This is the Unique Skill [Great Sage], the ability has adapted, so it can quickly answer you.>>")
+            ssprint(
+                "<<Answer. This is the Unique Skill [Great Sage], the ability has adapted, so it can quickly answer you.>>")
             ssprint("[Great Sage]? [Predator]? heh?!")
-            ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
+            ssprint(
+                "Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
             action_menu(self)
 
-        class _what_is_predator:
+        class what_is_predator:
             def __init__(self):
                 ssprint("What is this predator?")
-                ssprint("<<Answer, Unique skill [Predator] allows one to predate targets. [Predator] can store predated targets in this unique skill's stomach or able to isolate dangerous material.")
-                ssprint("<<After successful analysis a monster, one can use mimicry to replicate and use analyzed target's abilities.>>")
+                ssprint(
+                    "<<Answer, Unique skill [Predator] allows one to predate targets. [Predator] can store predated targets in this unique skill's stomach or able to isolate dangerous material.")
+                ssprint(
+                    "<<After successful analysis a monster, one can use mimicry to replicate and use analyzed target's abilities.>>")
                 action_menu(self)
-
-
-
-
-
 
             def analyze_grass(self):
                 ssprint("As a test, can you analyze that grass I just ate?")
+                ssprint("<<Analysis complete.>>")
+                rimuru.show_info('hipokte grass')
 
+            def _create_potions(self):
+                ssprint("")
+                action_menu(_learn_skills)
 
         def predate_grass(self):
-            rimuru.add('Hipokte Grass')
+            rimuru.add_inventory('Hipokte Grass')
 
         class _what_are_skills:
             def __init__(self):
                 ssprint("<<Answer. When growth is recognized by the world, occasionally one will obtain a [Skill].>>")
                 ssprint("Although I don't understand it too much. It seems like it's just how this world works.")
                 ssprint("Even if it's a skill, I now have someone to talk to.")
-                ssprint("~Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water~")
+                ssprint(
+                    "~Getting carried away and not having all of his normal senses. The little slime fell into what seemed to be water~")
                 ssprint("I'm going to die! SHIT! I've finally reincarnated and I'm already going to die!")
                 ssprint("Great sage how painful is it to suffocate to death!?")
                 ssprint("<<Answer. A slime's body does not need oxygen.>>")
-                ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
+                ssprint(
+                    "I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
                 ssprint("How can I get out of here?")
                 ssprint("<<Suggestion, use predator to intake water then expel at high velocity.>>")
                 action_menu(self)
@@ -114,7 +124,7 @@ def Chapter1(rimuru):
 
                 class _predate_water:
                     def __init__(self):
-                        rimuru.add('Hydraulic Propulsion')
+                        rimuru.add_attribute('Hydraulic Propulsion')
                         action_menu(self)
 
                     def stay_in_water(self):
@@ -123,10 +133,11 @@ def Chapter1(rimuru):
                     def _expel_water(self):
                         ssprint("Finally, I'm back on land!")
                         sprint("~Can you hear me little one.~")
-                        ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
-                        ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
+                        ssprint(
+                            "Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
+                        ssprint(
+                            "It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
                         action_menu(Find_Veldora())
-
 
     class Find_Veldora:
         def __init__(self):
@@ -169,18 +180,22 @@ def Chapter1(rimuru):
             sprint("I never expected to be able to speak with anything other than my skill by thought...")
             sprint("Right now I am in a state that's unable to see anything....Ummmm you are?.")
             sprint("~This is telepathy. It's Hard to converse if you can't see... Alright, I'll help you see.~")
-            sprint("~Just don't be scared when you see my true form. There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.~")
+            sprint(
+                "~Just don't be scared when you see my true form. There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.~")
             sprint("Magic essence?...")
-            ssprint("<<Answer. This world is covered with magic essence for example, the body of a slime can move because it absorbs magic essence.>>")
-            sprint("~If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill.~")
+            ssprint(
+                "<<Answer. This world is covered with magic essence for example, the body of a slime can move because it absorbs magic essence.>>")
+            sprint(
+                "~If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill.~")
             sprint("~With that you will be able to 'see' and 'hear'.~")
             sprint("Eh... this feels really complicated. Wellllll, it won't hurt to try... Will it?).")
             sprint("I sense something floating, is this the so called magic essence?")
 
             sprint("Ehh, just like that heh?")
-            ssprint("<<Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception].>>")
+            ssprint(
+                "<<Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception].>>")
             ssprint("<<Activate [Magic Perception]?>>")
-            rimuru.add('Magic Perception')
+            rimuru.add_attribute('Magic Perception')
             action_menu(self)
 
         # ========== Veldora introduce himself
@@ -224,7 +239,8 @@ def Chapter1(rimuru):
                 action_menu(Become_Friends())
 
             def _leave(self):
-                ssprint("~I guess there's nothing I can say or do to make you stay. How rude of you to just leave me here all by myself!~")
+                ssprint(
+                    "~I guess there's nothing I can say or do to make you stay. How rude of you to just leave me here all by myself!~")
                 Leave_Cave()
 
         def _friend_dragon(self):
@@ -237,11 +253,11 @@ def Chapter1(rimuru):
             sprint("Great. Now I guess I should help you with this seal eh?")
             action_menu(Help_With_Seal())
 
-
     class Help_With_Seal:
         def __init__(self):
             ssprint("[Great Sage]?")
-            ssprint("<<Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks.>>")
+            ssprint(
+                "<<Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks.>>")
             ssprint("<<Notice, possible solution may be...")
             sprint("~Hey don't just only talk to your own skill.~")
             sprint("Jealous?")
@@ -283,8 +299,9 @@ def Chapter1(rimuru):
 
         class _predate_veldora:
             def __init__(self):
-                ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
-                rimuru.add(mobs.veldora)
+                ssprint(
+                    "~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
+                rimuru.add_inventory(mobs.veldora)
                 rimuru.show()
                 rimuru.show()
                 ssprint("<<Notice, start analyzing Unique Skill [Infinity Prison]?>>")
@@ -298,12 +315,12 @@ def Chapter1(rimuru):
             def _move_on(self):
                 ssprint("Ummmmm, I guess he's imprisoned in my stomach now forever....")
                 ssprint("Note, you can start analysis whenever you choose.")
-                ssprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, he'll think I betrayed him...")
+                ssprint(
+                    "ehehhh... Veldora is gonna be pissed that I didn't immediately start, he'll think I betrayed him...")
                 Leave_Cave()
 
     def Leave_Cave():
         ssprint("Time to leave this cave already.")
         continue_story(rimuru, Chapter2)
-    
-    Chapter_1()
 
+    Chapter_1()

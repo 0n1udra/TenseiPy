@@ -1,7 +1,9 @@
 from character import Character
 
+
 def ssprint(Msg):
     print(f'    {Msg}\n')
+
 
 class Rimuru_Tempest(Character):
     def __init__(self):
@@ -11,13 +13,12 @@ class Rimuru_Tempest(Character):
         self.level = 7
         self.current_mimic = None
         self.current_mimic_name = 'Slime'
-        self.acquired_mimics = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
-                                'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
-                                }
+        self.acquired_mimicries = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
+                                   'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+                                   }
         self.starting_state = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist',
                                'Electricity Resist']
-        self.Data.update_info()
-
+        self.update_info()
 
     # ========== Predator Functions
     def mimic_generator(self):
@@ -25,9 +26,10 @@ class Rimuru_Tempest(Character):
         Yields available mimic mob objects.
 
         Returns:
-            Character objects that are in acquired_mimics dictionary.
+            Character objects that are in acquired_mimicries dictionary.
         """
-        for level, mimicries_list in self.acquired_mimics.items():
+
+        for level, mimicries_list in self.acquired_mimicries.items():
             for mimic in mimicries_list:
                 yield mimic
 
@@ -91,8 +93,8 @@ class Rimuru_Tempest(Character):
             mimic = self.get_object(character, mimic=True)
 
         if mimic:
-            self.acquired_mimics[mimic.rank].append(self.get_object(character))
-            self.show_info()
+            self.acquired_mimicries[mimic.rank].append(self.get_object(character))
+            self.show()
             ssprint(f'<<Notice, new mimicry available: {mimic.name}.>>')
             ssprint(f'<<Information, analysis on {mimic.name} complete.>>')
 
@@ -129,8 +131,8 @@ class Veldora_Tempest(Character):
         self.alive = True
         self.level = 11
         self.item_type = 'Misc'
-        self.inventory_add_amount = 10
-        self.Data.update_info()
+        self.inventory_add_capacity = 10
+        self.update_info()
 
 
 # ========== Low Level
@@ -144,7 +146,7 @@ class Tempest_Serpent(Character):
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
         self.starting_state = ['sense heat source', 'poisonous breath']
         self.set_start_state()
-        self.Data.update_info()
+        self.update_info()
 
 
 class Giant_Bat(Character):
@@ -160,7 +162,7 @@ class Giant_Bat(Character):
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
         self.starting_state = ['ultrasound waves', 'vampirism']
         self.set_start_state()
-        self.Data.update_info()
+        self.update_info()
 
 
 class Evil_Centipede(Character):
@@ -175,7 +177,7 @@ class Evil_Centipede(Character):
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
         self.starting_state = ['paralyzing breath']
         self.set_start_state()
-        self.Data.update_info()
+        self.update_info()
 
 
 class Black_Spider(Character):
@@ -190,7 +192,7 @@ class Black_Spider(Character):
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
         self.starting_state = ['sticky thread', 'steel thread']
         self.set_start_state()
-        self.Data.update_info()
+        self.update_info()
 
 
 # ========== Wolves
@@ -207,10 +209,13 @@ class Tempest_Wolf(Character):
         self.evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
         self.starting_state = []
         self.set_start_state()
-        self.Data.update_info()
+        self.update_info()
+
 
 # ========== Rimuru
 rimuru = None
+
+
 def update_character(character):
     global rimuru
     rimuru = character

@@ -1,12 +1,9 @@
-
-
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
 
 class Combat:
     def __init__(self):
-        super().__init__()
         self.current_level_characters = []
         self.focused_targets = set()
 
@@ -32,7 +29,6 @@ class Combat:
                     if i.get_name() in target:
                         self.focused_targets.add(i)
                         break
-
 
     def can_attack(self, targets_and_attacks):
         """
@@ -70,7 +66,6 @@ class Combat:
         # If mob is in current_level_characters list and is alive, adds to focusTarget list.
         for i in self.current_level_characters:
             if i.get_name() in targets and i.alive:
-                targets.add(i)
                 self.focused_targets.add(i)
 
         # Checks if there are skills in targets_and_attacks list then adds skill object to attacks list.
@@ -99,5 +94,3 @@ class Combat:
                     attacked = True
 
         return attacked, attack_succes
-
-

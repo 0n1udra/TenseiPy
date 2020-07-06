@@ -1,4 +1,3 @@
-
 class Skill:
     def __init__(self):
         self.name = 'N/A'
@@ -18,8 +17,8 @@ class Skill:
 
         self.game_object_type = 'skill'
 
-    def get_acquired_msg(self):
-        return self.acquired_msg
+    def show_acquired_msg(self):
+        print(f"    {self.acquired_msg}\n")
 
     def update_skill_info(self):
         self.info = f"""
@@ -68,7 +67,7 @@ class Ciel_Skill(Skill):
         Auto Battle Mode 
             - Great sage can battle on behalf of user of permission granted
         """
-        self. evolution = "Sage > Great Sage > Raphael > Ciel"
+        self.evolution = "Sage > Great Sage > Raphael > Ciel"
         self.update_skill_info()
         self.acquired_msg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
 
@@ -99,12 +98,13 @@ class Predator_Mimicry_Skill(Skill):
     @property
     def info(self):
         print("\t-----Available Mimicries-----")
-        for level, mob_list in self.acquired_mimics.items():
+        for level, mob_list in self.acquired_mimicries.items():
             print(f'\t{level} :')
             for mob in mob_list:
                 print(f'\t\t{mob.name}')
         print("\n\t'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
-    
+
+
 class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -184,6 +184,7 @@ class Sage_Skill(Skill):
         self.skill_level = 'Extra Skill'
         self.update_skill_info()
 
+
 class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -227,6 +228,7 @@ class Hydraulic_Propulsion(Skill):
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_skill_info()
 
+
 class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -236,6 +238,7 @@ class Water_Blade(Skill):
         self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_skill_info()
+
 
 class Water_Bullet(Skill):
     def __init__(self):
@@ -257,6 +260,7 @@ class Absorb_Dissolve(Skill):
         self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
         self.update_skill_info()
 
+
 class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -269,6 +273,7 @@ class Self_Regeneration(Skill):
         '''
         self.evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
         self.update_skill_info()
+
 
 # ========== Tempest Serpent
 class Sense_Heat_Source(Skill):
@@ -289,7 +294,9 @@ class Sense_Heat_Source(Skill):
                 if i.alive:
                     print(f'\t{i.name}')
             return True
-        except: pass
+        except:
+            pass
+
 
 class Poisonous_Breath(Skill):
     def __init__(self):
@@ -304,6 +311,7 @@ class Poisonous_Breath(Skill):
         '''
         self.update_skill_info()
 
+
 # ========== Giant Bat
 class Vampirism_Skill(Skill):
     def __init__(self):
@@ -315,6 +323,7 @@ class Vampirism_Skill(Skill):
         self.description = "By sucking the target's blood the user can temporarily gain its Skills."
         self.update_skill_info()
 
+
 class Ultrasound_Waves(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -324,6 +333,7 @@ class Ultrasound_Waves(Skill):
         self.damage_level = 3
         self.description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
         self.update_skill_info()
+
 
 # ========== Evil Centipede
 class Paralyzing_Breath(Skill):
@@ -335,6 +345,7 @@ class Paralyzing_Breath(Skill):
         self.damage_level = 5
         self.description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
         self.update_skill_info()
+
 
 # ========== Black Spider
 class Sticky_Thread(Skill):
@@ -351,7 +362,8 @@ class Sticky_Thread(Skill):
         try:
             rimuru.target.movement = False
             return True
-        except: pass
+        except:
+            pass
 
 
 class Steel_Thread(Skill):
@@ -377,6 +389,7 @@ class Resist_Pain(Resistance):
         '''
         self.update_skill_info()
 
+
 class Resist_Melee(Resistance):
     def __init__(self):
         Resistance.__init__(self)
@@ -384,6 +397,7 @@ class Resist_Melee(Resistance):
         self.resistTypes = ['Melee']
         self.description = 'Tolerance-type Skill that grants immunity to melee attacks.'
         self.update_skill_info()
+
 
 class Resist_Electricity(Resistance):
     def __init__(self):
@@ -396,6 +410,7 @@ class Resist_Electricity(Resistance):
         '''
         self.update_skill_info()
 
+
 class Resist_Temperature(Resistance):
     def __init__(self):
         Resistance.__init__(self)
@@ -406,6 +421,7 @@ class Resist_Temperature(Resistance):
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
         self.update_skill_info()
+
 
 class Resist_Poison(Resistance):
     def __init__(self):

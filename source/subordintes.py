@@ -1,16 +1,14 @@
-
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
 
 class Subordinates:
     def __init__(self):
-        self.starting_state = []
         self.subordinates = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
                              'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
                              }
 
-    def generator(self, character=None):
+    def subordinates_generator(self, character=None):
         """
         Yields the subordinates under specified character.
         """
@@ -19,7 +17,7 @@ class Subordinates:
             for subordinate in sub_list:
                 yield subordinate
 
-    def add(self, name, character):
+    def add_subordinate(self, name, character):
         """
         Naming subordinates and give blessing.
 
@@ -28,7 +26,7 @@ class Subordinates:
             character: Character name or object to be named.
 
         Usage:
-            .add('Tempest Wolf', 'Ranga')
+            .add_subordinates('Tempest Wolf', 'Ranga')
         """
 
         char = self.get_object(character, sub=True)
@@ -38,4 +36,3 @@ class Subordinates:
             self.subs[char.species].append(char)
         else:
             self.subs[char.species] = list([char])
-

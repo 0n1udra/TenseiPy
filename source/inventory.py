@@ -1,5 +1,3 @@
-
-
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
@@ -7,7 +5,7 @@ def ssprint(Msg):
 class Inventory:
     def __init__(self):
         self.inventory_capacity = 0
-        self.inventory_add_amount = 0
+        self.inventory_add_capacity = 0
         self.inventory = {
             'Items': {},
             'Material': {},
@@ -15,7 +13,7 @@ class Inventory:
             'Misc': {}
         }
 
-    def generator(self, output=False):
+    def inventory_generator(self, output=False):
         """
         Yields all items in character's inventory (Currently only Rimuru).
 
@@ -23,18 +21,19 @@ class Inventory:
             output: Yields a friendly string for printing in game purposes.
 
         Usage:
-            .generator(output=True)
+            .inventory_generator(output=True)
         """
         for item_type, items in self.inventory.items():
             if output and items:
                 yield f'{item_type}:'  # If output=True prints out item_type also
+
             for item_name, item_object in items.items():
                 if output:
                     yield f'\t{self.inventory[item_type][item_name].amount}x {item_object.name}'
                 else:
                     yield item_object
 
-    def show(self, character=None):
+    def show_inventory(self, character=None):
         """
         Prints out inventory items, corresponding category, and capacity.
 
@@ -48,11 +47,11 @@ class Inventory:
         """
 
         print('\n-----Inventory-----')
-        print(f'Capacity: {self.inventory_capacity}%\n')
-        for i in self.generator(output=True):
+        print(f'Capacity: {self.inventory_capacity:.2f}%\n')
+        for i in self.inventory_generator(output=True):
             print(i)  # Prints out inventory items
 
-    def add(self, item):
+    def add_inventory(self, item):
         """
         Adds item to character (currently only Rimuru) inventory.
 
@@ -60,21 +59,23 @@ class Inventory:
             item: Item to add to inventory.
 
         Usage:
-            .add('hipokte grass')
+            .add_inventory('hipokte grass')
         """
 
         item = self.get_object(item, new=True)
-        if item:
+
+        if self.check_mob_has(item):
+            self.inventory[item.item_type][item.name].amount += item.inventory_add_capacity
+            self.inventory_capacity += item.inventory_add_capacity
+            item.show_acquired_msg()
+        else:
             self.inventory[item.item_type][item.name] = item
-            self.inventory[item.item_type][item.name].amount += item.inventory_add_amount
+            self.inventory[item.item_type][item.name].amount += item.inventory_add_capacity
             ssprint(f'<<Analysis on {item.name} successful.>>')
-            self.show_info(item)
 
-            self.inventory_capacity += item.inventory_add_amount
-            ssprint(item.get_acquired_msg() + f' | Total: {self.inventory[item.item_type][item.name].amount}>')
-            ssprint(f'<Inventory Capacity: {self.inventory_capacity:.2f}%>')
+            self.inventory_capacity += item.inventory_add_capacity
 
-    def remove(self, item):
+    def remove_inventory(self, item):
         """
         Remove item from inventory (Currently only Rimuru).
 

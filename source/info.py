@@ -1,5 +1,3 @@
-
-
 def ssprint(Msg):
     print(f'    {Msg}\n')
 
@@ -80,5 +78,5 @@ class Info:
         char = self.get_object(character)
         if char:
             char.level = level
-            self.Data.update_info()
+            self.update_info()
             ssprint(f"<{char} rank up to {level}>")
