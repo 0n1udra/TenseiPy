@@ -172,11 +172,11 @@ def Chapter2(rimuru):
 
     # ========== Learn Water Blade/Bullet
     def LearnWaterBlade():
-        rimuru.add_attributes(skills.Water_Blade())
+        rimuru.add(skills.Water_Blade())
         sprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
 
     def LearnWaterBullet():
-        rimuru.add_attributes(skills.Water_Bullet())
+        rimuru.add(skills.Water_Bullet())
         sprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
 
     # ========== Magic Ore 

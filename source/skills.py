@@ -1,33 +1,33 @@
-import mobs
+
 class Skill:
     def __init__(self):
         self.name = 'N/A'
         self.type = 'Activatable Skill'
-        self.skillLevel = 'Common Skill'
-        self.damageLevel = 1
-        self.damageType = 'N/A'
+        self.skill_level = 'Common Skill'
+        self.damage_level = 1
+        self.damage_type = 'N/A'
         self.description = 'N/A'
-        self.acquredMsg = ''
+        self.acquired_msg = ''
         self.evolution = 'N/A'
         self.abilities = 'N/A'
 
         self.active = False
         self.passive = False
         self.predate = True
-        self.subSkills = {}
+        self.sub_skills = {}
 
-        self.objectType = 'skill'
+        self.game_object_type = 'skill'
 
-    def acquired_msg(self):
-        return self.acquiredMsg
+    def get_acquired_msg(self):
+        return self.acquired_msg
 
     def update_skill_info(self):
         self.info = f"""
     Name: {self.name}
     Type: {self.type}
-    Level: {self.skillLevel}
-    Damage: {self.damageLevel}
-    Damage Type: {self.damageType}
+    Level: {self.skill_level}
+    Damage: {self.damage_level}
+    Damage Type: {self.damage_type}
 
     Description:
         {self.description}
@@ -39,7 +39,7 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquiredMsg = f"<<{self.skillLevel} [{self.name}] Acquired.>>"
+        self.acquired_msg = f"<<{self.skill_level} [{self.name}] Acquired.>>"
 
     def get_name(self):
         return self.name.lower()
@@ -51,7 +51,7 @@ class Skill:
 class Resistance(Skill):
     def __init__(self):
         Skill.__init__(self)
-        self.skillLevel = 'Resistance'
+        self.skill_level = 'Resistance'
         self.type = 'Passive'
         self.passive = True
         self.resistTypess = []
@@ -62,7 +62,7 @@ class Ciel_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Ciel'
-        self.skillLevel = 'Manas'
+        self.skill_level = 'Manas'
         self.description = "Evolved from Wisdom King Raphael."
         self.abilities = """
         Auto Battle Mode 
@@ -70,7 +70,7 @@ class Ciel_Skill(Skill):
         """
         self. evolution = "Sage > Great Sage > Raphael > Ciel"
         self.update_skill_info()
-        self.acquiredMsg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
+        self.acquired_msg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
 
 
 # ===== Ultimate Skill=====
@@ -79,7 +79,7 @@ class Raphael_Skill(Skill):
         Skill.__init__(self)
 
         self.name = 'Wisdom King Raphael'
-        self.skillLevel = 'Ultimate Skill'
+        self.skill_level = 'Ultimate Skill'
         self.description = 'Evolved version of Great Sage.'
         self.abilities = """
         Auto Battle Mode 
@@ -94,28 +94,22 @@ class Predator_Mimicry_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Mimic'
-        self.skillLevel = 'Unique Skill'
-        self.mimics = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
-            'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
-            }
-
-    def AddMimicy(self, character):
-        self.mimics.append(character)
+        self.skill_level = 'Unique Skill'
 
     @property
     def info(self):
-        print("\t-----Available Mimicry-----")
-        for lvl, lvlList in self.mimics.items():
-            print(f'\t{lvl} :')
-            for name in lvlList:
-                print(f'\t\t{name.name}')
+        print("\t-----Available Mimicries-----")
+        for level, mob_list in self.acquired_mimics.items():
+            print(f'\t{level} :')
+            for mob in mob_list:
+                print(f'\t\t{mob.name}')
         print("\n\t'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
     
 class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Predator'
-        self.skillLevel = 'Unique Skill'
+        self.skill_level = 'Unique Skill'
         self.description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
         self.abilities = """
         Predation   
@@ -136,14 +130,14 @@ class Predator_Skill(Skill):
         """
         self.evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
         self.update_skill_info()
-        self.acquiredMsg = "<<Unique Skill [Predator] successfully Acquired.>>"
+        self.acquired_msg = "<<Unique Skill [Predator] successfully Acquired.>>"
 
 
 class Great_Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Great Sage'
-        self.skillLevel = 'Unique Skill'
+        self.skill_level = 'Unique Skill'
         self.description = '''
         A Conceptual Intelligence that has a heartless and emotionless personality 
         and is solely driven by purely logical computations. It cares for nobody but the benefit 
@@ -179,7 +173,7 @@ class Great_Sage_Skill(Skill):
         '''
         self.evolution = 'Sage > Great Sage > Raphael > Ciel'
         self.update_skill_info()
-        self.acquiredMsg = f'<<Unique Skill [Great Sage] Successfully Acquired!>>'
+        self.acquired_msg = f'<<Unique Skill [Great Sage] Successfully Acquired!>>'
 
 
 #                    ========== Extra Skills ==========
@@ -187,14 +181,14 @@ class Sage_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Sage'
-        self.skillLevel = 'Extra Skill'
+        self.skill_level = 'Extra Skill'
         self.update_skill_info()
 
 class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Magic Perception'
-        self.skillLevel = 'Extra Skill'
+        self.skill_level = 'Extra Skill'
         self.description = '''
         One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
         the skill is rather simple.
@@ -215,7 +209,7 @@ class Water_Manipulation(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = "Water Manipulation"
-        self.skillLevel = 'Extra Skill'
+        self.skill_level = 'Extra Skill'
         self.description = '''
         After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
         The three Skills are fused and evolved into Water Manipulation.
@@ -237,8 +231,8 @@ class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Blade'
-        self.damageType = 'Melee'
-        self.damageLevel = 9
+        self.damage_type = 'Melee'
+        self.damage_level = 9
         self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_skill_info()
@@ -247,8 +241,8 @@ class Water_Bullet(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Water Bullet'
-        self.damageType = 'Melee'
-        self.damageLevel = 9
+        self.damage_type = 'Melee'
+        self.damage_level = 9
         self.description = "Shoot out a small powerful water bullet."
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_skill_info()
@@ -259,7 +253,7 @@ class Absorb_Dissolve(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Absorb/Dissolve'
-        self.skillLevel = 'Intrinsic Skill'
+        self.skill_level = 'Intrinsic Skill'
         self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
         self.update_skill_info()
 
@@ -267,7 +261,7 @@ class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
-        self.skillLevel = 'Intrinsic Skill'
+        self.skill_level = 'Intrinsic Skill'
         self.description = '''
         Restores the user's damaged body. 
         It can restore even lost limbs as long as it's not a situation where the limbs get continuously chopped off or crushed. 
@@ -281,7 +275,7 @@ class Sense_Heat_Source(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Sense Heat Source'
-        self.skillLevel = 'Intrinsic Skill'
+        self.skill_level = 'Intrinsic Skill'
         self.description = '''
         Identifies any heat reactions in the local area. 
         Not affected by any concealing effects.
@@ -291,7 +285,7 @@ class Sense_Heat_Source(Skill):
     def UseSkill(self):
         try:
             print("\t-----Nearby Heat Sources-----")
-            for i in mobs.rimuru.currentMobs:
+            for i in rimuru.current_level_characters:
                 if i.alive:
                     print(f'\t{i.name}')
             return True
@@ -301,9 +295,9 @@ class Poisonous_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Poisonous Breath'
-        self.skillLevel = 'Intrinsic Skill'
-        self.damageType = 'Poison'
-        self.damageLevel = 8
+        self.skill_level = 'Intrinsic Skill'
+        self.damage_type = 'Poison'
+        self.damage_level = 8
         self.description = '''
         A powerful breath-type poison (corrosion) attack. 
         Affects an area seven meters in front of the user in a 120-degree radius.
@@ -315,9 +309,9 @@ class Vampirism_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Vampirism'
-        self.skillLevel = 'Intrinsic Skill'
-        self.damageType = 'Melee'
-        self.damageLevel = 4
+        self.skill_level = 'Intrinsic Skill'
+        self.damage_type = 'Melee'
+        self.damage_level = 4
         self.description = "By sucking the target's blood the user can temporarily gain its Skills."
         self.update_skill_info()
 
@@ -325,9 +319,9 @@ class Ultrasound_Waves(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Ultrasound Waves'
-        self.skillLevel = 'Intrinsic Skill'
-        self.damageType = 'Melee'
-        self.damageLevel = 3
+        self.skill_level = 'Intrinsic Skill'
+        self.damage_type = 'Melee'
+        self.damage_level = 3
         self.description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
         self.update_skill_info()
 
@@ -336,9 +330,9 @@ class Paralyzing_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Paralyzing Breath'
-        self.skillLevel = 'Intrinsic Skill'
-        self.damageType = 'Poison'
-        self.damageLevel = 5
+        self.skill_level = 'Intrinsic Skill'
+        self.damage_type = 'Poison'
+        self.damage_level = 5
         self.description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
         self.update_skill_info()
 
@@ -347,15 +341,15 @@ class Sticky_Thread(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Sticky Thread'
-        self.skillLevel = 'Intrinsic Skill'
-        self.damageType = 'Melee'
-        self.damageLevel = 2
+        self.skill_level = 'Intrinsic Skill'
+        self.damage_type = 'Melee'
+        self.damage_level = 2
         self.description = "A thin sticky thread that traps enemies and prevent them from moving."
         self.update_skill_info()
 
     def UseSkill(self):
         try:
-            mobs.rimuru.target.movement = False
+            rimuru.target.movement = False
             return True
         except: pass
 
@@ -364,9 +358,9 @@ class Steel_Thread(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Steel Thread'
-        self.skillLevel = 'Intrinsic Skill'
-        self.damageType = 'Melee'
-        self.damageLevel = 5
+        self.skill_level = 'Intrinsic Skill'
+        self.damage_type = 'Melee'
+        self.damage_level = 5
         self.description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
         self.update_skill_info()
 

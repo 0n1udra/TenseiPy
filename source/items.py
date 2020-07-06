@@ -1,23 +1,23 @@
 class Item:
     def __init__(self):
         self.name = ''
-        self.itemType = ''
+        self.item_type = ''
         self.amount = 0
-        self.addAmount = 1 # Amount to add when calling add_inventory()
+        self.predator_add_amount = 1 # Amount to add when calling add()
         self.description = ''
-        self.capacityUse = 0
+        self.inventory_add_amount = 0
         self.description = ''
 
-        self.objectType = 'item'
+        self.game_object_type = 'item'
 
-    def ItemDescription(self):
+    def get_description(self):
         return self.description
 
-    def AcquiredMsg(self):
-        return f'<Acquired {self.addAmount} {self.name}'
-        # add_inventory function will append ' | Total : x'
+    def acquired_msg(self):
+        return f'<Acquired {self.predator_add_amount} {self.name}'
+        # add function will append ' | Total : x'
 
-    def UpdateInfo(self):
+    def update_info(self):
         self.info = f'''
     Name: {self.name}
     
@@ -31,7 +31,7 @@ class Item:
     def __str__(self):
         return self.name
 
-    def GetName(self):
+    def get_name(self):
         return self.name.lower()
 
 
@@ -40,29 +40,29 @@ class Hipokte_Grass(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Hipokte Grass'
-        self.itemType = 'Material'
-        self.addAmount = 5
+        self.item_type = 'Material'
+        self.predator_add_amount = 5
         self.amount = 0
-        self.capacityUse = 0.01
+        self.inventory_add_amount = 0.01
         self.usage = 'Mainly used for making healing potions.'
         self.description = 'Magicule infused grass, found in locations with high Magicule concentration'
         self.appearance = 'Looks like regular grass, but gives off small amounts of magic essence.'
-        self.UpdateInfo()
+        self.Data.update_info()
 
 
 class Magic_Ore(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Magic Ore'
-        self.itemType = 'Material'
-        self.addAmount = 5
+        self.item_type = 'Material'
+        self.predator_add_amount = 5
         self.amount = 0
-        self.capacityUse = 0.1
+        self.inventory_add_amount = 0.1
         self.usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
         self.description = '''
         Magic ores form around high concentration of magic essence.
         Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
         '''
         self.appearance = 'A very colorful ore. Almost like a glowing shimmering rainbow effect, while giving off some magic essence.'
-        self.UpdateInfo()
+        self.Data.update_info()
         

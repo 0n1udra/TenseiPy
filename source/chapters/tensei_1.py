@@ -9,15 +9,15 @@ def Chapter1(rimuru):
             sprint(".....")
             sprint(slime_art.great_sage)
             ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
-            rimuru.run_start_state()
+            rimuru.set_start_state()
             ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
-            rimuru.add_attributes('Predator')
+            rimuru.add('Predator')
             ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
-            rimuru.add_attributes('Sage')
+            rimuru.add('Sage')
             ssprint("<<Confirmation Complete. Extra skill [Sage] evolving.>>")
             sprint('.....')
-            rimuru.skill_upgrade('Sage', 'Great Sage')
-            print(rimuru.show_attributes())
+            rimuru.upgrade('Sage', 'Great Sage')
+            print(rimuru.show())
 
             ssprint(".....")
             ssprint("It's so dark, where is this. What happened to me?")
@@ -59,7 +59,7 @@ def Chapter1(rimuru):
 
                 def _predate_grass(self):
                     ssprint("Ooooweeee more grass!")
-                    rimuru.add_inventory('Hipokte Grass')
+                    rimuru.add('Hipokte Grass')
                     rimuru.show_info('hipokte grass')
                     action_menu(_learn_skills())
 
@@ -76,11 +76,24 @@ def Chapter1(rimuru):
             ssprint("Speakin of which, when I died I seemed to have acquired some of skills. That said, what are skills?")
             action_menu(self)
 
-        def info_great_sage(self): pass
-        def info_predator(self): pass
+        class _what_is_predator:
+            def __init__(self):
+                ssprint("What is this predator?")
+                ssprint("<<Answer, Unique skill [Predator] allows one to predate targets. [Predator] can store predated targets in this unique skill's stomach or able to isolate dangerous material.")
+                ssprint("<<After successful analysis a monster, one can use mimicry to replicate and use analyzed target's abilities.>>")
+                action_menu(self)
+
+
+
+
+
+
+            def analyze_grass(self):
+                ssprint("As a test, can you analyze that grass I just ate?")
+
 
         def predate_grass(self):
-            rimuru.add_inventory('Hipokte Grass')
+            rimuru.add('Hipokte Grass')
 
         class _what_are_skills:
             def __init__(self):
@@ -101,7 +114,7 @@ def Chapter1(rimuru):
 
                 class _predate_water:
                     def __init__(self):
-                        rimuru.add_attributes('Hydraulic Propulsion')
+                        rimuru.add('Hydraulic Propulsion')
                         action_menu(self)
 
                     def stay_in_water(self):
@@ -167,7 +180,7 @@ def Chapter1(rimuru):
             sprint("Ehh, just like that heh?")
             ssprint("<<Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception].>>")
             ssprint("<<Activate [Magic Perception]?>>")
-            rimuru.add_attributes('Magic Perception')
+            rimuru.add('Magic Perception')
             action_menu(self)
 
         # ========== Veldora introduce himself
@@ -180,10 +193,10 @@ def Chapter1(rimuru):
                 sprint("I can see. I CAN SEE!")
                 sprint("~Seems like you did it. You learn quickly little one.~")
                 sprint("Yes, thank you!")
-                sprint("~Then shall I introduce myself, again?~")
+                sprint("~Allow me to formally introduce myself?~")
                 action_menu(self)
 
-            def _yes(self):
+            def _sure(self):
                 sprint("My name is Storm Dragon Veldora!~")
                 sprint(slime_art.cave_veldora)
                 sprint("~I am one of the four True Dragons of this world.~")
@@ -192,7 +205,7 @@ def Chapter1(rimuru):
                 ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
                 action_menu(Become_Friends())
 
-            def _no(self):
+            def _nah(self):
                 ssprint("~Alright then, I won't. Hmmmmph~")
                 action_menu(Become_Friends())
 
@@ -249,20 +262,20 @@ def Chapter1(rimuru):
             sprint("~Before that, let me give you a name. You think of a name for both of us.~")
             sprint("Like a last name? hmmmmm...")
             veldoraLName = str(input("\nLast Name > "))
-            c.veldora.familyName = veldoraLName
-            rimuru.familyName = veldoraLName
+            mobs.veldora.family_name = veldoraLName
+            rimuru.family_name = veldoraLName
             rimuru.divineProtection = 'Storm Crest'
             ssprint("<Acquired Storm Crest Divine Protection>\n")
             rimuru.update_ranking(8)
 
-            sprint(f"Hmmmmmm... How about {c.veldora.familyName}")
+            sprint(f"Hmmmmmm... How about {mobs.veldora.family_name}")
             sprint("~What a good name!~")
             sprint("He actually likes it?")
-            sprint(f"~From now on I'll be Veldora {c.veldora.familyName}~")
+            sprint(f"~From now on I'll be Veldora {mobs.veldora.family_name}~")
             sprint("~And as for you...~")
             rimuruName = str(input("\nName > "))
             rimuru.name = rimuruName
-            sprint(f"~How about {rimuru.name} {rimuru.familyName}")
+            sprint(f"~How about {rimuru.name} {rimuru.family_name}")
 
             sprint("~Leave it to me. Until we meet again little one!~")
             ssprint("<<Use Unique skill [Predator]?>>")
@@ -271,9 +284,9 @@ def Chapter1(rimuru):
         class _predate_veldora:
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
-                rimuru.add_inventory(c.veldora)
-                rimuru.show_attributes()
-                rimuru.show_inventory()
+                rimuru.add(mobs.veldora)
+                rimuru.show()
+                rimuru.show()
                 ssprint("<<Notice, start analyzing Unique Skill [Infinity Prison]?>>")
                 action_menu(self)
 
