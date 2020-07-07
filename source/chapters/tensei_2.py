@@ -10,8 +10,7 @@ def Chapter2(rimuru):
                     [['predate magic ore'], ['move on']],
                     [PredateOre, MoveOn])
 
-        ssprint(
-            "<<Information, analysis shows this is the raw form of Magic Steel. Can be used for crafting weapons, armor, etc.>>")
+        ssprint("<<Information, analysis shows this is the raw form of Magic Steel. Can be used for crafting weapons, armor, etc.>>")
         sprint("Ok, might be useful in the future. Guess I should get as much as I can")
 
         sprint("Now with magic perception I can finally find my way out of this cave.")
@@ -177,13 +176,11 @@ def Chapter2(rimuru):
     # ========== Learn Water Blade/Bullet
     def LearnWaterBlade():
         rimuru.add_attribute('water blade')
-        sprint(
-            "Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
+        sprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
 
     def LearnWaterBullet():
         rimuru.add_attribute('water bullet')
-        sprint(
-            "Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
+        sprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
 
     # ========== Magic Ore 
     def PredateOre():

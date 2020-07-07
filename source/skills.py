@@ -15,7 +15,7 @@ class Skill:
         self.predate = True
         self.sub_skills = {}
 
-        self.game_object_type = 'skill'
+        self.game_object_type = 'attribute'
 
     def show_acquired_msg(self):
         print(f"    {self.acquired_msg}\n")
@@ -38,13 +38,10 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquired_msg = f"<<{self.skill_level} [{self.name}] Acquired.>>"
+        self.acquired_msg = f"<<{self.skill_level} [{self.name}] successfully acquired.>>"
 
     def get_name(self):
         return self.name.lower()
-
-    def __str__(self):
-        return self.name
 
 
 class Resistance(Skill):
@@ -53,7 +50,7 @@ class Resistance(Skill):
         self.skill_level = 'Resistance'
         self.type = 'Passive'
         self.passive = True
-        self.resistTypess = []
+        self.resist_types = []
 
 
 #                    ========== Manas ==========
@@ -95,6 +92,10 @@ class Predator_Mimicry_Skill(Skill):
         self.name = 'Mimic'
         self.skill_level = 'Unique Skill'
 
+        self.acquired_mimicries = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
+                                   'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+                                   }
+
     @property
     def info(self):
         print("\t-----Available Mimicries-----")
@@ -103,6 +104,7 @@ class Predator_Mimicry_Skill(Skill):
             for mob in mob_list:
                 print(f'\t\t{mob.name}')
         print("\n\t'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
+        return ''
 
 
 class Predator_Skill(Skill):
@@ -200,7 +202,7 @@ class Magic_Perception(Skill):
         '''
         self.update_skill_info()
 
-    def UseSkill(self):
+    def use_skill(self):
         print("\t<Activated Extra Skill [Magic Perception].>")
         self.active = True
         return True
@@ -287,10 +289,10 @@ class Sense_Heat_Source(Skill):
         '''
         self.update_skill_info()
 
-    def UseSkill(self):
+    def use_skill(self):
         try:
             print("\t-----Nearby Heat Sources-----")
-            for i in rimuru.current_level_characters:
+            for i in self.current_level_characters:
                 if i.alive:
                     print(f'\t{i.name}')
             return True
@@ -358,12 +360,8 @@ class Sticky_Thread(Skill):
         self.description = "A thin sticky thread that traps enemies and prevent them from moving."
         self.update_skill_info()
 
-    def UseSkill(self):
-        try:
-            rimuru.target.movement = False
-            return True
-        except:
-            pass
+    def use_thread(self):
+        pass
 
 
 class Steel_Thread(Skill):
@@ -382,7 +380,7 @@ class Resist_Pain(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Resist Pain'
-        self.resistTypes = ['Pain']
+        self.resist_types = ['Pain']
         self.description = '''
         Tolerance-type Skill that grants immunity to physical pain sensation. 
         However, you still take damage.
@@ -394,7 +392,7 @@ class Resist_Melee(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Resist Melee'
-        self.resistTypes = ['Melee']
+        self.resist_types = ['Melee']
         self.description = 'Tolerance-type Skill that grants immunity to melee attacks.'
         self.update_skill_info()
 
@@ -403,7 +401,7 @@ class Resist_Electricity(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Resist Electricity'
-        self.resistTypes = ['Electricity']
+        self.resist_types = ['Electricity']
         self.description = '''
         Tolerance-type Skill that grants resistance to electricity-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
@@ -415,7 +413,7 @@ class Resist_Temperature(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Resist Temperature'
-        self.resistTypes = ['hot', 'cold', 'temperature']
+        self.resist_types = ['hot', 'cold', 'temperature']
         self.description = '''
         Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
@@ -427,7 +425,7 @@ class Resist_Poison(Resistance):
     def __init__(self):
         Resistance.__init__(self)
         self.name = 'Resist Poison'
-        self.resistTypes = ['Poison']
+        self.resist_types = ['Poison']
         self.description = '''
         Tolerance-type Skill that grants resistance to poison-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.

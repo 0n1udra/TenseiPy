@@ -1,7 +1,7 @@
 class Test:
+    testVar = 'testy var'
     def __init__(self):
-        print("ok")
-        self.data = 'hi'
+        self.testVart  = 'init'
 
 
     def printData(self):
@@ -10,10 +10,12 @@ class Test:
 
 
 
-class One(Test):
-    def __init__(self):
-        self.data = 'ok'
 
+print(Test.testVar)
+Test.testVar = 'hi'
+print(Test().testVart)
+t = Test()
+x = Test()
 
-one = One()
-one.printData()
+print(t.testVar)
+print(x.testVar)
