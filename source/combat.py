@@ -30,7 +30,7 @@ class Combat:
                         self.focused_targets.add(i)
                         break
 
-    def can_attack(self, targets_and_attacks):
+    def attack(self, targets_and_attacks=None):
         """
         Checks if can attack, and if it was successful.
 
@@ -47,42 +47,44 @@ class Combat:
             attack_success: If attack was successful.
 
         Usage:
-            .can_attack('tempest serpent')
-            .can_attack('tempest serpent, giant bat')
+            .attack('tempest serpent')
+            .attack('tempest serpent, giant bat')
 
             > attack tempest serpent
             > attack tempest serpent, giant bat
         """
 
-        targets = self.focused_targets
-        targets_and_attacks = []
+        targets = []
+        skills = []
+
 
         # Tries to split targets and attacks if there are multiples separated by commas ','.
         try:
-            current_targets = targets.split(',')
+            targets_and_attacks = targets_and_attacks.split(',')
         except:
-            current_targets = targets
+            targets_and_attacks = self.current_level_characters
 
         # If mob is in current_level_characters list and is alive, adds to focusTarget list.
         for i in self.current_level_characters:
-            if i.get_name() in targets and i.alive:
+            if i.get_name() in targets_and_attacks and i.alive:
                 self.focused_targets.add(i)
+                targets.append(i)
 
-        # Checks if there are skills in targets_and_attacks list then adds skill object to attacks list.
-        for i in current_targets:
+        # Checks if there are skills in targets_and_attacks list then adds skill object to skills list.
+        for i in targets_and_attacks:
             skill = self.get_object(i)
-            if skill:
-                if skill.get_name() in i.lower() and skill.game_object_type == 'skill':
-                    targets_and_attacks.append(self.get_object(skill))
+            if self.is_attribute(skill):
+                if skill.get_name() in i.lower():
+                    skills.append(skill)
 
         attacked = attack_success = False
 
         for current_target in targets:
-            for current_attack in targets_and_attacks:
+            for current_skill in skills:
                 # Checks if target has resistance to current attack.
-                if not self.check_resistance(current_target, current_attack.damage_type):
+                if not self.check_resistance(current_skill, current_target):
                     # Checks if target is lower level than current attack.
-                    if current_target.level <= current_attack.damage_level:
+                    if current_target.level <= current_skill.damage_level:
                         current_target.alive = False
                         attack_success = attacked = True
                         ssprint(f'<Eliminated {current_target.name}.>')
@@ -90,7 +92,7 @@ class Combat:
                         ssprint(f"<{current_target.name} level too for that attack.>")
                         attacked = True
                 else:
-                    ssprint(f'<<Warning,{current_target.name} has resistance to {current_attack.damage_type}.>>')
+                    ssprint(f'<<Warning,{current_target.name} has resistance to {current_skill.damage_type}.>>')
                     attacked = True
 
-        return attacked, attack_succes
+        return attacked, attack_success

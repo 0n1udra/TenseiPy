@@ -18,6 +18,7 @@ class Info:
         self.alive = True
         self.evolution = ''
         self.info = ''
+        self.acquired_msg = ''
 
     def get_name(self):
         """Returns object name attribute in lowercase."""
@@ -26,6 +27,10 @@ class Info:
 
     def update_info(self):
         """Updates character information."""
+
+        # Sets ranking according to level
+        ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
+        self.rank = ranking[self.level - 1]
 
         self.info = f"""
         Name: {self.name} {self.family_name}
@@ -42,10 +47,6 @@ class Info:
             {self.appearance}
             """
 
-        # Sets ranking according to level
-        ranking = ['Special S', 'S', 'Special A', 'A+', 'A', 'A-', 'B', 'C', 'D', 'E', 'F']
-        self.rank = ranking[self.level - 1]
-
     def show_info(self, game_object):
         """
         Shows corresponding information for object.
@@ -61,9 +62,9 @@ class Info:
         try:
             print(self.get_object(game_object).info)
         except:
-            ssprint("<No available data.>")
+            pass
 
-    def update_ranking(self, character, level):
+    def update_ranking(self, level, character=None):
         """
         Updates character ranking.
 
@@ -75,8 +76,8 @@ class Info:
             .update_ranking('rimuru', 'A+')
         """
 
-        char = self.get_object(character)
-        if char:
-            char.level = level
+        character = self
+        if character:
+            character.level = level
             self.update_info()
-            ssprint(f"<{char} rank up to {level}>")
+            ssprint(f"<{character.name} leveled up to {level}>")
