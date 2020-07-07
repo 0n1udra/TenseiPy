@@ -4,8 +4,10 @@ def ssprint(Msg):
 
 class Inventory:
     def __init__(self):
-        self.inventory_capacity = 0
-        self.inventory_add_capacity = 0
+        self.capacity = 0
+        self.capacity_add = 0
+        self.amount_add = 1
+        self.amount = 0
         self.inventory = {
             'Items': {},
             'Material': {},
@@ -13,7 +15,7 @@ class Inventory:
             'Misc': {}
         }
 
-    def inventory_generator(self, output=False):
+    def inventory_generator(self, character=None, output=False):
         """
         Yields all items in character's inventory (Currently only Rimuru).
 
@@ -23,9 +25,14 @@ class Inventory:
         Usage:
             .inventory_generator(output=True)
         """
-        for item_type, items in self.inventory.items():
+
+        if not character:
+            character = self
+
+        for item_type, items in character.inventory.items():
             if output and items:
-                yield f'{item_type}:'  # If output=True prints out item_type also
+                # If output=True prints out item_type also
+                yield f'~{item_type}~'
 
             for item_name, item_object in items.items():
                 if output:
@@ -47,9 +54,10 @@ class Inventory:
         """
 
         print('\n-----Inventory-----')
-        print(f'Capacity: {self.inventory_capacity:.2f}%\n')
+        print(f'Capacity: {self.capacity:.2f}%\n')
         for i in self.inventory_generator(output=True):
-            print(i)  # Prints out inventory items
+            print(i)
+        print()
 
     def add_inventory(self, item):
         """
@@ -64,16 +72,14 @@ class Inventory:
 
         item = self.get_object(item, new=True)
 
-        if self.check_mob_has(item):
-            self.inventory[item.item_type][item.name].amount += item.inventory_add_capacity
-            self.inventory_capacity += item.inventory_add_capacity
-            item.show_acquired_msg()
-        else:
+        item.show_acquired_msg()
+
+        if not self.check_mob_has(item):
             self.inventory[item.item_type][item.name] = item
-            self.inventory[item.item_type][item.name].amount += item.inventory_add_capacity
             ssprint(f'<<Analysis on {item.name} successful.>>')
 
-            self.inventory_capacity += item.inventory_add_capacity
+        self.inventory[item.item_type][item.name].amount += item.amount_add
+        self.capacity += item.capacity_add
 
     def remove_inventory(self, item):
         """
@@ -90,3 +96,8 @@ class Inventory:
             self.inventory[item.item_type].remove(item)
         except:
             ssprint('<Failed removing item from inventory.>')
+
+    def show_acquired_msg(self):
+        """Shows acquired message."""
+
+        ssprint(self.acquired_msg)
