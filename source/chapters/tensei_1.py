@@ -9,8 +9,8 @@ def Chapter1(rimuru):
         def __init__(self):
             sprint(".....")
             sprint(slime_art.great_sage)
-            ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
             rimuru.set_start_state()
+            ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
             ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
             rimuru.add_attribute('Predator')
             ssprint("<<Confirmation Complete. Acquiring Extra Skill [Sage]...>>")
@@ -28,7 +28,7 @@ def Chapter1(rimuru):
             ssprint("That said is this the hospital bed? I can't see anything, I can't hear anything.")
             action_menu(self)
 
-        class _move_arms:
+        class _move:
             def __init__(self):
                 ssprint("Where are my arms, I can't feel them!")
                 ssprint("hm? eh? My limbs don't seem to be responding!?")
@@ -220,6 +220,8 @@ def Chapter1(rimuru):
                 sprint("I guess I'll be heading out now.")
                 ssprint("~Really, so soon. But we just started!~")
                 ssprint("~Stay, please, we have so to talk about.~")
+                action_menu(self)
+
 
             def _stay(self):
                 ssprint("~Oh, I'm so glad you decided to stay!.~")
