@@ -64,7 +64,6 @@ class Rimuru_Tempest(Character):
                         else:
                             print(f"<<Warning, predation of {mob.name} unsuccessful.>>")
 
-
         self.focused_targets = set()
 
     def mimic_object(self, active=None):
