@@ -43,7 +43,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         Args:
             item: Either string or object instance of the object you want. If object, will get objects .name attribute.
             mimic: If currently using Mimic ability, will also include mimicked mob attributes.
-            new: If first time adding a new object to inventory.
+            new: If first time adding a new object to character.
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.

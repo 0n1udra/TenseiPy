@@ -3,7 +3,7 @@ from time import sleep
 import chapters.tensei_1 as tensei1
 import mobs
 
-debug_mode = True
+debug_mode = False
 
 
 #                    ========== Game Input ==========
@@ -108,57 +108,6 @@ def show_hud(actions):
         print("\nActions:", options, f'| {mimicking}, (stats, inv, help)')
 
 
-def show_help(*args):
-    """Shows help page."""
-
-    print("""
-    Commands:
-        target TARGET(s)            -- Target commands and abilities. E.g. 'target tempest serpent'
-        attack <TARGET> with SKILL  -- Attack target(s) (if not already targeting) with skill(s). E.g. 'attack with water blade', 'attack tempest serpent with water blade'
-          - Multiple targets and/or attacks separated by comma. E.g. 'attack tempest serpent, black spider with water blade, poisonous breath'
-        use SKILL(s)                -- Use skill/items. E.g. 'use sense heat source'
-        stats                       -- Show yours skills and resistances. 
-          - stats TARGET            -- Stats for monsters you have predated. E.g. 'stats tempest serpent'
-        inv                         -- Show inventory.
-        info                        -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
-                                       NOTE: To get info on skills from a monster, have to be mimicking corresponding monster. E.g. 'info sense heat source'
-        help                        -- Show this help page.
-        exit                        -- Exit game.
-
-    Abilities:
-        mimic ___                   -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
-          - info mimic              -- Shows available mimicries.
-          - mimic reset             -- Resets mimic (Back to slime)
-        predate                     -- Predate target(s). Can only be used while you have target(s) command. E.g. 'predate'
-        
-    Game Dialogue:
-        ~Message~                   -- Telepathy
-        *Message*                   -- Story progression
-        <Message>                   -- Acquired item, information, etc
-        <<Message>>                 -- Great Sage (Raphael, Ciel)
-        <<<Message>>>               -- Voice of the World
-
-    HUD:
-        Target: Currently Focused Target(s)
-        Actions: (ACTION(s)) | MIMIC, (Extra Actions)
-      E.g.
-        Target: Giant Bat, Black Spider
-        Actions: (*Attack), (*Move on) | Tempest Serpent, (stats, inv, help)
-
-    Level/Ranking:
-       Level      Rank         Risk
-        11.     Special S   Catastrophe
-        10.     S           Disaster
-        9.      Special A   Calamity
-        8.      A+          Tragedy
-        7.      A           Hazard
-        6.      A-          Danger
-        5.      B           Pro
-        4.      C           Advance
-        3.      D           Intermediate
-        2.      E           Beginner
-        1.      F           Novice
-    """)
 
 
 # Checks if mob is alive
@@ -248,7 +197,6 @@ def delete_game_save(rimuru_object):
     os.remove(rimuru_object.save_path)
     print("Resetting Game. Deleted player_save.p")
 
-
 def continue_story(rimuru_object, next_chapter):
     """
     Continues story progress from last save point.
@@ -320,6 +268,58 @@ def sprint(Msg):
 def ssprint(Msg):
     """Print tabbed in message."""
     sprint(f'    {Msg}')
+
+def show_help(*args):
+    """Shows help page."""
+
+    print("""
+    Commands:
+        target TARGET(s)            -- Target commands and abilities. E.g. 'target tempest serpent'
+        attack <TARGET> with SKILL  -- Attack target(s) (if not already targeting) with skill(s). E.g. 'attack with water blade', 'attack tempest serpent with water blade'
+          - Multiple targets and/or attacks separated by comma. E.g. 'attack tempest serpent, black spider with water blade, poisonous breath'
+        use SKILL(s)                -- Use skill/items. E.g. 'use sense heat source'
+        stats                       -- Show yours skills and resistances. 
+          - stats TARGET            -- Stats for monsters you have predated. E.g. 'stats tempest serpent'
+        inv                         -- Show inventory.
+        info                        -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+                                       NOTE: To get info on skills from a monster, have to be mimicking corresponding monster. E.g. 'info sense heat source'
+        help                        -- Show this help page.
+        exit                        -- Exit game.
+
+    Abilities:
+        mimic ___                   -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
+          - info mimic              -- Shows available mimicries.
+          - mimic reset             -- Resets mimic (Back to slime).
+        predate                     -- Predate target(s). Can only be used while you have target(s) command. E.g. 'predate'
+
+    Game Dialogue:
+        ~Message~                   -- Telepathy, thought communication.
+        *Message*                   -- Story context.
+        <Message>                   -- Game info, acquisition, etc.
+        <<Message>>                 -- Great Sage (Raphael, Ciel).
+        <<<Message>>>               -- Voice of the World.
+
+    HUD:
+        Target: Currently Focused Target(s)
+        Actions: (ACTION(s)) | MIMIC, (Extra Actions)
+      E.g.
+        Target: Giant Bat, Black Spider
+        Actions: (*Attack), (*Move on) | Tempest Serpent, (stats, inv, help)
+
+    Level/Ranking:
+       Level      Rank         Risk
+        11.     Special S   Catastrophe
+        10.     S           Disaster
+        9.      Special A   Calamity
+        8.      A+          Tragedy
+        7.      A           Hazard
+        6.      A-          Danger
+        5.      B           Pro
+        4.      C           Advance
+        3.      D           Intermediate
+        2.      E           Beginner
+        1.      F           Novice
+    """)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,42 @@
+-----Story Layout-----
+Chapter_1
+    ASCII: Great Sage
+    Set player's start state, acquire starting abilties and resistances.
+    Skill Acquired: Predator
+    Skill Acquired: Sage
+    Skill Upgrade: Sage > Great Sage
+    Show Attributes & Inventory
+
+
+Reading Variable Names:
+Name [] - List
+Name {} - Dictionary
+Name () - Set
+Name() - Function
+When I say attribute it means skills and resistances.
+
+
+-----character.py-----
+
+:Character Object Variables:
+    starting_state - Attributes for character to start with.
+    game_object_type - Used for checking what game object it is.
+    friends {} - Character's friends, different from subordinates.
+
+    :Game Mechanic Variables:
+        story_progress [] - Story chapters player has gone through.
+        save_path - Player's save file path.
+        text_delay - If player wants text delay enabled/disabled.
+        last_command - Last player inputted command.
+
+:Functions:
+
+set_start_state() - Adds starting attributes to character
+get_object() - Returns game corresponding game object, usually used for when inputting with string.
+check_mob_has() - Checks if character has object (attribute/item).
+is_character, is_item, is_attribute, is_str - Checks if inputted is a character, item, attribute or a string.
+
+-----info.py-----
+:Character Object Variables:
+Even though it's a Info class object, all these variables are still part of the Character object. (Also don't do Character.Info.)
+
