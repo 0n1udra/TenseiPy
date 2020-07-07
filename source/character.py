@@ -19,6 +19,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         Subordinates.__init__(self)
 
         self.starting_state = []
+        self.game_object_type = 'character'
+        self.friends = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
+                        'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+                        }
 
         # Game variables.
         self.story_progress = [None]
@@ -26,23 +30,15 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         self.text_delay = True
         self.last_command = ''
 
-        # Predator ability variables.
-        self.game_object_type = 'character'
-
-        self.friends = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
-                        'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
-                        }
-
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
 
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, item, mimic=False, new=False):
+    def get_object(self, item, character=None, mimic=False, new=False):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
-
 
         Args:
             item: Either string or object instance of the object you want. If object, will get objects .name attribute.
@@ -53,15 +49,17 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             Corresponding object, will initialize if one hasn't been already in inventory.
         """
 
+        if not character:
+            character = self
+
         # If input is an objects, gets objects name (str).
-        try:
+        if not self.is_str(item):
             item = item.name
-        except: pass
 
-        generators = [*self.inventory_generator(), *self.attributes_generator()]
+        generators = [*self.inventory_generator(character), *self.attributes_generator(character)]
 
         try:
-            generators.extend([*self.mimic_generator()])
+            generators.extend([*self.mimic_generator(character)])
         except:
             pass
 
@@ -78,16 +76,16 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             generators = [*self.mimic_generator()]
             # Adds mimicked monster abilities if currently using mimic.
             if self.current_mimic:
-                generators.extend(self.generator(self.current_mimic))
+                generators.extend([*self.mimic_generator()])
+
 
         for i in generators:
             if new:
                 i = i()
-            if i:
-                if i.get_name() in item.lower():
-                    return i
-                else:
-                    del i
+            if i.get_name() in item.lower():
+                return i
+            else:
+                del i
 
     def check_mob_has(self, check_object, character=None):
         """
@@ -114,3 +112,75 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         if character and check_object:
             if character.get_object(check_object):
                 return True
+
+    def is_character(self, character):
+        """
+        Check if game character object.
+
+        Args:
+            character: Check game character object.
+
+        Returns:
+            True if game character object.
+        """
+
+        try:
+            character = self.get_object(character, new=True)
+            if character.game_object_type == 'character':
+                del character
+                return True
+        except:
+            return False
+
+    def is_item(self, item):
+        """
+        Check if game item object.
+
+        Args:
+            item: If game item object.
+
+        Returns:
+            True of game item object.
+        """
+
+        try:
+            item = self.get_object(item, new=True)
+            if item.game_object_type == 'item':
+                del item
+                return True
+        except:
+            return False
+
+    def is_attribute(self, attribute):
+        """
+        Checks if is game attribute object.
+
+        Args:
+            attribute: Check if is attribute object.
+
+        Returns:
+            True if is attribute object.
+        """
+
+        try:
+            attribute = self.get_object(attribute, new=True)
+            if attribute.game_object_type == 'attribute':
+                del attribute
+                return True
+        except:
+            return False
+
+    def is_str(self, string):
+        """
+        Check if is a string.
+
+        Args:
+            string: Check string.
+
+        Returns:
+            True if is string.
+        """
+
+        if type(string) == str:
+            return True
+
