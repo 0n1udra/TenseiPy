@@ -3,7 +3,7 @@ from time import sleep
 import chapters.tensei_1 as tensei1
 import mobs
 
-debug_mode = False
+debug_mode = True
 
 
 #                    ========== Game Input ==========
@@ -32,7 +32,6 @@ def action_menu(current_class):
     show_hud(actions)
 
     if debug_mode:
-        print(current_class)
         user_input = class_funcs[0].replace('_', ' ')[1:]
     else:
         user_input = input("\n> ").lower()
@@ -60,7 +59,7 @@ def action_menu(current_class):
     elif 'use' in user_input:
         skill_success = mobs.rimuru.use_skill(split_user_input)
     elif 'attack' in user_input:
-        attacked, attack_success = mobs.rimuru.can_attack(split_user_input)
+        attacked, attack_success = mobs.rimuru.attack(split_user_input)
     try:
         pass
     except:
@@ -74,12 +73,7 @@ def action_menu(current_class):
         run_action = f'current_class.{current_action}()'
         if i[0] == '*':
             if user_input.lower() == i.lower()[1:]:
-
                 eval(run_action)
-                try:
-                    pass
-                except:
-                    pass
                 loop = False
                 break
         else:
@@ -97,7 +91,7 @@ def action_menu(current_class):
 
 
 def show_hud(actions):
-    '''Shows user HUD with available actions and targets (if any).'''
+    """Shows user HUD with available actions and targets (if any)."""
 
     # Adds () around actions, (*action)
     options = ', '.join('(' + i + ')' for i in actions)
@@ -115,7 +109,7 @@ def show_hud(actions):
 
 
 def show_help(*args):
-    '''Shows help page.'''
+    """Shows help page."""
 
     print("""
     Commands:
@@ -172,14 +166,16 @@ def get_mob_status(target):
     """
     Returns whether mob in current_mob list is alive.
 
+    Args:
+        target: Target to check alive status.
 
+    Usage:
+        .get_mob_status('tempest serpent')
     """
-    try:
-        for i in mobs.rimuru.current_level_characters:
-            if target.lower() in i.get_name():
-                return True
-    except:
-        pass
+
+    for i in mobs.rimuru.current_level_characters:
+        if target.lower() in i.get_name():
+            return True
 
 
 def add_level_mob(level_characters):
@@ -205,13 +201,23 @@ def add_level_mob(level_characters):
 
 #                    ========== Extra ==========
 def tbc():
-    ''' To Be Continued function.'''
+    """ To Be Continued function."""
     print("---TO BE CONTINUED---")
     input("Press Enter to exit > ")
 
 
 #                    ========== Game Saves ==========
 def load_save_game(path):
+    """
+    Load game save.
+
+    Args:
+        path: Path of game save.
+
+    Returns:
+        Loaded game save object.
+    """
+
     try:
         rimuru = pickle.load(open(path, 'rb'))
         print("Loaded Player Save\n")
@@ -221,19 +227,37 @@ def load_save_game(path):
 
 
 def save_game(rimuru_object):
+    """
+    Save game state.
+
+    Args:
+        rimuru_object: Game state object to save.
+    """
+
     pickle.dump(rimuru_object, open(rimuru_object.save_path, 'wb'))
     print("Game Saved To: player_save.p")
 
 
 def delete_game_save(rimuru_object):
-    try:
-        os.remove(rimuru_object.save_path)
-        print("Resetting Game. Deleted player_save.p")
-    except:
-        pass
+    """
+    Deletes game save.
+
+    Args:
+        rimuru_object: Deletes game save object.
+    """
+    os.remove(rimuru_object.save_path)
+    print("Resetting Game. Deleted player_save.p")
 
 
 def continue_story(rimuru_object, next_chapter):
+    """
+    Continues story progress from last save point.
+
+    Args:
+        rimuru_object: Save state object.
+        next_chapter: Next chapter to play.
+    """
+
     print("Continue to next chapter?")
     user_input = input("Y/N > ")
     rimuru_object.story_progress.append(next_chapter)
@@ -246,6 +270,8 @@ def continue_story(rimuru_object, next_chapter):
 
 #                    ========== Game Functions ==========
 def show_start_banner():
+    """Show game start banner."""
+
     print("\n----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
     instructions = """
     NOTE: 
@@ -262,6 +288,13 @@ def show_start_banner():
 
 # ========== Printing
 def sprint(Msg):
+    """
+    Delay text in game.
+
+    Args:
+        Msg: Message to delay.
+    """
+
     msgLen = len(str(Msg))
     if mobs.rimuru.text_delay:
         if msgLen > 100:
@@ -284,8 +317,8 @@ def sprint(Msg):
     print(Msg, '\n')
     sleep(sTime)
 
-
 def ssprint(Msg):
+    """Print tabbed in message."""
     sprint(f'    {Msg}')
 
 
@@ -298,7 +331,8 @@ if __name__ == '__main__':
     show_start_banner()
 
     print("\nDisable text delay? (Recommend leaving enabled for easier reading)")
-    setSleep = str(input("(Y)es/(N)o > "))
+    #setSleep = str(input("(Y)es/(N)o > "))
+    setSleep = 'y'
     if setSleep.lower() in ['yes', 'y']:
         print("Text Delay: DISABLED")
         mobs.rimuru.text_delay = False
