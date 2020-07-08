@@ -6,7 +6,6 @@ class Skill:
         self.damage_level = 1
         self.damage_type = 'N/A'
         self.description = 'N/A'
-        self.acquired_msg = ''
         self.evolution = 'N/A'
         self.abilities = 'N/A'
 
@@ -315,7 +314,7 @@ class Poisonous_Breath(Skill):
 
 
 # ========== Giant Bat
-class Vampirism_Skill(Skill):
+class Vampirism(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Vampirism'

@@ -164,9 +164,6 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-
-
-
     def use_skill(self, skill):
         try:
             self.get_object(skill).use_skill()

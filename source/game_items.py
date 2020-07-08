@@ -4,10 +4,11 @@ class Item:
         self.item_type = ''
         self.amount = 0
         self.amount_add = 1
-        self.capacity_add = 1
+        self.capacity_add = 0
+        self.info = 'N/A'
         self.description = ''
-        self.amount_add = 0
-        self.description = ''
+        self.usage = ''
+        self.appearance = ''
         self.game_object_type = 'item'
 
     def get_description(self):
@@ -54,7 +55,7 @@ class Hipokte_Grass(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Hipokte Grass'
-        self.item_type = 'Material'
+        self.item_type = 'Materials'
         self.amount = 0
         self.amount_add = 5
         self.capacity_add = 0.01
@@ -68,7 +69,7 @@ class Magic_Ore(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Magic Ore'
-        self.item_type = 'Material'
+        self.item_type = 'Materials'
         self.amount_add = 5
         self.amount = 0
         self.capacity_add = 0.1

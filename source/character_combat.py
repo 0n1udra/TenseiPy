@@ -7,7 +7,7 @@ class Combat:
         self.current_level_characters = []
         self.focused_targets = set()
 
-    def set_target(self, targets):
+    def set_targets(self, targets):
         """
         Adds c to focused_targets list from user input.
 

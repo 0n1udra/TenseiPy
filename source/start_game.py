@@ -1,7 +1,7 @@
 import os, pickle
 from time import sleep
 import chapters.tensei_1 as tensei1
-import mobs
+import game_characters as mobs
 
 debug_mode = True
 
@@ -40,7 +40,7 @@ def action_menu(current_class):
     # Get info on skills, times, etc
     split_user_input = ' '.join(user_input.split()[1:])
     level_actions = {
-        'target': mobs.rimuru.set_target,
+        'target': mobs.rimuru.set_targets,
         'predate': mobs.rimuru.predate_targets,
         'mimic': mobs.rimuru.use_mimic,
         'help': show_help,
@@ -106,10 +106,6 @@ def show_hud(actions):
         print(f'\nTarget: {targets}\nActions:', options, f'| {mimicking}, (stats, inv, help)')
     else:
         print("\nActions:", options, f'| {mimicking}, (stats, inv, help)')
-
-
-def show_help(*args):
-    """Shows help page."""
 
 
 # Checks if mob is alive

@@ -1,4 +1,4 @@
-import skills
+import game_skills as skills
 from start_game import *
 from chapters.tensei_3 import Chapter3
 

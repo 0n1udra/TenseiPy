@@ -6,11 +6,11 @@ class Inventory:
     def __init__(self):
         self.capacity = 0
         self.capacity_add = 0
-        self.amount_add = 1
         self.amount = 0
+        self.amount_add = 1
         self.inventory = {
             'Items': {},
-            'Material': {},
+            'Materials': {},
             'Potions': {},
             'Misc': {}
         }
@@ -97,7 +97,3 @@ class Inventory:
         except:
             ssprint('<Failed removing item from inventory.>')
 
-    def show_acquired_msg(self):
-        """Shows acquired message."""
-
-        ssprint(self.acquired_msg)

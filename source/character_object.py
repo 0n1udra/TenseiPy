@@ -1,9 +1,9 @@
-import skills, items
-from info import Info
-from inventory import Inventory
-from attributes import Attributes
-from combat import Combat
-from subordintes import Subordinates
+import game_skills, game_items, game_characters
+from character_info import Info
+from character_inventory import Inventory
+from character_attributes import Attributes
+from character_combat import Combat
+from character_subordinates import Subordinates
 
 
 def ssprint(Msg):
@@ -66,9 +66,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         # If object not in inventory. Will need to use __subclasses__ method to find, initialize and add to inventory.
         if new:
             generators = [
-                *items.Item.__subclasses__(),
-                *skills.Skill.__subclasses__(),
-                *Character.__subclasses__()
+                *game_items.Item.__subclasses__(),
+                *game_skills.Skill.__subclasses__(),
+                *game_characters.Character.__subclasses__()
             ]
 
         # If currently using Mimic ability.

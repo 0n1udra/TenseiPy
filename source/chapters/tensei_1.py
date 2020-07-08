@@ -1,6 +1,6 @@
 from start_game import *
 from chapters.tensei_2 import Chapter2
-import slime_art
+import game_art as art
 
 
 # Manga, Chapter 1
@@ -8,7 +8,7 @@ def Chapter1(rimuru):
     class Chapter_1:
         def __init__(self):
             sprint(".....")
-            sprint(slime_art.great_sage)
+            sprint(art.great_sage)
             rimuru.set_start_state()
             ssprint("<<Confirmation Complete. Constructing a body that does not require blood...>>")
             ssprint("<<Confirmation Complete. Acquiring Skill [Predator]...>>")
@@ -46,7 +46,7 @@ def Chapter1(rimuru):
                     ssprint("ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
                     ssprint("*Although Minami Satoru didn't want to admins it.*")
                     ssprint("*He has reincarnated into a slime!*")
-                    sprint(slime_art.slime)
+                    sprint(art.slime)
                     ssprint("Puyo, Puyoyoyo.... stretch....bounce")
                     ssprint("It's been a long time since I've accepted myself a slime. I've gotten used to this elastic body.")
                     ssprint("I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
@@ -189,7 +189,7 @@ def Chapter1(rimuru):
         class _use_magic_perception:
             def __init__(self):
                 sprint('...')
-                sprint(slime_art.magic_perception)
+                sprint(art.magic_perception)
                 sprint("OH!")
                 sprint("Hmmmmmmmm")
                 sprint("I can see. I CAN SEE!")
@@ -200,7 +200,7 @@ def Chapter1(rimuru):
 
             def _sure(self):
                 sprint("My name is Storm Dragon Veldora!~")
-                sprint(slime_art.cave_veldora)
+                sprint(art.cave_veldora)
                 sprint("~I am one of the four True Dragons of this world.~")
                 sprint("HOLY SHIT, you're a real dragon!")
                 sprint("~Didn't I tell you not to get scared.~")

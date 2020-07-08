@@ -1,4 +1,4 @@
-from character import Character
+from character_object import Character
 
 
 def ssprint(Msg):
