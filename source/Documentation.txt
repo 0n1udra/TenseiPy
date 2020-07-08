@@ -1,5 +1,5 @@
 -----Story Layout-----
-Chapter_1
+:Chapter_1:
     ASCII: Great Sage
     Set player's start state, acquire starting abilties and resistances.
     Skill Acquired: Predator
@@ -12,31 +12,228 @@ Reading Variable Names:
 Name [] - List
 Name {} - Dictionary
 Name () - Set
+Name True/False - boolean
 Name() - Function
+
 When I say attribute it means skills and resistances.
 
+-----start_game.py-----
+:Functions:
+    action_menu() - Takes care of user input and runs corresponding functions.
+    show_hud() - Shows user's available actions, current mimicry, and other basic commands like stats and inv.
+    get_mob_status() - Returns True if mob is in current_level_characters list.
+    add_level_mob() - Adds new character object to current game level.
+    tbc() - Prints out To be continued.
+    load_save_game() - Load user save.
+    save_game() - Saves game state by pickling Rimuru_Tempest object (the player).
+    load_save_game() - Loads user save.
+    delete_game_save() - Deletes save.
+    continue_story() - At end of chapter, asks if want to continue.
+    show_start_banner() - Shows name and basic help at start of game.
+    sprint() - Delays text, for easier reading if player chooses.
+    ssprint() - Indents printout using sprint(). Used for player thoughts, Great Sage or other game messages.
+    show_help() - Shows help page.
 
------character.py-----
 
-:Character Object Variables:
-    starting_state - Attributes for character to start with.
-    game_object_type - Used for checking what game object it is.
+-----character_object.py-----
+:Variables:
+    starting_state [] - Attributes for character to start with.
+    game_object_type str - Used for checking what game object it is.
     friends {} - Character's friends, different from subordinates.
 
-    :Game Mechanic Variables:
-        story_progress [] - Story chapters player has gone through.
-        save_path - Player's save file path.
-        text_delay - If player wants text delay enabled/disabled.
-        last_command - Last player inputted command.
+    story_progress [] - Story chapters player has completed.
+    save_path str - Player save file path.
+    text_delay True - If player wants text delay enabled/disabled.
+    last_command str - Last player inputted command.
 
 :Functions:
+    set_start_state() - Adds starting attributes to character
+    get_object() - Returns game corresponding game object, usually used for when inputting with string.
+    check_mob_has() - Checks if character has object (attribute/item).
+    is_character() / is_item() / is_attribute() / is_str() - Checks if inputted is a character, item, attribute or a string.
 
-set_start_state() - Adds starting attributes to character
-get_object() - Returns game corresponding game object, usually used for when inputting with string.
-check_mob_has() - Checks if character has object (attribute/item).
-is_character, is_item, is_attribute, is_str - Checks if inputted is a character, item, attribute or a string.
 
------info.py-----
-:Character Object Variables:
-Even though it's a Info class object, all these variables are still part of the Character object. (Also don't do Character.Info.)
+-----character_attributes.py-----
+:Variables:
+    attributes {} - Character attributes, includes skills and resistances.
+
+:Functions:
+    attribute_generator() - Yields all attributes character has access to. Also used for printing out with show_attributes()
+    show_attributes() - Shows character's attributes, can also show mimicked character's attributes.
+    add_attribute() / remove_attribute() upgrade_attribute - adds, removes, or upgrades attribute.
+    check_resistance() - Checks if have resistance to attack.
+    use_skill() - Uses specified skill.
+
+
+-----character_combat.py-----
+:Variables:
+    current_level_characters [] - Characters that are on the current level of game.
+    focused_targets () - Currently targeted characters, used for attack and predate.
+
+:Functions:
+    set_targets() - Set targets to be focused.
+    attack() - Attacks targets (including focused). Also checks resistance to attack.
+
+
+-----character_info.py-----
+:Variables:
+    Variable accessible from Character object no need for Character.Info.)
+    name str - Name of character.
+    family_name str - Shared family name.
+    blessing str - Divine protection.
+    shared_blessing str - Divine protection to pass onto subordinates when naming.
+    title str - Extra titles, like Demon Lord, Storm Dragon.
+    species str - Species of character, like.
+    level str - Level of character, rank variable will change accordingly. Updated with update_ranking().
+    info str - Info page for character, showing: name, title, species, alive, blessing, description, and appearance variables.
+    appearance str - Appearance description.
+    description str - Description.
+    alive True - Alive status.
+    evolution str str - Evolution line.
+    acquired_msg str - Message shown when acquired.
+
+:Functions:
+    get_name() - Returns character's name in lowercase.
+    show_info() - Shows info page for game objects.
+    update_info() - Updates character info variable.
+    update_ranking() - Updates character's level, which will also update ranking.
+
+
+-----character_inventory.py-----
+:Variables:
+    capacity 0 - Inventory capacity % used.
+    capacity_add 0 - % to add to inventory capacity total.
+    amount 0 - Total amount character has.
+    amount_add 1 - Amount to add to inventory.
+    inventory {} - Character's: Items, Materials, Potions, and Misc.
+
+:Functions:
+    inventory_generator() - Yields character's inventory objects.
+    show_inventory() - Prints out inventory items separated by category.
+    add_inventory() / remove_inventory() - Adds, removes item from inventory.
+    show_acquired_msg() - Shows acquired message when character object is added to inventory.
+
+-----character_subordinates.py-----
+:Variables:
+    subordinates {} - Subordinates separated by rank.
+
+:Functions:
+    subordinates_generator() - Yields subordinates character object.
+    add_subordinate() - Add new subordinate.
+
+
+-----game_art.py-----
+:ASCII Arts:
+slime - Rimuru.
+great_sage - Great Sage.
+magic_perception - When acquired and use magic perception.
+cave_veldora - Veldora introducing himself.
+
+-----game_characters.py-----
+:Characters:
+Rimuru_Tempest - Player character.
+    mimic_generator() - Yields character object acquired for mimicry.
+    predate_target() - Predates inputted and focused targets. Either adds skill, item, or character.
+    mimic_object() - Returns mimic skill object from attributes dictionary.
+    add_mimic() - Adds new character object to acquired_mimicries dictionary.
+    use_mimic() - Activate mimicry.
+
+Veldora_Tempest
+Tempest_Serpent
+Giant_Bat
+Evil_Centipede
+Black_Spider
+Tempest_Wolf
+
+update_character() - Updates rimuru (player) object.
+
+
+-----game_items.py-----
+:Variables:
+    name str - Item name.
+    item_type str - Item type: Items, Materials, Potions, or Misc.
+    amount 0 - Total item amount have.
+    amount_add 1 - Amount to add at a time.
+    capacity_add 0 - Capacity % to add to total inventory capacity.
+    info str - Item info, includes: name, usage, and appearance.
+    description str - Description of item.
+    usage str - Item usages.
+    appearance str - Item appearance.
+    game_object_type str - Game object type = 'item'
+
+:Functions:
+    get_description() - Get's item description.
+    show_acquired_msg() - Prints out item acquired message.
+    update_info() - Updates item info page.
+    get_name() - Returns item name in lowercase.
+
+:Items:
+Hipokte_Grass
+Magic_ore
+
+
+-----game_skills.py-----
+:Variables:
+    name str - Skill name.
+    type str - Skill type, e.g. Activatable Skill, Passive, etc.
+    skill_level str - Skill level like: Common Skill, Extra Skill, etc
+    damage_level 1 - Skill damage level.
+    damage_type str - Skill damage types.
+    info str - Information page for skill.
+    description str - Skill description.
+    acquired_msg str - Acquired message.
+    evolution str - Evolution line.
+    abilities str - Skill abilities description.
+    active False - Skill active status.
+    passive False - If passive skill.
+    predate True - Able to predate.
+    sub_skills {} - Sub skills.
+    game_object_type - Game object type = 'attribute'
+
+:Functions:
+    show_acquired_msg() - Shows skill acquired message.
+    update_skill_info() - Updates skill info page.
+    get_name() - Returns skill name in lowercase.
+
+Resistance
+    resist_types [] - Resistance types. E.g. Pain, Melee
+
+:Skills:
+Ciel_Skill
+Raphael_Skill
+Predator_Mimicry_Skill
+    acquired_mimicries {} - Available mimicries can use.
+    info() - @property, shows acquired mimicries.
+Predator_Skill
+Great_Sage_Skill
+Sage_Skill
+Magic_Perception
+Water_Manipulation
+Hydraulic_Propulsion
+Water_Blade
+Water_Bullet
+Absorb_Dissolve
+Self_Regeneration
+Sense_Heat_Source
+Poisonous_Breath
+Vampirism
+Ultrasound_Waves
+Paralyzing_Breath
+Sticky_Thread
+Steel_Thread
+
+:Resistances:
+Resist_Pain
+Resist_Melee
+Resist_Electricity
+Resist_Temperature
+Resist_Poison
+
+
+
+
+
+
+
+
 
