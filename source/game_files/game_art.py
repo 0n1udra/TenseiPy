@@ -38,7 +38,6 @@ slime = """
 :yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyNNdddhdyyyyyyyyhyhhhmmmmmNNNMMMMMMMMMMMMMMMMMMMMMMMNddyyyyyyyyyyy
 """
 
-
 great_sage = """
 //::---..`````````````````       `-:/-:-..---.-.---:/+::.::--//::-.:+o++++/::-:++ossso++++-/oyyysyhhhhhhhhhhhhhyyhdmmdhd
 /:::----..`````````````````       .---.:---:---...-.://:.-:--::---./++++/+/+/++++os+:...:.``.:oyhhhhhhhhhhhyoyhysyysyood
@@ -182,7 +181,6 @@ Nds+/--:omMMMmy/--odMMMMMNho:.      ``  .-:sysdNMMMMMMMMMMMMMNhmMMMMMMMNh-mMMMMM
        ``````                          :dMMMMMMMMMMMy-  `.  `..        ` -MMMMMMMMMMMMMMMMMMMMMMMMNso`:+ : ` `.`           `:o:.oNMMMMMNh+-    .`    -//.                 
                `````                `/dMMMMMMMMMMMy-        `. `   `` ``.hNMMMMMMNMMMMMMMMMMMMMMMMNh// `  `                   ./:`-yNMMMMmo:.    ``     -/:             
 """
-
 
 cave_veldora = """
 ddmmmmmdmdddmmmmNmmmmmNNmmmmmmmmmmmmmmmNNmmmmmmmmdyyhddddhsosddmmhhhhdmmmNmdhhhddddmmddddhhdNmdddddhhhhhhhhhdhhhhhddhddm

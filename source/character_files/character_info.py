@@ -1,7 +1,3 @@
-def ssprint(Msg):
-    print(f'    {Msg}\n')
-
-
 class Info:
     def __init__(self):
         self.name = 'N/A'
@@ -79,9 +75,9 @@ class Info:
         if character:
             character.level = level
             self.update_info()
-            ssprint(f"<{character.name} leveled up to {level}>")
+            print(f"    <{character.name} leveled up to {level}>")
 
     def show_acquired_msg(self):
         """Shows acquired message."""
 
-        ssprint(self.acquired_msg)
+        print(f'    {self.acquired_msg}')

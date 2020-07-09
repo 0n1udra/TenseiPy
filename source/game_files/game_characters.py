@@ -1,8 +1,4 @@
-from character_object import Character
-
-
-def ssprint(Msg):
-    print(f'    {Msg}\n')
+from character_files.character_object import Character
 
 
 class Rimuru_Tempest(Character):
@@ -88,7 +84,7 @@ class Rimuru_Tempest(Character):
         # Checks if already have mimicry.
 
         self.mimic_object().acquired_mimicries[character.rank].append(character)
-        ssprint(f'<<Notice, new mimicry available: {character.name}.>>')
+        print(f'    <<Notice, new mimicry available: {character.name}.>>')
 
     def use_mimic(self, character):
         """
@@ -104,13 +100,13 @@ class Rimuru_Tempest(Character):
             # Resets mimic state (default Slime).
             self.current_mimic_name = 'Slime'
             self.current_mimic = None
-            ssprint("<Mimicry Reset>")
+            print("    <Mimicry Reset>")
         else:
             new_mimic = self.get_object(character, mimic=True)
             if new_mimic:
                 self.current_mimic_name = new_mimic.name
                 self.current_mimic = new_mimic
-                ssprint(f'<Now Mimicking: {new_mimic.name}>')
+                print(f'    <Now Mimicking: {new_mimic.name}>')
 
 
 class Veldora_Tempest(Character):
@@ -196,13 +192,3 @@ class Tempest_Wolf(Character):
         self.starting_state = []
         self.set_start_state()
         self.update_info()
-
-
-# ========== Rimuru
-rimuru = None
-
-
-def update_character(character):
-    global rimuru
-    rimuru = character
-    return rimuru

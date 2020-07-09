@@ -1,13 +1,11 @@
-import game_skills, game_items, game_characters
-from character_info import Info
-from character_inventory import Inventory
-from character_attributes import Attributes
-from character_combat import Combat
-from character_subordinates import Subordinates
-
-
-def ssprint(Msg):
-    print(f'    {Msg}\n')
+import game_files.game_skills as game_skills
+import game_files.game_items as game_items
+import game_files.game_characters as game_characters
+from .character_info import Info
+from .character_inventory import Inventory
+from .character_attributes import Attributes
+from .character_combat import Combat
+from .character_subordinates import Subordinates
 
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates):
@@ -28,7 +26,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         self.story_progress = [None]
         self.save_path = ''
         self.text_delay = True
-        self.last_command = ''
+        self.played_paths = set()
 
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
@@ -77,7 +75,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             # Adds mimicked monster abilities if currently using mimic.
             if self.current_mimic:
                 generators.extend([*self.mimic_generator()])
-
 
         for i in generators:
             if new:
@@ -183,4 +180,3 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
 
         if type(string) == str:
             return True
-

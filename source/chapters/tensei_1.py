@@ -1,9 +1,7 @@
-from start_game import *
+from game_files.game_functions import *
 from chapters.tensei_2 import Chapter2
-import game_art as art
 
 
-# Manga, Chapter 1
 def Chapter1(rimuru):
     class Chapter_1:
         def __init__(self):
@@ -40,7 +38,7 @@ def Chapter1(rimuru):
                 ssprint("WAIT A MINUTE, am I even human anymore!!?! Eh.. Let's calm down and confirm my appearance.")
                 action_menu(self)
 
-            class _inspect():
+            class _inspect:
                 def __init__(self):
                     ssprint("Wait what kind of joke is this! Who would accept something like this!!")
                     ssprint("ahhhh... but... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
@@ -63,9 +61,9 @@ def Chapter1(rimuru):
                 def _predate_grass(self):
                     ssprint("Ooooweeee more grass!")
                     rimuru.add_inventory('Hipokte Grass')
-                    action_menu(Learn_Skills())
+                    action_menu(_Learn_Skills())
 
-    class Learn_Skills:
+    class _Learn_Skills:
         def __init__(self):
             ssprint("I've ate what seems like a lot of grass, and yet I haven't pooped yet. So where did all the grass go?")
             ssprint("<<Answer. They are stored inside the Unique Skill [Predator]'s stomach sack.>>")
@@ -91,7 +89,7 @@ def Chapter1(rimuru):
 
             def _create_potions(self):
                 ssprint("")
-                action_menu(Learn_Skills)
+                action_menu(_Learn_Skills)
 
         def predate_grass(self):
             rimuru.add_inventory('Hipokte Grass')
@@ -127,9 +125,9 @@ def Chapter1(rimuru):
                     sprint("~Can you hear me little one.~")
                     ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!?")
                     ssprint("It's not [Great Sage], so who is it? This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
-                    action_menu(Find_Veldora())
+                    action_menu(_Find_Veldora())
 
-    class Find_Veldora:
+    class _Find_Veldora:
         def __init__(self):
             ssprint("Let's try to find where that voice is coming from")
             ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
@@ -137,36 +135,34 @@ def Chapter1(rimuru):
             sprint("~Hey can you just reply?~")
             action_menu(self)
 
-        def _leave(self):
-            sprint("~Hey, are you just going to keep ignoring me?~")
-            action_menu(Leave_Veldora())
+        class _leave:
+            def __init__(self):
+                sprint("~Hey, are you just going to keep ignoring me?~")
+                sprint("...")
+                sprint("~Wait where are you going?~")
+                sprint("You seem pretty suspicious...")
+                sprint("~Oh, really... Is there anything I can do to ease your mind?~")
+                action_menu(self)
+
+            def _help_me_see(self):
+                action_menu(_Respond())
+
+            def _leave(self):
+                sprint("No, I'm just going to move on.")
+                sprint("~Oh. Ok, at least it was interesting seeing a higher intelligent monster in my cave for once.~")
+                Leave_Cave()
 
         def _hello(self):
             sprint("~Keep following my voice little one.~")
-            action_menu(Respond())
+            action_menu(_Respond())
 
         def _shutit_baldy(self):
             ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!!!~")
             ssprint("Oh!")
-            action_menu(Respond())
+            action_menu(_Respond())
 
-    class Leave_Veldora:
-        def __init__(self):
-            sprint("...")
-            sprint("~Wait where are you going?~")
-            sprint("You seem pretty suspicious...")
-            sprint("~Oh, really... Is there anything I can do to ease your mind?~")
-            action_menu(self)
 
-        def _help_me_see(self):
-            action_menu(Respond())
-
-        def _leave(self):
-            sprint("No, I'm just going to move on.")
-            sprint("~Oh. Ok, at least it was interesting seeing a higher intelligent monster in my cave for once.~")
-            Leave_Cave()
-
-    class Respond:
+    class _Respond:
         def __init__(self):
             sprint("I never expected to be able to speak with anything other than my skill by thought...")
             sprint("Right now I am in a state that's unable to see anything....Ummmm you are?.")
@@ -185,7 +181,6 @@ def Chapter1(rimuru):
             rimuru.add_attribute('Magic Perception')
             action_menu(self)
 
-        # ========== Veldora introduce himself
         class _use_magic_perception:
             def __init__(self):
                 sprint('...')
@@ -198,50 +193,56 @@ def Chapter1(rimuru):
                 sprint("~Allow me to formally introduce myself?~")
                 action_menu(self)
 
-            def _sure(self):
-                sprint("My name is Storm Dragon Veldora!~")
-                sprint(art.cave_veldora)
-                sprint("~I am one of the four True Dragons of this world.~")
-                sprint("HOLY SHIT, you're a real dragon!")
-                sprint("~Didn't I tell you not to get scared.~")
-                ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
-                action_menu(Become_Friends())
+            class _sure:
+                global _Become_Friends
+                def __init__(self):
+                    sprint("My name is Storm Dragon Veldora!~")
+                    sprint(art.cave_veldora)
+                    sprint("~I am one of the four True Dragons of this world.~")
+                    sprint("HOLY SHIT, you're a real dragon!")
+                    sprint("~Didn't I tell you not to get scared.~")
+                    ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
+                    action_menu(self)
+
+                class _Become_Friends:
+
+                    def __init__(self):
+                        ssprint("Hmmmm, now what?")
+                        action_menu(self)
+
+                    class _leave:
+                        def __init__(self):
+                            sprint("I guess I'll be heading out now.")
+                            ssprint("~Really, so soon. But we just started!~")
+                            ssprint("~Stay, please, we have so to talk about.~")
+                            action_menu(self)
+
+                        def _stay(self):
+                            ssprint("~Oh, I'm so glad you decided to stay!.~")
+                            action_menu(_Become_Friends)
+
+                        def _leave(self):
+                            ssprint("~I guess there's nothing I can say or do to make you stay. How rude of you to just leave me here all by myself!~")
+                            Leave_Cave()
+
+
+                    def _friend_dragon(self):
+                        sprint("Okay... sooo, you want to be friends?")
+                        sprint("~HAHAHA, WHAT?! A mere slime wants to be friends with the great Storm Dragon Veldora!?~")
+                        sprint("Wellll... If you don't want to, that's fine too.")
+                        sprint("~WHAAAAAAT, Who said we could not!~")
+                        sprint("I guess I won't have a reason to come back here again, huh.")
+                        sprint("~Wait. I guess it can't be helped. I'll become your friend!.~")
+                        sprint("Great. Now I guess I should help you with this seal eh?")
+                        action_menu(_Help_With_Seal())
 
             def _nah(self):
                 ssprint("~Alright then, I won't. Hmmmmph~")
-                action_menu(Become_Friends())
-
-    class Become_Friends:
-        def __init__(self):
-            ssprint("Hmmmm, now what?")
-
-        class _leave:
-            def __init__(self):
-                sprint("I guess I'll be heading out now.")
-                ssprint("~Really, so soon. But we just started!~")
-                ssprint("~Stay, please, we have so to talk about.~")
-                action_menu(self)
+                action_menu(_Become_Friends())
 
 
-            def _stay(self):
-                ssprint("~Oh, I'm so glad you decided to stay!.~")
-                action_menu(Become_Friends())
 
-            def _leave(self):
-                ssprint("~I guess there's nothing I can say or do to make you stay. How rude of you to just leave me here all by myself!~")
-                Leave_Cave()
-
-        def _friend_dragon(self):
-            sprint("Okay... sooo, you want to be friends?")
-            sprint("~HAHAHA, WHAT?! A mere slime wants to be friends with the great Storm Dragon Veldora!?~")
-            sprint("Wellll... If you don't want to, that's fine too.")
-            sprint("~WHAAAAAAT, Who said we could not!~")
-            sprint("I guess I won't have a reason to come back here again, huh.")
-            sprint("~Wait. I guess it can't be helped. I'll become your friend!.~")
-            sprint("Great. Now I guess I should help you with this seal eh?")
-            action_menu(Help_With_Seal())
-
-    class Help_With_Seal:
+    class _Help_With_Seal:
         def __init__(self):
             global veldora
             veldora = mobs.Veldora_Tempest()

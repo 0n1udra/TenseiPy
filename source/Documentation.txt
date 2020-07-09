@@ -1,11 +1,29 @@
------Story Layout-----
-:Chapter_1:
-    ASCII: Great Sage
-    Set player's start state, acquire starting abilties and resistances.
-    Skill Acquired: Predator
-    Skill Acquired: Sage
-    Skill Upgrade: Sage > Great Sage
-    Show Attributes & Inventory
+How to storyline.
+def ChapterXX(Rimuru):
+    class Chapter_XX:
+        def __init__(self):
+            TEXT/COMMANDS
+            actionMenu(self)
+
+        _ACTION():
+            pass
+
+        ACTION(self):
+            pass
+
+    class _ACTION:
+        def __init__(self):
+
+    class ACTION:
+        def __init__(self):
+
+> Start with ChapterXX function with Chapter_XX class to start with.
+> Evoke action_menu to prompt user with available actions.
+> Pass in Rimuru_Tempest object when starting chapter.
+> Functions and class starting with _ will progress the story.
+> action_menu grabs functions and classes under passed in object, then shows the user.
+> Use class for nesting more paths in, and functions for the end of a path.
+> Remember to set global CLASS in upper if want to call it with action_menu() from inner nest.
 
 
 Reading Variable Names:
@@ -14,6 +32,28 @@ Name {} - Dictionary
 Name () - Set
 Name True/False - boolean
 Name() - Function
+Name: - Class
+
+-----Story Layout-----
+Chapter_1:
+    ASCII: Great Sage
+    Set player's start state, acquire starting abilties and resistances.
+    Skill Acquired: Predator
+    Skill Acquired: Sage
+    Skill Upgrade: Sage > Great Sage
+    Show Attributes & Inventory
+
+    _move:
+        _inspect:
+            explore()
+            puyo()
+            _predate_grass()
+    L
+
+
+
+
+
 
 When I say attribute it means skills and resistances.
 
@@ -26,7 +66,7 @@ When I say attribute it means skills and resistances.
     tbc() - Prints out To be continued.
     load_save_game() - Load user save.
     save_game() - Saves game state by pickling Rimuru_Tempest object (the player).
-    load_save_game() - Loads user save.
+    load_save_game() - Load s user save.
     delete_game_save() - Deletes save.
     continue_story() - At end of chapter, asks if want to continue.
     show_start_banner() - Shows name and basic help at start of game.
@@ -44,7 +84,7 @@ When I say attribute it means skills and resistances.
     story_progress [] - Story chapters player has completed.
     save_path str - Player save file path.
     text_delay True - If player wants text delay enabled/disabled.
-    last_command str - Last player inputted command.
+    played_paths () - Played story paths
 
 :Functions:
     set_start_state() - Adds starting attributes to character
@@ -131,19 +171,19 @@ cave_veldora - Veldora introducing himself.
 
 -----game_characters.py-----
 :Characters:
-Rimuru_Tempest - Player character.
+Rimuru_Tempest: - Player character.
     mimic_generator() - Yields character object acquired for mimicry.
     predate_target() - Predates inputted and focused targets. Either adds skill, item, or character.
     mimic_object() - Returns mimic skill object from attributes dictionary.
     add_mimic() - Adds new character object to acquired_mimicries dictionary.
     use_mimic() - Activate mimicry.
 
-Veldora_Tempest
-Tempest_Serpent
-Giant_Bat
-Evil_Centipede
-Black_Spider
-Tempest_Wolf
+Veldora_Tempest:
+Tempest_Serpent:
+Giant_Bat:
+Evil_Centipede:
+Black_Spider:
+Tempest_Wolf:
 
 update_character() - Updates rimuru (player) object.
 
@@ -204,30 +244,30 @@ Raphael_Skill
 Predator_Mimicry_Skill
     acquired_mimicries {} - Available mimicries can use.
     info() - @property, shows acquired mimicries.
-Predator_Skill
-Great_Sage_Skill
-Sage_Skill
-Magic_Perception
-Water_Manipulation
-Hydraulic_Propulsion
-Water_Blade
-Water_Bullet
-Absorb_Dissolve
-Self_Regeneration
-Sense_Heat_Source
-Poisonous_Breath
-Vampirism
-Ultrasound_Waves
-Paralyzing_Breath
-Sticky_Thread
-Steel_Thread
+Predator_Skill:
+Great_Sage_Skill:
+Sage_Skill:
+Magic_Perception:
+Water_Manipulation:
+Hydraulic_Propulsion:
+Water_Blade:
+Water_Bullet:
+Absorb_Dissolve:
+Self_Regeneration:
+Sense_Heat_Source:
+Poisonous_Breath:
+Vampirism:
+Ultrasound_Waves:
+Paralyzing_Breath:
+Sticky_Thread:
+Steel_Thread:
 
 :Resistances:
-Resist_Pain
-Resist_Melee
-Resist_Electricity
-Resist_Temperature
-Resist_Poison
+Resist_Pain:
+Resist_Melee:
+Resist_Electricity:
+Resist_Temperature:
+Resist_Poison:
 
 
 

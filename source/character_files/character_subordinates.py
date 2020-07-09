@@ -1,7 +1,3 @@
-def ssprint(Msg):
-    print(f'    {Msg}\n')
-
-
 class Subordinates:
     def __init__(self):
         self.subordinates = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],

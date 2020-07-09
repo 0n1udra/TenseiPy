@@ -1,7 +1,3 @@
-def ssprint(Msg):
-    print(f'    {Msg}\n')
-
-
 class Inventory:
     def __init__(self):
         self.capacity = 0
@@ -76,7 +72,7 @@ class Inventory:
 
         if not self.check_mob_has(item):
             self.inventory[item.item_type][item.name] = item
-            ssprint(f'<<Analysis on {item.name} successful.>>')
+            print(f'    <<Analysis on {item.name} successful.>>')
 
         self.inventory[item.item_type][item.name].amount += item.amount_add
         self.capacity += item.capacity_add
@@ -95,5 +91,4 @@ class Inventory:
         try:
             self.inventory[item.item_type].remove(item)
         except:
-            ssprint('<Failed removing item from inventory.>')
-
+            print('    <Failed removing item from inventory.>')

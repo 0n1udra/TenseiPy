@@ -1,7 +1,3 @@
-def ssprint(Msg):
-    print(f'    {Msg}\n')
-
-
 class Combat:
     def __init__(self):
         self.current_level_characters = []
@@ -57,7 +53,6 @@ class Combat:
         targets = []
         skills = []
 
-
         # Tries to split targets and attacks if there are multiples separated by commas ','.
         try:
             targets_and_attacks = targets_and_attacks.split(',')
@@ -87,12 +82,12 @@ class Combat:
                     if current_target.level <= current_skill.damage_level:
                         current_target.alive = False
                         attack_success = attacked = True
-                        ssprint(f'<Eliminated {current_target.name}.>')
+                        print(f'    <Eliminated {current_target.name}.>')
                     else:
-                        ssprint(f"<{current_target.name} level too for that attack.>")
+                        print(f"    <{current_target.name} level too for that attack.>")
                         attacked = True
                 else:
-                    ssprint(f'<<Warning,{current_target.name} has resistance to {current_skill.damage_type}.>>')
+                    print(f'    <<Warning,{current_target.name} has resistance to {current_skill.damage_type}.>>')
                     attacked = True
 
         return attacked, attack_success

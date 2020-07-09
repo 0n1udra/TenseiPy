@@ -1,7 +1,3 @@
-def ssprint(Msg):
-    print(f'    {Msg}\n')
-
-
 class Attributes:
     def __init__(self):
         self.attributes = {
@@ -65,7 +61,6 @@ class Attributes:
         character = self
         if self.is_str(character):
             character = self.get_object(character)
-
 
         print("-----Attributes/Skills-----")
         print(f"Name: {self.name} {self.family_name}\n")
@@ -137,7 +132,7 @@ class Attributes:
         skill_to = self.get_object(skill_to, new=True)
         if skill_to and skill_from:
             self.remove_attribute(skill_from)
-            ssprint(f'<<{skill_from.skill_level} [{skill_from}] evolving to {skill_to.skill_level} [{skill_to}]...>>')
+            print(f'    <<{skill_from.skill_level} [{skill_from}] evolving to {skill_to.skill_level} [{skill_to}]...>>')
             self.add_attribute(skill_to)
 
     def check_resistance(self, attack, target=None):
