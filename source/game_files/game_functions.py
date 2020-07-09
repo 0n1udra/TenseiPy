@@ -81,13 +81,11 @@ def action_menu(current_class):
         if i[0] == '*':
             if user_input.lower() == i.lower()[1:]:
                 eval(run_action)
-                rimuru.played_paths.append(current_class)
                 loop = False
                 break
         else:
             if user_input.lower() == i.lower():
                 eval(run_action)
-                rimuru.played_paths.append(current_class)
 
     if skill_success or (attacked and attack_success):
         pass
