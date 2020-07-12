@@ -29,7 +29,7 @@ class Attributes:
         for skill_type, skills in character.attributes.items():
             if output and skills:
                 # Prints out skill category (Ultimate, Unique, etc)
-                yield f'~{skill_type}~'
+                yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Prints if skill is active or passive
@@ -58,12 +58,16 @@ class Attributes:
         """
 
         # If no character was specified, else show player stats (rimuru)
-        character = self
-        if self.is_str(character):
-            character = self.get_object(character)
+        try:
+            character = self.get_object(character, mimic=True)
+        except:
+            pass
+        if character is None:
+            character = self
+
 
         print("-----Attributes/Skills-----")
-        print(f"Name: {self.name} {self.family_name}\n")
+        print(f"[{character.name} {character.family_name}]\n")
 
         for i in self.attributes_generator(character, output=True):
             print(i)
@@ -71,7 +75,7 @@ class Attributes:
         # Only shows mimicry info when not looking at stats of other monsters and is currently using mimicry
         if self.current_mimic:
             print("\n-----Mimicry-----")
-            print(f"Mimicking: {character.current_mimic.name}\n")
+            print(f"Mimicking: [{character.current_mimic.name}]\n")
             for j in self.attributes_generator(character.current_mimic, True):
                 print(f'{j}')
         print()
@@ -159,8 +163,10 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-    def use_skill(self, skill):
+    def use_skill(self, skill, character=None):
         try:
-            self.get_object(skill).use_skill()
+            self.current_mimic.get_object(skill).use_skill(character)
         except:
-            pass
+            try:
+                self.get_object(skill).use_skill(character)
+            except: pass
