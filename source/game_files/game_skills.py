@@ -1,3 +1,4 @@
+
 class Skill:
     def __init__(self):
         self.name = 'N/A'
@@ -288,10 +289,10 @@ class Sense_Heat_Source(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self):
+    def use_skill(self, character):
         try:
             print("\t-----Nearby Heat Sources-----")
-            for i in self.current_level_characters:
+            for i in character.current_level_characters:
                 if i.alive:
                     print(f'\t{i.name}')
             return True

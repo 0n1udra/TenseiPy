@@ -58,7 +58,7 @@ class Rimuru_Tempest(Character):
                         if not mob.alive and mob.get_name() in target.get_name():
                             self.add_mimic(target)
                         else:
-                            print(f"<<Warning, predation of {mob.name} unsuccessful.>>")
+                            pass
 
         self.focused_targets = set()
 
@@ -84,7 +84,7 @@ class Rimuru_Tempest(Character):
         # Checks if already have mimicry.
 
         self.mimic_object().acquired_mimicries[character.rank].append(character)
-        print(f'    <<Notice, new mimicry available: {character.name}.>>')
+        print(f'    <<Notice, new mimicry available: [{character.name}].>>')
 
     def use_mimic(self, character):
         """
@@ -106,7 +106,7 @@ class Rimuru_Tempest(Character):
             if new_mimic:
                 self.current_mimic_name = new_mimic.name
                 self.current_mimic = new_mimic
-                print(f'    <Now Mimicking: {new_mimic.name}>')
+                print(f'    <Now Mimicking: [{new_mimic.name}].>')
 
 
 class Veldora_Tempest(Character):
