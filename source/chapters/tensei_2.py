@@ -51,7 +51,7 @@ def Chapter2(rimuru):
 			ssprint("<Target the Tempest Serpent, then attack with your new skill. 'help' for more info.>")
 			action_menu(self)
 
-		def _predate_ore(self): pass
+		def predate_ore(self): pass
 
 		def _attack(self):
 			if not get_mob_status('tempest serpent'):

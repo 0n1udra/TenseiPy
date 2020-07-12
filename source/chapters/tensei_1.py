@@ -58,7 +58,6 @@ def Chapter1(rimuru):
                 def puyo(self):
                     sprint("Puyo!")
 
-                # GOTO: _learn_skills
                 def _predate_grass(self):
                     ssprint("Ooooweeee more grass!")
                     rimuru.add_inventory('Hipokte Grass')
@@ -88,7 +87,6 @@ def Chapter1(rimuru):
                 ssprint("<<Analysis complete.>>")
                 rimuru.show_info('hipokte grass')
 
-            # GOTO: _learn_skills
             def _create_potions(self):
                 ssprint("")
                 action_menu(_learn_skills)
@@ -121,7 +119,6 @@ def Chapter1(rimuru):
                 def stay_in_water(self):
                     sprint("..........")
 
-                # GOTO: _find_veldora
                 def _expel_water(self):
                     rimuru.add_attribute('Hydraulic Propulsion')
                     ssprint("Finally, I'm back on land!")
@@ -147,7 +144,6 @@ def Chapter1(rimuru):
                 sprint("~Oh, really... Is there anything I can do to ease your mind?~")
                 action_menu(self)
 
-            # GOTO: _respond
             def _help_me_see(self):
                 action_menu(_respond())
 
@@ -156,12 +152,10 @@ def Chapter1(rimuru):
                 sprint("~Oh. Ok, at least it was interesting seeing a higher intelligent monster in my cave for once.~")
                 _leave_cave()
 
-        # GOTO: _respond
         def _hello(self):
             sprint("~Keep following my voice little one.~")
             action_menu(_respond())
 
-        # GOTO: _respond
         def _shutit_baldy(self):
             ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!!!~")
             ssprint("Oh!")
@@ -207,7 +201,6 @@ def Chapter1(rimuru):
                 sprint("~Didn't I tell you not to get scared.~")
                 ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
 
-                # GOTO: _become_frineds
                 action_menu(_become_friends())
 
             def _nah(self):

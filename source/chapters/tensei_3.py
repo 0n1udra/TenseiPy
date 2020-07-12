@@ -1,4 +1,6 @@
-from start_game import *
+from game_files.game_functions import *
+
+
 def Chapter3(rimuru):
     class Chapter_3:
         def __init__(self):
