@@ -28,7 +28,7 @@ class Inventory:
         for item_type, items in character.inventory.items():
             if output and items:
                 # If output=True prints out item_type also
-                yield f'~{item_type}~'
+                yield f'[{item_type}]'
 
             for item_name, item_object in items.items():
                 if output:
@@ -72,7 +72,7 @@ class Inventory:
 
         if not self.check_mob_has(item):
             self.inventory[item.item_type][item.name] = item
-            print(f'    <<Analysis on {item.name} successful.>>')
+            print(f'    <<Analysis on [{item.name}] successful.>>\n')
 
         self.inventory[item.item_type][item.name].amount += item.amount_add
         self.capacity += item.capacity_add
