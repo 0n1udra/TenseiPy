@@ -34,7 +34,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, item, character=None, mimic=False, new=False):
+    def get_object(self, item, character=None, mimic=False, new=False, clm=False):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
@@ -66,15 +66,21 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             generators = [
                 *game_items.Item.__subclasses__(),
                 *game_skills.Skill.__subclasses__(),
-                *game_characters.Character.__subclasses__()
+                *game_characters.Character.__subclasses__(),
             ]
+        if clm:
+            generators.extend(self.current_level_characters)
 
         # If currently using Mimic ability.
         if mimic:
-            generators = [*self.mimic_generator()]
+            generators.extend([*self.mimic_generator()])
             # Adds mimicked monster abilities if currently using mimic.
+
+        try:
             if self.current_mimic:
                 generators.extend([*self.mimic_generator()])
+        except:
+            pass
 
         for i in generators:
             if new:
@@ -167,6 +173,17 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         except:
             return False
 
+    def is_obj(self, object):
+        try:
+            object = self.get_object(object)
+            if self.is_item(object) or self.is_attribute(object):
+                return True
+            else:
+                return False
+        except:
+            return False
+
+
     def is_str(self, string):
         """
         Check if is a string.
@@ -180,3 +197,5 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
 
         if type(string) == str:
             return True
+        else:
+            return False
