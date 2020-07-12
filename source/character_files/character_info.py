@@ -32,10 +32,17 @@ class Info:
             > info tempest serpent
         """
 
+        # Checks to see if any acquired mimics has inputted ability to get info on.
+        for i in self.mimic_generator():
+            try:
+                print(i.get_object(game_object).info)
+            except:
+                pass
         try:
-            print(self.get_object(game_object).info)
+            print(self.get_object(game_object, mimic=True).info)
         except:
             pass
+
 
     def update_info(self):
         """Updates character information."""
