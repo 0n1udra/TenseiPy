@@ -67,7 +67,7 @@ def Chapter2(rimuru):
 		def __init__(self):
 			add_level_mob(['giant bat', 'black spider'])
 			sprint("Are those bats?")
-			ssprint("<<Answer, They are [Giant Bat].>>")
+			ssprint("<<Answer, they are commonly known as [Giant Bat].>>")
 			action_menu(self)
 
 		def predate_ore(self):

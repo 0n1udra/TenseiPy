@@ -81,7 +81,7 @@ class Combat:
 						print(f"    <{current_target.name} level too for that attack.>")
 						attacked = True
 				else:
-					print(f'    <<Warning,{current_target.name} has resistance to {current_skill.damage_type}.>>')
+					print(f'    <<Warning, {current_target.name} has resistance to {current_skill.damage_type}.>>')
 					attacked = True
 
 		return attack_success
