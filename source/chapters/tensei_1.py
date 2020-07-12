@@ -107,7 +107,7 @@ def Chapter1(rimuru):
                 ssprint("<<Answer. A slime's body does not need oxygen.>>")
                 ssprint("I am indeed not feeling any pain, at this time my brain cells (or slime body) thought up a strategy.")
                 ssprint("How can I get out of here?")
-                ssprint("<<Suggestion, use predator to intake water then expel at high velocity.>>")
+                ssprint("<<Suggestion, use [Predator] to intake water then expel at high velocity.>>")
                 action_menu(self)
 
             def stay_in_water(self):
@@ -208,8 +208,7 @@ def Chapter1(rimuru):
                 ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
 
                 # GOTO: _become_frineds
-                action_menu(_become_friends)
-
+                action_menu(_become_friends())
 
             def _nah(self):
                 ssprint("~Alright then, I won't. Hmmmmph~")
