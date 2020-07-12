@@ -5,6 +5,7 @@ class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Slime'
+        self.canon_name = 'Rimuru Tempest'
         self.shared_blessing = 'Protection of Tempest'
         self.level = 7
         self.current_mimic = None
@@ -114,6 +115,7 @@ class Veldora_Tempest(Character):
         Character.__init__(self)
         self.name = "Veldora"
         self.title = 'Storm Dragon'
+        self.canon_name = 'Veldora Tempest'
         self.species = 'True Dragon'
         self.blessing = 'Storm Crest'
         self.alive = True
