@@ -38,7 +38,10 @@ def action_menu(current_class):
 	show_hud(actions)
 
 	if debug_mode:
-		user_input = class_funcs[0].replace('_', ' ')[1:]
+		for i in actions:
+			if i[0] == '*':
+				user_input = i[1:]
+
 	else:
 		user_input = input("\n> ").lower()
 		print()
