@@ -36,14 +36,14 @@ Name: - Class
 
 -----Story Layout-----
 Chapter1()
-	chapter_1:
-		:ASCII: Great Sage
-		:Set: player's start state, acquire starting abilties and resistances.
-		:Skill Acquired: Predator
-		:Skill Acquired: Sage
-		:Skill Upgrade: Sage > Great Sage
-		:Show: Attributes & Inventory
-		> _learn_new_attack
+    chapter_1:
+        :ASCII: Great Sage
+        :Set: player's start state, acquire starting abilties and resistances.
+        :Skill Acquired: Predator
+        :Skill Acquired: Sage
+        :Skill Upgrade: Sage > Great Sage
+        :Show: Attributes & Inventory
+        > _learn_new_attack
 
     _move:
         _inspect:
@@ -64,8 +64,8 @@ Chapter1()
         _leave:
             _help_me_see() > _respond
             _leave() > _leave_cave
-		_hello() > _respond:
-		_shutit_baldy() > _respond:
+        _hello() > _respond:
+        _shutit_baldy() > _respond:
 
     _respond:
         Skill Acquired: Magic Perception
@@ -90,29 +90,29 @@ Chapter1()
     _leave_cave() > Chapter2
 
 Chapter2()
-	chapter_2:
-		predate_ore()
-		_move_on() > _learn_new_attack
+    chapter_2:
+        predate_ore()
+        _move_on() > _learn_new_attack
 
-	_learn_new_attack:
-		:Mob Add: Tempest Serpent
-		_try_escaping() > _after_serpent
-		_learn_water_bullet() > _attack_serpent
-		_learn_water_blade() > _attack_serpent
+    _learn_new_attack:
+        :Mob Add: Tempest Serpent
+        _try_escaping() > _after_serpent
+        _learn_water_bullet() > _attack_serpent
+        _learn_water_blade() > _attack_serpent
 
-	_attack_serpent:
-		predate_ore()
-		_attack()
+    _attack_serpent:
+        predate_ore()
+        _attack()
 
-	_after_serpent:
-		predate_ore()
-		_sneak_away() > _at_exit()
+    _after_serpent:
+        predate_ore()
+        _sneak_away() > _at_exit()
 
-	_attack: > _at_exit()/_after_serpent
+    _attack: > _at_exit()/_after_serpent
 
-	_at_exit:
-		_sneak_out() > Chapter3
-		_say_hi() > :Death:
+    _at_exit:
+        _sneak_out() > Chapter3
+        _say_hi() > :Death:
 
 
 

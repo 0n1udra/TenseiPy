@@ -1,21 +1,27 @@
 class Test:
-    testVar = 'testy var'
+    cVar = 'hi'
     def __init__(self):
-        self.testVart  = 'init'
+        print(self.cVar)
+        pass
+
+    def printVar(self):
+        print('Test:', self.cVar)
+
+class Tx(Test):
+    def __init__(self):
+        print("NEW")
+
+    @classmethod
+    def new(cls):
+        cls.cVar = 'bye'
 
 
-    def printData(self):
-        print(self.data)
+x = Tx()
+x.new()
+x.printVar()
+y = Tx()
+y.printVar()
 
 
 
 
-
-print(Test.testVar)
-Test.testVar = 'hi'
-print(Test().testVart)
-t = Test()
-x = Test()
-
-print(t.testVar)
-print(x.testVar)

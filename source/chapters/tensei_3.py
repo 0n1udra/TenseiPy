@@ -11,14 +11,7 @@ def Chapter3(rimuru):
             ssprint("<<Answer, [Magic Perception] converts sound waves to comprehensible sentences.>>")
             ssprint("<<Also, sound waves can also be used to communicate your thoughts.>>")
             ssprint("Is that so, let's try that.")
-
             action_menu(self)
-         #   action_menu(['*Speak to Goblins', '*Chase Wolves', '*Run'],
-         #           [['speak to goblins'], ['chase wolves'], ['run']],
-         #           [Goblins, Wolves, Run])
-
-
-
 
 
         def _use_sticky_thread(self):
@@ -26,18 +19,14 @@ def Chapter3(rimuru):
 
         def _explore_more(self):
             sprint("Where am I going?")
+            action_menu()
 
-        def test():
-            print("oh:")
 
-    # ========== Goblins 
-    class Goblins_Path(Chapter_3):
+
+
+    class _goblin_path:
         def __init__(self):
             ssprint("How should I introduce myself?")
-
-      #  action_menu(['*Friendly', '*Mad', '*Coerce', '*Attack'],
-      #          [['friendly'], ['mad'], ['coerce'], ['attack #$%']],
-      #          [FriendlyGoblin, MadGoblin, CoerceGoblin, AttackGoblin])
 
         def be_friendly(self):
             sprint("HELLO, I'M A SLIME. MY NAME IS RIMURU")
@@ -50,17 +39,6 @@ def Chapter3(rimuru):
             sprint("No, that is our village ahead of here. We felt a strong demonic aura and decided to immediately investigate.")
             ssprint("Demonic aura? where?")
             sprint("I didn't feel.")
-
-
-    # ========== Wolves
-    class Chase_Wolves:
-        pass
-
-
-    # ========== Run
-    def run_away(self):
-        pass
-
 
     Chapter_3()
 
