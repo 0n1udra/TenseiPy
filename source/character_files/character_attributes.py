@@ -51,7 +51,8 @@ class Attributes:
             character: Character's attributes to show.
 
         Usage:
-            .show('tempest serpent')
+            .show_attributes()
+            .show_attributes('tempest serpent')
 
             > stats
             > stats tempest serpent
@@ -95,12 +96,10 @@ class Attributes:
 
         attribute = self.get_object(attribute, new=True)
         if attribute:
-            if not self.check_mob_has(attribute):
-                self.attributes[attribute.skill_level][attribute.name] = attribute
+            self.attributes[attribute.skill_level][attribute.name] = attribute
             if show_acquired_msg:
                 attribute.show_acquired_msg()
             if show_skill_info:
-                # Shows skill info
                 self.show_info(attribute.name)
 
     def remove_attribute(self, attribute):
@@ -118,7 +117,7 @@ class Attributes:
             attribute = self.get_object(attribute)
             del self.attributes[attribute.skill_level][attribute.name]
         except:
-            print("ERROR Deleting attribute. If you're seeing this message, please let developer know")
+            print("<Error removing attribute.>")
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -129,7 +128,7 @@ class Attributes:
             skill_to (str): Skill to upgrade to.
 
         Usage:
-            .upgrade(skill_from, skill_to)
+            .upgrade_attribute(skill_from, skill_to)
         """
 
         skill_from = self.get_object(skill_from)
@@ -164,9 +163,22 @@ class Attributes:
                     return True
 
     def use_skill(self, skill, character=None):
+        """
+        Use skill.
+
+        Args:
+            skill: Skill to use.
+            character: Character to use skill.
+
+        Usage:
+            > use sense heat source
+        """
         try:
             self.current_mimic.get_object(skill).use_skill(character)
         except:
             try:
                 self.get_object(skill).use_skill(character)
-            except: pass
+            except:
+                pass
+
+

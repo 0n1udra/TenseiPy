@@ -76,7 +76,8 @@ class Info:
             level: New level for character.
 
         Usage:
-            .update_ranking('rimuru', 'A+')
+            .update_ranking('A+')
+            .update_ranking('A+', 'ranga')
         """
 
         character = self

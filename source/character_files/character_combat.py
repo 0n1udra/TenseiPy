@@ -37,18 +37,15 @@ class Combat:
         Will return booleans for if attack was attempted and if attack was successful.
 
         Args:
-            targets_and_attacks: Targets to attack, if multiple, separated by comma ','.
+            user_input: Targets to attack, if multiple, separated by comma ','.
 
         Returns:
             attacked: If attack was attempted.
             attack_success: If attack was successful.
 
         Usage:
-            .attack('tempest serpent')
-            .attack('tempest serpent, giant bat')
-
-            > attack tempest serpent
-            > attack tempest serpent, giant bat with water blade
+            > attack with water blade
+            > attack water blade
         """
 
 
@@ -79,9 +76,7 @@ class Combat:
                         print(f'    <Eliminated {current_target.name}.>\n')
                     else:
                         print(f"    <{current_target.name} level too for that attack.>")
-                        attacked = True
                 else:
                     print(f'    <<Warning, {current_target.name} has resistance to {current_skill.damage_type}.>>')
-                    attacked = True
 
         return attack_success

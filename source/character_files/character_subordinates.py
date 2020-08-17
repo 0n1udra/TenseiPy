@@ -38,3 +38,4 @@ class Subordinates:
             self.subs[char.species].append(char)
         else:
             self.subs[char.species] = list([char])
+

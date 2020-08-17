@@ -45,6 +45,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
+
+        Usage:
+            .get_object('great sage')
+            .get_object('hipokte grass')
         """
 
         if not character:
@@ -98,6 +102,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             check_object: Object to check if specified character has item, attribute, skill, etc.
             character: Check if character has the object.
 
+        Returns:
+            Boolean: If specified character has attribute or object.
+
         Usage:
             .check_mob_has('resist poison')
             .check_mob_has('resist poison', 'ranga')
@@ -110,11 +117,17 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             character = self
         else:
             character = self.get_object(character)
-        check_object = self.get_object(check_object)
 
-        if character and check_object:
-            if character.get_object(check_object):
-                return True
+        if character.get_object(check_object):
+            return True
+
+        try:
+            for i in self.mimic_generator():
+                if i.get_object(check_object):
+                    return True
+        except:
+            pass
+
 
     def is_character(self, character):
         """
@@ -125,6 +138,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
 
         Returns:
             True if game character object.
+
+        Usage:
+            .is_character('tempest serpent')
         """
 
         try:
@@ -144,6 +160,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
 
         Returns:
             True of game item object.
+
+        Usage:
+            .is_item('hipokte grass')
         """
 
         try:
