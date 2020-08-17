@@ -13,7 +13,6 @@ def update_character(character):
     rimuru = character
     return rimuru
 
-
 def action_menu(current_class):
     """
     Takes user input and runs corresponding actions.
@@ -88,7 +87,6 @@ def action_menu(current_class):
     if loop:
         action_menu(current_class)
 
-
 def show_hud(actions):
     """Shows user HUD with available actions and targets (if any)."""
 
@@ -107,23 +105,7 @@ def show_hud(actions):
         print("\nActions:", options, f'| {mimicking}, (stats, inv, help)')
 
 
-def get_mob_status(target):
-    """
-    Returns whether mob in current_mob list is alive.
-
-    Args:
-        target: Target to check alive status.
-
-    Usage:
-        .get_mob_status('tempest serpent')
-    """
-
-    for i in rimuru.current_level_characters:
-        if target.lower() in i.get_name():
-            if i.alive:
-                return True
-
-
+#                    ========== Mob Functions ==========
 def add_level_mob(characters):
     """
     Adds new mob to current level in game.
@@ -132,8 +114,8 @@ def add_level_mob(characters):
         level_characters: Mob character(s) to add to current level. Can be single mob (string) or multiple (list).
 
     Usage:
-        .add_level_mob('tempest serpent')
-        .add_level_mob(['tempest serpent', 'giant bat'])
+        add_level_mob('tempest serpent')
+        add_level_mob(['tempest serpent', 'giant bat'])
     """
     if type(characters) == list:
         for i in characters:
@@ -143,6 +125,39 @@ def add_level_mob(characters):
     else:
         mob = rimuru.get_object(characters, new=True)
         rimuru.current_level_characters.append(mob)
+
+def get_mob_status(target):
+    """
+    Returns whether mob in current_mob list is alive.
+
+    Args:
+        target: Target to check alive status.
+
+    Usage:
+        get_mob_status('tempest serpent')
+    """
+
+    for i in rimuru.current_level_characters:
+        if target.lower() in i.get_name():
+            if i.alive:
+                return True
+
+def check_cleared_mobs():
+    """
+    Returns whether all mobs on at current stage are cleared.
+
+    Returns:
+        Boolean: If all mobs in current_level_characters are dead.
+
+    Usage:
+        if check_cleared_mobs():
+    """
+
+    for mob in rimuru.current_level_characters:
+        if mob.alive:
+            return False
+    else:
+        return True
 
 
 #                    ========== Extra ==========
@@ -162,8 +177,7 @@ def save_game(rimuru_object):
     """
 
     pickle.dump(rimuru_object, open(rimuru_object.save_path, 'wb'))
-    print("Game Saved To: player_save.p")
-
+    print("Game saved to player_save.p\n")
 
 def load_save_game(path):
     """
@@ -183,7 +197,6 @@ def load_save_game(path):
         rimuru = mobs.Rimuru_Tempest()
     return rimuru
 
-
 def delete_game_save(rimuru_object):
     """
     Deletes game save.
@@ -193,6 +206,8 @@ def delete_game_save(rimuru_object):
     """
     os.remove(rimuru_object.save_path)
     print("Resetting Game. Deleted player_save.p\n")
+    print("Good luck next time!\n")
+    exit()
 
 
 def continue_story(rimuru_object, next_chapter):
@@ -231,11 +246,9 @@ def show_start_banner(rimuru):
     rimuru.show_inventory()
     print()
 
-
 def ssprint(Msg):
     """Print tabbed in message."""
     sprint(f'    {Msg}')
-
 
 def sprint(Msg):
     """
@@ -267,27 +280,27 @@ def sprint(Msg):
     print(Msg, '\n')
     sleep(sleep_time)
 
-
 def show_help(*args):
     """Shows help page."""
 
     print("""
+    Command Required_Parameter [Optional_Parameter]
+
     Commands:
-        target TARGET(s)            -- Target mobs. E.g. 'target tempest serpent'
-        attack with SKILL			-- Attack targeted. E.g. 'attack with water blade'
-        use SKILL                	-- Use a skill. E.g. 'use sense heat source'
-        stats                       -- Show yours skills and resistances. 
-          - stats TARGET            -- Stats for monsters you have predated. E.g. 'stats tempest serpent'
+        target TARGET               -- Target mobs. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
+        attack with SKILL	    -- Attack targeted. E.g. 'attack with water blade', 'attack water bullet'
+        use SKILL                   -- Use a skill. E.g. 'use sense heat source'
+        stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
         inv                         -- Show inventory.
-        info                        -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
         help                        -- Show this help page.
         exit                        -- Exit game.
 
     Abilities:
-        mimic ___                   -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
+        mimic TARGET                -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
           - info mimic              -- Shows available mimicries.
           - mimic reset             -- Resets mimic (Back to slime).
-        predate                     -- Predate target(s). Can only predate mobs that are focused.
+        predate                     -- Predate target(s). Can only predate mobs that are targeted and dead.
 
     Game Dialogue:
         ~Message~                   -- Telepathy, thought communication.
@@ -297,9 +310,9 @@ def show_help(*args):
         <<<Message>>>               -- Voice of the World.
 
     HUD:
-        Target: Currently Focused Target(s)
-        Actions: (ACTION(s)) | MIMIC, (Extra Actions)
-      E.g.
+        Target: Currently_Focused_Targets
+        Actions: (Actions) | Mimic, (Extra_Actions)
+    Example HUD:
         Target: Giant Bat, Black Spider
         Actions: (*Attack), (*Move on) | Tempest Serpent, (stats, inv, help)
 
