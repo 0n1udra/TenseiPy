@@ -53,12 +53,11 @@ def Chapter2(rimuru):
 
         class _attack:
             def __init__(self):
-
                 if not get_mob_status('tempest serpent'):
-                    sprint("Wow, what a powerful attack. I probably shouldn't use that so openly.")
+                    sprint("Wow, what a powerful attack. I probably shouldn't use that so carelessly.")
                     ssprint("<<Notice, would you like to use Unique Skill [Predator]?>>")
                     sprint("Oh...? What will that do?")
-                    ssprint("<<Answer, after predation, information and targets skills may be obtained through analysis.>>")
+                    ssprint("<<Answer, after predation, information and target's skills may be obtained through analysis.>>")
                     sprint("Are those bats?")
                     ssprint("<<Answer, they are commonly known as [Giant Bat].>>")
 
