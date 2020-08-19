@@ -1,5 +1,4 @@
-import os, pickle
-from time import sleep
+import os, pickle, time, sys
 import game_files.game_characters as mobs
 import game_files.game_art as art
 
@@ -50,15 +49,15 @@ def action_menu(current_class):
     parameter = ' '.join(split_user_input[1:])
 
     level_actions = {
-        'target': rimuru.set_targets,
-        'predate': rimuru.predate_targets,
-        'mimic': rimuru.use_mimic,
-        'help': show_help,
-        'inv': rimuru.show_inventory,
-        'stats': rimuru.show_attributes,
-        'info': rimuru.show_info,
-        'exit': exit,
-    }
+            'target': rimuru.set_targets,
+            'predate': rimuru.predate_targets,
+            'mimic': rimuru.use_mimic,
+            'help': show_help,
+            'inv': rimuru.show_inventory,
+            'stats': rimuru.show_attributes,
+            'info': rimuru.show_info,
+            'exit': exit,
+            }
     if 'attack' in command:
         if rimuru.attack(parameter):
             user_input = 'attack'
@@ -105,7 +104,7 @@ def show_hud(actions):
         print("\nActions:", options, f'| {mimicking}, (stats, inv, help)')
 
 
-#                    ========== Mob Functions ==========
+#                    ========== Level Functions ==========
 def add_level_mob(characters):
     """
     Adds new mob to current level in game.
@@ -246,39 +245,43 @@ def show_start_banner(rimuru):
     rimuru.show_inventory()
     print()
 
-def ssprint(Msg):
+def ssprint(message):
     """Print tabbed in message."""
-    sprint(f'    {Msg}')
+    print('    ', end='')
+    sprint(message)
 
-def sprint(Msg):
+def sprint(message):
     """
-    Delay text in game.
+    Text crawling. Slowly print out text to console.
 
     Args:
-        Msg: Message to delay.
+        message: Message to delay.
     """
 
-    msg_len = len(str(Msg))
-    if rimuru.text_delay:
-        if msg_len > 100:
-            sleep_time = 1
-        elif msg_len > 70 and msg_len > 80:
-            sleep_time = 4
-        elif msg_len > 50 and msg_len > 40:
-            sleep_time = 3
-        elif msg_len > 40 and msg_len > 20:
-            sleep_time = 2
-        elif msg_len < 10:
-            sleep_time = 2
-        elif msg_len < 5:
-            sleep_time = 1
-        else:
-            sleep_time = 1
-    else:
-        sleep_time = 0
+    stripped_message = message.lstrip()
+    message_length = len(stripped_message)
 
-    print(Msg, '\n')
-    sleep(sleep_time)
+    
+    if message_length > 200:
+        total_time = 0.1
+    elif message_length > 50:
+        total_time = 4.5
+    elif message_length > 25:
+        total_time = 3.5
+    elif message_length > 10:
+        total_time = 2.5
+    else:
+        total_time = 2.5
+
+    sleep_time = total_time / message_length
+
+
+    for letter in stripped_message:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(sleep_time)
+    print()
+
 
 def show_help(*args):
     """Shows help page."""
