@@ -3,9 +3,7 @@ import game_files.game_characters as mobs
 import game_files.game_art as art
 
 debug_mode = False
-
 rimuru = None
-
 
 def update_character(character):
     global rimuru
@@ -208,7 +206,6 @@ def delete_game_save(rimuru_object):
     print("Good luck next time!\n")
     exit()
 
-
 def continue_story(rimuru_object, next_chapter):
     """
     Continues story progress from last save point.
@@ -230,15 +227,15 @@ def continue_story(rimuru_object, next_chapter):
 
 #                    ========== Game Functions ==========
 def show_start_banner(rimuru):
-    """Show game start banner."""
+    """Show game title, tips, and player stats/inv."""
 
     print("\n----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
     instructions = """
     NOTE: 
-    - Set window size for ASCII art accordingly (Fullscreen recommended)
-    - Access help, inventory and skills with help, inv and stats
-    - * actions continues story (do NOT actually input *, or ()). Try the other actions first maybe, see what happens
-    - Delete player_save.p to reset game progress (includes player inventory and skills)
+    - Set window fullscreen for ASCII art.
+    - Use 'help' command for game commands and more.
+    - Actions with a '*' will advance the story (do NOT actually input *). Try the other actions first maybe, see what happens.
+    - Delete player_save.p to reset game progress, inventory and skills.
     """
     print(instructions)
     rimuru.show_attributes()
@@ -258,30 +255,30 @@ def sprint(message):
         message: Message to delay.
     """
 
-    stripped_message = message.lstrip()
-    message_length = len(stripped_message)
+    if rimuru.text_delay:
+        stripped_message = message.lstrip()
+        message_length = len(stripped_message)
 
-    
-    if message_length > 200:
-        total_time = 0.1
-    elif message_length > 50:
-        total_time = 4.5
-    elif message_length > 25:
-        total_time = 3.5
-    elif message_length > 10:
-        total_time = 2.5
+        if message_length > 200:
+            total_time = 0.1
+        elif message_length > 50:
+            total_time = 4.5
+        elif message_length > 25:
+            total_time = 3.5
+        elif message_length > 10:
+            total_time = 2.5
+        else:
+            total_time = 2.5
+
+        sleep_time = total_time / message_length
+
+        for letter in stripped_message:
+            sys.stdout.write(letter)
+            sys.stdout.flush()
+            time.sleep(sleep_time)
+        print()
     else:
-        total_time = 2.5
-
-    sleep_time = total_time / message_length
-
-
-    for letter in stripped_message:
-        sys.stdout.write(letter)
-        sys.stdout.flush()
-        time.sleep(sleep_time)
-    print()
-
+        print(message)
 
 def show_help(*args):
     """Shows help page."""
@@ -308,9 +305,9 @@ def show_help(*args):
     Game Dialogue:
         ~Message~                   -- Telepathy, thought communication.
         *Message*                   -- Story context.
-        <Message>                   -- Game info, acquisition, etc.
-        <<Message>>                 -- Great Sage (Raphael, Ciel).
-        <<<Message>>>               -- Voice of the World.
+        < Message >                   -- Game info, acquisition, game help, etc.
+        << Message >>                 -- Great Sage (Raphael, Ciel).
+        <<< Message >>>               -- Voice of the World.
 
     HUD:
         Target: Currently_Focused_Targets
