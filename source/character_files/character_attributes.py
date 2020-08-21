@@ -35,11 +35,11 @@ class Attributes:
                 # Prints if skill is active or passive
                 if output:
                     if skill_object.active:
-                        yield f'\t{skill_name} (Active)'
+                        yield f'    {skill_name} (Active)'
                     elif skill_object.passive:
-                        yield f'\t{skill_name} (Passive)'
+                        yield f'    {skill_name} (Passive)'
                     else:
-                        yield f'\t{skill_name}'
+                        yield f'    {skill_name}'
                 else:
                     yield skill_object
 
