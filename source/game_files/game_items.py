@@ -38,7 +38,15 @@ class Item:
 
     Appearance:
         {self.appearance}
+
+    Recipe:
     '''
+        if self.recipe:
+            self.info += f'    Will craft {self.amount_add}x at a time.\n'
+            for item, amount in self.recipe.items():
+                self.info += f'   {amount}x {item}\n'
+        else:
+            self.info += '    N/A'
 
     def get_name(self):
         """
@@ -58,7 +66,7 @@ class Hipokte_Grass(Item):
         self.name = 'Hipokte Grass'
         self.item_type = 'Materials'
         self.amount = 0
-        self.amount_add = 5
+        self.amount_add = 50
         self.capacity_add = 0.01
         self.usage = 'Mainly used for making healing potions.'
         self.description = 'Magicule infused grass, found in locations with high Magicule concentration'
@@ -72,7 +80,7 @@ class Magic_Ore(Item):
         self.name = 'Magic Ore'
         self.item_type = 'Materials'
         self.amount = 0
-        self.amount_add = 5
+        self.amount_add = 25
         self.capacity_add = 0.1
         self.usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
         self.description = '''
@@ -88,8 +96,8 @@ class Full_Potion(Item):
         self.name = 'Full Potion'
         self.item_type = 'Consumable'
         self.amount = 0
-        self.amount_add = 10
-        self.capacity_add = 0.05
+        self.amount_add = 25
+        self.capacity_add = 0.1
         self.usage = 'Heals major wounds even severed limbs. However, can not resurrect.'
         self.description = '''
         Can heal subject to optimum condition, but cannot revive the dead.
