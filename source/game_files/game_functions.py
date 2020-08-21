@@ -289,7 +289,7 @@ def show_help(*args):
 
     Commands:
         target TARGET               -- Target mobs. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
-        attack with SKILL	    -- Attack targeted. E.g. 'attack with water blade', 'attack water bullet'
+        attack with SKILL	        -- Attack targeted. E.g. 'attack with water blade', 'attack water bullet'
         use SKILL                   -- Use a skill. E.g. 'use sense heat source'
         stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
         inv                         -- Show inventory.
@@ -302,13 +302,15 @@ def show_help(*args):
           - info mimic              -- Shows available mimicries.
           - mimic reset             -- Resets mimic (Back to slime).
         predate                     -- Predate target(s). Can only predate mobs that are targeted and dead.
+        craft ITEM                  -- Craft items if have necessary ingredients. E.g. 'craft full potion'
+                                         NOTE: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
 
     Game Dialogue:
         ~Message~                   -- Telepathy, thought communication.
         *Message*                   -- Story context.
-        < Message >                   -- Game info, acquisition, game help, etc.
-        << Message >>                 -- Great Sage (Raphael, Ciel).
-        <<< Message >>>               -- Voice of the World.
+        < Message >                 -- Game info, acquisition, game help, etc.
+        << Message >>               -- Great Sage (Raphael, Ciel).
+        <<< Message >>>             -- Voice of the World.
 
     HUD:
         Target: Currently_Focused_Targets

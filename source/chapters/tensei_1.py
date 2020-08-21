@@ -107,6 +107,7 @@ def Chapter1(rimuru):
 
                 def _craft_full_potion(self):
                     ssprint("I have a feeling these will come in handy.")
+                    ssprint("< Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
                     action_menu(_learn_skills)
 
 
