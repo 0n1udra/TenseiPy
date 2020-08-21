@@ -55,7 +55,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             character = self
 
         # If input is an objects, gets objects name (str).
-        if not self.is_str(item):
+        if not type(item) == str:
             item = item.name
 
         generators = [*self.inventory_generator(character), *self.attributes_generator(character)]
@@ -94,20 +94,21 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             else:
                 del i
 
-    def check_mob_has(self, check_object, character=None):
+    def check_acquired(self, check_object, amount=1, character=None):
         """
         Checks to see if character has object/attribute/item/etc.
 
         Args:
             check_object: Object to check if specified character has item, attribute, skill, etc.
             character: Check if character has the object.
+            amount: Check to see if have this amount of specified item.
 
         Returns:
             Boolean: If specified character has attribute or object.
 
         Usage:
-            .check_mob_has('resist poison')
-            .check_mob_has('resist poison', 'ranga')
+            .check_acquired('resist poison')
+            .check_acquired('resist poison', 'ranga')
 
             > rimuru has resist melee
             >>True
@@ -118,8 +119,12 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         else:
             character = self.get_object(character)
 
-        if character.get_object(check_object):
-            return True
+        if character:
+            item = character.get_object(check_object)
+            if item:
+                if item.game_object_type == 'Item' and item.amount < amount:
+                    return False
+                return True
 
         try:
             for i in self.mimic_generator():
@@ -128,93 +133,3 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         except:
             pass
 
-
-    def is_character(self, character):
-        """
-        Check if game character object.
-
-        Args:
-            character: Check game character object.
-
-        Returns:
-            True if game character object.
-
-        Usage:
-            .is_character('tempest serpent')
-        """
-
-        try:
-            character = self.get_object(character, new=True)
-            if character.game_object_type == 'character':
-                del character
-                return True
-        except:
-            return False
-
-    def is_item(self, item):
-        """
-        Check if game item object.
-
-        Args:
-            item: If game item object.
-
-        Returns:
-            True of game item object.
-
-        Usage:
-            .is_item('hipokte grass')
-        """
-
-        try:
-            item = self.get_object(item, new=True)
-            if item.game_object_type == 'item':
-                del item
-                return True
-        except:
-            return False
-
-    def is_attribute(self, attribute):
-        """
-        Checks if is game attribute object.
-
-        Args:
-            attribute: Check if is attribute object.
-
-        Returns:
-            True if is attribute object.
-        """
-
-        try:
-            attribute = self.get_object(attribute, new=True)
-            if attribute.game_object_type == 'attribute':
-                del attribute
-                return True
-        except:
-            return False
-
-    def is_obj(self, object):
-        try:
-            object = self.get_object(object)
-            if self.is_item(object) or self.is_attribute(object):
-                return True
-            else:
-                return False
-        except:
-            return False
-
-
-    def is_str(self, string):
-        """
-        Check if is a string.
-
-        Args:
-            string: Check string.
-
-        Returns:
-            True if is string.
-        """
-
-        if type(string) == str:
-            return True
-        else:
-            return False
