@@ -9,7 +9,8 @@ class Item:
         self.description = ''
         self.usage = ''
         self.appearance = ''
-        self.game_object_type = 'item'
+        self.recipe = {}
+        self.game_object_type = 'Item'
 
     def get_description(self):
         """
@@ -24,7 +25,7 @@ class Item:
     def show_acquired_msg(self):
         """Print item's acquired message."""
 
-        print(f'    <Acquired {self.amount_add}x [{self.name}].>\n')
+        print(f'    < Acquired {self.amount_add}x [{self.name}]. >\n')
 
     def update_info(self):
         """Updates item's info."""
@@ -70,8 +71,8 @@ class Magic_Ore(Item):
         Item.__init__(self)
         self.name = 'Magic Ore'
         self.item_type = 'Materials'
-        self.amount_add = 5
         self.amount = 0
+        self.amount_add = 5
         self.capacity_add = 0.1
         self.usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
         self.description = '''
@@ -79,4 +80,21 @@ class Magic_Ore(Item):
         Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
         '''
         self.appearance = 'A very colorful ore. Almost like a glowing shimmering rainbow effect, while giving off some magic essence.'
+        self.update_info()
+
+class Full_Potion(Item):
+    def __init__(self):
+        Item.__init__(self)
+        self.name = 'Full Potion'
+        self.item_type = 'Consumable'
+        self.amount = 0
+        self.amount_add = 10
+        self.capacity_add = 0.05
+        self.usage = 'Heals major wounds even severed limbs. However, can not resurrect.'
+        self.description = '''
+        Can heal subject to optimum condition, but cannot revive the dead.
+        '''
+        self.appearance = 'Blue potion in a glass bottle.'
+        # One Hipokte Grass makes 10 potions.
+        self.recipe = {'Hipokte Grass': 1}
         self.update_info()
