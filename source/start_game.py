@@ -12,10 +12,10 @@ if __name__ == '__main__':
     rimuru.save_path = save_path
     game_funcs.show_start_banner(rimuru)
 
-    print("\nDisable text delay? (Recommend leaving enabled for easier reading)")
-    # setSleep = str(input("(Y)es/(N)o > "))
-    setSleep = 'y'
-    if setSleep.lower() in ['yes', 'y']:
+    print("\nEnable text crawl? (Recommended for easier reading)")
+    setSleep = str(input("no/yes or Enter > "))
+    if setSleep.lower() in ['n', 'no']:
+    esetSleep = 'y'
         print("Text Delay: DISABLED")
         rimuru.text_delay = False
     else:
