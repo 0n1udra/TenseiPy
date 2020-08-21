@@ -15,7 +15,6 @@ if __name__ == '__main__':
     print("\nEnable text crawl? (Recommended for easier reading)")
     setSleep = str(input("no/yes or Enter > "))
     if setSleep.lower() in ['n', 'no']:
-    esetSleep = 'y'
         print("Text Delay: DISABLED")
         rimuru.text_delay = False
     else:

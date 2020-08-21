@@ -1,27 +1,10 @@
-class Test:
-    cVar = 'hi'
-    def __init__(self):
-        print(self.cVar)
-        pass
-
-    def printVar(self):
-        print('Test:', self.cVar)
-
-class Tx(Test):
-    def __init__(self):
-        print("NEW")
-
-    @classmethod
-    def new(cls):
-        cls.cVar = 'bye'
+y = '''
+hello
+'''
+x = {'hi': 1, 'bye': 3}
+y = {}
+for k, v in x.items():
+    y += f'{v} {k}, '
 
 
-x = Tx()
-x.new()
-x.printVar()
-y = Tx()
-y.printVar()
-
-
-
-
+        
