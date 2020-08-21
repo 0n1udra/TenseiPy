@@ -98,12 +98,12 @@ class Predator_Mimicry_Skill(Skill):
 
     @property
     def info(self):
-        print("\t-----Available Mimicries-----")
+        print("    -----Available Mimicries-----")
         for level, mob_list in self.acquired_mimicries.items():
-            print(f'\t{level} :')
+            print(f'    {level} :')
             for mob in mob_list:
-                print(f'\t\t{mob.name}')
-        print("\n\t'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
+                print(f'        {mob.name}')
+        print("\n    'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
         return ''
 
 
@@ -203,7 +203,7 @@ class Magic_Perception(Skill):
         self.update_skill_info()
 
     def use_skill(self):
-        print("\t< Activated Extra Skill [Magic Perception]. >")
+        print("    < Activated Extra Skill [Magic Perception]. >")
         self.active = True
         return True
 
@@ -291,10 +291,10 @@ class Sense_Heat_Source(Skill):
 
     def use_skill(self, character):
         try:
-            print("\t-----Nearby Heat Sources-----")
+            print("    -----Nearby Heat Sources-----")
             for i in character.current_level_characters:
                 if i.alive:
-                    print(f'\t{i.name}')
+                    print(f'    {i.name}')
             return True
         except:
             pass
