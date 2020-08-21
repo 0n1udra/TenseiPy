@@ -15,7 +15,7 @@ class Skill:
         self.predate = True
         self.sub_skills = {}
 
-        self.game_object_type = 'attribute'
+        self.game_object_type = 'Attribute'
 
     def show_acquired_msg(self):
         print(f"    {self.acquired_msg}\n")
@@ -38,7 +38,7 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquired_msg = f"<<{self.skill_level} [{self.name}] successfully acquired.>>"
+        self.acquired_msg = f"<< {self.skill_level} [{self.name}] successfully acquired. >>"
 
     def get_name(self):
         return self.name.lower()
@@ -66,7 +66,7 @@ class Ciel_Skill(Skill):
         """
         self.evolution = "Sage > Great Sage > Raphael > Ciel"
         self.update_skill_info()
-        self.acquired_msg = "<<Ulitamte Skill Core Manas [Ciel] Acquired!>>"
+        self.acquired_msg = "<< Ulitamte Skill Core Manas [Ciel] Acquired! >>"
 
 
 # ===== Ultimate Skill=====
@@ -132,7 +132,7 @@ class Predator_Skill(Skill):
         """
         self.evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
         self.update_skill_info()
-        self.acquired_msg = "<<Unique Skill [Predator] successfully Acquired.>>"
+        self.acquired_msg = "<< Unique Skill [Predator] successfully Acquired. >>"
 
 
 class Great_Sage_Skill(Skill):
@@ -175,7 +175,7 @@ class Great_Sage_Skill(Skill):
         '''
         self.evolution = 'Sage > Great Sage > Raphael > Ciel'
         self.update_skill_info()
-        self.acquired_msg = f'<<Unique Skill [Great Sage] Successfully Acquired!>>'
+        self.acquired_msg = f"<< Unique Skill [Great Sage] Successfully Acquired! >>"
 
 
 #                    ========== Extra Skills ==========
@@ -203,7 +203,7 @@ class Magic_Perception(Skill):
         self.update_skill_info()
 
     def use_skill(self):
-        print("\t<Activated Extra Skill [Magic Perception].>")
+        print("\t< Activated Extra Skill [Magic Perception]. >")
         self.active = True
         return True
 

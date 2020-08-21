@@ -70,25 +70,42 @@ class Inventory:
 
         item.show_acquired_msg()
 
-        if not self.check_mob_has(item):
+        if not self.check_acquired(item):
             self.inventory[item.item_type][item.name] = item
-            print(f'    <<Analysis on [{item.name}] successful.>>\n')
+            print(f'    << Analysis on [{item.name}] successful. >>\n')
 
         self.inventory[item.item_type][item.name].amount += item.amount_add
         self.capacity += item.capacity_add
 
-    def remove_inventory(self, item):
+    def remove_inventory(self, item, amount=1):
         """
         Remove item from inventory (Currently only Rimuru).
 
         Args:
             item: Item to remove from inventory.
+            amount: How many to remove from inventory.
 
         Usage:
             .remove('hipokte grass')
+            .remove('magic ore', 5)
         """
 
-        try:
+        item = self.get_object(item)
+
+        if item.amount <= 1:
             self.inventory[item.item_type].remove(item)
-        except:
-            print('    <Failed removing item from inventory.>')
+        else:
+            item.amount -= amount
+
+    def craft_item(self, item, amount):
+
+        item = self.get_object(item, new=True)
+
+        for ingredient_name, ingredient_amount in item.recipe.items():
+            if self.check_acquired(ingredient_name, ingredient_amount * amount):
+                
+
+
+
+
+

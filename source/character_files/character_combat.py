@@ -73,10 +73,10 @@ class Combat:
                     if current_target.level <= current_skill.damage_level:
                         current_target.alive = False
                         attack_success = True
-                        print(f'    <Eliminated {current_target.name}.>\n')
+                        print(f"    < Eliminated {current_target.name}. >\n")
                     else:
-                        print(f"    <{current_target.name} level too for that attack.>")
+                        print(f"    < {current_target.name} level too for that attack. >")
                 else:
-                    print(f'    <<Warning, {current_target.name} has resistance to {current_skill.damage_type}.>>')
+                    print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
 
         return attack_success

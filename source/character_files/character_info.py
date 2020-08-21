@@ -84,7 +84,7 @@ class Info:
         if character:
             character.level = level
             self.update_info()
-            print(f"    <{character.name} leveled up to {level}>")
+            print(f"    < {character.name} leveled up to {level} >")
 
     def show_acquired_msg(self):
         """Shows acquired message."""

@@ -48,11 +48,11 @@ class Rimuru_Tempest(Character):
 
         for target in targets:
             if target:
-                if self.is_item(target):
+                if target.game_object_type == 'Item':
                     self.add_inventory(target)
-                elif self.is_attribute(target):
+                elif target.game_object_type == 'Attribute':
                     self.add_attribute(target)
-                elif self.is_character(target):
+                elif target.game_object_type == 'Character':
                     # Get's list of c that are on current level.
                     for mob in self.current_level_characters:
                         # Checks if current mob is alive and checks of current target is in current_level_characters lsit.
@@ -85,7 +85,7 @@ class Rimuru_Tempest(Character):
         # Checks if already have mimicry.
 
         self.mimic_object().acquired_mimicries[character.rank].append(character)
-        print(f'    <<Notice, new mimicry available: [{character.name}].>>')
+        print(f"    << Notice, new mimicry available: [{character.name}]. >>")
 
     def use_mimic(self, character):
         """
@@ -101,13 +101,13 @@ class Rimuru_Tempest(Character):
             # Resets mimic state (default Slime).
             self.current_mimic_name = 'Slime'
             self.current_mimic = None
-            print("    <Mimicry Reset>")
+            print("    < Mimicry Reset >")
         else:
             new_mimic = self.get_object(character, mimic=True)
             if new_mimic:
                 self.current_mimic_name = new_mimic.name
                 self.current_mimic = new_mimic
-                print(f'    <Now Mimicking: [{new_mimic.name}].>')
+                print(f'    < Now Mimicking: [{new_mimic.name}]. >')
 
 
 class Veldora_Tempest(Character):

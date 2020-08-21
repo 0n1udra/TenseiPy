@@ -117,7 +117,7 @@ class Attributes:
             attribute = self.get_object(attribute)
             del self.attributes[attribute.skill_level][attribute.name]
         except:
-            print("<Error removing attribute.>")
+            print("< Error removing attribute. >")
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -135,7 +135,7 @@ class Attributes:
         skill_to = self.get_object(skill_to, new=True)
         if skill_to and skill_from:
             self.remove_attribute(skill_from)
-            print(f'    <<{skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]...>>')
+            print(f"    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
             self.add_attribute(skill_to)
 
     def check_resistance(self, attack, target=None):
@@ -151,7 +151,7 @@ class Attributes:
             .check_resistance('resist pain', 'ranga')
         """
 
-        if self.is_str(target):
+        if type(target) == str:
             target = self.get_object(target)
         if not target:
             target = self

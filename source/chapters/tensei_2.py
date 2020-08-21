@@ -10,7 +10,7 @@ def Chapter2(rimuru):
 
         def predate_ore(self):
             rimuru.add_inventory('magic ore')
-            ssprint("<<Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more.>>")
+            ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
             sprint("Ok, might be useful in the future. Guess I should get as much as I can")
 
         def _move_on(self):
@@ -22,11 +22,11 @@ def Chapter2(rimuru):
     class _learn_new_attack:
         def __init__(self):
             sprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
-            ssprint("<<Answer, this is a [Tempest Serpent].>>")
+            ssprint("<< Answer, this is a [Tempest Serpent]. >>")
             sprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             sprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
 
-            ssprint("<Choose ability to learn and use on tempest serpent>")
+            ssprint("< Choose ability to learn and use on tempest serpent. >")
             add_level_mob('tempest serpent')
             action_menu(self)
 
@@ -48,18 +48,18 @@ def Chapter2(rimuru):
         def __init__(self):
             add_level_mob(['giant bat', 'black spider', 'evil centipede'])
             ssprint("Now I have a way to attack.")
-            ssprint("<Target the Tempest Serpent, then attack with your new skill. 'help' for more info.>")
+            ssprint("< Target the Tempest Serpent, then attack with your new skill. 'help' for more info. >")
             action_menu(self)
 
         class _attack:
             def __init__(self):
                 if not get_mob_status('tempest serpent'):
                     sprint("Wow, what a powerful attack. I probably shouldn't use that so carelessly.")
-                    ssprint("<<Notice, would you like to use Unique Skill [Predator]?>>")
+                    ssprint("<< Notice, would you like to use Unique Skill [Predator]? >>")
                     sprint("Oh...? What will that do?")
-                    ssprint("<<Answer, after predation, information and target's skills may be obtained through analysis.>>")
+                    ssprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
                     sprint("Are those bats?")
-                    ssprint("<<Answer, they are commonly known as [Giant Bat].>>")
+                    ssprint("<< Answer, they are commonly known as [Giant Bat]. >>")
 
                 if check_cleared_mobs():
                     action_menu(_at_exit())
@@ -97,7 +97,7 @@ def Chapter2(rimuru):
             sprint("WAIT, Wait. I'm a friendly slime! Slurrrr.....")
             ssprint("*The adventurers attacked and killed the little slime monster before he could say anything else.*")
 
-            if rimuru.check_mob_has('veldora'):
+            if rimuru.check_acquired('veldora'):
                 ssprint("*After the little slime died. All of his stomach contents spewed outwards.*")
                 ssprint("*Unfortunately this particular slime had somehow absorbed a dragon locked in [Infinity Prison].*")
                 ssprint("*The three adventurers where crushed by such a massive object. They Have failed there simple mission*")
@@ -114,14 +114,14 @@ def Chapter2(rimuru):
                 ssprint("Was I that loud... Eh? Where are those wolves going? What's this...")
                 sprint("You strong one.")
                 ssprint("Wait, are those... Goblins? Also, How can I understand them?")
-                ssprint("<<Answer, [Magic Perception] converts sound waves to comprehensible sentences.>>")
-                ssprint("<<Also, sound waves can also be used to communicate your thoughts.>>")
+                ssprint("<< Answer, [Magic Perception] converts sound waves to comprehensible sentences. >>")
+                ssprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
                 ssprint("Is that so, let's try that.")
                 action_menu(_meet_goblins())
 
             #def _try_escapeing(self):
 
-        if rimuru.check_mob_has('sticky thread'):
+        if rimuru.check_acquired('sticky thread'):
             def _use_sticky_thread(self):
                 ssprint("Swinging from tree to tree with [Sticky Thread] seems to be a pretty effective way to travel.")
                 action_menu(_meet_goblins())
@@ -190,7 +190,7 @@ def Chapter2(rimuru):
         def __init__(self):
             sprint("The Dire Wolves, they're here!")
             sprint("Setup defenses")
-            ssprint("<Use the 'Command' command to tell subdoranites what to do.>")
+            ssprint("< Use the 'Command' command to tell subdoranites what to do. >")
 
     #_the_encouter()
     chapter_2()

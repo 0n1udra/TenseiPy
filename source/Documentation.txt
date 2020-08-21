@@ -155,8 +155,7 @@ When I say attribute it means skills and resistances.
 :Functions:
     set_start_state() - Adds starting attributes to character
     get_object() - Returns game corresponding game object, usually used for when inputting with string.
-    check_mob_has() - Checks if character has object (attribute/item).
-    is_character() / is_item() / is_attribute() / is_str() - Checks if inputted is a character, item, attribute or a string.
+    check_acquired() - Checks if character has object (attribute/item).
 
 
 -----character_attributes.py-----
