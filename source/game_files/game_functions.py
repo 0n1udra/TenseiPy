@@ -54,6 +54,7 @@ def action_menu(current_class):
             'inv': rimuru.show_inventory,
             'stats': rimuru.show_attributes,
             'info': rimuru.show_info,
+            'craft': rimuru.craft_item,
             'exit': exit,
             }
     if 'attack' in command:
