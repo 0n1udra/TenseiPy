@@ -88,6 +88,9 @@ def Chapter1(rimuru):
             ssprint("With that said, what are skills?")
             action_menu(self)
 
+        def predate_grass(self):
+            rimuru.add_inventory('Hipokte Grass')
+
         class what_is_predator:
             def __init__(self):
                 ssprint("What is this predator?")
@@ -95,17 +98,17 @@ def Chapter1(rimuru):
                 ssprint("<< Also, after successful analysis a monster, one can use mimicry to replicate appearance and use analyzed target's abilities. >>")
                 action_menu(self)
 
-            def analyze_grass(self):
-                ssprint("As a test, can you analyze that grass I just ate?")
-                ssprint("<< Analysis complete. >>")
-                rimuru.show_info('hipokte grass')
+            class _analyze_grass:
+                def __init__(self):
+                    ssprint("As a test, can you analyze that grass I just ate?")
+                    ssprint("<< Analysis complete. >>")
+                    rimuru.show_info('hipokte grass')
+                    action_menu(self)
 
-            def _create_potions(self):
-                ssprint("")
-                action_menu(_learn_skills)
+                def _craft_full_potion(self):
+                    ssprint("I have a feeling these will come in handy.")
+                    action_menu(_learn_skills)
 
-        def predate_grass(self):
-            rimuru.add_inventory('Hipokte Grass')
 
         class _what_are_skills:
             def __init__(self):
@@ -301,7 +304,6 @@ def Chapter1(rimuru):
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
                 rimuru.add_inventory(veldora)
-                rimuru.show_inventory()
 
                 ssprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
                 action_menu(self)
