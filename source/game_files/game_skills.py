@@ -9,13 +9,14 @@ class Skill:
         self.description = 'N/A'
         self.evolution = 'N/A'
         self.abilities = 'N/A'
+        self.acquired_msg = ''
 
         self.active = False
         self.passive = False
         self.predate = True
         self.sub_skills = {}
 
-        self.game_object_type = 'Attribute'
+        self.game_object_type = 'attribute'
 
     def show_acquired_msg(self):
         print(f"    {self.acquired_msg}\n")
@@ -92,16 +93,16 @@ class Predator_Mimicry_Skill(Skill):
         self.name = 'Mimic'
         self.skill_level = 'Unique Skill'
 
-        self.acquired_mimicries = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
-                                   'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+        self.acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                                   'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
                                    }
 
     @property
     def info(self):
         print("    -----Available Mimicries-----")
-        for level, mob_list in self.acquired_mimicries.items():
-            print(f'    {level} :')
-            for mob in mob_list:
+        for mob_level, mobs in self.acquired_mimicries.items():
+            print(f'    {mob_level}:')
+            for mob_name, mob in mobs.items():
                 print(f'        {mob.name}')
         print("\n    'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
         return ''
@@ -202,7 +203,7 @@ class Magic_Perception(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self):
+    def use_skill(self, user, target):
         print("    < Activated Extra Skill [Magic Perception]. >")
         self.active = True
         return True
@@ -289,15 +290,12 @@ class Sense_Heat_Source(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, character):
-        try:
-            print("    -----Nearby Heat Sources-----")
-            for i in character.current_level_characters:
-                if i.alive:
-                    print(f'    {i.name}')
-            return True
-        except:
-            pass
+    def use_skill(self, user, target):
+        print("    -----Nearby Heat Sources-----")
+        for i in user.current_level_mobs:
+            if i.alive:
+                print(f'    {i.name}')
+        return True
 
 
 class Poisonous_Breath(Skill):

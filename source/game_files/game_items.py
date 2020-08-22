@@ -10,7 +10,8 @@ class Item:
         self.usage = ''
         self.appearance = ''
         self.recipe = {}
-        self.game_object_type = 'Item'
+        self.ingredient_for = []
+        self.game_object_type = 'item'
 
     def get_description(self):
         """
@@ -30,23 +31,23 @@ class Item:
     def update_info(self):
         """Updates item's info."""
 
-        self.info = f'''
+        self.info = f"""
     Name: {self.name}
     
     Usage:
         {self.usage}
+    """
+        if self.ingredient_for:
+            self.info += "    Ingredient for: "
+            for item in self.ingredient_for:
+                self.info += f'[{item}], '
 
-    Appearance:
-        {self.appearance}
-
-    Recipe:
-    '''
         if self.recipe:
-            self.info += f'    Will craft {self.amount_add}x at a time.\n'
+            self.info += f'\n    Recipe:\n        Will craft {self.amount_add} at a time.\n'
             for item, amount in self.recipe.items():
-                self.info += f'   {amount}x {item}\n'
-        else:
-            self.info += '    N/A'
+                self.info += f'        {amount}x {item}\n'
+
+        self.info += f"\n   Appearance:\n        {self.appearance}"
 
     def get_name(self):
         """
@@ -71,6 +72,7 @@ class Hipokte_Grass(Item):
         self.usage = 'Mainly used for making healing potions.'
         self.description = 'Magicule infused grass, found in locations with high Magicule concentration'
         self.appearance = 'Looks like regular grass, but gives off small amounts of magic essence.'
+        self.ingredient_for = ['Full Potion']
         self.update_info()
 
 
@@ -89,6 +91,7 @@ class Magic_Ore(Item):
         '''
         self.appearance = 'A very colorful ore. Almost like a glowing shimmering rainbow effect, while giving off some magic essence.'
         self.update_info()
+
 
 class Full_Potion(Item):
     def __init__(self):
