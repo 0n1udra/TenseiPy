@@ -1,14 +1,20 @@
-import os, pickle, time, sys
-import game_files.game_characters as mobs
+import os
+import pickle
+import sys
+import time
+
 import game_files.game_art as art
+import game_files.game_characters as mobs
 
 debug_mode = False
 rimuru = None
+
 
 def update_character(character):
     global rimuru
     rimuru = character
     return rimuru
+
 
 def action_menu(current_class):
     """
@@ -26,13 +32,13 @@ def action_menu(current_class):
 
     # Gets class functions and subclasses if it doesn't start with __
     class_funcs = [i for i in dir(current_class) if i[1] != '_']
-    funcs = [i.replace('_', ' ') for i in class_funcs]
     # Functions starting with _ replaced with *, then replaces _ with space
     actions = [('*' + i[1:]) if i[0] == '_' else i for i in class_funcs]
     actions = [i.replace('_', ' ') for i in actions]
 
     show_hud(actions)
 
+    # Runs first available action that will progress the storyline.
     if debug_mode:
         for i in actions:
             if i[0] == '*':
@@ -41,29 +47,29 @@ def action_menu(current_class):
         user_input = input("\n> ").lower()
         print()
 
-    # Get info on skills, times, etc
+    # Separates user input into command and command arguments.
     split_user_input = user_input.split(' ')
     command = split_user_input[0]
     parameter = ' '.join(split_user_input[1:])
 
     level_actions = {
-            'target': rimuru.set_targets,
-            'predate': rimuru.predate_targets,
-            'mimic': rimuru.use_mimic,
-            'help': show_help,
-            'inv': rimuru.show_inventory,
-            'stats': rimuru.show_attributes,
-            'info': rimuru.show_info,
-            'craft': rimuru.craft_item,
-            'exit': exit,
-            }
+        'target': rimuru.set_targets,
+        'predate': rimuru.predate_targets,
+        'mimic': rimuru.use_mimic,
+        'help': show_help,
+        'inv': rimuru.show_inventory,
+        'stats': rimuru.show_attributes,
+        'info': rimuru.show_info,
+        'craft': rimuru.craft_item,
+        'use': rimuru.use_skill,
+        'exit': exit,
+    }
     if 'attack' in command:
+        # Runs function if attack was successful, if not it'll just loop.
         if rimuru.attack(parameter):
             user_input = 'attack'
-    if 'use' in command:
-        rimuru.use_skill(parameter, character=rimuru)
 
-
+    # Passes in user inputted arguments as parameters and runs corresponding action.
     for k, v in level_actions.items():
         if k in command:
             v(parameter)
@@ -71,8 +77,11 @@ def action_menu(current_class):
     loop = True
 
     for i in actions:
+        # Removes special characters for comparison.
         current_action = i.replace('*', '_').replace(' ', '_')
+        # Gets full function name to call with.
         run_action = f'current_class.{current_action}()'
+        # Checks if action will progress storyline.
         if i[0] == '*':
             if user_input.lower() == i.lower()[1:]:
                 eval(run_action)
@@ -85,6 +94,7 @@ def action_menu(current_class):
     if loop:
         action_menu(current_class)
 
+
 def show_hud(actions):
     """Shows user HUD with available actions and targets (if any)."""
 
@@ -92,8 +102,8 @@ def show_hud(actions):
     options = ', '.join('(' + i + ')' for i in actions)
     mimicking = rimuru.current_mimic_name
     try:
-        targets, = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in rimuru.focused_targets]),
-    except:
+        targets = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in rimuru.targeted_mobs])
+    except ValueError:
         targets = None
 
     if targets:
@@ -109,7 +119,7 @@ def add_level_mob(characters):
     Adds new mob to current level in game.
 
     Args:
-        level_characters: Mob character(s) to add to current level. Can be single mob (string) or multiple (list).
+        characters: Mob character(s) to add to current level. Can be single mob (string) or multiple (list).
 
     Usage:
         add_level_mob('tempest serpent')
@@ -119,10 +129,11 @@ def add_level_mob(characters):
         for i in characters:
             mob = rimuru.get_object(i, new=True)
             if mob:
-                rimuru.current_level_characters.append(mob)
+                rimuru.current_level_mobs.append(mob)
     else:
         mob = rimuru.get_object(characters, new=True)
-        rimuru.current_level_characters.append(mob)
+        rimuru.current_level_mobs.append(mob)
+
 
 def get_mob_status(target):
     """
@@ -135,23 +146,24 @@ def get_mob_status(target):
         get_mob_status('tempest serpent')
     """
 
-    for i in rimuru.current_level_characters:
+    for i in rimuru.current_level_mobs:
         if target.lower() in i.get_name():
             if i.alive:
                 return True
+
 
 def check_cleared_mobs():
     """
     Returns whether all mobs on at current stage are cleared.
 
     Returns:
-        Boolean: If all mobs in current_level_characters are dead.
+        Boolean: If all mobs in current_level_mobs are dead.
 
     Usage:
         if check_cleared_mobs():
     """
 
-    for mob in rimuru.current_level_characters:
+    for mob in rimuru.current_level_mobs:
         if mob.alive:
             return False
     else:
@@ -177,6 +189,7 @@ def save_game(rimuru_object):
     pickle.dump(rimuru_object, open(rimuru_object.save_path, 'wb'))
     print("Game saved to player_save.p\n")
 
+
 def load_save_game(path):
     """
     Load game save.
@@ -188,12 +201,17 @@ def load_save_game(path):
         Loaded game save object.
     """
 
+    # Tries loading game. If can't, creates new Rimuru_Tempest object.
+    # Rimuru_Tempest object stores all game data like progress, inventory, stats, etc.
+
     try:
         rimuru = pickle.load(open(path, 'rb'))
         print("Loaded Player Save\n")
     except:
         rimuru = mobs.Rimuru_Tempest()
+
     return rimuru
+
 
 def delete_game_save(rimuru_object):
     """
@@ -207,6 +225,7 @@ def delete_game_save(rimuru_object):
     print("Good luck next time!\n")
     exit()
 
+
 def continue_story(rimuru_object, next_chapter):
     """
     Continues story progress from last save point.
@@ -216,7 +235,7 @@ def continue_story(rimuru_object, next_chapter):
         next_chapter: Next chapter to play.
     """
 
-    print("Continue to next chapter?")
+    print("\nContinue to next chapter?")
     user_input = input("Y/N > ")
     rimuru_object.story_progress.append(next_chapter)
     save_game(rimuru_object)
@@ -243,10 +262,12 @@ def show_start_banner(rimuru):
     rimuru.show_inventory()
     print()
 
+
 def ssprint(message):
     """Print tabbed in message."""
     print('    ', end='')
     sprint(message)
+
 
 def sprint(message):
     """
@@ -281,6 +302,7 @@ def sprint(message):
     else:
         print(message)
 
+
 def show_help(*args):
     """Shows help page."""
 
@@ -288,8 +310,8 @@ def show_help(*args):
     Command Required_Parameter [Optional_Parameter]
 
     Commands:
-        target TARGET               -- Target mobs. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
-        attack with SKILL	        -- Attack targeted. E.g. 'attack with water blade', 'attack water bullet'
+        target TARGET(S)            -- Target mobs, target multiple by separating with comma ','. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
+        attack with SKILL	        -- Attack targeted_mobs. E.g. 'attack with water blade', 'attack water bullet'
         use SKILL                   -- Use a skill. E.g. 'use sense heat source'
         stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
         inv                         -- Show inventory.
@@ -301,7 +323,7 @@ def show_help(*args):
         mimic TARGET                -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
           - info mimic              -- Shows available mimicries.
           - mimic reset             -- Resets mimic (Back to slime).
-        predate                     -- Predate target(s). Can only predate mobs that are targeted and dead.
+        predate                     -- Predate target(s). Can only predate mobs that are targeted_mobs and dead.
         craft ITEM                  -- Craft items if have necessary ingredients. E.g. 'craft full potion'
                                          NOTE: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
 
@@ -313,7 +335,7 @@ def show_help(*args):
         <<< Message >>>             -- Voice of the World.
 
     HUD:
-        Target: Currently_Focused_Targets
+        Target: Currently_targeted_mobs
         Actions: (Actions) | Mimic, (Extra_Actions)
     Example HUD:
         Target: Giant Bat, Black Spider
