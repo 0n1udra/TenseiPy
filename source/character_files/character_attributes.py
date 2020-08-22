@@ -23,14 +23,17 @@ class Attributes:
             output: Yields friendly string for in game printing.
 
         Usage:
-            .attributes_generator('ranga', True)
+            .attributes_generator('ranga', output=True)
         """
+
+        if character is None:
+            character = self
 
         for skill_type, skills in character.attributes.items():
             if output and skills:
                 # Prints out skill category (Ultimate, Unique, etc)
+                # So far it's easier to put the code for printing user stat info here.
                 yield f'[{skill_type}]'
-
             for skill_name, skill_object in skills.items():
                 # Prints if skill is active or passive
                 if output:
@@ -58,26 +61,30 @@ class Attributes:
             > stats tempest serpent
         """
 
-        # If no character was specified, else show player stats (rimuru)
-        try:
-            character = self.get_object(character, mimic=True)
-        except:
-            pass
+        # Checks whether or not you have analyzed the target before (using mimicry functions), if not it'll return None.
+
+
+        character = self.get_object(character, mimic=True)
+
+        # If no character was specified show player stats (rimuru)
         if character is None:
             character = self
 
+        # Only allow Character objects.
+        if character.game_object_type != 'character':
+            return
 
         print("-----Attributes/Skills-----")
-        print(f"[{character.name} {character.family_name}]\n")
+        # Prints character's name. Without the if statement if the character doesn't have a family_name it'll show an extra space in the [] at the end, doesn't look so pretty.
+        print(f"Name: [{character.name}{' '+character.family_name if character.family_name else ''}]\n")
 
         for i in self.attributes_generator(character, output=True):
             print(i)
 
-        # Only shows mimicry info when not looking at stats of other monsters and is currently using mimicry
+        # Only shows mimicry info when not looking at stats of other monsters and if currently using mimicry
         if self.current_mimic:
-            print("\n-----Mimicry-----")
-            print(f"Mimicking: [{character.current_mimic.name}]\n")
-            for j in self.attributes_generator(character.current_mimic, True):
+            print(f"\nMimicking: [{self.current_mimic.name}]")
+            for j in self.attributes_generator(self.current_mimic, output=True):
                 print(f'{j}')
         print()
 
@@ -113,11 +120,9 @@ class Attributes:
             .remove_attribute('resist poison')
         """
 
-        try:
-            attribute = self.get_object(attribute)
+        attribute = self.get_object(attribute)
+        if attribute:
             del self.attributes[attribute.skill_level][attribute.name]
-        except:
-            print("< Error removing attribute. >")
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -162,23 +167,25 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-    def use_skill(self, skill, character=None):
+    def use_skill(self, skill, user=None, target=None):
         """
         Use skill.
 
         Args:
             skill: Skill to use.
-            character: Character to use skill.
 
         Usage:
             > use sense heat source
         """
-        try:
-            self.current_mimic.get_object(skill).use_skill(character)
-        except:
-            try:
-                self.get_object(skill).use_skill(character)
-            except:
-                pass
+
+        # Set default user of skill and target of skill.
+        if user is None:
+            user = self
+        if target is None:
+            target = self
+
+        skill = self.get_object(skill)
+        if skill:
+            skill.use_skill(user=user, target=target)
 
 
