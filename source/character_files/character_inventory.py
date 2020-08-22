@@ -125,8 +125,8 @@ class Inventory:
         item = self.get_object(item, new=True)
 
         try:
-            craft_amount = int(input("Amount > "))
-        except:
+            craft_amount = int(input(f"Amount ({item.amount_add}x) > "))
+        except ValueError:
             print("    < Error, need integer input. >")
 
         for ingredient_name, ingredient_amount in item.recipe.items():
@@ -138,12 +138,3 @@ class Inventory:
             self.remove_inventory(ingredient_name, ingredient_amount)
 
         self.add_inventory(item, craft_amount)
-
-
-
-
-
-
-
-
-
