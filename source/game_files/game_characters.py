@@ -20,60 +20,31 @@ class Rimuru_Tempest(Character):
         Yields available mimic mob objects.
 
         Returns:
-            Yields character objects that are in acquired_mimicries dictionary.
+            mimic: Yields character objects that are in acquired_mimicries dictionary.
         """
 
-        for level, mimicries_list in self.mimic_object().acquired_mimicries.items():
-            for mimic in mimicries_list:
+        if not self.mimic_object():
+            return None
+
+        for level, mimics in self.mimic_object().acquired_mimicries.items():
+            for mimic_name, mimic in mimics.items():
                 yield mimic
 
-    def predate_targets(self, input_targets=None):
-        """
-        Predates targets that are being focused. Also adds target mimicry.
-
-        Args:
-            input_targets: Target to predate.
-
-        Usage:
-            > predate
-        """
-
-        targets = list(self.focused_targets)
-
-        try:
-            for i in input_targets.split(','):
-                targets.append(self.get_object(i))
-        except:
-            pass
-
-        for target in targets:
-            if target:
-                if target.game_object_type == 'Item':
-                    self.add_inventory(target)
-                elif target.game_object_type == 'Attribute':
-                    self.add_attribute(target)
-                elif target.game_object_type == 'Character':
-                    # Get's list of c that are on current level.
-                    for mob in self.current_level_characters:
-                        # Checks if current mob is alive and checks of current target is in current_level_characters lsit.
-                        if not mob.alive and mob.get_name() in target.get_name():
-                            self.add_mimic(target)
-                        else:
-                            pass
-
-        self.focused_targets = set()
 
     def mimic_object(self, active=None):
         """
         Args:
-            active:
+            active: Sets whether mimic is being used or not.
 
         Returns:
+            mimic: Mimic object from .attributes.
 
         """
-        mimic = self.attributes['Unique Skill']['Mimic']
-        mimic.active = active
-        return mimic
+
+        if 'Mimic' in self.attributes['Unique Skill']:
+            mimic = self.attributes['Unique Skill']['Mimic']
+            mimic.active = active
+            return mimic
 
     def add_mimic(self, character):
         """
@@ -82,10 +53,15 @@ class Rimuru_Tempest(Character):
         Args:
             character: Character object to add to acquired_mimicries list
         """
-        # Checks if already have mimicry.
 
-        self.mimic_object().acquired_mimicries[character.rank].append(character)
-        print(f"    << Notice, new mimicry available: [{character.name}]. >>")
+        if self.mimic_object():
+            # Makes sure that you haven't already acquired mimicry.
+            if character.name not in self.mimic_object().acquired_mimicries[character.rank]:
+                self.mimic_object().acquired_mimicries[character.rank][character.name] = character
+                for attribute in character.attributes_generator():
+                    self.add_attribute(attribute)
+                print(f"    << Information, analysis on [{character.name}] completed. >>")
+                print(f"    << Notice, new skills and mimicry available: [{character.name}]. >>\n")
 
     def use_mimic(self, character):
         """
@@ -101,13 +77,51 @@ class Rimuru_Tempest(Character):
             # Resets mimic state (default Slime).
             self.current_mimic_name = 'Slime'
             self.current_mimic = None
-            print("    < Mimicry Reset >")
+            self.mimic_object(active=False)
+            print("    < Mimicry reset. >")
         else:
             new_mimic = self.get_object(character, mimic=True)
             if new_mimic:
                 self.current_mimic_name = new_mimic.name
                 self.current_mimic = new_mimic
+                self.mimic_object(active=True)
                 print(f'    < Now Mimicking: [{new_mimic.name}]. >')
+
+    def predate_targets(self, input_targets=None):
+        """
+        Predates targets that are being focused. Also adds target mimicry.
+
+        Args:
+            input_targets: Target to predate.
+
+        Usage:
+            > predate
+        """
+
+        targets = list(self.targeted_mobs)
+
+        try:
+            for i in input_targets.split(','):
+                targets.append(self.get_object(i))
+        except ValueError:
+            pass
+
+        for target in targets:
+            if not target:
+                continue
+
+            if target.game_object_type == 'item':
+                self.add_inventory(target)
+            elif target.game_object_type == 'attribute':
+                self.add_attribute(target)
+            elif target.game_object_type == 'character':
+                # Get's list of c that are on current level.
+                for mob in self.current_level_mobs:
+                    # Checks if current mob is alive and checks of current target is in current_level_mobs lsit.
+                    if not mob.alive and mob.get_name() in target.get_name():
+                        self.add_mimic(target)
+
+        self.targeted_mobs = set()
 
 
 class Veldora_Tempest(Character):
