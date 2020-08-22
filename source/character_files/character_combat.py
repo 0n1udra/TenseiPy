@@ -1,31 +1,31 @@
 class Combat:
 
     def __init__(self):
-        self.current_level_characters = []
-        self.focused_targets = set()
+        self.current_level_mobs = []
+        self.targeted_mobs = set()
 
     def set_targets(self, targets):
         """
-        Adds c to focused_targets list from user input.
+        Adds c to targeted_mobs list from user input.
 
-        Separates user inputted targets via ',' then checks to see if mob is in current_level_characters list.
+        Separates user inputted targets via ',' then checks to see if mob is in current_level_mobs list.
         If so, adds to setTargets list.
 
         Args:
-            targets; String of target(s) to add to focused_targets (list)
+            targets: String of target(s) to add to targeted_mobs (list)
 
         Usage:
             > target tempest serpent, giant bat
         """
 
         if 'reset' in targets:
-            self.focused_targets.clear()
+            self.targeted_mobs.clear()
         else:
             for target in targets.split(','):
-                for i in self.current_level_characters:
+                for i in self.current_level_mobs:
+                    # Checks if target is targetable by checking if in current_level_mobs list.
                     if i.get_name() in target:
-                        self.focused_targets.add(i)
-                        break
+                        self.targeted_mobs.add(i)
 
     def attack(self, user_input):
         """
@@ -48,19 +48,21 @@ class Combat:
             > attack water blade
         """
 
-
         attacks = []
+
+        # Tries to split up the inputted attacks.
         try:
             attacks.append(attacks.split(','))
-        except:
+        except AttributeError:
             attacks.append(user_input)
-        targets = self.focused_targets
+
+        targets = self.targeted_mobs
         skills = []
 
-        # If mob is in current_level_characters list and is alive, adds to focusTarget list.
+        # If mob is in current_level_mobs list and is alive, adds to focusTarget list.
         for j in attacks:
             j = self.get_object(j)
-            if j != None:
+            if j is not None:
                 skills.append(j)
 
         attack_success = False
