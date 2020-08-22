@@ -1,4 +1,6 @@
+# Import most used functions like ssprint, action_mentu, etc
 from game_files.game_functions import *
+# Import the next chapter to continue to
 from chapters.tensei_2 import Chapter2
 
 
@@ -26,8 +28,11 @@ def Chapter1(rimuru):
             ssprint("What happened to me...?")
             ssprint("I remembered that I got stabbed while protecting _____....")
             ssprint("Was I saved?")
+            # Show user HUD and playable actions.
             action_menu(self)
 
+        # Actions starting with '_' will progress the storyline.
+        # The ones without it can still have one ore more sub actions, they will just loop back around.
         class _move:
             def __init__(self):
                 ssprint("Where are my arms, I can't feel them!")
@@ -45,7 +50,6 @@ def Chapter1(rimuru):
                 def __init__(self):
                     ssprint("Wait what kind of joke is this! Who would want this?")
                     ssprint("But... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
-                    #Satoru Mikami 
                     ssprint("*Although _______ didn't want to admit it.*")
                     ssprint("*You have died as a Human and reincarnated into a slime!*")
                     sprint(art.slime)
@@ -109,7 +113,6 @@ def Chapter1(rimuru):
                     ssprint("I have a feeling these will come in handy.")
                     ssprint("< Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
                     action_menu(_learn_skills)
-
 
         class _what_are_skills:
             def __init__(self):
@@ -184,7 +187,6 @@ def Chapter1(rimuru):
             ssprint("Oh!")
             action_menu(_respond())
 
-
     class _respond:
         def __init__(self):
             sprint("I never expected to speak with anyone other than my skill")
@@ -242,7 +244,6 @@ def Chapter1(rimuru):
             ssprint("~Really, so soon. But we just started!~")
             ssprint("~Stay, please, we have so to talk about.~")
             action_menu(_leave_cave())
-
 
         def _friend_dragon(self):
             sprint("Okay... sooo, you want to be friends?")
