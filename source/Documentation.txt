@@ -127,7 +127,7 @@ When I say attribute it means skills and resistances.
 :Functions:
     action_menu() - Takes care of user input and runs corresponding functions.
     show_hud() - Shows user's available actions, current mimicry, and other basic commands like stats and inv.
-    get_mob_status() - Returns True if mob is in current_level_characters list.
+    get_mob_status() - Returns True if mob is in current_level_mobs list.
     add_level_mob() - Adds new character object to current game level.
     tbc() - Prints out To be continued.
     load_save_game() - Load user save.
@@ -172,8 +172,8 @@ When I say attribute it means skills and resistances.
 
 -----character_combat.py-----
 :Variables:
-    current_level_characters [] - Characters that are on the current level of game.
-    focused_targets () - Currently targeted characters, used for attack and predate.
+    current_level_mobs [] - Characters that are on the current level of game.
+    targeted_mobs () - Currently targeted_mobs characters, used for attack and predate.
 
 :Functions:
     set_targets() - Set targets to be focused.

@@ -13,8 +13,9 @@ if __name__ == '__main__':
     game_funcs.show_start_banner(rimuru)
 
     print("\nEnable text crawl? (Recommended for easier reading)")
-    setSleep = str(input("no/yes or Enter > "))
-    if setSleep.lower() in ['n', 'no']:
+    #set_text_crawl = str(input("no/yes or Enter > "))
+    set_text_crawl = 'n'
+    if set_text_crawl.lower() in ['n', 'no']:
         print("Text Delay: DISABLED")
         rimuru.text_delay = False
     else:
