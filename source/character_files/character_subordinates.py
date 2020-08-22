@@ -1,7 +1,7 @@
 class Subordinates:
     def __init__(self):
-        self.subordinates = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
-                             'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+        self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                             'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
                              }
 
     def subordinates_generator(self, character=None):

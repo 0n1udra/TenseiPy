@@ -18,8 +18,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
 
         self.starting_state = []
         self.game_object_type = 'character'
-        self.friends = {'Special S': [], 'S': [], 'Special A': [], 'A+': [], 'A': [],
-                        'A-': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'Other': [],
+        self.friends = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                        'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
                         }
 
         # Game variables.
@@ -34,63 +34,65 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, item, character=None, mimic=False, new=False, clm=False):
+    def get_object(self, item, character=None, mimic=False, new=False, get_level_mobs=False):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
         Args:
             item: Either string or object instance of the object you want. If object, will get objects .name attribute.
+            character: Character to get object from.
             mimic: If currently using Mimic ability, will also include mimicked mob attributes.
             new: If first time adding a new object to character.
+            get_level_mobs: Gets character objects from current_level_mobs list
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
+            False: If inputted item cannot be used to find object.
 
         Usage:
             .get_object('great sage')
             .get_object('hipokte grass')
         """
 
+        # This function does a lot of heavy lifting for the game, since it looks, finds, and grabs game objects.
+
+        # Set's character to player character (Rimuru) if none specified
         if not character:
             character = self
 
         # If input is an objects, gets objects name (str).
-        if not type(item) == str:
+        if item and not type(item) == str:
             item = item.name
+
+        if item is None:
+            return None
 
         generators = [*self.inventory_generator(character), *self.attributes_generator(character)]
 
-        try:
-            generators.extend([*self.mimic_generator(character)])
-        except:
-            pass
-
-        # If object not in inventory. Will need to use __subclasses__ method to find, initialize and add to inventory.
+        # If object not in inventory, Will need to use __subclasses__ method to find and create new instance of object.
         if new:
             generators = [
                 *game_items.Item.__subclasses__(),
                 *game_skills.Skill.__subclasses__(),
                 *game_characters.Character.__subclasses__(),
             ]
-        if clm:
-            generators.extend(self.current_level_characters)
 
-        # If currently using Mimic ability.
+        # Get mob character objects from current_level_mobs list.
+        if get_level_mobs:
+            generators.extend(self.current_level_mobs)
+
+        # Adds objects from all acquired mimicries.
         if mimic:
             generators.extend([*self.mimic_generator()])
-            # Adds mimicked monster abilities if currently using mimic.
 
-        try:
-            if self.current_mimic:
-                generators.extend([*self.mimic_generator()])
-        except:
-            pass
-
+        # Iterates through the generators and looks for a match.
         for i in generators:
+            # Creates new instance to check for match, idk if there's a better way...
             if new:
                 i = i()
             if i.get_name() in item.lower():
                 return i
+            # Deletes newly created instances if it wasn't a match.
             else:
                 del i
 
@@ -114,6 +116,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
             >>True
         """
 
+        # If no specified character, default is player.
         if not character:
             character = self
         else:
@@ -122,14 +125,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         if character:
             item = character.get_object(check_object)
             if item:
+                # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
                 if item.game_object_type == 'Item' and item.amount < amount:
                     return False
                 return True
-
-        try:
-            for i in self.mimic_generator():
-                if i.get_object(check_object):
-                    return True
-        except:
-            pass
 
