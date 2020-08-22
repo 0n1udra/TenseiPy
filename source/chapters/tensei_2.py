@@ -5,33 +5,33 @@ from chapters.tensei_3 import Chapter3
 def Chapter2(rimuru):
     class chapter_2:
         def __init__(self):
-            sprint("Oh, what's this? Looks like some kind of rock?")
+            ssprint("Oh, what's this? Looks like some kind of rock?")
             action_menu(self)
 
         def predate_ore(self):
             rimuru.add_inventory('magic ore')
             ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
-            sprint("Ok, might be useful in the future. Guess I should get as much as I can")
+            ssprint("Ok, might be useful in the future. Guess I should get as much as I can")
 
         def _move_on(self):
-            sprint("I'll just leave it, and continue finding my way out.")
-            sprint("Now with magic perception I can finally find my way out of this cave.")
-            sprint("*But before finding the exit, some small monsters started taking a interest in the little slime.*")
+            ssprint("I'll just leave it, and continue finding my way out.")
+            ssprint("Now with magic perception I can finally find my way out of this cave.")
+            ssprint("*But before finding the exit, some small monsters started taking a interest in the little slime.*")
             action_menu(_learn_new_attack())
 
     class _learn_new_attack:
         def __init__(self):
-            sprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
+            ssprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
             ssprint("<< Answer, this is a [Tempest Serpent]. >>")
-            sprint("Still, it's not as scary as Veldora. I should be able to handle it.")
-            sprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
+            ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
+            ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
 
-            ssprint("< Choose ability to learn and use on tempest serpent. >")
+            ssprint("< Choose ability to learn and use on the [Tempest Serpent]. >")
             add_level_mob('tempest serpent')
             action_menu(self)
 
         def _try_escaping(self):
-            sprint("Alright, lets try out this new skill.")
+            ssprint("Alright, lets try out this new skill.")
             action_menu(_after_serpent())
 
         def _learn_water_bullet(self):
@@ -48,7 +48,7 @@ def Chapter2(rimuru):
         def __init__(self):
             add_level_mob(['giant bat', 'black spider', 'evil centipede'])
             ssprint("Now I have a way to attack.")
-            ssprint("< Target the Tempest Serpent, then attack with your new skill. 'help' for more info. >")
+            ssprint("< Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
             action_menu(self)
 
         class _attack:
@@ -60,13 +60,18 @@ def Chapter2(rimuru):
                     ssprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
                     sprint("Are those bats?")
                     ssprint("<< Answer, they are commonly known as [Giant Bat]. >>")
+                    ssprint("And it seems like there's some other small monsters dwelling in here aswell.")
+                    ssprint("I should clear them out before they notice me.")
+                    ssprint("< After using 'predate', Try finding the other monsters and use 'target' and 'attack' on them. >")
+                    ssprint(" < Hint, Try [Sense Heat Source] to detect foes using the 'use' command. 'help' for more info. >")
 
                 if check_cleared_mobs():
                     action_menu(_at_exit())
                 else:
                     action_menu(_attack_serpent)
 
-        def predate_ore(self): pass
+        def predate_ore(self):
+            pass
 
         def _sneak_away(self):
             ssprint("I'll try to sneak away.")
@@ -74,10 +79,10 @@ def Chapter2(rimuru):
 
     class _at_exit:
         def __init__(self):
-            sprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
-            sprint("Water attack? No, that'll probably be overkill. Wait somethings happening.")
-            sprint("*The giant pair of doors slowly creeks open, and three adventurers shows themselves.*")
-            sprint("What should I do... I can wait and try to sneak past them if they're going in")
+            ssprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
+            ssprint("Water attack? No, that'll probably be overkill. Wait somethings happening.")
+            ssprint("*The giant pair of doors slowly creeks open, and three adventurers shows themselves.*")
+            ssprint("What should I do... I can wait and try to sneak past them if they're going in")
             sprint("Adventurer 1: Phew, it's finally open, even the keyhole was rusted.")
             sprint(
                 "Adventurer 2: It is over 300 years old, and nobody is maintaining it. I doubt there's a real dragon in here.")
@@ -88,24 +93,26 @@ def Chapter2(rimuru):
 
         def _sneak_out(self):
             ssprint("I'll try sneaking out after they go in.")
-            sprint("Finally! I'm out of that cave. Where now to though?")
+            ssprint("Finally! I'm out of that cave. Where now to though?")
             action_menu(_the_encouter())
 
         def _say_hi(self):
             sprint("HELLO THERE!")
-            sprint("Adventurers: AHHHHH MONSTER. KILL IT. KILL IT. KILL IT!!!!")
+            sprint("Adventurers: AHHHHH MONSTER.")
+            sprint("KILL IT. KILL IT.")
+            sprint("KILL IT!!!!")
             sprint("WAIT, Wait. I'm a friendly slime! Slurrrr.....")
             ssprint("*The adventurers attacked and killed the little slime monster before he could say anything else.*")
 
             if rimuru.check_acquired('veldora'):
-                ssprint("*After the little slime died. All of his stomach contents spewed outwards.*")
-                ssprint("*Unfortunately this particular slime had somehow absorbed a dragon locked in [Infinity Prison].*")
-                ssprint("*The three adventurers where crushed by such a massive object. They Have failed there simple mission*")
+                ssprint("* After the little slime died. All of his stomach contents spewed outwards. *")
+                ssprint("* Unfortunately this particular slime had somehow absorbed a whole dragon! *")
+                ssprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
             delete_game_save(rimuru)
 
     class _the_encouter:
         def __init__(self):
-            sprint("Where am I going?")
+            ssprint("Where am I going?")
             action_menu(self)
 
         class _explore:
@@ -119,7 +126,7 @@ def Chapter2(rimuru):
                 ssprint("Is that so, let's try that.")
                 action_menu(_meet_goblins())
 
-            #def _try_escapeing(self):
+            # def _try_escapeing(self):
 
         if rimuru.check_acquired('sticky thread'):
             def _use_sticky_thread(self):
@@ -142,7 +149,7 @@ def Chapter2(rimuru):
             ssprint("Great Sage can you set change my viewpoint, I want to see this 'demonic aura'.")
             ssprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
             ssprint("The goblins and I chatted some more then they invited me to there village.")
-            action_menu(_goblin_village)
+            action_menu(_goblin_village())
 
         def _ruthless(self):
             sprint("Alright you weaklings. Listen here, all of you little shits can choose to follow my commands or death.")
@@ -151,10 +158,11 @@ def Chapter2(rimuru):
             sprint("Now you guys got a base or village of some sort?")
             sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
             sprint("Alright, then lets get moving.")
-            action_menu(_goblin_village)
+            action_menu(_goblin_village())
 
     class _goblin_village:
         global _help_goblins
+
         def __init__(self):
             ssprint("Wow, this place looks like a dump... ")
             sprint("I am the village elder. I'm sorry we don't have much to serve you.")
@@ -185,12 +193,10 @@ def Chapter2(rimuru):
             sprint("Have we offended you in some way. Please we are desperate here!")
             sprint("No, there's nothing that you can offer here that interests me.")
 
-
     class _wolf_attack:
         def __init__(self):
             sprint("The Dire Wolves, they're here!")
             sprint("Setup defenses")
             ssprint("< Use the 'Command' command to tell subdoranites what to do. >")
 
-    #_the_encouter()
     chapter_2()
