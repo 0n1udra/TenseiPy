@@ -34,16 +34,9 @@ class Info:
         """
 
         # Checks to see if any acquired mimics has inputted ability to get info on.
-        for i in self.mimic_generator():
-            try:
-                print(i.get_object(game_object).info)
-            except:
-                pass
-        try:
-            print(self.get_object(game_object, mimic=True).info)
-        except:
-            pass
-
+        game_object = self.get_object(game_object, mimic=True)
+        if game_object:
+            print(game_object.info)
 
     def update_info(self):
         """Updates character information."""
@@ -67,26 +60,29 @@ class Info:
             {self.appearance}
             """
 
-    def update_ranking(self, level, character=None):
+    def update_ranking(self, level):
         """
         Updates character ranking.
 
         Args:
-            character: Character to level up.
             level: New level for character.
 
         Usage:
-            .update_ranking('A+')
-            .update_ranking('A+', 'ranga')
+            character_object.update_ranking('A+')
         """
 
-        character = self
-        if character:
-            character.level = level
-            self.update_info()
-            print(f"    < {character.name} leveled up to {level} >")
+        self.level = level
+        self.update_info()
+        print(f"    < {self.name} leveled up to {level} >")
 
     def show_acquired_msg(self):
         """Shows acquired message."""
 
         print(f'    {self.acquired_msg}')
+
+    def check_if_player(self):
+        """Checks if you're interacting with the player object (Rimuru)."""
+
+        if self.__class__.__name__ == 'Rimuru_Tempest':
+            return True
+
