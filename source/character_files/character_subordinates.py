@@ -1,3 +1,4 @@
+
 class Subordinates:
     def __init__(self):
         self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
@@ -19,23 +20,23 @@ class Subordinates:
             for subordinate in sub_list:
                 yield subordinate
 
-    def add_subordinate(self, name, character):
+    def add_subordinate(self, new_subordinate, new_name):
         """
         Naming subordinates and give blessing.
 
         Args:
-            name: Set name to new subordinates.
-            character: Character name or object to be named.
+            new_subordinate: Character name or object to be named.
+            new_name: Set name to new subordinates.
 
         Usage:
             .add_subordinates('Tempest Wolf', 'Ranga')
         """
 
-        char = self.get_object(character, sub=True)
-        char.name = name
-        char.blessing = self.shared_blessing
-        if char.species in self.subs:
-            self.subs[char.species].append(char)
-        else:
-            self.subs[char.species] = list([char])
+        new_subordinate = self.get_object(new_subordinate, sub=True)
+        new_subordinate.name = new_name
 
+        new_subordinate.blessing = self.shared_blessing
+        if new_subordinate.species in self.subordinates:
+            self.subordinates[new_subordinate.species].append(new_subordinate)
+        else:
+            self.subordinates[new_subordinate.species] = list([new_subordinate])
