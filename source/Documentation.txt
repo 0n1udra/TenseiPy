@@ -2,32 +2,34 @@ How to construct storyline.
 
 # Import most used functions like ssprint, action_menu, etc
 from game_files.game_functions import *
+# Import relevant map locations.
+game_maps.sealed_cave import Sealed_Cave, Outside_Sealed_Cave
 # Import the next chapter to continue to.
 from chapters.tensei_2 import Chapter2
 
-
 # Pass in Rimuru_Tempest object which has player stats, inv and other data.
 def ChapterXX(Rimuru):
-    class Chapter_1:
+    # Pass in location map object for functions concerning a location.
+    class Chapter_1(Sealed_Cave):
         def __init__(self):
-            TEXT/COMMANDS
-            actionMenu(self)
+            # Dialogue and Commands.
+            sprint("What a dark cave, what to do...what to do.")
 
-        # If you want more sub actions use classes, else use can use functions or classes.
+            # Prompt user for input and shows HUD containing relavent actions and info.
+            action_menu(self)
+
+        # If you want more sub paths (actions) use classes, else can use functions or classes for actions with no further actions.
          # Action with '_' at the start will progress the storyline.
-        class _(self):
+        class _exit_cave(Outside_Sealed_Cave):
             def __init__(self):
+                # Regular message used for talking to other characters, even when using telepathy.
+                sprint("HELLO WORLD!")
                 # Indented message, usually for inner dialogue and game functions.
                 ssprint("Moving on..")
 
-        def  ACTION(self):
-            pass
+            class _explore(Outside_Sealed_Cave):
+                pass
 
-    class _ACTION:
-        def __init__(self):
-
-    class ACTION:
-        def __init__(self):
 
 > Start with ChapterXX function with Chapter_XX class to start with.
 > Evoke action_menu to prompt user with available actions and how HUD.
@@ -46,93 +48,6 @@ Name True/False - boolean
 Name() - Function
 Name: - Class
 
------Story Layout-----
-Chapter1()
-    chapter_1:
-        :ASCII: Great Sage
-        :Set: player's start state, acquire starting abilities and resistances.
-        :Skill Acquired: Predator
-        :Skill Acquired: Sage
-        :Skill Upgrade: Sage > Great Sage
-        :Show: Attributes & Inventory
-        > _learn_new_attack
-
-    _move:
-        _inspect:
-            explore()
-            puyo()
-            _predate_grass() > _learn_skills
-
-    _learn_skills:
-        what_is_predator()
-            analyze_grass()
-            _create_potions() > _learn_skills
-        predate_grass()
-        _what_are_skills:
-            stay_in_water:
-                stay_in_water()
-                _expel_water() > _find_veldora
-    _find_veldora:
-        _leave:
-            _help_me_see() > _respond
-            _leave() > _leave_cave
-        _hello() > _respond:
-        _shutit_baldy() > _respond:
-
-    _respond:
-        Skill Acquired: Magic Perception
-        _use_magic_perception:
-            _sure() > _become_friends
-                :ASCII: cave_veldora
-            _run() > _become_friends
-
-    _become_friends:
-        _leave() > _leave_cave
-        _friend_dragon() > _help_with_seal
-
-    _help_with_seal:
-        Set new family name
-        Set player's name
-        _predate_veldora:
-            :Item Add: Veldora
-            :Show: Inventory
-            _start_analysis() > _leave_cave
-        _move_on() > _leave_cave
-
-    _leave_cave() > Chapter2
-
-Chapter2()
-    chapter_2:
-        predate_ore()
-        _move_on() > _learn_new_attack
-
-    _learn_new_attack:
-        :Mob Add: Tempest Serpent
-        _try_escaping() > _after_serpent
-        _learn_water_bullet() > _attack_serpent
-        _learn_water_blade() > _attack_serpent
-
-    _attack_serpent:
-        predate_ore()
-        _attack()
-
-    _after_serpent:
-        predate_ore()
-        _sneak_away() > _at_exit()
-
-    _attack: > _at_exit()/_after_serpent
-
-    _at_exit:
-        _sneak_out() > Chapter3
-        _say_hi() > :Death:
-
-
-
-
-
-
-
-
 When I say attribute it means skills and/or resistances.
 In function docstring's Usage section, '>' means example of user input in game.
 
@@ -149,7 +64,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     delete_game_save() - Deletes save.
     continue_story() - At end of chapter, asks if want to continue.
     show_start_banner() - Shows name and basic help at start of game.
-    sprint() - Delays text, for easier reading if player chooses.
+    sprint() - Delays text, for easier reading if player chooses. Using sys.stdout.write() and sys.stdout.flush().
     ssprint() - Indents printout using sprint(). Used for player thoughts, Great Sage or other game messages.
     show_help() - Shows help page.
 
