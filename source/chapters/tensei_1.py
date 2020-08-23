@@ -1,16 +1,14 @@
-# Import location classes that are relevant.
-from game_maps.sealed_cave import Sealed_Cave_Start, Sealed_Cave
-
+# Import all game_functions' funcs for easy access.
 from game_files.game_functions import *
 # Import the next chapter to continue to.
 from chapters.tensei_2 import Chapter2
 
 
 def Chapter1(rimuru):
-    class chapter_1(Sealed_Cave_Start):
+    class chapter_1():
         def __init__(self):
             ssprint(".....")
-            sprint(art.great_sage)
+            print(art.great_sage)
             rimuru.set_start_state()
             ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>")
             ssprint("<< Confirmation Complete. Acquiring Skill [Predator]... >>")
@@ -54,7 +52,7 @@ def Chapter1(rimuru):
                     ssprint("But... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
                     ssprint("*Although _______ didn't want to admit it.*")
                     ssprint("*You have died as a Human and reincarnated into a slime!*")
-                    sprint(art.slime)
+                    print(art.slime)
                     ssprint("Puyo, Puyoyoyo....")
                     ssprint("It's been a long time since I've accepted myself a slime.")
                     ssprint("I've gotten used to this elastic body.")
@@ -78,7 +76,7 @@ def Chapter1(rimuru):
                     rimuru.add_inventory('Hipokte Grass')
                     action_menu(_learn_skills())
 
-    class _learn_skills(Sealed_Cave):
+    class _learn_skills():
         def __init__(self):
             ssprint("I've eaten, or I guess absorbed what I thought was a lot of grass.")
             ssprint("So where has it all gone? I haven't had the need to poop yet.")
@@ -211,7 +209,7 @@ def Chapter1(rimuru):
         class _use_magic_perception:
             def __init__(self):
                 sprint('...')
-                sprint(art.magic_perception)
+                print(art.magic_perception)
                 sprint("OH!")
                 sprint("Hmmmmmmmm")
                 sprint("I can see. I CAN SEE!")
@@ -222,7 +220,7 @@ def Chapter1(rimuru):
 
             def _sure(self):
                 sprint("My name is Storm Dragon Veldora!~")
-                sprint(art.cave_veldora)
+                print(art.cave_veldora)
                 sprint("~I am one of the four True Dragons of this world.~")
                 sprint("HOLY SHIT, you're a real dragon!")
                 sprint("~Didn't I tell you not to get scared.~")
@@ -321,6 +319,6 @@ def Chapter1(rimuru):
 
     def _leave_cave():
         ssprint("Time to leave this cave already.")
-        continue_story(rimuru, Chapter2)
+        continue_story(Chapter2)
 
     chapter_1()

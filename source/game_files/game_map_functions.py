@@ -1,10 +1,4 @@
-
 class Map:
-
-    def __init__(self):
-        self.available_locations = []
-        self.current_location = None
-
     def get_location(self, character=None):
         character = self.get_object(character)
 
@@ -18,7 +12,7 @@ class Map:
     def get_map(self, location=None):
         print("map")
 
-    def update_location(self,new_location=None, character=None):
+    def update_location(self, new_location=None, character=None):
         character = self.get_object(character)
 
         if not character:

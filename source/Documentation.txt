@@ -2,15 +2,13 @@ How to construct storyline.
 
 # Import most used functions like ssprint, action_menu, etc
 from game_files.game_functions import *
-# Import relevant map locations.
-game_maps.sealed_cave import Sealed_Cave, Outside_Sealed_Cave
 # Import the next chapter to continue to.
 from chapters.tensei_2 import Chapter2
 
 # Pass in Rimuru_Tempest object which has player stats, inv and other data.
 def ChapterXX(Rimuru):
     # Pass in location map object for functions concerning a location.
-    class Chapter_1(Sealed_Cave):
+    class Chapter_1():
         def __init__(self):
             # Dialogue and Commands.
             sprint("What a dark cave, what to do...what to do.")
@@ -20,7 +18,7 @@ def ChapterXX(Rimuru):
 
         # If you want more sub paths (actions) use classes, else can use functions or classes for actions with no further actions.
          # Action with '_' at the start will progress the storyline.
-        class _exit_cave(Outside_Sealed_Cave):
+        class _exit_cave():
             def __init__(self):
                 # Regular message used for talking to other characters, even when using telepathy.
                 sprint("HELLO WORLD!")
@@ -77,7 +75,7 @@ In function docstring's Usage section, '>' means example of user input in game.
 
     story_progress [] - Story chapters player has completed.
     save_path str - Player save file path.
-    text_delay True - If player wants text delay enabled/disabled.
+    text_crawl True - If player wants text delay enabled/disabled.
     played_paths () - Played story paths
 
 :Functions:
