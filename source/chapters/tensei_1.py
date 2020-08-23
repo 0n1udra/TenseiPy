@@ -1,11 +1,13 @@
-# Import most used functions like ssprint, action_mentu, etc
+# Import location classes that are relevant.
+from game_maps.sealed_cave import Sealed_Cave_Start, Sealed_Cave
+
 from game_files.game_functions import *
-# Import the next chapter to continue to
+# Import the next chapter to continue to.
 from chapters.tensei_2 import Chapter2
 
 
 def Chapter1(rimuru):
-    class chapter_1:
+    class chapter_1(Sealed_Cave_Start):
         def __init__(self):
             ssprint(".....")
             sprint(art.great_sage)
@@ -76,7 +78,7 @@ def Chapter1(rimuru):
                     rimuru.add_inventory('Hipokte Grass')
                     action_menu(_learn_skills())
 
-    class _learn_skills:
+    class _learn_skills(Sealed_Cave):
         def __init__(self):
             ssprint("I've eaten, or I guess absorbed what I thought was a lot of grass.")
             ssprint("So where has it all gone? I haven't had the need to poop yet.")
@@ -92,8 +94,6 @@ def Chapter1(rimuru):
             ssprint("With that said, what are skills?")
             action_menu(self)
 
-        def predate_grass(self):
-            rimuru.add_inventory('Hipokte Grass')
 
         class what_is_predator:
             def __init__(self):

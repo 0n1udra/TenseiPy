@@ -10,6 +10,8 @@ debug_mode = False
 rimuru = None
 
 
+# start_game.py will load game save if user has one, if not it'll create one.
+# Then pass in that into update_character which will update the rimuru variable to be used here.
 def update_character(character):
     global rimuru
     rimuru = character
@@ -30,12 +32,20 @@ def action_menu(current_class):
         > attack tempest serpent with water blade
     """
 
-    # Gets class functions and subclasses if it doesn't start with __
-    class_funcs = [i for i in dir(current_class) if i[1] != '_']
-    # Functions starting with _ replaced with *, then replaces _ with space
-    actions = [('*' + i[1:]) if i[0] == '_' else i for i in class_funcs]
+    # Gets subclass functions.
+    class_funcs = [i for i in dir(current_class)]
+    # Actions starting with '__' will be omitted. And actions starting with '_' will be replaced with '*' at the front.
+    actions = []
+    for action in class_funcs:
+        if '__' in action:
+            continue
+        if action[0] == '_':
+            actions.append('*' + action[1:])
+
     actions = [i.replace('_', ' ') for i in actions]
 
+    # Updates player's current location and shows HUD.
+    rimuru.update_location(current_class)
     show_hud(actions)
 
     # Runs first available action that will progress the storyline.
@@ -62,6 +72,8 @@ def action_menu(current_class):
         'info': rimuru.show_info,
         'craft': rimuru.craft_item,
         'use': rimuru.use_skill,
+        'location': rimuru.get_location,
+        'map': rimuru.get_map,
         'exit': exit,
     }
     if 'attack' in command:
@@ -203,12 +215,17 @@ def load_save_game(path):
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object.
     # Rimuru_Tempest object stores all game data like progress, inventory, stats, etc.
-
     try:
         rimuru = pickle.load(open(path, 'rb'))
         print("Loaded Player Save\n")
     except:
         rimuru = mobs.Rimuru_Tempest()
+        # Sets file save path for later retrieval.
+        rimuru.save_path = path
+
+        # Adds first chapter.
+        import chapters.tensei_1 as tensei1
+        rimuru.story_progress[0] = tensei1.Chapter1
 
     return rimuru
 

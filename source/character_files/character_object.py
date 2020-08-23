@@ -1,6 +1,8 @@
 import game_files.game_skills as game_skills
 import game_files.game_items as game_items
 import game_files.game_characters as game_characters
+
+from game_files.game_map_functions import Map
 from .character_info import Info
 from .character_inventory import Inventory
 from .character_attributes import Attributes
@@ -8,13 +10,14 @@ from .character_combat import Combat
 from .character_subordinates import Subordinates
 
 
-class Character(Info, Attributes, Inventory, Combat, Subordinates):
+class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __init__(self):
         Info.__init__(self)
         Attributes.__init__(self)
         Inventory.__init__(self)
         Combat.__init__(self)
         Subordinates.__init__(self)
+        Map.__init__(self)
 
         self.starting_state = []
         self.game_object_type = 'character'
@@ -26,7 +29,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates):
         self.story_progress = [None]
         self.save_path = ''
         self.text_delay = True
-        self.played_paths = set()
 
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
