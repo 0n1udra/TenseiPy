@@ -1,21 +1,4 @@
 class Info:
-    def __init__(self):
-        self.name = 'N/A'
-        self.family_name = ''
-        self.canon_name = 'N/A'
-        self.title = 'N/A'
-        self.blessing = 'N/A'
-        self.shared_blessing = 'N/A'
-        self.species = 'N/A'
-        self.rank = 'N/A'
-        self.level = 1
-        self.info = 'N/A'
-        self.description = 'N/A'
-        self.appearance = 'N/A'
-        self.evolution = ''
-        self.acquired_msg = ''
-        self.alive = True
-
     def get_name(self):
         """Returns object name attribute in lowercase."""
 

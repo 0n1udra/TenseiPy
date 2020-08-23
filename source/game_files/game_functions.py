@@ -6,7 +6,8 @@ import time
 import game_files.game_art as art
 import game_files.game_characters as mobs
 
-debug_mode = False
+# I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
+debug_mode = True
 rimuru = None
 
 
@@ -41,11 +42,12 @@ def action_menu(current_class):
             continue
         if action[0] == '_':
             actions.append('*' + action[1:])
+        else:
+            actions.append(action)
 
     actions = [i.replace('_', ' ') for i in actions]
 
-    # Updates player's current location and shows HUD.
-    rimuru.update_location(current_class)
+    # Passes in actions to show in HUD.
     show_hud(actions)
 
     # Runs first available action that will progress the storyline.
@@ -190,15 +192,10 @@ def tbc():
 
 
 #                    ========== Game Saves ==========
-def save_game(rimuru_object):
-    """
-    Save game state.
+def save_game():
+    """Pickels Rimuru_Tempest object."""
 
-    Args:
-        rimuru_object: Game state object to save.
-    """
-
-    pickle.dump(rimuru_object, open(rimuru_object.save_path, 'wb'))
+    pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
     print("Game saved to player_save.p\n")
 
 
@@ -231,33 +228,26 @@ def load_save_game(path):
 
 
 def delete_game_save(rimuru_object):
-    """
-    Deletes game save.
+    """Deletes pickle save file."""
 
-    Args:
-        rimuru_object: Deletes game save object.
-    """
-    os.remove(rimuru_object.save_path)
+    os.remove(rimuru.save_path)
     print("Resetting Game. Deleted player_save.p\n")
-    print("Good luck next time!\n")
-    exit()
 
 
-def continue_story(rimuru_object, next_chapter):
+def continue_story(next_chapter):
     """
     Continues story progress from last save point.
 
     Args:
-        rimuru_object: Save state object.
         next_chapter: Next chapter to play.
     """
 
     print("\nContinue to next chapter?")
     user_input = input("Y/N > ")
-    rimuru_object.story_progress.append(next_chapter)
-    save_game(rimuru_object)
+    rimuru.story_progress.append(next_chapter)
+    save_game()
     if user_input.lower() == 'y':
-        next_chapter(rimuru_object)
+        next_chapter(rimuru)
     else:
         exit()
 
@@ -294,7 +284,7 @@ def sprint(message):
         message: Message to delay.
     """
 
-    if rimuru.text_delay:
+    if rimuru.text_crawl:
         stripped_message = message.lstrip()
         message_length = len(stripped_message)
 

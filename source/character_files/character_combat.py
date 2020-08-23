@@ -1,9 +1,4 @@
 class Combat:
-
-    def __init__(self):
-        self.current_level_mobs = []
-        self.targeted_mobs = set()
-
     def set_targets(self, targets):
         """
         Adds c to targeted_mobs list from user input.

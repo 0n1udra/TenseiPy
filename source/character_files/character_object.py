@@ -12,23 +12,78 @@ from .character_subordinates import Subordinates
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __init__(self):
-        Info.__init__(self)
-        Attributes.__init__(self)
-        Inventory.__init__(self)
-        Combat.__init__(self)
-        Subordinates.__init__(self)
-        Map.__init__(self)
+        # Initializes other character related objects containing corresponding functions.
+        # Info.__init__(self)
+        # Attributes.__init__(self)
+        # Inventory.__init__(self)
+        # Combat.__init__(self)
+        # Subordinates.__init__(self)
+        # Map.__init__(self)
 
+        # Main character attributes, inventory, skills, resistances, etc.
         self.starting_state = []
-        self.game_object_type = 'character'
-        self.friends = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
-                        'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
-                        }
+
+        self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                                            'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
+                                            }
+
+        # Skills ordered by most powerful to weakest, alongside resistances and other attributes.
+        self.attributes = {
+            'Manas': {},
+            'Ultimate Skill': {},
+            'Unique Skill': {},
+            'Special Skill': {},
+            'Extra Skill': {},
+            'Intrinsic Skill': {},
+            'Common Skill': {},
+            'Daily Skill': {},
+            'Composite Skill': {},
+            'Resistance': {},
+            'Attribute': {},
+        }
+
+        # Character inventory.
+        self.capacity = 0  # Inventory capacity in percentage.
+        self.capacity_add = 0  # Add to overall capacity when adding items to inventory.
+        self.amount = 0  # Item quantity in inventory>
+        self.amount_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
+        self.inventory = {
+            'Items': {},
+            'Materials': {},
+            'Consumable': {},
+            'Misc': {}
+        }
+
+        # Combat variables.
+        self.current_level_mobs = []  # Current mobs around you that you can interact or attack.
+        self.targeted_mobs = set()  # Targets that will be attacked with 'attack' command.
+
+        # Character information and data related variables.
+        self.name = 'N/A'
+        self.family_name = ''
+        self.canon_name = 'N/A'  # Name from anime or manga storyline.
+        self.title = 'N/A'  # E.g. True Dragon, Demon Lord.
+        self.blessing = 'N/A'  # E.g. Storm Crest (from Veldora)>
+        self.shared_blessing = 'N/A'
+        self.species = 'N/A'
+        self.rank = 'N/A'  # E.g. Catastrophe, Calamity.
+        self.level = 1  # Same as rank just as integer.
+        self.info = 'N/A'  # Info page for character.
+        self.description = 'N/A'
+        self.appearance = 'N/A'
+        self.evolution = ''
+        self.acquired_msg = ''
+        self.alive = True
+
+        # Map functionality.
+        self.available_locations = []
+        self.current_location = 'N/A'
 
         # Game variables.
+        self.game_object_type = 'character'
         self.story_progress = [None]
         self.save_path = ''
-        self.text_delay = True
+        self.text_crawl = True
 
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
@@ -131,4 +186,3 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
                 if item.game_object_type == 'Item' and item.amount < amount:
                     return False
                 return True
-

@@ -1,16 +1,4 @@
 class Inventory:
-    def __init__(self):
-        self.capacity = 0
-        self.capacity_add = 0
-        self.amount = 0
-        self.amount_add = 1
-        self.inventory = {
-            'Items': {},
-            'Materials': {},
-            'Consumable': {},
-            'Misc': {}
-        }
-
     def inventory_generator(self, character=None, output=False):
         """
         Yields all items in character's inventory (Currently only Rimuru).

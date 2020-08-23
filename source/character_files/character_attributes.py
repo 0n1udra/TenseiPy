@@ -1,20 +1,4 @@
 class Attributes:
-    def __init__(self):
-        # Skills ordered by most powerful to weakest, alongside resistances and other attributes.
-        self.attributes = {
-            'Manas': {},
-            'Ultimate Skill': {},
-            'Unique Skill': {},
-            'Special Skill': {},
-            'Extra Skill': {},
-            'Intrinsic Skill': {},
-            'Common Skill': {},
-            'Daily Skill': {},
-            'Composite Skill': {},
-            'Resistance': {},
-            'Attribute': {},
-        }
-
     def attributes_generator(self, character=None, output=False):
         """
         Yields character's attributes game objects (skills/resistances).
