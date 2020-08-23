@@ -1,6 +1,8 @@
 class Attributes:
     def __init__(self):
+        # Skills ordered by most powerful to weakest, alongside resistances and other attributes.
         self.attributes = {
+            'Manas': {},
             'Ultimate Skill': {},
             'Unique Skill': {},
             'Special Skill': {},
@@ -11,12 +13,11 @@ class Attributes:
             'Composite Skill': {},
             'Resistance': {},
             'Attribute': {},
-            'Manas': {},
         }
 
     def attributes_generator(self, character=None, output=False):
         """
-        Yields character's attributes (skills/resistances).
+        Yields character's attributes game objects (skills/resistances).
 
         Args:
             character: Specifies character to get attributes from, default is Rimuru (player).
@@ -48,7 +49,7 @@ class Attributes:
 
     def show_attributes(self, character=None):
         """
-        Shows character's attributes if data is available.
+        Prints out attribute of player or specified character.
 
         Args:
             character: Character's attributes to show.
@@ -60,9 +61,6 @@ class Attributes:
             > stats
             > stats tempest serpent
         """
-
-        # Checks whether or not you have analyzed the target before (using mimicry functions), if not it'll return None.
-
 
         character = self.get_object(character, mimic=True)
 
@@ -128,6 +126,9 @@ class Attributes:
         """
         Upgrades skill.
 
+        Grabs game object for skill_from, and creates new game object for skill_to.
+        Removes old skill and adds new skill.
+
         Args:
             skill_from: Skill to upgrade from.
             skill_to (str): Skill to upgrade to.
@@ -146,6 +147,10 @@ class Attributes:
     def check_resistance(self, attack, target=None):
         """
         Checks if character has resistance.
+
+        Gets character object from parameter target, whether it's a string or already game object.
+        Returns True if target has resistance to inputted attack.
+
 
         Args:
             attack: Attack to check resistance to.
@@ -171,6 +176,8 @@ class Attributes:
         """
         Use skill.
 
+        Gets character object for user and target.
+
         Args:
             skill: Skill to use.
 
@@ -178,7 +185,7 @@ class Attributes:
             > use sense heat source
         """
 
-        # Set default user of skill and target of skill.
+        # Set default user of skill and target of skill. Default for both is self (rimuru).
         if user is None:
             user = self
         if target is None:
