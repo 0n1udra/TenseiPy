@@ -1,0 +1,79 @@
+-----Story Layout-----
+Chapter1()
+    chapter_1:
+        :ASCII: Great Sage
+        :Set: player's start state, acquire starting abilities and resistances.
+        :Skill Acquired: Predator
+        :Skill Acquired: Sage
+        :Skill Upgrade: Sage > Great Sage
+        :Show: Attributes & Inventory
+        > _learn_new_attack
+
+    _move:
+        _inspect:
+            explore()
+            puyo()
+            _predate_grass() > _learn_skills
+
+    _learn_skills:
+        what_is_predator()
+            analyze_grass()
+            _create_potions() > _learn_skills
+        predate_grass()
+        _what_are_skills:
+            stay_in_water:
+                stay_in_water()
+                _expel_water() > _find_veldora
+    _find_veldora:
+        _leave:
+            _help_me_see() > _respond
+            _leave() > _leave_cave
+        _hello() > _respond:
+        _shutit_baldy() > _respond:
+
+    _respond:
+        Skill Acquired: Magic Perception
+        _use_magic_perception:
+            _sure() > _become_friends
+                :ASCII: cave_veldora
+            _run() > _become_friends
+
+    _become_friends:
+        _leave() > _leave_cave
+        _friend_dragon() > _help_with_seal
+
+    _help_with_seal:
+        Set new family name
+        Set player's name
+        _predate_veldora:
+            :Item Add: Veldora
+            :Show: Inventory
+            _start_analysis() > _leave_cave
+        _move_on() > _leave_cave
+
+    _leave_cave() > Chapter2
+
+Chapter2()
+    chapter_2:
+        predate_ore()
+        _move_on() > _learn_new_attack
+
+    _learn_new_attack:
+        :Mob Add: Tempest Serpent
+        _try_escaping() > _after_serpent
+        _learn_water_bullet() > _attack_serpent
+        _learn_water_blade() > _attack_serpent
+
+    _attack_serpent:
+        predate_ore()
+        _attack()
+
+    _after_serpent:
+        predate_ore()
+        _sneak_away() > _at_exit()
+
+    _attack: > _at_exit()/_after_serpent
+
+    _at_exit:
+        _sneak_out() > Chapter3
+        _say_hi() > :Death:

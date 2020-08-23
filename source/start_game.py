@@ -18,10 +18,10 @@ if __name__ == '__main__':
     #set_text_crawl = 'n'
     if set_text_crawl.lower() in ['n', 'no']:
         print("Text Delay: DISABLED")
-        rimuru.text_delay = False
+        rimuru.text_crawl = False
         sleep(2)
     else:
-        rimuru.text_delay = True
+        rimuru.text_crawl = True
         game_funcs.sprint("Text Delay: ENABLED")
     print("\n\n")
 
