@@ -13,8 +13,9 @@ rimuru = None
 
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass in that into update_character which will update the rimuru variable to be used here.
-def update_character(character):
-    global rimuru
+def update_character(character, debug):
+    global rimuru, debug_mode
+    debug_mode = debug
     rimuru = character
     return rimuru
 
