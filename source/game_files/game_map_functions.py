@@ -1,9 +1,7 @@
 class Map:
     def get_location(self, character=None):
         character = self.get_object(character)
-
-        if not character:
-            character = self
+        if not character: character = self
 
         if hasattr(character, 'current_location'):
             if hasattr(character.current_location, '__locaton_name'):
@@ -15,8 +13,5 @@ class Map:
     def update_location(self, new_location=None, character=None):
         character = self.get_object(character)
 
-        if not character:
-            character = self
-
-        if character:
-            character.current_location = new_location
+        if not character: character = self
+        if character: character.current_location = new_location

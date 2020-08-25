@@ -116,10 +116,10 @@ In function docstring's Usage section, '>' means example of user input in game.
     title str - Extra titles, like Demon Lord, Storm Dragon.
     species str - Species of character, like.
     level str - Level of character, rank variable will change accordingly. Updated with update_ranking().
-    info str - Info page for character, showing: name, title, species, alive, blessing, description, and appearance variables.
+    info str - Info page for character, showing: name, title, species, is_alive, blessing, description, and appearance variables.
     appearance str - Appearance description.
     description str - Description.
-    alive True - Alive status.
+    is_alive True - is_alive status.
     evolution str str - Evolution line.
     acquired_msg str - Message shown when acquired.
 

@@ -12,22 +12,12 @@ from .character_subordinates import Subordinates
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __init__(self):
-        # Initializes other character related objects containing corresponding functions.
-        # Info.__init__(self)
-        # Attributes.__init__(self)
-        # Inventory.__init__(self)
-        # Combat.__init__(self)
-        # Subordinates.__init__(self)
-        # Map.__init__(self)
-
         # Main character attributes, inventory, skills, resistances, etc.
         self.starting_state = []
-
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                             'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
                                             }
 
-        # Skills ordered by most powerful to weakest, alongside resistances and other attributes.
         self.attributes = {
             'Manas': {},
             'Ultimate Skill': {},
@@ -43,10 +33,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         }
 
         # Character inventory.
-        self.capacity = 0  # Inventory capacity in percentage.
-        self.capacity_add = 0  # Add to overall capacity when adding items to inventory.
-        self.amount = 0  # Item quantity in inventory>
-        self.amount_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
+        self.inventory_capacity = 0  # Inventory capacity in percentage.
+        self.inventory_capacity_add = 0  # Add to overall capacity when adding items to inventory.
+        self.quantity = 0  # Item quantity in inventory.
+        self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
         self.inventory = {
             'Items': {},
             'Materials': {},
@@ -73,7 +63,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.appearance = 'N/A'
         self.evolution = ''
         self.acquired_msg = ''
-        self.alive = True
+        self.is_alive = True
 
         # Map functionality.
         self.available_locations = []
@@ -111,47 +101,27 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        # This function does a lot of heavy lifting for the game, since it looks, finds, and grabs game objects.
-
         # Set's character to player character (Rimuru) if none specified
-        if not character:
-            character = self
-
-        # If input is an objects, gets objects name (str).
-        if item and not type(item) == str:
-            item = item.name
-
-        if item is None:
-            return None
+        if not character: character = self
+        # Should always return a character object if no object to find was passed in.
+        if item is None: return self
+        # If input is an objects, gets object's name.
+        if item and not type(item) == str: item = item.name
 
         generators = [*self.inventory_generator(character), *self.attributes_generator(character)]
-
         # If object not in inventory, Will need to use __subclasses__ method to find and create new instance of object.
-        if new:
-            generators = [
-                *game_items.Item.__subclasses__(),
-                *game_skills.Skill.__subclasses__(),
-                *game_characters.Character.__subclasses__(),
-            ]
-
+        if new: generators = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
         # Get mob character objects from current_level_mobs list.
-        if get_level_mobs:
-            generators.extend(self.current_level_mobs)
-
+        if get_level_mobs: generators.extend(self.current_level_mobs)
         # Adds objects from all acquired mimicries.
-        if mimic:
-            generators.extend([*self.mimic_generator()])
+        if mimic: generators.extend([*self.mimic_generator()])
 
-        # Iterates through the generators and looks for a match.
         for i in generators:
             # Creates new instance to check for match, idk if there's a better way...
-            if new:
-                i = i()
+            if new: i = i()
             if i.get_name() in item.lower():
                 return i
-            # Deletes newly created instances if it wasn't a match.
-            else:
-                del i
+            else: del i
 
     def check_acquired(self, check_object, amount=1, character=None):
         """
@@ -173,16 +143,12 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             >>True
         """
 
-        # If no specified character, default is player.
-        if not character:
-            character = self
-        else:
-            character = self.get_object(character)
+        # If no specified character, default is self (the player).
+        character = self.get_object(character)
 
-        if character:
-            item = character.get_object(check_object)
-            if item:
-                # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
-                if item.game_object_type == 'Item' and item.amount < amount:
-                    return False
-                return True
+        item = character.get_object(check_object)
+        if item:
+            # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
+            if item.game_object_type == 'Item' and item.quantity < amount:
+                return False
+            return True

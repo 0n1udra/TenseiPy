@@ -29,8 +29,8 @@ class Subordinates:
 
         new_subordinate = self.get_object(new_subordinate, sub=True)
         new_subordinate.name = new_name
-
         new_subordinate.blessing = self.shared_blessing
+
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)
         else:

@@ -11,14 +11,14 @@ class Attributes:
             .attributes_generator('ranga', output=True)
         """
 
-        if character is None:
-            character = self
+        if character is None: character = self
 
         for skill_type, skills in character.attributes.items():
             if output and skills:
                 # Prints out skill category (Ultimate, Unique, etc)
                 # So far it's easier to put the code for printing user stat info here.
                 yield f'[{skill_type}]'
+
             for skill_name, skill_object in skills.items():
                 # Prints if skill is active or passive
                 if output:
@@ -47,21 +47,13 @@ class Attributes:
         """
 
         character = self.get_object(character, mimic=True)
-
-        # If no character was specified show player stats (rimuru)
-        if character is None:
-            character = self
-
-        # Only allow Character objects.
-        if character.game_object_type != 'character':
-            return
+        if character is None: character = self
+        if character.game_object_type != 'character': return
 
         print("-----Attributes/Skills-----")
         # Prints character's name. Without the if statement if the character doesn't have a family_name it'll show an extra space in the [] at the end, doesn't look so pretty.
-        print(f"Name: [{character.name}{' '+character.family_name if character.family_name else ''}]\n")
-
-        for i in self.attributes_generator(character, output=True):
-            print(i)
+        print(f"Name: [{character.name}{' ' + character.family_name if character.family_name else ''}]\n")
+        for i in self.attributes_generator(character, output=True): print(i)
 
         # Only shows mimicry info when not looking at stats of other monsters and if currently using mimicry
         if self.current_mimic:
@@ -103,8 +95,8 @@ class Attributes:
         """
 
         attribute = self.get_object(attribute)
-        if attribute:
-            del self.attributes[attribute.skill_level][attribute.name]
+
+        if attribute: del self.attributes[attribute.skill_level][attribute.name]
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -118,11 +110,12 @@ class Attributes:
             skill_to (str): Skill to upgrade to.
 
         Usage:
-            .upgrade_attribute(skill_from, skill_to)
+            .upgrade_attribute('sage', 'great sage')
         """
 
         skill_from = self.get_object(skill_from)
         skill_to = self.get_object(skill_to, new=True)
+
         if skill_to and skill_from:
             self.remove_attribute(skill_from)
             print(f"    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
@@ -145,10 +138,8 @@ class Attributes:
             .check_resistance('resist pain', 'ranga')
         """
 
-        if type(target) == str:
-            target = self.get_object(target)
-        if not target:
-            target = self
+        if type(target) == str: target = self.get_object(target)
+        if not target: target = self
 
         # Checks if character has resistance attribute
         for resist_name, resist_object in target.attributes['Resistance'].items():
@@ -164,19 +155,15 @@ class Attributes:
 
         Args:
             skill: Skill to use.
+            user: Specify who will use the skill.
+            target: Target of specified skill.
 
         Usage:
             > use sense heat source
         """
 
-        # Set default user of skill and target of skill. Default for both is self (rimuru).
-        if user is None:
-            user = self
-        if target is None:
-            target = self
+        if user is None: user = self
+        if target is None: target = self
 
         skill = self.get_object(skill)
-        if skill:
-            skill.use_skill(user=user, target=target)
-
-
+        if skill: skill.use_skill(user=user, target=target)

@@ -23,8 +23,7 @@ class Rimuru_Tempest(Character):
             mimic: Yields character objects that are in acquired_mimicries dictionary.
         """
 
-        if not self.mimic_object():
-            return None
+        if not self.mimic_object(): return None
 
         for level, mimics in self.mimic_object().acquired_mimicries.items():
             for mimic_name, mimic in mimics.items():
@@ -103,12 +102,10 @@ class Rimuru_Tempest(Character):
         try:
             for i in input_targets.split(','):
                 targets.append(self.get_object(i))
-        except ValueError:
-            pass
+        except ValueError: pass
 
         for target in targets:
-            if not target:
-                continue
+            if not target: continue
 
             if target.game_object_type == 'item':
                 self.add_inventory(target)
@@ -117,8 +114,8 @@ class Rimuru_Tempest(Character):
             elif target.game_object_type == 'character':
                 # Get's list of c that are on current level.
                 for mob in self.current_level_mobs:
-                    # Checks if current mob is alive and checks of current target is in current_level_mobs lsit.
-                    if not mob.alive and mob.get_name() in target.get_name():
+                    # Checks if current mob is is_alive and checks of current target is in current_level_mobs lsit.
+                    if not mob.is_alive and mob.get_name() in target.get_name():
                         self.add_mimic(target)
 
         self.targeted_mobs = set()
@@ -132,10 +129,10 @@ class Veldora_Tempest(Character):
         self.canon_name = 'Veldora Tempest'
         self.species = 'True Dragon'
         self.blessing = 'Storm Crest'
-        self.alive = True
+        self.is_alive = True
         self.level = 11
         self.item_type = 'Misc'
-        self.capacity_add = 10
+        self.inventory_capacity_add = 10
         self.update_info()
 
 

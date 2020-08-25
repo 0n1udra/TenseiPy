@@ -1,10 +1,11 @@
-y = '''
-hello
-'''
-x = {'hi': 1, 'bye': 3}
-y = {}
-for k, v in x.items():
-    y += f'{v} {k}, '
+x = [1,2,3]
 
+def test():
+    for i in x:
+        yield i
 
-        
+for i in test():
+    if i == 2:
+        del i
+
+print(x)

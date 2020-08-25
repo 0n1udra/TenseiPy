@@ -7,7 +7,7 @@ import game_files.game_art as art
 import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
-debug_mode = True
+debug_mode = False
 rimuru = None
 
 
@@ -84,9 +84,9 @@ def action_menu(current_class):
             user_input = 'attack'
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
-    for k, v in level_actions.items():
-        if k in command:
-            v(parameter)
+    for game_action, game_function in level_actions.items():
+        if game_action in command:
+            game_function(parameter)
 
     loop = True
 
@@ -116,7 +116,7 @@ def show_hud(actions):
     options = ', '.join('(' + i + ')' for i in actions)
     mimicking = rimuru.current_mimic_name
     try:
-        targets = ', '.join([(i.name if i.alive else f'{i.name}(Dead)') for i in rimuru.targeted_mobs])
+        targets = ', '.join([(i.name if i.is_alive else f'{i.name}(Dead)') for i in rimuru.targeted_mobs])
     except ValueError:
         targets = None
 
@@ -151,10 +151,10 @@ def add_level_mob(characters):
 
 def get_mob_status(target):
     """
-    Returns whether mob in current_mob list is alive.
+    Returns whether mob in current_mob list is is_alive.
 
     Args:
-        target: Target to check alive status.
+        target: Target to check is_alive status.
 
     Usage:
         get_mob_status('tempest serpent')
@@ -162,7 +162,7 @@ def get_mob_status(target):
 
     for i in rimuru.current_level_mobs:
         if target.lower() in i.get_name():
-            if i.alive:
+            if i.is_alive:
                 return True
 
 
@@ -178,10 +178,8 @@ def check_cleared_mobs():
     """
 
     for mob in rimuru.current_level_mobs:
-        if mob.alive:
-            return False
-    else:
-        return True
+        if mob.is_alive: return False
+    else: return True
 
 
 #                    ========== Extra ==========
@@ -248,8 +246,7 @@ def continue_story(next_chapter):
     save_game()
     if user_input.lower() == 'y':
         next_chapter(rimuru)
-    else:
-        exit()
+    else: exit()
 
 
 #                    ========== Game Functions ==========
@@ -288,16 +285,11 @@ def sprint(message):
         stripped_message = message.lstrip()
         message_length = len(stripped_message)
 
-        if message_length > 200:
-            total_time = 0.1
-        elif message_length > 50:
-            total_time = 4.5
-        elif message_length > 25:
-            total_time = 3.5
-        elif message_length > 10:
-            total_time = 2.5
-        else:
-            total_time = 2.5
+        if message_length > 200: total_time = 0.1
+        elif message_length > 50: total_time = 4.5
+        elif message_length > 25: total_time = 3.5
+        elif message_length > 10: total_time = 2.5
+        else: total_time = 2.5
 
         sleep_time = total_time / message_length
 
@@ -306,8 +298,7 @@ def sprint(message):
             sys.stdout.flush()
             time.sleep(sleep_time)
         print()
-    else:
-        print(message)
+    else: print(message)
 
 
 def show_help(*args):

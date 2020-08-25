@@ -18,8 +18,7 @@ class Info:
 
         # Checks to see if any acquired mimics has inputted ability to get info on.
         game_object = self.get_object(game_object, mimic=True)
-        if game_object:
-            print(game_object.info)
+        if game_object: print(game_object.info)
 
     def update_info(self):
         """Updates character information."""
@@ -66,6 +65,5 @@ class Info:
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""
 
-        if self.__class__.__name__ == 'Rimuru_Tempest':
-            return True
+        if self.__class__.__name__ == 'Rimuru_Tempest': return True
 

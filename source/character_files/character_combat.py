@@ -1,7 +1,7 @@
 class Combat:
     def set_targets(self, targets):
         """
-        Adds c to targeted_mobs list from user input.
+        Adds inputted targets to targeted_mobs list from user input.
 
         Separates user inputted targets via ',' then checks to see if mob is in current_level_mobs list.
         If so, adds to setTargets list.
@@ -43,7 +43,9 @@ class Combat:
             > attack water blade
         """
 
-        attacks = []
+        attacks = skills = []
+        targets = self.targeted_mobs
+        attack_success = False
 
         # Tries to split up the inputted attacks.
         try:
@@ -51,24 +53,17 @@ class Combat:
         except AttributeError:
             attacks.append(user_input)
 
-        targets = self.targeted_mobs
-        skills = []
-
-        # If mob is in current_level_mobs list and is alive, adds to focusTarget list.
-        for j in attacks:
-            j = self.get_object(j)
-            if j is not None:
-                skills.append(j)
-
-        attack_success = False
+        # If mob is in current_level_mobs list and is is_alive, adds to focusTarget list.
+        for attack in attacks:
+            attack = self.get_object(j)
+            if attack is not None:
+                skills.append(attack)
 
         for current_target in targets:
             for current_skill in skills:
-                # Checks if target has resistance to current attack.
                 if not self.check_resistance(current_skill, current_target):
-                    # Checks if target is lower level than current attack.
                     if current_target.level <= current_skill.damage_level:
-                        current_target.alive = False
+                        current_target.is_alive = False
                         attack_success = True
                         print(f"    < Eliminated {current_target.name}. >\n")
                     else:

@@ -2,9 +2,9 @@ class Item:
     def __init__(self):
         self.name = ''
         self.item_type = ''
-        self.amount = 0
-        self.amount_add = 1
-        self.capacity_add = 0
+        self.quantity = 0
+        self.quantity_add = 1
+        self.inventory_capacity_add = 0
         self.info = 'N/A'
         self.description = ''
         self.usage = ''
@@ -26,7 +26,7 @@ class Item:
     def show_acquired_msg(self):
         """Print item's acquired message."""
 
-        print(f'    < Acquired {self.amount_add}x [{self.name}]. >\n')
+        print(f'    < Acquired {self.quantity_add}x [{self.name}]. >\n')
 
     def update_info(self):
         """Updates item's info."""
@@ -43,7 +43,7 @@ class Item:
                 self.info += f'[{item}], '
 
         if self.recipe:
-            self.info += f'\n    Recipe:\n        Will craft {self.amount_add} at a time.\n'
+            self.info += f'\n    Recipe:\n        Will craft {self.quantity_add} at a time.\n'
             for item, amount in self.recipe.items():
                 self.info += f'        {amount}x {item}\n'
 
@@ -66,9 +66,9 @@ class Hipokte_Grass(Item):
         Item.__init__(self)
         self.name = 'Hipokte Grass'
         self.item_type = 'Materials'
-        self.amount = 0
-        self.amount_add = 50
-        self.capacity_add = 0.01
+        self.quantity = 0
+        self.quantity_add = 50
+        self.inventory_capacity_add = 0.01
         self.usage = 'Mainly used for making healing potions.'
         self.description = 'Magicule infused grass, found in locations with high Magicule concentration'
         self.appearance = 'Looks like regular grass, but gives off small amounts of magic essence.'
@@ -81,9 +81,9 @@ class Magic_Ore(Item):
         Item.__init__(self)
         self.name = 'Magic Ore'
         self.item_type = 'Materials'
-        self.amount = 0
-        self.amount_add = 25
-        self.capacity_add = 0.1
+        self.quantity = 0
+        self.quantity_add = 25
+        self.inventory_capacity_add = 0.1
         self.usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
         self.description = '''
         Magic ores form around high concentration of magic essence.
@@ -98,9 +98,9 @@ class Full_Potion(Item):
         Item.__init__(self)
         self.name = 'Full Potion'
         self.item_type = 'Consumable'
-        self.amount = 0
-        self.amount_add = 25
-        self.capacity_add = 0.1
+        self.quantity = 0
+        self.quantity_add = 25
+        self.inventory_capacity_add = 0.1
         self.usage = 'Heals major wounds even severed limbs. However, can not resurrect.'
         self.description = '''
         Can heal subject to optimum condition, but cannot revive the dead.

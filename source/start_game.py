@@ -3,7 +3,6 @@ from time import sleep
 import game_files.game_functions as game_funcs
 
 if __name__ == '__main__':
-    # Get file path depending on Windows or not
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/player_save.p'
 
     # Loads game save and updates rimuru object in game_functions.
@@ -25,5 +24,4 @@ if __name__ == '__main__':
         game_funcs.sprint("Text Delay: ENABLED")
     print("\n\n")
 
-    # Loads latest chapter from save_progress.
     rimuru.story_progress[-1](rimuru)
