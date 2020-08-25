@@ -1,4 +1,4 @@
-import os
+import os, sys
 from time import sleep
 import game_files.game_functions as game_funcs
 
