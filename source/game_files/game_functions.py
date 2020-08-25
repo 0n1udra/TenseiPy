@@ -1,15 +1,10 @@
-import os
-import pickle
-import sys
-import time
-
+import os, sys, time, pickle
 import game_files.game_art as art
 import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 debug_mode = False
 rimuru = None
-
 
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass in that into update_character which will update the rimuru variable to be used here.
@@ -75,7 +70,6 @@ def action_menu(current_class):
         'info': rimuru.show_info,
         'craft': rimuru.craft_item,
         'use': rimuru.use_skill,
-        'location': rimuru.get_location,
         'map': rimuru.get_map,
         'exit': exit,
     }
@@ -83,6 +77,8 @@ def action_menu(current_class):
         # Runs function if attack was successful, if not it'll just loop.
         if rimuru.attack(parameter):
             user_input = 'attack'
+    elif 'location' in command:
+        rimuru.get_location(parameter, current_class)
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for game_action, game_function in level_actions.items():
@@ -105,27 +101,23 @@ def action_menu(current_class):
         else:
             if user_input.lower() == i.lower():
                 eval(run_action)
-
-    if loop:
-        action_menu(current_class)
+    if loop: action_menu(current_class)
 
 
 def show_hud(actions):
     """Shows user HUD with available actions and targets (if any)."""
 
-    # Adds () around actions, (*action)
     options = ', '.join('(' + i + ')' for i in actions)
-    mimicking = rimuru.current_mimic_name
+    mimicking = rimuru.current_mimic_species
     try:
         targets = ', '.join([(i.name if i.is_alive else f'{i.name}(Dead)') for i in rimuru.targeted_mobs])
-    except ValueError:
-        targets = None
+    except ValueError: targets = None
 
     if targets:
         # print(f'\nTarget:', str(targets))
-        print(f'\nTarget: {targets}\nActions:', options, f'| {mimicking}, (stats, inv, help)')
+        print(f'\nTarget: {targets}\nActions:', options, f'| [{mimicking}], (stats, inv, help)')
     else:
-        print("\nActions:", options, f'| {mimicking}, (stats, inv, help)')
+        print("\nActions:", options, f'| [{mimicking}], (stats, inv, help)')
 
 
 #                    ========== Level Functions ==========
@@ -163,8 +155,7 @@ def get_mob_status(target):
 
     for i in rimuru.current_level_mobs:
         if target.lower() in i.get_name():
-            if i.is_alive:
-                return True
+            if i.is_alive: return True
 
 
 def check_cleared_mobs():

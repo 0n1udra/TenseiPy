@@ -5,7 +5,9 @@ from chapters.tensei_2 import Chapter2
 
 
 def Chapter1(rimuru):
-    class chapter_1():
+    class chapter_1:
+        __location_name = 'Sealed Cave'
+
         def __init__(self):
             ssprint(".....")
             print(art.great_sage)
@@ -113,6 +115,7 @@ def Chapter1(rimuru):
                     action_menu(_learn_skills)
 
         class _what_are_skills:
+            __location_name = "Under water"
             def __init__(self):
                 ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
                 ssprint("What an interesting world!")

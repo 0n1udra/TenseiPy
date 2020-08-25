@@ -9,7 +9,7 @@ class Rimuru_Tempest(Character):
         self.shared_blessing = 'Protection of Tempest'
         self.level = 7
         self.current_mimic = None
-        self.current_mimic_name = 'Slime'
+        self.current_mimic_species = 'Slime'
         self.starting_state = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist',
                                'Electricity Resist']
         self.update_info()
@@ -74,14 +74,14 @@ class Rimuru_Tempest(Character):
         """
         if character == 'reset':
             # Resets mimic state (default Slime).
-            self.current_mimic_name = 'Slime'
+            self.current_mimic_species = 'Slime'
             self.current_mimic = None
             self.mimic_object(active=False)
             print("    < Mimicry reset. >")
         else:
             new_mimic = self.get_object(character, mimic=True)
             if new_mimic:
-                self.current_mimic_name = new_mimic.name
+                self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
                 self.mimic_object(active=True)
                 print(f'    < Now Mimicking: [{new_mimic.name}]. >')

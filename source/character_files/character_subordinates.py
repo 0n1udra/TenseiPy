@@ -1,4 +1,3 @@
-
 class Subordinates:
     def subordinates_generator(self, character=None):
         """
