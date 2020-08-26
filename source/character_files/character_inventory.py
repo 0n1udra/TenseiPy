@@ -91,10 +91,9 @@ class Inventory:
 
         item = self.get_object(item)
 
-        if item.quantity <= 1:
-            self.inventory[item.item_type].remove(item)
-        else:
-            item.quantity -= amount
+        item.quantity -= amount
+        if item.quantity < 0:
+            del self.inventory[item.item_type]
 
     def craft_item(self, item, craft_amount=1):
         """
@@ -112,20 +111,29 @@ class Inventory:
         """
 
         item = self.get_object(item, new=True)
+        if not item: return
+
+        recipe = ''
+        for ingredient, amount in item.recipe.items():
+            recipe += F"{amount}x {ingredient}, "
+        print(f"{item.quantity_add}x {item.name}: {recipe[:-2]}")
 
         # Asks for how much to make. note that some items are crafted in batches.
         try:
-            craft_amount = int(input(f"Amount ({item.quantity_add}x) > "))
+            craft_amount = int(input("Amount (0 to cancel) > "))
         except ValueError:
             print("    < Error, need integer input. >")
+            return
+
+        if not craft_amount: return
 
         for ingredient_name, ingredient_amount in item.recipe.items():
-            if not self.check_acquired(ingredient_name, ingredient_amount * craft_amount):
+            if self.check_acquired(ingredient_name, ingredient_amount * craft_amount):
                 print("    < Not enough materials to craft item. >")
                 return
 
         # Use ingredients to make the item.
         for ingredient_name, ingredient_amount in item.recipe.items():
-            self.remove_inventory(ingredient_name, ingredient_amount)
+            self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
 
         self.add_inventory(item, craft_amount)

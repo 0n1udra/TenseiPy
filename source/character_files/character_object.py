@@ -144,10 +144,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         # If no specified character, default is self (the player).
         character = self.get_object(character)
-
+        if not character: character = self
         item = character.get_object(check_object)
         if item:
             # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
-            if item.game_object_type == 'Item' and item.quantity < amount:
-                return False
+            if item.game_object_type == 'item' and item.quantity >= amount: return False
             return True
