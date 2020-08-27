@@ -111,7 +111,7 @@ class Inventory:
         """
 
         item = self.get_object(item, new=True)
-        if not item: return
+        if item is None: return
 
         recipe = ''
         for ingredient, amount in item.recipe.items():
@@ -125,7 +125,7 @@ class Inventory:
             print("    < Error, need integer input. >")
             return
 
-        if not craft_amount: return
+        if craft_amount is None: return
 
         for ingredient_name, ingredient_amount in item.recipe.items():
             if self.check_acquired(ingredient_name, ingredient_amount * craft_amount):

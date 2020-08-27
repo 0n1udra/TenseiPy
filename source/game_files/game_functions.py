@@ -3,25 +3,22 @@ import game_files.game_art as art
 import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
-debug_mode = False
-rimuru = None
-
+rimuru = debug_mode = None
 # start_game.py will load game save if user has one, if not it'll create one.
-# Then pass in that into update_character which will update the rimuru variable to be used here.
-def update_character(character, debug):
+# Then pass that into update_character which will update the rimuru variable to be used here.
+def update_variables(rimuru_object, debug):
     global rimuru, debug_mode
-    debug_mode = debug
-    rimuru = character
+    rimuru, debug_mode = rimuru_object, debug
     return rimuru
 
 
-def action_menu(current_class):
+def action_menu(current_level_class):
     """
     Takes user input and runs corresponding actions.
 
 
     Args:
-        current_class: Current story progress class object.
+        current_level_class: Current story progress class object.
 
     Usage:
         > inv
@@ -30,7 +27,7 @@ def action_menu(current_class):
     """
 
     # Gets subclass functions.
-    class_funcs = [i for i in dir(current_class)]
+    class_funcs = [i for i in dir(current_level_class)]
     # Actions starting with '__' will be omitted. And actions starting with '_' will be replaced with '*' at the front.
     actions = []
     for action in class_funcs:
@@ -43,7 +40,7 @@ def action_menu(current_class):
 
     actions = [i.replace('_', ' ') for i in actions]
 
-    # Passes in actions to show in HUD.
+    rimuru.update_location(rimuru.get_location_name(current_level_class))
     show_hud(actions)
 
     # Runs first available action that will progress the storyline.
@@ -61,16 +58,16 @@ def action_menu(current_class):
     parameter = ' '.join(split_user_input[1:])
 
     level_actions = {
-        'target': rimuru.set_targets,
-        'predate': rimuru.predate_targets,
-        'mimic': rimuru.use_mimic,
-        'help': show_help,
-        'inv': rimuru.show_inventory,
         'stats': rimuru.show_attributes,
+        'target': rimuru.set_targets,
+        'mimic': rimuru.use_mimic,
+        'use': rimuru.use_skill,
+        'predate': rimuru.predate_targets,
+        'inv': rimuru.show_inventory,
         'info': rimuru.show_info,
         'craft': rimuru.craft_item,
-        'use': rimuru.use_skill,
         'map': rimuru.get_map,
+        'help': show_help,
         'exit': exit,
     }
     if 'attack' in command:
@@ -78,12 +75,12 @@ def action_menu(current_class):
         if rimuru.attack(parameter):
             user_input = 'attack'
     elif 'location' in command:
-        rimuru.get_location(parameter, current_class)
+        rimuru.get_location(parameter, current_level_class)
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
-    for game_action, game_function in level_actions.items():
-        if game_action in command:
-            game_function(parameter)
+    for action_string, action  in level_actions.items():
+        if action_string in command:
+            action(parameter)
 
     loop = True
 
@@ -91,7 +88,7 @@ def action_menu(current_class):
         # Removes special characters for comparison.
         current_action = i.replace('*', '_').replace(' ', '_')
         # Gets full function name to call with.
-        run_action = f'current_class.{current_action}()'
+        run_action = f'current_level_class.{current_action}()'
         # Checks if action will progress storyline.
         if i[0] == '*':
             if user_input.lower() == i.lower()[1:]:
@@ -101,23 +98,22 @@ def action_menu(current_class):
         else:
             if user_input.lower() == i.lower():
                 eval(run_action)
-    if loop: action_menu(current_class)
+    if loop: action_menu(current_level_class)
 
 
 def show_hud(actions):
     """Shows user HUD with available actions and targets (if any)."""
 
     options = ', '.join('(' + i + ')' for i in actions)
-    mimicking = rimuru.current_mimic_species
     try:
         targets = ', '.join([(i.name if i.is_alive else f'{i.name}(Dead)') for i in rimuru.targeted_mobs])
     except ValueError: targets = None
 
     if targets:
         # print(f'\nTarget:', str(targets))
-        print(f'\nTarget: {targets}\nActions:', options, f'| [{mimicking}], (stats, inv, help)')
+        print(f'\nTarget: {targets}\nActions:', options, f'| (stats, inv, help)')
     else:
-        print("\nActions:", options, f'| [{mimicking}], (stats, inv, help)')
+        print("\nActions:", options, f'| (stats, inv, help)')
 
 
 #                    ========== Level Functions ==========

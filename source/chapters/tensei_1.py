@@ -6,8 +6,7 @@ from chapters.tensei_2 import Chapter2
 
 def Chapter1(rimuru):
     class chapter_1:
-        __location_name = 'Sealed Cave'
-
+        __location = 'Sealed Cave'
         def __init__(self):
             ssprint(".....")
             print(art.great_sage)
@@ -94,6 +93,8 @@ def Chapter1(rimuru):
             ssprint("With that said, what are skills?")
             action_menu(self)
 
+        def predate_ore(self):
+            rimuru.add_inventory('hipokte grass')
 
         class what_is_predator:
             def __init__(self):
@@ -115,7 +116,7 @@ def Chapter1(rimuru):
                     action_menu(_learn_skills)
 
         class _what_are_skills:
-            __location_name = "Under water"
+            __location = "Under water?"
             def __init__(self):
                 ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
                 ssprint("What an interesting world!")
@@ -155,6 +156,7 @@ def Chapter1(rimuru):
                     action_menu(_find_veldora())
 
     class _find_veldora:
+        __location = "Sealed Cave"
         def __init__(self):
             ssprint("Let's try to find where that voice is coming from")
             ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
@@ -189,6 +191,7 @@ def Chapter1(rimuru):
             action_menu(_respond())
 
     class _respond:
+        __location = "Veldora's Prison"
         def __init__(self):
             sprint("I never expected to speak with anyone other than my skill")
             sprint("I can't 'see' or 'hear' anything.")
@@ -304,6 +307,7 @@ def Chapter1(rimuru):
             action_menu(self)
 
         class _predate_veldora:
+            __location = "Sealed Cave"
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
                 rimuru.add_inventory(veldora)

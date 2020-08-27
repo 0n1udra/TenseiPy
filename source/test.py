@@ -1,11 +1,5 @@
-x = [1,2,3]
+def testing(test1=False, test2=False):
+    print(test1, test2)
 
-def test():
-    for i in x:
-        yield i
-
-for i in test():
-    if i == 2:
-        del i
-
-print(x)
+x = [True, False]
+testing(*x)

@@ -12,7 +12,7 @@ if __name__ == '__main__':
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/player_save.p'
 
     # Loads game save and updates rimuru object in game_functions alongside debug variable.
-    rimuru = game_funcs.update_character(game_funcs.load_save_game(save_path), debug)
+    rimuru = game_funcs.update_variables(game_funcs.load_save_game(save_path), debug)
 
     game_funcs.show_start_banner(rimuru)
 

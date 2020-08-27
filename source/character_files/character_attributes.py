@@ -21,15 +21,14 @@ class Attributes:
 
             for skill_name, skill_object in skills.items():
                 # Prints if skill is active or passive
-                if output:
-                    if skill_object.active:
-                        yield f'    {skill_name} (Active)'
-                    elif skill_object.passive:
-                        yield f'    {skill_name} (Passive)'
-                    else:
-                        yield f'    {skill_name}'
+                if not output: yield skill_object
+
+                if skill_object.active:
+                    yield f'    {skill_name} (Active)'
+                elif skill_object.passive:
+                    yield f'    {skill_name} (Passive)'
                 else:
-                    yield skill_object
+                    yield f'    {skill_name}'
 
     def show_attributes(self, character=None):
         """
@@ -52,7 +51,9 @@ class Attributes:
 
         print("-----Attributes/Skills-----")
         # Prints character's name. Without the if statement if the character doesn't have a family_name it'll show an extra space in the [] at the end, doesn't look so pretty.
-        print(f"Name: [{character.name}{' ' + character.family_name if character.family_name else ''}]\n")
+        print(f"Name: [{character.name}{' ' + character.family_name if character.family_name else ''}]")
+        print(f"Location: {character.current_location}\n")
+
         for i in self.attributes_generator(character, output=True): print(i)
 
         # Only shows mimicry info when not looking at stats of other monsters and if currently using mimicry
@@ -76,12 +77,13 @@ class Attributes:
         """
 
         attribute = self.get_object(attribute, new=True)
-        if attribute:
-            self.attributes[attribute.skill_level][attribute.name] = attribute
-            if show_acquired_msg:
-                attribute.show_acquired_msg()
-            if show_skill_info:
-                self.show_info(attribute.name)
+        if not attribute: return
+
+        self.attributes[attribute.skill_level][attribute.name] = attribute
+        if show_acquired_msg:
+            attribute.show_acquired_msg()
+        if show_skill_info:
+            self.show_info(attribute.name)
 
     def remove_attribute(self, attribute):
         """
@@ -95,8 +97,9 @@ class Attributes:
         """
 
         attribute = self.get_object(attribute)
+        if not attribute: return
 
-        if attribute: del self.attributes[attribute.skill_level][attribute.name]
+        del self.attributes[attribute.skill_level][attribute.name]
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -115,11 +118,11 @@ class Attributes:
 
         skill_from = self.get_object(skill_from)
         skill_to = self.get_object(skill_to, new=True)
+        if not skill_to and not skill_from: return
 
-        if skill_to and skill_from:
-            self.remove_attribute(skill_from)
-            print(f"    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
-            self.add_attribute(skill_to)
+        self.remove_attribute(skill_from)
+        print(f"    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
+        self.add_attribute(skill_to)
 
     def check_resistance(self, attack, target=None):
         """
@@ -166,4 +169,6 @@ class Attributes:
         if target is None: target = self
 
         skill = self.get_object(skill)
-        if skill: skill.use_skill(user=user, target=target)
+        if not skill: return
+
+        skill.use_skill(user=user, target=target)

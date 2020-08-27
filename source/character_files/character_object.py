@@ -112,14 +112,14 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if new: generators = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
         # Get mob character objects from current_level_mobs list.
         if get_level_mobs: generators.extend(self.current_level_mobs)
-        # Adds objects from all acquired mimicries.
+        # Adds all attributes from all acquired mimicries.
         if mimic: generators.extend([*self.mimic_generator()])
 
         for i in generators:
             # Creates new instance to check for match, idk if there's a better way...
             if new: i = i()
-            if i.get_name() in item.lower():
-                return i
+            if type(i) is str: continue
+            if i.get_name() in item.lower(): return i
             else: del i
 
     def check_acquired(self, check_object, amount=1, character=None):
@@ -145,8 +145,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # If no specified character, default is self (the player).
         character = self.get_object(character)
         if not character: character = self
+
         item = character.get_object(check_object)
-        if item:
-            # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
-            if item.game_object_type == 'item' and item.quantity >= amount: return False
-            return True
+        if not item: return
+
+        # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
+        if item.game_object_type == 'item' and item.quantity >= amount: return False
+        return True

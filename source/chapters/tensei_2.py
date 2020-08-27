@@ -4,6 +4,7 @@ from chapters.tensei_3 import Chapter3
 
 def Chapter2(rimuru):
     class chapter_2:
+        __location = 'Sealed Cave'
         def __init__(self):
             ssprint("Oh, what's this? Looks like some kind of rock?")
             action_menu(self)
@@ -111,6 +112,7 @@ def Chapter2(rimuru):
             delete_game_save(rimuru)
 
     class _the_encouter:
+        __location = "Near Sealed Cave"
         def __init__(self):
             ssprint("Where am I going?")
             action_menu(self)
@@ -161,6 +163,7 @@ def Chapter2(rimuru):
             action_menu(_goblin_village())
 
     class _goblin_village:
+        __locatoin = "Goblin Village"
         global _help_goblins
 
         def __init__(self):
