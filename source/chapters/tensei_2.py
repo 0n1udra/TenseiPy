@@ -9,7 +9,7 @@ def Chapter2(rimuru):
             ssprint("Oh, what's this? Looks like some kind of rock?")
             action_menu(self)
 
-        def predate_ore(self):
+        def predate_magic_ore(self):
             rimuru.add_inventory('magic ore')
             ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
             ssprint("Ok, might be useful in the future. Guess I should get as much as I can")
@@ -71,7 +71,7 @@ def Chapter2(rimuru):
                 else:
                     action_menu(_attack_serpent)
 
-        def predate_ore(self):
+        def predate_magic_ore(self):
             pass
 
         def _sneak_away(self):

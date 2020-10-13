@@ -72,7 +72,7 @@ def Chapter1(rimuru):
                 def puyo(self):
                     sprint("Puuuuuuuuuuuuyooooooooooo!")
 
-                def _predate_grass(self):
+                def _predate_hipokte_grass(self):
                     ssprint("More grass!")
                     rimuru.add_inventory('Hipokte Grass')
                     action_menu(_learn_skills())
@@ -93,8 +93,7 @@ def Chapter1(rimuru):
             ssprint("With that said, what are skills?")
             action_menu(self)
 
-        def predate_ore(self):
-            rimuru.add_inventory('hipokte grass')
+        def predate_hipokte_grass(self): rimuru.add_inventory('hipokte grass')
 
         class what_is_predator:
             def __init__(self):
@@ -190,8 +189,12 @@ def Chapter1(rimuru):
             ssprint("Oh!")
             action_menu(_respond())
 
+        def predate_hipokte_grass(self): rimuru.add_inventory('hipokte grass')
+
+
     class _respond:
         __location = "Veldora's Prison"
+
         def __init__(self):
             sprint("I never expected to speak with anyone other than my skill")
             sprint("I can't 'see' or 'hear' anything.")
@@ -237,6 +240,8 @@ def Chapter1(rimuru):
             def _nah(self):
                 ssprint("~Alright then, I won't. Hmmmmph~")
                 action_menu(_become_friends())
+
+        def predate_hipokte_grass(self): rimuru.add_inventory('hipokte grass')
 
     class _become_friends:
         def __init__(self):
