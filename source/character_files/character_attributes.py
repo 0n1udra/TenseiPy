@@ -12,13 +12,10 @@ class Attributes:
         """
 
         for skill_type, skills in self.attributes.items():
-
-            # Prints out skill category (Ultimate, Unique, etc)
-            # So far it's easier to put the code for printing user stat info here.
+            # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
             if output and skills: yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
-
                 # Yields skill game object if not in printing mode.
                 if not output: yield skill_object
 
@@ -68,14 +65,17 @@ class Attributes:
             .add_attribute('rimuru', 'water blade')
         """
 
-        attribute = self.get_object(attribute, new=True)
-        if not attribute: return
+        if attribute := self.get_object(attribute, new=True):
+            # Checks if already acquired.
+            if self.check_acquired(attribute): return False
 
-        self.attributes[attribute.skill_level][attribute.name] = attribute
-        if show_acquired_msg:
-            attribute.show_acquired_msg()
-        if show_skill_info:
-            self.show_info(attribute.name)
+            self.attributes[attribute.skill_level][attribute.name] = attribute
+            if show_acquired_msg:
+                attribute.show_acquired_msg()
+            if show_skill_info:
+                self.show_info(attribute.name)
+
+        return False
 
     def remove_attribute(self, attribute):
         """
@@ -88,10 +88,8 @@ class Attributes:
             .remove_attribute('resist poison')
         """
 
-        attribute = self.get_object(attribute)
-        if not attribute: return
-
-        del self.attributes[attribute.skill_level][attribute.name]
+        if attribute := self.get_object(attribute):
+            del self.attributes[attribute.skill_level][attribute.name]
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -139,22 +137,21 @@ class Attributes:
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
-                if attack.damage_type in resist:
-                    return True
+                if attack.damage_type in resist: return True
 
-    def use_skill(self, skill, *args):
+    def use_skill(self, character, skill, *args):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
         Args:
+            character: Character that will use skill.
             skill: Skill to use.
 
         Usage:
             > use sense heat source
         """
 
-        skill = self.get_object(skill)
-        if not skill: return False
-
-        try: skill.use_skill(args)
-        except: pass
+        if skill := self.get_object(skill):
+            try: skill.use_skill(character, args)
+            except: pass
+        else: return False
