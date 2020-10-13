@@ -28,10 +28,10 @@ if __name__ == '__main__':
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
     if set_text_crawl is False:
         rimuru.text_crawl = False
-    else:
+    elif rimuru.text_crawl is None:
         print("\nEnable text crawl? (Recommended for easier reading)")
         if str(input("No/Yes or Enter > ")).lower() in ['n', 'no']:
-            print("Text Delay: DISABLED")
+            print("    < Text Crawl Deactivated. > ")
             rimuru.text_crawl = False
             sleep(2)
         else:

@@ -11,7 +11,6 @@ def update_variables(rimuru_object, debug):
     rimuru, debug_mode = rimuru_object, debug
     return rimuru
 
-
 def action_menu(level=None):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
@@ -68,8 +67,9 @@ def action_menu(level=None):
         'info': rimuru.show_info,
         'craft': rimuru.craft_item,
         'map': rimuru.get_map,
-        'help': show_help,
+        'textcrawl': game_text_crawl,
         'save': game_save,
+        'help': show_help,
         'exit': game_exit,
     }
     if 'attack' in command:
@@ -88,7 +88,6 @@ def action_menu(level=None):
             eval(f"level.{action}()")
 
     if loop: action_menu(level)
-
 
 #                    ========== Level Functions ==========
 def new_active_mob(characters):
@@ -109,7 +108,6 @@ def new_active_mob(characters):
     # Adds singular mob object to current level.
     else: rimuru.active_mobs.append(rimuru.get_object(characters, new=True))
 
-
 def mob_status(target):
     """
     Returns whether mob in active_mobs list is is_alive.
@@ -124,7 +122,6 @@ def mob_status(target):
     for i in rimuru.active_mobs:
         if target.lower() in i.get_name():
             return i.is_alive
-
 
 def cleared_all_mobs():
     """
@@ -146,9 +143,29 @@ def cleared_all_mobs():
 def tbc():
     """ To Be Continued message.."""
 
-    ssprint("< ---IN PREOGRESS--- >\n")
+    print("<     ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
 
+def game_text_crawl(arg):
+    """
+    Updates and gets status for text_crawl.
+
+    Args:
+        arg: Enable or disable text crawl.
+
+    Usage:
+        > textcrawl
+        > textcrawl enable
+        > textcrawl 0
+
+    """
+
+    if arg in ['true', 'enable', '1'] or rimuru.text_crawl is True:
+        rimuru.text_crawl = True
+        print("    < Text Crawl: Active. >\n")
+    elif arg in ['false', 'disable', '0'] or rimuru.text_crawl is False:
+        rimuru.text_crawl = False
+        print("    < Text Crawl Deactivated. >\n")
 
 #                    ========== Game Saves ==========
 def game_exit(*args):
@@ -162,8 +179,7 @@ def game_save(*args):
 
     rimuru.valid_save = True
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    ssprint("< Game Saved. >\n")
-
+    print("    < Game Saved. >\n")
 
 def game_load(path):
     """
@@ -191,15 +207,13 @@ def game_load(path):
 
     return rimuru
 
-
 def game_over():
     """Deletes pickle save file."""
 
     rimuru.valid_save = False  # So you can't use copies of game save.
     os.remove(rimuru.save_path)
-    ssprint("< GAME OVER. >\n")
+    print("<     GAME OVER. >\n")
     exit(0)
-
 
 def continue_story(next_chapter):
     """
@@ -235,15 +249,13 @@ def show_start_banner(rimuru):
     rimuru.show_inventory()
 
     if rimuru.valid_save is True:
-        ssprint("< Save Loaded. >")
+        print("<     Save Loaded. >")
     print()
-
 
 def ssprint(message):
     """Print tabbed in message."""
     print('    ', end='')
     sprint(message)
-
 
 def sprint(message):
     """
@@ -272,7 +284,6 @@ def sprint(message):
         print()
 
     else: print(message)  # Print all lines instantly.
-
 
 def show_help(*args):
     """Shows help page."""

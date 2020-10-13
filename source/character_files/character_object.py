@@ -56,7 +56,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.game_object_type = 'character'
         self.story_progress = [None]
         self.save_path = ''
-        self.text_crawl = True
+        self.text_crawl = None
         self.valid_save = None
 
     def set_start_state(self):
