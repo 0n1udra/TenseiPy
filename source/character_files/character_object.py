@@ -45,7 +45,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.is_alive = True
 
         # Combat variables.
-        self.current_level_mobs = []  # Current mobs around you that you can interact or attack.
+        self.active_mobs = []  # Current mobs around you that you can interact or attack.
         self.targeted_mobs = set()  # Targets that will be attacked with 'attack' command.
 
         # Map functionality.
@@ -57,6 +57,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.story_progress = [None]
         self.save_path = ''
         self.text_crawl = True
+        self.valid_save = None
 
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
@@ -72,7 +73,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             item: Either string or object instance of the object you want. If object, will get objects .name attribute.
             mimic: If currently using Mimic ability, will also include mimicked mob attributes.
             new: If first time adding a new object to character.
-            get_level_mobs: Gets character objects from current_level_mobs list
+            get_level_mobs: Gets character objects from active_mobs list
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
@@ -93,8 +94,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         generators = [*self.inventory_generator(), *self.attributes_generator()]
         # If object not in inventory, Will need to use __subclasses__ method to find and create new instance of object.
         if new: generators = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
-        # Get mob character objects from current_level_mobs list.
-        if get_level_mobs: generators.extend(self.current_level_mobs)
+        # Get mob character objects from active_mobs list.
+        if get_level_mobs: generators.extend(self.active_mobs)
         # Adds all attributes from all acquired mimicries.
         if mimic: generators.extend([*self.mimic_generator()])
 

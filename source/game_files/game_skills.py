@@ -288,7 +288,7 @@ class Sense_Heat_Source(Skill):
 
     def use_skill(self, character, args):
         print("    -----Nearby Heat Sources-----")
-        for mob in character.current_level_mobs:
+        for mob in character.active_mobs:
             if mob.is_alive: print(f'    {mob.name}')
         return True
 

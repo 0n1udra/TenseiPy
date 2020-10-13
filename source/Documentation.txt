@@ -53,12 +53,12 @@ In function docstring's Usage section, '>' means example of user input in game.
 :Functions:
     action_menu() - Takes care of user input and runs corresponding functions.
     show_hud() - Shows user's available actions, current mimicry, and other basic commands like stats and inv.
-    get_mob_status() - Returns True if mob is in current_level_mobs list.
-    add_level_mob() - Adds new character object to current game level.
+    mob_status() - Returns True if mob is in active_mobs list.
+    new_active_mob() - Adds new character object to current game level.
     tbc() - Prints out To be continued.
-    load_save_game() - Load user save.
-    save_game() - Saves game state by pickling Rimuru_Tempest object (the player).
-    load_save_game() - Load s user save.
+    game_load() - Load user save.
+    game_save() - Saves game state by pickling Rimuru_Tempest object (the player).
+    game_load() - Load s user save.
     delete_game_save() - Deletes save.
     continue_story() - At end of chapter, asks if want to continue.
     show_start_banner() - Shows name and basic help at start of game.
@@ -98,7 +98,7 @@ In function docstring's Usage section, '>' means example of user input in game.
 
 -----character_combat.py-----
 :Variables:
-    current_level_mobs [] - Characters that are on the current level of game.
+    active_mobs [] - Characters that are active and relevant to current level.
     targeted_mobs () - Currently targeted_mobs characters, used for attack and predate.
 
 :Functions:

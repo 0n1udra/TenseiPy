@@ -3,7 +3,7 @@ class Combat:
         """
         Adds inputted targets to targeted_mobs list from user input.
 
-        Separates user inputted targets by ',' then checks to see if mob is in current_level_mobs list.
+        Separates user inputted targets by ',' then checks to see if mob is in active_mobs list.
         If so, adds to setTargets list.
 
         Args:
@@ -17,8 +17,8 @@ class Combat:
             self.targeted_mobs.clear()
         else:
             for target in targets.split(','):
-                for i in self.current_level_mobs:
-                    # If can able to target, by checking if in current_level_mobs list.
+                for i in self.active_mobs:
+                    # If can able to target, by checking if in active_mobs list.
                     if i.get_name() in target:
                         self.targeted_mobs.add(i)
 
@@ -46,7 +46,7 @@ class Combat:
         attack_success = False
         skills = []
 
-        # If mob is in current_level_mobs list and is is_alive, adds to focusTarget list.
+        # If mob is in active_mobs list and is is_alive, adds to focusTarget list.
         for attack in user_input.split(','):
             attack = self.get_object(attack)
             try:

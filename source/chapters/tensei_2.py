@@ -28,7 +28,7 @@ def Chapter2(rimuru):
             ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
 
             ssprint("< Choose ability to learn and use on the [Tempest Serpent]. >")
-            add_level_mob('tempest serpent')
+            new_active_mob('tempest serpent')
             action_menu(self)
 
         def _try_escaping(self):
@@ -47,7 +47,7 @@ def Chapter2(rimuru):
 
     class _attack_serpent:
         def __init__(self):
-            add_level_mob(['giant bat', 'black spider', 'evil centipede'])
+            new_active_mob(['giant bat', 'black spider', 'evil centipede'])
             ssprint("Now I have a way to attack.\n")
 
             ssprint("< Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
@@ -55,7 +55,7 @@ def Chapter2(rimuru):
 
         class _attack:
             def __init__(self):
-                if not get_mob_status('tempest serpent'):
+                if not mob_status('tempest serpent'):
                     sprint("Wow, what a powerful attack. I probably shouldn't use that so carelessly.")
                     ssprint("<< Notice, would you like to use Unique Skill [Predator]? >>")
                     sprint("Oh...? What will that do?")
@@ -69,7 +69,7 @@ def Chapter2(rimuru):
                     ssprint("< After using 'predate', Try finding the other monsters and use 'target' and 'attack' on them. >")
                     ssprint("< HINT: Try [Sense Heat Source] to detect foes using the 'use' command. 'help' for more info. >")
 
-                if check_cleared_mobs():
+                if cleared_all_mobs():
                     action_menu(_at_exit())
                 else: action_menu(_attack_serpent)
 
@@ -110,7 +110,7 @@ def Chapter2(rimuru):
                 ssprint("* After the little slime died. All of his stomach contents spewed outwards. *")
                 ssprint("* Unfortunately this particular slime had somehow absorbed a whole dragon! *")
                 ssprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
-            delete_game_save(rimuru)
+            delete_game_save()
 
     class _the_encouter:
         __location = "Near Sealed Cave"

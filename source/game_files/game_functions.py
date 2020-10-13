@@ -69,7 +69,8 @@ def action_menu(level=None):
         'craft': rimuru.craft_item,
         'map': rimuru.get_map,
         'help': show_help,
-        'exit': exit,
+        'save': game_save,
+        'exit': game_exit,
     }
     if 'attack' in command:
         if rimuru.attack(parameter): user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
@@ -90,73 +91,80 @@ def action_menu(level=None):
 
 
 #                    ========== Level Functions ==========
-def add_level_mob(characters):
+def new_active_mob(characters):
     """
-    Adds new mob to current level in game.
+    Mob is alive on current level.
 
     Args:
         characters: Mob character(s) to add to current level. Can be single mob (string) or multiple (list).
 
     Usage:
-        add_level_mob('tempest serpent')
-        add_level_mob(['tempest serpent', 'giant bat'])
+        new_active_mob('tempest serpent')
+        new_active_mob(['tempest serpent', 'giant bat'])
     """
     if type(characters) is list:
         for mob in characters:
             if mob := rimuru.get_object(mob, new=True):
-                rimuru.current_level_mobs.append(mob)
+                rimuru.active_mobs.append(mob)
     # Adds singular mob object to current level.
-    else: rimuru.current_level_mobs.append(rimuru.get_object(characters, new=True))
+    else: rimuru.active_mobs.append(rimuru.get_object(characters, new=True))
 
 
-def get_mob_status(target):
+def mob_status(target):
     """
-    Returns whether mob in current_mob list is is_alive.
+    Returns whether mob in active_mobs list is is_alive.
 
     Args:
         target: Target to check is_alive status.
 
     Usage:
-        get_mob_status('tempest serpent')
+        mob_status('tempest serpent')
     """
 
-    for i in rimuru.current_level_mobs:
+    for i in rimuru.active_mobs:
         if target.lower() in i.get_name():
             return i.is_alive
 
 
-def check_cleared_mobs():
+def cleared_all_mobs():
     """
     Checks if mobs on current level are all dead.
 
     Returns:
-        Boolean: If all mobs in current_level_mobs are dead.
+        boolean: If all mobs in active_mobs are dead.
 
     Usage:
-        if check_cleared_mobs():
+        if cleared_all_mobs():
     """
 
-    for mob in rimuru.current_level_mobs:
+    for mob in rimuru.active_mobs:
         if mob.is_alive: return False
     else: return True
 
 
 #                    ========== Extra ==========
 def tbc():
-    """ To Be Continued function."""
+    """ To Be Continued message.."""
+
     print("---TO BE CONTINUED---")
     input("Press Enter to exit > ")
 
 
 #                    ========== Game Saves ==========
-def save_game():
+def game_exit(*args):
+    """Saves game using pickle, then exits."""
+
+    game_save()
+    exit(0)
+
+def game_save(*args):
     """Pickels Rimuru_Tempest object."""
 
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    print("Game saved to player_save.p\n")
+    print("Game Saved.\n")
 
 
-def load_save_game(path):
+def game_load(path):
     """
     Load game save.
 
@@ -167,28 +175,31 @@ def load_save_game(path):
         Loaded game save object.
     """
 
-    # Tries loading game. If can't, creates new Rimuru_Tempest object.
-    # Rimuru_Tempest object stores all game data like progress, inventory, stats, etc.
-    try:
-        rimuru = pickle.load(open(path, 'rb'))
-        print("Loaded Player Save\n")
+    # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
+    try: rimuru = pickle.load(open(path, 'rb'))
     except:
         rimuru = mobs.Rimuru_Tempest()
-        # Sets file save path for later retrieval.
         rimuru.save_path = path
 
-        # Adds first chapter.
         import chapters.tensei_1 as tensei1
         rimuru.story_progress[0] = tensei1.Chapter1
+
+    if rimuru.valid_save:
+        print("Loaded Game Save.\n")
+    else:
+        os.remove(rimuru.save_path)
+        game_load(path)
 
     return rimuru
 
 
-def delete_game_save(rimuru_object):
+def game_over():
     """Deletes pickle save file."""
 
+    rimuru.valid_save = False  # So you can't use copies of game save.
     os.remove(rimuru.save_path)
-    print("Resetting Game. Deleted player_save.p\n")
+    print("GAME OVER.\n")
+    exit(0)
 
 
 def continue_story(next_chapter):
@@ -199,27 +210,27 @@ def continue_story(next_chapter):
         next_chapter: Next chapter to play.
     """
 
-    print("\nContinue to next chapter?")
-    user_input = input("Y/N > ")
+    # Adds next chapter of game, and saves current progress.
     rimuru.story_progress.append(next_chapter)
-    save_game()
-    if user_input.lower() == 'y':
-        next_chapter(rimuru)
-    else: exit()
+    game_save()
+
+    print("\nContinue to next chapter?")
+    if str(input("No/Yes or Enter > ")).lower() in ['n', 'no']:
+        exit(0)
+    else: next_chapter(rimuru)
 
 
 #                    ========== Game Functions ==========
 def show_start_banner(rimuru):
     """Show game title, tips, and player stats/inv."""
 
-    print("\n----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------\n")
-    instructions = """
+    print(f"""
+    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
+    
     NOTE: 
-    - Set window fullscreen for ASCII art.
-    - Use 'help' command for game commands and more.
-    - Delete player_save.p to reset game progress, inventory and skills.
-    """
-    print(instructions)
+    - Some basic commands: help, info, stats, inv, save, and exit.
+    - Fullscreen recommended.
+    """)
     rimuru.show_attributes()
     rimuru.show_inventory()
     print()
@@ -249,14 +260,15 @@ def sprint(message):
         elif message_length > 10: total_time = 2.5
         else: total_time = 2.5
 
+        # Prints letter by letter, resulted speed depends on string length.
         sleep_time = total_time / message_length
-
         for letter in stripped_message:
             sys.stdout.write(letter)
             sys.stdout.flush()
             time.sleep(sleep_time)
         print()
-    else: print(message)
+
+    else: print(message)  # Print all lines instantly.
 
 
 def show_help(*args):
@@ -272,6 +284,7 @@ def show_help(*args):
         stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
         inv                         -- Show inventory.
         info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        save                        -- Saves current game state.
         help                        -- Show this help page.
         exit                        -- Exit game.
 

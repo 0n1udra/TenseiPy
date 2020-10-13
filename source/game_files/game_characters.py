@@ -117,8 +117,8 @@ class Rimuru_Tempest(Character):
                 self.add_attribute(target)
             elif target.game_object_type == 'character':
                 # Get's list of c that are on current level.
-                for mob in self.current_level_mobs:
-                    # Checks if current mob is is_alive and checks of current target is in current_level_mobs lsit.
+                for mob in self.active_mobs:
+                    # Checks if current mob is is_alive and checks of current target is in active_mobs lsit.
                     if not mob.is_alive and mob.get_name() in target.get_name():
                         self.add_mimic(target)
 
