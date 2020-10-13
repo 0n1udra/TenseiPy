@@ -1,5 +1,5 @@
 class Inventory:
-    def inventory_generator(self, character=None, output=False):
+    def inventory_generator(self, output=False):
         """
         Yields all items in character's inventory (Currently only Rimuru).
 
@@ -11,20 +11,18 @@ class Inventory:
             .inventory_generator(output=True)
         """
 
-        if not character: character = self
-
         # Generator responsible for getting printout data when using show_attribute.
-        for item_type, items in character.inventory.items():
-            if output and items:
-                # If output=True yields out item_type to printout.
-                yield f'[{item_type}]'
+        for item_type, items in self.inventory.items():
+
+            # Yields item type if formatting for output to plyaer.
+            if output and items: yield f'[{item_type}]'
 
             for item_name, item_object in items.items():
                 if output:
                     yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name}'
                 else: yield item_object
 
-    def show_inventory(self, character=None):
+    def show_inventory(self, *args):
         """
         Prints out inventory items, corresponding category, and capacity.
 
@@ -95,7 +93,7 @@ class Inventory:
         if item.quantity < 0:
             del self.inventory[item.item_type]
 
-    def craft_item(self, item, craft_amount=1):
+    def craft_item(self, item):
         """
         Craft item if have necessary material.
 
@@ -104,7 +102,6 @@ class Inventory:
 
         Args:
             item: Item to craft.
-            craft_amount: How many to craft.
 
         Usage:
             > craft full potion
@@ -113,6 +110,7 @@ class Inventory:
         item = self.get_object(item, new=True)
         if item is None: return
 
+        # Shows recipe.
         recipe = ''
         for ingredient, amount in item.recipe.items():
             recipe += F"{amount}x {ingredient}, "
@@ -124,15 +122,13 @@ class Inventory:
             print("    < Error, need integer input. >")
             return
 
-        if craft_amount is None: return
-
+        # Checks if have enough ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
             if self.check_acquired(ingredient_name, ingredient_amount * craft_amount):
                 print("    < Not enough materials to craft item. >")
                 return
 
-        # Use ingredients to make the item.
+        # Use up ingredients then add to inventory
         for ingredient_name, ingredient_amount in item.recipe.items():
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
-
         self.add_inventory(item, craft_amount)

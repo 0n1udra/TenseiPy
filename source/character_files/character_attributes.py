@@ -1,19 +1,17 @@
 class Attributes:
-    def attributes_generator(self, character=None, output=False):
+    def attributes_generator(self, output=False):
         """
         Yields character's attributes game objects (skills/resistances).
 
         Args:
-            character: Specifies character to get attributes from, default is Rimuru (player).
             output: Yields friendly string for in game printing.
 
         Usage:
-            .attributes_generator('ranga', output=True)
+            .attributes_generator()
+            .attributes_generator(output=True)
         """
 
-        if character is None: character = self
-
-        for skill_type, skills in character.attributes.items():
+        for skill_type, skills in self.attributes.items():
 
             # Prints out skill category (Ultimate, Unique, etc)
             # So far it's easier to put the code for printing user stat info here.
@@ -31,7 +29,7 @@ class Attributes:
                     yield f'    {skill_name} (Passive)'
                 else: yield f'    {skill_name}'
 
-    def show_attributes(self, character=None):
+    def show_attributes(self, *args):
         """
         Prints out attribute of player or specified character.
 
@@ -46,21 +44,17 @@ class Attributes:
             > stats tempest serpent
         """
 
-        character = self.get_object(character, mimic=True)
-        if character is None: character = self
-        if character.game_object_type != 'character': return
-
         print("-----Attributes/Skills-----")
         # Prints character's name. Without the if statement if the character doesn't have a family_name it'll show an extra space in the [] at the end, doesn't look so pretty.
-        print(f"Name: [{character.name}{' ' + character.family_name if character.family_name else ''}]")
-        print(f"Location: {character.current_location}\n")
+        print(f"Name: [{self.name}{' ' + self.family_name if self.family_name else ''}]")
+        print(f"Location: {self.current_location}\n")
 
-        for i in self.attributes_generator(character, output=True): print(i)
+        for i in self.attributes_generator(output=True): print(i)
 
         # Only shows mimicry info when not looking at stats of other monsters and if currently using mimicry
         if self.current_mimic:
             print(f"\nMimicking: [{self.current_mimic.name}]")
-            for j in self.attributes_generator(self.current_mimic, output=True):
+            for j in self.current_mimic.attributes_generator(output=True):
                 print(f'{j}')
         print()
 
@@ -111,7 +105,7 @@ class Attributes:
 
         Args:
             skill_from: Skill to upgrade from.
-            skill_to (str): Skill to upgrade to.
+            skill_to str: Skill to upgrade to.
 
         Usage:
             .upgrade_attribute('sage', 'great sage')

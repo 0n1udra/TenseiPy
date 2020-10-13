@@ -1,10 +1,7 @@
 class Subordinates:
-    def subordinates_generator(self, character=None):
+    def subordinates_generator(self):
         """
         Yields the subordinates under specified character.
-
-        Args:
-            character: Character to get subordinates from.
 
         Usage:
             .subordinates_generator('milim')
