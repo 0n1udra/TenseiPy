@@ -203,7 +203,7 @@ class Magic_Perception(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, user, target):
+    def use_skill(self, args):
         print("    < Activated Extra Skill [Magic Perception]. >")
         self.active = True
         return True
@@ -290,9 +290,9 @@ class Sense_Heat_Source(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, user, target):
+    def use_skill(self, args):
         print("    -----Nearby Heat Sources-----")
-        for i in user.current_level_mobs:
+        for i in self.current_level_mobs:
             if i.is_alive:
                 print(f'    {i.name}')
         return True
