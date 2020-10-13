@@ -33,7 +33,6 @@ def action_menu(level=None):
         if '__' in action: continue  # Filters out unwanted variables and functions.
         actions.append(action)
 
-
     # ========== HUD
     print()
     if rimuru.targeted_mobs:
@@ -43,7 +42,6 @@ def action_menu(level=None):
     # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
     actions_for_hud = ', '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
     print(f"Actions: {actions_for_hud} | (stats, inv, help)")
-
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
@@ -83,7 +81,6 @@ def action_menu(level=None):
     for action_string, action in level_actions.items():
         if action_string in command:
             action(parameter)
-
 
     loop = True
     for action in actions:

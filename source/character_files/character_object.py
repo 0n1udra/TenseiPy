@@ -57,7 +57,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.species = 'N/A'
         self.rank = 'N/A'  # E.g. Catastrophe, Calamity.
         self.level = 1  # Same as rank just as integer.
-        self.info = 'N/A'  # Info page for character.
+        self.info_page = 'N/A'  # Info page for character.
         self.description = 'N/A'
         self.appearance = 'N/A'
         self.evolution = ''
@@ -80,7 +80,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, item, character=None, mimic=False, new=False, get_level_mobs=False):
+    def get_object(self, item, mimic=False, new=False, get_level_mobs=False):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
@@ -100,14 +100,14 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        # Set's character to player character (Rimuru) if none specified
-        if not character: character = self
         # Should always return a character object if no object to find was passed in.
         if item is None: return self
-        # If input is an objects, gets object's name.
-        if item and not type(item) == str: item = item.name
 
-        generators = [*self.inventory_generator(character), *self.attributes_generator(character)]
+        # If input is an objects, gets object's name.
+        if item and not type(item) == str:
+            item = item.name
+
+        generators = [*self.inventory_generator(), *self.attributes_generator()]
         # If object not in inventory, Will need to use __subclasses__ method to find and create new instance of object.
         if new: generators = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
         # Get mob character objects from current_level_mobs list.
@@ -122,13 +122,12 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             if i.get_name() in item.lower(): return i
             else: del i
 
-    def check_acquired(self, check_object, amount=1, character=None):
+    def check_acquired(self, check_object, amount=1):
         """
         Checks to see if character has object/attribute/item/etc.
 
         Args:
             check_object: Object to check if specified character has item, attribute, skill, etc.
-            character: Check if character has the object.
             amount: Check to see if have this amount of specified item.
 
         Returns:
@@ -142,13 +141,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             >>True
         """
 
-        # If no specified character, default is self (the player).
-        character = self.get_object(character)
-        if not character: character = self
-
-        item = character.get_object(check_object)
+        item = self.get_object(check_object)
         if not item: return
 
         # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
-        if item.game_object_type == 'item' and item.quantity >= amount: return False
+        if item.game_object_type == 'item' and item.quantity >= amount:
+            return False
         return True

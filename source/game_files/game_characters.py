@@ -1,6 +1,5 @@
 from character_files.character_object import Character
 
-
 class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)

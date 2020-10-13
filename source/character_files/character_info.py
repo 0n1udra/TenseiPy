@@ -18,7 +18,7 @@ class Info:
 
         # Checks to see if any acquired mimics has inputted ability to get info on.
         game_object = self.get_object(game_object, mimic=True)
-        if game_object: print(game_object.info)
+        if game_object: print(game_object.info_page)
 
     def update_info(self):
         """Updates character information."""
@@ -27,7 +27,7 @@ class Info:
         ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
         self.rank = ranking[self.level - 1]
 
-        self.info = f"""
+        self.info_page = f"""
         Name: {self.name} {self.family_name}
         Title: {self.title}
         Species: {self.species}

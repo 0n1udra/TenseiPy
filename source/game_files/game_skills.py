@@ -1,4 +1,3 @@
-
 class Skill:
     def __init__(self):
         self.name = 'N/A'
@@ -6,6 +5,7 @@ class Skill:
         self.skill_level = 'Common Skill'
         self.damage_level = 1
         self.damage_type = 'N/A'
+        self.info_page = None
         self.description = 'N/A'
         self.evolution = 'N/A'
         self.abilities = 'N/A'
@@ -18,11 +18,14 @@ class Skill:
 
         self.game_object_type = 'attribute'
 
+    def get_name(self):
+        return self.name.lower()
+
     def show_acquired_msg(self):
         print(f"\n    {self.acquired_msg}\n")
 
     def update_skill_info(self):
-        self.info = f"""
+        self.info_page = f"""
     Name: {self.name}
     Type: {self.type}
     Level: {self.skill_level}
@@ -40,9 +43,6 @@ class Skill:
     """
 
         self.acquired_msg = f"<< {self.skill_level} [{self.name}] successfully acquired. >>"
-
-    def get_name(self):
-        return self.name.lower()
 
 
 class Resistance(Skill):
@@ -292,9 +292,8 @@ class Sense_Heat_Source(Skill):
 
     def use_skill(self, args):
         print("    -----Nearby Heat Sources-----")
-        for i in self.current_level_mobs:
-            if i.is_alive:
-                print(f'    {i.name}')
+        for mob in self.current_level_mobs:
+            if mob.is_alive: print(f'    {mob.name}')
         return True
 
 

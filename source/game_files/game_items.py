@@ -5,7 +5,7 @@ class Item:
         self.quantity = 0
         self.quantity_add = 1
         self.inventory_capacity_add = 0
-        self.info = 'N/A'
+        self.info_page = 'N/A'
         self.description = ''
         self.usage = ''
         self.appearance = ''
@@ -31,23 +31,26 @@ class Item:
     def update_info(self):
         """Updates item's info."""
 
-        self.info = f"""
+        self.info_page = f"""
     Name: {self.name}
     
     Usage:
         {self.usage}
     """
+
         if self.ingredient_for:
-            self.info += "    Ingredient for: "
+            self.info_page += "    Ingredient for: "
+
             for item in self.ingredient_for:
-                self.info += f'[{item}], '
+                self.info_page += f'[{item}], '
 
         if self.recipe:
-            self.info += f'\n    Recipe:\n        Will craft {self.quantity_add} at a time.\n'
-            for item, amount in self.recipe.items():
-                self.info += f'        {amount}x {item}\n'
+            self.info_page += f'\n    Recipe:\n        Will craft {self.quantity_add} at a time.\n'
 
-        self.info += f"\n   Appearance:\n        {self.appearance}"
+            for item, amount in self.recipe.items():
+                self.info_page += f'        {amount}x {item}\n'
+
+        self.info_page += f"\n   Appearance:\n        {self.appearance}"
 
     def get_name(self):
         """
