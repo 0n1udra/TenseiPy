@@ -27,10 +27,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
         self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {},'Misc': {}}
 
-        # Combat variables.
-        self.current_level_mobs = []  # Current mobs around you that you can interact or attack.
-        self.targeted_mobs = set()  # Targets that will be attacked with 'attack' command.
-
         # Character information and data related variables.
         self.name = 'N/A'
         self.family_name = ''
@@ -47,6 +43,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.evolution = ''
         self.acquired_msg = ''
         self.is_alive = True
+
+        # Combat variables.
+        self.current_level_mobs = []  # Current mobs around you that you can interact or attack.
+        self.targeted_mobs = set()  # Targets that will be attacked with 'attack' command.
 
         # Map functionality.
         self.available_locations = []
@@ -124,10 +124,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             >>True
         """
 
-        item = self.get_object(check_object)
-        if not item: return
-
-        # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
-        if item.game_object_type == 'item' and item.quantity >= amount:
-            return False
-        return True
+        if item := self.get_object(check_object):
+            # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
+            if item.game_object_type == 'item' and item.quantity >= amount:
+                return False
+            return True

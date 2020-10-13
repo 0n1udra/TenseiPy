@@ -27,7 +27,6 @@ class Rimuru_Tempest(Character):
         for level, mimics in self.mimic_object().acquired_mimicries.items():
             for mimic_name, mimic in mimics.items(): yield mimic
 
-
     def mimic_object(self, active=None):
         """
         Args:
@@ -51,14 +50,21 @@ class Rimuru_Tempest(Character):
             character: Character object to add to acquired_mimicries list
         """
 
-        if self.mimic_object():
-            # Makes sure that you haven't already acquired mimicry.
-            if character.name not in self.mimic_object().acquired_mimicries[character.rank]:
-                self.mimic_object().acquired_mimicries[character.rank][character.name] = character
-                for attribute in character.attributes_generator():
-                    self.add_attribute(attribute)
-                print(f"    << Information, analysis on [{character.name}] completed. >>")
-                print(f"    << Notice, new skills and mimicry available: [{character.name}]. >>\n")
+        # Basically checks if self is the rimuru object (player).
+        if not self.mimic_object(): return False
+
+        # Checks if already acquired.
+        if character.name in self.mimic_object().acquired_mimicries[character.rank]: return None
+
+        # Adds new mob object to usable mimicries dict.
+        self.mimic_object().acquired_mimicries[character.rank][character.name] = character
+
+        # Adds attributes from mob just analyzed.
+        for attribute in character.attributes_generator():
+            self.add_attribute(attribute)
+
+        print(f"    << Information, analysis on [{character.name}] completed. >>")
+        print(f"    << Notice, new skills and mimicry available: [{character.name}]. >>\n")
 
     def use_mimic(self, character):
         """

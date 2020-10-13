@@ -37,7 +37,7 @@ def action_menu(level=None):
     print()
     if rimuru.targeted_mobs:
         # Adds (Dead) status to corresponding
-        targets = ', '.join([(mob.name if mob.is_alive else f'{mob.name} (Dead)') for mob in rimuru.targeted_mobs])
+        targets = ', '.join([(mob.name if mob.is_alive else f'{mob.name}(Dead)') for mob in rimuru.targeted_mobs])
         print(f'\nTarget: {targets}')
     # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
     actions_for_hud = ', '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
@@ -57,12 +57,12 @@ def action_menu(level=None):
     split_user_input = user_input.split(' ')
     command = split_user_input[0]
     parameter = ' '.join(split_user_input[1:])
+    character = rimuru
 
     level_actions = {
         'stats': rimuru.show_attributes,
         'target': rimuru.set_targets,
         'mimic': rimuru.use_mimic,
-        'use': rimuru.use_skill,
         'predate': rimuru.predate_targets,
         'inv': rimuru.show_inventory,
         'info': rimuru.show_info,
@@ -72,15 +72,13 @@ def action_menu(level=None):
         'exit': exit,
     }
     if 'attack' in command:
-        # Runs function if attack was successful, if not it'll just loop.
-        if rimuru.attack(parameter): user_input = 'attack'
-    elif 'location' in command:
-        rimuru.get_location()
+        if rimuru.attack(parameter): user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
+    elif 'use' in command: rimuru.use_skill(character, parameter)
+    elif 'location' in command: rimuru.get_location()
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action_string, action in level_actions.items():
-        if action_string in command:
-            action(parameter)
+        if action_string in command: action(parameter)
 
     loop = True
     for action in actions:
@@ -105,8 +103,8 @@ def add_level_mob(characters):
     """
     if type(characters) is list:
         for mob in characters:
-            mob = rimuru.get_object(mob, new=True)
-            if mob: rimuru.current_level_mobs.append(mob)
+            if mob := rimuru.get_object(mob, new=True):
+                rimuru.current_level_mobs.append(mob)
     # Adds singular mob object to current level.
     else: rimuru.current_level_mobs.append(rimuru.get_object(characters, new=True))
 
@@ -219,7 +217,6 @@ def show_start_banner(rimuru):
     NOTE: 
     - Set window fullscreen for ASCII art.
     - Use 'help' command for game commands and more.
-    - Actions with a '*' will advance the story (do NOT actually input *). Try the other actions first maybe, see what happens.
     - Delete player_save.p to reset game progress, inventory and skills.
     """
     print(instructions)

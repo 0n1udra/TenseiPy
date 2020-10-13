@@ -26,7 +26,7 @@ class Item:
     def show_acquired_msg(self):
         """Print item's acquired message."""
 
-        print(f'\n    < Acquired {self.quantity_add}x [{self.name}]. >\n')
+        print(f'\n    < Acquired {self.quantity_add}x [{self.name}]. >')
 
     def update_info(self):
         """Updates item's info."""

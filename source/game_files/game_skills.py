@@ -5,7 +5,6 @@ class Skill:
         self.skill_level = 'Common Skill'
         self.damage_level = 1
         self.damage_type = 'N/A'
-        self.info_page = None
         self.description = 'N/A'
         self.evolution = 'N/A'
         self.abilities = 'N/A'
@@ -22,7 +21,7 @@ class Skill:
         return self.name.lower()
 
     def show_acquired_msg(self):
-        print(f"\n    {self.acquired_msg}\n")
+        print(f"    {self.acquired_msg}\n")
 
     def update_skill_info(self):
         self.info_page = f"""
@@ -42,7 +41,7 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquired_msg = f"<< {self.skill_level} [{self.name}] successfully acquired. >>"
+        self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
 
 
 class Resistance(Skill):
@@ -97,7 +96,7 @@ class Predator_Mimicry_Skill(Skill):
                                    'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
     @property
-    def info(self):
+    def info_page(self):
         print("    -----Available Mimicries-----")
         for mob_level, mobs in self.acquired_mimicries.items():
             print(f'    {mob_level}:')
@@ -132,7 +131,6 @@ class Predator_Skill(Skill):
         """
         self.evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
         self.update_skill_info()
-        self.acquired_msg = "<< Unique Skill [Predator] successfully Acquired. >>"
 
 
 class Great_Sage_Skill(Skill):
@@ -175,7 +173,6 @@ class Great_Sage_Skill(Skill):
         '''
         self.evolution = 'Sage > Great Sage > Raphael > Ciel'
         self.update_skill_info()
-        self.acquired_msg = f"<< Unique Skill [Great Sage] Successfully Acquired! >>"
 
 
 #                    ========== Extra Skills ==========
@@ -202,7 +199,7 @@ class Magic_Perception(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, args):
+    def use_skill(self, character, args):
         print("    < Activated Extra Skill [Magic Perception]. >")
         self.active = True
         return True
@@ -236,7 +233,7 @@ class Water_Blade(Skill):
         Skill.__init__(self)
         self.name = 'Water Blade'
         self.damage_type = 'Melee'
-        self.damage_level = 9
+        self.damage_level = 6
         self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_skill_info()
@@ -247,7 +244,7 @@ class Water_Bullet(Skill):
         Skill.__init__(self)
         self.name = 'Water Bullet'
         self.damage_type = 'Melee'
-        self.damage_level = 9
+        self.damage_level = 6
         self.description = "Shoot out a small powerful water bullet."
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_skill_info()
@@ -289,9 +286,9 @@ class Sense_Heat_Source(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, args):
+    def use_skill(self, character, args):
         print("    -----Nearby Heat Sources-----")
-        for mob in self.current_level_mobs:
+        for mob in character.current_level_mobs:
             if mob.is_alive: print(f'    {mob.name}')
         return True
 
