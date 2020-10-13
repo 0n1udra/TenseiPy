@@ -25,8 +25,7 @@ def Chapter2(rimuru):
             ssprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
             ssprint("<< Answer, this is a [Tempest Serpent]. >>")
             ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
-            ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
-
+            ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
             ssprint("< Choose ability to learn and use on the [Tempest Serpent]. >")
             add_level_mob('tempest serpent')
             action_menu(self)

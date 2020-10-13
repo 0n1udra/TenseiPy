@@ -94,8 +94,7 @@ class Predator_Mimicry_Skill(Skill):
         self.skill_level = 'Unique Skill'
 
         self.acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
-                                   'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
-                                   }
+                                   'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
     @property
     def info(self):

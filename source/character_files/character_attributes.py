@@ -33,9 +33,6 @@ class Attributes:
         """
         Prints out attribute of player or specified character.
 
-        Args:
-            character: Character's attributes to show.
-
         Usage:
             .show_attributes()
             .show_attributes('tempest serpent')

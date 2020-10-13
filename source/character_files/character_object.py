@@ -14,34 +14,18 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # Main character attributes, inventory, skills, resistances, etc.
         self.starting_state = []
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
-                                            'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {},
-                                            }
+                                            'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
-        self.attributes = {
-            'Manas': {},
-            'Ultimate Skill': {},
-            'Unique Skill': {},
-            'Special Skill': {},
-            'Extra Skill': {},
-            'Intrinsic Skill': {},
-            'Common Skill': {},
-            'Daily Skill': {},
-            'Composite Skill': {},
-            'Resistance': {},
-            'Attribute': {},
-        }
+        self.attributes = {'Manas': {},
+                           'Ultimate Skill': {},'Unique Skill': {},'Special Skill': {},'Extra Skill': {},'Intrinsic Skill': {},
+                           'Common Skill': {},'Daily Skill': {},'Composite Skill': {},'Resistance': {},'Attribute': {}}
 
         # Character inventory.
         self.inventory_capacity = 0  # Inventory capacity in percentage.
         self.inventory_capacity_add = 0  # Add to overall capacity when adding items to inventory.
         self.quantity = 0  # Item quantity in inventory.
         self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
-        self.inventory = {
-            'Items': {},
-            'Materials': {},
-            'Consumable': {},
-            'Misc': {}
-        }
+        self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {},'Misc': {}}
 
         # Combat variables.
         self.current_level_mobs = []  # Current mobs around you that you can interact or attack.
@@ -86,7 +70,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         Args:
             item: Either string or object instance of the object you want. If object, will get objects .name attribute.
-            character: Character to get object from.
             mimic: If currently using Mimic ability, will also include mimicked mob attributes.
             new: If first time adding a new object to character.
             get_level_mobs: Gets character objects from current_level_mobs list

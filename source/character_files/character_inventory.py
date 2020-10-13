@@ -4,7 +4,6 @@ class Inventory:
         Yields all items in character's inventory (Currently only Rimuru).
 
         Args:
-            character: Character to yield inventory items from.
             output: Yields a friendly string for printing in game purposes.
 
         Usage:
@@ -25,9 +24,6 @@ class Inventory:
     def show_inventory(self, *args):
         """
         Prints out inventory items, corresponding category, and capacity.
-
-        Args:
-            character: Specify which character's inventory to show.
 
         Usage:
             .show('gobta')
