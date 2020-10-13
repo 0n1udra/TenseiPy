@@ -26,6 +26,7 @@ def Chapter2(rimuru):
             ssprint("<< Answer, this is a [Tempest Serpent]. >>")
             ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
+
             ssprint("< Choose ability to learn and use on the [Tempest Serpent]. >")
             add_level_mob('tempest serpent')
             action_menu(self)
@@ -48,6 +49,7 @@ def Chapter2(rimuru):
         def __init__(self):
             add_level_mob(['giant bat', 'black spider', 'evil centipede'])
             ssprint("Now I have a way to attack.\n")
+
             ssprint("< Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
             action_menu(self)
 
@@ -57,21 +59,21 @@ def Chapter2(rimuru):
                     sprint("Wow, what a powerful attack. I probably shouldn't use that so carelessly.")
                     ssprint("<< Notice, would you like to use Unique Skill [Predator]? >>")
                     sprint("Oh...? What will that do?")
-                    ssprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
+                    ssprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>\n")
+
                     sprint("Are those bats?")
                     ssprint("<< Answer, they are commonly known as [Giant Bat]. >>")
                     ssprint("And it seems like there's some other small monsters dwelling in here aswell.")
-                    ssprint("I should clear them out before they notice me.")
+                    ssprint("I should clear them out before they notice me.\n")
+
                     ssprint("< After using 'predate', Try finding the other monsters and use 'target' and 'attack' on them. >")
-                    ssprint(" < Hint, Try [Sense Heat Source] to detect foes using the 'use' command. 'help' for more info. >")
+                    ssprint("< HINT: Try [Sense Heat Source] to detect foes using the 'use' command. 'help' for more info. >")
 
                 if check_cleared_mobs():
                     action_menu(_at_exit())
-                else:
-                    action_menu(_attack_serpent)
+                else: action_menu(_attack_serpent)
 
-        def predate_magic_ore(self):
-            pass
+        def predate_magic_ore(self): rimuru.add_inventory('magic ore')
 
         def _sneak_away(self):
             ssprint("I'll try to sneak away.")
