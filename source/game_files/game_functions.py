@@ -12,13 +12,13 @@ def update_variables(rimuru_object, debug):
     return rimuru
 
 
-def action_menu(current_level_class):
+def action_menu(level=None):
     """
-    Takes user input and runs corresponding actions.
+    Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
 
     Args:
-        current_level_class: Current story progress class object.
+        level: Current story progress class object.
 
     Usage:
         > inv
@@ -26,28 +26,29 @@ def action_menu(current_level_class):
         > attack tempest serpent with water blade
     """
 
-    # Gets subclass functions.
-    class_funcs = [i for i in dir(current_level_class)]
-    # Actions starting with '__' will be omitted. And actions starting with '_' will be replaced with '*' at the front.
+    rimuru.update_location(rimuru.get_location_variable(level))  # Updates player's location.
+
     actions = []
-    for action in class_funcs:
-        if '__' in action:
-            continue
-        if action[0] == '_':
-            actions.append('*' + action[1:])
-        else:
-            actions.append(action)
+    for action in dir(level):  # Gets subclass functions.
+        if '__' in action: continue  # Filters out unwanted variables and functions.
+        actions.append(action)
 
-    actions = [i.replace('_', ' ') for i in actions]
+    print()
+    # Show HUD and mobs being targeted.
+    if rimuru.targeted_mobs:
+        # Adds (Dead) status to corresponding
+        targets = ', '.join([(mob.name if mob.is_alive else f'{mob.name} (Dead)') for mob in rimuru.targeted_mobs])
+        print(f'\nTarget: {targets}')
 
-    rimuru.update_location(rimuru.get_location_name(current_level_class))
-    show_hud(actions)
+    # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
+    actions_for_hud = ', '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
+    print(f"Actions: {actions_for_hud} | (stats, inv, help)")
 
     # Runs first available action that will progress the storyline.
     if debug_mode:
-        for i in actions:
-            if i[0] == '*':
-                user_input = i[1:]
+        for action in actions:
+            if action[0] == '*':
+                user_input = action[1:]
     else:
         user_input = input("\n> ").lower()
         print()
@@ -72,48 +73,22 @@ def action_menu(current_level_class):
     }
     if 'attack' in command:
         # Runs function if attack was successful, if not it'll just loop.
-        if rimuru.attack(parameter):
-            user_input = 'attack'
+        if rimuru.attack(parameter): user_input = 'attack'
     elif 'location' in command:
-        rimuru.get_location(parameter, current_level_class)
+        rimuru.get_location()
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
-    for action_string, action  in level_actions.items():
+    for action_string, action in level_actions.items():
         if action_string in command:
             action(parameter)
 
     loop = True
+    for action in actions:
+        if action.replace('_', ' ').strip() in user_input:
+            if action[0] == '_': loop = False  # Checks if action will progress storyline.
+            eval(f"level.{action}()")
 
-    for i in actions:
-        # Removes special characters for comparison.
-        current_action = i.replace('*', '_').replace(' ', '_')
-        # Gets full function name to call with.
-        run_action = f'current_level_class.{current_action}()'
-        # Checks if action will progress storyline.
-        if i[0] == '*':
-            if user_input.lower() == i.lower()[1:]:
-                eval(run_action)
-                loop = False
-                break
-        else:
-            if user_input.lower() == i.lower():
-                eval(run_action)
-    if loop: action_menu(current_level_class)
-
-
-def show_hud(actions):
-    """Shows user HUD with available actions and targets (if any)."""
-
-    options = ', '.join('(' + i + ')' for i in actions)
-    try:
-        targets = ', '.join([(i.name if i.is_alive else f'{i.name}(Dead)') for i in rimuru.targeted_mobs])
-    except ValueError: targets = None
-
-    if targets:
-        # print(f'\nTarget:', str(targets))
-        print(f'\nTarget: {targets}\nActions:', options, f'| (stats, inv, help)')
-    else:
-        print("\nActions:", options, f'| (stats, inv, help)')
+    if loop: action_menu(level)
 
 
 #                    ========== Level Functions ==========
@@ -128,14 +103,12 @@ def add_level_mob(characters):
         add_level_mob('tempest serpent')
         add_level_mob(['tempest serpent', 'giant bat'])
     """
-    if type(characters) == list:
-        for i in characters:
-            mob = rimuru.get_object(i, new=True)
-            if mob:
-                rimuru.current_level_mobs.append(mob)
-    else:
-        mob = rimuru.get_object(characters, new=True)
-        rimuru.current_level_mobs.append(mob)
+    if type(characters) is list:
+        for mob in characters:
+            mob = rimuru.get_object(mob, new=True)
+            if mob: rimuru.current_level_mobs.append(mob)
+    # Adds singular mob object to current level.
+    else: rimuru.current_level_mobs.append(rimuru.get_object(characters, new=True))
 
 
 def get_mob_status(target):
@@ -151,12 +124,12 @@ def get_mob_status(target):
 
     for i in rimuru.current_level_mobs:
         if target.lower() in i.get_name():
-            if i.is_alive: return True
+            return i.is_alive
 
 
 def check_cleared_mobs():
     """
-    Returns whether all mobs on at current stage are cleared.
+    Checks if mobs on current level are all dead.
 
     Returns:
         Boolean: If all mobs in current_level_mobs are dead.
