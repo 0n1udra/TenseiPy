@@ -14,21 +14,22 @@ class Attributes:
         if character is None: character = self
 
         for skill_type, skills in character.attributes.items():
-            if output and skills:
-                # Prints out skill category (Ultimate, Unique, etc)
-                # So far it's easier to put the code for printing user stat info here.
-                yield f'[{skill_type}]'
+
+            # Prints out skill category (Ultimate, Unique, etc)
+            # So far it's easier to put the code for printing user stat info here.
+            if output and skills: yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
-                # Prints if skill is active or passive
+
+                # Yields skill game object if not in printing mode.
                 if not output: yield skill_object
 
+                # Prints skill's active or passive status.
                 if skill_object.active:
                     yield f'    {skill_name} (Active)'
                 elif skill_object.passive:
                     yield f'    {skill_name} (Passive)'
-                else:
-                    yield f'    {skill_name}'
+                else: yield f'    {skill_name}'
 
     def show_attributes(self, character=None):
         """
@@ -144,31 +145,24 @@ class Attributes:
         if type(target) == str: target = self.get_object(target)
         if not target: target = self
 
-        # Checks if character has resistance attribute
+        # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
                 if attack.damage_type in resist:
                     return True
 
-    def use_skill(self, skill, user=None, target=None):
+    def use_skill(self, skill, *args):
         """
-        Use skill.
-
-        Gets character object for user and target.
+        Uses spell and passes arguments to spell's corresponding function.
 
         Args:
             skill: Skill to use.
-            user: Specify who will use the skill.
-            target: Target of specified skill.
 
         Usage:
             > use sense heat source
         """
 
-        if user is None: user = self
-        if target is None: target = self
-
         skill = self.get_object(skill)
-        if not skill: return
+        if not skill: return False
 
-        skill.use_skill(user=user, target=target)
+        skill.use_skill(args)
