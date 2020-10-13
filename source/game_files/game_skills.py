@@ -19,7 +19,7 @@ class Skill:
         self.game_object_type = 'attribute'
 
     def show_acquired_msg(self):
-        print(f"    {self.acquired_msg}\n")
+        print(f"\n    {self.acquired_msg}\n")
 
     def update_skill_info(self):
         self.info = f"""

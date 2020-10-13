@@ -119,8 +119,7 @@ class Inventory:
         print(f"{item.quantity_add}x {item.name}: {recipe[:-2]}")
 
         # Asks for how much to make. note that some items are crafted in batches.
-        try:
-            craft_amount = int(input("Amount (0 to cancel) > "))
+        try: craft_amount = int(input("Amount (0 to cancel) > "))
         except ValueError:
             print("    < Error, need integer input. >")
             return

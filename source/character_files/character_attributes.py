@@ -122,7 +122,7 @@ class Attributes:
         if not skill_to and not skill_from: return
 
         self.remove_attribute(skill_from)
-        print(f"    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
+        print(f"\n    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
         self.add_attribute(skill_to)
 
     def check_resistance(self, attack, target=None):
@@ -165,4 +165,5 @@ class Attributes:
         skill = self.get_object(skill)
         if not skill: return False
 
-        skill.use_skill(args)
+        try: skill.use_skill(args)
+        except: pass

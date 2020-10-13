@@ -33,17 +33,19 @@ def action_menu(level=None):
         if '__' in action: continue  # Filters out unwanted variables and functions.
         actions.append(action)
 
+
+    # ========== HUD
     print()
-    # Show HUD and mobs being targeted.
     if rimuru.targeted_mobs:
         # Adds (Dead) status to corresponding
         targets = ', '.join([(mob.name if mob.is_alive else f'{mob.name} (Dead)') for mob in rimuru.targeted_mobs])
         print(f'\nTarget: {targets}')
-
     # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
     actions_for_hud = ', '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
     print(f"Actions: {actions_for_hud} | (stats, inv, help)")
 
+
+    # ========== Debug Mode
     # Runs first available action that will progress the storyline.
     if debug_mode:
         for action in actions:
@@ -81,6 +83,7 @@ def action_menu(level=None):
     for action_string, action in level_actions.items():
         if action_string in command:
             action(parameter)
+
 
     loop = True
     for action in actions:

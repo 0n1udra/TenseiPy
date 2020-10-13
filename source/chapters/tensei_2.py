@@ -48,7 +48,7 @@ def Chapter2(rimuru):
     class _attack_serpent:
         def __init__(self):
             add_level_mob(['giant bat', 'black spider', 'evil centipede'])
-            ssprint("Now I have a way to attack.")
+            ssprint("Now I have a way to attack.\n")
             ssprint("< Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
             action_menu(self)
 

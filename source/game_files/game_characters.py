@@ -26,8 +26,7 @@ class Rimuru_Tempest(Character):
         if not self.mimic_object(): return None
 
         for level, mimics in self.mimic_object().acquired_mimicries.items():
-            for mimic_name, mimic in mimics.items():
-                yield mimic
+            for mimic_name, mimic in mimics.items(): yield mimic
 
 
     def mimic_object(self, active=None):
