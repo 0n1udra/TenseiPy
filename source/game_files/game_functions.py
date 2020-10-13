@@ -47,8 +47,8 @@ def action_menu(level=None):
     # Runs first available action that will progress the storyline.
     if debug_mode:
         for action in actions:
-            if action[0] == '*':
-                user_input = action[1:]
+            if action[0] == '_':
+                user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").lower()
         print()
