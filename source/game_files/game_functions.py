@@ -146,7 +146,7 @@ def cleared_all_mobs():
 def tbc():
     """ To Be Continued message.."""
 
-    print("---TO BE CONTINUED---")
+    ssprint("< ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
 
 
@@ -160,8 +160,9 @@ def game_exit(*args):
 def game_save(*args):
     """Pickels Rimuru_Tempest object."""
 
+    rimuru.valid_save = True
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    print("Game Saved.\n")
+    ssprint("< Game Saved. >\n")
 
 
 def game_load(path):
@@ -184,9 +185,7 @@ def game_load(path):
         import chapters.tensei_1 as tensei1
         rimuru.story_progress[0] = tensei1.Chapter1
 
-    if rimuru.valid_save:
-        print("Loaded Game Save.\n")
-    else:
+    if rimuru.valid_save is False:
         os.remove(rimuru.save_path)
         game_load(path)
 
@@ -198,7 +197,7 @@ def game_over():
 
     rimuru.valid_save = False  # So you can't use copies of game save.
     os.remove(rimuru.save_path)
-    print("GAME OVER.\n")
+    ssprint("< GAME OVER. >\n")
     exit(0)
 
 
@@ -231,8 +230,12 @@ def show_start_banner(rimuru):
     - Some basic commands: help, info, stats, inv, save, and exit.
     - Fullscreen recommended.
     """)
+
     rimuru.show_attributes()
     rimuru.show_inventory()
+
+    if rimuru.valid_save is True:
+        ssprint("< Save Loaded. >")
     print()
 
 
@@ -286,7 +289,7 @@ def show_help(*args):
         info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
         save                        -- Saves current game state.
         help                        -- Show this help page.
-        exit                        -- Exit game.
+        exit                        -- Exits after save.
 
     Abilities:
         mimic TARGET                -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
