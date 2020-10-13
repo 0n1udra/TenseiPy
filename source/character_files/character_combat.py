@@ -43,22 +43,18 @@ class Combat:
             > attack water blade
         """
 
-        attacks = skills = []
-        targets = self.targeted_mobs
         attack_success = False
-
-        # Checks if receiving multiple spells (attacks).
-        try:
-            attacks.append(attacks.split(','))
-        except: attacks.append(user_input)
+        skills = []
 
         # If mob is in current_level_mobs list and is is_alive, adds to focusTarget list.
-        for attack in attacks:
+        for attack in user_input.split(','):
             attack = self.get_object(attack)
-            if attack is not None:
-                skills.append(attack)
+            try:
+                if attack.game_object_type is 'attribute':
+                    skills.append(attack)
+            except: continue
 
-        for current_target in targets:
+        for current_target in self.targeted_mobs:
             for current_skill in skills:
 
                 # Checking if have resistance.
@@ -66,8 +62,8 @@ class Combat:
                     print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
                     return False
 
-                # If target is lower level.
-                if current_target.level <= current_skill.damage_level:
+                # If target is too high of a level to damage with skill.
+                if current_target.level > current_skill.damage_level:
                     print(f"    < {current_target.name} level too for that attack. >")
                     return False
 
