@@ -11,7 +11,7 @@ def Chapter1(rimuru):
             ssprint(".....")
             print(art.great_sage)
             rimuru.set_start_state()
-            ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>")
+            ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             ssprint("<< Confirmation Complete. Acquiring Skill [Predator]... >>")
             rimuru.add_attribute('Predator')
             ssprint("<< Confirmation Complete. Acquiring Extra Skill [Sage]... >>")
@@ -129,7 +129,8 @@ def Chapter1(rimuru):
                 ssprint("<< Answer, none. A slime's body does not require oxygen to live. >>")
                 ssprint("Hmmmmm. I'm not feeling any pain.")
                 ssprint("I just thought of something!")
-                ssprint("I swallow up tons of water then I can and expel it at a high pressure...")
+                ssprint("I could swallow up tons of water then I can and expel it at a high pressure...")
+                rimuru.add_attribute('Hydraulic Propulsion')
                 action_menu(self)
 
             def stay_in_water(self):
@@ -143,8 +144,7 @@ def Chapter1(rimuru):
                 def stay_in_water(self):
                     sprint("..........")
 
-                def _expel_water(self):
-                    rimuru.add_attribute('Hydraulic Propulsion')
+                def _use_hydraulic_propulsion(self):
                     ssprint("Finally, I'm back on land!")
                     sprint("~Can you hear me little one.~")
                     ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
