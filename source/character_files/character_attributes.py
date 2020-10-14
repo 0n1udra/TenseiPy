@@ -71,7 +71,7 @@ class Attributes:
         if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
             if show_acquired_msg:
-                attribute.show_acquired_msg()
+                print(f"    < Acquired: {attribute.skill_level} [{attribute.name}]. >\n")
             if show_skill_info:
                 self.show_info(attribute.name)
 

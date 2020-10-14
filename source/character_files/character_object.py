@@ -56,8 +56,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.game_object_type = 'character'
         self.story_progress = [None]
         self.save_path = ''
-        self.text_crawl = None
         self.valid_save = None
+        self.text_crawl = None
+        self.show_ascii = False
 
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
@@ -100,14 +101,12 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             if stricter:
                 if str(game_object).lower().strip() == str(match).lower().strip():
                     return game_object
-
             elif str(game_object).lower() in str(match).lower():
                 return game_object
 
             if new: del game_object
 
         return None
-
 
     def check_acquired(self, check_object):
         """

@@ -18,7 +18,7 @@ class Combat:
         else:
             for target in targets.split(','):
                 for mob in self.active_mobs:
-                    # If can able to target, by checking if in active_mobs list.
+                    # If targetable, by checking if in active_mobs list.
                     if str(mob) in target:
                         self.targeted_mobs.append(mob)
 

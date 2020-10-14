@@ -9,7 +9,7 @@ def Chapter1(rimuru):
         __location = 'Sealed Cave'
         def __init__(self):
             ssprint(".....")
-            print(art.great_sage)
+            show_art('great sage')
             rimuru.set_start_state()
             ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             ssprint("<< Confirmation Complete. Acquiring Skill [Predator]... >>")
@@ -53,7 +53,7 @@ def Chapter1(rimuru):
                     ssprint("But... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
                     ssprint("*Although _______ didn't want to admit it.*")
                     ssprint("*You have died as a Human and reincarnated into a slime!*")
-                    print(art.slime)
+                    show_art('slime')
                     ssprint("Puyo, Puyoyoyo....")
                     ssprint("It's been a long time since I've accepted myself a slime.")
                     ssprint("I've gotten used to this elastic body.")
@@ -218,7 +218,7 @@ def Chapter1(rimuru):
         class _use_magic_perception:
             def __init__(self):
                 sprint('...')
-                print(art.magic_perception)
+                show_art('magic perception')
                 sprint("OH!")
                 sprint("Hmmmmmmmm")
                 sprint("I can see. I CAN SEE!")
@@ -229,7 +229,7 @@ def Chapter1(rimuru):
 
             def _sure(self):
                 sprint("My name is Storm Dragon Veldora!~")
-                print(art.cave_veldora)
+                show_art('cave veldora')
                 sprint("~I am one of the four True Dragons of this world.~")
                 sprint("HOLY SHIT, you're a real dragon!")
                 sprint("~Didn't I tell you not to get scared.~")
@@ -296,7 +296,7 @@ def Chapter1(rimuru):
             veldora.family_name = family_name
             rimuru.family_name = family_name
             rimuru.divineProtection = 'Storm Crest'
-            ssprint("< Acquired Storm Crest Divine Protection. >\n")
+            ssprint("< Acquired: Storm Crest Divine Protection. >\n")
             rimuru.update_ranking(8)
 
             sprint(f"Hmmmmmm... How about {family_name}")

@@ -8,34 +8,39 @@ __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
 __status__ = "Development"
 
-if __name__ == '__main__':
+def help_page():
+    print("""
+    -f  --  Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
+    -t  --  Disable text crawl effect.
+    -a  --  Hides ASCII art.
+    -h  --  This help page.
+    """)
+    exit(0)
 
-    # Enable debug mode and disable text crawl.
-    debug = False
-    set_text_crawl = True
-    if '-d' in sys.argv:
-        debug = True
-        set_text_crawl = False
-    if '-t' in sys.argv:
-        set_text_crawl = False
+if __name__ == '__main__':
+    if '-h' in sys.argv: help_page()
 
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/game.save'
 
     # Loads game save and updates rimuru object in game_functions alongside debug variable, and shows start banner.
-    rimuru = game_funcs.update_variables(game_funcs.game_load(save_path), debug)
+    rimuru = game_funcs.update_rimuru(game_funcs.game_load(save_path))
     game_funcs.show_start_banner(rimuru)
 
+    if '-f' in sys.argv:
+        game_funcs.set_fast_mode()
+    if '-t' in sys.argv: rimuru.text_crawl = False
+    if '-a' in sys.argv: rimuru.show_ascii = True
+
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
-    if set_text_crawl is False:
-        rimuru.text_crawl = False
-    elif rimuru.text_crawl is None:
-        print("\nEnable text crawl? (Recommended for easier reading)")
+    if rimuru.text_crawl is None:
+        print("\nEnable Text Crawl? (Recommended for easier reading)")
         if str(input("No/Yes or Enter > ")).lower() in ['n', 'no']:
-            print("    < Text Crawl Deactivated. > ")
+            print("\n    < Text Crawl Deactivated. > ")
             rimuru.text_crawl = False
             sleep(2)
         else:
             rimuru.text_crawl = True
-            game_funcs.sprint("Text Delay: ENABLED\n\n")
+            print()
+            game_funcs.ssprint("< Text Crawl Activated. >\n\n")
 
     rimuru.story_progress[-1](rimuru)
