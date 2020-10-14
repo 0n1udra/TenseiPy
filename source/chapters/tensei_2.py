@@ -9,7 +9,7 @@ def Chapter2(rimuru):
             ssprint("Oh, what's this? Looks like some kind of rock?")
             action_menu(self)
 
-        def predate_magic_ore(self):
+        def predate_ore(self):
             rimuru.add_inventory('magic ore')
             ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
             ssprint("Ok, might be useful in the future. Guess I should get as much as I can")
@@ -71,9 +71,9 @@ def Chapter2(rimuru):
 
                 if cleared_all_mobs():
                     action_menu(_at_exit())
-                else: action_menu(_attack_serpent)
+                else: action_menu(_attack_serpent())
 
-        def predate_magic_ore(self): rimuru.add_inventory('magic ore')
+        def predate_ore(self): rimuru.add_inventory('magic ore')
 
         def _sneak_away(self):
             ssprint("I'll try to sneak away.")
@@ -110,7 +110,6 @@ def Chapter2(rimuru):
                 ssprint("* After the little slime died. All of his stomach contents spewed outwards. *")
                 ssprint("* Unfortunately this particular slime had somehow absorbed a whole dragon! *")
                 ssprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
-            delete_game_save()
 
     class _the_encouter:
         __location = "Near Sealed Cave"
