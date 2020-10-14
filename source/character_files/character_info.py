@@ -58,11 +58,6 @@ class Info:
         self.update_info()
         print(f"    < {self.name} leveled up to {level} >")
 
-    def show_acquired_msg(self):
-        """Shows acquired message."""
-
-        print(f'\n    {self.acquired_msg}')
-
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""
 

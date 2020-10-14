@@ -37,14 +37,13 @@ class Inventory:
             print(i)
         print()
 
-    def add_inventory(self, item, amount=None, print_analysis_message=False):
+    def add_inventory(self, item, amount=1):
         """
         Adds item to character (currently only Rimuru) inventory.
 
         Args:
             item: Item to add to inventory.
             amount: Amount of specified item to add to inventory. If not specified, will use item's .add_amount value.
-            print_analysis_message: Prints analysis complete message.
 
         Usage:
             .add_inventory('hipokte grass')
@@ -56,20 +55,15 @@ class Inventory:
         if not item_object:
             if item_object := self.get_object(item, new=True):
                 self.inventory[item_object.item_type][item_object.name] = item_object
-                print_analysis_message = True
+                print(f'    << Analysis on [{item_object.name}] successful. >>\n')
             else: return False
 
-        if amount:
-            self.inventory_capacity += item_object.inventory_capacity_add * item_object.quantity_add
-            self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
-            print(f'\n    < Acquired {amount * item_object.quantity_add}x [{item_object.name}]. >\n')
-        else:
-            self.inventory_capacity += item_object.inventory_capacity_add
-            self.inventory[item_object.item_type][item_object.name].quantity += item_object.quantity_add
-            item_object.show_acquired_msg()
+        # Adds to total inventory capacity %.
+        self.inventory_capacity += item_object.inventory_capacity_add * item_object.quantity_add
+        # Adds to quantity variable residing in item's object which is saved in character's inventory dict.
+        self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
 
-            if print_analysis_message:
-                print(f'    << Analysis on [{item_object.name}] successful. >>\n')
+        print(f'\n    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}]. >\n')
 
     def remove_inventory(self, item, amount=1):
         """

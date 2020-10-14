@@ -43,7 +43,7 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
+        self.acquired_msg = f"<< Acquired: {self.skill_level} [{self.name}] successfully. >>"
 
 
 class Resistance(Skill):
@@ -68,7 +68,7 @@ class Ciel_Skill(Skill):
         """
         self.evolution = "Sage > Great Sage > Raphael > Ciel"
         self.update_skill_info()
-        self.acquired_msg = "<< Ulitamte Skill Core Manas [Ciel] Acquired! >>"
+        self.acquired_msg = "<< Ultimate Skill Core Manas [Ciel] Acquired! >>"
 
 
 # ===== Ultimate Skill=====

@@ -1,15 +1,22 @@
 import os, sys, time, pickle
-import game_files.game_art as art
+import game_files.game_art as game_art
 import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
-rimuru = debug_mode = None
+rimuru = None
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here.
-def update_variables(rimuru_object, debug):
-    global rimuru, debug_mode
-    rimuru, debug_mode = rimuru_object, debug
+def update_rimuru(rimuru_object):
+    global rimuru
+    rimuru = rimuru_object
     return rimuru
+
+fast_mode = False
+def set_fast_mode():
+    global fast_mode
+    rimuru.text_crawl = rimuru.show_ascii = False
+    fast_mode = True
+
 
 def action_menu(level=None):
     """
@@ -44,7 +51,7 @@ def action_menu(level=None):
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
-    if debug_mode:
+    if fast_mode:
         for action in actions:
             if action[0] == '_':
                 user_input = action.replace('_', ' ').strip()
@@ -169,6 +176,24 @@ def game_text_crawl(arg):
     elif arg in ['false', 'disable', '0'] or rimuru.text_crawl is False:
         rimuru.text_crawl = False
         print("\n    < Text Crawl Deactivated. >\n")
+
+def show_art(art):
+    """
+    Prints out ASCII art line by line or all at once dependding on text_crawl boolean.
+
+    Args:
+        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
+    """
+
+    if rimuru.show_ascii is False: return False
+
+    # Gets corresponding variable from within game_art.py file.
+    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
+    if rimuru.text_crawl:
+        for line in art.split('\n'):
+            time.sleep(0.05)
+            print(line)
+    else: print(art)
 
 #                    ========== Game Saves ==========
 def game_exit(*args):
