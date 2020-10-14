@@ -83,7 +83,7 @@ class Rimuru_Tempest(Character):
             self.mimic_object(active=False)
             print("    < Mimicry reset. >")
         else:
-            new_mimic = self.get_object(character, mimic=True)
+            new_mimic = self.get_object(character, self.mimic_object().acquired_mimics)
             if new_mimic:
                 self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
@@ -105,7 +105,7 @@ class Rimuru_Tempest(Character):
 
         try:
             for i in input_targets.split(','):
-                targets.append(self.get_object(i))
+                targets.append(self.get_object(i, stricter=False))
         except ValueError: pass
 
         for target in targets:
@@ -116,13 +116,11 @@ class Rimuru_Tempest(Character):
             elif target.game_object_type == 'attribute':
                 self.add_attribute(target)
             elif target.game_object_type == 'character':
-                # Get's list of c that are on current level.
-                for mob in self.active_mobs:
-                    # Checks if current mob is is_alive and checks of current target is in active_mobs lsit.
-                    if not mob.is_alive and mob.get_name() in target.get_name():
+                # Can only predate targeted mobs that are dead.
+                for mob in self.targeted_mobs:
+                    if mob.is_alive is False:
                         self.add_mimic(target)
-
-        self.targeted_mobs = set()
+                        del self.targeted_mobs[self.targeted_mobs.index(mob)]
 
 
 class Veldora_Tempest(Character):

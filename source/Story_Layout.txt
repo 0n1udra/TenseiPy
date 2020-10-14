@@ -19,7 +19,7 @@ Chapter1()
         what_is_predator()
             analyze_grass()
             _create_potions() > _learn_skills
-        predate_hipokte_grass()
+        predate_grass()
         _what_are_skills:
             stay_in_water:
                 stay_in_water()
@@ -55,7 +55,7 @@ Chapter1()
 
 Chapter2()
     chapter_2:
-        predate_magic_ore()
+        predate_ore()
         _move_on() > _learn_new_attack
 
     _learn_new_attack:
@@ -65,11 +65,11 @@ Chapter2()
         _learn_water_blade() > _attack_serpent
 
     _attack_serpent:
-        predate_magic_ore()
+        predate_ore()
         _attack()
 
     _after_serpent:
-        predate_magic_ore()
+        predate_ore()
         _sneak_away() > _at_exit()
 
     _attack: > _at_exit()/_after_serpent

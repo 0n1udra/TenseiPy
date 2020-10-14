@@ -65,16 +65,17 @@ class Attributes:
             .add_attribute('rimuru', 'water blade')
         """
 
-        if attribute := self.get_object(attribute, new=True):
-            # Checks if already acquired.
-            if self.check_acquired(attribute): return False
+        # Checks if already acquired.
+        if self.check_acquired(attribute): return False
 
+        if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
             if show_acquired_msg:
                 attribute.show_acquired_msg()
             if show_skill_info:
                 self.show_info(attribute.name)
 
+            return True
         return False
 
     def remove_attribute(self, attribute):
@@ -90,6 +91,7 @@ class Attributes:
 
         if attribute := self.get_object(attribute):
             del self.attributes[attribute.skill_level][attribute.name]
+            return True
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
@@ -108,11 +110,10 @@ class Attributes:
 
         skill_from = self.get_object(skill_from)
         skill_to = self.get_object(skill_to, new=True)
-        if not skill_to and not skill_from: return
+        if not skill_from and not skill_to: return False
 
-        self.remove_attribute(skill_from)
-        print(f"\n    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
-        self.add_attribute(skill_to)
+        if self.remove_attribute(skill_from) and self.add_attribute(skill_to):
+            print(f"\n    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
 
     def check_resistance(self, attack, target=None):
         """

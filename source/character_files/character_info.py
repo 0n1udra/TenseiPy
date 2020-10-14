@@ -17,8 +17,9 @@ class Info:
         """
 
         # Checks to see if any acquired mimics has inputted ability to get info on.
-        game_object = self.get_object(game_object, mimic=True)
-        if game_object: print(game_object.info_page)
+        if game_object := self.get_object(game_object):
+            print(game_object)
+            print(game_object.info_page)
 
     def update_info(self):
         """Updates character information."""

@@ -17,10 +17,10 @@ class Combat:
             self.targeted_mobs.clear()
         else:
             for target in targets.split(','):
-                for i in self.active_mobs:
+                for mob in self.active_mobs:
                     # If can able to target, by checking if in active_mobs list.
-                    if i.get_name() in target:
-                        self.targeted_mobs.add(i)
+                    if str(mob) in target:
+                        self.targeted_mobs.append(mob)
 
     def attack(self, user_input):
         """

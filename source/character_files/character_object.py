@@ -46,7 +46,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         # Combat variables.
         self.active_mobs = []  # Current mobs around you that you can interact or attack.
-        self.targeted_mobs = set()  # Targets that will be attacked with 'attack' command.
+        self.targeted_mobs = []  # Targets that will be attacked with 'attack' command.
 
         # Map functionality.
         self.available_locations = []
@@ -65,15 +65,15 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, item, mimic=False, new=False, get_level_mobs=False):
+    def get_object(self, match, item_pool=[], new=False, get_level_mobs=False, stricter=True):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
         Args:
-            item: Either string or object instance of the object you want. If object, will get objects .name attribute.
-            mimic: If currently using Mimic ability, will also include mimicked mob attributes.
+            item_pool: List of game items to search against.
             new: If first time adding a new object to character.
             get_level_mobs: Gets character objects from active_mobs list
+            stricter: Find more of a exact match, still cane insensitive. For example, sometimes Sage will be returned instead of Great Sage.
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
@@ -84,49 +84,47 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        # Should always return a character object if no object to find was passed in.
-        if item is None: return self
+        if new: item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
 
-        # If input is an objects, gets object's name.
-        if item and not type(item) == str:
-            item = item.name
+        if 'character' in self.game_object_type:
+            item_pool.extend([*self.inventory_generator(), *self.attributes_generator()])
 
-        generators = [*self.inventory_generator(), *self.attributes_generator()]
-        # If object not in inventory, Will need to use __subclasses__ method to find and create new instance of object.
-        if new: generators = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
-        # Get mob character objects from active_mobs list.
-        if get_level_mobs: generators.extend(self.active_mobs)
-        # Adds all attributes from all acquired mimicries.
-        if mimic: generators.extend([*self.mimic_generator()])
+            if get_level_mobs:
+                item_pool.extend(self.active_mobs)
 
-        for i in generators:
-            # Creates new instance to check for match, idk if there's a better way...
-            if new: i = i()
-            if type(i) is str: continue
-            if i.get_name() in item.lower(): return i
-            else: del i
+        for game_object in item_pool:
+            if new:
+                try: game_object = game_object()
+                except: pass
 
-    def check_acquired(self, check_object, amount=1):
+            if stricter:
+                if str(game_object).lower().strip() == str(match).lower().strip():
+                    return game_object
+
+            elif str(game_object).lower() in str(match).lower():
+                return game_object
+
+            if new: del game_object
+
+        return None
+
+
+    def check_acquired(self, check_object):
         """
         Checks to see if character has object/attribute/item/etc.
 
         Args:
             check_object: Object to check if specified character has item, attribute, skill, etc.
-            amount: Check to see if have this amount of specified item.
 
         Returns:
             Boolean: If specified character has attribute or object.
 
         Usage:
             .check_acquired('resist poison')
-            .check_acquired('resist poison', 'ranga')
-
-            > rimuru has resist melee
-            >>True
         """
 
         if item := self.get_object(check_object):
-            # Check if have item and the specified amount. Even if you have the item but not the specified amount, it'll return False.
-            if item.game_object_type == 'item' and item.quantity >= amount:
-                return False
-            return True
+            return item
+        else: return False
+
+    def __str__(self): return self.name.lower()

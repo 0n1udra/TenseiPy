@@ -99,7 +99,7 @@ In function docstring's Usage section, '>' means example of user input in game.
 -----character_combat.py-----
 :Variables:
     active_mobs [] - Characters that are active and relevant to current level.
-    targeted_mobs () - Currently targeted_mobs characters, used for attack and predate.
+    targeted_mobs [] - Currently targeted_mobs characters, used for attack and predate.
 
 :Functions:
     set_targets() - Set targets to be focused.

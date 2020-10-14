@@ -13,7 +13,7 @@ class Inventory:
         # Generator responsible for getting printout data when using show_attribute.
         for item_type, items in self.inventory.items():
 
-            # Yields item type if formatting for output to plyaer.
+            # Yields item type if formatting for output to player.
             if output and items: yield f'[{item_type}]'
 
             for item_name, item_object in items.items():
@@ -50,25 +50,26 @@ class Inventory:
             .add_inventory('hipokte grass')
         """
 
-        item = self.get_object(item, new=True)
-
         # Adds new item to inventory if not already exists.
-        if not self.check_acquired(item):
-            self.inventory[item.item_type][item.name] = item
-            print_analysis_message = True
+        item_object = self.check_acquired(item)
 
-        # Uses item's amount_add to add items in batches.
+        if not item_object:
+            if item_object := self.get_object(item, new=True):
+                self.inventory[item_object.item_type][item_object.name] = item_object
+                print_analysis_message = True
+            else: return False
+
         if amount:
-            self.inventory[item.item_type][item.name].quantity += amount * item.quantity_add
-            print(f'    < Acquired {amount * item.quantity_add}x [{item.name}]. >\n')
+            self.inventory_capacity += item_object.inventory_capacity_add * item_object.quantity_add
+            self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
+            print(f'\n    < Acquired {amount * item_object.quantity_add}x [{item_object.name}]. >\n')
         else:
-            self.inventory[item.item_type][item.name].quantity += item.quantity_add
-            item.show_acquired_msg()
+            self.inventory_capacity += item_object.inventory_capacity_add
+            self.inventory[item_object.item_type][item_object.name].quantity += item_object.quantity_add
+            item_object.show_acquired_msg()
 
-        self.inventory_capacity += item.inventory_capacity_add
-
-        if print_analysis_message:
-            print(f'    << Analysis on [{item.name}] successful. >>\n')
+            if print_analysis_message:
+                print(f'    << Analysis on [{item_object.name}] successful. >>\n')
 
     def remove_inventory(self, item, amount=1):
         """
@@ -110,18 +111,18 @@ class Inventory:
         recipe = ''
         for ingredient, amount in item.recipe.items():
             recipe += F"{amount}x {ingredient}, "
-        print(f"{item.quantity_add}x {item.name}: {recipe[:-2]}")
+        print(f"{item.quantity_add} {item.name}: {recipe[:-2]}")
 
         # Asks for how much to make. note that some items are crafted in batches.
         try: craft_amount = int(input("Amount (0 to cancel) > "))
         except ValueError:
-            print("    < Error, need integer input. >")
+            print("\n    < Error, need integer input. >\n")
             return
 
         # Checks if have enough ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
-            if self.check_acquired(ingredient_name, ingredient_amount * craft_amount):
-                print("    < Not enough materials to craft item. >")
+            if ingredient := self.check_acquired(ingredient_name).quantity < ingredient_amount * craft_amount:
+                print("\n    < Not enough materials to craft item. >")
                 return
 
         # Use up ingredients then add to inventory

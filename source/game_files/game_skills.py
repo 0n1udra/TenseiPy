@@ -20,6 +20,8 @@ class Skill:
     def get_name(self):
         return self.name.lower()
 
+    def __str__(self): return self.name.lower()
+
     def show_acquired_msg(self):
         print(f"    {self.acquired_msg}\n")
 
