@@ -8,22 +8,17 @@ def Chapter1(rimuru):
     class chapter_1:
         __location = 'Sealed Cave'
         def __init__(self):
-            ssprint(".....")
+            ssprint(".....\n")
             show_art('great sage')
             rimuru.set_start_state()
             ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
-            ssprint("<< Confirmation Complete. Acquiring Skill [Predator]... >>")
+            ssprint("<< Confirmation Complete. Acquiring: Skill [Predator]... >>")
             rimuru.add_attribute('Predator')
-            ssprint("<< Confirmation Complete. Acquiring Extra Skill [Sage]... >>")
+            ssprint("<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
             rimuru.add_attribute('Sage')
-            ssprint("<< Confirmation Complete. Extra skill [Sage] evolving. >>")
-            ssprint('.....')
             rimuru.upgrade_attribute('Sage', 'Great Sage')
 
-            rimuru.show_attributes()
-            rimuru.show_inventory()
-
-            ssprint(".....")
+            print()
             ssprint("It's so dark...")
             ssprint("where is this...")
             ssprint("What happened to me...?")

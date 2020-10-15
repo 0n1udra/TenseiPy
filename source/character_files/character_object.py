@@ -58,7 +58,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.save_path = ''
         self.valid_save = None
         self.text_crawl = None
-        self.show_ascii = False
+        self.show_ascii = True
 
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""

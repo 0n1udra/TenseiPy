@@ -110,10 +110,13 @@ class Attributes:
 
         skill_from = self.get_object(skill_from)
         skill_to = self.get_object(skill_to, new=True)
-        if not skill_from and not skill_to: return False
+        if not skill_from and not skill_to:
+            print("    < Error evolving skill. >")
+            return False
 
-        if self.remove_attribute(skill_from) and self.add_attribute(skill_to):
-            print(f"\n    << {skill_from.skill_level} [{skill_from.name}] evolving to {skill_to.skill_level} [{skill_to.name}]... >>")
+        print(f"    < Evolving: {skill_from.skill_level} [{skill_from.name}]. >")
+        if self.remove_attribute(skill_from) and self.add_attribute(skill_to, show_acquired_msg=False):
+            print(f"    < Evolution Successful: {skill_from.skill_level} [{skill_from.name}] is now {skill_to.skill_level} [{skill_to.name}]! >")
 
     def check_resistance(self, attack, target=None):
         """
