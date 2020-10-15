@@ -66,14 +66,13 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, match, item_pool=[], new=False, get_level_mobs=False, stricter=True):
+    def get_object(self, match, item_pool=[], new=False, stricter=True):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
         Args:
             item_pool: List of game items to search against.
             new: If first time adding a new object to character.
-            get_level_mobs: Gets character objects from active_mobs list
             stricter: Find more of a exact match, still cane insensitive. For example, sometimes Sage will be returned instead of Great Sage.
 
         Returns:
@@ -90,18 +89,17 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if 'character' in self.game_object_type:
             item_pool.extend([*self.inventory_generator(), *self.attributes_generator()])
 
-            if get_level_mobs:
-                item_pool.extend(self.active_mobs)
-
         for game_object in item_pool:
+            if type(game_object) is str: continue
+
             if new:
                 try: game_object = game_object()
                 except: pass
 
             if stricter:
-                if str(game_object).lower().strip() == str(match).lower().strip():
+                if str(game_object) == str(match).lower().strip():
                     return game_object
-            elif str(game_object).lower() in str(match).lower():
+            elif str(game_object) in str(match).lower():
                 return game_object
 
             if new: del game_object

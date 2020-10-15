@@ -28,7 +28,7 @@ class Attributes:
 
     def show_attributes(self, *args):
         """
-        Prints out attribute of player or specified character.
+        Prints out attribute of player or specified character. Includes info like Mimcking, Location, Full Name, etc.
 
         Usage:
             .show_attributes()
@@ -39,18 +39,15 @@ class Attributes:
         """
 
         print("-----Attributes/Skills-----")
-        # Prints character's name. Without the if statement if the character doesn't have a family_name it'll show an extra space in the [] at the end, doesn't look so pretty.
-        print(f"Name: [{self.name}{' ' + self.family_name if self.family_name else ''}]")
+        print(f"Name: [{(self.name + ' ' + self.family_name).strip()}]")
+
+        if self.current_mimic: print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
+
         print(f"Location: {self.current_location}\n")
 
+        # Print out skill category and corresponding skills indented.
         for i in self.attributes_generator(output=True): print(i)
 
-        # Only shows mimicry info when not looking at stats of other monsters and if currently using mimicry
-        if self.current_mimic:
-            print(f"\nMimicking: [{self.current_mimic.name}]")
-            for j in self.current_mimic.attributes_generator(output=True):
-                print(f'{j}')
-        print()
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
@@ -157,5 +154,5 @@ class Attributes:
 
         if skill := self.get_object(skill):
             try: skill.use_skill(character, args)
-            except: pass
+            except: return False
         else: return False

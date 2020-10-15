@@ -45,9 +45,11 @@ def action_menu(level=None):
         # Adds (Dead) status to corresponding
         targets = ', '.join([(mob.name if mob.is_alive else f'{mob.name}(Dead)') for mob in rimuru.targeted_mobs])
         print(f'\nTarget: {targets}')
+
     # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
     actions_for_hud = ', '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
     print(f"Actions: {actions_for_hud} | (stats, inv, help)")
+
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
@@ -111,10 +113,11 @@ def new_active_mob(characters):
         new_active_mob('tempest serpent')
         new_active_mob(['tempest serpent', 'giant bat'])
     """
+
     if type(characters) is list:
         for mob in characters:
-            if mob := rimuru.get_object(mob, new=True):
-                rimuru.active_mobs.append(mob)
+            if mob_object := rimuru.get_object(mob, new=True):
+                rimuru.active_mobs.append(mob_object)
     # Adds singular mob object to current level.
     else: rimuru.active_mobs.append(rimuru.get_object(characters, new=True, stricter=False))
 
@@ -258,7 +261,9 @@ def continue_story(next_chapter):
     print("\nContinue to next chapter?")
     if str(input("No/Yes or Enter > ")).lower() in ['n', 'no']:
         exit(0)
-    else: next_chapter(rimuru)
+    else:
+        next_chapter(rimuru)
+        print()
 
 
 #                    ========== Game Functions ==========
@@ -273,12 +278,8 @@ def show_start_banner(rimuru):
     - Fullscreen recommended.
     """)
 
-    rimuru.show_attributes()
-    rimuru.show_inventory()
-
     if rimuru.valid_save is True:
-        print("\n < Save Loaded. >\n")
-    print()
+        print("\n    < Save Loaded. >\n")
 
 def ssprint(message):
     """Print tabbed in message."""

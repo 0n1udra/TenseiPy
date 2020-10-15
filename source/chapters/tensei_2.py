@@ -5,14 +5,17 @@ from chapters.tensei_3 import Chapter3
 def Chapter2(rimuru):
     class chapter_2:
         __location = 'Sealed Cave'
+
         def __init__(self):
+            new_active_mob(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
             ssprint("Oh, what's this? Looks like some kind of rock?")
             action_menu(self)
 
-        def predate_ore(self):
+        def _predate_ore(self):
             rimuru.add_inventory('magic ore')
             ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
             ssprint("Ok, might be useful in the future. Guess I should get as much as I can")
+            action_menu(_learn_new_attack())
 
         def _move_on(self):
             ssprint("I'll just leave it, and continue finding my way out.")
@@ -27,30 +30,30 @@ def Chapter2(rimuru):
             ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
 
-            ssprint("< Choose ability to learn and use on the [Tempest Serpent]. >")
-            new_active_mob('tempest serpent')
+            ssprint("< Hint: Choose ability to learn and use on the [Tempest Serpent]. >")
             action_menu(self)
 
-        def _try_escaping(self):
-            ssprint("Alright, lets try out this new skill.")
-            action_menu(_after_serpent())
+        def try_escaping(self):
+            ssprint("Oh no, it noticed me!")
 
         def _learn_water_bullet(self):
             rimuru.add_attribute('water bullet')
             ssprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
+            ssprint("Now I have a way to attack.\n")
             action_menu(_attack_serpent())
 
         def _learn_water_blade(self):
             rimuru.add_attribute('water blade')
             ssprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
+            ssprint("Lets try it out!")
             action_menu(_attack_serpent())
+
+        def predate_ore(self): rimuru.add_inventory('magic ore')
+
 
     class _attack_serpent:
         def __init__(self):
-            new_active_mob(['giant bat', 'black spider', 'evil centipede'])
-            ssprint("Now I have a way to attack.\n")
-
-            ssprint("< Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
+            ssprint("< Hint: Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
             action_menu(self)
 
         class _attack:

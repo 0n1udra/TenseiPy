@@ -294,7 +294,7 @@ def Chapter1(rimuru):
             ssprint("< Acquired: Storm Crest Divine Protection. >\n")
             rimuru.update_ranking(8)
 
-            sprint(f"Hmmmmmm... How about {family_name}")
+            sprint(f"Hmmmmmm... How about {family_name}~")
             sprint("~What a good name!~")
             sprint("He actually likes it?")
             sprint(f"~From now on I'll be Veldora {family_name}~")

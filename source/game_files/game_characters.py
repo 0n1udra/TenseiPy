@@ -9,8 +9,7 @@ class Rimuru_Tempest(Character):
         self.level = 7
         self.current_mimic = None
         self.current_mimic_species = 'Slime'
-        self.starting_state = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist',
-                               'Electricity Resist']
+        self.starting_state = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
         self.update_info()
 
     # ========== Predator Functions
@@ -81,10 +80,9 @@ class Rimuru_Tempest(Character):
             self.current_mimic_species = 'Slime'
             self.current_mimic = None
             self.mimic_object(active=False)
-            print("    < Mimicry reset. >")
+            print("    < Mimicry Reset. >")
         else:
-            new_mimic = self.get_object(character, self.mimic_object().acquired_mimics)
-            if new_mimic:
+            if new_mimic := self.get_object(character, [*self.mimic_generator()]):
                 self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
                 self.mimic_object(active=True)
@@ -143,7 +141,7 @@ class Tempest_Serpent(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
-        self.Species = 'Serpent'
+        self.species = 'Serpent'
         self.level = 6
         self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
@@ -156,8 +154,8 @@ class Giant_Bat(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Giant Bat'
-        self.Species = 'Bat'
-        self.level = 4
+        self.species = 'Bat'
+        self.level = 6
         self.appearance = '''
         It's a giant bat...
         Due to its wings that regulate its own gravity, it's capable of flight
@@ -172,7 +170,7 @@ class Evil_Centipede(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Evil Centipede'
-        self.Species = 'Centipede'
+        self.species = 'Centipede'
         self.level = 5
         self.appearance = 'Centipede monstrosity, a giant centipede.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
@@ -185,7 +183,7 @@ class Black_Spider(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Black Spider'
-        self.Species = 'Spider'
+        self.species = 'Spider'
         self.level = 5
         self.appearance = 'Most of the body is yellow-ish, while the legs are black.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
@@ -199,7 +197,7 @@ class Tempest_Wolf(Character):
     def __init__(self):
         Character.__init__(self)
         self.name = 'Tempest Wolf'
-        self.Species = 'Tempest Wolf'
+        self.species = 'Tempest Wolf'
         self.level = 5
         self.appearance = 'Most of the body is yellow-ish, while the legs are black.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'

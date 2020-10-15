@@ -12,14 +12,18 @@ class Combat:
         Usage:
             > target tempest serpent, giant bat
         """
+        targets = targets.lower()
 
         if 'reset' in targets:
             self.targeted_mobs.clear()
+        elif 'all' in targets:
+            print(self.active_mobs)
+            for mob in self.active_mobs:
+                self.targeted_mobs.append(mob)
         else:
             for target in targets.split(','):
                 for mob in self.active_mobs:
-                    # If targetable, by checking if in active_mobs list.
-                    if str(mob) in target:
+                    if str(mob) in target:  # If targetable, by checking if in active_mobs list.
                         self.targeted_mobs.append(mob)
 
     def attack(self, user_input):
@@ -50,25 +54,23 @@ class Combat:
         for attack in user_input.split(','):
             attack = self.get_object(attack)
             try:
-                if attack.game_object_type is 'attribute':
+                if attack.game_object_type == 'attribute':
                     skills.append(attack)
             except: continue
 
         for current_target in self.targeted_mobs:
             for current_skill in skills:
-
-                # Checking if have resistance.
-                if self.check_resistance(current_skill, current_target):
-                    print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
-                    return False
-
                 # If target is too high of a level to damage with skill.
                 if current_target.level > current_skill.damage_level:
                     print(f"    < {current_target.name} level too for that attack. >")
-                    return False
+                    continue
+                # Checking if have resistance.
+                elif self.check_resistance(current_skill, current_target):
+                    print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
+                    continue
 
                 current_target.is_alive = False
                 attack_success = True
-                print(f"    < Eliminated {current_target.name}. >\n")
+                print(f"    < Eliminated: {current_target.name}. >\n")
 
         return attack_success

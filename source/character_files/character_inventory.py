@@ -33,8 +33,7 @@ class Inventory:
 
         print('\n-----Inventory-----')
         print(f'Capacity: {self.inventory_capacity:.2f}%\n')
-        for i in self.inventory_generator(output=True):
-            print(i)
+        for i in self.inventory_generator(output=True): print(i)
         print()
 
     def add_inventory(self, item, amount=1):
@@ -55,7 +54,7 @@ class Inventory:
         if not item_object:
             if item_object := self.get_object(item, new=True):
                 self.inventory[item_object.item_type][item_object.name] = item_object
-                print(f'    << Analysis on [{item_object.name}] successful. >>\n')
+                print(f'\n    << Analysis on [{item_object.name}] Complete. >>')
             else: return False
 
         # Adds to total inventory capacity %.
@@ -111,15 +110,17 @@ class Inventory:
         try: craft_amount = int(input("Amount (0 to cancel) > "))
         except ValueError:
             print("\n    < Error, need integer input. >\n")
-            return
+            return False
 
         # Checks if have enough ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
-            if ingredient := self.check_acquired(ingredient_name).quantity < ingredient_amount * craft_amount:
+            if self.check_acquired(ingredient_name).quantity < ingredient_amount * craft_amount:
                 print("\n    < Not enough materials to craft item. >")
-                return
+                return False
 
         # Use up ingredients then add to inventory
         for ingredient_name, ingredient_amount in item.recipe.items():
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
         self.add_inventory(item, craft_amount)
+
+        print()
