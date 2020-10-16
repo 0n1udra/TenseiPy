@@ -189,6 +189,14 @@ def Chapter2(rimuru):
 
                 def _heal_goblins(self):
                     sprint("Wow, ")
+                    action_menu(self, remove='_heal_goblins')
+
+                def _let_goblins_die(self):
+                    ssprint("I'm going to save my potions for myself.")
+                    sprint("Great one, please! If you can heal our wounded we would be most grateful!")
+                    sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
+                    sprint("I see, we are sorry for troubling you.")
+
 
                 def _let_goblins_die(self):
                     ssprint("I'm going to save my potions for myself.")
