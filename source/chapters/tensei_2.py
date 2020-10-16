@@ -50,7 +50,6 @@ def Chapter2(rimuru):
 
         def predate_ore(self): rimuru.add_inventory('magic ore')
 
-
     class _attack_serpent:
         def __init__(self):
             ssprint("< Hint: Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
@@ -115,7 +114,7 @@ def Chapter2(rimuru):
                 ssprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
 
     class _the_encouter:
-        __location = "Near Sealed Cave"
+        __location = "Near the Sealed Cave"
         def __init__(self):
             ssprint("Where am I going?")
             action_menu(self)
@@ -183,11 +182,18 @@ def Chapter2(rimuru):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
 
-            def _heal_wounded(self):
-                sprint("Show me your wounded")
+            class _heal_wounded:
+                def __init__(self):
+                    sprint("Show me your wounded")
+                    action_menu(self)
 
-            def _setup_defenses(self):
-                sprint("Let's setup defenses.")
+                def _use_full_potion(self):
+                    sprint("Wow, ")
+
+            class _setup_defenses:
+                def __init__(self):
+                    action_menu(self)
+                    sprint("Let's setup defenses.")
 
         def _compensation(self):
             sprint("So what, you want protection? What would my reward be?")

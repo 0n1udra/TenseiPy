@@ -114,7 +114,10 @@ class Inventory:
 
         # Checks if have enough ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
-            if self.check_acquired(ingredient_name).quantity < ingredient_amount * craft_amount:
+            if ingredient := self.check_acquired(ingredient_name):
+                if ingredient.quantity > ingredient_amount * craft_amount:
+                    continue
+            else:
                 print("\n    < Not enough materials to craft item. >")
                 return False
 
@@ -122,5 +125,5 @@ class Inventory:
         for ingredient_name, ingredient_amount in item.recipe.items():
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
         self.add_inventory(item, craft_amount)
-
         print()
+

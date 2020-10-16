@@ -54,13 +54,13 @@ In function docstring's Usage section, '>' means example of user input in game.
     action_menu() - Takes care of user input and runs corresponding functions.
     show_hud() - Shows user's available actions, current mimicry, and other basic commands like stats and inv.
     mob_status() - Returns True if mob is in active_mobs list.
-    new_active_mob() - Adds new character object to current game level.
+    new_active_mob([]) - Adds new character object to current game level. Must pass in list.
     tbc() - Prints out To be continued.
     game_load() - Load user save.
     game_save() - Saves game state by pickling Rimuru_Tempest object (the player).
     game_load() - Load s user save.
     delete_game_save() - Deletes save.
-    continue_story() - At end of chapter, asks if want to continue.
+    next_location() - Goes to next location.
     show_start_banner() - Shows name and basic help at start of game.
     sprint() - Delays text, for easier reading if player chooses. Using sys.stdout.write() and sys.stdout.flush().
     ssprint() - Indents printout using sprint(). Used for player thoughts, Great Sage or other game messages.

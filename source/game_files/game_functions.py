@@ -77,7 +77,6 @@ def action_menu(level=None):
         'craft': rimuru.craft_item,
         'map': rimuru.get_map,
         'textcrawl': game_text_crawl,
-        'save': game_save,
         'help': show_help,
         'exit': game_exit,
     }
@@ -87,6 +86,8 @@ def action_menu(level=None):
         rimuru.use_skill(character, parameter)
     elif 'location' in command:
         rimuru.get_location()
+    elif 'save' in command:
+        game_save(level)
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action_string, action in level_actions.items():
@@ -102,24 +103,21 @@ def action_menu(level=None):
     if loop: action_menu(level)
 
 #                    ========== Level Functions ==========
-def new_active_mob(characters):
+def new_active_mob(add_mobs):
     """
     Mob is alive on current level.
 
     Args:
-        characters: Mob character(s) to add to current level. Can be single mob (string) or multiple (list).
+        mobs: Adds mob objects to active_mobs list.
 
     Usage:
-        new_active_mob('tempest serpent')
+        new_active_mob(['tempest serpent'])
         new_active_mob(['tempest serpent', 'giant bat'])
     """
 
-    if type(characters) is list:
-        for mob in characters:
-            if mob_object := rimuru.get_object(mob, new=True):
-                rimuru.active_mobs.append(mob_object)
-    # Adds singular mob object to current level.
-    else: rimuru.active_mobs.append(rimuru.get_object(characters, new=True, stricter=False))
+    for mob in add_mobs:
+        if mob_object := rimuru.get_object(mob, new=True):
+            rimuru.active_mobs.append(mob_object)
 
 def mob_status(target):
     """
@@ -230,7 +228,7 @@ def game_load(path):
         rimuru.save_path = path
 
         import chapters.tensei_1 as tensei1
-        rimuru.story_progress[0] = tensei1.Chapter1
+        rimuru.current_location_object = tensei1.Chapter1
 
     if rimuru.valid_save is False:
         os.remove(rimuru.save_path)
@@ -246,24 +244,17 @@ def game_over():
     print("\n    < GAME OVER. >\n")
     exit(0)
 
-def continue_story(next_chapter):
+def next_location(next_chapter):
     """
-    Continues story progress from last save point.
+    Asks if
 
     Args:
         next_chapter: Next chapter to play.
     """
 
-    # Adds next chapter of game, and saves current progress.
-    rimuru.story_progress.append(next_chapter)
     game_save()
-
-    print("\nContinue to next chapter?")
-    if str(input("No/Yes or Enter > ")).lower() in ['n', 'no']:
-        exit(0)
-    else:
-        next_chapter(rimuru)
-        print()
+    try: next_chapter(rimuru)
+    except: print("    < Error Loading Next Location. >")
 
 
 #                    ========== Game Functions ==========

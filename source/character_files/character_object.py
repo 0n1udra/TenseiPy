@@ -43,6 +43,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.evolution = ''
         self.acquired_msg = ''
         self.is_alive = True
+        self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
 
         # Combat variables.
         self.active_mobs = []  # Current mobs around you that you can interact or attack.
@@ -51,10 +52,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # Map functionality.
         self.available_locations = []
         self.current_location = 'N/A'
+        self.current_location_object = None
 
         # Game variables.
         self.game_object_type = 'character'
-        self.story_progress = [None]
         self.save_path = ''
         self.valid_save = None
         self.text_crawl = None

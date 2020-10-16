@@ -326,6 +326,6 @@ def Chapter1(rimuru):
 
     def _leave_cave():
         ssprint("Time to leave this cave already.")
-        continue_story(Chapter2)
+        next_location(Chapter2)
 
     chapter_1()

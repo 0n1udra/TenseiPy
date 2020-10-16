@@ -69,6 +69,7 @@ class Combat:
                     print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
                     continue
 
+                self.data['kills'] += 1
                 current_target.is_alive = False
                 attack_success = True
                 print(f"    < Eliminated: {current_target.name}. >\n")
