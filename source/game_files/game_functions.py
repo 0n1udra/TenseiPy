@@ -18,7 +18,7 @@ def set_fast_mode():
     fast_mode = True
 
 
-def action_menu(level=None):
+def action_menu(level=None, remove=False):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
@@ -38,6 +38,8 @@ def action_menu(level=None):
     for action in dir(level):  # Gets subclass functions.
         if '__' in action: continue  # Filters out unwanted variables and functions.
         actions.append(action)
+
+    if remove: del actions[actions.index(remove)]  # Removes action so player can't take it.
 
     # ========== HUD
     print()
@@ -103,6 +105,15 @@ def action_menu(level=None):
     if loop: action_menu(level)
 
 #                    ========== Level Functions ==========
+def game_conditions(value, new_value=None):
+    if new_value:
+        rimuru.conditions_data[value] = new_value
+        return rimuru.conditions_data[value]
+
+    if value in rimuru.conditions_data:
+        return rimuru.conditions_data[value]
+    else: return False
+
 def new_active_mob(add_mobs):
     """
     Mob is alive on current level.

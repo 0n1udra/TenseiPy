@@ -43,6 +43,8 @@ def Chapter1(rimuru):
                 action_menu(self)
 
             class _inspect:
+                __testvar = True
+
                 def __init__(self):
                     ssprint("Wait what kind of joke is this! Who would want this?")
                     ssprint("But... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
