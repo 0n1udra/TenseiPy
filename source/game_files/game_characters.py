@@ -122,9 +122,10 @@ class Rimuru_Tempest(Character):
 
 
 class Veldora_Tempest(Character):
-    def __init__(self):
+    def __init__(self, name=None):
         Character.__init__(self)
         self.name = "Veldora"
+        if name: self.name = name
         self.title = 'Storm Dragon'
         self.canon_name = 'Veldora Tempest'
         self.species = 'True Dragon'
@@ -138,9 +139,10 @@ class Veldora_Tempest(Character):
 
 # ========== Low Level
 class Tempest_Serpent(Character):
-    def __init__(self):
+    def __init__(self, name=None):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
+        if name: self.name = name
         self.species = 'Serpent'
         self.level = 6
         self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
@@ -149,11 +151,11 @@ class Tempest_Serpent(Character):
         self.set_start_state()
         self.update_info()
 
-
 class Giant_Bat(Character):
-    def __init__(self):
+    def __init__(self, name=None):
         Character.__init__(self)
         self.name = 'Giant Bat'
+        if name: self.name = name
         self.species = 'Bat'
         self.level = 6
         self.appearance = '''
@@ -165,11 +167,11 @@ class Giant_Bat(Character):
         self.set_start_state()
         self.update_info()
 
-
 class Evil_Centipede(Character):
-    def __init__(self):
+    def __init__(self, name=None):
         Character.__init__(self)
         self.name = 'Evil Centipede'
+        if name: self.name = name
         self.species = 'Centipede'
         self.level = 5
         self.appearance = 'Centipede monstrosity, a giant centipede.'
@@ -178,11 +180,11 @@ class Evil_Centipede(Character):
         self.set_start_state()
         self.update_info()
 
-
 class Black_Spider(Character):
-    def __init__(self):
+    def __init__(self, name=None):
         Character.__init__(self)
         self.name = 'Black Spider'
+        if name: self.name = name
         self.species = 'Spider'
         self.level = 5
         self.appearance = 'Most of the body is yellow-ish, while the legs are black.'
@@ -194,9 +196,10 @@ class Black_Spider(Character):
 
 # ========== Wolves
 class Tempest_Wolf(Character):
-    def __init__(self):
+    def __init__(self, name=None):
         Character.__init__(self)
         self.name = 'Tempest Wolf'
+        if name: self.name = name
         self.species = 'Tempest Wolf'
         self.level = 5
         self.appearance = 'Most of the body is yellow-ish, while the legs are black.'
@@ -205,3 +208,37 @@ class Tempest_Wolf(Character):
         self.starting_state = []
         self.set_start_state()
         self.update_info()
+
+
+# ========== Goblins
+class Goblin(Character):
+    def __init__(self, name=None):
+        Character.__init__(self)
+        self.name = 'Goblin'
+        if name: self.name = name
+        self.species = 'Goblin'
+        self.level = 4
+        self.appearance = 'They have green skin and a big nose. Their average height is 150 centimeters.'
+        self.description = '''
+        Goblins are of the monsters that populate The Great Jura Forest, with many different tribes dotting around the forest. 
+        Although there are many different tribes of goblins, they will usually stand together in the face of great danger.
+        
+        Many of the goblins revere the Storm Dragon as their God and protector of the forest.
+
+        For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
+        '''
+        self.evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
+        self.update_info()
+
+class Hobgoblin(Goblin):
+    def __init__(self, name=None):
+        Goblin.__init__(self)
+        self.name = 'Hobgoblin'
+        if name: self.name = name
+        self.species = 'Hobgoblin'
+        self.level = 5
+        self.appearance = 'They have green skin like their pre-evolved form, but their average height is improved and his height now reaches around 180 centimeters.'
+        self.description = 'Hobglins are evolved form of Gobins.'
+        self.evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
+        self.update_info()
+
