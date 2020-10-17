@@ -2,7 +2,7 @@ import os, sys
 from time import sleep
 import game_files.game_functions as game_funcs
 
-__version__ = "3.1.1 Alpha"
+__version__ = "3.2 Alpha"
 __author__ = "D Thomas"
 __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
