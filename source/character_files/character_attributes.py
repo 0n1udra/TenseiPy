@@ -48,7 +48,6 @@ class Attributes:
         # Print out skill category and corresponding skills indented.
         for i in self.attributes_generator(output=True): print(i)
 
-
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
         Adds attribute to character.
@@ -152,7 +151,7 @@ class Attributes:
             > use sense heat source
         """
 
-        if skill := self.get_object(skill):
-            try: skill.use_skill(character, args)
+        if skill_object := self.get_object(skill):
+            try: skill_object.use_skill(character, args)
             except: return False
         else: return False

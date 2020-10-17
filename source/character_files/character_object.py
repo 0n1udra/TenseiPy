@@ -16,8 +16,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                             'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
-        self.attributes = {'Manas': {},
-                           'Ultimate Skill': {},'Unique Skill': {},'Special Skill': {},'Extra Skill': {},'Intrinsic Skill': {},
+        self.attributes = {'Manas': {},'Ultimate Skill': {},'Unique Skill': {},'Special Skill': {},'Extra Skill': {},'Intrinsic Skill': {},
                            'Common Skill': {},'Daily Skill': {},'Composite Skill': {},'Resistance': {},'Attribute': {}}
 
         # Character inventory.
@@ -86,10 +85,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        if new: item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
-
         if 'character' in self.game_object_type:
-            item_pool.extend([*self.inventory_generator(), *self.attributes_generator()])
+            item_pool = ([*self.inventory_generator(), *self.attributes_generator()])
+
+        if new: item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
 
         for game_object in item_pool:
             if type(game_object) is str: continue
