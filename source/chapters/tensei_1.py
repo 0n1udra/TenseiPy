@@ -43,8 +43,6 @@ def Chapter1(rimuru):
                 action_menu(self)
 
             class _inspect:
-                __testvar = True
-
                 def __init__(self):
                     ssprint("Wait what kind of joke is this! Who would want this?")
                     ssprint("But... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
@@ -109,47 +107,53 @@ def Chapter1(rimuru):
                 def _craft_full_potion(self):
                     ssprint("I have a feeling these will come in handy.")
                     ssprint("< Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
-                    action_menu(_learn_skills)
+                    action_menu(_learn_skills())
 
-        class _what_are_skills:
-            __location = "Under water?"
+                def _move_on(self): action_menu(_what_are_skills())
+            def _move_on(self): action_menu(_what_are_skills())
+
+        def _what_are_skills(self):
+            action_menu(_what_are_skills())
+
+    class _what_are_skills:
+        __location = "Under water?"
+        def __init__(self):
+            ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
+            ssprint("What an interesting world!")
+            ssprint("Even as skill, I now have someone to talk to.")
+            ssprint("Even though it's basically a one way.")
+            ssprint("*Getting carried away and not being aware of it's surroundings. The little slime fell into what seems to be water.*")
+            ssprint("I'm going to die!")
+            ssprint("SHIT! I've finally reincarnated and I'm already going to die!")
+            ssprint("O'Great sage how painful is it to suffocate to death!?")
+            ssprint("<< Answer, none. A slime's body does not require oxygen to live. >>")
+            ssprint("Hmmmmm. I'm not feeling any pain.")
+            ssprint("I just thought of something!")
+            ssprint("I could swallow up tons of water then I can and expel it at a high pressure...")
+            rimuru.add_attribute('Hydraulic Propulsion')
+            action_menu(self)
+
+        def stay_in_water(self):
+            sprint(".....")
+
+        class _predate_water:
             def __init__(self):
-                ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
-                ssprint("What an interesting world!")
-                ssprint("Even as skill, I now have someone to talk to.")
-                ssprint("Even though it's basically a one way.")
-                ssprint("*Getting carried away and not being aware of it's surroundings. The little slime fell into what seems to be water.*")
-                ssprint("I'm going to die!")
-                ssprint("SHIT! I've finally reincarnated and I'm already going to die!")
-                ssprint("O'Great sage how painful is it to suffocate to death!?")
-                ssprint("<< Answer, none. A slime's body does not require oxygen to live. >>")
-                ssprint("Hmmmmm. I'm not feeling any pain.")
-                ssprint("I just thought of something!")
-                ssprint("I could swallow up tons of water then I can and expel it at a high pressure...")
-                rimuru.add_attribute('Hydraulic Propulsion')
+                ssprint("Alright, now lets try this out.")
                 action_menu(self)
 
             def stay_in_water(self):
-                sprint(".....")
+                sprint("..........")
 
-            class _predate_water:
-                def __init__(self):
-                    ssprint("Alright, now lets try this out.")
-                    action_menu(self)
-
-                def stay_in_water(self):
-                    sprint("..........")
-
-                def _use_hydraulic_propulsion(self):
-                    ssprint("Finally, I'm back on land!")
-                    sprint("~Can you hear me little one.~")
-                    ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
-                    ssprint("Who's that speaking to me!?")
-                    ssprint("It's not [Great Sage], so who is it?")
-                    ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
-                    ssprint("I've been only talking to [Great Sage] so far, according to it... her?...")
-                    ssprint("I've been in this cave for about 90 days!")
-                    action_menu(_find_veldora())
+            def _use_hydraulic_propulsion(self):
+                ssprint("Finally, I'm back on land!")
+                sprint("~Can you hear me little one.~")
+                ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
+                ssprint("Who's that speaking to me!?")
+                ssprint("It's not [Great Sage], so who is it?")
+                ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
+                ssprint("I've been only talking to [Great Sage] so far, according to it... her?...")
+                ssprint("I've been in this cave for about 90 days!")
+                action_menu(_find_veldora())
 
     class _find_veldora:
         __location = "Sealed Cave"
@@ -169,7 +173,7 @@ def Chapter1(rimuru):
                 sprint("~Oh, really... Is there anything I can do to ease your mind?~")
                 action_menu(self)
 
-            def _help_me_see(self):
+            def _please_help_me(self):
                 action_menu(_respond())
 
             def _leave(self):
@@ -191,7 +195,6 @@ def Chapter1(rimuru):
 
     class _respond:
         __location = "Veldora's Prison"
-
         def __init__(self):
             sprint("I never expected to speak with anyone other than my skill")
             sprint("I can't 'see' or 'hear' anything.")

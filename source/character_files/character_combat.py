@@ -17,7 +17,6 @@ class Combat:
         if 'reset' in targets:
             self.targeted_mobs.clear()
         elif 'all' in targets:
-            print(self.active_mobs)
             for mob in self.active_mobs:
                 self.targeted_mobs.append(mob)
         else:

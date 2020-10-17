@@ -17,7 +17,6 @@ def set_fast_mode():
     rimuru.text_crawl = rimuru.show_ascii = False
     fast_mode = True
 
-
 def action_menu(level=None, remove=False):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
@@ -45,12 +44,12 @@ def action_menu(level=None, remove=False):
     print()
     if rimuru.targeted_mobs:
         # Adds (Dead) status to corresponding
-        targets = ', '.join([(mob.name if mob.is_alive else f'{mob.name}(Dead)') for mob in rimuru.targeted_mobs])
+        targets = ', '.join([(f'({mob.name})' if mob.is_alive else f'x({mob.name})') for mob in rimuru.targeted_mobs])
         print(f'\nTarget: {targets}')
 
     # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
-    actions_for_hud = ', '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
-    print(f"Actions: {actions_for_hud} | (stats, inv, help)")
+    actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
+    print(f"Actions: {actions_for_hud}")
 
 
     # ========== Debug Mode
@@ -88,8 +87,6 @@ def action_menu(level=None, remove=False):
         rimuru.use_skill(character, parameter)
     elif 'location' in command:
         rimuru.get_location()
-    elif 'save' in command:
-        game_save(level)
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action_string, action in level_actions.items():
@@ -160,6 +157,19 @@ def cleared_all_mobs():
         if mob.is_alive: return False
     else: return True
 
+def next_location(next_location):
+    """
+    Asks if
+
+    Args:
+        next_location: Next chapter to play.
+    """
+
+    rimuru.current_location_object = next_location
+    game_save()
+    try: next_location(rimuru)
+    except: print("    < Error Loading Next Location. >")
+
 
 #                    ========== Extra ==========
 def tbc():
@@ -214,9 +224,10 @@ def game_exit(*args):
     game_save()
     exit(0)
 
-def game_save(*args):
+def game_save(level=None):
     """Pickels Rimuru_Tempest object."""
 
+    if level: rimuru.current_location_object = level
     rimuru.valid_save = True
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
     print("\n    < Game Saved. >\n")
@@ -231,6 +242,7 @@ def game_load(path):
     Returns:
         Loaded game save object.
     """
+    global rimuru
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
     try: rimuru = pickle.load(open(path, 'rb'))
@@ -255,38 +267,14 @@ def game_over():
     print("\n    < GAME OVER. >\n")
     exit(0)
 
-def next_location(next_chapter):
-    """
-    Asks if
-
-    Args:
-        next_chapter: Next chapter to play.
-    """
-
-    game_save()
-    try: next_chapter(rimuru)
-    except: print("    < Error Loading Next Location. >")
-
 
 #                    ========== Game Functions ==========
-def show_start_banner(rimuru):
-    """Show game title, tips, and player stats/inv."""
-
-    print(f"""
-    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
-    
-    NOTE: 
-    - Some basic commands: help, info, stats, inv, save, and exit.
-    - Fullscreen recommended.
-    """)
-
-    if rimuru.valid_save is True:
-        print("\n    < Save Loaded. >\n")
-
 def ssprint(message):
     """Print tabbed in message."""
+
+    if message[0] == '\n': print()
     print('    ', end='')
-    sprint(message)
+    sprint(message.strip())
 
 def sprint(message):
     """
@@ -297,8 +285,7 @@ def sprint(message):
     """
 
     if rimuru.text_crawl:
-        stripped_message = message.lstrip()
-        message_length = len(stripped_message)
+        message_length = len(message)
 
         if message_length > 200: total_time = 0.1
         elif message_length > 50: total_time = 4.5
@@ -308,7 +295,7 @@ def sprint(message):
 
         # Prints letter by letter, resulted speed depends on string length.
         sleep_time = total_time / message_length
-        for letter in stripped_message:
+        for letter in message:
             sys.stdout.write(letter)
             sys.stdout.flush()
             time.sleep(sleep_time)
@@ -316,12 +303,27 @@ def sprint(message):
 
     else: print(message)  # Print all lines instantly.
 
+def show_start_banner(rimuru):
+    """Show game title, tips, and player stats/inv."""
+
+    print(f"""
+    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
+
+    NOTE: 
+    - Some basic commands: info, stats, inv, save, and  help for more.
+    - Fullscreen recommended.
+    """)
+
+    if rimuru.valid_save is True:
+        print("\n    < Save Loaded. >\n")
+
+
 def show_help(*args):
     """Shows help page."""
 
     print("""
     Command Required_Parameter [Optional_Parameter]
-
+    
     Commands:
         target TARGET(S)            -- Target mobs, target multiple by separating with comma ','. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
         attack with SKILL	        -- Attack targeted_mobs. E.g. 'attack with water blade', 'attack water bullet'
@@ -329,7 +331,7 @@ def show_help(*args):
         stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
         inv                         -- Show inventory.
         info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        save                        -- Saves current game state.
+        textcrawl <on|off>          -- Enable or disable text crawl effect.
         help                        -- Show this help page.
         exit                        -- Exits after save.
 
@@ -349,11 +351,8 @@ def show_help(*args):
         <<< Message >>>             -- Voice of the World.
 
     HUD:
-        Target: Currently_targeted_mobs
-        Actions: (Actions) | Mimic, (Extra_Actions)
-    Example HUD:
-        Target: Giant Bat, Black Spider
-        Actions: (*Attack), (*Move on) | Tempest Serpent, (stats, inv, help)
+        Target: x(Giant Bat) (Black Spider)
+        Actions: (attack) (move on)
 
     Level/Ranking:
        Level      Rank         Risk

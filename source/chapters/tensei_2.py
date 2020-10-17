@@ -35,7 +35,6 @@ def Chapter2(rimuru):
 
         def try_escaping(self):
             ssprint("Oh no, it noticed me!")
-
         def _learn_water_bullet(self):
             rimuru.add_attribute('water bullet')
             ssprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
@@ -52,7 +51,7 @@ def Chapter2(rimuru):
 
     class _attack_serpent:
         def __init__(self):
-            ssprint("< Hint: Target the [Tempest Serpent], then attack with your new skill. 'help' for more info. >")
+            ssprint("\n< Hint: Target the [Tempest Serpent] using target command, then use attack with your new skill. 'help' for more info. >")
             action_menu(self)
 
         class _attack:
@@ -88,8 +87,7 @@ def Chapter2(rimuru):
             ssprint("*The giant pair of doors slowly creeks open, and three adventurers shows themselves.*")
             ssprint("What should I do... I can wait and try to sneak past them if they're going in")
             sprint("Adventurer 1: Phew, it's finally open, even the keyhole was rusted.")
-            sprint(
-                "Adventurer 2: It is over 300 years old, and nobody is maintaining it. I doubt there's a real dragon in here.")
+            sprint("Adventurer 2: It is over 300 years old, and nobody is maintaining it. I doubt there's a real dragon in here.")
             sprint("Adventurer 2: Still reckless of the guildmaster to send us to investigate.")
             sprint("I shouldn't show, they'll probably get scared and attack me")
 
@@ -112,6 +110,8 @@ def Chapter2(rimuru):
                 ssprint("* After the little slime died. All of his stomach contents spewed outwards. *")
                 ssprint("* Unfortunately this particular slime had somehow absorbed a whole dragon! *")
                 ssprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
+
+            game_over()
 
     class _the_encouter:
         __location = "Near the Sealed Cave"
@@ -189,21 +189,14 @@ def Chapter2(rimuru):
 
                 def _heal_goblins(self):
                     sprint("Wow, ")
-                    action_menu(self, remove='_heal_goblins')
+                    action_menu(_help_goblins, remove='_heal_goblins')
 
                 def _let_goblins_die(self):
                     ssprint("I'm going to save my potions for myself.")
                     sprint("Great one, please! If you can heal our wounded we would be most grateful!")
                     sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
                     sprint("I see, we are sorry for troubling you.")
-
-
-                def _let_goblins_die(self):
-                    ssprint("I'm going to save my potions for myself.")
-                    sprint("Great one, please! If you can heal our wounded we would be most grateful!")
-                    sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
-                    sprint("I see, we are sorry for troubling you.")
-
+                    action_menu(_help_goblins, 'heal_wounded')
 
             class _setup_defenses:
                 def __init__(self):
