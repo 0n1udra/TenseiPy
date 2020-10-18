@@ -52,10 +52,10 @@ class Combat:
         # If mob is in active_mobs list and is is_alive, adds to focusTarget list.
         for attack in user_input.split(','):
             attack = self.get_object(attack)
-            try:
+            if attack:
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
-            except: continue
+            else: continue
 
         for current_target in self.targeted_mobs:
             for current_skill in skills:

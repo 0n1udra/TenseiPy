@@ -101,11 +101,9 @@ class Rimuru_Tempest(Character):
 
         targets = self.targeted_mobs[:]
 
-        try:
-            for i in input_targets.split(','):
-                if mob_object := self.get_object(i, stricter=False):
-                    targets.append([mob_object])
-        except: pass
+        for i in input_targets.split(','):
+            if mob_object := self.get_object(i, stricter=False):
+                targets.append([mob_object])
 
         for target in targets:
             if not target[0]: continue
