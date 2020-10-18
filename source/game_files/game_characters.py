@@ -99,26 +99,27 @@ class Rimuru_Tempest(Character):
             > predate
         """
 
-        targets = list(self.targeted_mobs)
+        targets = self.targeted_mobs[:]
 
         try:
             for i in input_targets.split(','):
-                targets.append(self.get_object(i, stricter=False))
-        except ValueError: pass
+                if mob_object := self.get_object(i, stricter=False):
+                    targets.append([mob_object])
+        except: pass
 
         for target in targets:
-            if not target: continue
+            if not target[0]: continue
 
-            if target.game_object_type == 'item':
-                self.add_inventory(target)
-            elif target.game_object_type == 'attribute':
-                self.add_attribute(target)
-            elif target.game_object_type == 'character':
+            if target[0].game_object_type == 'item':
+                self.add_inventory(target[0])
+            elif target[0].game_object_type == 'attribute':
+                self.add_attribute(target[0])
+            elif target[0].game_object_type == 'character':
                 # Can only predate targeted mobs that are dead.
-                for mob in self.targeted_mobs:
-                    if mob.is_alive is False:
-                        self.add_mimic(target)
-                        del self.targeted_mobs[self.targeted_mobs.index(mob)]
+                if target[0].is_alive is False:
+                    self.add_mimic(target[0])
+                    del self.targeted_mobs[self.targeted_mobs.index(target)]
+                    del self.active_mobs[self.active_mobs.index(target)]
 
 
 class Veldora_Tempest(Character):

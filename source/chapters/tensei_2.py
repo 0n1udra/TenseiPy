@@ -67,8 +67,7 @@ def Chapter2(rimuru):
                     ssprint("And it seems like there's some other small monsters dwelling in here aswell.")
                     ssprint("I should clear them out before they notice me.\n")
 
-                    ssprint("< After using 'predate', Try finding the other monsters and use 'target' and 'attack' on them. >")
-                    ssprint("< HINT: Try [Sense Heat Source] to detect foes using the 'use' command. 'help' for more info. >")
+                    ssprint("\n< HINT: Try [Sense Heat Source] to detect foes using the 'use' command, or use 'nearby'. 'help' for more info. >")
 
                 if cleared_all_mobs():
                     action_menu(_at_exit())
@@ -139,7 +138,9 @@ def Chapter2(rimuru):
 
     class _meet_goblins:
         def __init__(self):
+            new_active_mob(['10* goblin'])
             ssprint("How should I introduce myself?")
+            action_menu(self)
 
         def _friendly(self):
             sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
@@ -156,19 +157,19 @@ def Chapter2(rimuru):
             action_menu(_goblin_village())
 
         def _ruthless(self):
-            sprint("Alright you weaklings. Listen here, all of you little shits can choose to follow my commands or death.")
+            sprint("Alright you weaklings. Listen here you little shits. You have two options. You can worship me or you can die.")
             sprint("So. What will it be?")
             sprint("O-of course, we all obey!")
-            sprint("Now you guys got a base or village of some sort?")
+            sprint("Ok, good choice. So, you guys have a base, village, anything?")
             sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
-            sprint("Alright, then lets get moving.")
+            sprint("Of course you would. Lets start moving.")
             action_menu(_goblin_village())
 
     class _goblin_village:
         __locatoin = "Goblin Village"
-        global _help_goblins
 
         def __init__(self):
+            new_active_mob(['goblin: Goblin Chief'])
             ssprint("Wow, this place looks like a dump... ")
             sprint("I am the village elder. I'm sorry we don't have much to serve you.")
             sprint("So I'm guessing you didn't invite me here just for pleasantries.")
@@ -177,10 +178,11 @@ def Chapter2(rimuru):
             sprint("There is a pack of 100 Dire Wolves that have been attacking us recently, and we are barely fendding them off.")
             action_menu(self)
 
-        class _help_goblins:
+        class _assist_goblins:
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
+                action_menu(self)
 
             class _heal_wounded:
                 def __init__(self):
@@ -213,6 +215,16 @@ def Chapter2(rimuru):
             sprint("Have we offended you in some way. Please we are desperate here!")
             sprint("No, there's nothing that you can offer here that interests me.")
 
+        def _attack(self):
+            if cleared_all_mobs():
+                ssprint("I killed them, I killed them all. They were so weak.")
+                ssprint("What now?")
+
+            if mob_status('goblin elder'):
+                sprint("Listen up! I am now you're new village chief!")
+                sprint("Anyone that disagrees will be cut down on the spot!")
+
+
     class _wolf_attack:
         def __init__(self):
             sprint("The Dire Wolves, they're here!")
@@ -220,3 +232,4 @@ def Chapter2(rimuru):
             ssprint("< Use the 'Command' command to tell subdoranites what to do. >")
 
     chapter_2()
+    #_goblin_village()

@@ -44,7 +44,7 @@ def action_menu(level=None, remove=False):
     print()
     if rimuru.targeted_mobs:
         # Adds (Dead) status to corresponding
-        targets = ', '.join([(f'({mob.name})' if mob.is_alive else f'x({mob.name})') for mob in rimuru.targeted_mobs])
+        targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'\nTarget: {targets}')
 
     # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
@@ -56,42 +56,32 @@ def action_menu(level=None, remove=False):
     # Runs first available action that will progress the storyline.
     if fast_mode:
         for action in actions:
-            if action[0] == '_':
-                user_input = action.replace('_', ' ').strip()
+            if action[0] == '_': user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").lower()
         print()
 
     # Separates user input into command and command arguments.
     split_user_input = user_input.split(' ')
-    command = split_user_input[0]
-    parameter = ' '.join(split_user_input[1:])
+    command, parameters = split_user_input[0], ' '.join(split_user_input[1:])
     character = rimuru
 
     level_actions = {
-        'stats': rimuru.show_attributes,
         'target': rimuru.set_targets,
-        'mimic': rimuru.use_mimic,
-        'predate': rimuru.predate_targets,
-        'inv': rimuru.show_inventory,
-        'info': rimuru.show_info,
-        'craft': rimuru.craft_item,
+        'mimic': rimuru.use_mimic,'predate': rimuru.predate_targets,
+        'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory,'info': rimuru.show_info, 'craft': rimuru.craft_item,
         'map': rimuru.get_map,
-        'textcrawl': game_text_crawl,
-        'help': show_help,
-        'exit': game_exit,
+        'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl
     }
     if 'attack' in command:
-        if rimuru.attack(parameter): user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
-    elif 'use' in command:
-        rimuru.use_skill(character, parameter)
-    elif 'location' in command:
-        rimuru.get_location()
+        if rimuru.attack(parameters): user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
+    elif 'use' in command: rimuru.use_skill(character, parameters)
+    elif 'location' in command: rimuru.get_location()
+    elif 'nearby' in command: rimuru.use_skill(character, 'sense heat source')
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action_string, action in level_actions.items():
-        if action_string in command:
-            action(parameter)
+        if action_string in command: action(parameters)
 
     loop = True
     for action in actions:
@@ -116,16 +106,29 @@ def new_active_mob(add_mobs):
     Mob is alive on current level.
 
     Args:
-        mobs: Adds mob objects to active_mobs list.
+        add_mobs: Adds mob objects to active_mobs list.
 
     Usage:
         new_active_mob(['tempest serpent'])
         new_active_mob(['tempest serpent', 'giant bat'])
+        new_active_mob(['10* goblin', 'goblin: Goblin Chief'])
+        new_active_mob(['50* goblin: Goblinas'])
     """
 
     for mob in add_mobs:
+        amount, name = 1, None
+        if '*' in mob:
+            amount, mob = mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
+            try: amount = int(amount)
+            except: pass
+
+        if ':' in mob:
+            mob, name = mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
+
         if mob_object := rimuru.get_object(mob, new=True):
-            rimuru.active_mobs.append(mob_object)
+            if name: mob_object.name = name.strip()
+            list_item = [mob_object, amount]
+            rimuru.active_mobs.append(list_item)
 
 def mob_status(target):
     """
@@ -139,8 +142,8 @@ def mob_status(target):
     """
 
     for i in rimuru.active_mobs:
-        if target.lower() in i.get_name():
-            return i.is_alive
+        if target.lower() in i[0].get_name():
+            return i[0].is_alive
 
 def cleared_all_mobs():
     """
@@ -154,7 +157,7 @@ def cleared_all_mobs():
     """
 
     for mob in rimuru.active_mobs:
-        if mob.is_alive: return False
+        if mob[0].is_alive: return False
     else: return True
 
 def next_location(next_location):
@@ -325,12 +328,14 @@ def show_help(*args):
     Command Required_Parameter [Optional_Parameter]
     
     Commands:
+        inv                         -- Show inventory.
+        stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
+        info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
         target TARGET(S)            -- Target mobs, target multiple by separating with comma ','. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
         attack with SKILL	        -- Attack targeted_mobs. E.g. 'attack with water blade', 'attack water bullet'
         use SKILL                   -- Use a skill. E.g. 'use sense heat source'
-        stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
-        inv                         -- Show inventory.
-        info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        craft ITEM                  -- Craft items if have necessary ingredients. E.g. 'craft full potion'
+                                         NOTE: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
         textcrawl <on|off>          -- Enable or disable text crawl effect.
         help                        -- Show this help page.
         exit                        -- Exits after save.
@@ -340,8 +345,8 @@ def show_help(*args):
           - info mimic              -- Shows available mimicries.
           - mimic reset             -- Resets mimic (Back to slime).
         predate                     -- Predate target(s). Can only predate mobs that are targeted_mobs and dead.
-        craft ITEM                  -- Craft items if have necessary ingredients. E.g. 'craft full potion'
-                                         NOTE: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
+        nearby                      -- Once acquired the [sense heat source] skill, you can use nearby instead of typing 'use sense heat source' every time.
+                                         
 
     Game Dialogue:
         ~Message~                   -- Telepathy, thought communication.

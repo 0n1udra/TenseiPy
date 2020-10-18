@@ -22,7 +22,7 @@ class Combat:
         else:
             for target in targets.split(','):
                 for mob in self.active_mobs:
-                    if str(mob) in target:  # If targetable, by checking if in active_mobs list.
+                    if str(mob[0]) in target:  # If targetable, by checking if in active_mobs list.
                         self.targeted_mobs.append(mob)
 
     def attack(self, user_input):
@@ -60,17 +60,17 @@ class Combat:
         for current_target in self.targeted_mobs:
             for current_skill in skills:
                 # If target is too high of a level to damage with skill.
-                if current_target.level > current_skill.damage_level:
-                    print(f"    < {current_target.name} level too for that attack. >")
+                if current_target[0].level > current_skill.damage_level:
+                    print(f"    < {current_target[0].name} level too for that attack. >")
                     continue
                 # Checking if have resistance.
-                elif self.check_resistance(current_skill, current_target):
+                elif self.check_resistance(current_skill, current_target[0]):
                     print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
                     continue
 
                 self.data['kills'] += 1
-                current_target.is_alive = False
+                current_target[0].is_alive = False
                 attack_success = True
-                print(f"    < Eliminated: {current_target.name}. >\n")
+                print(f"    < Eliminated: {current_target[0].name}. >\n")
 
         return attack_success
