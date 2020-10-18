@@ -35,7 +35,6 @@ def ChapterXX(Rimuru):
 > Functions and class starting with _ will progress the storyline.
 > action_menu grabs functions and classes under passed in object, then shows the user the available actions.
 > Use class for nesting more paths in, and functions for the end of a path.
-> Remember to set global CLASS in upper if want to call it with action_menu() from inner nest.
 
 
 Reading Variable Names:

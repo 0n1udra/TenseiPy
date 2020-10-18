@@ -125,5 +125,4 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             return item
         else: return False
 
-
     def __str__(self): return self.name.lower()

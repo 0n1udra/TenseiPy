@@ -95,7 +95,7 @@ def Chapter2(rimuru):
         def _sneak_out(self):
             ssprint("I'll try sneaking out after they go in.")
             ssprint("Finally! I'm out of that cave. Where now to though?")
-            action_menu(_the_encouter())
+            action_menu(_the_encounter())
 
         def _say_hi(self):
             sprint("HELLO THERE!")
@@ -112,7 +112,7 @@ def Chapter2(rimuru):
 
             game_over()
 
-    class _the_encouter:
+    class _the_encounter:
         __location = "Near the Sealed Cave"
         def __init__(self):
             ssprint("Where am I going?")
@@ -129,12 +129,6 @@ def Chapter2(rimuru):
                 ssprint("Is that so, let's try that.")
                 action_menu(_meet_goblins())
 
-            # def _try_escapeing(self):
-
-        if rimuru.check_acquired('sticky thread'):
-            def _use_sticky_thread(self):
-                ssprint("Swinging from tree to tree with [Sticky Thread] seems to be a pretty effective way to travel.")
-                action_menu(_meet_goblins())
 
     class _meet_goblins:
         def __init__(self):
@@ -191,24 +185,40 @@ def Chapter2(rimuru):
 
                 def _heal_goblins(self):
                     sprint("Wow, ")
-                    action_menu(_help_goblins, remove='_heal_goblins')
+                    action_menu(_goblin_village._assist_goblins, remove='_heal_wounded')
 
-                def _let_goblins_die(self):
+                def _let_them_die(self):
                     ssprint("I'm going to save my potions for myself.")
                     sprint("Great one, please! If you can heal our wounded we would be most grateful!")
                     sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
                     sprint("I see, we are sorry for troubling you.")
-                    action_menu(_help_goblins, 'heal_wounded')
+                    action_menu(_goblin_village._assist_goblins, remove='_heal_wounded')
 
             class _setup_defenses:
                 def __init__(self):
-                    action_menu(self)
                     sprint("Let's setup defenses.")
+                    action_menu(_wolf_attack())
+
+            class _leave():
+                def __init__(self):
+                    if game_conditions('wolf defense'):
+                        action_menu(_goblin_village._assist_goblins)
+                    else:
+                        sprint("Great one! The wolves will be here soon. Please help us!")
+                        action_menu(self)
+
+                def _stay(self):
+                    sprint("STAYING")
+                    action_menu(_goblin_village._assist_goblins)
+
+                def _leave(self):
+                    sprint("Leaving")
+
 
         def _compensation(self):
             sprint("So what, you want protection? What would my reward be?")
             sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
-            action_menu(_help_goblins())
+            action_menu(_assist_goblins())
 
         def _leave(self):
             sprint("I don't want anything to do with this. I'm just going to leave.")
@@ -232,4 +242,3 @@ def Chapter2(rimuru):
             ssprint("< Use the 'Command' command to tell subdoranites what to do. >")
 
     chapter_2()
-    #_goblin_village()
