@@ -197,7 +197,8 @@ def Chapter2(rimuru):
             class _setup_defenses:
                 def __init__(self):
                     sprint("Let's setup defenses.")
-                    action_menu(_wolf_attack())
+
+                    action_menu(_wolf_attack_village())
 
             class _leave():
                 def __init__(self):
@@ -218,27 +219,48 @@ def Chapter2(rimuru):
         def _compensation(self):
             sprint("So what, you want protection? What would my reward be?")
             sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
-            action_menu(_assist_goblins())
+            action_menu(_goblin_village._assist_goblins())
 
         def _leave(self):
             sprint("I don't want anything to do with this. I'm just going to leave.")
-            sprint("Have we offended you in some way. Please we are desperate here!")
+            sprint("Have we offended you in some way. Please we are desperate here!")  n
             sprint("No, there's nothing that you can offer here that interests me.")
 
         def _attack(self):
             if cleared_all_mobs():
                 ssprint("I killed them, I killed them all. They were so weak.")
                 ssprint("What now?")
+                action_menu(_hunt_wolves())
 
             if mob_status('goblin elder'):
                 sprint("Listen up! I am now you're new village chief!")
                 sprint("Anyone that disagrees will be cut down on the spot!")
+                action_menu(self)
 
 
-    class _wolf_attack:
+    class _wolf_attack_village:
         def __init__(self):
             sprint("The Dire Wolves, they're here!")
-            sprint("Setup defenses")
-            ssprint("< Use the 'Command' command to tell subdoranites what to do. >")
+            action_menu(self)
+
+        def _attack(self):
+            ssprint("Lets attack first before they can do anything.")
+
+        def _give_warning(self):
+            sprint("Listen up, because I'm only going to say this once!")
+            sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
+            sprint("So, which is it?")
+
+    class _hunt_wolves:
+        def __init__(self):
+            sprint("Lets go chase after those wolves, see if anything interesting happens.")
+
+
+            action_menu(self)
+
+        def _
+
+
+
 
     chapter_2()
