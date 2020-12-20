@@ -7,6 +7,7 @@ from chapters.tensei_2 import Chapter2
 def Chapter1(rimuru):
     class chapter_1:
         __location = 'Sealed Cave'
+
         def __init__(self):
             ssprint(".....\n")
             show_art('great sage')
@@ -72,7 +73,7 @@ def Chapter1(rimuru):
                     rimuru.add_inventory('Hipokte Grass')
                     action_menu(_learn_skills())
 
-    class _learn_skills():
+    class _learn_skills:
         def __init__(self):
             ssprint("I've eaten, or I guess absorbed what I thought was a lot of grass.")
             ssprint("So where has it all gone? I haven't had the need to poop yet.")
@@ -110,6 +111,7 @@ def Chapter1(rimuru):
                     action_menu(_learn_skills())
 
                 def _move_on(self): action_menu(_what_are_skills())
+
             def _move_on(self): action_menu(_what_are_skills())
 
         def _what_are_skills(self):
@@ -117,6 +119,7 @@ def Chapter1(rimuru):
 
     class _what_are_skills:
         __location = "Under water?"
+
         def __init__(self):
             ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
             ssprint("What an interesting world!")
@@ -157,6 +160,7 @@ def Chapter1(rimuru):
 
     class _find_veldora:
         __location = "Sealed Cave"
+
         def __init__(self):
             ssprint("Let's try to find where that voice is coming from")
             ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
@@ -192,9 +196,9 @@ def Chapter1(rimuru):
 
         def predate_grass(self): rimuru.add_inventory('hipokte grass')
 
-
     class _respond:
         __location = "Veldora's Prison"
+
         def __init__(self):
             sprint("I never expected to speak with anyone other than my skill")
             sprint("I can't 'see' or 'hear' anything.")
@@ -313,6 +317,7 @@ def Chapter1(rimuru):
 
         class _predate_veldora:
             __location = "Sealed Cave"
+
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
                 rimuru.add_inventory(veldora)

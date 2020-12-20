@@ -55,7 +55,8 @@ class Combat:
             if attack:
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
-            else: continue
+            else:
+                continue
 
         for current_target in self.targeted_mobs:
             for current_skill in skills:

@@ -4,6 +4,8 @@ import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
+
+
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here.
 def update_rimuru(rimuru_object):
@@ -11,11 +13,15 @@ def update_rimuru(rimuru_object):
     rimuru = rimuru_object
     return rimuru
 
+
 fast_mode = False
+
+
 def set_fast_mode():
     global fast_mode
     rimuru.text_crawl = rimuru.show_ascii = False
     fast_mode = True
+
 
 def action_menu(level=None, remove=False):
     """
@@ -51,12 +57,12 @@ def action_menu(level=None, remove=False):
     actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
     print(f"Actions: {actions_for_hud}")
 
-
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
     if fast_mode:
         for action in actions:
-            if action[0] == '_': user_input = action.replace('_', ' ').strip()
+            if action[0] == '_':
+                user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").lower()
         print()
@@ -68,16 +74,19 @@ def action_menu(level=None, remove=False):
 
     level_actions = {
         'target': rimuru.set_targets,
-        'mimic': rimuru.use_mimic,'predate': rimuru.predate_targets,
-        'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory,'info': rimuru.show_info, 'craft': rimuru.craft_item,
+        'mimic': rimuru.use_mimic, 'predate': rimuru.predate_targets,
+        'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory, 'info': rimuru.show_info, 'craft': rimuru.craft_item,
         'map': rimuru.get_map,
         'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl
     }
     if 'attack' in command:
         if rimuru.attack(parameters): user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
-    elif 'use' in command: rimuru.use_skill(character, parameters)
-    elif 'location' in command: rimuru.get_location()
-    elif 'nearby' in command: rimuru.use_skill(character, 'sense heat source')
+    elif 'use' in command:
+        rimuru.use_skill(character, parameters)
+    elif 'location' in command:
+        rimuru.get_location()
+    elif 'nearby' in command:
+        rimuru.use_skill(character, 'sense heat source')
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action_string, action in level_actions.items():
@@ -91,6 +100,7 @@ def action_menu(level=None, remove=False):
 
     if loop: action_menu(level)
 
+
 #                    ========== Level Functions ==========
 def game_conditions(value, new_value=None):
     if new_value:
@@ -99,7 +109,9 @@ def game_conditions(value, new_value=None):
 
     if value in rimuru.conditions_data:
         return rimuru.conditions_data[value]
-    else: return False
+    else:
+        return False
+
 
 def new_active_mob(add_mobs):
     """
@@ -119,8 +131,10 @@ def new_active_mob(add_mobs):
         amount, name = 1, None
         if '*' in mob:
             amount, mob = mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
-            try: amount = int(amount)
-            except: pass
+            try:
+                amount = int(amount)
+            except:
+                pass
 
         if ':' in mob:
             mob, name = mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
@@ -129,6 +143,7 @@ def new_active_mob(add_mobs):
             if name: mob_object.name = name.strip()
             list_item = [mob_object, amount]
             rimuru.active_mobs.append(list_item)
+
 
 def mob_status(target):
     """
@@ -145,6 +160,7 @@ def mob_status(target):
         if target.lower() in i[0].get_name():
             return i[0].is_alive
 
+
 def cleared_all_mobs():
     """
     Checks if mobs on current level are all dead.
@@ -158,7 +174,9 @@ def cleared_all_mobs():
 
     for mob in rimuru.active_mobs:
         if mob[0].is_alive: return False
-    else: return True
+    else:
+        return True
+
 
 def next_location(next_location):
     """
@@ -170,8 +188,10 @@ def next_location(next_location):
 
     rimuru.current_location_object = next_location
     game_save()
-    try: next_location(rimuru)
-    except: print("    < Error Loading Next Location. >")
+    try:
+        next_location(rimuru)
+    except:
+        print("    < Error Loading Next Location. >")
 
 
 #                    ========== Extra ==========
@@ -180,6 +200,7 @@ def tbc():
 
     print("\n    < ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
+
 
 def game_text_crawl(arg):
     """
@@ -202,6 +223,7 @@ def game_text_crawl(arg):
         rimuru.text_crawl = False
         print("\n    < Text Crawl Deactivated. >\n")
 
+
 def show_art(art):
     """
     Prints out ASCII art line by line or all at once dependding on text_crawl boolean.
@@ -218,7 +240,9 @@ def show_art(art):
         for line in art.split('\n'):
             time.sleep(0.05)
             print(line)
-    else: print(art)
+    else:
+        print(art)
+
 
 #                    ========== Game Saves ==========
 def game_exit(*args):
@@ -227,6 +251,7 @@ def game_exit(*args):
     game_save()
     exit(0)
 
+
 def game_save(level=None):
     """Pickels Rimuru_Tempest object."""
 
@@ -234,6 +259,7 @@ def game_save(level=None):
     rimuru.valid_save = True
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
     print("\n    < Game Saved. >\n")
+
 
 def game_load(path):
     """
@@ -248,7 +274,8 @@ def game_load(path):
     global rimuru
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
-    try: rimuru = pickle.load(open(path, 'rb'))
+    try:
+        rimuru = pickle.load(open(path, 'rb'))
     except:
         rimuru = mobs.Rimuru_Tempest()
         rimuru.save_path = path
@@ -261,6 +288,7 @@ def game_load(path):
         game_load(path)
 
     return rimuru
+
 
 def game_over():
     """Deletes pickle save file."""
@@ -279,6 +307,7 @@ def ssprint(message):
     print('    ', end='')
     sprint(message.strip())
 
+
 def sprint(message):
     """
     Text crawling. Slowly print out text to console.
@@ -290,11 +319,16 @@ def sprint(message):
     if rimuru.text_crawl:
         message_length = len(message)
 
-        if message_length > 200: total_time = 0.1
-        elif message_length > 50: total_time = 4.5
-        elif message_length > 25: total_time = 3.5
-        elif message_length > 10: total_time = 2.5
-        else: total_time = 2.5
+        if message_length > 200:
+            total_time = 0.1
+        elif message_length > 50:
+            total_time = 4.5
+        elif message_length > 25:
+            total_time = 3.5
+        elif message_length > 10:
+            total_time = 2.5
+        else:
+            total_time = 2.5
 
         # Prints letter by letter, resulted speed depends on string length.
         sleep_time = total_time / message_length
@@ -304,7 +338,9 @@ def sprint(message):
             time.sleep(sleep_time)
         print()
 
-    else: print(message)  # Print all lines instantly.
+    else:
+        print(message)  # Print all lines instantly.
+
 
 def show_start_banner(rimuru):
     """Show game title, tips, and player stats/inv."""

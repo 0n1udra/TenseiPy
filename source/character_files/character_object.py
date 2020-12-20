@@ -16,15 +16,15 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                             'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
-        self.attributes = {'Manas': {},'Ultimate Skill': {},'Unique Skill': {},'Special Skill': {},'Extra Skill': {},'Intrinsic Skill': {},
-                           'Common Skill': {},'Daily Skill': {},'Composite Skill': {},'Resistance': {},'Attribute': {}}
+        self.attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Special Skill': {}, 'Extra Skill': {}, 'Intrinsic Skill': {},
+                           'Common Skill': {}, 'Daily Skill': {}, 'Composite Skill': {}, 'Resistance': {}, 'Attribute': {}}
 
         # Character inventory.
         self.inventory_capacity = 0  # Inventory capacity in percentage.
         self.inventory_capacity_add = 0  # Add to overall capacity when adding items to inventory.
         self.quantity = 0  # Item quantity in inventory.
         self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
-        self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {},'Misc': {}}
+        self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {}, 'Misc': {}}
 
         # Character information and data related variables.
         self.name = 'N/A'
@@ -67,7 +67,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, match, item_pool=[], new=False, stricter=True):
+    def get_object(self, match, item_pool=None, new=False, stricter=True):
         """
         Can take in either a str or obj, then returns object (initialized if not already in inventory).
 
@@ -85,17 +85,24 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
+        if item_pool is None:
+            item_pool = []
+
         if 'character' in self.game_object_type:
             item_pool = ([*self.inventory_generator(), *self.attributes_generator()])
 
-        if new: item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
+        if new is True:
+            item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
 
         for game_object in item_pool:
-            if type(game_object) is str: continue
+            if type(game_object) is str:
+                continue
 
             if new:
-                try: game_object = game_object()
-                except: pass
+                try:
+                    game_object = game_object()
+                except:
+                    pass
 
             if stricter:
                 if str(game_object) == str(match).lower().strip():
@@ -103,7 +110,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             elif str(game_object) in str(match).lower():
                 return game_object
 
-            if new: del game_object
+            if new:
+                del game_object
 
         return None
 
@@ -123,6 +131,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         if item := self.get_object(check_object):
             return item
-        else: return False
+        else:
+            return False
 
-    def __str__(self): return self.name.lower()
+    def __str__(self):
+        return self.name.lower()

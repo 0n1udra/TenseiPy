@@ -8,6 +8,7 @@ __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
 __status__ = "Development"
 
+
 def help_page():
     print("""
     -f  --  Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
@@ -16,6 +17,7 @@ def help_page():
     -h  --  This help page.
     """)
     exit(0)
+
 
 if __name__ == '__main__':
     if '-h' in sys.argv: help_page()

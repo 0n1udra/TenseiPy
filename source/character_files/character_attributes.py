@@ -13,18 +13,21 @@ class Attributes:
 
         for skill_type, skills in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills: yield f'[{skill_type}]'
+            if output and skills:
+                yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
-                if not output: yield skill_object
+                if output is False:
+                    yield skill_object
 
                 # Prints skill's active or passive status.
                 if skill_object.active:
                     yield f'    {skill_name} (Active)'
                 elif skill_object.passive:
                     yield f'    {skill_name} (Passive)'
-                else: yield f'    {skill_name}'
+                else:
+                    yield f'    {skill_name}'
 
     def show_attributes(self, *args):
         """
@@ -41,12 +44,14 @@ class Attributes:
         print("-----Attributes/Skills-----")
         print(f"Name: [{(self.name + ' ' + self.family_name).strip()}]")
 
-        if self.current_mimic: print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
+        if self.current_mimic:
+            print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
 
         print(f"Location: {self.current_location}\n")
 
         # Print out skill category and corresponding skills indented.
-        for i in self.attributes_generator(output=True): print(i)
+        for i in self.attributes_generator(output=True):
+            print(i)
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
@@ -62,7 +67,8 @@ class Attributes:
         """
 
         # Checks if already acquired.
-        if self.check_acquired(attribute): return False
+        if self.check_acquired(attribute):
+            return False
 
         if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
@@ -131,13 +137,16 @@ class Attributes:
             .check_resistance('resist pain', 'ranga')
         """
 
-        if type(target) == str: target = self.get_object(target)
-        if not target: target = self
+        if type(target) == str:
+            target = self.get_object(target)
+        if not target:
+            target = self
 
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
-                if attack.damage_type in resist: return True
+                if attack.damage_type in resist:
+                    return True
 
     def use_skill(self, character, skill, *args):
         """
@@ -152,6 +161,9 @@ class Attributes:
         """
 
         if skill_object := self.get_object(skill):
-            try: skill_object.use_skill(character, args)
-            except: return False
-        else: return False
+            try:
+                skill_object.use_skill(character, args)
+            except:
+                return False
+        else:
+            return False

@@ -1,5 +1,6 @@
 from character_files.character_object import Character
 
+
 class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
@@ -150,6 +151,7 @@ class Tempest_Serpent(Character):
         self.set_start_state()
         self.update_info()
 
+
 class Giant_Bat(Character):
     def __init__(self, name=None):
         Character.__init__(self)
@@ -166,6 +168,7 @@ class Giant_Bat(Character):
         self.set_start_state()
         self.update_info()
 
+
 class Evil_Centipede(Character):
     def __init__(self, name=None):
         Character.__init__(self)
@@ -178,6 +181,7 @@ class Evil_Centipede(Character):
         self.starting_state = ['paralyzing breath']
         self.set_start_state()
         self.update_info()
+
 
 class Black_Spider(Character):
     def __init__(self, name=None):
@@ -229,6 +233,7 @@ class Goblin(Character):
         self.evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
         self.update_info()
 
+
 class Hobgoblin(Goblin):
     def __init__(self, name=None):
         Goblin.__init__(self)
@@ -240,4 +245,3 @@ class Hobgoblin(Goblin):
         self.description = 'Hobglins are evolved form of Gobins.'
         self.evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
         self.update_info()
-

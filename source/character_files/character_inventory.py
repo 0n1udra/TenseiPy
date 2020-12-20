@@ -19,7 +19,8 @@ class Inventory:
             for item_name, item_object in items.items():
                 if output:
                     yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name}'
-                else: yield item_object
+                else:
+                    yield item_object
 
     def show_inventory(self, *args):
         """
@@ -55,7 +56,8 @@ class Inventory:
             if item_object := self.get_object(item, new=True):
                 self.inventory[item_object.item_type][item_object.name] = item_object
                 print(f'\n    << Analysis on [{item_object.name}] Complete. >>')
-            else: return False
+            else:
+                return False
 
         # Adds to total inventory capacity %.
         self.inventory_capacity += item_object.inventory_capacity_add * item_object.quantity_add
@@ -107,7 +109,8 @@ class Inventory:
         print(f"{item.quantity_add} {item.name}: {recipe[:-2]}")
 
         # Asks for how much to make. note that some items are crafted in batches.
-        try: craft_amount = int(input("Amount (0 to cancel) > "))
+        try:
+            craft_amount = int(input("Amount (0 to cancel) > "))
         except ValueError:
             print("\n    < Error, need integer input. >\n")
             return False
@@ -126,4 +129,3 @@ class Inventory:
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
         self.add_inventory(item, craft_amount)
         print()
-

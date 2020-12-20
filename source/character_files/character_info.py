@@ -60,4 +60,3 @@ class Info:
         """Checks if you're interacting with the player object (Rimuru)."""
 
         if self.__class__.__name__ == 'Rimuru_Tempest': return True
-

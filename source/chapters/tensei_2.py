@@ -35,6 +35,7 @@ def Chapter2(rimuru):
 
         def try_escaping(self):
             ssprint("Oh no, it noticed me!")
+
         def _learn_water_bullet(self):
             rimuru.add_attribute('water bullet')
             ssprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
@@ -71,9 +72,11 @@ def Chapter2(rimuru):
 
                 if cleared_all_mobs():
                     action_menu(_at_exit())
-                else: action_menu(_attack_serpent())
+                else:
+                    action_menu(_attack_serpent())
 
-        def predate_ore(self): rimuru.add_inventory('magic ore')
+        def predate_ore(self):
+            rimuru.add_inventory('magic ore')
 
         def _sneak_away(self):
             ssprint("I'll try to sneak away.")
@@ -114,6 +117,7 @@ def Chapter2(rimuru):
 
     class _the_encounter:
         __location = "Near the Sealed Cave"
+
         def __init__(self):
             ssprint("Where am I going?")
             action_menu(self)
@@ -128,7 +132,6 @@ def Chapter2(rimuru):
                 ssprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
                 ssprint("Is that so, let's try that.")
                 action_menu(_meet_goblins())
-
 
     class _meet_goblins:
         def __init__(self):
@@ -200,7 +203,7 @@ def Chapter2(rimuru):
 
                     action_menu(_wolf_attack_village())
 
-            class _leave():
+            class _leave:
                 def __init__(self):
                     if game_conditions('wolf defense'):
                         action_menu(_goblin_village._assist_goblins)
@@ -215,7 +218,6 @@ def Chapter2(rimuru):
                 def _leave(self):
                     sprint("Leaving")
 
-
         def _compensation(self):
             sprint("So what, you want protection? What would my reward be?")
             sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
@@ -223,7 +225,7 @@ def Chapter2(rimuru):
 
         def _leave(self):
             sprint("I don't want anything to do with this. I'm just going to leave.")
-            sprint("Have we offended you in some way. Please we are desperate here!")  n
+            sprint("Have we offended you in some way. Please we are desperate here!")
             sprint("No, there's nothing that you can offer here that interests me.")
 
         def _attack(self):
@@ -236,7 +238,6 @@ def Chapter2(rimuru):
                 sprint("Listen up! I am now you're new village chief!")
                 sprint("Anyone that disagrees will be cut down on the spot!")
                 action_menu(self)
-
 
     class _wolf_attack_village:
         def __init__(self):
@@ -255,12 +256,8 @@ def Chapter2(rimuru):
         def __init__(self):
             sprint("Lets go chase after those wolves, see if anything interesting happens.")
 
-
             action_menu(self)
 
         def _
-
-
-
 
     chapter_2()
