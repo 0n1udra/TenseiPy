@@ -169,9 +169,16 @@ def cleared_all_mobs():
     """
 
     for mob in rimuru.active_mobs:
-        if mob[0].is_alive: return False
+        if mob[0].is_alive:
+            return False
     else:
         return True
+
+def reset_mobs():
+    """Resets active_mobs and targeted_mobs list."""
+
+    rimuru.active_mobs.clear()
+    rimuru.targeted_mobs.clear()
 
 def next_location(next_location):
     """

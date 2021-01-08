@@ -104,13 +104,15 @@ class Inventory:
 
         # Shows recipe.
         recipe = ''
+        print(f"Recipe for {item.quantity_add}x:")
         for ingredient, amount in item.recipe.items():
             recipe += F"{amount}x {ingredient}, "
-        print(f"{item.quantity_add} {item.name}: {recipe[:-2]}")
+        print(f"{recipe[:-2]}")  # [:-2] cuts off last comma and space
+        print(f"\nInputting 1 will create {item.quantity_add}. 0 will cancel crafting.")
 
         # Asks for how much to make. note that some items are crafted in batches.
         try:
-            craft_amount = int(input("Amount (0 to cancel) > "))
+            craft_amount = int(input(f"> "))
         except ValueError:
             print("\n    < Error, need integer input. >\n")
             return False

@@ -22,10 +22,12 @@ class Rimuru_Tempest(Character):
             mimic: Yields character objects that are in acquired_mimicries dictionary.
         """
 
-        if not self.mimic_object(): return None
+        if not self.mimic_object():
+            return None
 
         for level, mimics in self.mimic_object().acquired_mimicries.items():
-            for mimic_name, mimic in mimics.items(): yield mimic
+            for mimic_name, mimic in mimics.items():
+                yield mimic
 
     def mimic_object(self, active=None):
         """
@@ -51,10 +53,12 @@ class Rimuru_Tempest(Character):
         """
 
         # Basically checks if self is the rimuru object (player).
-        if not self.mimic_object(): return False
+        if not self.mimic_object():
+            return False
 
         # Checks if already acquired.
-        if character.name in self.mimic_object().acquired_mimicries[character.rank]: return None
+        if character.name in self.mimic_object().acquired_mimicries[character.rank]:
+            return None
 
         # Adds new mob object to usable mimicries dict.
         self.mimic_object().acquired_mimicries[character.rank][character.name] = character
