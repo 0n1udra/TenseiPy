@@ -101,7 +101,7 @@ class Full_Potion(Item):
         self.quantity = 0
         self.quantity_add = 25
         self.inventory_capacity_add = 0.1
-        self.usage = 'Heals major wounds even severed limbs. However, can not resurrect.'
+        self.usage = 'Heals major wounds even severed limbs and illnesses. However, can not resurrect.'
         self.description = '''
         Can heal subject to optimum condition, but cannot revive the dead.
         '''

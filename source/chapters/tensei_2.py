@@ -119,6 +119,7 @@ def Chapter2(rimuru):
         __location = "Near the Sealed Cave"
 
         def __init__(self):
+            reset_mobs()
             ssprint("Where am I going?")
             action_menu(self)
 
@@ -187,6 +188,7 @@ def Chapter2(rimuru):
                     action_menu(self)
 
                 def _heal_goblins(self):
+                    rimuru.remove_inventory('full potion', 9)
                     sprint("Wow, ")
                     action_menu(_goblin_village._assist_goblins, remove='_heal_wounded')
 
@@ -200,37 +202,19 @@ def Chapter2(rimuru):
             class _setup_defenses:
                 def __init__(self):
                     sprint("Let's setup defenses.")
+                    game_conditions('village_defense', 'up')
 
                     action_menu(_wolf_attack_village())
-
-            class _leave:
-                def __init__(self):
-                    if game_conditions('wolf defense'):
-                        action_menu(_goblin_village._assist_goblins)
-                    else:
-                        sprint("Great one! The wolves will be here soon. Please help us!")
-                        action_menu(self)
-
-                def _stay(self):
-                    sprint("STAYING")
-                    action_menu(_goblin_village._assist_goblins)
-
-                def _leave(self):
-                    sprint("Leaving")
 
         def _compensation(self):
             sprint("So what, you want protection? What would my reward be?")
             sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
+            sprint("That will have to do. For now.")
             action_menu(_goblin_village._assist_goblins())
-
-        def _leave(self):
-            sprint("I don't want anything to do with this. I'm just going to leave.")
-            sprint("Have we offended you in some way. Please we are desperate here!")
-            sprint("No, there's nothing that you can offer here that interests me.")
 
         def _attack(self):
             if cleared_all_mobs():
-                ssprint("I killed them, I killed them all. They were so weak.")
+                ssprint("They're all dead now. They were so weak.")
                 ssprint("What now?")
                 action_menu(_hunt_wolves())
 
@@ -249,7 +233,7 @@ def Chapter2(rimuru):
 
         def _give_warning(self):
             sprint("Listen up, because I'm only going to say this once!")
-            sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
+            sprint("Acknowledge me as your ki   ng, or retreat now and never show yourselves again!")
             sprint("So, which is it?")
 
     class _hunt_wolves:
@@ -258,6 +242,5 @@ def Chapter2(rimuru):
 
             action_menu(self)
 
-        def _
 
     chapter_2()
