@@ -202,7 +202,7 @@ class Magic_Perception(Skill):
         self.update_skill_info()
 
     def use_skill(self, character, args):
-        print("    < Activated Extra Skill [Magic Perception]. >")
+        print("    < Activated Extra Skill [Magic Perception] >")
         self.active = True
         return True
 

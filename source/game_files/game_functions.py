@@ -4,6 +4,7 @@ import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
+fast_mode = False
 
 
 # start_game.py will load game save if user has one, if not it'll create one.
@@ -13,15 +14,10 @@ def update_rimuru(rimuru_object):
     rimuru = rimuru_object
     return rimuru
 
-
-fast_mode = False
-
-
 def set_fast_mode():
     global fast_mode
     rimuru.text_crawl = rimuru.show_ascii = False
     fast_mode = True
-
 
 def action_menu(level=None, remove=False):
     """
@@ -104,18 +100,17 @@ def action_menu(level=None, remove=False):
 #                    ========== Level Functions ==========
 def game_conditions(value, new_value=None):
     if new_value:
-        rimuru.conditions_data[value] = new_value
-        return rimuru.conditions_data[value]
+        rimuru.conditional_data[value] = new_value
+        return rimuru.conditional_data[value]
 
-    if value in rimuru.conditions_data:
-        return rimuru.conditions_data[value]
+    if value in rimuru.conditional_data:
+        return rimuru.conditional_data[value]
     else:
         return False
 
-
 def new_active_mob(add_mobs):
     """
-    Mob is alive on current level.
+    Add new mob to current level, and able to set name at creation.
 
     Args:
         add_mobs: Adds mob objects to active_mobs list.
@@ -127,23 +122,25 @@ def new_active_mob(add_mobs):
         new_active_mob(['50* goblin: Goblinas'])
     """
 
-    for mob in add_mobs:
-        amount, name = 1, None
-        if '*' in mob:
-            amount, mob = mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
+    for new_mob in add_mobs:
+        amount = 1
+        if '*' in new_mob:
+            amount, new_mob = new_mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
             try:
                 amount = int(amount)
             except:
                 pass
 
-        if ':' in mob:
-            mob, name = mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
+        if ':' in new_mob:
+            new_mob, new_name = new_mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
+        else:
+            new_name = None
 
-        if mob_object := rimuru.get_object(mob, new=True):
-            if name: mob_object.name = name.strip()
-            list_item = [mob_object, amount]
-            rimuru.active_mobs.append(list_item)
+        if mob_object := rimuru.get_object(new_mob, new=True):
+            if new_name:
+                mob_object.name = new_name.strip()
 
+            rimuru.active_mobs.append([mob_object, amount])
 
 def mob_status(target):
     """
@@ -159,7 +156,6 @@ def mob_status(target):
     for i in rimuru.active_mobs:
         if target.lower() in i[0].get_name():
             return i[0].is_alive
-
 
 def cleared_all_mobs():
     """
@@ -177,7 +173,6 @@ def cleared_all_mobs():
     else:
         return True
 
-
 def next_location(next_location):
     """
     Asks if
@@ -191,7 +186,7 @@ def next_location(next_location):
     try:
         next_location(rimuru)
     except:
-        print("    < Error Loading Next Location. >")
+        print("    < Error Loading Next Location >")
 
 
 #                    ========== Extra ==========
@@ -200,7 +195,6 @@ def tbc():
 
     print("\n    < ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
-
 
 def game_text_crawl(arg):
     """
@@ -218,11 +212,10 @@ def game_text_crawl(arg):
 
     if arg in ['true', 'enable', '1'] or rimuru.text_crawl is True:
         rimuru.text_crawl = True
-        print("    < Text Crawl: Active. >\n")
+        print("    < Text Crawl Active >\n")
     elif arg in ['false', 'disable', '0'] or rimuru.text_crawl is False:
         rimuru.text_crawl = False
-        print("\n    < Text Crawl Deactivated. >\n")
-
+        print("\n    < Text Crawl Deactivated >\n")
 
 def show_art(art):
     """
@@ -251,15 +244,13 @@ def game_exit(*args):
     game_save()
     exit(0)
 
-
 def game_save(level=None):
     """Pickels Rimuru_Tempest object."""
 
     if level: rimuru.current_location_object = level
     rimuru.valid_save = True
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    print("\n    < Game Saved. >\n")
-
+    print("\n    < Game Saved >\n")
 
 def game_load(path):
     """
@@ -289,13 +280,12 @@ def game_load(path):
 
     return rimuru
 
-
 def game_over():
     """Deletes pickle save file."""
 
     rimuru.valid_save = False  # So you can't use copies of game save.
     os.remove(rimuru.save_path)
-    print("\n    < GAME OVER. >\n")
+    print("\n    < GAME OVER >\n")
     exit(0)
 
 
@@ -306,7 +296,6 @@ def ssprint(message):
     if message[0] == '\n': print()
     print('    ', end='')
     sprint(message.strip())
-
 
 def sprint(message):
     """
@@ -341,7 +330,6 @@ def sprint(message):
     else:
         print(message)  # Print all lines instantly.
 
-
 def show_start_banner(rimuru):
     """Show game title, tips, and player stats/inv."""
 
@@ -354,8 +342,7 @@ def show_start_banner(rimuru):
     """)
 
     if rimuru.valid_save is True:
-        print("\n    < Save Loaded. >\n")
-
+        print("\n    < Save Loaded >\n")
 
 def show_help(*args):
     """Shows help page."""

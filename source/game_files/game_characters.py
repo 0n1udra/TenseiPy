@@ -81,13 +81,13 @@ class Rimuru_Tempest(Character):
             self.current_mimic_species = 'Slime'
             self.current_mimic = None
             self.mimic_object(active=False)
-            print("    < Mimicry Reset. >")
+            print("    < Mimicry Reset >")
         else:
             if new_mimic := self.get_object(character, [*self.mimic_generator()]):
                 self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
                 self.mimic_object(active=True)
-                print(f'    < Now Mimicking: [{new_mimic.name}]. >')
+                print(f'    < Now Mimicking [{new_mimic.name}] >')
 
     def predate_targets(self, input_targets=None):
         """

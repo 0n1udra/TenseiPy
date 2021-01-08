@@ -37,12 +37,12 @@ if __name__ == '__main__':
     if rimuru.text_crawl is None:
         print("\nEnable Text Crawl? (Recommended for easier reading)")
         if str(input("No/Yes or Enter > ")).lower() in ['n', 'no']:
-            print("\n    < Text Crawl Deactivated. > ")
+            print("\n    < Text Crawl Deactivated > ")
             rimuru.text_crawl = False
             sleep(2)
         else:
             rimuru.text_crawl = True
             print()
-            game_funcs.ssprint("< Text Crawl Activated. >\n\n")
+            game_funcs.ssprint("< Text Crawl Activated >\n\n")
 
     rimuru.current_location_object(rimuru)

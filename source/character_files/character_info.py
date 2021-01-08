@@ -54,7 +54,7 @@ class Info:
 
         self.level = level
         self.update_info()
-        print(f"    < {self.name} leveled up to {level} >")
+        print(f"    < Leveled Up {self.name} >>> {level} >")
 
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""
