@@ -43,10 +43,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.acquired_msg = ''
         self.is_alive = True
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
-        self.conditions_data = {}  # Contains data that player has done, paths taken, etc.
+        self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
 
         # Combat variables.
-        self.active_mobs = []  # Current mobs around you that you can interact or attack.
+        self.active_mobs = ()  # Current mobs around you that you can interact or attack.
         self.targeted_mobs = []  # Targets that will be attacked with 'attack' command.
 
         # Map functionality.
