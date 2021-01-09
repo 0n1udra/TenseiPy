@@ -26,20 +26,24 @@ class Info:
         ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
         self.rank = ranking[self.level - 1]
 
-        self.info_page = f"""
-        Name: {self.name} {self.family_name}
-        Title: {self.title}
-        Species: {self.species}
-        Rank: {self.rank}
-        Divine Protection: {self.blessing}
-        Canon Name: {self.canon_name}
+        if self.status:
+            self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] ({self.status})\n'
+        else:
+            self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}]\n'
 
-        Description:
-            {self.description}
+        self.info_page += f"""
+    Title: {self.title}
+    Species: {self.species}
+    Rank: {self.rank}
+    Divine Protection: {self.blessing}
+    Canon Name: {self.canon_name}
 
-        Appearance:
-            {self.appearance}
-            """
+    Description:
+        {self.description}
+
+    Appearance:
+        {self.appearance}
+        """
 
     def update_ranking(self, level):
         """

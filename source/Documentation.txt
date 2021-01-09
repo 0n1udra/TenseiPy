@@ -222,7 +222,7 @@ Magic_ore
 
 :Functions:
     show_acquired_msg() - Shows skill acquired message.
-    update_skill_info() - Updates skill info page.
+    update_info() - Updates skill info page.
     get_name() - Returns skill name in lowercase.
 
 Resistance

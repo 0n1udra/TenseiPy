@@ -10,10 +10,9 @@ class Skill:
         self.evolution = 'N/A'
         self.abilities = 'N/A'
         self.acquired_msg = ''
+        self.status = ''
         self.use_requirements = {}
 
-        self.active = False
-        self.passive = False
         self.predate = True
         self.sub_skills = {}
 
@@ -28,9 +27,13 @@ class Skill:
     def show_acquired_msg(self):
         print(f"    {self.acquired_msg}\n")
 
-    def update_skill_info(self):
-        self.info_page = f"""
-    Name: [{self.name}]
+    def update_info(self):
+        if self.status:
+            self.info_page = f'    Name: [{self.name}] ({self.status})'
+        else:
+            self.info_page = f'    Name: [{self.name}]'
+
+        self.info_page += f"""
     Type: {self.type}
     Level: {self.skill_level}
     Damage: {self.damage_level}
@@ -75,7 +78,7 @@ class Ciel_Skill(Skill):
             - Great sage can battle on behalf of user of permission granted
         """
         self.evolution = "Sage > Great Sage > Raphael > Ciel"
-        self.update_skill_info()
+        self.update_info()
         self.acquired_msg = "<< Ultimate Skill Core Manas [Ciel] Acquired! >>"
 
 
@@ -92,7 +95,7 @@ class Raphael_Skill(Skill):
             - Great sage can battle on behalf of user of permission granted
         """
         self.evolution = "Sage > Great Sage > Wisdom King Raphael > Ciel"
-        self.update_skill_info()
+        self.update_info()
 
 
 #                    ========== Unique Skills ==========
@@ -140,7 +143,7 @@ class Predator_Skill(Skill):
             - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
         """
         self.evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
-        self.update_skill_info()
+        self.update_info()
 
 
 class Great_Sage_Skill(Skill):
@@ -182,7 +185,7 @@ class Great_Sage_Skill(Skill):
             - By giving permission to [Great Sage], The master can let it control his body temporarily
         '''
         self.evolution = 'Sage > Great Sage > Raphael > Ciel'
-        self.update_skill_info()
+        self.update_info()
 
 
 #                    ========== Extra Skills ==========
@@ -191,7 +194,7 @@ class Sage_Skill(Skill):
         Skill.__init__(self)
         self.name = 'Sage'
         self.skill_level = 'Extra Skill'
-        self.update_skill_info()
+        self.update_info()
 
 
 class Magic_Perception(Skill):
@@ -207,11 +210,11 @@ class Magic_Perception(Skill):
         even if one's eyes and ears are crushed, one can continue combat. 
         Ambushes become nearly impossible. It's an indispensable skill.
         '''
-        self.update_skill_info()
+        self.update_info()
 
-    def use_skill(self, user, args):
+    def use_skill(self, user):
         print("    < Activated: Extra Skill [Magic Perception] >")
-        self.active = True
+        user.update_status('magic perception', 'Active')
         return True
 
 
@@ -225,7 +228,7 @@ class Water_Manipulation(Skill):
         The three Skills are fused and evolved into Water Manipulation.
         '''
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
-        self.update_skill_info()
+        self.update_info()
 
 
 #                    ========== Common Skills ==========
@@ -236,7 +239,7 @@ class Hydraulic_Propulsion(Skill):
         self.description = 'Uses pressure to create a powerful water jet that can propel its user through vast distances.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.use_requirements = {'Water': 1}
-        self.update_skill_info()
+        self.update_info()
 
     def use_skill(self, user):
         if user.check_acquired("water", 1):
@@ -256,7 +259,7 @@ class Water_Blade(Skill):
         self.damage_level = 6
         self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
-        self.update_skill_info()
+        self.update_info()
 
 
 class Water_Bullet(Skill):
@@ -267,7 +270,7 @@ class Water_Bullet(Skill):
         self.damage_level = 6
         self.description = "Shoot out a small powerful water bullet."
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
-        self.update_skill_info()
+        self.update_info()
 
 
 #                    ========== Intrinsic Skills ==========
@@ -277,7 +280,7 @@ class Absorb_Dissolve(Skill):
         self.name = 'Absorb/Dissolve'
         self.skill_level = 'Intrinsic Skill'
         self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
-        self.update_skill_info()
+        self.update_info()
 
 
 class Self_Regeneration(Skill):
@@ -291,7 +294,7 @@ class Self_Regeneration(Skill):
         The Skill's performance can be enhanced by other Skills.
         '''
         self.evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
-        self.update_skill_info()
+        self.update_info()
 
 
 # ========== Tempest Serpent
@@ -304,7 +307,7 @@ class Sense_Heat_Source(Skill):
         Identifies any heat reactions in the local area. 
         Not affected by any concealing effects.
         '''
-        self.update_skill_info()
+        self.update_info()
 
     def use_skill(self, user):
         print("    -----Nearby Heat Sources-----")
@@ -325,7 +328,7 @@ class Poisonous_Breath(Skill):
         A powerful breath-type poison (corrosion) attack. 
         Affects an area seven meters in front of the user in a 120-degree radius.
         '''
-        self.update_skill_info()
+        self.update_info()
 
 
 # ========== Giant Bat
@@ -337,7 +340,7 @@ class Vampirism(Skill):
         self.damage_type = 'Melee'
         self.damage_level = 4
         self.description = "By sucking the target's blood the user can temporarily gain its Skills."
-        self.update_skill_info()
+        self.update_info()
 
 
 class Ultrasound_Waves(Skill):
@@ -348,7 +351,7 @@ class Ultrasound_Waves(Skill):
         self.damage_type = 'Melee'
         self.damage_level = 3
         self.description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
-        self.update_skill_info()
+        self.update_info()
 
 
 # ========== Evil Centipede
@@ -360,7 +363,7 @@ class Paralyzing_Breath(Skill):
         self.damage_type = 'Poison'
         self.damage_level = 5
         self.description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
-        self.update_skill_info()
+        self.update_info()
 
 
 # ========== Black Spider
@@ -372,7 +375,7 @@ class Sticky_Thread(Skill):
         self.damage_type = 'Melee'
         self.damage_level = 2
         self.description = "A thin sticky thread that traps enemies and prevent them from moving."
-        self.update_skill_info()
+        self.update_info()
 
     def use_thread(self):
         pass
@@ -386,7 +389,7 @@ class Steel_Thread(Skill):
         self.damage_type = 'Melee'
         self.damage_level = 5
         self.description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
-        self.update_skill_info()
+        self.update_info()
 
 
 #                    ========== Resistances ==========
@@ -399,7 +402,7 @@ class Resist_Pain(Resistance):
         Tolerance-type Skill that grants immunity to physical pain sensation. 
         However, you still take damage.
         '''
-        self.update_skill_info()
+        self.update_info()
 
 
 class Resist_Melee(Resistance):
@@ -408,7 +411,7 @@ class Resist_Melee(Resistance):
         self.name = 'Resist Melee'
         self.resist_types = ['Melee']
         self.description = 'Tolerance-type Skill that grants immunity to melee attacks.'
-        self.update_skill_info()
+        self.update_info()
 
 
 class Resist_Electricity(Resistance):
@@ -420,7 +423,7 @@ class Resist_Electricity(Resistance):
         Tolerance-type Skill that grants resistance to electricity-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
-        self.update_skill_info()
+        self.update_info()
 
 
 class Resist_Temperature(Resistance):
@@ -432,7 +435,7 @@ class Resist_Temperature(Resistance):
         Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
-        self.update_skill_info()
+        self.update_info()
 
 
 class Resist_Poison(Resistance):
@@ -444,4 +447,4 @@ class Resist_Poison(Resistance):
         Tolerance-type Skill that grants resistance to poison-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
-        self.update_skill_info()
+        self.update_info()

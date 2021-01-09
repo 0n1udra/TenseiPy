@@ -1,6 +1,7 @@
 class Item:
     def __init__(self):
         self.name = ''
+        self.status = ''
         self.item_type = ''
         self.quantity = 0
         self.quantity_add = 1
@@ -26,12 +27,12 @@ class Item:
     def update_info(self):
         """Updates item's info."""
 
-        self.info_page = f"""
-    Name: [{self.name}]
-    
-    Usage:
-        {self.usage}
-    """
+        if self.status:
+            self.info_page = f'    Name: [{self.name}] ({self.status})\n'
+        else:
+            self.info_page = f'    Name: [{self.name}]\n'
+
+        self.info_page += f'\n    Usage:\n        {self.usage}\n'
 
         if self.ingredient_for:
             self.info_page += "\n    Ingredient for:\n"

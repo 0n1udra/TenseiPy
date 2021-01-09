@@ -21,11 +21,8 @@ class Attributes:
                 if output is False:
                     yield skill_object
 
-                # Prints skill's active or passive status.
-                if skill_object.active:
-                    yield f'    {skill_name} (Active)'
-                elif skill_object.passive:
-                    yield f'    {skill_name} (Passive)'
+                if skill_object.status:
+                    yield f'    {skill_name} ({skill_object.status})'
                 else:
                     yield f'    {skill_name}'
 

@@ -93,7 +93,7 @@ class Rimuru_Tempest(Character):
                 self.mimic_object(active=True)
                 print(f'    < Now Mimicking [{new_mimic.name}] >')
 
-    def predate_targets(self, input_targets=None):
+    def predate_targets(self, input_targets=''):
         """
         Predates targets that are being focused. Also adds target mimicry.
 
@@ -104,13 +104,7 @@ class Rimuru_Tempest(Character):
             > predate
         """
 
-        targets = self.targeted_mobs[:]
-
-        for i in input_targets.split(','):
-            if mob_object := self.get_object(i, stricter=False):
-                targets.append([mob_object])
-
-        for target in targets:
+        for target in self.targeted_mobs:
             if not target[0]: continue
 
             if target[0].game_object_type == 'item':
@@ -121,8 +115,16 @@ class Rimuru_Tempest(Character):
                 # Can only predate targeted mobs that are dead.
                 if target[0].is_alive is False:
                     self.add_mimic(target[0])
-                    del self.targeted_mobs[self.targeted_mobs.index(target)]
-                    del self.active_mobs[self.active_mobs.index(target)]
+                    self.add_inventory(target[0], target[1])
+                    self.targeted_mobs.remove(target)
+                    try:
+                        self.active_mobs.remove(target)
+                    except: pass
+
+        # For some reason I need this to check if it cleared out all dead mobs.
+        for i in self.targeted_mobs:
+            if i[0].is_alive is False:
+                self.predate_targets()
 
 
 class Veldora_Tempest(Character):
@@ -136,7 +138,6 @@ class Veldora_Tempest(Character):
         self.blessing = 'Storm Crest'
         self.is_alive = True
         self.level = 11
-        self.item_type = 'Misc'
         self.inventory_capacity_add = 10
         self.update_info()
 

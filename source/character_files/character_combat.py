@@ -17,8 +17,7 @@ class Combat:
         if 'reset' in targets:
             self.targeted_mobs.clear()
         elif 'all' in targets:
-            for mob in self.active_mobs:
-                self.targeted_mobs.append(mob)
+            self.targeted_mobs = self.active_mobs[:]
         else:
             for target in targets.split(','):
                 for mob in self.active_mobs:
@@ -79,6 +78,7 @@ class Combat:
 
                 self.data['kills'] += 1
                 current_target[0].is_alive = False
+                current_target[0].status = 'Dead'
                 attack_success = True
                 print(f"    < Eliminated: {current_target[0].name} >\n")
 

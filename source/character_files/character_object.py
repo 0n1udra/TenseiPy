@@ -24,7 +24,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.inventory_capacity_add = 0  # Add to overall capacity when adding items to inventory.
         self.quantity = 0  # Item quantity in inventory.
         self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
-        self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {}, 'Misc': {}}
+        self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {}, 'Living': {}, 'Misc': {}}
 
         # Character information and data related variables.
         self.name = 'N/A'
@@ -42,6 +42,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.evolution = ''
         self.acquired_msg = ''
         self.is_alive = True
+        self.item_type = 'Living'
+        self.status = ''
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
 
@@ -77,7 +79,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         Args:
             item_pool: List of game items to search against.
             new: If first time adding a new object to character.
-            stricter: Find more of a exact match, still cane insensitive. For example, sometimes Sage will be returned instead of Great Sage.
+            stricter: Find more of a exact match, still case insensitive. For example, sometimes Sage will be returned instead of Great Sage.
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
@@ -143,5 +145,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         else:
             return False
 
+    def update_status(self, game_object, new_status):
+        if game_object := self.get_object(game_object):
+            game_object.status = new_status
+            game_object.update_info()
 
 

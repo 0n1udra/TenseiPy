@@ -9,7 +9,6 @@ def Chapter1(rimuru):
         __location = 'Sealed Cave'
 
         def __init__(self):
-            rimuru.add_inventory('full potion')
             ssprint(".....\n")
             show_art('great sage')
             rimuru.set_start_state()
@@ -300,6 +299,7 @@ def Chapter1(rimuru):
             sprint("Like a family name? hmmmmm...")
             family_name = str(input("\nFamily Name > "))
             veldora.family_name = family_name
+
             rimuru.family_name = family_name
             rimuru.divineProtection = 'Storm Crest'
             ssprint("< Acquired: Storm Crest Divine Protection >\n")
@@ -322,6 +322,8 @@ def Chapter1(rimuru):
 
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
+                veldora.update_info()
+                print(veldora.info_page)
                 rimuru.add_inventory(veldora)
 
                 ssprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
@@ -329,6 +331,8 @@ def Chapter1(rimuru):
 
             def _start_analysis(self):
                 ssprint("Yes, Please take care of it [Great Sage].")
+                rimuru.update_status('veldora', 'Analyzing')
+                ssprint("< Analysis Started >")
                 ssprint("I hope you get out quickly!")
                 _leave_cave()
 

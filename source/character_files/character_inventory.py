@@ -14,11 +14,15 @@ class Inventory:
         for item_type, items in self.inventory.items():
 
             # Yields item type if formatting for output to player.
-            if output and items: yield f'[{item_type}]'
+            if output and items:
+                yield f'[{item_type}]'
 
             for item_name, item_object in items.items():
                 if output:
-                    yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name}'
+                    if item_object.status:
+                        yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name} ({item_object.status})'
+                    else:
+                        yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name}'
                 else:
                     yield item_object
 
@@ -53,11 +57,16 @@ class Inventory:
         item_object = self.check_acquired(item)
 
         if not item_object:
-            if item_object := self.get_object(item, new=True):
-                self.inventory[item_object.item_type][item_object.name] = item_object
-                print(f'\n    << Analysis on [{item_object.name}] Complete. >>')
-            else:
-                return False
+            try:
+                if item.name:
+                    item_object = item
+                    self.inventory[item_object.item_type][item_object.name] = item_object
+            except:
+                if item_object := self.get_object(item, new=True):
+                    self.inventory[item_object.item_type][item_object.name] = item_object
+                    print(f'\n    << Analysis on [{item_object.name}] Complete. >>')
+                else:
+                    return False
 
         # Adds to total inventory capacity %.
         self.inventory_capacity += item_object.inventory_capacity_add * item_object.quantity_add
