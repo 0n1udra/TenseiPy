@@ -4,11 +4,13 @@ class Skill:
         self.type = 'Activatable Skill'
         self.skill_level = 'Common Skill'
         self.damage_level = 1
+        self.info_page = 'N/A'
         self.damage_type = 'N/A'
         self.description = 'N/A'
         self.evolution = 'N/A'
         self.abilities = 'N/A'
         self.acquired_msg = ''
+        self.use_requirements = {}
 
         self.active = False
         self.passive = False
@@ -20,14 +22,15 @@ class Skill:
     def get_name(self):
         return self.name.lower()
 
-    def __str__(self): return self.name.lower()
+    def __str__(self):
+        return self.name.lower()
 
     def show_acquired_msg(self):
         print(f"    {self.acquired_msg}\n")
 
     def update_skill_info(self):
         self.info_page = f"""
-    Name: {self.name}
+    Name: [{self.name}]
     Type: {self.type}
     Level: {self.skill_level}
     Damage: {self.damage_level}
@@ -43,7 +46,12 @@ class Skill:
         {self.evolution}
     """
 
-        self.acquired_msg = f"<< Acquired: {self.skill_level} [{self.name}] successfully. >>"
+        if self.use_requirements:
+            self.info_page += "\n    Use Requirements:\n"
+            for item, amount in self.use_requirements.items():
+                self.info_page += f"        {amount}x [{item}]\n"
+
+        self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
 
 
 class Resistance(Skill):
@@ -201,8 +209,8 @@ class Magic_Perception(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, character, args):
-        print("    < Activated Extra Skill [Magic Perception] >")
+    def use_skill(self, user, args):
+        print("    < Activated: Extra Skill [Magic Perception] >")
         self.active = True
         return True
 
@@ -225,9 +233,19 @@ class Hydraulic_Propulsion(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Hydraulic Propulsion'
-        self.escription = 'Uses pressure to create a powerful water jet that can propel its user through vast distances.'
+        self.description = 'Uses pressure to create a powerful water jet that can propel its user through vast distances.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+        self.use_requirements = {'Water': 1}
         self.update_skill_info()
+
+    def use_skill(self, user):
+        if user.check_acquired("water", 1):
+            user.remove_inventory('water', 1)
+            return True
+        else:
+            print("\n    < Skill Requires: 1x [Water] >")
+            return False
+
 
 
 class Water_Blade(Skill):
@@ -288,9 +306,9 @@ class Sense_Heat_Source(Skill):
         '''
         self.update_skill_info()
 
-    def use_skill(self, character, args):
+    def use_skill(self, user):
         print("    -----Nearby Heat Sources-----")
-        for mob in character.active_mobs:
+        for mob in user.active_mobs:
             if mob[0].is_alive:
                 print(f'    {mob[1]}x {mob[0].name}')
         return True

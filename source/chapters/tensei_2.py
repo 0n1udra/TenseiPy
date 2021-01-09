@@ -188,9 +188,12 @@ def Chapter2(rimuru):
                     action_menu(self)
 
                 def _heal_goblins(self):
-                    rimuru.remove_inventory('full potion', 9)
-                    sprint("Wow, ")
-                    action_menu(_goblin_village._assist_goblins, remove='_heal_wounded')
+                    if rimuru.check_acquired('full potion', 9):
+                        rimuru.remove_inventory('full potion', 9)
+                        sprint("Wow, ")
+                        action_menu(_goblin_village._assist_goblins, remove='_heal_wounded')
+                    else:
+                        sprint("I need some way to heal them.")
 
                 def _let_them_die(self):
                     ssprint("I'm going to save my potions for myself.")

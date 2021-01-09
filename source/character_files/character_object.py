@@ -61,6 +61,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.text_crawl = None
         self.show_ascii = True
 
+    def __str__(self):
+        return self.name.lower()
+
     def set_start_state(self):
         """Adds corresponding starter attributes and items to character."""
 
@@ -115,12 +118,13 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         return None
 
-    def check_acquired(self, check_object):
+    def check_acquired(self, check_object, amount=1):
         """
         Checks to see if character has object/attribute/item/etc.
 
         Args:
             check_object: Object to check if specified character has item, attribute, skill, etc.
+            amount [int:1]: Check quaintly of item, only works for inventory right now.
 
         Returns:
             Boolean: If specified character has attribute or object.
@@ -130,9 +134,14 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         """
 
         if item := self.get_object(check_object):
+            if item.game_object_type == 'item':
+                if item.quantity >= amount:
+                    return item
+                else:
+                    return False
             return item
         else:
             return False
 
-    def __str__(self):
-        return self.name.lower()
+
+

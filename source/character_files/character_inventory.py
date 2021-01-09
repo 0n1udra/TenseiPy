@@ -64,7 +64,7 @@ class Inventory:
         # Adds to quantity variable residing in item's object which is saved in character's inventory dict.
         self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
 
-        print(f'\n    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}]. >\n')
+        print(f'\n    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >\n')
 
     def remove_inventory(self, item, amount=1):
         """
@@ -84,6 +84,8 @@ class Inventory:
         item.quantity -= amount
         if item.quantity < 0:
             del self.inventory[item.item_type]
+
+        print(f"\n    < Removed: {amount}x [{item.name}] >\n")
 
     def craft_item(self, item):
         """
@@ -123,7 +125,7 @@ class Inventory:
                 if ingredient.quantity > ingredient_amount * craft_amount:
                     continue
             else:
-                print("\n    < Not enough materials to craft item. >")
+                print("\n    < Missing Ingredient(s) >")
                 return False
 
         # Use up ingredients then add to inventory

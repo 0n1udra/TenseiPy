@@ -76,22 +76,25 @@ def action_menu(level=None, remove=False):
         'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl
     }
     if 'attack' in command:
-        if rimuru.attack(parameters): user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
+        if rimuru.attack(parameters):
+            user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
     elif 'use' in command:
-        rimuru.use_skill(character, parameters)
+        rimuru.use_skill(parameters, character)
     elif 'location' in command:
         rimuru.get_location()
     elif 'nearby' in command:
-        rimuru.use_skill(character, 'sense heat source')
+        rimuru.use_skill('sense heat source', character)
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action_string, action in level_actions.items():
-        if action_string in command: action(parameters)
+        if action_string in command:
+            action(parameters)
 
     loop = True
     for action in actions:
         if action.replace('_', ' ').strip() in user_input:
-            if action[0] == '_': loop = False  # Checks if action will progress storyline.
+            if action[0] == '_':
+                loop = False  # Checks if action will progress storyline.
             eval(f"level.{action}()")
 
     if loop: action_menu(level)

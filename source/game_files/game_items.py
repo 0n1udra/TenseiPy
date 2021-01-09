@@ -27,23 +27,24 @@ class Item:
         """Updates item's info."""
 
         self.info_page = f"""
-    Name: {self.name}
+    Name: [{self.name}]
     
     Usage:
         {self.usage}
     """
 
         if self.ingredient_for:
-            self.info_page += "    Ingredient for: "
+            self.info_page += "\n    Ingredient for:\n"
 
             for item in self.ingredient_for:
-                self.info_page += f'[{item}], '
+                self.info_page += f'        [{item}], '
+            self.info_page = self.info_page[:-2] + '\n'
 
         if self.recipe:
             self.info_page += f'\n    Recipe:\n        Will craft {self.quantity_add} at a time.\n'
 
             for item, amount in self.recipe.items():
-                self.info_page += f'        {amount}x {item}\n'
+                self.info_page += f'        {amount}x [{item}]\n'
 
         self.info_page += f"\n   Appearance:\n        {self.appearance}"
 
@@ -108,4 +109,22 @@ class Full_Potion(Item):
         self.appearance = 'Blue potion in a glass bottle.'
         # One Hipokte Grass makes 10 potions.
         self.recipe = {'Hipokte Grass': 1}
+        self.update_info()
+
+
+# ========== Extra ==========
+
+class Water(Item):
+    def __init__(self):
+        Item.__init__(self)
+        self.name = 'Water'
+        self.item_type = 'Misc'
+        self.quantity = 0
+        self.quantity_add = 100
+        self.inventory_capacity_add = 0.1
+        self.usage = 'Can be used in high pressure attacks.'
+        self.description = '''
+        It's wet, and it's clear, it is just water...
+        '''
+        self.appearance = 'Clear flowing liquid.'
         self.update_info()

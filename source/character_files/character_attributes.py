@@ -73,7 +73,7 @@ class Attributes:
         if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
             if show_acquired_msg:
-                print(f"    < Acquired {attribute.skill_level} [{attribute.name}] >\n")
+                print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >\n")
             if show_skill_info:
                 self.show_info(attribute.name)
 
@@ -148,13 +148,13 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-    def use_skill(self, character, skill, *args):
+    def use_skill(self, skill, character):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
         Args:
-            character: Character that will use skill.
             skill: Skill to use.
+            character: Character that will use skill.
 
         Usage:
             > use sense heat source
@@ -162,7 +162,7 @@ class Attributes:
 
         if skill_object := self.get_object(skill):
             try:
-                skill_object.use_skill(character, args)
+                skill_object.use_skill(character)
             except:
                 return False
         else:

@@ -80,6 +80,6 @@ class Combat:
                 self.data['kills'] += 1
                 current_target[0].is_alive = False
                 attack_success = True
-                print(f"    < Eliminated {current_target[0].name} >\n")
+                print(f"    < Eliminated: {current_target[0].name} >\n")
 
         return attack_success

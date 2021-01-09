@@ -9,6 +9,7 @@ def Chapter1(rimuru):
         __location = 'Sealed Cave'
 
         def __init__(self):
+            rimuru.add_inventory('full potion')
             ssprint(".....\n")
             show_art('great sage')
             rimuru.set_start_state()
@@ -133,7 +134,6 @@ def Chapter1(rimuru):
             ssprint("Hmmmmm. I'm not feeling any pain.")
             ssprint("I just thought of something!")
             ssprint("I could swallow up tons of water then I can and expel it at a high pressure...")
-            rimuru.add_attribute('Hydraulic Propulsion')
             action_menu(self)
 
         def stay_in_water(self):
@@ -141,6 +141,8 @@ def Chapter1(rimuru):
 
         class _predate_water:
             def __init__(self):
+                rimuru.add_inventory('water')
+                rimuru.add_attribute('Hydraulic Propulsion')
                 ssprint("Alright, now lets try this out.")
                 action_menu(self)
 
@@ -300,7 +302,7 @@ def Chapter1(rimuru):
             veldora.family_name = family_name
             rimuru.family_name = family_name
             rimuru.divineProtection = 'Storm Crest'
-            ssprint("< Acquired: Storm Crest Divine Protection. >\n")
+            ssprint("< Acquired: Storm Crest Divine Protection >\n")
             rimuru.update_ranking(8)
 
             sprint(f"Hmmmmmm... How about {family_name}~")
