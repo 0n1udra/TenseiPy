@@ -122,7 +122,7 @@ class Water(Item):
         self.item_type = 'Misc'
         self.quantity = 0
         self.quantity_add = 100
-        self.inventory_capacity_add = 0.1
+        self.inventory_capacity_add = 0.01
         self.usage = 'Can be used in high pressure attacks.'
         self.description = '''
         It's wet, and it's clear, it is just water...

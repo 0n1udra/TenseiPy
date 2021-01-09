@@ -19,10 +19,11 @@ class Inventory:
 
             for item_name, item_object in items.items():
                 if output:
+                    item_text = f'    {item_object.inventory_capacity_add * item_object.quantity}% - {self.inventory[item_type][item_name].quantity}x {item_object.name}'
                     if item_object.status:
-                        yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name} ({item_object.status})'
+                        yield item_text + f' ({item_object.status})'
                     else:
-                        yield f'    {self.inventory[item_type][item_name].quantity}x {item_object.name}'
+                        yield item_text
                 else:
                     yield item_object
 

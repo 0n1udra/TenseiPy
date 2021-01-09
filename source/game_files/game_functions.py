@@ -388,10 +388,6 @@ def show_help(*args):
         << Message >>               -- Great Sage (Raphael, Ciel).
         <<< Message >>>             -- Voice of the World.
 
-    HUD:
-        Target: x(Giant Bat) (Black Spider)
-        Actions: (attack) (move on)
-
     Level/Ranking:
        Level      Rank         Risk
         11.     Special S   Catastrophe
