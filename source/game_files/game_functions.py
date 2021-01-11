@@ -40,10 +40,14 @@ def action_menu(level=None, remove=False):
         if '__' in action: continue  # Filters out unwanted variables and functions.
         actions.append(action)
 
-    if remove: del actions[actions.index(remove)]  # Removes action so player can't take it.
+    if remove:
+        del actions[actions.index(remove)]  # Removes action so player can't take it.
 
     # ========== HUD
     print()
+    if rimuru.current_mimic:
+        print(f"Mimic: [{rimuru.current_mimic.name}]")
+
     if rimuru.targeted_mobs:
         # Adds (Dead) status to corresponding
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
@@ -73,7 +77,8 @@ def action_menu(level=None, remove=False):
         'mimic': rimuru.use_mimic, 'predate': rimuru.predate_targets,
         'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory, 'info': rimuru.show_info, 'craft': rimuru.craft_item,
         'map': rimuru.get_map,
-        'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl
+        'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl,
+        'restart': restart,
     }
     if 'attack' in command:
         if rimuru.attack(parameters):
@@ -245,6 +250,10 @@ def show_art(art):
             print(line)
     else:
         print(art)
+
+def restart(*args):
+    print("\n    < Restarting Game... >\n")
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 #                    ========== Game Saves ==========

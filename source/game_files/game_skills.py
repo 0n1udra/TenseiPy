@@ -78,8 +78,8 @@ class Ciel_Skill(Skill):
             - Great sage can battle on behalf of user of permission granted
         """
         self.evolution = "Sage > Great Sage > Raphael > Ciel"
-        self.update_info()
         self.acquired_msg = "<< Ultimate Skill Core Manas [Ciel] Acquired! >>"
+        self.update_info()
 
 
 # ===== Ultimate Skill=====
@@ -108,15 +108,14 @@ class Predator_Mimicry_Skill(Skill):
         self.acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                    'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
-    @property
-    def info_page(self):
-        print("    -----Available Mimicries-----")
+    def show_info_page(self):
+        data = "\n    -----Available Mimicries-----\n"
         for mob_level, mobs in self.acquired_mimicries.items():
-            print(f'    {mob_level}:')
+            data += f'    {mob_level}:\n'
             for mob_name, mob in mobs.items():
-                print(f'        {mob.name}')
-        print("\n    'mimic reset' to reset mimicry. use 'info predator' for more info on mimicry.")
-        return ''
+                data += f'        {mob_name}\n'
+        data += "\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.\n"
+        return data
 
 
 class Predator_Skill(Skill):
@@ -287,6 +286,7 @@ class Self_Regeneration(Skill):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
+        self.status = 'Passive'
         self.skill_level = 'Intrinsic Skill'
         self.description = '''
         Restores the user's damaged body. 

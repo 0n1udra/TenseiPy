@@ -110,9 +110,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
                     pass
 
             if stricter:
-                if str(game_object) == str(match).lower().strip():
+                if str(game_object).lower() == str(match).lower().strip():
                     return game_object
-            elif str(game_object) in str(match).lower():
+            elif str(game_object).lower() in str(match).lower():
                 return game_object
 
             if new:

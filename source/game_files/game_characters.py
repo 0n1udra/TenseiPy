@@ -39,17 +39,16 @@ class Rimuru_Tempest(Character):
 
         """
 
-        if 'Mimic' in self.attributes['Unique Skill']:
-            mimic = self.attributes['Unique Skill']['Mimic']
+        if mimic := self.check_acquired('Mimic'):
             mimic.active = active
             return mimic
 
-    def add_mimic(self, character):
+    def add_mimic(self, mob):
         """
         Adds new monster mimicry.
 
         Args:
-            character: Character object to add to acquired_mimicries list
+            mob: Character object to add to acquired_mimicries list
         """
 
         # Basically checks if self is the rimuru object (player).
@@ -57,18 +56,18 @@ class Rimuru_Tempest(Character):
             return False
 
         # Checks if already acquired.
-        if character.name in self.mimic_object().acquired_mimicries[character.rank]:
+        if mob.name in self.mimic_object().acquired_mimicries[mob.rank]:
             return None
 
         # Adds new mob object to usable mimicries dict.
-        self.mimic_object().acquired_mimicries[character.rank][character.name] = character
+        self.mimic_object().acquired_mimicries[mob.rank][mob.name] = mob
 
         # Adds attributes from mob just analyzed.
-        for attribute in character.attributes_generator():
+        for attribute in mob.attributes_generator():
             self.add_attribute(attribute)
 
-        print(f"    << Information, analysis on [{character.name}] completed. >>")
-        print(f"    << Notice, new skills and mimicry available: [{character.name}]. >>\n")
+        print(f"    << Information, analysis on [{mob.name}] completed. >>")
+        print(f"    << Notice, new skills and mimicry available. >>\n")
 
     def use_mimic(self, character):
         """
@@ -92,6 +91,16 @@ class Rimuru_Tempest(Character):
                 self.current_mimic = new_mimic
                 self.mimic_object(active=True)
                 print(f'    < Now Mimicking [{new_mimic.name}] >')
+
+    def check_mimic(self, match='MIMIC'):
+        if m_object := self.mimic_object():
+            if match.lower() in m_object.name.lower():
+                return m_object.name
+            return m_object.name
+        else:
+            return False
+
+
 
     def predate_targets(self, input_targets=''):
         """

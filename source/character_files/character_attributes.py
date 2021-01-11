@@ -67,6 +67,7 @@ class Attributes:
         if self.check_acquired(attribute):
             return False
 
+
         if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
             if show_acquired_msg:

@@ -194,6 +194,7 @@ def Chapter2(rimuru):
                         action_menu(_goblin_village._assist_goblins, remove='_heal_wounded')
                     else:
                         sprint("I need some way to heal them.")
+                        action_menu(_goblin_village._assist_goblins)
 
                 def _let_them_die(self):
                     ssprint("I'm going to save my potions for myself.")
