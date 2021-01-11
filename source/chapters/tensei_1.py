@@ -273,6 +273,7 @@ def Chapter1(rimuru):
 
     class _help_with_seal:
         def __init__(self):
+            rimuru.add_attribute('mimic')
             global veldora
             veldora = mobs.Veldora_Tempest()
             ssprint("[Great Sage]?")
@@ -323,10 +324,10 @@ def Chapter1(rimuru):
             def __init__(self):
                 ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
                 veldora.update_info()
-                print(veldora.info_page)
                 rimuru.add_inventory(veldora)
+                rimuru.add_mimic(veldora)
 
-                ssprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
+                ssprint("\n<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
                 action_menu(self)
 
             def _start_analysis(self):
