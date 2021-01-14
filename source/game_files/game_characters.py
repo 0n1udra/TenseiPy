@@ -92,15 +92,14 @@ class Rimuru_Tempest(Character):
                 self.mimic_object(active=True)
                 print(f'    < Now Mimicking [{new_mimic.name}] >')
 
-    def check_mimic(self, match='MIMIC'):
+    def check_mimic(self, match=None):
         if m_object := self.mimic_object():
+            if match is None:
+                return m_object.name
             if match.lower() in m_object.name.lower():
                 return m_object.name
-            return m_object.name
-        else:
-            return False
-
-
+            else: return False
+        else: return False
 
     def predate_targets(self, input_targets=''):
         """

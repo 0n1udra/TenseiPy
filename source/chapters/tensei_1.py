@@ -20,11 +20,9 @@ def Chapter1(rimuru):
             rimuru.upgrade_attribute('Sage', 'Great Sage')
 
             print()
-            ssprint("It's so dark...")
-            ssprint("where is this...")
-            ssprint("What happened to me...?")
-            ssprint("I remembered that I got stabbed while protecting _____....")
-            ssprint("Was I saved?")
+            ssprint("It's so dark? Where is this? What happened?")
+            ssprint("I remembered now. I got stabbed!")
+            ssprint("Was I saved? Can I move?")
             # Show user HUD and playable actions.
             action_menu(self)
 
@@ -33,14 +31,10 @@ def Chapter1(rimuru):
         class _move:
             def __init__(self):
                 ssprint("Where are my arms, I can't feel them!")
-                ssprint("Hey! HEY!, Give me a break already...")
-                ssprint("AH!? I moved!? Below my abdomen(?), is that grass?")
-                ssprint("I can't see anything, hear or smell anything as matter of fact.")
-                ssprint("This sense of...  absorbing?")
-                ssprint("Am I eating it? Actually! Where the fuck is my mouth?")
-                ssprint("The grass melted, did it just dissolve?")
-                ssprint("WAIT A MINUTE")
-                ssprint("Am I even human anymore!?!?!")
+                ssprint("Did I just move?")
+                ssprint("I can't see anything, hear or smell anything either.")
+                ssprint("What is this thing? It feels like I am abosrbing something into me.")
+                ssprint("What is this body? Am I even human anymore!?!?!")
                 action_menu(self)
 
             class _inspect:
@@ -75,18 +69,14 @@ def Chapter1(rimuru):
 
     class _learn_skills:
         def __init__(self):
-            ssprint("I've eaten, or I guess absorbed what I thought was a lot of grass.")
-            ssprint("So where has it all gone? I haven't had the need to poop yet.")
+            ssprint("Where did all that grass go?")
             ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
-            ssprint("Whoa, somebody actually answered!?!")
+            ssprint("Whoa! Who's that?")
             ssprint("<< Notice, the current spaced used is less than 1%. >>")
             ssprint("< Use 'inv' command to get inventory information, use 'help' for more.  >")
-            ssprint("I've heard this voice before, it sounds like a computer....")
-            ssprint("Who.... or what is that?")
+            ssprint("I've heard this voice before, I think. What or who are you?")
             ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
-            ssprint("[Great Sage]? [Predator]? heh?!")
-            ssprint("Is that what I was hearing when I was dying")
-            ssprint("With that said, what are skills?")
+            ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
             action_menu(self)
 
         def predate_grass(self): rimuru.add_inventory('hipokte grass')

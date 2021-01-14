@@ -61,6 +61,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.save_path = ''
         self.valid_save = None
         self.text_crawl = None
+        self.show_menu = True
         self.show_ascii = True
 
     def __str__(self):

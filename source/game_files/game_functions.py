@@ -45,21 +45,22 @@ def action_menu(level=None, remove=False):
 
     # ========== HUD
     print()
-    if rimuru.current_mimic:
+    if rimuru.current_mimic is True:
         print(f"Mimic: [{rimuru.current_mimic.name}]")
 
-    if rimuru.targeted_mobs:
+    if rimuru.targeted_mobs is True:
         # Adds (Dead) status to corresponding
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'\nTarget: {targets}')
 
-    # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
-    actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
-    print(f"Actions: {actions_for_hud}")
+    if rimuru.show_menu is True:
+        # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
+        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
+        print(f"Actions: {actions_for_hud}")
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
-    if fast_mode:
+    if fast_mode is True:
         for action in actions:
             if action[0] == '_':
                 user_input = action.replace('_', ' ').strip()
@@ -75,9 +76,9 @@ def action_menu(level=None, remove=False):
     level_actions = {
         'target': rimuru.set_targets,
         'mimic': rimuru.use_mimic, 'predate': rimuru.predate_targets,
-        'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory, 'info': rimuru.show_info, 'craft': rimuru.craft_item,
-        'map': rimuru.get_map,
-        'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl,
+        'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory, 'info': rimuru.show_info,'map': rimuru.get_map,
+        'craft': rimuru.craft_item,
+        'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl, 'menu': game_show_menu,
         'restart': restart,
     }
     if 'attack' in command:
@@ -211,6 +212,23 @@ def tbc():
     print("\n    < ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
 
+def game_show_menu(arg):
+    """
+    Updates and gets rimuru.show_menu boolean. Shows and hides available actions.
+
+    Args:
+        arg: Enable or disable text crawl.
+
+    Usage:
+        > menu
+        > menu enable
+    """
+
+    if arg in ['true', 'enable', '1'] or rimuru.show_menu is True:
+        rimuru.show_menu = True
+    if arg in ['false', 'disable', '0'] or rimuru.show_menu is False:
+        rimuru.show_menu = False
+
 def game_text_crawl(arg):
     """
     Updates and gets status for text_crawl.
@@ -228,7 +246,7 @@ def game_text_crawl(arg):
     if arg in ['true', 'enable', '1'] or rimuru.text_crawl is True:
         rimuru.text_crawl = True
         print("    < Text Crawl Active >\n")
-    elif arg in ['false', 'disable', '0'] or rimuru.text_crawl is False:
+    if arg in ['false', 'disable', '0'] or rimuru.text_crawl is False:
         rimuru.text_crawl = False
         print("\n    < Text Crawl Deactivated >\n")
 

@@ -128,16 +128,26 @@ class Predator_Skill(Skill):
         Predation   
             - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
               The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
+              
+              Usage:
+              > predate
+              
         Analysis    
             - The absorbed target is studied and analyzed. Craftable items can then be produced. 
               If the required materials are present, duplicates can be produced. 
               In the case of successful skill or magic analysis, the same technique can be acquired.
+              
         Stomach     
             - The target can be stored. Items produced via Analysis can also be stored. There is no storage time limit.
               However, there is a capacity limit.
+              
         Mimicry     
             - Replicate the target's appearance. The skills and abilities used by the target can also be used. 
               However, this depends on the successful analysis and acquisition of relative information regarding the target.
+              
+            Usage:
+            > mimic tempest serpent
+              
         Isolation   
             - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
         """
