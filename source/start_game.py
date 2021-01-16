@@ -32,6 +32,7 @@ if __name__ == '__main__':
         game_funcs.set_fast_mode()
     if '-t' in sys.argv: rimuru.text_crawl = False
     if '-a' in sys.argv: rimuru.show_ascii = False
+    if '-m' in sys.argv: rimuru.show_menu = True
 
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
     if rimuru.text_crawl is None:
