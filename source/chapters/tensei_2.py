@@ -8,24 +8,27 @@ def Chapter2(rimuru):
 
         def __init__(self):
             new_active_mob(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
-            ssprint("Oh, what's this? Looks like some kind of rock?")
+            ssprint("Oh, what's this? Feels like some kind of ore.?")
             action_menu(self)
 
-        def _predate_ore(self):
+        class _predate_ore:
+            subs = ['']
             rimuru.add_inventory('magic ore')
             ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
             ssprint("Ok, might be useful in the future. Guess I should get as much as I can")
             action_menu(_learn_new_attack())
 
         def _move_on(self):
-            ssprint("I'll just leave it, and continue finding my way out.")
-            ssprint("Now with magic perception I can finally find my way out of this cave.")
-            ssprint("*But before finding the exit, some small monsters started taking a interest in the little slime.*")
+            ssprint("I can always come back for it I guess.")
+            ssprint("With [Magic Perception] I can finally find my way out.")
+            ssprint("*But before that... Some monsters started taking a interest in the little slime.*\n")
             action_menu(_learn_new_attack())
+
+        def _explore(self): self._move_on()
 
     class _learn_new_attack:
         def __init__(self):
-            ssprint("Whoa. It looks like a giant snake serpent thing with big fangs. Or am I just small?")
+            ssprint("Now that's a big snake! Or am I just small?")
             ssprint("<< Answer, this is a [Tempest Serpent]. >>")
             ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")

@@ -20,7 +20,7 @@ Chapter1()
             analyze_grass()
             _create_potions() > _learn_skills
         predate_grass()
-        _what_are_skills:
+        _in_water:
             stay_in_water:
                 stay_in_water()
                 _expel_water() > _find_veldora

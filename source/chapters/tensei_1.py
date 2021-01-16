@@ -29,51 +29,49 @@ def Chapter1(rimuru):
         # Actions starting with '_' will progress the storyline.
         # The ones without it can still have one ore more sub actions, they will just loop back around.
         class _move:
+            __subs = ['feel', 'touch']
+
             def __init__(self):
                 ssprint("Where are my arms, I can't feel them!")
-                ssprint("Did I just move?")
-                ssprint("I can't see anything, hear or smell anything either.")
-                ssprint("What is this thing? It feels like I am abosrbing something into me.")
-                ssprint("What is this body? Am I even human anymore!?!?!")
+                ssprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
+                ssprint("What is this thing? It feels like I'm 'absorbing' something.")
+                ssprint("This body? Am I even human anymore!?!?!")
                 action_menu(self)
 
             class _inspect:
                 def __init__(self):
-                    ssprint("Wait what kind of joke is this! Who would want this?")
-                    ssprint("But... Dissolving and absorbing plants, this streamlined elastic feeling body shape.")
-                    ssprint("*Although _______ didn't want to admit it.*")
-                    ssprint("*You have died as a Human and reincarnated into a slime!*")
+                    __subs = ['move', 'check body', 'inspect body', 'feel body']
+                    ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
                     show_art('slime')
-                    ssprint("Puyo, Puyoyoyo....")
-                    ssprint("It's been a long time since I've accepted myself a slime.")
-                    ssprint("I've gotten used to this elastic body.")
-                    ssprint("I can't feel heat nor cold.")
-                    ssprint("Even after bumping into rocks I'll quickly regenerate.")
-                    ssprint("And there was no need for sleep or eating.")
-                    ssprint("This body isn't so bad I guess.")
-                    ssprint("It's just... very lonely here. Wherever here is.")
-                    ssprint("I've been eating grass just to pass the time.")
+                    ssprint("It looks like I have been stabbed, died and reincarnated as a slime!")
+                    ssprint("It's been a long time since I've accepted myself a slime. I am getting use to this body.")
+                    ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
+                    ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
+                    ssprint("There seems to be always some grass to eat, and more to explore!")
                     action_menu(self)
 
-                def explore(self):
-                    ssprint("Oh... look.....")
-                    ssprint("more grass... woooo!")
+                class _explore:
+                    __subs = ['move forward', 'move', 'wonder', 'continue']
+                    def __init__(self):
+                        ssprint("Oh... look.....")
+                        ssprint("more grass... woooo!")
+                        action_menu(_learn_skills())
 
-                def puyo(self):
-                    sprint("Puuuuuuuuuuuuyooooooooooo!")
+                class puyo:
+                    __subs = ['squish']
+                    def __init__(self):
+                        sprint("Puuuuuuuuuuuuyooooooooooo!")
 
-                def _predate_grass(self):
-                    ssprint("More grass!")
-                    rimuru.add_inventory('Hipokte Grass')
-                    action_menu(_learn_skills())
+                def predate_grass(self):
+                        ssprint("More grass!")
+                        rimuru.add_inventory('Hipokte Grass')
+                        action_menu(_learn_skills())
 
     class _learn_skills:
         def __init__(self):
             ssprint("Where did all that grass go?")
             ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
             ssprint("Whoa! Who's that?")
-            ssprint("<< Notice, the current spaced used is less than 1%. >>")
-            ssprint("< Use 'inv' command to get inventory information, use 'help' for more.  >")
             ssprint("I've heard this voice before, I think. What or who are you?")
             ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
             ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
@@ -82,6 +80,7 @@ def Chapter1(rimuru):
         def predate_grass(self): rimuru.add_inventory('hipokte grass')
 
         class what_is_predator:
+            __subs = ['predator?', 'what is predator?', 'what is this predator', 'what is this predator skill']
             def __init__(self):
                 ssprint("What is this predator?")
                 ssprint("<< Answer, unique skill [Predator] allows one to predate targets. store said targets in skill's stomach, or isolate as hazardous material.")
@@ -100,54 +99,53 @@ def Chapter1(rimuru):
                     ssprint("< Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
                     action_menu(_learn_skills())
 
-                def _move_on(self): action_menu(_what_are_skills())
+        class _what_are_skills:
+            __subs = ['what are skills?', 'skills?', 'tell me more about skills', 'what are these skills?']
+            def __init__(self):
+                ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
+                ssprint("What an interesting world! It's nice to have someone to talk to, even if it is a one way with a skill.")
+                action_menu(_in_water())
 
-            def _move_on(self): action_menu(_what_are_skills())
-
-        def _what_are_skills(self):
-            action_menu(_what_are_skills())
-
-    class _what_are_skills:
+    class _in_water:
         __location = "Under water?"
 
         def __init__(self):
-            ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
-            ssprint("What an interesting world!")
-            ssprint("Even as skill, I now have someone to talk to.")
-            ssprint("Even though it's basically a one way.")
-            ssprint("*Getting carried away and not being aware of it's surroundings. The little slime fell into what seems to be water.*")
-            ssprint("I'm going to die!")
+            ssprint("I'M GOING TO DIE... AGAIN!")
             ssprint("SHIT! I've finally reincarnated and I'm already going to die!")
-            ssprint("O'Great sage how painful is it to suffocate to death!?")
+            ssprint("O'Great sage how painful is it to suffocate to death!? I really should be more careful with where I'm moving.")
             ssprint("<< Answer, none. A slime's body does not require oxygen to live. >>")
-            ssprint("Hmmmmm. I'm not feeling any pain.")
-            ssprint("I just thought of something!")
-            ssprint("I could swallow up tons of water then I can and expel it at a high pressure...")
+            ssprint("Ummmmmmmmmmmm. I'm not feeling any pain. I don't think I'm drowning.")
+            ssprint("I thought of something... I could suck up some of water then I can and expel it at a high pressure...")
             action_menu(self)
 
-        def stay_in_water(self):
-            sprint(".....")
+        class _stay_in_water:
+            __subs = ['wait', 'glub']
+            def __init__(self):
+                sprint(".....")
 
         class _predate_water:
+            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water']
             def __init__(self):
                 rimuru.add_inventory('water')
                 rimuru.add_attribute('Hydraulic Propulsion')
                 ssprint("Alright, now lets try this out.")
                 action_menu(self)
 
-            def stay_in_water(self):
-                sprint("..........")
+            class _stay_in_water:
+                __subs = ['wait', 'glub']
+                def __init__(self):
+                    sprint("..........")
 
-            def _use_hydraulic_propulsion(self):
-                ssprint("Finally, I'm back on land!")
-                sprint("~Can you hear me little one.~")
-                ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
-                ssprint("Who's that speaking to me!?")
-                ssprint("It's not [Great Sage], so who is it?")
-                ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
-                ssprint("I've been only talking to [Great Sage] so far, according to it... her?...")
-                ssprint("I've been in this cave for about 90 days!")
-                action_menu(_find_veldora())
+            class _expel_water:
+                __subs = ['spew water', 'eject water', 'vomit water']
+                def __init__(self):
+                    ssprint("Finally, I'm back on land!")
+                    sprint("~Can you hear me little one.~")
+                    ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
+                    ssprint("Who's that speaking to me!? It can't be [Great Sage] could it?")
+                    ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
+                    ssprint("According to [Great Sage] I've been in this cave for about 90 days!")
+                    action_menu(_find_veldora())
 
     class _find_veldora:
         __location = "Sealed Cave"

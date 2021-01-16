@@ -44,19 +44,20 @@ def action_menu(level=None, remove=False):
         del actions[actions.index(remove)]  # Removes action so player can't take it.
 
     # ========== HUD
-    print()
-    if rimuru.current_mimic is True:
-        print(f"Mimic: [{rimuru.current_mimic.name}]")
+    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_menu: print()  # Adds extra space when needed.
 
-    if rimuru.targeted_mobs is True:
+    if rimuru.current_mimic:
+        print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
+
+    if rimuru.targeted_mobs:
         # Adds (Dead) status to corresponding
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
-        print(f'\nTarget: {targets}')
+        print(f'Target: {targets}', end='')
 
-    if rimuru.show_menu is True:
+    if rimuru.show_menu:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
-        print(f"Actions: {actions_for_hud}")
+        print(f"Actions: {actions_for_hud}", end='')
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
@@ -66,7 +67,7 @@ def action_menu(level=None, remove=False):
                 user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").lower()
-        print()
+    print()
 
     # Separates user input into command and command arguments.
     split_user_input = user_input.split(' ')
@@ -75,10 +76,17 @@ def action_menu(level=None, remove=False):
 
     level_actions = {
         'target': rimuru.set_targets,
-        'mimic': rimuru.use_mimic, 'predate': rimuru.predate_targets,
-        'stats': rimuru.show_attributes, 'inv': rimuru.show_inventory, 'info': rimuru.show_info,'map': rimuru.get_map,
+        'mimic': rimuru.use_mimic,
+        'predate': rimuru.predate_targets,
+        'stats': rimuru.show_attributes, 'skills': rimuru.show_attributes, 'attributes': rimuru.show_attributes,
+        'inv': rimuru.show_inventory, 'inventory': rimuru.show_inventory,
+        'info': rimuru.show_info, 'data': rimuru.show_info,
+        'map': rimuru.get_map,
         'craft': rimuru.craft_item,
-        'help': show_help, 'exit': game_exit, 'textcrawl': game_text_crawl, 'menu': game_show_menu,
+        'help': show_help,
+        'menu': game_show_menu,
+        'textcrawl': game_text_crawl,
+        'exit': game_exit,
         'restart': restart,
     }
     if 'attack' in command:
@@ -98,9 +106,13 @@ def action_menu(level=None, remove=False):
 
     loop = True
     for action in actions:
-        if action.replace('_', ' ').strip() in user_input:
+        try:
+            action_subs = eval(f"level.{action}.{action}__subs")
+        except: action_subs = []
+
+        if action.replace('_', ' ').strip() in user_input or user_input in action_subs:
             if action[0] == '_':
-                loop = False  # Checks if action will progress storyline.
+                loop = False
             eval(f"level.{action}()")
 
     if loop: action_menu(level)
@@ -224,9 +236,9 @@ def game_show_menu(arg):
         > menu enable
     """
 
-    if arg in ['true', 'enable', '1'] or rimuru.show_menu is True:
+    if arg in ['true', 'enable', 'on', '1'] or rimuru.show_menu is True:
         rimuru.show_menu = True
-    if arg in ['false', 'disable', '0'] or rimuru.show_menu is False:
+    if arg in ['false', 'disable', 'off', '0'] or rimuru.show_menu is False:
         rimuru.show_menu = False
 
 def game_text_crawl(arg):
@@ -243,10 +255,10 @@ def game_text_crawl(arg):
 
     """
 
-    if arg in ['true', 'enable', '1'] or rimuru.text_crawl is True:
+    if arg in ['true', 'enable', 'on', '1'] or rimuru.text_crawl is True:
         rimuru.text_crawl = True
         print("    < Text Crawl Active >\n")
-    if arg in ['false', 'disable', '0'] or rimuru.text_crawl is False:
+    if arg in ['false', 'disable', 'off', '0'] or rimuru.text_crawl is False:
         rimuru.text_crawl = False
         print("\n    < Text Crawl Deactivated >\n")
 
@@ -388,9 +400,9 @@ def show_help(*args):
     Command Required_Parameter [Optional_Parameter]
     
     Commands:
-        inv                         -- Show inventory.
-        stats [TARGET]              -- Show yours skills and resistances. E.g. 'stats tempest serpent'
-        info TARGET                 -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        inv/inventory               -- Show inventory.
+        stats/skills [TARGET]       -- Show yours skills and resistances. attribute also works. E.g. 'stats tempest serpent', 'attributes evil centipede'
+        info/data TARGET            -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
         target TARGET(S)            -- Target mobs, target multiple by separating with comma ','. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
         attack with SKILL	        -- Attack targeted_mobs. E.g. 'attack with water blade', 'attack water bullet'
         use SKILL                   -- Use a skill. E.g. 'use sense heat source'
