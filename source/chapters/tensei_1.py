@@ -13,7 +13,7 @@ def Chapter1(rimuru):
             show_art('great sage')
             rimuru.set_start_state()
             ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
-            ssprint("<< Confirmation Complete. Acquiring: Skill [Predator]... >>")
+            ssprint("<< Confirmation Complete. Acquiring skill: [Predator]... >>")
             rimuru.add_attribute('Predator')
             ssprint("<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
             rimuru.add_attribute('Sage')
@@ -39,15 +39,17 @@ def Chapter1(rimuru):
                 action_menu(self)
 
             class _inspect:
+                __subs = ['move', 'check body', 'inspect body', 'feel body', 'feel', 'feel around', 'move around']
                 def __init__(self):
-                    __subs = ['move', 'check body', 'inspect body', 'feel body']
                     ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
                     show_art('slime')
                     ssprint("It looks like I have been stabbed, died and reincarnated as a slime!")
-                    ssprint("It's been a long time since I've accepted myself a slime. I am getting use to this body.")
+                    ssprint("\n.....\n")
+                    ssprint("It's been a long time since I have accepted myself a slime. I am getting use to this body.")
                     ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
                     ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
                     ssprint("There seems to be always some grass to eat, and more to explore!")
+                    ssprint("\n< Hint: Try 'predate grass' see what happens.")
                     action_menu(self)
 
                 class _explore:
@@ -58,7 +60,7 @@ def Chapter1(rimuru):
                         action_menu(_learn_skills())
 
                 class puyo:
-                    __subs = ['squish']
+                    __subs = ['squish', 'bounce']
                     def __init__(self):
                         sprint("Puuuuuuuuuuuuyooooooooooo!")
 
@@ -72,15 +74,15 @@ def Chapter1(rimuru):
             ssprint("Where did all that grass go?")
             ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
             ssprint("Whoa! Who's that?")
-            ssprint("I've heard this voice before, I think. What or who are you?")
+            ssprint("I think I heard this voice before. Who, or what, are you?")
             ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
             ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
             action_menu(self)
 
-        def predate_grass(self): rimuru.add_inventory('hipokte grass')
+        #def predate_grass(self): rimuru.add_inventory('hipokte grass')
 
         class what_is_predator:
-            __subs = ['predator?', 'what is predator?', 'what is this predator', 'what is this predator skill']
+            __subs = ['predator?', 'what is predator?', 'what is this predator?', 'what is this predator skill?', 'predator huh']
             def __init__(self):
                 ssprint("What is this predator?")
                 ssprint("<< Answer, unique skill [Predator] allows one to predate targets. store said targets in skill's stomach, or isolate as hazardous material.")
@@ -151,32 +153,26 @@ def Chapter1(rimuru):
         __location = "Sealed Cave"
 
         def __init__(self):
-            ssprint("Let's try to find where that voice is coming from")
             ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
             sprint("~Hey can you just reply?~")
-            ssprint("Was I sensed somehow?")
+            ssprint("Was I seen?")
             action_menu(self)
 
         class _leave:
+            __subs = ['wonder', 'explore', 'move on']
             def __init__(self):
                 sprint("~Hey, are you just going to keep ignoring me?~")
                 sprint("...")
                 sprint("~Wait where are you going?~")
                 sprint("You seem pretty suspicious...")
-                sprint("~Oh, really... Is there anything I can do to ease your mind?~")
-                action_menu(self)
-
-            def _please_help_me(self):
-                action_menu(_respond())
-
-            def _leave(self):
-                sprint("No, I'm just going to move on.")
-                sprint("~Oh. Ok, at least it was interesting seeing a higher intelligent monster in my cave for once.~")
+                sprint("~Nooooo.... I'm not suspicious at all.l.l..~")
                 _leave_cave()
 
-        def _hello(self):
-            sprint("~Keep following my voice little one.~")
-            action_menu(_respond())
+        class _hello:
+            __subs = ["who's there?", 'who is therer?', 'who is that?']
+            def __init__(self):
+                sprint("~Keep following my voice little one.~")
+                action_menu(_respond())
 
         def _shutit_baldy(self):
             ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!!!~")

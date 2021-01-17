@@ -108,7 +108,11 @@ def action_menu(level=None, remove=False):
     for action in actions:
         try:
             action_subs = eval(f"level.{action}.{action}__subs")
-        except: action_subs = []
+        except:
+            action_subs = []
+        try:
+            action_subs = eval(f"level.{action}._{action}__subs")
+        except: pass
 
         if action.replace('_', ' ').strip() in user_input or user_input in action_subs:
             if action[0] == '_':
@@ -345,6 +349,7 @@ def ssprint(message):
     if message[0] == '\n': print()
     print('    ', end='')
     sprint(message.strip())
+    if message[-1:] == '\n': print()
 
 def sprint(message):
     """
@@ -384,7 +389,7 @@ def show_start_banner(rimuru):
 
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
-
+    {game_art.rimuru_art.rimuru_r}
     NOTE: 
     - Some basic commands: info, stats, inv, save, and  help for more.
     - Fullscreen recommended.
