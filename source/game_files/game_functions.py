@@ -5,7 +5,9 @@ import game_files.game_characters as mobs
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
 fast_mode = False
-
+move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'explore more', 'explore further']
+on_subs = ['activate', 'true', 'enable', 'on', '1']
+off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here.
@@ -46,15 +48,15 @@ def action_menu(level=None, remove=False):
     # ========== HUD
     if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_menu: print()  # Adds extra space when needed.
 
-    if rimuru.current_mimic:
+    if rimuru.current_mimic and not rimuru.hardcore:
         print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
 
-    if rimuru.targeted_mobs:
+    if rimuru.targeted_mobs and not rimuru.hardcore:
         # Adds (Dead) status to corresponding
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'Target: {targets}', end='')
 
-    if rimuru.show_menu:
+    if rimuru.show_menu and not rimuru.hardcore:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
         print(f"Actions: {actions_for_hud}", end='')
@@ -84,8 +86,10 @@ def action_menu(level=None, remove=False):
         'map': rimuru.get_map,
         'craft': rimuru.craft_item,
         'help': show_help,
-        'menu': game_show_menu,
+        'showmenu': game_show_menu, 'menu': game_show_menu,
+        'showart': game_show_ascii, 'ascii': game_show_ascii,
         'textcrawl': game_text_crawl,
+        'hardcore': game_hardcore_mode,
         'exit': game_exit,
         'restart': restart,
     }
@@ -236,14 +240,56 @@ def game_show_menu(arg):
         arg: Enable or disable text crawl.
 
     Usage:
-        > menu
-        > menu enable
+        > menu on
+        > menu off
     """
 
-    if arg in ['true', 'enable', 'on', '1'] or rimuru.show_menu is True:
-        rimuru.show_menu = True
-    if arg in ['false', 'disable', 'off', '0'] or rimuru.show_menu is False:
+    if rimuru.hardcore is True:
         rimuru.show_menu = False
+        print("    < Error: Hardcore mode is active. >")
+        return
+
+    if arg in on_subs or rimuru.show_menu is True:
+        rimuru.show_menu = True
+    if arg in off_subs or rimuru.show_menu is False:
+        rimuru.show_menu = False
+    print(f"    < Action Menu: {'Enabled' if rimuru.show_menu else 'Disabled'} >")
+
+def game_show_ascii(arg):
+    """
+    Enable/Disable ASCII art.
+
+    Args:
+        arg: Enable or disable ASCII art.
+
+    Usage:
+        ascii on
+        ascii off
+    """
+
+    if arg in on_subs or rimuru.show_ascii is True:
+        rimuru.show_ascii = True
+    if arg in off_subs or rimuru.show_ascii is False:
+        rimuru.show_ascii = False
+    print(f"    < ASCII Art: {'Enabled' if rimuru.show_ascii else 'Disabled'} >")
+
+def game_hardcore_mode(arg):
+    """
+    Enable/Disable ASCII art.
+
+    Args:
+        arg: Enable or disable ASCII art.
+
+    Usage:
+        hardcore on
+        hardcore off
+    """
+
+    if arg in on_subs or rimuru.hardcore is True:
+        rimuru.hardcore = True
+    if arg in off_subs or rimuru.hardcore is False:
+        rimuru.hardcore = False
+    print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >")
 
 def game_text_crawl(arg):
     """
@@ -254,17 +300,16 @@ def game_text_crawl(arg):
 
     Usage:
         > textcrawl
-        > textcrawl enable
-        > textcrawl 0
-
+        > textcrawl on
+        > textcrawl off
     """
 
-    if arg in ['true', 'enable', 'on', '1'] or rimuru.text_crawl is True:
+    if arg in on_subs or rimuru.text_crawl is True:
         rimuru.text_crawl = True
-        print("    < Text Crawl Active >\n")
-    if arg in ['false', 'disable', 'off', '0'] or rimuru.text_crawl is False:
+    if arg in off_subs or rimuru.text_crawl is False:
         rimuru.text_crawl = False
-        print("\n    < Text Crawl Deactivated >\n")
+    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >")
+
 
 def show_art(art):
     """

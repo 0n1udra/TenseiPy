@@ -43,7 +43,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.acquired_msg = ''
         self.is_alive = True
         self.item_type = 'Living'
-        self.status = ''
+        self.status = ''  # E.g. Passive, Active, Analysing, etc
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
 
@@ -54,15 +54,16 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # Map functionality.
         self.available_locations = []
         self.current_location = 'N/A'
-        self.current_location_object = None
+        self.current_location_object = None  # Current location's class object.
 
         # Game variables.
         self.game_object_type = 'character'
         self.save_path = ''
-        self.valid_save = None
-        self.text_crawl = None
-        self.show_menu = False
-        self.show_ascii = True
+        self.valid_save = None  # If you died in-game, the current save will be unusable.
+        self.text_crawl = None  # Slow text crawl effect, letter by letter.
+        self.show_menu = False  # Show available actions player can take.
+        self.hardcore = False  # Hides targets, mimicking, and actions.
+        self.show_ascii = True  # Show ASCII art. Disable to save room on screen.
 
     def __str__(self):
         return self.name.lower()

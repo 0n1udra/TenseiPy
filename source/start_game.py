@@ -11,10 +11,11 @@ __status__ = "Development"
 
 def help_page():
     print("""
-    -f  --  Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
-    -t  --  Disable text crawl effect.
-    -a  --  Hides ASCII art.
-    -h  --  This help page.
+    -h      --  This help page.
+    -f      --  Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
+    -t      --  Disable text crawl effect.
+    -a      --  Hides ASCII art.
+    -hard   --  Hardcore mode.
     """)
     exit(0)
 
@@ -33,6 +34,7 @@ if __name__ == '__main__':
     if '-t' in sys.argv: rimuru.text_crawl = False
     if '-a' in sys.argv: rimuru.show_ascii = False
     if '-m' in sys.argv: rimuru.show_menu = True
+    if '-hard' in sys.argv: rimuru.hardcore = True
 
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
     if rimuru.text_crawl is None:
