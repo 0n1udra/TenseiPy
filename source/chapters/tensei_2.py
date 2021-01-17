@@ -33,7 +33,7 @@ def Chapter2(rimuru):
             ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
 
-            ssprint("< Hint: Choose ability to learn and use on the [Tempest Serpent]. >")
+            ssprint("< Hint: Choose ability to learn and use it on [Tempest Serpent]. >")
             action_menu(self)
 
         def try_escaping(self):
@@ -55,7 +55,7 @@ def Chapter2(rimuru):
 
     class _attack_serpent:
         def __init__(self):
-            ssprint("\n< Hint: Target the [Tempest Serpent] using target command, then use attack with your new skill. 'help' for more info. >")
+            ssprint("\n< Hint: Try to 'target' the Tempest Serpent, than try to 'attack' it with your new skill. 'help' for more.")
             action_menu(self)
 
         class _attack:

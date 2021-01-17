@@ -53,7 +53,7 @@ def Chapter1(rimuru):
                     action_menu(self)
 
                 class _explore:
-                    __subs = ['move forward', 'move', 'wonder', 'continue']
+                    __subs = move_subs
                     def __init__(self):
                         ssprint("Oh... look.....")
                         ssprint("more grass... woooo!")
@@ -87,25 +87,29 @@ def Chapter1(rimuru):
                 ssprint("What is this predator?")
                 ssprint("<< Answer, unique skill [Predator] allows one to eat targets. store said targets in skill's stomach, or isolate as hazardous material.")
                 ssprint("<< Also, after successful analysis a monster, one can use mimicry to replicate appearance and use analyzed target's abilities. >>")
-                ssprint("< Hint: Try crafting a Full Potion. >")
+                ssprint("< Hint: Try getting more 'info' on [Hipokte Grass]. >")
+                ssprint("< Hint: Try to 'crafting' a Full Potion. >")
                 action_menu(self)
 
 
             def _craft_full_potion(self):
-                ssprint("As a test, can you analyze that grass I just ate?")
-                ssprint("<< Analysis complete. >>")
                 rimuru.show_info('hipokte grass')
                 action_menu(self)
                 ssprint("I have a feeling these will come in handy.")
-                ssprint("< Hint: Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
                 action_menu(_learn_skills())
 
-        class _what_are_skills:
+        class what_are_skills:
             __subs = ['what are skills?', 'skills?', 'tell me more about skills', 'what are these skills?']
             def __init__(self):
                 ssprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
                 ssprint("What an interesting world! It's nice to have someone to talk to, even if it is a one way with a skill.")
+
+        class _keep_exploring:
+            __subs = move_subs
+            def __init__(self):
+                ssprint("Lets keep moving!")
                 action_menu(_in_water())
+
 
     class _in_water:
         __location = "Under water?"
