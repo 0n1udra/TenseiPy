@@ -98,7 +98,7 @@ In function docstring's Usage section, '>' means example of user input in game.
 -----character_combat.py-----
 :Variables:
     active_mobs [] - Characters that are active and relevant to current level. [[character_object, amount]]
-    targeted_mobs [] - Currently targeted_mobs characters, used for attack and predate.
+    targeted_mobs [] - Currently targeted_mobs characters, used for attack and eat.
 
 :Functions:
     set_targets() - Set targets to be focused.
@@ -163,7 +163,7 @@ cave_veldora - Veldora introducing himself.
 :Characters:
 Rimuru_Tempest: - Player character.
     mimic_generator() - Yields character object acquired for mimicry.
-    predate_target() - Predates inputted and focused targets. Either adds skill, item, or character.
+    eat_target() - Predates inputted and focused targets. Either adds skill, item, or character.
     mimic_object() - Returns mimic skill object from attributes dictionary.
     add_mimic() - Adds new character object to acquired_mimicries dictionary.
     use_mimic() - Activate mimicry.
@@ -216,7 +216,7 @@ Magic_ore
     abilities str - Skill abilities description.
     active False - Skill active status.
     passive False - If passive skill.
-    predate True - Able to predate.
+    eat True - Able to eat.
     sub_skills {} - Sub skills.
     game_object_type - Game object type = 'attribute'
 

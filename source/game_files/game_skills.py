@@ -13,7 +13,7 @@ class Skill:
         self.status = ''
         self.use_requirements = {}
 
-        self.predate = True
+        self.eat = True
         self.sub_skills = {}
 
         self.game_object_type = 'attribute'
@@ -130,7 +130,7 @@ class Predator_Skill(Skill):
               The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
               
               Usage:
-              > predate
+              > eat
               
         Analysis    
             - The absorbed target is studied and analyzed. Craftable items can then be produced. 

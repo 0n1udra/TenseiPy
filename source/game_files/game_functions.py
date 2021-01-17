@@ -1,4 +1,4 @@
-import os, sys, time, pickle
+import keyboard, pickle, time, sys, os
 import game_files.game_art as game_art
 import game_files.game_characters as mobs
 
@@ -77,7 +77,7 @@ def action_menu(level=None, remove=False):
     level_actions = {
         'target': rimuru.set_targets,
         'mimic': rimuru.use_mimic,
-        'predate': rimuru.predate_targets,
+        'eat': rimuru.eat_targets, 'predate': rimuru.eat_targets,
         'stats': rimuru.show_attributes, 'skills': rimuru.show_attributes, 'attributes': rimuru.show_attributes,
         'inv': rimuru.show_inventory, 'inventory': rimuru.show_inventory,
         'info': rimuru.show_info, 'data': rimuru.show_info,
@@ -347,9 +347,7 @@ def ssprint(message):
     """Print tabbed in message."""
 
     if message[0] == '\n': print()
-    print('    ', end='')
-    sprint(message.strip())
-    if message[-1:] == '\n': print()
+    sprint('    ' + message.lstrip())
 
 def sprint(message):
     """
@@ -358,6 +356,8 @@ def sprint(message):
     Args:
         message: Message to delay.
     """
+
+    flag = False
 
     if rimuru.text_crawl:
         message_length = len(message)
@@ -374,22 +374,22 @@ def sprint(message):
             total_time = 2.5
 
         # Prints letter by letter, resulted speed depends on string length.
+        msg = message
         sleep_time = total_time / message_length
         for letter in message:
             sys.stdout.write(letter)
             sys.stdout.flush()
             time.sleep(sleep_time)
-        print()
-
     else:
         print(message)  # Print all lines instantly.
 
 def show_start_banner(rimuru):
     """Show game title, tips, and player stats/inv."""
 
+    show_art('great sage')
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
-    {game_art.rimuru_art.rimuru_r}
+    {game_art.rimuru_art.banner}
     NOTE: 
     - Some basic commands: info, stats, inv, save, and  help for more.
     - Fullscreen recommended.
@@ -418,10 +418,10 @@ def show_help(*args):
         exit                        -- Exits after save.
 
     Abilities:
-        mimic TARGET                -- Mimics appearance of of predated. E.g. 'mimic tempest serpent'
+        mimic TARGET                -- Mimics appearance of of eatd. E.g. 'mimic tempest serpent'
           - info mimic              -- Shows available mimicries.
           - mimic reset             -- Resets mimic (Back to slime).
-        predate                     -- Predate target(s). Can only predate mobs that are targeted_mobs and dead.
+        eat                         -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
         nearby                      -- Once acquired the [sense heat source] skill, you can use nearby instead of typing 'use sense heat source' every time.
                                          
 

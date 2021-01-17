@@ -9,9 +9,8 @@ def Chapter1(rimuru):
         __location = 'Sealed Cave'
 
         def __init__(self):
-            ssprint(".....\n")
-            show_art('great sage')
             rimuru.set_start_state()
+            ssprint(".....\n")
             ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             ssprint("<< Confirmation Complete. Acquiring skill: [Predator]... >>")
             rimuru.add_attribute('Predator')
@@ -43,13 +42,14 @@ def Chapter1(rimuru):
                 def __init__(self):
                     ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
                     show_art('slime')
+                    print(game_art.rimuru_art.died)
                     ssprint("It looks like I have been stabbed, died and reincarnated as a slime!")
                     ssprint("\n.....\n")
                     ssprint("It's been a long time since I have accepted myself a slime. I am getting use to this body.")
                     ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
                     ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
-                    ssprint("There seems to be always some grass to eat, and more to explore!")
-                    ssprint("\n< Hint: Try 'predate grass' see what happens.")
+                    ssprint("There seems to be always some grass to eat, and more to explore!\n")
+                    ssprint("< Hint: Try to 'eat' the grass see what happens.")
                     action_menu(self)
 
                 class _explore:
@@ -64,7 +64,7 @@ def Chapter1(rimuru):
                     def __init__(self):
                         sprint("Puuuuuuuuuuuuyooooooooooo!")
 
-                def predate_grass(self):
+                def eat_grass(self):
                         ssprint("More grass!")
                         rimuru.add_inventory('Hipokte Grass')
                         action_menu(_learn_skills())
@@ -79,27 +79,26 @@ def Chapter1(rimuru):
             ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
             action_menu(self)
 
-        #def predate_grass(self): rimuru.add_inventory('hipokte grass')
+        def eat_grass(self): rimuru.add_inventory('hipokte grass')
 
         class what_is_predator:
             __subs = ['predator?', 'what is predator?', 'what is this predator?', 'what is this predator skill?', 'predator huh']
             def __init__(self):
                 ssprint("What is this predator?")
-                ssprint("<< Answer, unique skill [Predator] allows one to predate targets. store said targets in skill's stomach, or isolate as hazardous material.")
+                ssprint("<< Answer, unique skill [Predator] allows one to eat targets. store said targets in skill's stomach, or isolate as hazardous material.")
                 ssprint("<< Also, after successful analysis a monster, one can use mimicry to replicate appearance and use analyzed target's abilities. >>")
+                ssprint("< Hint: Try crafting a Full Potion. >")
                 action_menu(self)
 
-            class _analyze_grass:
-                def __init__(self):
-                    ssprint("As a test, can you analyze that grass I just ate?")
-                    ssprint("<< Analysis complete. >>")
-                    rimuru.show_info('hipokte grass')
-                    action_menu(self)
 
-                def _craft_full_potion(self):
-                    ssprint("I have a feeling these will come in handy.")
-                    ssprint("< Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
-                    action_menu(_learn_skills())
+            def _craft_full_potion(self):
+                ssprint("As a test, can you analyze that grass I just ate?")
+                ssprint("<< Analysis complete. >>")
+                rimuru.show_info('hipokte grass')
+                action_menu(self)
+                ssprint("I have a feeling these will come in handy.")
+                ssprint("< Hint: Item's recipe can be found using 'info' command. Also note that some items are crafted in batches. >")
+                action_menu(_learn_skills())
 
         class _what_are_skills:
             __subs = ['what are skills?', 'skills?', 'tell me more about skills', 'what are these skills?']
@@ -125,8 +124,8 @@ def Chapter1(rimuru):
             def __init__(self):
                 sprint(".....")
 
-        class _predate_water:
-            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water']
+        class _eat_water:
+            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'use water to propel', 'propel with water', 'expel water to propel']
             def __init__(self):
                 rimuru.add_inventory('water')
                 rimuru.add_attribute('Hydraulic Propulsion')
@@ -179,7 +178,7 @@ def Chapter1(rimuru):
             ssprint("Oh!")
             action_menu(_respond())
 
-        def predate_grass(self): rimuru.add_inventory('hipokte grass')
+        def eat_grass(self): rimuru.add_inventory('hipokte grass')
 
     class _respond:
         __location = "Veldora's Prison"
@@ -230,7 +229,7 @@ def Chapter1(rimuru):
                 ssprint("~Alright then, I won't. Hmmmmph~")
                 action_menu(_become_friends())
 
-        def predate_grass(self): rimuru.add_inventory('hipokte grass')
+        def eat_grass(self): rimuru.add_inventory('hipokte grass')
 
     class _become_friends:
         def __init__(self):
@@ -302,7 +301,7 @@ def Chapter1(rimuru):
             ssprint("<< Use Unique skill [Predator]? >>")
             action_menu(self)
 
-        class _predate_veldora:
+        class _eat_veldora:
             __location = "Sealed Cave"
 
             def __init__(self):

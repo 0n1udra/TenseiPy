@@ -101,15 +101,15 @@ class Rimuru_Tempest(Character):
             else: return False
         else: return False
 
-    def predate_targets(self, input_targets=''):
+    def eat_targets(self, input_targets=''):
         """
         Predates targets that are being focused. Also adds target mimicry.
 
         Args:
-            input_targets: Target to predate.
+            input_targets: Target to eat.
 
         Usage:
-            > predate
+            > eat
         """
 
         for target in self.targeted_mobs:
@@ -120,7 +120,7 @@ class Rimuru_Tempest(Character):
             elif target[0].game_object_type == 'attribute':
                 self.add_attribute(target[0])
             elif target[0].game_object_type == 'character':
-                # Can only predate targeted mobs that are dead.
+                # Can only eat targeted mobs that are dead.
                 if target[0].is_alive is False:
                     self.add_mimic(target[0])
                     self.add_inventory(target[0], target[1])
@@ -132,7 +132,7 @@ class Rimuru_Tempest(Character):
         # For some reason I need this to check if it cleared out all dead mobs.
         for i in self.targeted_mobs:
             if i[0].is_alive is False:
-                self.predate_targets()
+                self.eat_targets()
 
 
 class Veldora_Tempest(Character):

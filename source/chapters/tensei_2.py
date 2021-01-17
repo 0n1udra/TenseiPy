@@ -11,7 +11,7 @@ def Chapter2(rimuru):
             ssprint("Oh, what's this? Feels like some kind of ore.?")
             action_menu(self)
 
-        class _predate_ore:
+        class _eat_ore:
             subs = ['']
             rimuru.add_inventory('magic ore')
             ssprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
@@ -51,7 +51,7 @@ def Chapter2(rimuru):
             ssprint("Lets try it out!")
             action_menu(_attack_serpent())
 
-        def predate_ore(self): rimuru.add_inventory('magic ore')
+        def eat_ore(self): rimuru.add_inventory('magic ore')
 
     class _attack_serpent:
         def __init__(self):
@@ -78,7 +78,7 @@ def Chapter2(rimuru):
                 else:
                     action_menu(_attack_serpent())
 
-        def predate_ore(self):
+        def eat_ore(self):
             rimuru.add_inventory('magic ore')
 
         def _sneak_away(self):
