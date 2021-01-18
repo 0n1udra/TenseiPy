@@ -4,8 +4,6 @@ from game_files.game_functions import *
 from chapters.tensei_2 import Chapter2
 
 
-move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bounching']
-
 def Chapter1(rimuru):
     class chapter_1:
         __location = 'Sealed Cave'
@@ -41,7 +39,7 @@ def Chapter1(rimuru):
                 action_menu(self)
 
             class _inspect_body:
-                __subs = ['move', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around']
+                __subs = ['inspect', 'move', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around']
 
                 def __init__(self):
                     ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
@@ -65,21 +63,21 @@ def Chapter1(rimuru):
                     ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
                     ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
                     ssprint("\n.... Or should I just forget about that and just move on?")
-                    action_menu(_learn_about_skills())
+                    action_menu(learn_about_skills())
 
                 class puyo:
                     __subs = ['squish', 'bounce']
                     def __init__(self):
                         sprint("Puuuuuuuuuuuuyooooooooooo!")
 
-                class explore:
+                class _explore:
                     __subs = move_subs
                     def __init__(self):
                         ssprint("Oh... look.....")
                         ssprint("More grass... Woooo!")
-                        action_menu(_learn_about_skills())
+                        action_menu(learn_about_skills())
 
-    class _learn_about_skills:
+    class learn_about_skills:
         def __init__(self):
             ssprint("All I can do is fumble around in the dark and eat grass... I'M SO BORED!")
             action_menu(self)
@@ -95,7 +93,7 @@ def Chapter1(rimuru):
             __subs = move_subs
             def __init__(self):
                 ssprint("Lets keep moving!")
-                action_menu(_in_water())
+                action_menu(in_water())
 
         class what_are_skills:
             __subs = ['what are skills?', 'skills?', 'tell me more about skills', 'what are these skills?']
@@ -111,7 +109,7 @@ def Chapter1(rimuru):
                 print("\n< Hint: Try getting more 'info' on [Hipokte Grass]. >")
                 print("< Hint: Try to 'crafting' a Full Potion. >")
 
-    class _in_water:
+    class in_water:
         __location = "Under water?"
 
         def __init__(self):
@@ -125,27 +123,27 @@ def Chapter1(rimuru):
             ssprint("I thought of something... I could suck up some of water then I can and expel it at a high pressure...")
             action_menu(self)
 
-        class _stay_in_water:
-            __subs = ['wait', 'glub']
+        class stay_in_water:
+            __subs = wait_subs + ['stay in water', 'wait in water']
             def __init__(self):
                 sdots(5)
 
-        class _eat_water:
+        class eat_water:
             __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'use water to propel', 'propel with water', 'expel water to propel']
             def __init__(self):
                 rimuru.add_inventory('water')
                 rimuru.add_attribute('Hydraulic Propulsion')
                 ssprint("Alright, now lets try this out.")
-                action_menu(self)
 
-            class _stay_in_water:
-                __subs = ['wait', 'glub']
-                def __init__(self):
-                    sdots(3, 8)
+        class try_getting_out:
+            __subs = ['spew water', 'eject water', 'vomit water', 'get_out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out']
+            def __init__(self):
+                ssprint("It's really hard to move in water, I need to find some way out!")
 
-            class _expel_water:
-                __subs = ['spew water', 'eject water', 'vomit water']
-                def __init__(self):
+        class _use_hydraulic_propulsion:
+            __subs = ['use new skill', 'use skill']
+            def __init__(self):
+                if rimuru.check_acquired('hydraulic propulsion'):
                     ssprint("Finally, I'm back on land!")
                     sprint("~Can you hear me little one.~")
                     ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
@@ -153,6 +151,7 @@ def Chapter1(rimuru):
                     ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
                     ssprint("According to [Great Sage] I've been in this cave for about 90 days!")
                     action_menu(_find_veldora())
+
 
     class _find_veldora:
         __location = "Sealed Cave"

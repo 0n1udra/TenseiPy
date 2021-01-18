@@ -7,6 +7,8 @@ rimuru = None
 fast_mode = False
 on_subs = ['activate', 'true', 'enable', 'on', '1']
 off_subs = ['deactivate', 'false', 'disable', 'off', '0']
+move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing']
+wait_subs = ['wait', 'stay']
 
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here.
@@ -118,13 +120,15 @@ def action_menu(level=None, remove=False):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
+        print("OK", level, action, user_input, action_subs)
         action_name = action.replace('_', ' ').strip().lower()
-        if action_name in user_input or any(user_input in i for i in action_subs):
+        if action_name in user_input or any(i in user_input for i in action_subs):
             if action[0] == '_':
-                loop = False
+                #loop = False
+                pass
             eval(f"level.{action}()")
 
-    if loop: action_menu(level)
+    action_menu(level)
 
 
 #                    ========== Level Functions ==========
