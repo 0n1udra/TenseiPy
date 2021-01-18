@@ -22,60 +22,62 @@ def Chapter1(rimuru):
             print()
             ssprint("It's so dark? Where is this? What happened?")
             ssprint("I remembered now. I got stabbed!")
-            ssprint("Was I saved? Can I move?")
+            ssprint("Was I saved? Can I move? Should I try to say something?")
             # Show user HUD and playable actions.
             action_menu(self)
 
-        # Actions starting with '_' will progress the storyline.
-        # The ones without it can still have one ore more sub actions, they will just loop back around.
-        class _move:
+        class move:
             __subs = ['feel', 'touch']
-
             def __init__(self):
                 ssprint("Where are my arms, I can't feel them!")
                 ssprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
                 ssprint("What is this thing? It feels like I'm 'absorbing' something.")
                 ssprint("This body? Am I even human anymore!?!?!")
+
+        class speak:
+            __subs = ['try to speak', 'try speaking', 'try to talk', 'try talking', 'talk', 'say something', 'try to say something', 'yell', 'try to yell', 'try yelling']
+            def __init__(self):
+                ssprint("I can't seem to speak, wait.....")
+                ssprint("I CAN'T FEEL MY MOUTH!")
+                ssprint("I. Can't. Feel. Anything!")
+
+        class _inspect_body:
+            __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around']
+            def __init__(self):
+                ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
+                show_art('slime')
+                print(game_art.rimuru_art.died)
+                ssprint("It looks like I have been stabbed, died and reincarnated as a slime!\n")
+                sdots(3, 8)
+                ssprint("\nIt's been a long time since I have accepted myself a slime. I am getting use to this body.")
+                ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
+                ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
+                ssprint("There seems to be always some grass to eat, and more to explore!\n")
+                print("< Hint: Try to 'eat' the grass, see what happens.")
                 action_menu(self)
 
-            class _inspect_body:
-                __subs = ['inspect', 'move', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around']
+            def eat_grass(self):
+                rimuru.add_inventory('Hipokte Grass')
+                ssprint("Where did all that grass go?")
+                ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
+                ssprint("Whoa! Who's that?")
+                ssprint("I think I heard this voice before. Who, or what, are you?")
+                ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
+                ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
+                ssprint("\n.... Or should I just forget about that and just move on?")
+                action_menu(learn_about_skills())
 
+            class puyo:
+               __subs = ['squish', 'bounce']
+               def __init__(self):
+                   sprint("Puuuuuuuuuuuuyooooooooooo!")
+
+            class _explore:
+                __subs = move_subs
                 def __init__(self):
-                    ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
-                    show_art('slime')
-                    print(game_art.rimuru_art.died)
-                    ssprint("It looks like I have been stabbed, died and reincarnated as a slime!\n")
-                    sdots(3, 8)
-                    ssprint("\nIt's been a long time since I have accepted myself a slime. I am getting use to this body.")
-                    ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
-                    ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
-                    ssprint("There seems to be always some grass to eat, and more to explore!\n")
-                    print("< Hint: Try to 'eat' the grass, see what happens.")
-                    action_menu(self)
-
-                def eat_grass(self):
-                    rimuru.add_inventory('Hipokte Grass')
-                    ssprint("Where did all that grass go?")
-                    ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
-                    ssprint("Whoa! Who's that?")
-                    ssprint("I think I heard this voice before. Who, or what, are you?")
-                    ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
-                    ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
-                    ssprint("\n.... Or should I just forget about that and just move on?")
+                    ssprint("Oh... look.....")
+                    ssprint("More grass... Woooo!")
                     action_menu(learn_about_skills())
-
-                class puyo:
-                    __subs = ['squish', 'bounce']
-                    def __init__(self):
-                        sprint("Puuuuuuuuuuuuyooooooooooo!")
-
-                class _explore:
-                    __subs = move_subs
-                    def __init__(self):
-                        ssprint("Oh... look.....")
-                        ssprint("More grass... Woooo!")
-                        action_menu(learn_about_skills())
 
     class learn_about_skills:
         def __init__(self):
@@ -85,9 +87,11 @@ def Chapter1(rimuru):
         def eat_grass(self):
             rimuru.add_inventory('hipokte grass')
 
-        def craft_full_potion(self):
-            if rimuru.check_acquired('full potion'):
-                ssprint("I have a feeling these will come in handy.")
+        class _hfunc:
+            __subs = ['craft full potion', 'craft potion']
+            def __init__(self):
+                if rimuru.check_acquired('full potion'):
+                    ssprint("I have a feeling these will come in handy.")
 
         class _keep_exploring:
             __subs = move_subs
@@ -129,27 +133,29 @@ def Chapter1(rimuru):
                 sdots(5)
 
         class eat_water:
-            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'use water to propel', 'propel with water', 'expel water to propel']
+            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', ]
             def __init__(self):
                 rimuru.add_inventory('water')
-                rimuru.add_attribute('Hydraulic Propulsion')
+                rimuru.add_attribute('Hydraulic Propulsion', show_acquired_msg=False)
                 ssprint("Alright, now lets try this out.")
 
         class try_getting_out:
-            __subs = ['spew water', 'eject water', 'vomit water', 'get_out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out']
+            __subs = ['spew water', 'eject water', 'vomit water', 'try getting out', 'try to get out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out', 'use water to propel', 'propel with water', 'expel water to propel']
             def __init__(self):
-                ssprint("It's really hard to move in water, I need to find some way out!")
+                if rimuru.check_acquired('hydraulic propulsion'):
+                    ssprint("Let's see if I can get out now.")
+                    ssprint("Ouch! It feels like I took a bit of damage from that, but at least I feel like I'm back on land.")
+                    ssprint("<< Notice, New skill [Hydraulic Propulsion] acquired. >>")
+                    ssprint("Oh cool, I wonder what else I can do with this skill.")
+                    action_menu(_find_veldora())
+                else:
+                    ssprint("It's really hard to move in water, I need to find some way out!")
 
-        class _use_hydraulic_propulsion:
-            __subs = ['use new skill', 'use skill']
+        class _hfunc:
+            __subs = ['use hydraulic propulsion', 'use new skill', 'use skill']
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
                     ssprint("Finally, I'm back on land!")
-                    sprint("~Can you hear me little one.~")
-                    ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
-                    ssprint("Who's that speaking to me!? It can't be [Great Sage] could it?")
-                    ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
-                    ssprint("According to [Great Sage] I've been in this cave for about 90 days!")
                     action_menu(_find_veldora())
 
 
@@ -157,6 +163,11 @@ def Chapter1(rimuru):
         __location = "Sealed Cave"
 
         def __init__(self):
+            sprint("~Can you hear me little one.~")
+            ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
+            ssprint("Who's that speaking to me!? It can't be [Great Sage] could it?")
+            ssprint("This is bad, I'm getting nervous. This is the first conversation I'm having since reincarnating.")
+            ssprint("According to [Great Sage] I've been in this cave for about 90 days!")
             ssprint("I'll have to be friendly. But how do I even reply?. It's not like I have a mouth to speak with.")
             sprint("~Hey can you just reply?~")
             ssprint("Was I seen?")

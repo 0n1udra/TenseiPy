@@ -59,7 +59,7 @@ def action_menu(level=None, remove=False):
 
     if rimuru.show_menu and not rimuru.hardcore:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
-        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions])
+        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if action != '_hfunc'])
         print(f"Actions: {actions_for_hud}", end='')
 
     # ========== Debug Mode
@@ -69,7 +69,7 @@ def action_menu(level=None, remove=False):
             if action[0] == '_':
                 user_input = action.replace('_', ' ').strip()
     else:
-        user_input = input("\n> ").lower()
+        user_input = input("\n> ").strip().lower()
     print()
 
     # Separates user input into command and command arguments.
@@ -109,8 +109,6 @@ def action_menu(level=None, remove=False):
         if action_string in command:
             action(parameters)
 
-    loop = True
-    user_input = user_input.strip().lower()
     for action in actions:
         try:
             action_subs = eval(f"level.{action}.{action}__subs")
@@ -120,12 +118,8 @@ def action_menu(level=None, remove=False):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
-        print("OK", level, action, user_input, action_subs)
         action_name = action.replace('_', ' ').strip().lower()
         if action_name in user_input or any(i in user_input for i in action_subs):
-            if action[0] == '_':
-                #loop = False
-                pass
             eval(f"level.{action}()")
 
     action_menu(level)
