@@ -4,13 +4,16 @@ from game_files.game_functions import *
 from chapters.tensei_2 import Chapter2
 
 
+move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bounching']
+
 def Chapter1(rimuru):
     class chapter_1:
         __location = 'Sealed Cave'
 
         def __init__(self):
             rimuru.set_start_state()
-            ssprint(".....\n")
+            sdots()
+            print()
             ssprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             ssprint("<< Confirmation Complete. Acquiring skill: [Predator]... >>")
             rimuru.add_attribute('Predator')
@@ -37,20 +40,20 @@ def Chapter1(rimuru):
                 ssprint("This body? Am I even human anymore!?!?!")
                 action_menu(self)
 
-            class _inspect:
-                __subs = ['move', 'check body', 'inspect body', 'feel body', 'feel', 'feel around', 'move around']
+            class _inspect_body:
+                __subs = ['move', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around']
 
                 def __init__(self):
                     ssprint("Dissolving and absorbing, this streamlined elastic feeling body.")
                     show_art('slime')
                     print(game_art.rimuru_art.died)
-                    ssprint("It looks like I have been stabbed, died and reincarnated as a slime!")
-                    ssprint("\n.....\n")
-                    ssprint("It's been a long time since I have accepted myself a slime. I am getting use to this body.")
+                    ssprint("It looks like I have been stabbed, died and reincarnated as a slime!\n")
+                    sdots(3, 8)
+                    ssprint("\nIt's been a long time since I have accepted myself a slime. I am getting use to this body.")
                     ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
                     ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
                     ssprint("There seems to be always some grass to eat, and more to explore!\n")
-                    ssprint("< Hint: Try to 'eat' the grass see what happens.")
+                    print("< Hint: Try to 'eat' the grass, see what happens.")
                     action_menu(self)
 
                 def eat_grass(self):
@@ -78,7 +81,7 @@ def Chapter1(rimuru):
 
     class _learn_about_skills:
         def __init__(self):
-            ssprint("The more I fumble around in the dark, the more bored I get.")
+            ssprint("All I can do is fumble around in the dark and eat grass... I'M SO BORED!")
             action_menu(self)
 
         def eat_grass(self):
@@ -105,25 +108,27 @@ def Chapter1(rimuru):
             def __init__(self):
                 ssprint("<< Answer, unique skill [Predator] allows one to eat targets. store said targets in skill's stomach, or isolate as hazardous material.")
                 ssprint("<< Also, after successful analysis a monster, one can use mimicry to replicate appearance and use analyzed target's abilities. >>")
-                ssprint("\n< Hint: Try getting more 'info' on [Hipokte Grass]. >")
-                ssprint("< Hint: Try to 'crafting' a Full Potion. >")
+                print("\n< Hint: Try getting more 'info' on [Hipokte Grass]. >")
+                print("< Hint: Try to 'crafting' a Full Potion. >")
 
     class _in_water:
         __location = "Under water?"
 
         def __init__(self):
+            print(game_art.rimuru_art.fall_in_water)
             ssprint("I'M GOING TO DIE... AGAIN!")
             ssprint("SHIT! I've finally reincarnated and I'm already going to die!")
-            ssprint("O'Great sage how painful is it to suffocate to death!? I really should be more careful with where I'm moving.")
-            ssprint("<< Answer, none. A slime's body does not require oxygen to live. >>")
-            ssprint("Ummmmmmmmmmmm. I'm not feeling any pain. I don't think I'm drowning.")
+            ssprint("O'Great sage how painful thy death will be? Am I really going to suffocate to death?!?!")
+            ssprint("<< Information, A slime's body does not require oxygen to survive. >>")
+            ssprint("Huh.... I'm not feeling any pain. But what am I going to do now?\n")
+            sdots()
             ssprint("I thought of something... I could suck up some of water then I can and expel it at a high pressure...")
             action_menu(self)
 
         class _stay_in_water:
             __subs = ['wait', 'glub']
             def __init__(self):
-                sprint(".....")
+                sdots(5)
 
         class _eat_water:
             __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'use water to propel', 'propel with water', 'expel water to propel']
@@ -136,7 +141,7 @@ def Chapter1(rimuru):
             class _stay_in_water:
                 __subs = ['wait', 'glub']
                 def __init__(self):
-                    sprint("..........")
+                    sdots(3, 8)
 
             class _expel_water:
                 __subs = ['spew water', 'eject water', 'vomit water']

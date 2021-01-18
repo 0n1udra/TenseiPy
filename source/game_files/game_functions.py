@@ -5,7 +5,6 @@ import game_files.game_characters as mobs
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
 fast_mode = False
-move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'explore more', 'explore further']
 on_subs = ['activate', 'true', 'enable', 'on', '1']
 off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
@@ -90,7 +89,7 @@ def action_menu(level=None, remove=False):
         'showart': game_show_ascii, 'ascii': game_show_ascii,
         'textcrawl': game_text_crawl,
         'hardcore': game_hardcore_mode,
-        'exit': game_exit,
+        'exit': game_exit, 'stop': game_exit, 'quit': game_exit,
         'restart': restart,
     }
     if 'attack' in command:
@@ -109,6 +108,7 @@ def action_menu(level=None, remove=False):
             action(parameters)
 
     loop = True
+    user_input = user_input.strip().lower()
     for action in actions:
         try:
             action_subs = eval(f"level.{action}.{action}__subs")
@@ -118,7 +118,8 @@ def action_menu(level=None, remove=False):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
-        if action.replace('_', ' ').strip() in user_input or user_input in action_subs:
+        action_name = action.replace('_', ' ').strip().lower()
+        if action_name in user_input or any(user_input in i for i in action_subs):
             if action[0] == '_':
                 loop = False
             eval(f"level.{action}()")
@@ -310,7 +311,6 @@ def game_text_crawl(arg):
         rimuru.text_crawl = False
     print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >")
 
-
 def show_art(art):
     """
     Prints out ASCII art line by line or all at once dependding on text_crawl boolean.
@@ -388,6 +388,40 @@ def game_over():
 
 
 #                    ========== Game Functions ==========
+def dots(times=2, length=5, indent=False):
+    """
+    Loading dot animation.
+
+    Args:
+        times: How many times to do animation.
+        length: How many dots per cycle.
+        indent: Add 4 spaces.
+    """
+
+    if not rimuru.text_crawl:
+        print(('    ' if indent else '') + '.' * length)
+        return
+
+    for i in range(times):
+        if indent:
+            print('    ', end='')
+
+        for j in range(length):
+            sys.stdout.write('.')
+            sys.stdout.flush()
+            time.sleep(0.5)
+
+        print()
+        if i != (times - 1):  # Keeps on last loop.
+            sys.stdout.write('\x1b[1A')
+            sys.stdout.write('\x1b[2K')
+            time.sleep(0.1)
+
+def sdots(*args):
+    """Calls and passes arguments to dts()"""
+
+    dots(*args, indent=True)
+
 def ssprint(message):
     """Print tabbed in message."""
 
@@ -402,31 +436,33 @@ def sprint(message):
         message: Message to delay.
     """
 
-    flag = False
-
     if rimuru.text_crawl:
         message_length = len(message)
 
         if message_length > 200:
             total_time = 0.1
         elif message_length > 50:
-            total_time = 4.5
+            total_time = 3
         elif message_length > 25:
-            total_time = 3.5
+            total_time = 1.5
         elif message_length > 10:
-            total_time = 2.5
+            total_time = 1
         else:
-            total_time = 2.5
+            total_time = 2
 
         # Prints letter by letter, resulted speed depends on string length.
-        msg = message
         sleep_time = total_time / message_length
         for letter in message:
             sys.stdout.write(letter)
             sys.stdout.flush()
             time.sleep(sleep_time)
+        print()
     else:
         print(message)  # Print all lines instantly.
+
+def iprint(message):
+    if message[0] == '\n': print()
+    print('    ' + message.lstrip())
 
 def show_start_banner(rimuru):
     """Show game title, tips, and player stats/inv."""
@@ -435,8 +471,7 @@ def show_start_banner(rimuru):
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
-    NOTE: 
-    - Some basic commands: info, stats, inv, save, and  help for more.
+    - Basic commands: info, stats, inv, save, and  help for more.
     - Fullscreen recommended.
     """)
 
