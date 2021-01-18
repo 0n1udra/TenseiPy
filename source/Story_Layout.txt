@@ -13,12 +13,12 @@ Chapter1()
         _inspect:
             explore()
             puyo()
-            _eat_grass() > _learn_skills
+            _eat_grass() > _learn_about_skills
 
-    _learn_skills:
+    _learn_about_skills:
         what_is_predator()
             analyze_grass()
-            _create_potions() > _learn_skills
+            _create_potions() > _learn_about_skills
         eat_grass()
         _in_water:
             stay_in_water:
