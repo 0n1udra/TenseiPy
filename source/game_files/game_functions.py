@@ -70,6 +70,7 @@ def action_menu(level=None, remove=False):
                 user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").strip().lower()
+        if 'hfunc' in user_input: action_menu(level)
     print()
 
     # Separates user input into command and command arguments.
@@ -109,6 +110,8 @@ def action_menu(level=None, remove=False):
         if action_string in command:
             action(parameters)
 
+    valid_action = False
+
     for action in actions:
         try:
             action_subs = eval(f"level.{action}.{action}__subs")
@@ -121,6 +124,14 @@ def action_menu(level=None, remove=False):
         action_name = action.replace('_', ' ').strip().lower()
         if action_name in user_input or any(i in user_input for i in action_subs):
             eval(f"level.{action}()")
+            valid_action = True
+
+    if not valid_action:
+        sys.stdout.write('\x1b[1A')
+        sys.stdout.write('\x1b[2k')
+        sys.stdout.write('\x1b[1A')
+        sys.stdout.write('\x1b[2k')
+        sys.stdout.write('\x1b[1B')
 
     action_menu(level)
 
@@ -252,7 +263,7 @@ def game_show_menu(arg):
         rimuru.show_menu = True
     if arg in off_subs or rimuru.show_menu is False:
         rimuru.show_menu = False
-    print(f"    < Action Menu: {'Enabled' if rimuru.show_menu else 'Disabled'} >")
+    print(f"    < Action Menu: {'Enabled' if rimuru.show_menu else 'Disabled'} >\n")
 
 def game_show_ascii(arg):
     """
@@ -270,7 +281,7 @@ def game_show_ascii(arg):
         rimuru.show_ascii = True
     if arg in off_subs or rimuru.show_ascii is False:
         rimuru.show_ascii = False
-    print(f"    < ASCII Art: {'Enabled' if rimuru.show_ascii else 'Disabled'} >")
+    print(f"    < ASCII Art: {'Enabled' if rimuru.show_ascii else 'Disabled'} >\n")
 
 def game_hardcore_mode(arg):
     """
@@ -288,7 +299,7 @@ def game_hardcore_mode(arg):
         rimuru.hardcore = True
     if arg in off_subs or rimuru.hardcore is False:
         rimuru.hardcore = False
-    print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >")
+    print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
 
 def game_text_crawl(arg):
     """
@@ -307,7 +318,7 @@ def game_text_crawl(arg):
         rimuru.text_crawl = True
     if arg in off_subs or rimuru.text_crawl is False:
         rimuru.text_crawl = False
-    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >")
+    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
 
 def show_art(art):
     """
