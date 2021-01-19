@@ -165,7 +165,6 @@ def Chapter1(rimuru):
 
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
-                    rimuru.remove_inventory('water', -1)
                     ssprint("Finally, I'm back on land!")
                     action_menu(find_veldora())
 

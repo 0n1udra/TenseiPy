@@ -27,12 +27,22 @@ class Inventory:
                 else:
                     yield item_object
 
+    def update_inventory_capacity(self):
+        """ Updates inventory_capacity variable by going through all items in inventory and adding them up. """
+
+        total = 0
+        for item in self.inventory_generator():
+            total += item.quantity * item.inventory_capacity_add
+
+        self.inventory_capacity = total
+        return total
+
     def show_inventory(self, *args):
         """
         Prints out inventory items, corresponding category, and capacity.
 
         Usage:
-            .show('gobta')
+            .show_inventory('gobta')
 
             > inv
         """
@@ -69,10 +79,9 @@ class Inventory:
                 else:
                     return False
 
-        # Adds to total inventory capacity %.
-        self.inventory_capacity += item_object.inventory_capacity_add * item_object.quantity_add
         # Adds to quantity variable residing in item's object which is saved in character's inventory dict.
         self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
+        self.update_inventory_capacity()
 
         print(f'\n    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >\n')
 
@@ -82,20 +91,30 @@ class Inventory:
 
         Args:
             item: Item to remove from inventory.
-            amount: How many to remove from inventory.
+            amount: How many to remove from inventory. -1 to remove all.
 
         Usage:
-            .remove('hipokte grass')
-            .remove('magic ore', 5)
+            .remove_inventory('hipokte grass')
+            .remove_inventory('magic ore', 5)
+            .remove_inventory('water' -1)
         """
 
         item = self.get_object(item)
+        if not item:
+            return
 
-        item.quantity -= amount
-        if item.quantity < 0:
-            del self.inventory[item.item_type]
+        if amount == -1:
+            item.quantity = 0
+        else:
+            item.quantity -= amount
 
-        print(f"\n    < Removed: {amount}x [{item.name}] >\n")
+        if item.quantity <= 0:
+            del self.inventory[item.item_type][item.name]
+            print(f"\n    < Removed Item: [{item.name}] >\n")
+        else:
+            print(f"\n    < Removed: {amount}x [{item.name}] >\n")
+
+        self.update_inventory_capacity()
 
     def craft_item(self, item):
         """

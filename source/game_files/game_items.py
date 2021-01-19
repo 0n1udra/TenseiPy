@@ -119,7 +119,7 @@ class Water(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Water'
-        self.item_type = 'Misc'
+        self.item_type = 'Materials'
         self.quantity = 0
         self.quantity_add = 100
         self.inventory_capacity_add = 0.01

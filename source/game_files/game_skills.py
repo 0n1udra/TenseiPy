@@ -259,7 +259,6 @@ class Hydraulic_Propulsion(Skill):
             return False
 
 
-
 class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
