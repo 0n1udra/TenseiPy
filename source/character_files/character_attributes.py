@@ -49,6 +49,7 @@ class Attributes:
         # Print out skill category and corresponding skills indented.
         for i in self.attributes_generator(output=True):
             print(i)
+        print()
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """

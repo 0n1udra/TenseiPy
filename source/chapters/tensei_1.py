@@ -66,7 +66,7 @@ def Chapter1(rimuru):
                 ssprint("Whoa! Who's that?")
                 ssprint("I think I heard this voice before. Who, or what, are you?")
                 ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
-                ssprint("Skills, [Great Sage], [Predator], huh... Wonder what those are.")
+                ssprint("Skills and predator? huh... Wonder what those are.")
                 ssprint("\n.... Or should I just forget about that and just move on?")
                 action_menu(learn_about_skills())
 
@@ -117,10 +117,10 @@ def Chapter1(rimuru):
             __subs = ['predator?', 'what is predator?', 'what is this predator?', 'what is this predator skill?', 'predator huh', 'tell me more about predator', 'tell me more about predator']
 
             def __init__(self):
-                ssprint("<< Answer, unique skill [Predator] allows one to eat targets. store said targets in skill's stomach, or isolate as hazardous material.")
-                ssprint("<< Also, after successful analysis a monster, one can use mimicry to replicate appearance and use analyzed target's abilities. >>")
+                ssprint("<< Answer, unique skill [Predator] allows one to eat targets, store said targets in skill's stomach, or isolate as hazardous material.")
+                ssprint("<< Also, after successful analysis on a monster one can use mimicry to replicate appearance, and use replaceable abilities from target. >>")
                 print("\n< Hint: Try getting more 'info' on [Hipokte Grass]. >")
-                print("< Hint: Try to 'crafting' a Full Potion. >")
+                print("< Hint: Try to 'craft' a Full Potion. >")
 
     class in_water:
         __location = "Under water?"
@@ -168,16 +168,23 @@ def Chapter1(rimuru):
                     ssprint("Finally, I'm back on land!")
                     action_menu(find_veldora())
 
+        class _hfunc:
+            __subs = ['grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
+            def __init__(self):
+                #rimuru.add_inventory('magisteel sword')
+                ssprint("HEY! Look! It feels like a sword! Wonder if it's any good?")
+                ssprint("<< Answer, analysis of sword shows it contains a magisteel core. This sword is above average. >>")
+                ssprint("Would you look at that, that might come in handy later on. But I'm still stuck down here!")
+
     class find_veldora:
         __location = "Sealed Cave"
 
         def __init__(self):
-            ssprint("Ouch! It feels like I took a bit of damage from that, but at least I feel like I'm back on land.")
+            ssprint("Ouch! I hit something, but at least it seems like I'm back on land.")
             ssprint("<< Notice, New skill [Hydraulic Propulsion] acquired. >>")
             ssprint("Oh cool, I wonder what else I can do with this skill.")
             sprint("~Can you hear me little one.~")
-            ssprint("Whaaaa? What was that, I almost pissed myself (if I could).")
-            ssprint("Who's that speaking to me!? It can't be [Great Sage] could it?")
+            ssprint("Whaaaa? What was that, I almost pissed myself (if I could). Who's that speaking to me!? It can't be [Great Sage] could it?")
             ssprint("This is the first conversation I'm having since reincarnating. According to [Great Sage] I've been in this cave for about 90 days!")
             ssprint("Should I be friendly? But how do I even reply?. It's not like I have a mouth to speak with.")
             sprint("~Hey can you just reply?~")
@@ -385,7 +392,6 @@ def Chapter1(rimuru):
                         def __init__(self):
                             ssprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
                             leave_cave()
-
 
     def leave_cave():
         ssprint("Time to leave this cave already.")
