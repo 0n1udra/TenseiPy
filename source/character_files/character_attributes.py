@@ -40,10 +40,8 @@ class Attributes:
 
         print("-----Attributes/Skills-----")
         print(f"Name: [{(self.name + ' ' + self.family_name).strip()}]")
-
         if self.current_mimic:
             print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
-
         print(f"Location: {self.current_location}\n")
 
         # Print out skill category and corresponding skills indented.

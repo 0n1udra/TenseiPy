@@ -31,9 +31,9 @@ def Chapter2(rimuru):
             ssprint("Now that's a big snake! Or am I just small?")
             ssprint("<< Answer, this is a [Tempest Serpent]. >>")
             ssprint("Still, it's not as scary as Veldora. I should be able to handle it.")
-            ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
+            ssprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
 
-            print("< Hint: Choose ability to learn and use it on [Tempest Serpent]. >")
+            print("\n    < Hint: Choose ability to learn and use it on [Tempest Serpent]. >")
             action_menu(self)
 
         def try_escaping(self):
@@ -55,7 +55,7 @@ def Chapter2(rimuru):
 
     class _attack_serpent:
         def __init__(self):
-            print("\n< Hint: Try to 'target' the Tempest Serpent, than try to 'attack' it with your new skill. 'help' for more.")
+            print("\n    < Hint: Try to 'target' the Tempest Serpent, than try to 'attack' it with your new skill. 'help' for more.")
             action_menu(self)
 
         class _attack:

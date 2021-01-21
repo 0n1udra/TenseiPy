@@ -256,7 +256,7 @@ def game_show_menu(arg):
 
     if rimuru.hardcore is True:
         rimuru.show_menu = False
-        print("    < Error: Hardcore mode is active. >")
+        print("    < Error: Hardcore mode is active. \n>")
         return
 
     if arg in on_subs or rimuru.show_menu is True:

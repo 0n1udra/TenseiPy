@@ -46,6 +46,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.status = ''  # E.g. Passive, Active, Analysing, etc
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
+        self.game_object_type = 'character'
 
         # Combat variables.
         self.active_mobs = []  # Current mobs around you that you can interact or attack.
@@ -57,7 +58,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.current_location_object = None  # Current location's class object.
 
         # Game variables.
-        self.game_object_type = 'character'
         self.save_path = ''
         self.valid_save = None  # If you died in-game, the current save will be unusable.
         self.text_crawl = None  # Slow text crawl effect, letter by letter.
