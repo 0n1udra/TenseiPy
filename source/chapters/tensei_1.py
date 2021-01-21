@@ -9,6 +9,7 @@ def Chapter1(rimuru):
         __location = 'Sealed Cave'
 
         def __init__(self):
+            rimuru.add_inventory('hipokte grass')
             rimuru.set_start_state()
             sdots()
             print()
@@ -56,18 +57,11 @@ def Chapter1(rimuru):
                 ssprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.")
                 ssprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
                 ssprint("There seems to be always some grass to eat, and more to explore!\n")
-                print("< Hint: Try to 'eat' the grass, see what happens.")
+                print("    < Hint: Try to 'eat' the grass, see what happens.")
                 action_menu(self)
 
             def eat_grass(self):
-                rimuru.add_inventory('Hipokte Grass')
-                ssprint("Where did all that grass go?")
-                ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
-                ssprint("Whoa! Who's that?")
-                ssprint("I think I heard this voice before. Who, or what, are you?")
-                ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
-                ssprint("Skills and predator? huh... Wonder what those are.")
-                ssprint("\n.... Or should I just forget about that and just move on?")
+                rimuru.add_inventory('hipokte grass')
                 action_menu(learn_about_skills())
 
             class puyo:
@@ -86,11 +80,29 @@ def Chapter1(rimuru):
 
     class learn_about_skills:
         def __init__(self):
-            ssprint("All I can do is fumble around in the dark and eat grass... I'M SO BORED!")
+            if rimuru.check_acquired('hipokte grass'):
+                self.where_did_it_go()
+            else:
+                ssprint("All I can do is fumble around in the dark and eat grass... I'M SO BORED!")
             action_menu(self)
 
+        class where_did_it_go:
+            __subs = ['where did the grass go?', 'where did that all go?', 'hey where did that go?', "where's the grass?", "where's the grass now?", 'where is the grass?', 'where is the grass now?', 'where did it go?']
+            def __init__(self):
+                ssprint("Where did all that grass go?")
+                ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
+                ssprint("Whoa! Who's that?")
+                ssprint("I think I heard this voice before. Who, or what, are you?")
+                ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
+                ssprint("Skills and predator? huh... Wonder what those are.")
+                ssprint("\n.... Or should I just forget about that and just move on?")
+
         def eat_grass(self):
-            rimuru.add_inventory('hipokte grass')
+            if not rimuru.check_acquired('hipokte grass'):
+                rimuru.add_inventory('hipokte grass')
+                self.where_did_it_go()
+            else:
+                rimuru.add_inventory('hipokte grass')
 
         class _hfunc:
             __subs = ['craft full potion', 'craft potion']
@@ -119,8 +131,16 @@ def Chapter1(rimuru):
             def __init__(self):
                 ssprint("<< Answer, unique skill [Predator] allows one to eat targets, store said targets in skill's stomach, or isolate as hazardous material.")
                 ssprint("<< Also, after successful analysis on a monster one can use mimicry to replicate appearance, and use replaceable abilities from target. >>")
-                print("\n< Hint: Try getting more 'info' on [Hipokte Grass]. >")
-                print("< Hint: Try to 'craft' a Full Potion. >")
+                print("\n    < Hint: Try 'info predator' to get more information. >")
+
+        class what_is_great_sage:
+            __subs = ['what is this great sage?', 'what is great sage?', 'great sage?', 'tell me more about great sage']
+            def __init__(self):
+                ssprint("<< Answer, my function is to assist my master (you) to the best of my abilities. >>")
+                print("\n    < Hint: Use 'info great sage' to get more information. >")
+
+                if rimuru.check_acquired('hipokte grass'):
+                    print("\n    < Hint: Try getting more 'info' on Hipokte Grass. Than, try making a Full Potion with 'craft' command. >")
 
     class in_water:
         __location = "Under water?"
