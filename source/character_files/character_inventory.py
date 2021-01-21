@@ -116,7 +116,7 @@ class Inventory:
 
         self.update_inventory_capacity()
 
-    def craft_item(self, item):
+    def craft_item(self, args):
         """
         Craft item if have necessary material.
 
@@ -130,23 +130,31 @@ class Inventory:
             > craft full potion
         """
 
+        try:
+            craft_amount = int(args.split(' ')[-1])
+            item = ' '.join((args.split(' ')[:-1]))
+        except:
+            craft_amount = None
+            item = args
+
         item = self.get_object(item, new=True)
         if item is None: return
 
-        # Shows recipe.
-        recipe = ''
-        print(f"    Recipe for {item.quantity_add}x {item.name}:")
-        for ingredient, amount in item.recipe.items():
-            recipe += F"    {amount}x {ingredient}, "
-        print(f"{recipe[:-2]}")  # [:-2] cuts off last comma and space
-        print(f"\n    Inputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
+        if craft_amount is None:
+            # Shows recipe.
+            recipe = ''
+            print(f"    Recipe for {item.quantity_add}x {item.name}:")
+            for ingredient, amount in item.recipe.items():
+                recipe += F"    {amount}x {ingredient}, "
+            print(f"{recipe[:-2]}")  # [:-2] cuts off last comma and space
+            print(f"\n    Inputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
 
-        # Asks for how much to make. note that some items are crafted in batches.
-        try:
-            craft_amount = int(input(f"Craft > "))
-        except ValueError:
-            print("\n    < Error, need integer input. >\n")
-            return False
+            # Asks for how much to make. note that some items are crafted in batches.
+            try:
+                craft_amount = int(input(f"Craft > "))
+            except ValueError:
+                print("\n    < Error, need integer input. >\n")
+                return False
 
         # Checks if have enough ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
