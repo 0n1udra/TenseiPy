@@ -22,7 +22,7 @@ def set_fast_mode():
     rimuru.text_crawl = rimuru.show_ascii = False
     fast_mode = True
 
-def action_menu(level=None, remove=False):
+def action_menu(level=None, hide_actions=False):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
@@ -43,8 +43,8 @@ def action_menu(level=None, remove=False):
         if '__' in action: continue  # Filters out unwanted variables and functions.
         actions.append(action)
 
-    if remove:
-        del actions[actions.index(remove)]  # Removes action so player can't take it.
+    if hide_actions is True:
+        del actions[actions.index(hide_actions)]  # Removes action so player can't take it.
 
     # ========== HUD
     if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_menu: print()  # Adds extra space when needed.
@@ -92,6 +92,7 @@ def action_menu(level=None, remove=False):
         'showart': game_show_ascii, 'ascii': game_show_ascii,
         'textcrawl': game_text_crawl,
         'hardcore': game_hardcore_mode,
+        'history': show_history, 'lines': show_history,
         'exit': game_exit, 'stop': game_exit, 'quit': game_exit,
         'restart': restart,
     }
@@ -397,6 +398,55 @@ def game_over():
 
 
 #                    ========== Game Functions ==========
+def sprint(message, from_ss=False, showing_history=False):
+    """
+    Text crawling. Slowly print out text to console.
+
+    Args:
+        message: Message to delay.
+        from_ss [bool:False]: Variable used to properly print out lines for 'history' game commmand.
+        showing_history [bool:False]: Variable used to make sure 'history' command doesn't effect itself.
+    """
+
+    # So user can get the last x lines, in case the screen has been cluttered.
+    if showing_history is False:  # Without this, when showing history it'll add onto itself, which creates duplicate lines.
+        rimuru.line_history.append([message, from_ss])
+        rimuru.line_history = rimuru.line_history[-25:]
+
+    if rimuru.text_crawl is True:
+        message_length = len(message)
+
+        if message_length > 200:
+            total_time = 0.1
+        elif message_length > 50:
+            total_time = 3
+        elif message_length > 25:
+            total_time = 1.5
+        elif message_length > 10:
+            total_time = 1
+        else:
+            total_time = 2
+
+        # Prints letter by letter, resulted speed depends on string length.
+        sleep_time = total_time / message_length
+        for letter in message:
+            sys.stdout.write(letter)
+            sys.stdout.flush()
+            time.sleep(sleep_time)
+        print()
+    else:
+        print(message)  # Print all lines instantly.
+
+def ssprint(message, showing_history=False):
+    """Print tabbed in message."""
+
+    if message[0] == '\n': print()
+    sprint('    ' + message.lstrip(), from_ss=True, showing_history=showing_history)
+
+def iprint(message):
+    if message[0] == '\n': print()
+    print('    ' + message.lstrip())
+
 def dots(times=2, length=5, indent=False):
     """
     Loading dot animation.
@@ -431,47 +481,24 @@ def sdots(*args):
 
     dots(*args, indent=True)
 
-def ssprint(message):
-    """Print tabbed in message."""
-
-    if message[0] == '\n': print()
-    sprint('    ' + message.lstrip())
-
-def sprint(message):
+def show_history(arg):
     """
-    Text crawling. Slowly print out text to console.
+    Shows x of last outputted story lines.
 
     Args:
-        message: Message to delay.
+        arg: Lines to show. Default is 5.
     """
 
-    if rimuru.text_crawl:
-        message_length = len(message)
+    try:
+        lines = int(arg)
+    except:
+        lines = 5
 
-        if message_length > 200:
-            total_time = 0.1
-        elif message_length > 50:
-            total_time = 3
-        elif message_length > 25:
-            total_time = 1.5
-        elif message_length > 10:
-            total_time = 1
+    for line in rimuru.line_history[-lines:]:
+        if line[1] is True:
+            ssprint(line[0], showing_history=True)
         else:
-            total_time = 2
-
-        # Prints letter by letter, resulted speed depends on string length.
-        sleep_time = total_time / message_length
-        for letter in message:
-            sys.stdout.write(letter)
-            sys.stdout.flush()
-            time.sleep(sleep_time)
-        print()
-    else:
-        print(message)  # Print all lines instantly.
-
-def iprint(message):
-    if message[0] == '\n': print()
-    print('    ' + message.lstrip())
+            sprint(line[0], showing_history=True)
 
 def show_start_banner(rimuru):
     """Show game title, tips, and player stats/inv."""

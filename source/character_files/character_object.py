@@ -64,6 +64,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.show_menu = False  # Show available actions player can take.
         self.hardcore = False  # Hides targets, mimicking, and actions.
         self.show_ascii = True  # Show ASCII art. Disable to save room on screen.
+        self.line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
     def __str__(self):
         return self.name.lower()
