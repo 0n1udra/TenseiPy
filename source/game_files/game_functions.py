@@ -392,7 +392,7 @@ def game_over():
 
 
 #                    ========== Game Functions ==========
-def sprint(message, from_ssprint=False, from_iprint=False, showing_history=False):
+def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
     """
     Text crawling. Slowly print out text to console.
 
@@ -405,10 +405,10 @@ def sprint(message, from_ssprint=False, from_iprint=False, showing_history=False
 
     # So user can get the last x lines, in case the screen has been cluttered.
     if showing_history is False:  # Without this, when showing history it'll add onto itself, which creates duplicate lines.
-        rimuru.line_history.append([message, from_ssprint, from_iprint])
+        rimuru.line_history.append([message, from_print])
         rimuru.line_history = rimuru.line_history[-25:]
 
-    if rimuru.textcrawl is True:
+    if rimuru.textcrawl is True and no_crawl is False:
         message_length = len(message)
 
         if message_length > 200:
@@ -437,12 +437,12 @@ def siprint(message, showing_history=False):
 
     if message[0] == '\n':
         print()
-    sprint('    ' + message.lstrip(), from_ssprint=True, showing_history=showing_history)
+    sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
 
 def iprint(message, showing_history=False):
     if message[0] == '\n':
         print()
-    print('    ' + message.lstrip(), from_iprint=True, showing_history=showing_history)
+    sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
 def show_history(arg):
     """
@@ -458,12 +458,14 @@ def show_history(arg):
         lines = 5
 
     for line in rimuru.line_history[-lines:]:
-        if line[1] is True:
-            siprint(line[0], showing_history=True)
-        elif line[2] is True:
+        if line[1] == 'iprint':
             iprint(line[0], showing_history=True)
-        else:
+        elif line[1] == 'iprint':
             sprint(line[0], showing_history=True)
+        elif line[1] == 'siprint':
+            siprint(line[0], showing_history=True)
+        else:
+            print(line[0])
 
 def dots(times=2, length=5, indent=False):
     """
