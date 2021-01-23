@@ -1,4 +1,4 @@
-# Import most used functions like ssprint, action_menu, etc
+# Import most used functions like siprint, action_menu, etc
 from game_maps import sealed_cave
 
 
