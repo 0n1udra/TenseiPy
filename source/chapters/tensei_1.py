@@ -2,17 +2,7 @@
 from game_files.game_functions import *
 # Import the next chapter to continue to.
 from chapters.tensei_2 import ch2_goblin_contact
-
-class cave_actions:
-    class eat_grass:
-        __subs = ['predate grass', 'eat hipokte grass', 'predate hipokte grass']
-        def __init__(self):
-            rimuru.add_inventory('hipokte grass')
-
-    class eat_ore:
-        __subs = ['predate ore', 'eat magic ore', 'predate magic ore', 'eat rock', 'predate rock', 'eat magic rock', 'predate magic rock']
-        def __init__(self):
-            rimuru.add_inventory('magic ore')
+from game_maps.game_location import cave_actions
 
 def ch1_cave(rimuru):
     class wake_up:
@@ -24,9 +14,9 @@ def ch1_cave(rimuru):
             print()
             siprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             siprint("<< Confirmation Complete. Acquiring skill: [Predator]... >>")
-            rimuru.add_attribute('Predator')
+            rimuru.add_attribute('Predator', newline=False)
             siprint("<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
-            rimuru.add_attribute('Sage')
+            rimuru.add_attribute('Sage', newline=False)
             rimuru.upgrade_attribute('Sage', 'Great Sage')
             print()
             siprint("It's so dark? Where is this? What happened?")
@@ -223,7 +213,7 @@ def ch1_cave(rimuru):
             action_menu(self)
 
         class hello:
-            __subs = ["who's there?", 'who is there?', 'who is that?', 'somebody there?', "who's out there?", "is somebody there?", 'who is that speaking?', 'hello?', 'hello there!', "who's that speaking?", "who's that talking?"]
+            __subs = ['reply hi', 'reply with hi', 'repy with hello', "who's there?", 'who is there?', 'who is that?', 'somebody there?', "who's out there?", "is somebody there?", 'who is that speaking?', 'hello?', 'hello there!', "who's that speaking?", "who's that talking?"]
             def __init__(self):
                 sprint("~Keep following my voice small one.~")
 
@@ -255,14 +245,14 @@ def ch1_cave(rimuru):
 
     class found_veldora(cave_actions):
         def __init__(self):
-            sprint("I never expected to speak with anyone other than my skill, since I can't see or hear.")
-            sprint("It's a kind of telepathy. hmmmm..... ~Alright... fine, I'll help you see. Just don't be scared when you see my true form.")
+            sprint("Hello? I never expected to speak with anyone other than my skill, since I can't see or hear.")
+            sprint("~It's a kind of telepathy. hmmmm..... Alright... fine, I'll help you see. Just don't be scared when you see my true form.")
             sprint("~There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.~")
             sprint("What's this magic essence?...")
             siprint("<< Answer, this world is covered with magic essence for example, the body of a slime can move because it absorbs magic essence from it's surroundings. >>")
-            sprint("~If you are able to perceive the flow of magic essence outside of your body, then you'll get the skill.~")
+            sprint("~If you are able to perceive the flow of magic essence outside of your body, then you will get the skill.~")
             sprint("~With that you will be able to 'see', 'hear' and much more!~")
-            sprint("Eh... this feels really complicated. It won't hurt to try though... Will it?.")
+            sprint("Eh... this feels really complicated. It won't hurt to try though... Will it???")
             siprint("<< Suggestion, in order to organize large amount of information, would you like to activate linking with [Great Sage] and [Magic Perception]. >>")
             action_menu(self)
 
@@ -529,7 +519,7 @@ def ch1_cave(rimuru):
                     siprint("* Unfortunately this particular slime had somehow absorbed a whole dragon! *")
                     siprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
 
-            game_over()
+                game_over()
 
         class _attack:
             __subs = []
