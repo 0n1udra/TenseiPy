@@ -28,7 +28,6 @@ def Chapter1(rimuru):
 
         class move:
             __subs = ['feel', 'touch']
-
             def __init__(self):
                 siprint("Where are my arms, I can't feel them!")
                 siprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
@@ -37,7 +36,6 @@ def Chapter1(rimuru):
 
         class speak:
             __subs = ['try to speak', 'try speaking', 'try to talk', 'try talking', 'talk', 'say something', 'try to say something', 'yell', 'try to yell', 'try yelling']
-
             def __init__(self):
                 siprint("I can't seem to speak, wait.....")
                 siprint("I CAN'T FEEL MY MOUTH!")
@@ -45,7 +43,6 @@ def Chapter1(rimuru):
 
         class _inspect_body:
             __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around', 'check', 'check if human']
-
             def __init__(self):
                 siprint("Dissolving and absorbing, this streamlined elastic feeling body.")
                 show_art('slime')
@@ -95,28 +92,24 @@ def Chapter1(rimuru):
 
         class _hfunc:
             __subs = ['craft full potion', 'craft potion']
-
             def __init__(self):
                 if rimuru.check_acquired('full potion'):
                     siprint("I have a feeling these will come in handy.")
 
         class _keep_exploring:
             __subs = move_subs + ['fumble around', 'keep fumbling', 'fumble', 'more fumbling', 'fumble more']
-
             def __init__(self):
                 siprint("Lets keep moving!")
                 action_menu(in_water())
 
         class what_are_skills:
             __subs = ['what are skills?', 'skills?', 'tell me more about skills', 'what are these skills?']
-
             def __init__(self):
                 siprint("<< Answer, when growth is recognized by the world, occasionally one will obtain a [Skill]. >>")
                 siprint("What an interesting world! It's nice to have someone to talk to, even if it is a one way with a skill.")
 
         class what_is_predator:
             __subs = ['predator?', 'what is predator?', 'what is this predator?', 'what is this predator skill?', 'predator huh', 'tell me more about predator', 'tell me more about predator']
-
             def __init__(self):
                 siprint("<< Answer, unique skill [Predator] allows one to eat targets, store said targets in skill's stomach, or isolate as hazardous material.")
                 siprint("<< Also, after successful analysis on a monster one can use mimicry to replicate appearance, and use replaceable abilities from target. >>")
@@ -133,7 +126,6 @@ def Chapter1(rimuru):
 
         class where_did_it_go:
             __subs = ['where did the grass go?', 'where did that all go?', 'hey where did that go?', "where's the grass?", "where's the grass now?", 'where is the grass?', 'where is the grass now?', 'where did it go?']
-
             def __init__(self):
                 siprint("Where did all that grass go?")
                 siprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
@@ -145,7 +137,6 @@ def Chapter1(rimuru):
 
     class in_water:
         __location = "Under water?"
-
         def __init__(self):
             print(game_art.rimuru_art.fall_in_water)
             siprint("I'M GOING TO DIE... AGAIN!")
@@ -165,7 +156,6 @@ def Chapter1(rimuru):
 
         class eat_water:
             __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up', 'eat more water', 'predate more water', 'suck up more water']
-
             def __init__(self):
                 rimuru.add_inventory('water')
                 rimuru.add_attribute('Hydraulic Propulsion', show_acquired_msg=False)
@@ -173,7 +163,6 @@ def Chapter1(rimuru):
 
         class try_getting_out:
             __subs = ['spew water', 'eject water', 'vomit water', 'try getting out', 'try to get out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out', 'use water to propel', 'propel with water', 'expel water to propel', 'expel', 'expel water', 'expel the water']
-
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
                     siprint("Let's see if I can get out now.")
@@ -201,7 +190,6 @@ def Chapter1(rimuru):
 
     class find_veldora:
         __location = "Sealed Cave"
-
         def __init__(self):
             siprint("Ouch! I hit something, but at least it seems like I'm back on land.")
             siprint("<< Notice, New skill [Hydraulic Propulsion] acquired. >>")
@@ -218,7 +206,6 @@ def Chapter1(rimuru):
 
         class _leave:
             __subs = move_subs
-
             def __init__(self):
                 sprint("~Hey, are you just going to keep ignoring me?~")
                 sprint("...")
@@ -235,7 +222,6 @@ def Chapter1(rimuru):
 
         class shut_it:
             __subs = ["shut it you baldy!", "screw you baldy!", 'shut up baldy!', 'shut up!', 'shut it!']
-
             def __init__(self):
                 sprint("~BALDY, HAHAHA, SEEMS LIKE YOU HAVE A DEATH WISH!!!~")
                 siprint("I'M SORRY!")
@@ -245,15 +231,12 @@ def Chapter1(rimuru):
 
         class _follow_voice:
             __subs = ['follow the voice', 'locate the voice', 'try locating the voice', 'try locating voice', 'try finding the voce', 'try following the voice', 'seek out voice', 'seek voice', 'follow strange voice', 'seek strange voice', 'follow']
-
             def __init__(self):
                 siprint("Hold on..... I'm trying to find my way!")
                 siprint("I hit something, but it's not a rock. And what is this aura that I'm feeling? Could it be?")
                 action_menu(found_veldora())
 
     class found_veldora:
-        __location = "Veldora's Prison"
-
         def __init__(self):
             sprint("I never expected to speak with anyone other than my skill, since I can't see or hear.")
             sprint("It's a kind of telepathy. hmmmm..... ~Alright... fine, I'll help you see. Just don't be scared when you see my true form.")
@@ -268,8 +251,7 @@ def Chapter1(rimuru):
             action_menu(self)
 
         class _use_magic_perception:
-            __subs = ['try magic perception', 'try using magic perception', 'activate magic perception']
-
+            __subs = ['try magic perception', 'try using magic perception', 'activate magic perception', 'yes', 'yes please!', 'yes do it', 'activate', 'activate it!', 'yes, activate it']
             def __init__(self):
                 idots(3)
                 show_art('magic perception')
@@ -278,21 +260,24 @@ def Chapter1(rimuru):
                 sprint("I can see. I CAN SEE!")
                 sprint("~Seems like you did it. You learn quickly little one.~")
                 sprint("Yes, thank you!")
-                sprint("~Allow me to formally introduce myself?~")
+                sprint("~Shall I formally introduce myself now?~")
                 action_menu(self)
 
-            def _sure(self):
-                sprint("My name is Storm Dragon Veldora!~")
-                show_art('cave veldora')
-                sprint("~I am one of the four True Dragons of this world.~")
-                sprint("HOLY SHIT, you're a real dragon!")
-                sprint("~Didn't I tell you not to get scared.~")
+            class _yes:
+                __subs = ['sure', 'why not', 'go ahead']
+                def __init__(self):
+                    sprint("My name is Storm Dragon Veldora!~")
+                    show_art('cave veldora')
+                    sprint("~I am one of the four True Dragons of this world.~")
+                    sprint("HOLY SHIT, you're a real dragon!")
+                    sprint("~Didn't I tell you not to get scared.~")
+                    action_menu(become_friends())
 
-                action_menu(become_friends())
-
-            def _nah(self):
-                siprint("~Alright then, I won't. Hmmmmph~")
-                action_menu(become_friends())
+            class _no:
+                __subs = ['no!', 'nah', "let's move on", "don't", 'skip', 'skip it']
+                def __init__(self):
+                    siprint("~Alright then, I won't. Hmmmmph~")
+                    action_menu(become_friends())
 
         def eat_grass(self):
             rimuru.add_inventory('hipokte grass')
@@ -300,6 +285,7 @@ def Chapter1(rimuru):
     class become_friends:
         def __init__(self):
             siprint("Hmmmm, now what?")
+            siprint("Should we be friends?")
             action_menu(self)
 
         def eat_grass(self):
@@ -315,7 +301,7 @@ def Chapter1(rimuru):
                 action_menu(leave_cave())
 
         class _friend_dragon:
-            __subs = ['befriend dragon', 'ask to become friends', 'want to be friends?', 'wanna be friends?']
+            __subs = ['befriend dragon', 'ask to become friends', 'want to be friends?', 'wanna be friends?', 'become friends']
 
             def __init__(self):
                 sprint("Okay... sooo, you want to be friends?")
@@ -329,7 +315,8 @@ def Chapter1(rimuru):
                 sprint("Great. Now I guess I should help you with this seal heh?")
                 action_menu(self)
 
-            class help_with_seal:
+            class _help_with_seal:
+                __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'help with prison', 'help veldora', 'help him']
                 def __init__(self):
                     rimuru.add_attribute('mimic')
                     global veldora
@@ -380,8 +367,6 @@ def Chapter1(rimuru):
 
                 class _eat_veldora:
                     __subs = ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon']
-                    __location = "Sealed Cave"
-
                     def __init__(self):
                         sprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
                         veldora.update_info()
@@ -409,6 +394,22 @@ def Chapter1(rimuru):
                         def __init__(self):
                             siprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
                             leave_cave()
+
+            class _leave_veldora:
+                __subs = move_subs + ['leave veldora', 'leave friend', 'abandon veldora', 'abandon him', 'abandon friend']
+                def __init__(self):
+                    siprint("OK, I go now.")
+                    siprint("~WAIT! WHAAAAAT!~")
+                    siprint("~I we were friends :(.......~")
+                    siprint("~Please come back friend!~")
+
+                    action_menu(self)
+
+                class _stay:
+                    pass
+
+                class _leave:
+                    pass
 
     def leave_cave():
         siprint("Time to leave this cave already.")

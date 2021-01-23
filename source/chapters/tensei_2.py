@@ -13,10 +13,11 @@ def Chapter2(rimuru):
 
         class _eat_ore:
             subs = ['']
-            rimuru.add_inventory('magic ore')
-            siprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
-            siprint("Ok, might be useful in the future. Guess I should get as much as I can")
-            action_menu(_learn_new_attack())
+            def __init__(self):
+                rimuru.add_inventory('magic ore')
+                siprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
+                siprint("Ok, might be useful in the future. Guess I should get as much as I can")
+                action_menu(_learn_new_attack())
 
         def _move_on(self):
             siprint("I can always come back for it I guess.")
