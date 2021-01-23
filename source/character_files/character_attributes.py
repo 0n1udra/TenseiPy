@@ -145,7 +145,7 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-    def use_skill(self, skill, character):
+    def use_skill(self, skill, character=None):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
@@ -156,6 +156,9 @@ class Attributes:
         Usage:
             > use sense heat source
         """
+
+        if character is None:
+            character = self
 
         if skill_object := self.get_object(skill):
             try:
