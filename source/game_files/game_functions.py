@@ -19,7 +19,7 @@ def update_rimuru(rimuru_object):
 
 def set_fast_mode():
     global fast_mode
-    rimuru.text_crawl = rimuru.show_ascii = False
+    rimuru.textcrawl = rimuru.show_art = False
     fast_mode = True
 
 def action_menu(level=None, hide_actions=False):
@@ -88,13 +88,13 @@ def action_menu(level=None, hide_actions=False):
         'map': rimuru.get_map,
         'craft': rimuru.craft_item,
         'help': show_help,
-        'showmenu': game_show_menu, 'menu': game_show_menu,
-        'showart': game_show_ascii, 'ascii': game_show_ascii, 'showascii': game_show_ascii,
-        'textcrawl': game_text_crawl,
-        'hardcore': game_hardcore_mode,
+        'menu': game_set_menu, 'showmenu': game_set_menu,
+        'art': game_set_art, 'showart': game_set_art,
+        'textcrawl': game_set_textcrawl,
+        'hardcore': game_set_hardcore,
         'history': show_history, 'lines': show_history,
         'exit': game_exit, 'stop': game_exit, 'quit': game_exit,
-        'restart': restart,
+        'restart': game_restart,
     }
     if 'attack' in command:
         if rimuru.attack(parameters):
@@ -139,6 +139,7 @@ def action_menu(level=None, hide_actions=False):
 
 #                    ========== Level Functions ==========
 def game_conditions(value, new_value=None):
+    """ Set and fetch game variables. """
     if new_value:
         rimuru.conditional_data[value] = new_value
         return rimuru.conditional_data[value]
@@ -148,7 +149,7 @@ def game_conditions(value, new_value=None):
     else:
         return False
 
-def new_active_mob(add_mobs):
+def mobs_new(add_mobs):
     """
     Add new mob to current level, and able to set name at creation.
 
@@ -156,10 +157,10 @@ def new_active_mob(add_mobs):
         add_mobs: Adds mob objects to active_mobs list.
 
     Usage:
-        new_active_mob(['tempest serpent'])
-        new_active_mob(['tempest serpent', 'giant bat'])
-        new_active_mob(['10* goblin', 'goblin: Goblin Chief'])
-        new_active_mob(['50* goblin: Goblinas'])
+        mobs_new(['tempest serpent'])
+        mobs_new(['tempest serpent', 'giant bat'])
+        mobs_new(['10* goblin', 'goblin: Goblin Chief'])
+        mobs_new(['50* goblin: Goblinas'])
     """
 
     for new_mob in add_mobs:
@@ -197,7 +198,7 @@ def mob_status(target):
         if target.lower() in i[0].get_name():
             return i[0].is_alive
 
-def cleared_all_mobs():
+def mobs_cleared():
     """
     Checks if mobs on current level are all dead.
 
@@ -205,7 +206,7 @@ def cleared_all_mobs():
         boolean: If all mobs in active_mobs are dead.
 
     Usage:
-        if cleared_all_mobs():
+        if mobs_cleared():
     """
 
     for mob in rimuru.active_mobs:
@@ -214,24 +215,24 @@ def cleared_all_mobs():
     else:
         return True
 
-def reset_mobs():
-    """Resets active_mobs and targeted_mobs list."""
+def mobs_reset():
+    """ Resets active_mobs and targeted_mobs list. """
 
     rimuru.active_mobs.clear()
     rimuru.targeted_mobs.clear()
 
-def next_location(next_location):
+def continue_to(continue_to):
     """
-    Asks if
+    Saves game and asks if player wants to continue to next location.
 
     Args:
-        next_location: Next chapter to play.
+        continue_to: Next chapter to play.
     """
 
-    rimuru.current_location_object = next_location
+    rimuru.current_location_object = continue_to
     game_save()
     try:
-        next_location(rimuru)
+        continue_to(rimuru)
     except:
         print("    < Error Loading Next Location >")
 
@@ -243,7 +244,29 @@ def tbc():
     print("\n    < ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
 
-def game_show_menu(arg):
+def show_art(art):
+    """
+    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
+
+    Args:
+        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
+        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
+
+    """
+
+    if rimuru.show_art is False: return False
+
+    # Gets corresponding variable from within game_art.py file.
+    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
+    if rimuru.textcrawl is True:
+        for line in art.split('\n'):
+            time.sleep(0.05)
+            print(line)
+    else:
+        print(art)
+    print("OK", rimuru.textcrawl)
+
+def game_set_menu(arg):
     """
     Updates and gets rimuru.show_menu boolean. Shows and hides available actions.
 
@@ -266,7 +289,7 @@ def game_show_menu(arg):
         rimuru.show_menu = False
     print(f"    < Action Menu: {'Enabled' if rimuru.show_menu else 'Disabled'} >\n")
 
-def game_show_ascii(arg):
+def game_set_art(arg):
     """
     Enable/Disable ASCII art.
 
@@ -278,13 +301,32 @@ def game_show_ascii(arg):
         ascii off
     """
 
-    if arg in on_subs or rimuru.show_ascii is True:
-        rimuru.show_ascii = True
-    if arg in off_subs or rimuru.show_ascii is False:
-        rimuru.show_ascii = False
-    print(f"    < ASCII Art: {'Enabled' if rimuru.show_ascii else 'Disabled'} >\n")
+    if arg in on_subs or rimuru.show_art is True:
+        rimuru.show_art = True
+    if arg in off_subs or rimuru.show_art is False:
+        rimuru.show_art = False
+    print(f"    < ASCII Art: {'Enabled' if rimuru.show_art else 'Disabled'} >\n")
 
-def game_hardcore_mode(arg):
+def game_set_textcrawl(arg):
+    """
+    Updates and gets status for textcrawl.
+
+    Args:
+        arg: Enable or disable text crawl.
+
+    Usage:
+        > textcrawl
+        > textcrawl on
+        > textcrawl off
+    """
+
+    if arg in on_subs or rimuru.textcrawl is True:
+        rimuru.textcrawl = True
+    if arg in off_subs or rimuru.textcrawl is False:
+        rimuru.textcrawl = False
+    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
+
+def game_set_hardcore(arg):
     """
     Enable/Disable ASCII art.
 
@@ -302,60 +344,22 @@ def game_hardcore_mode(arg):
         rimuru.hardcore = False
     print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
 
-def game_text_crawl(arg):
-    """
-    Updates and gets status for text_crawl.
-
-    Args:
-        arg: Enable or disable text crawl.
-
-    Usage:
-        > textcrawl
-        > textcrawl on
-        > textcrawl off
-    """
-
-    if arg in on_subs or rimuru.text_crawl is True:
-        rimuru.text_crawl = True
-    if arg in off_subs or rimuru.text_crawl is False:
-        rimuru.text_crawl = False
-    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
-
-def show_art(art):
-    """
-    Prints out ASCII art line by line or all at once dependding on text_crawl boolean.
-
-    Args:
-        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
-    """
-
-    if rimuru.show_ascii is False: return False
-
-    # Gets corresponding variable from within game_art.py file.
-    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
-    if rimuru.text_crawl:
-        for line in art.split('\n'):
-            time.sleep(0.05)
-            print(line)
-    else:
-        print(art)
-
-def restart(*args):
+def game_restart(*args):
     print("\n    < Restarting Game... >\n")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-
-#                    ========== Game Saves ==========
 def game_exit(*args):
     """Saves game using pickle, then exits."""
-
     game_save()
     exit(0)
 
+
+#                    ========== Game Saves ==========
 def game_save(level=None):
     """Pickels Rimuru_Tempest object."""
 
-    if level: rimuru.current_location_object = level
+    if level:
+        rimuru.current_location_object = level
     rimuru.valid_save = True
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
     print("\n    < Game Saved >\n")
@@ -398,22 +402,23 @@ def game_over():
 
 
 #                    ========== Game Functions ==========
-def sprint(message, from_ss=False, showing_history=False):
+def sprint(message, from_ssprint=False, from_iprint=False, showing_history=False):
     """
     Text crawling. Slowly print out text to console.
 
     Args:
         message: Message to delay.
-        from_ss [bool:False]: Variable used to properly print out lines for 'history' game commmand.
+        from_ssprint [bool:False]: Variable used to properly print out lines for 'history' game commmand.
+        from_iprint [bool:False]: If coming from iprint function.
         showing_history [bool:False]: Variable used to make sure 'history' command doesn't effect itself.
     """
 
     # So user can get the last x lines, in case the screen has been cluttered.
     if showing_history is False:  # Without this, when showing history it'll add onto itself, which creates duplicate lines.
-        rimuru.line_history.append([message, from_ss])
+        rimuru.line_history.append([message, from_ssprint, from_iprint])
         rimuru.line_history = rimuru.line_history[-25:]
 
-    if rimuru.text_crawl is True:
+    if rimuru.textcrawl is True:
         message_length = len(message)
 
         if message_length > 200:
@@ -437,15 +442,38 @@ def sprint(message, from_ss=False, showing_history=False):
     else:
         print(message)  # Print all lines instantly.
 
-def ssprint(message, showing_history=False):
+def siprint(message, showing_history=False):
     """Print tabbed in message."""
 
-    if message[0] == '\n': print()
-    sprint('    ' + message.lstrip(), from_ss=True, showing_history=showing_history)
+    if message[0] == '\n':
+        print()
+    sprint('    ' + message.lstrip(), from_ssprint=True, showing_history=showing_history)
 
-def iprint(message):
-    if message[0] == '\n': print()
-    print('    ' + message.lstrip())
+def iprint(message, showing_history=False):
+    if message[0] == '\n':
+        print()
+    print('    ' + message.lstrip(), from_iprint=True, showing_history=showing_history)
+
+def show_history(arg):
+    """
+    Shows x of last outputted story lines.
+
+    Args:
+        arg: Lines to show. Default is 5.
+    """
+
+    try:
+        lines = int(arg)
+    except:
+        lines = 5
+
+    for line in rimuru.line_history[-lines:]:
+        if line[1] is True:
+            siprint(line[0], showing_history=True)
+        elif line[2] is True:
+            iprint(line[0], showing_history=True)
+        else:
+            sprint(line[0], showing_history=True)
 
 def dots(times=2, length=5, indent=False):
     """
@@ -457,7 +485,7 @@ def dots(times=2, length=5, indent=False):
         indent: Add 4 spaces.
     """
 
-    if not rimuru.text_crawl:
+    if not rimuru.textcrawl:
         print(('    ' if indent else '') + '.' * length)
         return
 
@@ -476,31 +504,12 @@ def dots(times=2, length=5, indent=False):
             sys.stdout.write('\x1b[2K')
             time.sleep(0.1)
 
-def sdots(*args):
-    """Calls and passes arguments to dts()"""
+def idots(*args):
+    """ Calls and passes arguments to dots() with indent. """
 
     dots(*args, indent=True)
 
-def show_history(arg):
-    """
-    Shows x of last outputted story lines.
-
-    Args:
-        arg: Lines to show. Default is 5.
-    """
-
-    try:
-        lines = int(arg)
-    except:
-        lines = 5
-
-    for line in rimuru.line_history[-lines:]:
-        if line[1] is True:
-            ssprint(line[0], showing_history=True)
-        else:
-            sprint(line[0], showing_history=True)
-
-def show_start_banner(rimuru):
+def show_start_banner():
     """Show game title, tips, and player stats/inv."""
 
     show_art('great sage')

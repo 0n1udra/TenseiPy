@@ -27,25 +27,25 @@ if __name__ == '__main__':
 
     # Loads game save and updates rimuru object in game_functions alongside debug variable, and shows start banner.
     rimuru = game_funcs.update_rimuru(game_funcs.game_load(save_path))
-    game_funcs.show_start_banner(rimuru)
 
-    if '-f' in sys.argv:
-        game_funcs.set_fast_mode()
-    if '-t' in sys.argv: rimuru.text_crawl = False
-    if '-a' in sys.argv: rimuru.show_ascii = False
+    if '-f' in sys.argv: game_funcs.set_fast_mode()
+    if '-t' in sys.argv: rimuru.textcrawl = False
+    if '-a' in sys.argv: rimuru.show_art = False
     if '-m' in sys.argv: rimuru.show_menu = True
     if '-hard' in sys.argv: rimuru.hardcore = True
 
+    game_funcs.show_start_banner()
+
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
-    if rimuru.text_crawl is None:
+    if rimuru.textcrawl is None:
         print("\nEnable Text Crawl? (Recommended for easier reading)")
         if str(input("(No) / (Yes or Enter) > ")).lower() in ['n', 'no']:
-            print("\n    < Text Crawl Deactivated > ")
-            rimuru.text_crawl = False
+            print("\n    < Text Crawl Deactivated >\n")
+            rimuru.textcrawl = False
             sleep(2)
         else:
-            rimuru.text_crawl = True
+            rimuru.textcrawl = True
             print()
-            game_funcs.ssprint("< Text Crawl Activated >\n\n")
+            game_funcs.siprint("< Text Crawl Activated >\n\n")
 
     rimuru.current_location_object(rimuru)

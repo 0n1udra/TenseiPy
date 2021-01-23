@@ -60,10 +60,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # Game variables.
         self.save_path = ''
         self.valid_save = None  # If you died in-game, the current save will be unusable.
-        self.text_crawl = None  # Slow text crawl effect, letter by letter.
+        self.textcrawl = None  # Slow text crawl effect, letter by letter.
         self.show_menu = False  # Show available actions player can take.
         self.hardcore = False  # Hides targets, mimicking, and actions.
-        self.show_ascii = True  # Show ASCII art. Disable to save room on screen.
+        self.show_art = True  # Show ASCII art. Disable to save room on screen.
         self.line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
     def __str__(self):
