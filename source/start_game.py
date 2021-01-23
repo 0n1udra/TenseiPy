@@ -39,7 +39,7 @@ if __name__ == '__main__':
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
     if rimuru.textcrawl is None:
         print("\nEnable Text Crawl? (Recommended for easier reading)")
-        if str(input("(No) / (Yes or Enter) > ")).lower() in ['n', 'no']:
+        if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
             print("\n    < Text Crawl Deactivated >\n")
             rimuru.textcrawl = False
             sleep(2)

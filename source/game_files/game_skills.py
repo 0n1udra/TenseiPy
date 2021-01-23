@@ -129,6 +129,7 @@ class Predator_Skill(Skill):
               
               Usage:
               > eat
+              > predate
               
         Analysis    
             - The absorbed target is studied and analyzed. Craftable items can then be produced. 

@@ -1,10 +1,12 @@
-import pickle, time, sys, os
+import random, pickle, time, sys, os
 import game_files.game_art as game_art
 import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
 fast_mode = False
+on_subs = ['activate', 'true', 'enable', 'on', '1']
+off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
 
 # start_game.py will load game save if user has one, if not it'll create one.
@@ -57,7 +59,7 @@ def action_menu(level=None, hide_actions=False):
     if rimuru.show_menu and not rimuru.hardcore:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
-        print(f"Actions: {actions_for_hud}", end='')
+        print(f"\nActions: {actions_for_hud}", end='')
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
@@ -209,9 +211,9 @@ def mobs_reset():
     rimuru.active_mobs.clear()
     rimuru.targeted_mobs.clear()
 
-def continue_to(continue_to):
+def continue_to(next_location):
     """
-    Saves game and asks if player wants to continue to next location.
+    Saves game and continues to next location.
 
     Args:
         continue_to: Next chapter to play.
@@ -220,7 +222,7 @@ def continue_to(continue_to):
     rimuru.current_location_object = continue_to
     game_save()
     try:
-        continue_to(rimuru)
+        next_location(rimuru)
     except:
         print("    < Error Loading Next Location >")
 
@@ -252,6 +254,108 @@ def show_art(art):
             print(line)
     else:
         print(art)
+
+def get_random(min=1, max=100, target=None, range=None, return_int=False):
+    """
+    Generate random number and check if matches passed in target parameter, returns True if so.
+
+    Args:
+        min [int:1]: Starting number for randint function.
+        max [int:100]: End number for randint function.
+        target: Target number to match to random number.
+        range: Check if random number is bigger or equal to target.
+        return_int: Return randomly generated integer alongside boolean.
+
+    Returns:
+        bool: Returns True or False if target matches random number.
+        bool, int: Returns bool and integer of random number that was generated if return_int is True.
+
+    Usage:
+        get_random(1, 1_000, 666)
+        get_random(1, 50)
+        get_random(10, 50, range=20)
+    """
+
+    if target is None:
+        target = int(round(max / 2))
+
+    rand = random.randint(min, max)
+    if range:
+        if rand >= rand:
+            if return_int:
+                return True, rand
+            return True
+
+    if rand == target:
+        if return_int:
+            return True, rand
+        return True
+
+    return False
+
+
+#                    ========== Game Settings, Saves, Etc ==========
+def game_restart(*args):
+    print("\n    < Restarting Game... >\n")
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
+def game_exit(*args):
+    """Saves game using pickle, then exits."""
+    game_save()
+    exit(0)
+
+def game_save(level=None):
+    """Pickels Rimuru_Tempest object."""
+
+    if level:
+        rimuru.current_location_object = level
+    rimuru.valid_save = True
+    pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
+    print("\n    < Game Saved >\n")
+
+def game_load(path):
+    """
+    Load game save.
+
+    Args:
+        path: Path of game save.
+
+    Returns:
+        Loaded game save object.
+    """
+    global rimuru
+
+    # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
+    try:
+        rimuru = pickle.load(open(path, 'rb'))
+    except:
+        rimuru = mobs.Rimuru_Tempest()
+        rimuru.save_path = path
+
+        import chapters.tensei_1 as tensei1
+        rimuru.current_location_object = tensei1.ch1_cave
+
+    if rimuru.valid_save is False:
+        os.remove(rimuru.save_path)
+        game_load(path)
+
+    return rimuru
+
+def game_over():
+    """Deletes pickle save file."""
+
+    rimuru.valid_save = False  # So you can't use copies of game save.
+
+    try:
+        os.remove(rimuru.save_path)
+    except: pass
+
+    print("\n    < GAME OVER >\n")
+    print("Play again?")
+    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
+        exit(0)
+    else:
+        game_restart()
 
 def game_set_menu(arg):
     """
@@ -330,62 +434,6 @@ def game_set_hardcore(arg):
     if arg in off_subs or rimuru.hardcore is False:
         rimuru.hardcore = False
     print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
-
-def game_restart(*args):
-    print("\n    < Restarting Game... >\n")
-    os.execl(sys.executable, sys.executable, *sys.argv)
-
-def game_exit(*args):
-    """Saves game using pickle, then exits."""
-    game_save()
-    exit(0)
-
-
-#                    ========== Game Saves ==========
-def game_save(level=None):
-    """Pickels Rimuru_Tempest object."""
-
-    if level:
-        rimuru.current_location_object = level
-    rimuru.valid_save = True
-    pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    print("\n    < Game Saved >\n")
-
-def game_load(path):
-    """
-    Load game save.
-
-    Args:
-        path: Path of game save.
-
-    Returns:
-        Loaded game save object.
-    """
-    global rimuru
-
-    # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
-    try:
-        rimuru = pickle.load(open(path, 'rb'))
-    except:
-        rimuru = mobs.Rimuru_Tempest()
-        rimuru.save_path = path
-
-        import chapters.tensei_1 as tensei1
-        rimuru.current_location_object = tensei1.ch1_cave
-
-    if rimuru.valid_save is False:
-        os.remove(rimuru.save_path)
-        game_load(path)
-
-    return rimuru
-
-def game_over():
-    """Deletes pickle save file."""
-
-    rimuru.valid_save = False  # So you can't use copies of game save.
-    os.remove(rimuru.save_path)
-    print("\n    < GAME OVER >\n")
-    exit(0)
 
 
 #                    ========== Game Functions ==========

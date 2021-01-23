@@ -3,7 +3,7 @@ How to construct storyline.
 # Import most used functions like siprint, action_menu, etc
 from game_files.game_functions import *
 # Import the next chapter to continue to.
-from chapters.tensei_2 import ch2_goblin_contact
+from chapters.tensei_2 import ch2_goblin_encounter
 
 # Pass in Rimuru_Tempest object which has player stats, inv and other data.
 def ChapterXX(Rimuru):

@@ -1,7 +1,5 @@
 from game_files.game_functions import *
 
-on_subs = ['activate', 'true', 'enable', 'on', '1']
-off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 move_on_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing', 'just move on', 'keep moving forward', 'continue forward', 'continue exploring']
 wait_subs = ['wait', 'stay']
 activate_subs = ['activate', 'activate it', 'yes activate', 'yes activate it', 'yes please activate']

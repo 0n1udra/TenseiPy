@@ -7,7 +7,7 @@ ch1_cave()
         :Skill Acquired: Sage
         :Skill Upgrade: Sage > Great Sage
         :Show: Attributes & Inventory
-        > _learn_new_attack
+        > _tempest_serpent_encounter
 
     _move:
         _inspect:
@@ -34,11 +34,11 @@ ch1_cave()
     _respond:
         Skill Acquired: Magic Perception
         _use_magic_perception:
-            _sure() > _freind_veldora
+            _sure() > _friend_veldora
                 :ASCII: cave_veldora
-            _run() > _freind_veldora
+            _run() > _friend_veldora
 
-    _freind_veldora:
+    _friend_veldora:
         _leave() > _leave_cave
         _friend_dragon() > _help_with_seal
 
@@ -51,14 +51,14 @@ ch1_cave()
             _start_analysis() > _leave_cave
         _move_on() > _leave_cave
 
-    _leave_cave() > ch2_goblin_contact
+    _leave_cave() > ch2_goblin_encounter
 
-ch2_goblin_contact()
+ch2_goblin_encounter()
     chapter_2:
         eat_ore()
-        _move_on() > _learn_new_attack
+        _move_on() > _tempest_serpent_encounter
 
-    _learn_new_attack:
+    _tempest_serpent_encounter:
         :Mob Add: Tempest Serpent
         _try_escaping() > _after_serpent
         _learn_water_bullet() > _attack_serpent

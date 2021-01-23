@@ -64,9 +64,9 @@ class Rimuru_Tempest(Character):
 
         # Adds attributes from mob just analyzed.
         for attribute in mob.attributes_generator():
-            self.add_attribute(attribute)
+            self.add_attribute(attribute, top_newline=False, bot_newline=False)
 
-        print(f"    << Information, analysis on [{mob.name}] completed. >>")
+        print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
         print(f"    << Notice, new skills and mimicry available. >>\n")
 
     def use_mimic(self, character):
