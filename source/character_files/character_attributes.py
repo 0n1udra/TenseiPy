@@ -49,7 +49,7 @@ class Attributes:
             print(i)
         print()
 
-    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
+    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False, newline=True):
         """
         Adds attribute to character.
 
@@ -66,10 +66,10 @@ class Attributes:
         if self.check_acquired(attribute):
             return False
 
-
         if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
             if show_acquired_msg:
+                if newline: print()
                 print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >\n")
             if show_skill_info:
                 self.show_info(attribute.name)
