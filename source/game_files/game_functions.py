@@ -559,41 +559,18 @@ def show_start_banner():
 def show_help(*args):
     """Shows help page."""
 
-    print("""
-    Command Required_Parameter [Optional_Parameter]
-    
-    Commands:
-        inv/inventory               -- Show inventory.
-        stats/skills [TARGET]       -- Show yours skills and resistances. attribute also works. E.g. 'stats tempest serpent', 'attributes evil centipede'
-        info/data TARGET            -- Show info on skill, item or character. E.g. 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        target TARGET(S)            -- Target mobs, target multiple by separating with comma ','. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
-        attack with SKILL	        -- Attack targeted_mobs. E.g. 'attack with water blade', 'attack water bullet'
-        use SKILL                   -- Use a skill. E.g. 'use sense heat source'
-        craft ITEM                  -- Craft items if have necessary ingredients. E.g. 'craft full potion'
-                                         NOTE: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
-        help                        -- Show this help page.
-        exit                        -- Exits after save.
-
-    Abilities:
-        mimic TARGET                -- Mimics appearance of of eatd. E.g. 'mimic tempest serpent'
-          - info mimic              -- Shows available mimicries.
-          - mimic reset             -- Resets mimic (Back to slime).
-        eat/predate                 -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
-        nearby                      -- Once acquired the [sense heat source] skill, you can use nearby instead of typing 'use sense heat source' every time.
-                                        
+    if 'settings' in args:
+        print("""
     Game Settings:
         textcrawl <on/off>          -- Enable or disable text crawl effect.
         menu/showmenu <on/off>      -- Show avaliable actions player can take.
         ascii/showart <on/off>      -- Show ASCII art.
         hardcore <on/off>           -- Enable hardcore mode.
+        """)
+        return
 
-    Game Dialogue:
-        ~Message~                   -- Telepathy, thought communication.
-        *Message*                   -- Story context.
-        < Message >                 -- Game info, acquisition, game help, etc.
-        << Message >>               -- Great Sage (Raphael, Ciel).
-        <<< Message >>>             -- Voice of the World.
-
+    if 'level' in args:
+        print("""
     Level/Ranking:
        Level      Rank         Risk
         11.     Special S   Catastrophe
@@ -607,4 +584,45 @@ def show_help(*args):
         3.      D           Intermediate
         2.      E           Beginner
         1.      F           Novice
+        """)
+        return
+
+
+    print("""
+    Command Required_Parameter [Optional_Parameter]
+    
+    Commands:
+        inv/inventory               -- Show inventory.
+        stats/skills [TARGET]       -- Show yours skills and resistances. attribute also works.
+                                       Example: 'stats tempest serpent', 'attributes evil centipede'
+        info/data TARGET            -- Show info on skill, item or character. 
+                                       Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        target TARGET(S)            -- Target mob(s).
+                                       Example: 'target tempest serpent', 'target tempest serpent, black spider'
+          - target nearby           -- Target nearby mobs.
+          - target reset            -- Clear targeted.
+        attack SKILL	            -- Attack targeted_mobs. 
+                                       Example: 'attack water blade'
+        use SKILL                   -- Use a skill.
+                                       Example: 'use sense heat source'
+        craft ITEM [amount]         -- Craft items if have necessary ingredients. 
+                                       Example: 'craft full potion', 'craft full potion 10'
+                                       Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
+        mimic TARGET                -- Mimics appearance of of eatd.
+                                       Example: 'mimic tempest serpent'
+          - info mimic              -- Shows available mimicries.
+          - mimic reset             -- Resets mimic (Back to slime).
+        eat/predate                 -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
+        nearby                      -- Once acquired [Sense Heat Source] skill, you can use nearby instead of typing 'use sense heat source' every time.
+        help                        -- Show this help page.
+          - help settings           -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
+          - help level              -- Show mob level chart and correpsonding ranking.
+        exit                        -- Exits after save.
+
+    Game Dialogue:
+        ~Message~                   -- Telepathy, thought communication.
+        *Message*                   -- Story context.
+        < Message >                 -- Game info, acquisition, game help, etc.
+        << Message >>               -- Great Sage (Raphael, Ciel).
+        <<< Message >>>             -- Voice of the World.
     """)
