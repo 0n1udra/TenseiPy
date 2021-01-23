@@ -7,7 +7,7 @@ rimuru = None
 fast_mode = False
 on_subs = ['activate', 'true', 'enable', 'on', '1']
 off_subs = ['deactivate', 'false', 'disable', 'off', '0']
-move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing']
+move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing', 'just move on', 'keep moving forward', 'continue forward', 'continue exploring']
 wait_subs = ['wait', 'stay']
 
 # start_game.py will load game save if user has one, if not it'll create one.
@@ -59,7 +59,7 @@ def action_menu(level=None, hide_actions=False):
 
     if rimuru.show_menu and not rimuru.hardcore:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
-        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if action != '_hfunc'])
+        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
         print(f"Actions: {actions_for_hud}", end='')
 
     # ========== Debug Mode
@@ -89,7 +89,7 @@ def action_menu(level=None, hide_actions=False):
         'craft': rimuru.craft_item,
         'help': show_help,
         'showmenu': game_show_menu, 'menu': game_show_menu,
-        'showart': game_show_ascii, 'ascii': game_show_ascii,
+        'showart': game_show_ascii, 'ascii': game_show_ascii, 'showascii': game_show_ascii,
         'textcrawl': game_text_crawl,
         'hardcore': game_hardcore_mode,
         'history': show_history, 'lines': show_history,
@@ -529,7 +529,6 @@ def show_help(*args):
         use SKILL                   -- Use a skill. E.g. 'use sense heat source'
         craft ITEM                  -- Craft items if have necessary ingredients. E.g. 'craft full potion'
                                          NOTE: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
-        textcrawl <on|off>          -- Enable or disable text crawl effect.
         help                        -- Show this help page.
         exit                        -- Exits after save.
 
@@ -539,7 +538,12 @@ def show_help(*args):
           - mimic reset             -- Resets mimic (Back to slime).
         eat                         -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
         nearby                      -- Once acquired the [sense heat source] skill, you can use nearby instead of typing 'use sense heat source' every time.
-                                         
+                                        
+    Game Settings:
+        textcrawl <on/off>          -- Enable or disable text crawl effect.
+        menu/showmenu <on/off>      -- Show avaliable actions player can take.
+        ascii/showart <on/off>      -- Show ASCII art.
+        hardcore <on/off>           -- Enable hardcore mode.
 
     Game Dialogue:
         ~Message~                   -- Telepathy, thought communication.
