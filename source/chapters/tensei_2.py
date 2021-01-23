@@ -2,8 +2,8 @@ from game_files.game_functions import *
 from chapters.tensei_3 import Chapter3
 
 
-def Chapter2(rimuru):
-    class chapter_2:
+def ch2_goblin_contact(rimuru):
+    class found_ore:
         __location = 'Sealed Cave'
 
         def __init__(self):
@@ -74,7 +74,7 @@ def Chapter2(rimuru):
                     siprint("\n< HINT: Try [Sense Heat Source] to detect foes using the 'use' command, or use 'nearby'. 'help' for more info. >")
 
                 if mobs_cleared():
-                    action_menu(_at_exit())
+                    action_menu(_at_cave_exit())
                 else:
                     action_menu(_attack_serpent())
 
@@ -83,9 +83,9 @@ def Chapter2(rimuru):
 
         def _sneak_away(self):
             siprint("I'll try to sneak away.")
-            action_menu(_at_exit())
+            action_menu(_at_cave_exit())
 
-    class _at_exit:
+    class _at_cave_exit:
         def __init__(self):
             siprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
             siprint("Water attack? No, that'll probably be overkill. Wait somethings happening.")
@@ -249,5 +249,4 @@ def Chapter2(rimuru):
 
             action_menu(self)
 
-
-    chapter_2()
+    found_ore()
