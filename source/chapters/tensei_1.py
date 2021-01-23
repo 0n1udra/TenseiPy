@@ -86,16 +86,6 @@ def Chapter1(rimuru):
                 ssprint("All I can do is fumble around in the dark and eat grass... I'M SO BORED!")
             action_menu(self)
 
-        class where_did_it_go:
-            __subs = ['where did the grass go?', 'where did that all go?', 'hey where did that go?', "where's the grass?", "where's the grass now?", 'where is the grass?', 'where is the grass now?', 'where did it go?']
-            def __init__(self):
-                ssprint("Where did all that grass go?")
-                ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
-                ssprint("Whoa! Who's that?")
-                ssprint("I think I heard this voice before. Who, or what, are you?")
-                ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
-                ssprint("Skills and predator? huh... Wonder what those are.")
-                ssprint("\n.... Or should I just forget about that and just move on?")
 
         def eat_grass(self):
             if not rimuru.check_acquired('hipokte grass'):
@@ -142,6 +132,18 @@ def Chapter1(rimuru):
                 if rimuru.check_acquired('hipokte grass'):
                     print("\n    < Hint: Try getting more 'info' on Hipokte Grass. Than, try making a Full Potion with 'craft' command. >")
 
+        class where_did_it_go:
+            __subs = ['where did the grass go?', 'where did that all go?', 'hey where did that go?', "where's the grass?", "where's the grass now?", 'where is the grass?', 'where is the grass now?', 'where did it go?']
+
+            def __init__(self):
+                ssprint("Where did all that grass go?")
+                ssprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
+                ssprint("Whoa! Who's that?")
+                ssprint("I think I heard this voice before. Who, or what, are you?")
+                ssprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
+                ssprint("Skills and predator? huh... Wonder what those are.")
+                ssprint("\n.... Or should I just forget about that and just move on?")
+
     class in_water:
         __location = "Under water?"
 
@@ -163,7 +165,7 @@ def Chapter1(rimuru):
                 sdots(5)
 
         class eat_water:
-            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up']
+            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up', 'eat more water', 'predate more water', 'suck up more water']
 
             def __init__(self):
                 rimuru.add_inventory('water')
@@ -176,25 +178,27 @@ def Chapter1(rimuru):
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
                     ssprint("Let's see if I can get out now.")
+                    rimuru.use_skill('hydraulic propulsion')
                     action_menu(find_veldora())
                 else:
                     ssprint("It's really hard to move in water, I need to find some way out!")
 
-        class _hfunc:
+        class _hfunc_use_skill:
             __subs = ['use hydraulic propulsion', 'use new skill', 'use skill']
 
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
-                    ssprint("Finally, I'm back on land!")
+                    rimuru.use_skill('hydraulic propulsion')
                     action_menu(find_veldora())
 
-        class _hfunc:
+        class hfunc_grab_sword:
             __subs = ['grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
             def __init__(self):
                 #rimuru.add_inventory('magisteel sword')
                 ssprint("HEY! Look! It feels like a sword! Wonder if it's any good?")
                 ssprint("<< Answer, analysis of sword shows it contains a magisteel core. This sword is above average. >>")
                 ssprint("Would you look at that, that might come in handy later on. But I'm still stuck down here!")
+                in_water.hfunc_grab_sword.__subs = []  # Only able to grab sword once.
 
     class find_veldora:
         __location = "Sealed Cave"
@@ -225,40 +229,35 @@ def Chapter1(rimuru):
                 leave_cave()
 
         class hello:
-            __subs = ["who's there?", 'who is there?', 'who is that?', 'somebody there?', "who's out there?", "is somebody there?", 'who is that speaking?']
+            __subs = ["who's there?", 'who is there?', 'who is that?', 'somebody there?', "who's out there?", "is somebody there?", 'who is that speaking?', 'hello?', 'hello there!', "who's that speaking?", "who's that talking?"]
 
             def __init__(self):
                 sprint("~Keep following my voice little one.~")
 
-        class shut_it_baldy:
-            __subs = ["shut it you baldy", "screw you baldy"]
+        class shut_it:
+            __subs = ["shut it you baldy!", "screw you baldy!", 'shut up baldy!', 'shut up!', 'shut it!']
 
             def __init__(self):
-                ssprint("~BALDY, HAHAHA, SEEMS THAT YOU WANT TO DIE!!!~")
-                ssprint("Oh!")
-
-        class shut_up:
-            __subs = ['can you shut it', 'can you shut up', 'shut up!']
-
-            def __init__(self):
-                ssprint("~SUCH RUDENESS! DO YOU HAVE A DEATH WISH?~")
-                ssprint("Oh! Ummmmmmmm....")
+                sprint("~BALDY, HAHAHA, SEEMS LIKE YOU HAVE A DEATH WISH!!!~")
+                ssprint("I'M SORRY!")
+                ssprint("I'm sorry! I didn't think you could hear me!")
+                sprint("~Come closer little one.~")
+                ssprint('uh.... Should I follow?')
 
         class _follow_voice:
             __subs = ['follow the voice', 'locate the voice', 'try locating the voice', 'try locating voice', 'try finding the voce', 'try following the voice', 'seek out voice', 'seek voice', 'follow strange voice', 'seek strange voice', 'follow']
 
             def __init__(self):
                 ssprint("Hold on..... I'm trying to find my way!")
-                action_menu(respond())
+                ssprint("I hit something, but it's not a rock. And what is this aura that I'm feeling? Could it be?")
+                action_menu(found_veldora())
 
-    class respond:
+    class found_veldora:
         __location = "Veldora's Prison"
 
         def __init__(self):
-            sprint("I can't 'see' or 'hear' anything.")
-            sprint("I never expected to speak with anyone other than my skill")
-            sprint("~This is telepathy. It's Hard to converse if you can't see.~")
-            sprint("~Alright... fine, I'll help you see. Just don't be scared when you see my true form.")
+            sprint("I never expected to speak with anyone other than my skill, since I can't see or hear.")
+            sprint("It's a kind of telepathy. hmmmm..... ~Alright... fine, I'll help you see. Just don't be scared when you see my true form.")
             sprint("~There is something called [Magic Perception], it allows you to perceive the surrounding magic essence.~")
             sprint("What's this magic essence?...")
             ssprint("<< Answer, this world is covered with magic essence for example, the body of a slime can move because it absorbs magic essence from it's surroundings. >>")
@@ -266,17 +265,17 @@ def Chapter1(rimuru):
             sprint("~With that you will be able to 'see', 'hear' and much more!~")
             sprint("Eh... this feels really complicated. It won't hurt to try though... Will it?.")
 
-            ssprint("<< Suggestion, in order to organize large amount of information,  activate linking with [Great Sage] and [Magic Perception]. >>")
-            rimuru.add_attribute('Magic Perception')
+            ssprint("<< Suggestion, in order to organize large amount of information, would you like to activate linking with [Great Sage] and [Magic Perception]. >>")
             action_menu(self)
 
         class _use_magic_perception:
-            __subs = ['try magic perception', 'try using magic perception']
+            __subs = ['try magic perception', 'try using magic perception', 'activate magic perception']
 
             def __init__(self):
-                sprint("Like this?")
                 sdots(3)
                 show_art('magic perception')
+                sprint("Like this?")
+                rimuru.add_attribute('Magic Perception')
                 sprint("I can see. I CAN SEE!")
                 sprint("~Seems like you did it. You learn quickly little one.~")
                 sprint("Yes, thank you!")
@@ -289,7 +288,6 @@ def Chapter1(rimuru):
                 sprint("~I am one of the four True Dragons of this world.~")
                 sprint("HOLY SHIT, you're a real dragon!")
                 sprint("~Didn't I tell you not to get scared.~")
-                ssprint("~even with the scary appearance, the little slime and dragon started chatting.~")
 
                 action_menu(become_friends())
 
@@ -312,8 +310,8 @@ def Chapter1(rimuru):
             __subs = move_subs
             def __init__(self):
                 sprint("I guess I'll be heading out now.")
-                ssprint("~Really, so soon. But we just started!~")
-                ssprint("~Stay, please, we have so much to talk abo.o.o...~")
+                sprint("~Really, so soon. But we just started!~")
+                sprint("~Stay, please, we have so much to talk abo.o.o...~")
                 ssprint("Phew, I think I lost him.")
                 action_menu(leave_cave())
 
@@ -378,7 +376,7 @@ def Chapter1(rimuru):
                     action_menu(self)
 
                 def eat_grass(self):
-                    ssprint("~Hey what are you doing there? Focus on me... ME!~")
+                    sprint("~Hey what are you doing there? Focus on me... ME!~")
                     rimuru.add_inventory('hipokte grass')
 
                 class _eat_veldora:
@@ -386,7 +384,7 @@ def Chapter1(rimuru):
                     __location = "Sealed Cave"
 
                     def __init__(self):
-                        ssprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
+                        sprint("~The slime little grew big enough to completely engulf the dragon and his seal in mere seconds before turning back to normal~\n")
                         veldora.update_info()
                         rimuru.add_inventory(veldora)
                         rimuru.add_mimic(veldora)
