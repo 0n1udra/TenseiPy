@@ -1,5 +1,5 @@
 -----Story Layout-----
-Chapter1()
+ch1_cave()
     chapter_1:
         :ASCII: Great Sage
         :Set: player's start state, acquire starting abilities and resistances.
@@ -34,11 +34,11 @@ Chapter1()
     _respond:
         Skill Acquired: Magic Perception
         _use_magic_perception:
-            _sure() > _become_friends
+            _sure() > _freind_veldora
                 :ASCII: cave_veldora
-            _run() > _become_friends
+            _run() > _freind_veldora
 
-    _become_friends:
+    _freind_veldora:
         _leave() > _leave_cave
         _friend_dragon() > _help_with_seal
 
@@ -51,9 +51,9 @@ Chapter1()
             _start_analysis() > _leave_cave
         _move_on() > _leave_cave
 
-    _leave_cave() > Chapter2
+    _leave_cave() > ch2_goblin_contact
 
-Chapter2()
+ch2_goblin_contact()
     chapter_2:
         eat_ore()
         _move_on() > _learn_new_attack
@@ -70,10 +70,10 @@ Chapter2()
 
     _after_serpent:
         eat_ore()
-        _sneak_away() > _at_exit()
+        _sneak_away() > _at_cave_exit()
 
-    _attack: > _at_exit()/_after_serpent
+    _attack: > _at_cave_exit()/_after_serpent
 
-    _at_exit:
+    _at_cave_exit:
         _sneak_out() > Chapter3
         _say_hi() > :Death:

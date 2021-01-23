@@ -63,6 +63,21 @@ class Item:
 
 
 # ========== Materials ==========
+class Water(Item):
+    def __init__(self):
+        Item.__init__(self)
+        self.name = 'Water'
+        self.item_type = 'Materials'
+        self.quantity = 0
+        self.quantity_add = 100
+        self.inventory_capacity_add = 0.01
+        self.usage = 'Can be used in high pressure attacks.'
+        self.description = '''
+        It's wet, and it's clear, it is just water...
+        '''
+        self.appearance = 'Clear flowing liquid.'
+        self.update_info()
+
 class Hipokte_Grass(Item):
     def __init__(self):
         Item.__init__(self)
@@ -76,7 +91,6 @@ class Hipokte_Grass(Item):
         self.appearance = 'Looks like regular grass, but gives off small amounts of magic essence.'
         self.ingredient_for = ['Full Potion']
         self.update_info()
-
 
 class Magic_Ore(Item):
     def __init__(self):
@@ -94,7 +108,6 @@ class Magic_Ore(Item):
         self.appearance = 'A very colorful ore. Almost like a glowing shimmering rainbow effect, while giving off some magic essence.'
         self.update_info()
 
-
 class Full_Potion(Item):
     def __init__(self):
         Item.__init__(self)
@@ -110,22 +123,4 @@ class Full_Potion(Item):
         self.appearance = 'Blue potion in a glass bottle.'
         # One Hipokte Grass makes 10 potions.
         self.recipe = {'Hipokte Grass': 1}
-        self.update_info()
-
-
-# ========== Extra ==========
-
-class Water(Item):
-    def __init__(self):
-        Item.__init__(self)
-        self.name = 'Water'
-        self.item_type = 'Materials'
-        self.quantity = 0
-        self.quantity_add = 100
-        self.inventory_capacity_add = 0.01
-        self.usage = 'Can be used in high pressure attacks.'
-        self.description = '''
-        It's wet, and it's clear, it is just water...
-        '''
-        self.appearance = 'Clear flowing liquid.'
         self.update_info()

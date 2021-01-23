@@ -24,7 +24,6 @@ class Info:
             except: pass
             print(game_object.info_page)
 
-
     def update_info(self):
         """Updates character information."""
 

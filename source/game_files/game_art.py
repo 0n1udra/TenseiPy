@@ -1,4 +1,3 @@
-
 class rimuru_art:
     m1 = """
   ________

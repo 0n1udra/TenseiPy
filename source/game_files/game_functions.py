@@ -7,8 +7,14 @@ rimuru = None
 fast_mode = False
 on_subs = ['activate', 'true', 'enable', 'on', '1']
 off_subs = ['deactivate', 'false', 'disable', 'off', '0']
-move_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing', 'just move on', 'keep moving forward', 'continue forward', 'continue exploring']
+move_on_subs = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing', 'just move on', 'keep moving forward', 'continue forward', 'continue exploring']
 wait_subs = ['wait', 'stay']
+activate_subs = ['activate', 'activate it', 'yes activate', 'yes activate it', 'yes please activate']
+do_it_subs = ['do it', 'yes do it', 'please do that', 'please do it', 'yes do that']
+yes_subs = ['yes', 'yes please', 'sure', 'yep', 'affirmative', 'affirmatory', 'i consent', 'i give my consent']
+all_yes_subs = activate_subs + do_it_subs + yes_subs
+no_subs = ['negative', "that's a negative", 'that is a negative', 'negatory', 'i refuse', 'denied', 'cancel', 'cancel it' 'no', 'no thanks', 'nah', "don't", "please don't", "don't do it", 'do not do that', 'do not']
+
 
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here.
@@ -374,7 +380,7 @@ def game_load(path):
         rimuru.save_path = path
 
         import chapters.tensei_1 as tensei1
-        rimuru.current_location_object = tensei1.Chapter1
+        rimuru.current_location_object = tensei1.ch1_cave
 
     if rimuru.valid_save is False:
         os.remove(rimuru.save_path)
@@ -504,7 +510,7 @@ def show_start_banner():
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
-    - Basic commands: info, stats, inv, save, and  help for more.
+    - Basic commands: stats, inv, save, info, and  help for more.
     - Fullscreen recommended.
     """)
 
@@ -533,7 +539,7 @@ def show_help(*args):
         mimic TARGET                -- Mimics appearance of of eatd. E.g. 'mimic tempest serpent'
           - info mimic              -- Shows available mimicries.
           - mimic reset             -- Resets mimic (Back to slime).
-        eat                         -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
+        eat/predate                 -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
         nearby                      -- Once acquired the [sense heat source] skill, you can use nearby instead of typing 'use sense heat source' every time.
                                         
     Game Settings:

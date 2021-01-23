@@ -56,7 +56,6 @@ class Skill:
 
         self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
 
-
 class Resistance(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -117,7 +116,6 @@ class Predator_Mimicry_Skill(Skill):
         data += "\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.\n"
         return data
 
-
 class Predator_Skill(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -153,7 +151,6 @@ class Predator_Skill(Skill):
         """
         self.evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
         self.update_info()
-
 
 class Great_Sage_Skill(Skill):
     def __init__(self):
@@ -205,7 +202,6 @@ class Sage_Skill(Skill):
         self.skill_level = 'Extra Skill'
         self.update_info()
 
-
 class Magic_Perception(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -225,7 +221,6 @@ class Magic_Perception(Skill):
         print("    < Activated: Extra Skill [Magic Perception] >")
         user.update_status('magic perception', 'Active')
         return True
-
 
 class Water_Manipulation(Skill):
     def __init__(self):
@@ -258,7 +253,6 @@ class Hydraulic_Propulsion(Skill):
             print("\n    < Skill Requires: 1x [Water] >")
             return False
 
-
 class Water_Blade(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -268,7 +262,6 @@ class Water_Blade(Skill):
         self.description = 'Shoot out a thin water blade with tremendous cutting power.'
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
         self.update_info()
-
 
 class Water_Bullet(Skill):
     def __init__(self):
@@ -289,7 +282,6 @@ class Absorb_Dissolve(Skill):
         self.skill_level = 'Intrinsic Skill'
         self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
         self.update_info()
-
 
 class Self_Regeneration(Skill):
     def __init__(self):
@@ -325,7 +317,6 @@ class Sense_Heat_Source(Skill):
                 print(f'    {mob[1]}x {mob[0].name}')
         return True
 
-
 class Poisonous_Breath(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -350,7 +341,6 @@ class Vampirism(Skill):
         self.damage_level = 4
         self.description = "By sucking the target's blood the user can temporarily gain its Skills."
         self.update_info()
-
 
 class Ultrasound_Waves(Skill):
     def __init__(self):
@@ -389,7 +379,6 @@ class Sticky_Thread(Skill):
     def use_thread(self):
         pass
 
-
 class Steel_Thread(Skill):
     def __init__(self):
         Skill.__init__(self)
@@ -413,7 +402,6 @@ class Resist_Pain(Resistance):
         '''
         self.update_info()
 
-
 class Resist_Melee(Resistance):
     def __init__(self):
         Resistance.__init__(self)
@@ -421,7 +409,6 @@ class Resist_Melee(Resistance):
         self.resist_types = ['Melee']
         self.description = 'Tolerance-type Skill that grants immunity to melee attacks.'
         self.update_info()
-
 
 class Resist_Electricity(Resistance):
     def __init__(self):
@@ -434,7 +421,6 @@ class Resist_Electricity(Resistance):
         '''
         self.update_info()
 
-
 class Resist_Temperature(Resistance):
     def __init__(self):
         Resistance.__init__(self)
@@ -445,7 +431,6 @@ class Resist_Temperature(Resistance):
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
         self.update_info()
-
 
 class Resist_Poison(Resistance):
     def __init__(self):
