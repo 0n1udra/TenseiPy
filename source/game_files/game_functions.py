@@ -1,4 +1,4 @@
-import keyboard, pickle, time, sys, os
+import pickle, time, sys, os
 import game_files.game_art as game_art
 import game_files.game_characters as mobs
 
@@ -111,7 +111,6 @@ def action_menu(level=None, hide_actions=False):
         if action_string in command:
             action(parameters)
 
-    valid_action = False
 
     for action in actions:
         try:
@@ -125,14 +124,6 @@ def action_menu(level=None, hide_actions=False):
         action_name = action.replace('_', ' ').strip().lower()
         if action_name in user_input or any(i in user_input for i in action_subs):
             eval(f"level.{action}()")
-            valid_action = True
-
-    if not valid_action:
-        sys.stdout.write('\x1b[1A')
-        sys.stdout.write('\x1b[2k')
-        sys.stdout.write('\x1b[1A')
-        sys.stdout.write('\x1b[2k')
-        sys.stdout.write('\x1b[1B')
 
     action_menu(level)
 
@@ -258,13 +249,12 @@ def show_art(art):
 
     # Gets corresponding variable from within game_art.py file.
     art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
-    if rimuru.textcrawl is True:
+    if rimuru.textcrawl or rimuru.textcrawl is None:
         for line in art.split('\n'):
             time.sleep(0.05)
             print(line)
     else:
         print(art)
-    print("OK", rimuru.textcrawl)
 
 def game_set_menu(arg):
     """
@@ -499,10 +489,6 @@ def dots(times=2, length=5, indent=False):
             time.sleep(0.5)
 
         print()
-        if i != (times - 1):  # Keeps on last loop.
-            sys.stdout.write('\x1b[1A')
-            sys.stdout.write('\x1b[2K')
-            time.sleep(0.1)
 
 def idots(*args):
     """ Calls and passes arguments to dots() with indent. """
