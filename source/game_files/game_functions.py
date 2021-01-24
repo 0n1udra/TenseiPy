@@ -448,6 +448,9 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
         showing_history [bool:False]: Variable used to make sure 'history' command doesn't effect itself.
     """
 
+    if '< Hint:' in message and rimuru.show_hints is False:
+        return
+
     # So user can get the last x lines, in case the screen has been cluttered.
     if showing_history is False:  # Without this, when showing history it'll add onto itself, which creates duplicate lines.
         rimuru.line_history.append([message, from_print])
@@ -557,7 +560,14 @@ def show_start_banner():
         print("\n    < Save Loaded >\n")
 
 def show_help(*args):
-    """Shows help page."""
+    """
+    Shows help page.
+
+    Usage:
+        > help
+        > help settings
+        > help level
+    """
 
     if 'settings' in args:
         print("""

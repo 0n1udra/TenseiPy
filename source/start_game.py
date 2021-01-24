@@ -33,6 +33,7 @@ if __name__ == '__main__':
     if '-a' in sys.argv: rimuru.show_art = False
     if '-m' in sys.argv: rimuru.show_menu = True
     if '-hard' in sys.argv: rimuru.hardcore = True
+    if '-hint' in sys.argv: rimuru.show_hints = False
 
     game_funcs.show_start_banner()
 
@@ -47,5 +48,14 @@ if __name__ == '__main__':
             rimuru.textcrawl = True
             print()
             game_funcs.siprint("< Text Crawl Activated >\n\n")
+
+    if rimuru.show_hints is None:
+        print("\nShow game hints? Suggest leave enabled if first time playing.")
+        if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
+            print("\n    < Hints: Enabled >\n")
+            rimuru.show_hints = False
+        else:
+            rimuru.show_hints = True
+            game_funcs.siprint("\n < Hints: Disabled >\n")
 
     rimuru.current_location_object(rimuru)
