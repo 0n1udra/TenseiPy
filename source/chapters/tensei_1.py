@@ -517,6 +517,9 @@ def ch1_cave(rimuru):
             sprint("Phew, it's finally open, even the keyhole was rusted.")
             sprint("It is over 300 years old, and nobody is maintaining it. I doubt there's a real dragon in here.")
             sprint("Still reckless of the guildmaster to send us to investigate.")
+            siprint("How can I understand them?")
+            siprint("<< Answer, [Magic Perception] converts sound waves to comprehensible sentences which I interpret for you. >>")
+            siprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
             sprint("I shouldn't show, they'll probably get scared and attack me")
             action_menu(self)
 

@@ -17,10 +17,6 @@ def ch2_goblin_encounter(rimuru):
                 siprint("*While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up*")
                 siprint("Was I that loud... Eh? Where are those wolves going? What's this...")
                 sprint("You strong one.")
-                siprint("Wait, are those... Goblins? Also, How can I understand them?")
-                siprint("<< Answer, [Magic Perception] converts sound waves to comprehensible sentences. >>")
-                siprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
-                siprint("Is that so, let's try that.")
                 action_menu(_meet_goblins())
 
     class _meet_goblins:
