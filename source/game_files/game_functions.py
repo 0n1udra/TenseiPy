@@ -588,6 +588,7 @@ def show_help(*args):
         print("""
     Game Settings:
         textcrawl <on/off>          -- Enable or disable text crawl effect.
+                                       Example: 'textcrawl on'
         menu/showmenu <on/off>      -- Show avaliable actions player can take.
         ascii/showart <on/off>      -- Show ASCII art.
         hardcore <on/off>           -- Enable hardcore mode.
