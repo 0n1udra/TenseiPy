@@ -65,6 +65,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.show_art = True  # Show ASCII art. Disable to save room on screen.
         self.show_hints = None  # If hardcore is True, this boolean will be ignored.
         self.hardcore = None  # Hides targets, mimicking, and actions.
+        self.fast_mode = None
         self.line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
     def __str__(self):

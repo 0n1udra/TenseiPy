@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # Loads game save and updates rimuru object in game_functions alongside debug variable, and shows start banner.
     rimuru = game_funcs.update_rimuru(game_funcs.game_load(save_path))
 
-    if '-f' in sys.argv: game_funcs.set_fast_mode()
+    if '-f' in sys.argv: rimuru.fast_mode = True
     if '-t' in sys.argv: rimuru.textcrawl = False
     if '-a' in sys.argv: rimuru.show_art = False
     if '-m' in sys.argv: rimuru.show_menu = True
