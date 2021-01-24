@@ -2,7 +2,7 @@ import os, sys
 from time import sleep
 import game_files.game_functions as game_funcs
 
-__version__ = "3.2 Alpha"
+__version__ = "4.0 Alpha"
 __author__ = "D Thomas"
 __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
@@ -43,7 +43,7 @@ if __name__ == '__main__':
         if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
             print("\n    < Text Crawl Deactivated >\n")
             rimuru.textcrawl = False
-            sleep(2)
+            sleep(1)
         else:
             rimuru.textcrawl = True
             print()

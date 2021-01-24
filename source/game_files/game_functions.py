@@ -448,7 +448,7 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
         showing_history [bool:False]: Variable used to make sure 'history' command doesn't effect itself.
     """
 
-    if '< Hint:' in message and rimuru.show_hints is False:
+    if ('< Hint:' in message) and (rimuru.show_hints or rimuru.hardcore):
         return
 
     # So user can get the last x lines, in case the screen has been cluttered.
