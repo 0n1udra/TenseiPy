@@ -4,7 +4,6 @@ import game_files.game_characters as mobs
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
-fast_mode = False
 on_subs = ['activate', 'true', 'enable', 'on', '1']
 off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
@@ -16,12 +15,23 @@ def update_rimuru(rimuru_object):
     rimuru = rimuru_object
     return rimuru
 
-def set_fast_mode():
-    global fast_mode
-    rimuru.textcrawl = rimuru.show_art = False
-    fast_mode = True
+def game_hud(actions):
+    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_menu: print()  # Adds extra space when needed.
 
-def action_menu(level=None, hide_actions=False):
+    if rimuru.current_mimic and not rimuru.hardcore:
+        print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
+
+    if rimuru.targeted_mobs and not rimuru.hardcore:
+        # Adds (Dead) status to corresponding
+        targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
+        print(f'Target: {targets}', end='')
+
+    if rimuru.show_menu and not rimuru.hardcore:
+        # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
+        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
+        print(f"\nActions: {actions_for_hud}", end='')
+
+def game_action(level=None):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
@@ -42,34 +52,17 @@ def action_menu(level=None, hide_actions=False):
         if '__' in action: continue  # Filters out unwanted variables and functions.
         actions.append(action)
 
-    if hide_actions is True:
-        del actions[actions.index(hide_actions)]  # Removes action so player can't take it.
-
-    # ========== HUD
-    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_menu: print()  # Adds extra space when needed.
-
-    if rimuru.current_mimic and not rimuru.hardcore:
-        print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
-
-    if rimuru.targeted_mobs and not rimuru.hardcore:
-        # Adds (Dead) status to corresponding
-        targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
-        print(f'Target: {targets}', end='')
-
-    if rimuru.show_menu and not rimuru.hardcore:
-        # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
-        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
-        print(f"\nActions: {actions_for_hud}", end='')
+    game_hud(actions)
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
-    if fast_mode is True:
+    if rimuru.fast_mode is True:
         for action in actions:
             if action[0] == '_':
                 user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").strip().lower()
-        if 'hfunc' in user_input: action_menu(level)
+        if 'hfunc' in user_input: game_action(level)
     print()
 
     # Separates user input into command and command arguments.
@@ -77,48 +70,37 @@ def action_menu(level=None, hide_actions=False):
     command, parameters = split_user_input[0], ' '.join(split_user_input[1:])
     character = rimuru
 
-    level_actions = [
-        [rimuru.set_targets, ['target', 'focus', 'set focus', 'set target']],
+    game_actions = [
+        [rimuru.show_info, ['info', 'data', 'detail', 'details']],
         [rimuru.show_inventory, ['inv', 'inventory', 'stomach']],
-        [rimuru.use_mimic, ['mimic']],
-        [rimuru.]
-
+        [rimuru.show_attributes, ['stats', 'skills', 'attrs', 'attributes']],
+        [rimuru.set_targets, ['target', 'focus']],
+        [rimuru.attack, [parameters], ['attack']],
+        [rimuru.use_skill, [parameters, character], ['use']],
+        [rimuru.craft_item, ['craft', 'make', 'create']],
+        [rimuru.eat_targets, ['eat', 'predate', 'predation']],
+        [rimuru.use_mimic, ['mimic', 'mimicry']],
+        [rimuru.get_location, ['location']],
+        [rimuru.use_skill, ['sense heat source', character], ['nearby', 'sense heat sources']],
+        [show_help, ['help', 'commands']],
+        [show_settings, ['settings', 'options']],
+        [game_set_art, ['art', 'ascii']],
+        [game_set_menu, ['menu', 'actionmenu', 'hud']],
+        [game_set_hints, ['hints', 'show hints', 'showhints', 'gamehints']],
+        [game_set_textcrawl, ['textcrawl', 'slowtext']],
+        [game_set_hardcore, ['hardcore', 'hardmode']],
+        [show_history, ['history']],
+        [game_restart, ['restart']],
+        [game_exit, ['exit', 'quit', 'stop']],
         ]
-    test = {
-        'target': rimuru.set_targets,
-        'mimic': rimuru.use_mimic,
-        'eat': rimuru.eat_targets, 'predate': rimuru.eat_targets,
-        'stats': rimuru.show_attributes, 'skills': rimuru.show_attributes, 'attributes': rimuru.show_attributes,
-        'inv': rimuru.show_inventory, 'inventory': rimuru.show_inventory,
-        'info': rimuru.show_info, 'data': rimuru.show_info,
-        'map': rimuru.get_map,
-        'craft': rimuru.craft_item,
-        'settings': show_settings, 'help settings': show_settings,
-        'help': show_help,
-        'hints': game_set_hints, 'showhints': game_set_hints,
-        'menu': game_set_menu, 'showmenu': game_set_menu,
-        'art': game_set_art, 'showart': game_set_art,
-        'textcrawl': game_set_textcrawl,
-        'hardcore': game_set_hardcore,
-        'history': show_history, 'lines': show_history,
-        'exit': game_exit, 'stop': game_exit, 'quit': game_exit,
-        'restart': game_restart,
-    }
-    if 'attack' in command:
-        if rimuru.attack(parameters):
-            user_input = 'attack'  # Runs correlating function if attack was successful, if not it'll just loop.
-    elif 'use' in command:
-        rimuru.use_skill(parameters, character)
-    elif 'location' in command:
-        rimuru.get_location()
-    elif 'nearby' in command:
-        rimuru.use_skill('sense heat source', character)
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
-    for action_string, action in level_actions.items():
-        if action_string in command:
-            action(parameters)
-
+    for action in game_actions:
+        if len(action) == 3:
+            if command in action[2]:
+                action[0](*action[1])
+        if command in action[1]:
+            action[0](parameters)
 
     for action in actions:
         try:
@@ -133,7 +115,7 @@ def action_menu(level=None, hide_actions=False):
         if action_name in user_input or any(i in user_input for i in action_subs):
             eval(f"level.{action}()")
 
-    action_menu(level)
+    game_action(level)
 
 
 #                    ========== Level Functions ==========
@@ -593,12 +575,12 @@ def on_off(var):
 
 def show_settings(*args):
     print(f"""
-Game Settings:
-    {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
-                                                               Example: 'textcrawl on'
-    {on_off(rimuru.show_menu)}\tmenu/showmenu <on/off>  -- Show avaliable actions player can take.
-    {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
-    {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
+    Game Settings:
+        {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
+                                                                   Example: 'textcrawl on'
+        {on_off(rimuru.show_menu)}\tmenu/showmenu <on/off>  -- Show avaliable actions player can take.
+        {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
+        {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
     """)
 
 def show_help(*args):
