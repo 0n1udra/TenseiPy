@@ -77,7 +77,14 @@ def action_menu(level=None, hide_actions=False):
     command, parameters = split_user_input[0], ' '.join(split_user_input[1:])
     character = rimuru
 
-    level_actions = {
+    level_actions = [
+        [rimuru.set_targets, ['target', 'focus', 'set focus', 'set target']],
+        [rimuru.show_inventory, ['inv', 'inventory', 'stomach']],
+        [rimuru.use_mimic, ['mimic']],
+        [rimuru.]
+
+        ]
+    test = {
         'target': rimuru.set_targets,
         'mimic': rimuru.use_mimic,
         'eat': rimuru.eat_targets, 'predate': rimuru.eat_targets,
@@ -86,6 +93,7 @@ def action_menu(level=None, hide_actions=False):
         'info': rimuru.show_info, 'data': rimuru.show_info,
         'map': rimuru.get_map,
         'craft': rimuru.craft_item,
+        'settings': show_settings, 'help settings': show_settings,
         'help': show_help,
         'hints': game_set_hints, 'showhints': game_set_hints,
         'menu': game_set_menu, 'showmenu': game_set_menu,
@@ -574,45 +582,27 @@ def show_start_banner():
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")
 
+
+def on_off(var):
+    if var is True:
+        return 'on '
+    elif var is False:
+        return 'off'
+    else:
+        return 'n/a'
+
+def show_settings(*args):
+    print(f"""
+Game Settings:
+    {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
+                                                               Example: 'textcrawl on'
+    {on_off(rimuru.show_menu)}\tmenu/showmenu <on/off>  -- Show avaliable actions player can take.
+    {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
+    {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
+    """)
+
 def show_help(*args):
-    """
-    Shows help page.
-
-    Usage:
-        > help
-        > help settings
-        > help level
-    """
-
-    if 'settings' in args:
-        print("""
-    Game Settings:
-        textcrawl <on/off>          -- Enable or disable text crawl effect.
-                                       Example: 'textcrawl on'
-        menu/showmenu <on/off>      -- Show avaliable actions player can take.
-        ascii/showart <on/off>      -- Show ASCII art.
-        hardcore <on/off>           -- Enable hardcore mode.
-        """)
-        return
-
-    if 'level' in args:
-        print("""
-    Level/Ranking:
-       Level      Rank         Risk
-        11.     Special S   Catastrophe
-        10.     S           Disaster
-        9.      Special A   Calamity
-        8.      A+          Tragedy
-        7.      A           Hazard
-        6.      A-          Danger
-        5.      B           Pro
-        4.      C           Advance
-        3.      D           Intermediate
-        2.      E           Beginner
-        1.      F           Novice
-        """)
-        return
-
+    """ Shows help page. """
 
     print("""
     Command Required_Parameter [Optional_Parameter]
@@ -652,3 +642,20 @@ def show_help(*args):
         << Message >>               -- Great Sage (Raphael, Ciel).
         <<< Message >>>             -- Voice of the World.
     """)
+
+def show_rank_chart(*args):
+    print("""
+    Level/Ranking:
+       Level      Rank         Risk
+        11.     Special S   Catastrophe
+        10.     S           Disaster
+        9.      Special A   Calamity
+        8.      A+          Tragedy
+        7.      A           Hazard
+        6.      A-          Danger
+        5.      B           Pro
+        4.      C           Advance
+        3.      D           Intermediate
+        2.      E           Beginner
+        1.      F           Novice
+        """)
