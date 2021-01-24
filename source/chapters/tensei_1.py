@@ -55,7 +55,6 @@ def ch1_cave(rimuru):
             __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around', 'check', 'check if human']
             def __init__(self):
                 siprint("What is that feeling? Is....is that grass?! It feels like it's dissolving...")
-                show_art('slime')
                 iprint("\n< Hint: Try to 'eat grass' or 'eat ore', see what happens.")
                 action_menu(self)
 
@@ -89,6 +88,7 @@ def ch1_cave(rimuru):
 
     class learn_about_skills(cave_actions):
         def __init__(self):
+            show_art('slime')
             print(game_art.rimuru_art.died)
             idots(3, 8)
             siprint("Dissolving and absorbing, this streamlined elastic feeling body....")
