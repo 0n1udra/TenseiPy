@@ -17,7 +17,7 @@ class Map:
             if 'location' in function_name:
                 return eval(f"level_class.{function_name}")
 
-    def get_location(self):
+    def get_location(self, *args):
         """
         Gets character's current location.
 
