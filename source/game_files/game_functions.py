@@ -87,6 +87,7 @@ def action_menu(level=None, hide_actions=False):
         'map': rimuru.get_map,
         'craft': rimuru.craft_item,
         'help': show_help,
+        'hints': game_set_hints, 'showhints': game_set_hints,
         'menu': game_set_menu, 'showmenu': game_set_menu,
         'art': game_set_art, 'showart': game_set_art,
         'textcrawl': game_set_textcrawl,
@@ -417,6 +418,20 @@ def game_set_textcrawl(arg):
         rimuru.textcrawl = False
     print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
 
+def game_set_hints(arg):
+    """ Enable/Disable game hints. """
+
+    if rimuru.hardcore is True:
+        rimuru.show_menu = False
+        print("    < Error: Hardcore mode is active. \n>")
+        return
+
+    if arg in on_subs or rimuru.show_hints is True:
+        rimuru.show_hints = True
+    if arg in off_subs or rimuru.show_hints is False:
+        rimuru.show_hints = False
+    print(f"    < Hints: {'Enabled' if rimuru.show_hints else 'Disabled'} >\n")
+
 def game_set_hardcore(arg):
     """
     Enable/Disable ASCII art.
@@ -448,7 +463,7 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
         showing_history [bool:False]: Variable used to make sure 'history' command doesn't effect itself.
     """
 
-    if ('< Hint:' in message) and (rimuru.show_hints or rimuru.hardcore):
+    if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore):
         return
 
     # So user can get the last x lines, in case the screen has been cluttered.

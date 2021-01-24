@@ -33,7 +33,7 @@ if __name__ == '__main__':
     if '-a' in sys.argv: rimuru.show_art = False
     if '-m' in sys.argv: rimuru.show_menu = True
     if '-hard' in sys.argv: rimuru.hardcore = True
-    if '-hint' in sys.argv: rimuru.show_hints = False
+    if '-hints' in sys.argv: rimuru.show_hints = False
 
     game_funcs.show_start_banner()
 
