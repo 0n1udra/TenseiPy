@@ -34,7 +34,7 @@ def ch1_cave(rimuru):
                 game_over()
 
             # Show user HUD and playable actions.
-            action_menu(self)
+            game_action(self)
 
         class move:
             __subs = ['feel', 'touch']
@@ -56,7 +56,7 @@ def ch1_cave(rimuru):
             def __init__(self):
                 siprint("What is that feeling? Is....is that grass?! It feels like it's dissolving...")
                 iprint("\n< Hint: Try to 'eat grass' or 'eat ore', see what happens.")
-                action_menu(self)
+                game_action(self)
 
             class eat_grass:
                 __subs = cave_actions.eat_grass.__subs
@@ -99,7 +99,7 @@ def ch1_cave(rimuru):
                 self.where_did_it_go()
             else:
                 siprint("All I can do is fumble around in the dark and eat what I find... I'M SO BORED!")
-            action_menu(self)
+            game_action(self)
 
         class eat_grass:
             __subs = cave_actions.eat_grass.__subs
@@ -169,7 +169,7 @@ def ch1_cave(rimuru):
             siprint("Huh.... I'm not feeling any pain. But what am I going to do now?\n")
             idots()
             siprint("I thought of something... I could suck up some of water then I can and expel it at a high pressure...")
-            action_menu(self)
+            game_action(self)
 
         class stay_in_water:
             __subs = wait_subs + ['stay in water', 'wait in water']
@@ -222,7 +222,7 @@ def ch1_cave(rimuru):
             siprint("This is the first conversation I'm having since reincarnating. According to [Great Sage] I've been in this cave for about 90 days!")
             siprint("Should I be friendly? But how do I even reply?. It's not like I have a mouth to speak with.")
             sprint("~ Hey can you just reply? ~")
-            action_menu(self)
+            game_action(self)
 
         class hello:
             __subs = ['hi', 'reply', 'reply hi', 'reply with hi', 'repy with hello', "who's there?", 'who is there?', 'who is that?', 'somebody there?', "who's out there?", "is somebody there?", 'who is that speaking?', 'hello?', 'hello there!', "who's that speaking?", "who's that talking?"]
@@ -270,7 +270,7 @@ def ch1_cave(rimuru):
             sprint("~ With this skill you will be able to 'see', 'hear' and much more! ~")
             sprint("Eh... this feels really complicated. It won't hurt to try though... Will it???")
             siprint("<< Suggestion, in order to organize large amount of information, would you like to activate linking with [Great Sage] and [Magic Perception]. >>")
-            action_menu(self)
+            game_action(self)
 
         class _use_magic_perception(cave_actions):
             __subs = ['try magic perception', 'try using magic perception', 'activate magic perception', 'yes', 'yes please!', 'yes do it', 'activate', 'activate it!', 'yes, activate it']
@@ -283,7 +283,7 @@ def ch1_cave(rimuru):
                 sprint("~ Seems like you did it. You learn quickly small one. ~")
                 sprint("Yes, thank you!")
                 sprint("~ Shall I formally introduce myself now? ~")
-                action_menu(self)
+                game_action(self)
 
             class _yes:
                 __subs = ['sure', 'why not', 'go ahead']
@@ -318,7 +318,7 @@ def ch1_cave(rimuru):
         def __init__(self):
             sprint("Hmmmm, now what?")
             siprint("Should I try make a friend? Or just leave, there's something supsicious about him...")
-            action_menu(self)
+            game_action(self)
 
         class _leave:
             __subs = move_on_subs
@@ -339,7 +339,7 @@ def ch1_cave(rimuru):
                 sprint("I guess it can't be helped.")
                 sprint("Great. Now I guess I should look this seal heh?")
                 siprint("Wonder how he got imporisoned in the first place.....")
-                action_menu(self)
+                game_action(self)
 
             class _look_at_seal(cave_actions):
                 __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison']
@@ -383,7 +383,7 @@ def ch1_cave(rimuru):
 
                     sprint("Until we meet again small one!")
                     siprint("<< Use Unique skill [Predator]? >>")
-                    action_menu(self)
+                    game_action(self)
 
                 class eat_grass:
                     __subs = cave_actions.eat_grass.__subs
@@ -398,7 +398,7 @@ def ch1_cave(rimuru):
                         rimuru.add_inventory(veldora)
                         rimuru.add_mimic(veldora)
                         siprint("\n<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
-                        action_menu(self)
+                        game_action(self)
 
                     class _start_analysis:
                         __subs = all_yes_subs + ['start it!', 'yes start it please!', 'yes start it!']
@@ -448,7 +448,7 @@ def ch1_cave(rimuru):
             siprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             siprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
             siprint("\n< Hint: Try 'target tempest serpent'. Then try 'attack water blade' or 'attack water bullet'. >")
-            action_menu(self)
+            game_action(self)
 
         class sneak_away:
             __subs = ['sneak out', 'try sneaking out', 'try to sneak out', 'try escaping', 'try to sneak away', 'try sneaking away', 'try sneaking out', 'try slipping out', 'try to slip away', 'try to slip out', 'slip away']
@@ -521,7 +521,7 @@ def ch1_cave(rimuru):
             siprint("<< Answer, [Magic Perception] converts sound waves to comprehensible sentences which I interpret for you. >>")
             siprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
             sprint("I shouldn't show, they'll probably get scared and attack me")
-            action_menu(self)
+            game_action(self)
 
         class _sneak_out:
             subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past']
