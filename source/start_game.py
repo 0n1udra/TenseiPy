@@ -43,7 +43,7 @@ if __name__ == '__main__':
         if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
             print("\n    < Text Crawl Deactivated >\n")
             rimuru.textcrawl = False
-            sleep(2)
+            sleep(1)
         else:
             rimuru.textcrawl = True
             print()
