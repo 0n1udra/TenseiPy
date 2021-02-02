@@ -300,7 +300,10 @@ def game_save(level=None):
 
     if level:
         rimuru.current_location_object = level
-    rimuru.valid_save = True
+
+    if rimuru.valid_save is None:
+        rimuru.valid_save = True
+
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
     print("\n    < Game Saved >\n")
 
@@ -336,6 +339,7 @@ def game_over():
     """Deletes pickle save file."""
 
     rimuru.valid_save = False  # So you can't use copies of game save.
+    game_save()
 
     try:
         os.remove(rimuru.save_path)
@@ -563,7 +567,6 @@ def show_start_banner():
 
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")
-
 
 def on_off(var):
     if var is True:
