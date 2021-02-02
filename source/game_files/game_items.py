@@ -5,7 +5,7 @@ class Item:
         self.item_type = ''
         self.quantity = 0
         self.quantity_add = 1
-        self.inventory_capacity_add = 0
+        self.inventory_capacity_add = 0.1
         self.info_page = 'N/A'
         self.description = ''
         self.usage = ''
@@ -32,7 +32,9 @@ class Item:
         else:
             self.info_page = f'    Name: [{self.name}]\n'
 
-        self.info_page += f'\n    Usage:\n        {self.usage}\n'
+        self.info_page += f"\n    Description:\n        {self.description.strip()}\n"
+        self.info_page += f"\n    Appearance:\n        {self.appearance.strip()}\n"
+        self.info_page += f'\n    Usage:\n        {self.usage.strip()}\n'
 
         if self.ingredient_for:
             self.info_page += "\n    Ingredient for:\n"
@@ -47,7 +49,6 @@ class Item:
             for item, amount in self.recipe.items():
                 self.info_page += f'        {amount}x [{item}]\n'
 
-        self.info_page += f"\n   Appearance:\n        {self.appearance}"
 
     def get_name(self):
         """
@@ -67,8 +68,7 @@ class Water(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Water'
-        self.item_type = 'Materials'
-        self.quantity = 0
+        self.item_type = 'Material'
         self.quantity_add = 100
         self.inventory_capacity_add = 0.01
         self.usage = 'Can be used in high pressure attacks.'
@@ -82,8 +82,7 @@ class Hipokte_Grass(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Hipokte Grass'
-        self.item_type = 'Materials'
-        self.quantity = 0
+        self.item_type = 'Material'
         self.quantity_add = 50
         self.inventory_capacity_add = 0.01
         self.usage = 'Mainly used for making healing potions.'
@@ -96,8 +95,7 @@ class Magic_Ore(Item):
     def __init__(self):
         Item.__init__(self)
         self.name = 'Magic Ore'
-        self.item_type = 'Materials'
-        self.quantity = 0
+        self.item_type = 'Material'
         self.quantity_add = 25
         self.inventory_capacity_add = 0.1
         self.usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
@@ -113,7 +111,6 @@ class Full_Potion(Item):
         Item.__init__(self)
         self.name = 'Full Potion'
         self.item_type = 'Consumable'
-        self.quantity = 0
         self.quantity_add = 25
         self.inventory_capacity_add = 0.1
         self.usage = 'Heals major wounds even severed limbs and illnesses. However, can not resurrect.'
@@ -124,3 +121,27 @@ class Full_Potion(Item):
         # One Hipokte Grass makes 10 potions.
         self.recipe = {'Hipokte Grass': 1}
         self.update_info()
+
+# ========== Weapons ==========
+class Magic_Sword(Item):
+    def __init__(self):
+        Item.__init__(self)
+        self.name = "Magic Sword"
+        self.item_type = 'Weapon'
+        self.description = """
+        If a huge amount of magic essence was included in the raw materials of a sword, apparently it would become a sword that grows. 
+        Infusing magic into a sword, though you'd expect it to be a common technique, it's actually really difficult.
+        """
+        self.appearance = """Although they are usually made using a simple design, they are perfectly straight.
+        It could be said that there are no unnecessary parts to them.
+        It isn't meant for pure cutting, but still capable of slashing attacks.
+        The goal of this design is to use this simplicity as a base to make it easier to realize an individual's respective ideal form.
+        
+        Another special characteristic of magic swords is that the blade will never rust or become chipped.
+        The sword also has a life of its own.
+        If it became completely broken or bent, then the magic essence would bleed out and dissipate all at once.
+        """
+        self.update_info()
+
+
+

@@ -40,13 +40,13 @@ class Skill:
     Damage Type: {self.damage_type}
 
     Description:
-        {self.description}
+        {self.description.strip()}
 
     Abilities:
-        {self.abilities}
+        {self.abilities.strip()}
 
     Evolution:
-        {self.evolution}
+        {self.evolution.strip()}
     """
 
         if self.use_requirements:
@@ -126,7 +126,6 @@ class Predator_Skill(Skill):
         Predation   
             - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
               The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
-              
               Usage:
               > eat
               > predate
@@ -143,9 +142,8 @@ class Predator_Skill(Skill):
         Mimicry     
             - Replicate the target's appearance. The skills and abilities used by the target can also be used. 
               However, this depends on the successful analysis and acquisition of relative information regarding the target.
-              
-            Usage:
-            > mimic tempest serpent
+              Usage:
+              > mimic tempest serpent
               
         Isolation   
             - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
