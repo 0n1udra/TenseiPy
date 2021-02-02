@@ -204,7 +204,7 @@ def ch1_cave(rimuru):
         class hfunc_grab_sword:
             __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
             def __init__(self):
-                #rimuru.add_inventory('magisteel sword')
+                rimuru.add_inventory('magic sword')
                 siprint("HEY! Look! It feels like a sword! Wonder if it's any good?")
                 siprint("<< Answer, analysis of sword shows it contains a magisteel core. This sword is above average. >>")
                 siprint("Would you look at that, that might come in handy later on. But I'm still stuck down here!")
