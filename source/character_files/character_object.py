@@ -20,11 +20,11 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
                            'Common Skill': {}, 'Daily Skill': {}, 'Composite Skill': {}, 'Resistance': {}, 'Attribute': {}}
 
         # Character inventory.
+        self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
         self.inventory_capacity = 0  # Inventory capacity in percentage.
         self.inventory_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
         self.quantity = 0  # Item quantity in inventory.
         self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
-        self.inventory = {'Items': {}, 'Materials': {}, 'Consumable': {}, 'Living': {}, 'Misc': {}}
 
         # Character information and data related variables.
         self.name = 'N/A'
