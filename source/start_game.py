@@ -1,6 +1,5 @@
 import os, sys
-from time import sleep
-import game_files.game_functions as game_funcs
+from game_files.game_functions import *
 
 __version__ = "4.0 Alpha"
 __author__ = "D Thomas"
@@ -15,7 +14,10 @@ def help_page():
     -f      --  Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
     -t      --  Disable text crawl effect.
     -a      --  Hides ASCII art.
-    -hard   --  Hardcore mode.
+    -hud    --  Hide game HUD.
+    -hard   --  Enable Hardcore mode.
+    -hints  --  Hide game hints.
+    -slime  --  Same as: -t -a
     """)
     exit(0)
 
@@ -26,16 +28,17 @@ if __name__ == '__main__':
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/game.save'
 
     # Loads game save and updates rimuru object in game_functions alongside debug variable, and shows start banner.
-    rimuru = game_funcs.update_rimuru(game_funcs.game_load(save_path))
+    rimuru = update_rimuru(game_load(save_path))
 
-    if '-f' in sys.argv: rimuru.fast_mode = True
-    if '-t' in sys.argv: rimuru.textcrawl = False
-    if '-a' in sys.argv: rimuru.show_art = False
-    if '-m' in sys.argv: rimuru.show_menu = True
+    if get_any(sys.argv, ['-f', '-fast', '-fastmode']): rimuru.fast_mode = True
+    if get_any(sys.argv, ['-t', '-text', '-textcrawl']): rimuru.textcrawl = False
+    if get_any(sys.argv, ['-a', '-art', '-hideart']): rimuru.show_art = False
+    if get_any(sys.argv, ['-hud', '-hidehud']): rimuru.show_hud = True
     if '-hard' in sys.argv: rimuru.hardcore = True
     if '-hints' in sys.argv: rimuru.show_hints = False
-
-    game_funcs.show_start_banner()
+    if '-slime' in sys.argv:
+        rimuru.textcrawl = rimuru.show_hud = False
+        rimuru.show_hints = True
 
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
     if rimuru.textcrawl is None:
@@ -43,11 +46,10 @@ if __name__ == '__main__':
         if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
             print("\n    < Text Crawl Deactivated >\n")
             rimuru.textcrawl = False
-            sleep(1)
         else:
             rimuru.textcrawl = True
             print()
-            game_funcs.siprint("< Text Crawl Activated >\n\n")
+            siprint("< Text Crawl Activated >\n\n")
 
     if rimuru.show_hints is None:
         print("\nShow game hints? Suggest leave enabled if first time playing.")
@@ -56,6 +58,7 @@ if __name__ == '__main__':
             rimuru.show_hints = False
         else:
             rimuru.show_hints = True
-            game_funcs.siprint("\n < Hints: Disabled >\n")
+            siprint("\n < Hints: Disabled >\n")
 
+    show_start_banner()
     rimuru.current_location_object(rimuru)
