@@ -1,23 +1,31 @@
 from game_files.game_functions import *
+from game_maps.game_location import *
 from chapters.tensei_3 import Chapter3
 
 
 def ch2_goblin_encounter(rimuru):
-
     class goblin_encounter:
         __location = "Near the Sealed Cave"
 
         def __init__(self):
             mobs_reset()
             siprint("Where am I going?")
+            siprint("*While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up*")
+            sprint("You strong one.")
+            siprint("Who's that? Wait... They look like goblins! Should I talk to them?")
             game_action(self)
 
-        class _explore:
+        class _talk_to_goblins:
+            __subs = ['speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
             def __init__(self):
-                siprint("*While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up*")
-                siprint("Was I that loud... Eh? Where are those wolves going? What's this...")
-                sprint("You strong one.")
-                game_action(_meet_goblins())
+                _meet_goblins()
+
+        # In the works
+        class _move_on:
+            __subs = move_on_subs + ['ignore goblins', 'sneak away']
+            def __init__(self):
+                pass
+                #siprint("I'm going to try and loose them")
 
     class _meet_goblins:
         def __init__(self):
@@ -25,28 +33,35 @@ def ch2_goblin_encounter(rimuru):
             siprint("How should I introduce myself?")
             game_action(self)
 
-        def _friendly(self):
-            sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
-            sprint("...")
-            sprint("Strong one we have already recognized your strength. Please, lower your voice!")
-            sprint("Sorry, I am still adjusting.")
-            sprint("T-There is no need to apologize strong one!")
-            sprint("I was just exploring around here. Is there something you guys need?")
-            sprint("No, you see, our village is ahead of here. We felt a strong demonic aura and decided to immediately investigate.")
-            siprint("Demonic aura? what? I don't sense anything.")
-            siprint("Great Sage can you set change my viewpoint, I want to see this 'demonic aura'.")
-            siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
-            siprint("The goblins and I chatted some more then they invited me to there village.")
-            game_action(goto_goblin_village())
+        class _friendly:
+            __subs = []
+            def __init__(self):
+                sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
+                sprint("...")
+                sprint("Strong one we have already recognized your strength. Please, lower your voice!")
+                sprint("oh, ok. I was just exploring around here. Is there something you guys need?")
+                sprint("No, you see, our village is ahead of here. We felt a strong demonic aura and decided to immediately investigate.")
+                siprint("Demonic aura? what? Great Sage can you set change my viewpoint, I want to see this demonic aura.")
+                siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
+                siprint("After some more clarification, they invited to their village. It looks like they need some help. Should I go?")
+                goto_goblin_village()
 
-        def _ruthless(self):
-            sprint("Alright you weaklings. Listen here you little shits. You have two options. You can worship me or you can die.")
-            sprint("So. What will it be?")
-            sprint("O-of course, we all obey!")
-            sprint("Ok, good choice. So, you guys have a base, village, anything?")
-            sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
-            sprint("Of course you would. Lets start moving.")
-            game_action(goto_goblin_village())
+        class _subjugate:
+            __subs = ['subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
+            def __init__(self):
+                sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
+                sprint("You have two options. You can worship me or you can die.")
+                dots(2, 10)
+                if get_random(1, 10, 1):
+                    sprint("NEVER! We will never surrender to you!")
+                    sprint("ATTACK!!!!!!!!")
+                    game_over()
+
+                sprint("!")
+                sprint("Ok, good choice. So, you guys have a base, village, anything?")
+                sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
+                sprint("Of course you would. Lets start moving.")
+                goto_goblin_village()
 
     class goto_goblin_village:
         __locatoin = "Goblin Village"
@@ -68,44 +83,49 @@ def ch2_goblin_encounter(rimuru):
                 game_action(self)
 
             class _heal_wounded:
+                __subs = ['any wounded', 'any hurt', 'any goblins wounded']
                 def __init__(self):
                     sprint("Show me your wounded")
+                    siprint("Looks like 9 wounded goblins..... How can I help them?")
                     game_action(self)
 
-                def _heal_goblins(self):
-                    if rimuru.check_acquired('full potion', 9):
-                        rimuru.remove_inventory('full potion', 9)
-                        sprint("Wow, ")
-                        game_action(goto_goblin_village._assist_goblins, remove='_heal_wounded')
-                    else:
-                        sprint("I need some way to heal them.")
-                        game_action(goto_goblin_village._assist_goblins)
+                class _heal_goblins:
+                    __subs = ['use full potions', 'use healing potions', 'use potions']
+                    def __init__(self):
+                        if rimuru.check_acquired('full potion', 9):
+                            rimuru.remove_inventory('full potion', 9)
+                            sprint("Wow, ")
+                            goto_goblin_village._assist_goblins._heal_wounded.__subs = None
+                            goto_goblin_village._assist_goblins()
+                        else:
+                            sprint("I need some way to heal them.")
+                            goto_goblin_village._assist_goblins()
 
                 def _let_them_die(self):
                     siprint("I'm going to save my potions for myself.")
                     sprint("Great one, please! If you can heal our wounded we would be most grateful!")
                     sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
                     sprint("I see, we are sorry for troubling you.")
-                    game_action(goto_goblin_village._assist_goblins, remove='_heal_wounded')
+                    goto_goblin_village._assist_goblins()
 
             class _setup_defenses:
                 def __init__(self):
                     sprint("Let's setup defenses.")
-                    game_conditions('village_defense', 'up')
+                    game_cond('village_defense', 'up')
 
-                    game_action(wolf_attack())
+                    wolf_attack()
 
         def _compensation(self):
             sprint("So what, you want protection? What would my reward be?")
             sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
             sprint("That will have to do. For now.")
-            game_action(goto_goblin_village._assist_goblins())
+            goto_goblin_village._assist_goblins()
 
         def _attack(self):
             if mobs_cleared():
                 siprint("They're all dead now. They were so weak.")
                 siprint("What now?")
-                game_action(hunt_wolves())
+                hunt_wolves()
 
             if mob_status('goblin elder'):
                 sprint("Listen up! I am now you're new village chief!")

@@ -37,7 +37,7 @@ def ch1_cave(rimuru):
             game_action(self)
 
         class move:
-            __subs = ['feel', 'touch']
+            __subs = ['move around', 'try to move', 'look around']
             def __init__(self):
                 siprint("Where are my arms, I can't feel them!")
                 siprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
@@ -472,7 +472,6 @@ def ch1_cave(rimuru):
                         siprint("Oh yeah! I have that new [Sense Heat Source] skill, that might be useful.")
                         siprint("\n< Hint: Try 'nearby' or 'use sense heat source' to locate nearby mobs. >")
                         siprint("< Hint: Then use 'target' and 'attack' on them, also try 'help' if lost.")
-
 
         class _attack_water_bullet:
             __subs = ['learn water bullet', 'learn fast water attack', 'learn water attack']
