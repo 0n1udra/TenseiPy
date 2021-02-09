@@ -16,7 +16,9 @@ def update_rimuru(rimuru_object):
     return rimuru
 
 def game_hud(actions):
-    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_menu: print()  # Adds extra space when needed.
+    if rimuru.show_hud is False: return
+
+    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_hud: print()  # Adds extra space when needed.
 
     if rimuru.current_mimic and not rimuru.hardcore:
         print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
@@ -26,12 +28,13 @@ def game_hud(actions):
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'Target: {targets}', end='')
 
-    if rimuru.show_menu and not rimuru.hardcore:
+    if rimuru.show_hud and not rimuru.hardcore:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
         print(f"\nActions: {actions_for_hud}", end='')
 
 def game_action(level=None):
+    global onetime
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
@@ -84,8 +87,8 @@ def game_action(level=None):
         [rimuru.use_skill, ['sense heat source', character], ['nearby', 'sense heat sources']],
         [show_help, ['help', 'commands']],
         [show_settings, ['settings', 'options']],
-        [game_set_art, ['art', 'ascii']],
-        [game_set_menu, ['menu', 'actionmenu', 'hud']],
+        [game_set_art, ['art', 'ascii', 'showart']],
+        [game_set_hud, ['hud', 'showhud', 'gamehud']],
         [game_set_hints, ['hints', 'show hints', 'showhints', 'gamehints']],
         [game_set_textcrawl, ['textcrawl', 'slowtext']],
         [game_set_hardcore, ['hardcore', 'hardmode']],
@@ -111,19 +114,23 @@ def game_action(level=None):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
-        action_name = action.replace('_', ' ').strip().lower()
-        if action_name in user_input or any(i in user_input for i in action_subs):
+        if action_subs is None:
+            game_action(level)
+
+        action_subs.append(action.replace('_', ' ').strip().lower())
+
+        if get_any(user_input, action_subs):
             eval(f"level.{action}()")
 
     game_action(level)
 
 
 #                    ========== Level Functions ==========
-def game_conditions(value, new_value=None):
+def game_cond(value, new_value=None):
     """ Set and fetch game variables. """
     if new_value:
         rimuru.conditional_data[value] = new_value
-        return rimuru.conditional_data[value]
+        return new_value
 
     if value in rimuru.conditional_data:
         return rimuru.conditional_data[value]
@@ -219,33 +226,6 @@ def continue_to(next_location):
 
 
 #                    ========== Extra ==========
-def tbc():
-    """ To Be Continued message.."""
-
-    print("\n    < ---IN PREOGRESS--- >\n")
-    input("Press Enter to exit > ")
-
-def show_art(art):
-    """
-    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
-
-    Args:
-        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
-        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
-
-    """
-
-    if rimuru.show_art is False: return False
-
-    # Gets corresponding variable from within game_art.py file.
-    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
-    if rimuru.textcrawl or rimuru.textcrawl is None:
-        for line in art.split('\n'):
-            time.sleep(0.05)
-            print(line)
-    else:
-        print(art)
-
 def get_random(min=1, max=100, target=None, range=None, return_int=False):
     """
     Generate random number and check if matches passed in target parameter, returns True if so.
@@ -284,6 +264,28 @@ def get_random(min=1, max=100, target=None, range=None, return_int=False):
 
     return False
 
+def get_any(match_to, input_list):
+    """
+    Returns True if found a match from input_list with match_to.
+
+    Args:
+        match_to: String to match with.
+        input_list: List of items to find match with.
+
+    Returns:
+        bool: Returns True if match found.
+    """
+
+    if any(i in match_to for i in input_list):
+        return True
+
+def on_off(var):
+    if var is True:
+        return 'on '
+    elif var is False:
+        return 'off'
+    else:
+        return 'n/a'
 
 #                    ========== Game Settings, Saves, Etc ==========
 def game_restart(*args):
@@ -352,9 +354,9 @@ def game_over():
     else:
         game_restart()
 
-def game_set_menu(arg):
+def game_set_hud(arg):
     """
-    Updates and gets rimuru.show_menu boolean. Shows and hides available actions.
+    Updates and gets rimuru.show_hud boolean. Shows and hides available actions.
 
     Args:
         arg: Enable or disable text crawl.
@@ -365,15 +367,15 @@ def game_set_menu(arg):
     """
 
     if rimuru.hardcore is True:
-        rimuru.show_menu = False
+        rimuru.show_hud = False
         print("    < Error: Hardcore mode is active. \n>")
         return
 
-    if arg in on_subs or rimuru.show_menu is True:
-        rimuru.show_menu = True
-    if arg in off_subs or rimuru.show_menu is False:
-        rimuru.show_menu = False
-    print(f"    < Action Menu: {'Enabled' if rimuru.show_menu else 'Disabled'} >\n")
+    if arg in on_subs or rimuru.show_hud is True:
+        rimuru.show_hud = True
+    if arg in off_subs or rimuru.show_hud is False:
+        rimuru.show_hud = False
+    print(f"    < Action Menu: {'Enabled' if rimuru.show_hud else 'Disabled'} >\n")
 
 def game_set_art(arg):
     """
@@ -416,7 +418,7 @@ def game_set_hints(arg):
     """ Enable/Disable game hints. """
 
     if rimuru.hardcore is True:
-        rimuru.show_menu = False
+        rimuru.show_hud = False
         print("    < Error: Hardcore mode is active. \n>")
         return
 
@@ -555,8 +557,9 @@ def idots(*args):
     dots(*args, indent=True)
 
 def show_start_banner():
-    """Show game title, tips, and player stats/inv."""
+    """ Show game title, tips, and player stats/inv. """
 
+    print("OK")
     show_art('great sage')
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
@@ -568,22 +571,15 @@ def show_start_banner():
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")
 
-def on_off(var):
-    if var is True:
-        return 'on '
-    elif var is False:
-        return 'off'
-    else:
-        return 'n/a'
-
 def show_settings(*args):
     print(f"""
     Game Settings:
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
-                                                                   Example: 'textcrawl on'
-        {on_off(rimuru.show_menu)}\tmenu/showmenu <on/off>  -- Show avaliable actions player can take.
+                                                               Example: 'textcrawl on'
+        {on_off(rimuru.show_hud)}\thud/showhud <on/off>  -- Show available actions player can take.
         {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
         {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
+        {on_off(rimuru.show_hints)}\thints <on/off>         -- Show game hints, highly recommended for first timers.
     """)
 
 def show_help(*args):
@@ -644,3 +640,31 @@ def show_rank_chart(*args):
         2.      E           Beginner
         1.      F           Novice
         """)
+
+def tbc():
+    """ To Be Continued message.."""
+
+    print("\n    < ---IN PREOGRESS--- >\n")
+    input("Press Enter to exit > ")
+
+def show_art(art):
+    """
+    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
+
+    Args:
+        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
+        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
+
+    """
+
+    if rimuru.show_art is False: return False
+    print("OK")
+
+    # Gets corresponding variable from within game_art.py file.
+    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
+    if rimuru.textcrawl or rimuru.textcrawl is None:
+        for line in art.split('\n'):
+            time.sleep(0.05)
+            print(line)
+    else:
+        print(art)
