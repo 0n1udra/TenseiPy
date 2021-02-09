@@ -30,24 +30,36 @@ def ChapterXX(Rimuru):
                 # Indented message, usually for inner dialogue and game functions.
                 siprint("Moving on...")
 
-                # Start the next section.
-                # If class/function (the action) doesn't have a game_action in it, it will usually loop.
-                # Since, game_action is used to give player new actions to take, and is used to run the function/class that is given.
-                # If it's the first time the player is moving to a new section, you'll need to initialize it().
-                # Else, if it's already initialized don't pass in a newly initialized one (unless you need to) just pass int he function/class name.
-                game_action(outside_cave())
+                # Calling this will give player opportunity to input a action.
+                game_action(self)
 
-        # add hfunc or _hfunc at the start of a class/function action to hide it from player on the action menu.
-        # You will need to set a __subs list so player can take that action, only if they know the right input(s).
-        # Add sneaky, hidden, surprised, or easter egg actions. These hidden actions can progress the story if you want them to, just use game_action().
+        # hfunc or _hfunc are hidden on the action menu (still playable, player just won't know the input to play the action).
+        # Add __subs list for substitute or alternative inputs user can use for same action.
         class hfunc_secret_action:
-            __subs = ['the secret action']
+            __subs = ['the secret action', 'do the secret action']
             def __init__(self):
-                siprint("ooooooooo, a secret action!")
+                # Add mobs to current section. This will add 10 of them. Read other mob related functions like mob_status, mobs_cleared, and mobs_reset.
+                mobs_new(['10* scary mob'])
 
-                # Clear out __subs for hidden functions to make action only usable once.
-                # So far only works with hfunc actions. For non hfunc actions, you will have to use some if/else statements for that.
-                in_cave.hfunc_secret_action.__subs = []
+                # Set game conditions that will be used later. game_cond() manipulates rimuru.game_conditions dictionary.
+                game_cond('found_hidden', True)
+
+                # Loading dots animation (only works when textcrawl is True)
+                sdots(5, 5)
+
+                siprint("ooooooooohhh!, a secret action!")
+
+                # Add item to player inventory.
+                rimuru.add_inventory('special item')
+
+                # Add attribute (skill/resistances/etc).
+                rimuru.add_attribute('special skill')
+
+                # Set __subs to None to make action useable only once (only works with classes).
+                in_cave.hfunc_secret_action.__subs = None
+
+                # Move story to new section.
+                game_action(secret_place())
 
 
 > Start with ChapterXX function with Chapter_XX class to start with.
@@ -74,7 +86,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     update_rimuru()         -- Need to update local rimuru object for this file.
     set_fast_mode()         -- Plays all actions that progresses story, use to rush through story chapters for debugging.
     game_action()           -- Takes care of user input and runs corresponding functions, and shows user HUDs.
-    game_conditions()       -- Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
+    game_cond()       -- Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
     mob_status()            -- Returns True if mob is in active_mobs list.
     mobs_new([])            -- Adds new character object to current game level. Must pass in list.
     mobs_cleared()          -- Returns True if player cleared all mobs. Usually used for to let player continue on or not.
@@ -82,7 +94,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     continue_to()           -- Saves game and asks if user wants to continue to next section.
     tbc()                   -- Prints out To be continued.
     show_art()              -- Pass in string that matches variable name in game_art.py file, replace _ with spaces when passing in name. E.g. show_art('great sage'). Doesn't work with variables within classes.
-    game_set_menu()         -- Show available actions for player (not the hfunc ones).
+    game_set_hud()         -- Show available actions for player (not the hfunc ones).
     game_set_art()          -- Enable ASCII art, usually disable for less screen clutter. But they look cool!
     game_set_textcrawl      -- Whether or not to have the textcrawl effect. A typewriter like effect where each letter is printed to screen one by one, this does not include game messages like stats, inv, acquired messages, crafting, etc.
     game_set_hardcore       -- So far only disables action menu and so it can't be turned back on, disable hardcore to enable menu.
