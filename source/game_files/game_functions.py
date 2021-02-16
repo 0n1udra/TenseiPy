@@ -106,6 +106,7 @@ def game_action(level=None):
             action[0](parameters)
 
     for action in actions:
+        # Currently need two evals to find __subs for action.
         try:
             action_subs = eval(f"level.{action}.{action}__subs")
         except:
@@ -114,9 +115,10 @@ def game_action(level=None):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
-        if action_subs is None:
+        if not action_subs:
             game_action(level)
 
+        # Adds action's class name to subs list, so you don't have to add it yourself in the chapter files.
         action_subs.append(action.replace('_', ' ').strip().lower())
 
         if get_any(user_input, action_subs):
@@ -225,8 +227,16 @@ def continue_to(next_location):
         print("    < Error Loading Next Location >")
 
 def clear_subs(level):
+    """
+    Clears __subs list of passed in class.
+
+    Args:
+        level: Playable action class object from chapter file.
+    """
+
     for i in dir(level):
-        print('ok', i)
+        if '__subs' in i:
+            eval(f"level.{i}.clear()")
 
 #                    ========== Extra ==========
 def get_random(min=1, max=100, target=None, range=None, return_int=False):
