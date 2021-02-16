@@ -18,50 +18,47 @@ def ch2_goblin_encounter(rimuru):
         class _talk_to_goblins:
             __subs = ['speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
             def __init__(self):
-                _meet_goblins()
+                mobs_new(['10* goblin'])
+                siprint("How should I introduce myself?")
+                game_action(self)
 
-        # In the works
-        class _move_on:
-            __subs = move_on_subs + ['ignore goblins', 'sneak away']
+            class _friendly:
+                __subs = []
+                def __init__(self):
+                    sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
+                    sprint("...")
+                    sprint("Strong one we have already recognized your strength. Please, lower your voice!")
+                    sprint("oh, ok. I was just exploring around here. Is there something you need?")
+                    sprint("No, you see, our village is near. We felt a strong demonic aura and decided to immediately investigate.")
+                    siprint("Demonic aura? what? Great Sage can you change my viewpoint, I want to see this demonic aura.")
+                    siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
+                    siprint("After some more clarification, they invited to their village. It looks like they need some help. Should I go?")
+                    goto_goblin_village()
+
+            class _subjugate:
+                 __subs = ['subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
+                 def __init__(self):
+                     sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
+                     sprint("You have two options. You can worship me or you can die.")
+                     dots(2, 10)
+                     if get_random(1, 10, 1):
+                     sprint("NEVER! We will never surrender to you!")
+                     sprint("ATTACK!!!!!!!!")
+                     game_over()
+
+                     sprint("!")
+                     sprint("Ok, good choice. So, you guys have a base, village, anything?")
+                     sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
+                     sprint("Of course you would. Lets start moving.")
+                     goto_goblin_village()
+
+        class move_on:
+            __subs = move_on_subs
             def __init__(self):
-                pass
-                #siprint("I'm going to try and loose them")
+                siprint("Nah... Lets move on.")
+                siprint("<< Warning, dangerous monsters are near. >>")
+                siprint("Oh crap! Is that a wolf pack!?! I should probably run!")
 
-    class _meet_goblins:
-        def __init__(self):
-            mobs_new(['10* goblin'])
-            siprint("How should I introduce myself?")
-            game_action(self)
-
-        class _friendly:
-            __subs = []
-            def __init__(self):
-                sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
-                sprint("...")
-                sprint("Strong one we have already recognized your strength. Please, lower your voice!")
-                sprint("oh, ok. I was just exploring around here. Is there something you guys need?")
-                sprint("No, you see, our village is ahead of here. We felt a strong demonic aura and decided to immediately investigate.")
-                siprint("Demonic aura? what? Great Sage can you set change my viewpoint, I want to see this demonic aura.")
-                siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
-                siprint("After some more clarification, they invited to their village. It looks like they need some help. Should I go?")
-                goto_goblin_village()
-
-        class _subjugate:
-            __subs = ['subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
-            def __init__(self):
-                sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
-                sprint("You have two options. You can worship me or you can die.")
-                dots(2, 10)
-                if get_random(1, 10, 1):
-                    sprint("NEVER! We will never surrender to you!")
-                    sprint("ATTACK!!!!!!!!")
-                    game_over()
-
-                sprint("!")
-                sprint("Ok, good choice. So, you guys have a base, village, anything?")
-                sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
-                sprint("Of course you would. Lets start moving.")
-                goto_goblin_village()
 
     class goto_goblin_village:
         __locatoin = "Goblin Village"

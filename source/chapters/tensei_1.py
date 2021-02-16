@@ -547,7 +547,7 @@ def ch1_cave(rimuru):
                 game_over()
 
         class _attack:
-            __subs = []
+            __subs = ['attack adventurers', 'attack them']
             def __init__(self):
                 game_over()
 
