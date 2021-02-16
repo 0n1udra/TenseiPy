@@ -224,6 +224,9 @@ def continue_to(next_location):
     except:
         print("    < Error Loading Next Location >")
 
+def clear_subs(level):
+    for i in dir(level):
+        print('ok', i)
 
 #                    ========== Extra ==========
 def get_random(min=1, max=100, target=None, range=None, return_int=False):
