@@ -95,7 +95,7 @@ def ch2_goblin_encounter(rimuru):
                         if rimuru.check_acquired('full potion', 9):
                             rimuru.remove_inventory('full potion', 9)
                             sprint("Wow, ")
-                            goto_goblin_village._assist_goblins._heal_wounded.__subs = None
+                            clear_subs(self)
                             goto_goblin_village._assist_goblins()
                         else:
                             sprint("I need some way to heal them.")

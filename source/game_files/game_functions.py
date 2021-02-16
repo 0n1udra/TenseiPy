@@ -115,8 +115,8 @@ def game_action(level=None):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
-        if not action_subs:
-            game_action(level)
+        if 'ACTIONBLOCKED' in action_subs:
+            continue
 
         # Adds action's class name to subs list, so you don't have to add it yourself in the chapter files.
         action_subs.append(action.replace('_', ' ').strip().lower())
@@ -236,7 +236,7 @@ def clear_subs(level):
 
     for i in dir(level):
         if '__subs' in i:
-            eval(f"level.{i}.clear()")
+            eval(f"level.{i}.append('ACTIONBLOCKED')")
 
 #                    ========== Extra ==========
 def get_random(min=1, max=100, target=None, range=None, return_int=False):

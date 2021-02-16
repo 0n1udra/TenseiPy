@@ -208,7 +208,7 @@ def ch1_cave(rimuru):
                 siprint("HEY! Look! It feels like a sword! Wonder if it's any good?")
                 siprint("<< Answer, analysis of sword shows it contains a magisteel core. This sword is above average. >>")
                 siprint("Would you look at that, that might come in handy later on. But I'm still stuck down here!")
-                in_water.hfunc_grab_sword.__subs = []  # Only able to grab sword once.
+                clear_subs(self)  # Only able to grab sword once.
 
     class find_veldora(cave_actions):
         __location = "Sealed Cave"
