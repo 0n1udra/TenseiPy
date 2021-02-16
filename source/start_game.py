@@ -37,7 +37,7 @@ if __name__ == '__main__':
     if '-hard' in sys.argv: rimuru.hardcore = True
     if '-hints' in sys.argv: rimuru.show_hints = False
     if '-slime' in sys.argv:
-        rimuru.textcrawl = rimuru.show_hud = False
+        rimuru.textcrawl = rimuru.show_hud = rimuru.show_art = False
         rimuru.show_hints = True
 
     # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
