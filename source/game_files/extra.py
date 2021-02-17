@@ -56,10 +56,27 @@ def get_any(match_to, input_list):
 def on_off(var):
     if var is True:
         return 'on '
-    elif var is False:
-        return 'off'
     else:
-        return 'n/a'
+        return 'off'
+
+def format_info(name, var):
+    if not var: return None
+
+    return_data = ''
+
+    # Puts var info on newline and indented from name.
+    if '*' in name:
+        return_data += f'\n    {name[1:]}:\n\t'
+    else:
+        return_data += f"{name}: "
+
+    if type(var) is list:
+        return_data += ", ".join(var)
+    else:
+        return_data += str(var)
+
+    return return_data
+
 
 def tbc():
     """ To Be Continued message.."""

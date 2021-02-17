@@ -1,4 +1,4 @@
-from character_files.player import Character
+from character_files.character import Character
 
 
 class Rimuru_Tempest(Character):
@@ -148,6 +148,20 @@ class Veldora_Tempest(Character):
         self.inventory_capacity_add = 10
         self.update_info()
 
+# ========== Characters
+class Eren_Grimwold(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = "Eren Grimwold"
+        self.level = 5
+        self.species = 'Human'
+        self.occupations = ['Adventurer']
+        self.affiliations = ['Freedom Association', "Cabal's Party", "Brumund"]
+        self.description = "A Mage part of Cabal's Party."
+        self.appearance = "A blonde, 16y/o, green eyed adventurer from the Freedom Association."
+        self.abilities = ['Mud Hand', 'Cleaning Magic', 'Elemental Magic']
+        self.update_info()
+
 
 # ========== Low Level
 class Tempest_Serpent(Character):
@@ -155,7 +169,7 @@ class Tempest_Serpent(Character):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
         if name: self.name = name
-        self.species = 'Serpent'
+        self.species = 'Black Serpent'
         self.level = 6
         self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'

@@ -29,16 +29,19 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # Character information and data related variables.
         self.name = 'N/A'
         self.family_name = ''
-        self.canon_name = 'N/A'  # Name from anime or manga storyline.
+        self.canon_name = ''  # Name from anime or manga storyline.
         self.title = 'N/A'  # E.g. True Dragon, Demon Lord.
         self.blessing = 'N/A'  # E.g. Storm Crest (from Veldora)>
         self.shared_blessing = 'N/A'
         self.species = 'N/A'
         self.rank = 'N/A'  # E.g. Catastrophe, Calamity.
         self.level = 1  # Same as rank just as integer.
+        self.occupations = []
+        self.affiliations = []
         self.info_page = 'N/A'  # Info page for character.
         self.description = 'N/A'
         self.appearance = 'N/A'
+        self.abilities = []
         self.evolution = ''
         self.acquired_msg = ''
         self.is_alive = True

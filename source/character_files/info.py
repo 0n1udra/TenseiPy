@@ -1,3 +1,5 @@
+from game_files.extra import format_info
+
 class Info:
     def get_name(self):
         """Returns object name attribute in lowercase."""
@@ -31,24 +33,14 @@ class Info:
         ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
         self.rank = ranking[self.level - 1]
 
-        if self.status:
-            self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] ({self.status})\n'
-        else:
-            self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}]\n'
+        self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] {"(" + self.status + ")" if self.status else ""}\n'
 
-        self.info_page += f"""
-    Title: {self.title}
-    Species: {self.species}
-    Rank: {self.rank}
-    Divine Protection: {self.blessing}
-    Canon Name: {self.canon_name}
-
-    Description:
-        {self.description}
-
-    Appearance:
-        {self.appearance}
-        """
+        info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Divine Protection': self.blessing,
+                     'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
+                     '*Description': self.description, '*Appearance': self.appearance}
+        for k, v in info_dict.items():
+            if formatted_info := format_info(k, v):
+                self.info_page += f"    {formatted_info}\n"
 
     def update_ranking(self, level):
         """

@@ -1,3 +1,5 @@
+from game_files.extra import format_info
+
 class Item:
     def __init__(self):
         self.name = ''
@@ -27,14 +29,12 @@ class Item:
     def update_info(self):
         """Updates item's info."""
 
-        if self.status:
-            self.info_page = f'    Name: [{self.name}] ({self.status})\n'
-        else:
-            self.info_page = f'    Name: [{self.name}]\n'
+        self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'
 
-        self.info_page += f"\n    Description:\n        {self.description.strip()}\n"
-        self.info_page += f"\n    Appearance:\n        {self.appearance.strip()}\n"
-        self.info_page += f'\n    Usage:\n        {self.usage.strip()}\n'
+        info_dict = {'*Description': self.description, '*Appearance': self.appearance, '*Usage': self.usage}
+        for k, v in info_dict.items():
+            if formatted_info := format_info(k, v):
+                self.info_page += f"    {formatted_info}\n"
 
         if self.ingredient_for:
             self.info_page += "\n    Ingredient for:\n"
@@ -72,9 +72,7 @@ class Water(Item):
         self.quantity_add = 100
         self.inventory_capacity_add = 0.01
         self.usage = 'Can be used in high pressure attacks.'
-        self.description = '''
-        It's wet, and it's clear, it is just water...
-        '''
+        self.description = '''It's wet, and it's clear, it is just water...'''
         self.appearance = 'Clear flowing liquid.'
         self.update_info()
 
@@ -99,8 +97,7 @@ class Magic_Ore(Item):
         self.quantity_add = 25
         self.inventory_capacity_add = 0.1
         self.usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
-        self.description = '''
-        Magic ores form around high concentration of magic essence.
+        self.description = '''Magic ores form around high concentration of magic essence.
         Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
         '''
         self.appearance = 'A very colorful ore. Almost like a glowing shimmering rainbow effect, while giving off some magic essence.'
@@ -114,9 +111,7 @@ class Full_Potion(Item):
         self.quantity_add = 25
         self.inventory_capacity_add = 0.1
         self.usage = 'Heals major wounds even severed limbs and illnesses. However, can not resurrect.'
-        self.description = '''
-        Can heal subject to optimum condition, but cannot revive the dead.
-        '''
+        self.description = '''Can heal subject to optimum condition, but cannot revive the dead.'''
         self.appearance = 'Blue potion in a glass bottle.'
         # One Hipokte Grass makes 10 potions.
         self.recipe = {'Hipokte Grass': 1}
@@ -128,8 +123,7 @@ class Magic_Sword(Item):
         Item.__init__(self)
         self.name = "Magic Sword"
         self.item_type = 'Weapon'
-        self.description = """
-        If a huge amount of magic essence was included in the raw materials of a sword, apparently it would become a sword that grows. 
+        self.description = """If a huge amount of magic essence was included in the raw materials of a sword, apparently it would become a sword that grows. 
         Infusing magic into a sword, though you'd expect it to be a common technique, it's actually really difficult.
         """
         self.appearance = """Although they are usually made using a simple design, they are perfectly straight.

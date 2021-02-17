@@ -1,3 +1,5 @@
+from game_files.extra import format_info
+
 class Skill:
     def __init__(self):
         self.name = 'N/A'
@@ -5,10 +7,10 @@ class Skill:
         self.skill_level = 'Common Skill'
         self.damage_level = 1
         self.info_page = 'N/A'
-        self.damage_type = 'N/A'
-        self.description = 'N/A'
-        self.evolution = 'N/A'
-        self.abilities = 'N/A'
+        self.damage_type = ''
+        self.description = ''
+        self.evolution = ''
+        self.abilities = ''
         self.acquired_msg = ''
         self.status = ''
         self.use_requirements = {}
@@ -28,26 +30,13 @@ class Skill:
         print(f"    {self.acquired_msg}\n")
 
     def update_info(self):
-        if self.status:
-            self.info_page = f'    Name: [{self.name}] ({self.status})'
-        else:
-            self.info_page = f'    Name: [{self.name}]'
+        self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'
 
-        self.info_page += f"""
-    Type: {self.type}
-    Level: {self.skill_level}
-    Damage: {self.damage_level}
-    Damage Type: {self.damage_type}
-
-    Description:
-        {self.description.strip()}
-
-    Abilities:
-        {self.abilities.strip()}
-
-    Evolution:
-        {self.evolution.strip()}
-    """
+        info_dict = {'Type': self.type, 'Level': self.skill_level, 'Damage': self.damage_level, 'Damage Type': self.damage_type,
+                     'Evolution': self.evolution, '*Description': self.description, '*Abilities': self.abilities}
+        for k, v in info_dict.items():
+            if formatted_info := format_info(k, v):
+                self.info_page += f"    {formatted_info}\n"
 
         if self.use_requirements:
             self.info_page += "\n    Use Requirements:\n"
@@ -72,8 +61,7 @@ class Ciel_Skill(Skill):
         self.name = 'Ciel'
         self.skill_level = 'Manas'
         self.description = "Evolved from Wisdom King Raphael."
-        self.abilities = """
-        Auto Battle Mode 
+        self.abilities += """Auto Battle Mode 
             - Great sage can battle on behalf of user of permission granted
         """
         self.evolution = "Sage > Great Sage > Raphael > Ciel"
@@ -122,8 +110,7 @@ class Predator_Skill(Skill):
         self.name = 'Predator'
         self.skill_level = 'Unique Skill'
         self.description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
-        self.abilities = """
-        Predation   
+        self.abilities = """Predation   
             - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
               The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
               Usage:
@@ -156,13 +143,11 @@ class Great_Sage_Skill(Skill):
         Skill.__init__(self)
         self.name = 'Great Sage'
         self.skill_level = 'Unique Skill'
-        self.description = '''
-        A Conceptual Intelligence that has a heartless and emotionless personality 
+        self.description = '''A Conceptual Intelligence that has a heartless and emotionless personality 
         and is solely driven by purely logical computations. It cares for nobody but the benefit 
         of its master, even going so far as to hide things from master if it deems it beneficial in the long run.
         '''
-        self.abilities = '''
-        Thought Acceleration
+        self.abilities = '''Thought Acceleration
             - Raises thought-processing speed by a thousand times.
 
         Analytical Appraisal
@@ -206,8 +191,7 @@ class Magic_Perception(Skill):
         Skill.__init__(self)
         self.name = 'Magic Perception'
         self.skill_level = 'Extra Skill'
-        self.description = '''
-        One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
+        self.description = '''One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
         the skill is rather simple.
 
         With this skill, one can see 360 degrees around them, without a single blind-spot. With this, 
@@ -226,8 +210,7 @@ class Water_Manipulation(Skill):
         Skill.__init__(self)
         self.name = "Water Manipulation"
         self.skill_level = 'Extra Skill'
-        self.description = '''
-        After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
+        self.description = '''After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
         The three Skills are fused and evolved into Water Manipulation.
         '''
         self.evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
@@ -288,8 +271,7 @@ class Self_Regeneration(Skill):
         self.name = 'Self-Regeneration'
         self.status = 'Passive'
         self.skill_level = 'Intrinsic Skill'
-        self.description = '''
-        Restores the user's damaged body. 
+        self.description = '''Restores the user's damaged body. 
         It can restore even lost limbs as long as it's not a situation where the limbs get continuously chopped off or crushed. 
         The Skill's performance can be enhanced by other Skills.
         '''
@@ -303,8 +285,7 @@ class Sense_Heat_Source(Skill):
         Skill.__init__(self)
         self.name = 'Sense Heat Source'
         self.skill_level = 'Intrinsic Skill'
-        self.description = '''
-        Identifies any heat reactions in the local area. 
+        self.description = '''Identifies any heat reactions in the local area. 
         Not affected by any concealing effects.
         '''
         self.update_info()
@@ -323,8 +304,7 @@ class Poisonous_Breath(Skill):
         self.skill_level = 'Intrinsic Skill'
         self.damage_type = 'Poison'
         self.damage_level = 8
-        self.description = '''
-        A powerful breath-type poison (corrosion) attack. 
+        self.description = '''A powerful breath-type poison (corrosion) attack. 
         Affects an area seven meters in front of the user in a 120-degree radius.
         '''
         self.update_info()
@@ -395,8 +375,7 @@ class Resist_Pain(Resistance):
         Resistance.__init__(self)
         self.name = 'Resist Pain'
         self.resist_types = ['Pain']
-        self.description = '''
-        Tolerance-type Skill that grants immunity to physical pain sensation. 
+        self.description = '''Tolerance-type Skill that grants immunity to physical pain sensation. 
         However, you still take damage.
         '''
         self.update_info()
@@ -414,8 +393,7 @@ class Resist_Electricity(Resistance):
         Resistance.__init__(self)
         self.name = 'Resist Electricity'
         self.resist_types = ['Electricity']
-        self.description = '''
-        Tolerance-type Skill that grants resistance to electricity-types of attacks. 
+        self.description = '''Tolerance-type Skill that grants resistance to electricity-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
         self.update_info()
@@ -425,8 +403,7 @@ class Resist_Temperature(Resistance):
         Resistance.__init__(self)
         self.name = 'Resist Temperature'
         self.resist_types = ['hot', 'cold', 'temperature']
-        self.description = '''
-        Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
+        self.description = '''Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
         self.update_info()
@@ -436,8 +413,7 @@ class Resist_Poison(Resistance):
         Resistance.__init__(self)
         self.name = 'Resist Poison'
         self.resist_types = ['Poison']
-        self.description = '''
-        Tolerance-type Skill that grants resistance to poison-types of attacks. 
+        self.description = '''Tolerance-type Skill that grants resistance to poison-types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
         '''
         self.update_info()
