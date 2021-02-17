@@ -1,4 +1,4 @@
-from character_files.character_object import Character
+from character_files.player import Character
 
 
 class Rimuru_Tempest(Character):

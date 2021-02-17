@@ -1,5 +1,5 @@
 import os, sys
-from game_files.game_functions import *
+from game_files.functions import *
 
 __version__ = "4.0 Alpha"
 __author__ = "D Thomas"

@@ -1,4 +1,4 @@
-from game_files.game_functions import *
+from game_files.functions import *
 
 class subs:
 

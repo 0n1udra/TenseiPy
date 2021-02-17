@@ -1,12 +1,12 @@
-import game_files.game_skills as game_skills
-import game_files.game_items as game_items
-import game_files.game_characters as game_characters
-from .character_info import Info
-from .character_inventory import Inventory
-from .character_attributes import Attributes
-from .character_combat import Combat
-from .character_subordinates import Subordinates
-from .character_map import Map
+import game_files.skills as game_skills
+import game_files.items as game_items
+import game_files.characters as game_characters
+from .info import Info
+from .inventory import Inventory
+from .attributes import Attributes
+from .combat import Combat
+from .subordinates import Subordinates
+from game_files.map import Map
 
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):

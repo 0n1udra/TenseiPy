@@ -1,4 +1,4 @@
-from game_files.game_functions import *
+from game_files.functions import *
 from game_maps.game_location import *
 from chapters.tensei_3 import Chapter3
 
@@ -18,7 +18,7 @@ def ch2_goblin_encounter(rimuru):
         class _talk_to_goblins:
             __subs = ['speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
             def __init__(self):
-                mobs_new(['10* goblin'])
+                mobs_add(['10* goblin'])
                 siprint("How should I introduce myself?")
                 game_action(self)
 
@@ -86,7 +86,7 @@ def ch2_goblin_encounter(rimuru):
         __locatoin = "Goblin Village"
 
         def __init__(self):
-            mobs_new(['goblin: Goblin Chief'])
+            mobs_add(['goblin: Goblin Chief'])
             siprint("Wow, this place looks like a dump... ")
             sprint("I am the village elder. I'm sorry we don't have much to serve you.")
             sprint("So I'm guessing you didn't invite me here just for pleasantries.")

@@ -39,7 +39,7 @@ def ChapterXX(Rimuru):
             __subs = ['the secret action', 'do the secret action']
             def __init__(self):
                 # Add mobs to current section. This will add 10 of them. Read other mob related functions like mob_status, mobs_cleared, and mobs_reset.
-                mobs_new(['10* scary mob'])
+                mobs_add(['10* scary mob'])
 
                 # Set game conditions that will be used later. game_cond() manipulates rimuru.game_conditions dictionary.
                 game_cond('found_hidden', True)
@@ -88,7 +88,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     game_action()           -- Takes care of user input and runs corresponding functions, and shows user HUDs.
     game_cond()       -- Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
     mob_status()            -- Returns True if mob is in active_mobs list.
-    mobs_new([])            -- Adds new character object to current game level. Must pass in list.
+    mobs_add([])            -- Adds new character object to current game level. Must pass in list.
     mobs_cleared()          -- Returns True if player cleared all mobs. Usually used for to let player continue on or not.
     mobs_reset()            -- Reset active_mobs and targeted_mobs list.
     continue_to()           -- Saves game and asks if user wants to continue to next section.

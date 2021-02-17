@@ -1,5 +1,5 @@
 # Import all game_functions' funcs for easy access.
-from game_files.game_functions import *
+from game_files.functions import *
 # Import the next chapter to continue to.
 from chapters.tensei_2 import ch2_goblin_encounter
 from game_maps.game_location import cave_actions
@@ -89,7 +89,7 @@ def ch1_cave(rimuru):
     class learn_about_skills(cave_actions):
         def __init__(self):
             show_art('slime')
-            print(game_art.rimuru_art.died)
+            print(art.rimuru_art.died)
             idots(3, 8)
             siprint("Dissolving and absorbing, this streamlined elastic feeling body....")
             siprint("It looks like I have been stabbed, died and reincarnated as a slime!")
@@ -161,7 +161,7 @@ def ch1_cave(rimuru):
         __location = "Under water?"
 
         def __init__(self):
-            print(game_art.rimuru_art.fall_in_water)
+            print(art.rimuru_art.fall_in_water)
             siprint("I'M GOING TO DIE... AGAIN!")
             siprint("SHIT! I've finally reincarnated and I'm already going to die!")
             siprint("O'Great sage how painful thy death will be? Am I really going to suffocate to death?!?!")
@@ -438,7 +438,7 @@ def ch1_cave(rimuru):
     class tempest_serpent_encounter:
         __location = 'Sealed Cave'
         def __init__(self):
-            mobs_new(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
+            mobs_add(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
             siprint("I've been looking for the cave exit for a bit now.... This cave is so big! Or am I just small?")
             siprint("<< Answer, you are just small. >>")
             siprint("Oh, thanks for that.")

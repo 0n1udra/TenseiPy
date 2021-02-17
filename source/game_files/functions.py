@@ -1,6 +1,7 @@
-import random, pickle, time, sys, os
-import game_files.game_art as game_art
-import game_files.game_characters as mobs
+import pickle, time, sys, os
+import game_files.art as game_art
+import game_files.characters as mobs
+from game_files.extra import *
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
@@ -126,179 +127,6 @@ def game_action(level=None):
 
     game_action(level)
 
-
-#                    ========== Level Functions ==========
-def game_cond(value, new_value=None):
-    """ Set and fetch game variables. """
-    if new_value:
-        rimuru.conditional_data[value] = new_value
-        return new_value
-
-    if value in rimuru.conditional_data:
-        return rimuru.conditional_data[value]
-    else:
-        return False
-
-def mobs_new(add_mobs):
-    """
-    Add new mob to current level, and able to set name at creation.
-
-    Args:
-        add_mobs: Adds mob objects to active_mobs list.
-
-    Usage:
-        mobs_new(['tempest serpent'])
-        mobs_new(['tempest serpent', 'giant bat'])
-        mobs_new(['10* goblin', 'goblin: Goblin Chief'])
-        mobs_new(['50* goblin: Goblinas'])
-    """
-
-    for new_mob in add_mobs:
-        amount = 1
-        if '*' in new_mob:
-            amount, new_mob = new_mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
-            try:
-                amount = int(amount)
-            except:
-                pass
-
-        if ':' in new_mob:
-            new_mob, new_name = new_mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
-        else:
-            new_name = None
-
-        if mob_object := rimuru.get_object(new_mob, new=True):
-            if new_name:
-                mob_object.name = new_name.strip()
-
-            rimuru.active_mobs.append([mob_object, amount])
-
-def mob_status(target):
-    """
-    Returns whether mob in active_mobs list is is_alive.
-
-    Args:
-        target: Target to check is_alive status.
-
-    Usage:
-        mob_status('tempest serpent')
-    """
-
-    for i in rimuru.active_mobs:
-        if target.lower() in i[0].get_name():
-            return i[0].is_alive
-
-def mobs_cleared():
-    """
-    Checks if mobs on current level are all dead.
-
-    Returns:
-        boolean: If all mobs in active_mobs are dead.
-
-    Usage:
-        if mobs_cleared():
-    """
-
-    for mob in rimuru.active_mobs:
-        if mob[0].is_alive:
-            return False
-    else:
-        return True
-
-def mobs_reset():
-    """ Resets active_mobs and targeted_mobs list. """
-
-    rimuru.active_mobs.clear()
-    rimuru.targeted_mobs.clear()
-
-def continue_to(next_location):
-    """
-    Saves game and continues to next location.
-
-    Args:
-        continue_to: Next chapter to play.
-    """
-
-    rimuru.current_location_object = continue_to
-    game_save()
-    try:
-        next_location(rimuru)
-    except:
-        print("    < Error Loading Next Location >")
-
-def clear_subs(level):
-    """
-    Clears __subs list of passed in class.
-
-    Args:
-        level: Playable action class object from chapter file.
-    """
-
-    for i in dir(level):
-        if '__subs' in i:
-            eval(f"level.{i}.append('ACTIONBLOCKED')")
-
-#                    ========== Extra ==========
-def get_random(min=1, max=100, target=None, range=None, return_int=False):
-    """
-    Generate random number and check if matches passed in target parameter, returns True if so.
-
-    Args:
-        min [int:1]: Starting number for randint function.
-        max [int:100]: End number for randint function.
-        target: Target number to match to random number.
-        range: Check if random number is bigger or equal to target.
-        return_int: Return randomly generated integer alongside boolean.
-
-    Returns:
-        bool: Returns True or False if target matches random number.
-        bool, int: Returns bool and integer of random number that was generated if return_int is True.
-
-    Usage:
-        get_random(1, 1_000, 666)
-        get_random(1, 50)
-        get_random(10, 50, range=20)
-    """
-
-    if target is None:
-        target = int(round(max / 2))
-
-    rand = random.randint(min, max)
-    if range:
-        if rand >= rand:
-            if return_int:
-                return True, rand
-            return True
-
-    if rand == target:
-        if return_int:
-            return True, rand
-        return True
-
-    return False
-
-def get_any(match_to, input_list):
-    """
-    Returns True if found a match from input_list with match_to.
-
-    Args:
-        match_to: String to match with.
-        input_list: List of items to find match with.
-
-    Returns:
-        bool: Returns True if match found.
-    """
-
-    if any(i in match_to for i in input_list):
-        return True
-
-def on_off(var):
-    if var is True:
-        return 'on '
-    elif var is False:
-        return 'off'
-    else:
-        return 'n/a'
 
 #                    ========== Game Settings, Saves, Etc ==========
 def game_restart(*args):
@@ -459,6 +287,117 @@ def game_set_hardcore(arg):
         rimuru.hardcore = False
     print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
 
+#                    ========== Level Functions ==========
+def game_cond(value, new_value=None):
+    """ Set and fetch game variables. """
+    if new_value:
+        rimuru.conditional_data[value] = new_value
+        return new_value
+
+    if value in rimuru.conditional_data:
+        return rimuru.conditional_data[value]
+    else:
+        return False
+
+def mobs_add(add_mobs):
+    """
+    Add new mob to current level, and able to set name at creation.
+
+    Args:
+        add_mobs: Adds mob objects to active_mobs list.
+
+    Usage:
+        mobs_new(['tempest serpent'])
+        mobs_new(['tempest serpent', 'giant bat'])
+        mobs_new(['10* goblin', 'goblin: Goblin Chief'])
+        mobs_new(['50* goblin: Goblinas'])
+    """
+
+    for new_mob in add_mobs:
+        amount = 1
+        if '*' in new_mob:
+            amount, new_mob = new_mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
+            try:
+                amount = int(amount)
+            except:
+                pass
+
+        if ':' in new_mob:
+            new_mob, new_name = new_mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
+        else:
+            new_name = None
+
+        if mob_object := rimuru.get_object(new_mob, new=True):
+            if new_name:
+                mob_object.name = new_name.strip()
+
+            rimuru.active_mobs.append([mob_object, amount])
+
+def mob_status(target):
+    """
+    Returns whether mob in active_mobs list is is_alive.
+
+    Args:
+        target: Target to check is_alive status.
+
+    Usage:
+        mob_status('tempest serpent')
+    """
+
+    for i in rimuru.active_mobs:
+        if target.lower() in i[0].get_name():
+            return i[0].is_alive
+
+def mobs_cleared():
+    """
+    Checks if mobs on current level are all dead.
+
+    Returns:
+        boolean: If all mobs in active_mobs are dead.
+
+    Usage:
+        if mobs_cleared():
+    """
+
+    for mob in rimuru.active_mobs:
+        if mob[0].is_alive:
+            return False
+    else:
+        return True
+
+def mobs_reset():
+    """ Resets active_mobs and targeted_mobs list. """
+
+    rimuru.active_mobs.clear()
+    rimuru.targeted_mobs.clear()
+
+def continue_to(next_location):
+    """
+    Saves game and continues to next location.
+
+    Args:
+        continue_to: Next chapter to play.
+    """
+
+    rimuru.current_location_object = continue_to
+    game_save()
+    try:
+        next_location(rimuru)
+    except:
+        print("    < Error Loading Next Location >")
+
+def clear_subs(level):
+    """
+    Clears __subs list of passed in class.
+
+    Args:
+        level: Playable action class object from chapter file.
+    """
+
+    for i in dir(level):
+        if '__subs' in i:
+            eval(f"level.{i}.append('ACTIONBLOCKED')")
+
 
 #                    ========== Game Functions ==========
 def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
@@ -584,12 +523,34 @@ def show_start_banner():
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")
 
+def show_art(art):
+    """
+    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
+
+    Args:
+        art: Name of variable that is located in art.py file. The functions will replace spaces with _ if needed.
+        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
+
+    """
+
+    if rimuru.show_art is False: return False
+    print("OK")
+
+    # Gets corresponding variable from within art.py file.
+    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
+    if rimuru.textcrawl or rimuru.textcrawl is None:
+        for line in art.split('\n'):
+            time.sleep(0.05)
+            print(line)
+    else:
+        print(art)
+
 def show_settings(*args):
     print(f"""
     Game Settings:
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
                                                                Example: 'textcrawl on'
-        {on_off(rimuru.show_hud)}\thud/showhud <on/off>  -- Show available actions player can take.
+        {on_off(rimuru.show_hud)}\thud/showhud <on/off>     -- Show available actions player can take.
         {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
         {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
         {on_off(rimuru.show_hints)}\thints <on/off>         -- Show game hints, highly recommended for first timers.
@@ -603,11 +564,11 @@ def show_help(*args):
     
     Commands:
         inv/inventory               -- Show inventory.
-        stats/skills [TARGET]       -- Show yours skills and resistances. attribute also works.
+        stats/skills [TARGET]       -- Show skills and resistances. attribute also works.
                                        Example: 'stats tempest serpent', 'attributes evil centipede'
         info/data TARGET            -- Show info on skill, item or character. 
                                        Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        target TARGET(S)            -- Target mob(s).
+        target TARGET(S)            -- Target mob(s), to be able to use skills/abilities/etc on them.
                                        Example: 'target tempest serpent', 'target tempest serpent, black spider'
           - target nearby           -- Target nearby mobs.
           - target reset            -- Clear targeted.
@@ -653,31 +614,3 @@ def show_rank_chart(*args):
         2.      E           Beginner
         1.      F           Novice
         """)
-
-def tbc():
-    """ To Be Continued message.."""
-
-    print("\n    < ---IN PREOGRESS--- >\n")
-    input("Press Enter to exit > ")
-
-def show_art(art):
-    """
-    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
-
-    Args:
-        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
-        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
-
-    """
-
-    if rimuru.show_art is False: return False
-    print("OK")
-
-    # Gets corresponding variable from within game_art.py file.
-    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
-    if rimuru.textcrawl or rimuru.textcrawl is None:
-        for line in art.split('\n'):
-            time.sleep(0.05)
-            print(line)
-    else:
-        print(art)
