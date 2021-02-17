@@ -23,8 +23,8 @@ ch1_cave()
         _in_water:
             stay_in_water:
                 stay_in_water()
-                _expel_water() > _find_veldora
-    _find_veldora:
+                _expel_water() > _veldora_encounter
+    _veldora_encounter:
         _leave:
             _help_me_see() > _respond
             _leave() > _leave_cave

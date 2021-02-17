@@ -88,6 +88,7 @@ def game_action(level=None):
         [rimuru.use_skill, ['sense heat source', character], ['nearby', 'sense heat sources']],
         [show_help, ['help', 'commands']],
         [show_settings, ['settings', 'options']],
+        [show_rank_chart, ['showrank', 'showranking', 'showlevel']],
         [game_set_art, ['art', 'ascii', 'showart']],
         [game_set_hud, ['hud', 'showhud', 'gamehud']],
         [game_set_hints, ['hints', 'show hints', 'showhints', 'gamehints']],
@@ -548,12 +549,11 @@ def show_art(art):
 def show_settings(*args):
     print(f"""
     Game Settings:
-        {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
-                                                               Example: 'textcrawl on'
-        {on_off(rimuru.show_hud)}\thud/showhud <on/off>     -- Show available actions player can take.
-        {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
-        {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
-        {on_off(rimuru.show_hints)}\thints <on/off>         -- Show game hints, highly recommended for first timers.
+        {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
+        {on_off(rimuru.show_hud)}\thud/showhud <on/off>\t-- Show available actions player can take.
+        {on_off(rimuru.show_art)}\tascii/showart <on/off>\t-- Show ASCII art.
+        {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
+        {on_off(rimuru.show_hints)}\thints <on/off>\t\t-- Show game hints, highly recommended for first timers.
     """)
 
 def show_help(*args):
@@ -586,8 +586,8 @@ def show_help(*args):
         eat/predate                 -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
         nearby                      -- Once acquired [Sense Heat Source] skill, you can use nearby instead of typing 'use sense heat source' every time.
         help                        -- Show this help page.
-          - help settings           -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
-          - help level              -- Show mob level chart and correpsonding ranking.
+        settings                    -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
+        showrank                    -- Show mob level chart and corresponding ranking.
         exit                        -- Exits after save.
 
     Game Dialogue:
