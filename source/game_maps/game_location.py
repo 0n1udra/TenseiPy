@@ -7,6 +7,9 @@ do_it_subs = ['do it', 'yes do it', 'please do that', 'please do it', 'yes do th
 yes_subs = ['yes', 'yes please', 'sure', 'yep', 'affirmative', 'affirmatory', 'i consent', 'i give my consent']
 all_yes_subs = activate_subs + do_it_subs + yes_subs
 no_subs = ['negative', "that's a negative", 'that is a negative', 'negatory', 'i refuse', 'denied', 'cancel', 'cancel it' 'no', 'no thanks', 'nah', "don't", "please don't", "don't do it", 'do not do that', 'do not']
+you_want_subs = []
+you_who_subs = []
+you_what_subs = []
 
 class Game_Location:
     pass

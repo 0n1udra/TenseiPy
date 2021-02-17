@@ -56,6 +56,8 @@ class Combat:
         attack_success = False
         skills = []
 
+        # TODO set combat to use get_random
+
         # If mob is in active_mobs list and is is_alive, adds to focusTarget list.
         for attack in user_input.split(','):
             attack = self.get_object(attack)

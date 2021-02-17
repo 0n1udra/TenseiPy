@@ -42,11 +42,10 @@ def ch2_goblin_encounter(rimuru):
                      sprint("You have two options. You can worship me or you can die.")
                      dots(2, 10)
                      if get_random(1, 10, 1):
-                     sprint("NEVER! We will never surrender to you!")
-                     sprint("ATTACK!!!!!!!!")
+                         sprint("NEVER! We will never surrender to you!")
+                         sprint("ATTACK!!!!!!!!")
                      game_over()
 
-                     sprint("!")
                      sprint("Ok, good choice. So, you guys have a base, village, anything?")
                      sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
                      sprint("Of course you would. Lets start moving.")
@@ -58,6 +57,29 @@ def ch2_goblin_encounter(rimuru):
                 siprint("Nah... Lets move on.")
                 siprint("<< Warning, dangerous monsters are near. >>")
                 siprint("Oh crap! Is that a wolf pack!?! I should probably run!")
+                siprint("~You there, slime! What is such a weak creature doing out here?~")
+
+            class nice:
+                __subs = ['minding my own business', 'none of your business', 'why?', "Don't mind me", "I'm just a slime", "I'm just a cute little slime"]
+                def __init__(self):
+                    siprint("Just a cute little slime minding his own business.")
+
+            class rude:
+                __subs = ['weak?', 'weak', 'who are you calling weak', "you're the weak one", "bad dog", "you talking to me?"]
+                def __init__(self):
+                    siprint("Weak!?! Who are you calling weak, you mutt.")
+
+            class what_you_want:
+                def __init__(self):
+                    siprint("What do you want?")
+
+            class attack:
+                def __init__(self):
+                    if mobs_cleared():
+                        siprint("They looked dangerous.")
+                    else:
+                        siprint("I didn't get them all, crap there's one running towards me!")
+                        game_over()
 
 
     class goto_goblin_village:
