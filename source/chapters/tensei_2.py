@@ -81,7 +81,6 @@ def ch2_goblin_encounter(rimuru):
                         siprint("I didn't get them all, crap there's one running towards me!")
                         game_over()
 
-
     class goto_goblin_village:
         __locatoin = "Goblin Village"
 
