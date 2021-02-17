@@ -80,7 +80,7 @@ def ch1_cave(rimuru):
                     sprint("Puuuuuuuuuuuuyooooooooooo!")
 
             class _explore:
-                __subs = move_on_subs
+                __subs = subs.move_on
 
                 def __init__(self):
                     siprint("More grass... Woooo!")
@@ -116,7 +116,7 @@ def ch1_cave(rimuru):
                     siprint("I have a feeling these will come in handy.")
 
         class _keep_exploring:
-            __subs = move_on_subs + ['fumble around', 'keep fumbling', 'fumble', 'more fumbling', 'fumble more']
+            __subs = subs.move_on + ['fumble around', 'keep fumbling', 'fumble', 'more fumbling', 'fumble more']
             def __init__(self):
                 siprint("It's just... very lonely here. Wherever here is. I've been eating grass just to pass the time.")
                 siprint("There seems to be always some grass to eat, the occasional magic ore, and more to explore!")
@@ -172,7 +172,7 @@ def ch1_cave(rimuru):
             game_action(self)
 
         class stay_in_water:
-            __subs = wait_subs + ['stay in water', 'wait in water']
+            __subs = subs.wait + ['stay in water', 'wait in water']
 
             def __init__(self):
                 idots(5)
@@ -242,7 +242,7 @@ def ch1_cave(rimuru):
                 found_veldora()
 
         class _leave:
-            __subs = move_on_subs
+            __subs = subs.move_on
             def __init__(self):
                 sprint("~ Hey, are you just going to keep ignoring me? ~")
                 sprint("...")
@@ -301,14 +301,14 @@ def ch1_cave(rimuru):
                     sprint("~ Alright fine, I won't. Hmmmmph ~")
                     friend_veldora()
 
-        class no:
-            __subs = no_subs
+        class wait:
+            __subs = subs.no
             def __init__(self):
                 sprint("~ Welllll? I'm waiting..... ~")
                 siprint("<< Notice, activate linking? >>")
 
         class _leave:
-            __subs = move_on_subs + ['no, leave', 'leave', 'leave him', 'leave dragon', 'escape']
+            __subs = subs.move_on + ['no, leave', 'leave', 'leave him', 'leave dragon', 'escape']
             def __init__(self):
                 sprint("Wait where are you going small one! Weren't we getting somewhere......")
                 sprint("Hello? Hellooooooooooo?!")
@@ -321,7 +321,7 @@ def ch1_cave(rimuru):
             game_action(self)
 
         class _leave:
-            __subs = move_on_subs
+            __subs = subs.move_on
             def __init__(self):
                 sprint("I guess I'll be heading out now.")
                 sprint("Really, so soon. But we just started!")
@@ -392,7 +392,7 @@ def ch1_cave(rimuru):
                         sprint("Hey what are you doing there? Focus on me... ME!")
 
                 class _eat_veldora:
-                    __subs = all_yes_subs + ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon']
+                    __subs = subs.all_yes + ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon']
                     def __init__(self):
                         veldora.update_info()
                         rimuru.add_inventory(veldora)
@@ -401,7 +401,7 @@ def ch1_cave(rimuru):
                         game_action(self)
 
                     class _start_analysis:
-                        __subs = all_yes_subs + ['start it!', 'yes start it please!', 'yes start it!']
+                        __subs = subs.all_yes + ['start it!', 'yes start it please!', 'yes start it!']
                         def __init__(self):
                             siprint("Yes! Please take care of it [Great Sage].")
                             rimuru.update_status('veldora', 'Analyzing')
@@ -410,12 +410,12 @@ def ch1_cave(rimuru):
                             tempest_serpent_encounter()
 
                     class ignore:
-                        __subs = no_subs + ['do not start analysis', "don't start analysis", 'cancel analysis', "don't start", 'ignore him', 'leave it', 'leave him', 'trap him', "don't help him", 'do not help him']
+                        __subs = subs.no + ['do not start analysis', "don't start analysis", 'cancel analysis', "don't start", 'ignore him', 'leave it', 'leave him', 'trap him', "don't help him", 'do not help him']
                         def __init__(self):
                             siprint("You know what, no. I think I'll just leave that for now. Hehehe...")
 
                     class _move_on:
-                        __subs = move_on_subs + ['ignore him, lets move on']
+                        __subs = subs.move_on + ['ignore him, lets move on']
                         def __init__(self):
                             siprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
                             tempest_serpent_encounter()
@@ -426,7 +426,7 @@ def ch1_cave(rimuru):
                         sprint("Will you see, that's kind of a long story. Not one to be told here.")
 
             class _leave_veldora(cave_actions):
-                __subs = move_on_subs + ['leave veldora', 'leave friend', 'abandon veldora', 'abandon him', 'abandon friend']
+                __subs = subs.move_on + ['leave veldora', 'leave friend', 'abandon veldora', 'abandon him', 'abandon friend']
                 def __init__(self):
                     siprint("OK, I go now.")
                     siprint("WAIT! WHAAAAAT!")
@@ -462,7 +462,7 @@ def ch1_cave(rimuru):
                     siprint("< HINT: Try [Sense Heat Source] to detect foes using the 'use' command, or use 'nearby'. 'help' for more info. >")
 
         class _move_on:
-            __subs = move_on_subs
+            __subs = subs.move_on
             def __init__(self):
                 if mobs_cleared():
                     at_cave_exit()

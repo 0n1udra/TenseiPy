@@ -584,40 +584,12 @@ def show_start_banner():
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")
 
-def tbc():
-    """ To Be Continued message.."""
-
-    print("\n    < ---IN PREOGRESS--- >\n")
-    input("Press Enter to exit > ")
-
-def show_art(art):
-    """
-    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
-
-    Args:
-        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
-        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
-
-    """
-
-    if rimuru.show_art is False: return False
-    print("OK")
-
-    # Gets corresponding variable from within game_art.py file.
-    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
-    if rimuru.textcrawl or rimuru.textcrawl is None:
-        for line in art.split('\n'):
-            time.sleep(0.05)
-            print(line)
-    else:
-        print(art)
-
 def show_settings(*args):
     print(f"""
     Game Settings:
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>      -- Enable or disable text crawl effect.
                                                                Example: 'textcrawl on'
-        {on_off(rimuru.show_hud)}\thud/showhud <on/off>     -- Show available actions player can take.
+        {on_off(rimuru.show_hud)}\thud/showhud <on/off>  -- Show available actions player can take.
         {on_off(rimuru.show_art)}\tascii/showart <on/off>   -- Show ASCII art.
         {on_off(rimuru.hardcore)}\thardcore <on/off>        -- Enable hardcore mode.
         {on_off(rimuru.show_hints)}\thints <on/off>         -- Show game hints, highly recommended for first timers.
@@ -631,11 +603,11 @@ def show_help(*args):
     
     Commands:
         inv/inventory               -- Show inventory.
-        stats/skills [TARGET]       -- Show skills and resistances. attribute also works.
+        stats/skills [TARGET]       -- Show yours skills and resistances. attribute also works.
                                        Example: 'stats tempest serpent', 'attributes evil centipede'
         info/data TARGET            -- Show info on skill, item or character. 
                                        Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        target TARGET(S)            -- Target mob(s), to be able to use skills/abilities/etc on them.
+        target TARGET(S)            -- Target mob(s).
                                        Example: 'target tempest serpent', 'target tempest serpent, black spider'
           - target nearby           -- Target nearby mobs.
           - target reset            -- Clear targeted.
@@ -681,3 +653,31 @@ def show_rank_chart(*args):
         2.      E           Beginner
         1.      F           Novice
         """)
+
+def tbc():
+    """ To Be Continued message.."""
+
+    print("\n    < ---IN PREOGRESS--- >\n")
+    input("Press Enter to exit > ")
+
+def show_art(art):
+    """
+    Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
+
+    Args:
+        art: Name of variable that is located in game_art.py file. The functions will replace spaces with _ if needed.
+        textcrawl [bool:False]: Use textcrawl effect ignoring rimuru.show_art variable.
+
+    """
+
+    if rimuru.show_art is False: return False
+    print("OK")
+
+    # Gets corresponding variable from within game_art.py file.
+    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
+    if rimuru.textcrawl or rimuru.textcrawl is None:
+        for line in art.split('\n'):
+            time.sleep(0.05)
+            print(line)
+    else:
+        print(art)

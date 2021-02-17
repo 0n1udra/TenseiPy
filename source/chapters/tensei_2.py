@@ -52,7 +52,7 @@ def ch2_goblin_encounter(rimuru):
                      goto_goblin_village()
 
         class move_on:
-            __subs = move_on_subs
+            __subs = subs.move_on
             def __init__(self):
                 siprint("Nah... Lets move on.")
                 siprint("<< Warning, dangerous monsters are near. >>")
