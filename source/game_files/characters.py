@@ -156,12 +156,40 @@ class Eren_Grimwold(Character):
         self.level = 5
         self.species = 'Human'
         self.occupations = ['Adventurer']
-        self.affiliations = ['Freedom Association', "Cabal's Party", "Brumund"]
+        self.affiliations = ['Freedom Association', "Kaval's Party", "Brumund"]
         self.description = "A Mage part of Cabal's Party."
         self.appearance = "A blonde, 16y/o, green eyed adventurer from the Freedom Association."
         self.abilities = ['Mud Hand', 'Cleaning Magic', 'Elemental Magic']
         self.update_info()
 
+class Kaval(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = "Kaval"
+        self.level = 5
+        self.species = 'Human'
+        self.occupations = ['Adventurer']
+        self.affiliations = ["Kaval's Party", "Freedom Association"]
+        self.description = """Leader of his adventure's party, where he serves as the 'fighter' role. Alongside Gido,
+        he is also tasked as the secret bodyguard of Lady Elyune under the guise of an adventurer.'"""
+        self.appearance = 'A young man with medium length hair, seemingly in his prime.'
+        self.abilities = ['Fighting Spirit', 'Heavy Collision']
+        self.update_info()
+
+class Gideo(Character):
+    def __init__(self):
+        Character.__init__(self)
+        self.name = 'Gido'
+        self.level = 5
+        self.species = 'Human'
+        self.occupations = ['Adventurer']
+        self.affiliations = ["Kaval's Party", "Freedom Association"]
+        self.description = """A member of Kaval's Party who serves as the 'thief' role. However,
+        he is actually serving as one of the bodyguards of Lady Elyune secretly while under the guise of an adventurer."""
+        self.appearance = """Gido has a tall and strong build and a rectangular head. 
+        His brown hair is cut short and has a goatee, whereas his cheeks have distinct depressions."""
+        self.abilities = ['Stealth']
+        self.update_info()
 
 # ========== Low Level
 class Tempest_Serpent(Character):
