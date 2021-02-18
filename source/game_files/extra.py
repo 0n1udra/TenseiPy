@@ -71,7 +71,7 @@ def format_info(name, var):
         return_data += f"{name}: "
 
     if type(var) is list:
-        return_data += ", ".join(var)
+        return_data += ", ".join(sorted(var))
     else:
         return_data += str(var)
 
