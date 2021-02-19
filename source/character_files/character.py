@@ -27,20 +27,20 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
 
         # Character information and data related variables.
-        self.name = 'N/A'
+        self.name = ''
         self.family_name = ''
         self.canon_name = ''  # Name from anime or manga storyline.
-        self.title = 'N/A'  # E.g. True Dragon, Demon Lord.
-        self.blessing = 'N/A'  # E.g. Storm Crest (from Veldora)>
-        self.shared_blessing = 'N/A'
-        self.species = 'N/A'
-        self.rank = 'N/A'  # E.g. Catastrophe, Calamity.
+        self.title = ''  # E.g. True Dragon, Demon Lord.
+        self.blessing = ''  # E.g. Storm Crest (from Veldora)>
+        self.shared_blessing = ''
+        self.species = ''
+        self.rank = ''  # E.g. Catastrophe, Calamity.
         self.level = 1  # Same as rank just as integer.
         self.occupations = []
         self.affiliations = []
-        self.info_page = 'N/A'  # Info page for character.
-        self.description = 'N/A'
-        self.appearance = 'N/A'
+        self.info_page = ''  # Info page for character.
+        self.description = ''
+        self.appearance = ''
         self.abilities = []
         self.evolution = ''
         self.acquired_msg = ''
@@ -57,14 +57,14 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         # Map functionality.
         self.available_locations = []
-        self.current_location = 'N/A'
+        self.current_location = ''
         self.current_location_object = None  # Current location's class object.
 
         # Game variables.
         self.save_path = ''
         self.valid_save = None  # If you died in-game, the current save will be unusable.
         self.textcrawl = None  # Slow text crawl effect, letter by letter.
-        self.show_hud = False  # Show available actions player can take.
+        self.show_hud = None  # Show available actions player can take.
         self.show_art = True  # Show ASCII art. Disable to save room on screen.
         self.show_hints = None  # If hardcore is True, this boolean will be ignored.
         self.hardcore = None  # Hides targets, mimicking, and actions.

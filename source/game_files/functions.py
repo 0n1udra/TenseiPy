@@ -17,19 +17,19 @@ def update_rimuru(rimuru_object):
     return rimuru
 
 def game_hud(actions):
-    if rimuru.show_hud is False: return
+    if rimuru.show_hud is False or rimuru.hardcore is True: return
 
     if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_hud: print()  # Adds extra space when needed.
 
-    if rimuru.current_mimic and not rimuru.hardcore:
+    if rimuru.current_mimic:
         print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
 
-    if rimuru.targeted_mobs and not rimuru.hardcore:
-        # Adds (Dead) status to corresponding
+    if rimuru.targeted_mobs:
+        # Adds X status to corresponding targets that are dead.
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'Target: {targets}', end='')
 
-    if rimuru.show_hud and not rimuru.hardcore:
+    if rimuru.show_hud:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
         print(f"\nActions: {actions_for_hud}", end='')
@@ -38,7 +38,6 @@ def game_action(level=None):
     global onetime
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
-
 
     Args:
         level: Current story progress class object.
@@ -101,6 +100,7 @@ def game_action(level=None):
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action in game_actions:
+        # If action needs custom parameters passed in.
         if len(action) == 3:
             if command in action[2]:
                 action[0](*action[1])
@@ -117,6 +117,7 @@ def game_action(level=None):
             action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
+        # Usually used for when you want an action to be used only once.
         if 'ACTIONBLOCKED' in action_subs:
             continue
 

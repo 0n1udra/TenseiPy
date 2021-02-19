@@ -1,6 +1,6 @@
 from character_files.character import Character
 
-
+# ========== Characters
 class Rimuru_Tempest(Character):
     def __init__(self):
         Character.__init__(self)
@@ -148,7 +148,7 @@ class Veldora_Tempest(Character):
         self.inventory_capacity_add = 10
         self.update_info()
 
-# ========== Characters
+# ===== Adventurers
 class Eren_Grimwold(Character):
     def __init__(self):
         Character.__init__(self)
@@ -191,12 +191,12 @@ class Gideo(Character):
         self.abilities = ['Stealth']
         self.update_info()
 
+
 # ========== Low Level
 class Tempest_Serpent(Character):
-    def __init__(self, name=None):
+    def __init__(self):
         Character.__init__(self)
         self.name = 'Tempest Serpent'
-        if name: self.name = name
         self.species = 'Black Serpent'
         self.level = 6
         self.appearance = 'The snake has a large, jet-black body with thorned scales and tough skin.'
@@ -206,10 +206,9 @@ class Tempest_Serpent(Character):
         self.update_info()
 
 class Giant_Bat(Character):
-    def __init__(self, name=None):
+    def __init__(self):
         Character.__init__(self)
         self.name = 'Giant Bat'
-        if name: self.name = name
         self.species = 'Bat'
         self.level = 6
         self.appearance = '''
@@ -222,10 +221,9 @@ class Giant_Bat(Character):
         self.update_info()
 
 class Evil_Centipede(Character):
-    def __init__(self, name=None):
+    def __init__(self):
         Character.__init__(self)
         self.name = 'Evil Centipede'
-        if name: self.name = name
         self.species = 'Centipede'
         self.level = 5
         self.appearance = 'Centipede monstrosity, a giant centipede.'
@@ -235,10 +233,9 @@ class Evil_Centipede(Character):
         self.update_info()
 
 class Black_Spider(Character):
-    def __init__(self, name=None):
+    def __init__(self):
         Character.__init__(self)
         self.name = 'Black Spider'
-        if name: self.name = name
         self.species = 'Spider'
         self.level = 5
         self.appearance = 'Most of the body is yellow-ish, while the legs are black.'
@@ -249,12 +246,11 @@ class Black_Spider(Character):
 
 
 # ========== Wolves
-class Tempest_Wolf(Character):
-    def __init__(self, name=None):
+class Direwolf(Character):
+    def __init__(self):
         Character.__init__(self)
-        self.name = 'Tempest Wolf'
-        if name: self.name = name
-        self.species = 'Tempest Wolf'
+        self.name = 'Direwolf'
+        self.species = 'Direwolf'
         self.level = 5
         self.appearance = 'Most of the body is yellow-ish, while the legs are black.'
         self.description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
@@ -266,10 +262,9 @@ class Tempest_Wolf(Character):
 
 # ========== Goblins
 class Goblin(Character):
-    def __init__(self, name=None):
+    def __init__(self):
         Character.__init__(self)
         self.name = 'Goblin'
-        if name: self.name = name
         self.species = 'Goblin'
         self.level = 4
         self.appearance = 'They have green skin and a big nose. Their average height is 150 centimeters.'
@@ -285,10 +280,9 @@ class Goblin(Character):
         self.update_info()
 
 class Hobgoblin(Goblin):
-    def __init__(self, name=None):
+    def __init__(self):
         Goblin.__init__(self)
         self.name = 'Hobgoblin'
-        if name: self.name = name
         self.species = 'Hobgoblin'
         self.level = 5
         self.appearance = 'They have green skin like their pre-evolved form, but their average height is improved and his height now reaches around 180 centimeters.'

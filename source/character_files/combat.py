@@ -1,3 +1,5 @@
+from game_files.extra import get_any
+
 class Combat:
     def set_targets(self, targets):
         """
@@ -14,7 +16,7 @@ class Combat:
         """
         targets = targets.lower()
 
-        if 'reset' in targets:
+        if get_any(targets, ['reset', 'clear']):
             self.targeted_mobs.clear()
         elif 'all' in targets:
             self.targeted_mobs = self.active_mobs[:]
@@ -71,7 +73,7 @@ class Combat:
             for current_skill in skills:
                 # If target is too high of a level to damage with skill.
                 if current_target[0].level > current_skill.damage_level:
-                    print(f"    < {current_target[0].name} Failed >")
+                    print(f"    < Elimination Failed: {current_target[0].name}  >")
                     continue
                 # Checking if have resistance.
                 elif self.check_resistance(current_skill, current_target[0]):
