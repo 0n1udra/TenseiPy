@@ -381,7 +381,7 @@ def continue_to(next_location):
         continue_to: Next chapter to play.
     """
 
-    rimuru.current_location_object = continue_to
+    rimuru.current_location_object = next_location
     game_save()
     try:
         next_location(rimuru)
