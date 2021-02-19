@@ -94,11 +94,38 @@ def ch2_goblin_encounter(rimuru):
             sprint("There is a pack of 100 Dire Wolves that have been attacking us recently, and we are barely fendding them off.")
             game_action(self)
 
+        class _compensation:
+            __subs = ['what about pay?', 'reward?', 'is there a reward?', 'will i be compensated']
+            def __init__(self):
+                sprint("So what, you want protection? What would my reward be?")
+                sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
+                sprint("That will have to do. For now.")
+                goto_goblin_village._assist_goblins()
+
+        class _attack:
+            def __init__(self):
+                if mobs_cleared():
+                    siprint("They're all dead now. They were so weak.")
+                    siprint("What now?")
+                    hunt_wolves()
+
+                if mob_status('goblin elder'):
+                    sprint("Listen up! I am now you're new village chief!")
+                    sprint("Anyone that disagrees will be cut down on the spot!")
+                    game_action(self)
+
         class _assist_goblins:
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
                 game_action(self)
+
+            class _setup_defenses:
+                def __init__(self):
+                    sprint("Let's setup defenses.")
+                    siprint("Hey! Get some goblins to setup defences around the parameter.")
+                    game_cond('village_defense', True)
+                    wolf_attack()
 
             class _heal_wounded:
                 __subs = ['any wounded', 'any hurt', 'any goblins wounded']
@@ -119,54 +146,40 @@ def ch2_goblin_encounter(rimuru):
                             sprint("I need some way to heal them.")
                             goto_goblin_village._assist_goblins()
 
-                def _let_them_die(self):
-                    siprint("I'm going to save my potions for myself.")
-                    sprint("Great one, please! If you can heal our wounded we would be most grateful!")
-                    sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
-                    sprint("I see, we are sorry for troubling you.")
-                    goto_goblin_village._assist_goblins()
-
-            class _setup_defenses:
-                def __init__(self):
-                    sprint("Let's setup defenses.")
-                    game_cond('village_defense', 'up')
-
-                    wolf_attack()
-
-        def _compensation(self):
-            sprint("So what, you want protection? What would my reward be?")
-            sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
-            sprint("That will have to do. For now.")
-            goto_goblin_village._assist_goblins()
-
-        def _attack(self):
-            if mobs_cleared():
-                siprint("They're all dead now. They were so weak.")
-                siprint("What now?")
-                hunt_wolves()
-
-            if mob_status('goblin elder'):
-                sprint("Listen up! I am now you're new village chief!")
-                sprint("Anyone that disagrees will be cut down on the spot!")
-                game_action(self)
+                class _let_die:
+                    __subs = ['let them die', 'just let them die']
+                    def __init__(self):
+                        siprint("I'm going to save my potions for myself.")
+                        sprint("Great one, please! If you can heal our wounded we would be most grateful!")
+                        sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
+                        sprint("I see, we are sorry for troubling you.")
+                        goto_goblin_village._assist_goblins()
 
     class wolf_attack:
         def __init__(self):
+            mobs_add(['25* '])
             sprint("The Dire Wolves, they're here!")
             game_action(self)
 
-        def _attack(self):
-            siprint("Lets attack first before they can do anything.")
+        class _attack:
+            def __init__(self):
+                siprint("Best defence is a good offense, right?")
 
-        def _give_warning(self):
-            sprint("Listen up, because I'm only going to say this once!")
-            sprint("Acknowledge me as your ki   ng, or retreat now and never show yourselves again!")
-            sprint("So, which is it?")
+        class _give_warning:
+            __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
+            def __init__(self):
+                sprint("Listen up, because I'm only going to say this once!")
+                sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
+                sprint("So, which is it?")
+                if get_random(1, 3, 1):
+                    siprint("We accept you as our new leader!")
+                else:
+                    siprint("How dare you! We not accept this!")
+
 
     class hunt_wolves:
         def __init__(self):
             sprint("Lets go chase after those wolves, see if anything interesting happens.")
-
             game_action(self)
 
     goblin_encounter()

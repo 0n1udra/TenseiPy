@@ -303,7 +303,8 @@ def ch1_cave(rimuru):
     class friend_veldora(cave_actions):
         def __init__(self):
             sprint("Hmmmm, now what?")
-            siprint("Should I try make a friend? Or just leave, there's something supsicious about him...")
+            siprint("Should I try make a friend? Or just leave, there's something suspicious about him...")
+            game_cond('met veldora', True)
             game_action(self)
 
         class _leave:
@@ -495,7 +496,7 @@ def ch1_cave(rimuru):
 
     class at_cave_exit:
         def __init__(self):
-
+            mobs_add(['kaval', 'gido', 'eren grimwold'])
             siprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
             siprint("Water attack? No, that'll probably be overkill. Wait somethings happening.")
             siprint("Wait! They look like people! Three of them. What are they doing here?")
@@ -509,11 +510,17 @@ def ch1_cave(rimuru):
             sprint("I shouldn't show, they'll probably get scared and attack me")
             game_action(self)
 
-        class _sneak_out:
-            subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past']
+        class _wait:
+            subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
             def __init__(self):
-                siprint("Finally! I'm out of that cave. Where now to though?")
-                continue_to(ch2_goblin_encounter)
+                if get_random(1, 20, 1):
+                    siprint("I sense a monster nearby! There! A slime!")
+                    siprint("Crap! How did they notice me!")
+                    siprint("* And before another word could be uttered by the little slime, he was swiftly smushed. *")
+                    game_over()
+
+                siprint("Phew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
+                at_cave_exit._hfunc_leave_cave()
 
         class _say_hi:
             def __init__(self):
@@ -536,6 +543,33 @@ def ch1_cave(rimuru):
         class _attack:
             __subs = ['attack adventurers', 'attack them']
             def __init__(self):
-                game_over()
+                if mobs_cleared():
+                    siprint("Wasn't necessary, but I suppose it had to be done.")
+                    at_cave_exit._hfunc_leave_cave()
+                else:
+                    siprint("CRAP! I didn't kill all of them, the rest will kill me")
+                    siprint("* Before the little slime could do or say anything else, he was swiftly smushed to death! *")
+                    game_over()
+
+        class _hfunc_leave_cave(cave_actions):
+            __subs = ['leave this cave', 'leave', 'exit cave', 'exit']
+            def __init__(self):
+                if game_cond('met veldora'):
+                    siprint("Or... uhm... Should I go back to that pouty 'dragon'?")
+                game_action(self)
+
+            class _go_to_veldora:
+                __subs = ['go find veldora']
+                def __init__(self):
+                    if rimuru.check_acquired('veldora') or game_cond('met veldora'):
+                        siprint("Let's go check on that dragon.")
+                        siprint("~ What are you doing back? ~")
+                        friend_veldora()
+
+            class _leave:
+                __subs = ['leave', 'leave cave', 'exit', 'exit cave']
+                def __init__(self):
+                    siprint("Let's leave this cave already!")
+                    continue_to(ch2_goblin_encounter)
 
     wake_up()
