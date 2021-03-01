@@ -11,9 +11,9 @@ class subs:
     no = ['negative', "that's a negative", 'that is a negative', 'negatory', 'i refuse', 'denied', 'cancel', 'cancel it' 'no', 'no thanks', 'nah', "don't", "please don't", "don't do it", 'do not do that', 'do not']
     all_yes = activate + do_it + yes
 
-    who = ['who are you?', 'who are you guys?']
-    want = ['what do you want?', 'do you want something?']
-    what = ['what are you?', 'what is this?']
+    who = ['who are you', 'who are you guys']
+    want = ['what do you want', 'do you want something']
+    what = ['what are you', 'what is this']
 
 class Game_Location:
     pass

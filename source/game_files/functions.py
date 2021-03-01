@@ -65,7 +65,10 @@ def game_action(level=None):
                 user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").strip().lower()
+        # So user can't activate 'hfunc' actions.
         if 'hfunc' in user_input: game_action(level)
+        # Removes anything that's not alpha-numeric, easier for making __subs.
+        user_input = ''.join(i for i in user_input if i.isalnum() or ' ')
     print()
 
     # Separates user input into command and command arguments.
@@ -140,8 +143,14 @@ def game_exit(*args):
     game_save()
     exit(0)
 
-def game_save(level=None):
-    """Pickels Rimuru_Tempest object."""
+def game_save(level=None, show_msg=True):
+    """
+    Pickels Rimuru_Tempest object.
+
+    Args:
+        level [bool]: Update rimuru.current_location_object
+        show_msg [bool:True]: Show Game Saved message.
+    """
 
     if level:
         rimuru.current_location_object = level
@@ -150,7 +159,8 @@ def game_save(level=None):
         rimuru.valid_save = True
 
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    print("\n    < Game Saved >\n")
+    if show_msg:
+        print("\n    < Game Saved >\n")
 
 def game_load(path):
     """
@@ -184,7 +194,7 @@ def game_over():
     """Deletes pickle save file."""
 
     rimuru.valid_save = False  # So you can't use copies of game save.
-    game_save()
+    game_save(show_msg=False)
 
     try:
         os.remove(rimuru.save_path)

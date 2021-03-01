@@ -57,26 +57,28 @@ def ch2_goblin_encounter(rimuru):
                 siprint("Nah... Lets move on.")
                 siprint("<< Warning, dangerous monsters are near. >>")
                 siprint("Oh crap! Is that a wolf pack!?! I should probably run!")
-                siprint("~You there, slime! What is such a weak creature doing out here?~")
+                siprint("~ You there, slime! What is such a weak creature doing out here? ~")
 
             class nice:
-                __subs = ['minding my own business', 'none of your business', 'why?', "Don't mind me", "I'm just a slime", "I'm just a cute little slime"]
+                __subs = ['minding my own business', 'none of your business', "Don't mind me", "I'm just a slime", "I'm just a cute little slime"]
                 def __init__(self):
                     siprint("Just a cute little slime minding his own business.")
 
             class rude:
-                __subs = ['weak?', 'weak', 'who are you calling weak', "you're the weak one", "bad dog", "you talking to me?"]
+                __subs = ['weak', 'weak', 'who are you calling weak', "you're the weak one", "bad dog", "you talking to me?"]
                 def __init__(self):
                     siprint("Weak!?! Who are you calling weak, you mutt.")
 
             class what_you_want:
+                __subs = ['you need something', 'what do you want', 'what you guys want']
                 def __init__(self):
                     siprint("What do you want?")
 
             class attack:
                 def __init__(self):
                     if mobs_cleared():
-                        siprint("They looked dangerous.")
+                        siprint("They looked dangerous. So I attacked first.")
+                        siprint("But now looking at them up close, they look pretty weak and scrawny.")
                     else:
                         siprint("I didn't get them all, crap there's one running towards me!")
                         game_over()
@@ -95,7 +97,7 @@ def ch2_goblin_encounter(rimuru):
             game_action(self)
 
         class _compensation:
-            __subs = ['what about pay?', 'reward?', 'is there a reward?', 'will i be compensated']
+            __subs = ['what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
             def __init__(self):
                 sprint("So what, you want protection? What would my reward be?")
                 sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
@@ -115,16 +117,18 @@ def ch2_goblin_encounter(rimuru):
                     game_action(self)
 
         class _assist_goblins:
+            __subs = ['assit the goblins', 'help goblins', 'help the goblins', 'help them', 'assist them']
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
                 game_action(self)
 
             class _setup_defenses:
+                __subs = ['go setup defenses', 'setup some defenses', 'setup border defenses']
                 def __init__(self):
                     sprint("Let's setup defenses.")
-                    siprint("Hey! Get some goblins to setup defences around the parameter.")
-                    game_cond('village_defense', True)
+                    siprint("Hey! Get some goblins to setup defenses around the parameter.")
+                    game_cond('village defense', True)
                     wolf_attack()
 
             class _heal_wounded:
@@ -157,7 +161,7 @@ def ch2_goblin_encounter(rimuru):
 
     class wolf_attack:
         def __init__(self):
-            mobs_add(['25* '])
+            mobs_add(['25* direwolf'])
             sprint("The Dire Wolves, they're here!")
             game_action(self)
 
@@ -176,10 +180,5 @@ def ch2_goblin_encounter(rimuru):
                 else:
                     siprint("How dare you! We not accept this!")
 
-
-    class hunt_wolves:
-        def __init__(self):
-            sprint("Lets go chase after those wolves, see if anything interesting happens.")
-            game_action(self)
 
     goblin_encounter()
