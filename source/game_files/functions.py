@@ -490,7 +490,7 @@ def show_history(arg):
         else:
             print(line[0])
 
-def dots(times=2, length=5, indent=False):
+def dots(length=3, times=5, indent=False):
     """
     Loading dot animation.
 
