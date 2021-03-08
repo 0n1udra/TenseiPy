@@ -5,6 +5,8 @@ class Item:
         self.name = ''
         self.status = ''
         self.item_type = ''
+        self.damage_type = ''
+        self.damage_level = None
         self.quantity = 0
         self.quantity_add = 1
         self.inventory_capacity_add = 0.1
@@ -27,11 +29,12 @@ class Item:
         return self.description
 
     def update_info(self):
-        """Updates item's info."""
+        """ Updates item's info. """
 
         self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'
 
-        info_dict = {'*Description': self.description, '*Appearance': self.appearance, '*Usage': self.usage}
+        info_dict = {'Item Type': self.item_type, 'Damage Type': self.damage_type, 'Damage Level': self.damage_level,
+                     '*Description': self.description, '*Appearance': self.appearance, '*Usage': self.usage}
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
@@ -48,7 +51,6 @@ class Item:
 
             for item, amount in self.recipe.items():
                 self.info_page += f'        {amount}x [{item}]\n'
-
 
     def get_name(self):
         """
@@ -123,6 +125,8 @@ class Magic_Sword(Item):
         Item.__init__(self)
         self.name = "Magic Sword"
         self.item_type = 'Weapon'
+        self.damage_type = 'Melee'
+        self.damage_level = 6
         self.description = """If a huge amount of magic essence was included in the raw materials of a sword, apparently it would become a sword that grows. 
         Infusing magic into a sword, though you'd expect it to be a common technique, it's actually really difficult.
         """
