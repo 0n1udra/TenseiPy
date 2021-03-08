@@ -21,8 +21,8 @@ def ch1_cave(rimuru):
             rimuru.add_attribute('Sage', top_newline=False)
             rimuru.upgrade_attribute('Sage', 'Great Sage')
             print()
-            siprint("It's so dark? Where is this? What happened?")
-            siprint("I remembered now. I got stabbed!")
+            siprint("It's so dark? Where am I? What happened?")
+            siprint("I remember now, I got stabbed! A-am I dead?")
             siprint("Was I saved? Can I move? Should I try to say something?")
 
             # Because I am a dick. There is a 1 in 1,000 chance that you will wake up and just instantly die! kek!
@@ -34,6 +34,7 @@ def ch1_cave(rimuru):
                 game_over()
 
             # Show user HUD and playable actions.
+            rimuru.update_name("Rimuru")
             game_action(self)
 
         class speak:
@@ -44,17 +45,17 @@ def ch1_cave(rimuru):
                 siprint("I. Can't. Feel. ANYTHING! I should check the rest of my body!")
 
         class move:
-            __subs = ['move around', 'try to move', 'look around']
+            __subs = ['move around', 'try to move', 'look around', 'explore']
             def __init__(self):
-                siprint("Where are my arms, I can't feel them!")
+                siprint("I can't see anything! Where are my arms, I can't feel them!")
                 siprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
                 siprint("What is this? Feels like I'm 'absorbing' something. This body? Am I even human anymore!?!?!")
 
         class _inspect_body(cave_actions):
-            __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around', 'check', 'check if human']
+            __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'confirm body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around', 'check', 'check if human']
             def __init__(self):
                 siprint("What is that feeling? Is....is that grass?! It feels like it's dissolving...")
-                iprint("\n< Hint: Try to 'eat grass' or 'eat ore', see what happens.")
+                iprint("\n< Hint: Try to 'eat grass' or 'eat ore', see what happens. >")
                 game_action(self)
 
             class puyo:
@@ -77,7 +78,7 @@ def ch1_cave(rimuru):
                     siprint("Ok, might be useful in the future. Guess I should get as much as I can")
                     wake_up._inspect_body._explore()
 
-            class _explore:
+            class _explore(cave_actions):
                 __subs = subs.move_on
                 def __init__(self):
                     show_art('slime')
@@ -85,24 +86,12 @@ def ch1_cave(rimuru):
                     idots(3, 8)
                     siprint("Dissolving and absorbing, this streamlined elastic feeling body....")
                     siprint("It looks like I have been stabbed, died and reincarnated as a slime!")
+                    idots(10, 3)
                     siprint("\nIt's been a long time since I have accepted myself a slime. I am getting use to this body.")
-                    siprint("I don't need sleep or food. I can't feel heat nor cold. Even after bumping into rocks I'll quickly regenerate.\n")
-
-                    if rimuru.check_acquired('hipokte grass') or rimuru.check_acquired('magic ore'):
-                        self.where_did_it_go()
-                    else:
-                        siprint("All I can do is fumble around in the dark and eat what I find... I'M SO BORED!")
+                    siprint("No need for sleep or food. I don't feel too hot nor cold. Even after taking some damage I can heal myself..\n")
+                    siprint("All I can do is fumble around in the dark and eat what I find... I'M SO BORED!")
 
                     game_action(self)
-
-                class eat_grass:
-                    __subs = cave_actions.eat_grass.__subs
-                    def __init__(self):
-                        if not rimuru.check_acquired('hipokte grass'):
-                            rimuru.add_inventory('hipokte grass')
-                            self.where_did_it_go()
-                        else:
-                            rimuru.add_inventory('hipokte grass')
 
                 class _hfunc_craft_full_potion:
                     def __init__(self):
@@ -126,29 +115,28 @@ def ch1_cave(rimuru):
                 class what_is_predator:
                     __subs = ['predator', 'what is predator', 'what is this predator', 'what is this predator skill', 'predator huh', 'tell me more about predator', 'tell me more about predator']
                     def __init__(self):
-                        siprint("<< Answer, unique skill [Predator] allows one to 'eat' targets, store said targets in skill's stomach, or isolate as hazardous material.")
+                        siprint("<< Answer, unique skill [Predator] allows one to 'eat' targets, store said targets in skill's stomach, or isolate as hazardous material. >>")
                         siprint("<< Also, after successful analysis on a monster one can use mimicry to replicate appearance, and use replaceable abilities from target. >>")
                         iprint("\n< Hint: Try 'info predator' to get more information. >")
 
                 class what_is_great_sage:
-                    __subs = ['what is this great sage?', 'what is great sage?', 'great sage?', 'tell me more about great sage', 'what are you', 'tell me more about you', 'tell me more about yourself great sage', 'tell me more about yourself']
+                    __subs = ['what is this great sage', 'what is great sage', 'great sage', 'tell me more about great sage', 'what are you', 'tell me more about you', 'tell me more about yourself great sage', 'tell me more about yourself', 'what are you', 'who are you', 'what is you']
                     def __init__(self):
                         siprint("<< Answer, my function is to assist my master (you) to the best of my abilities. >>")
-                        siprint("<< Information, basic functions I am able to perform is: Analysis, skill control and manipulation, crafting, and more. >>")
+                        siprint("<< Information, some of my basic functions are: Analysis, skill control and manipulation, crafting, and more. >>")
                         iprint("\n< Hint: Use 'info great sage' to get more information. >")
 
                         if rimuru.check_acquired('hipokte grass'):
-                            iprint("< Hint: Try 'info hipokte grass'. Then try 'craft full potion' command. >")
+                            iprint("< Hint: Try 'info hipokte grass'. Then try 'craft full potion'. >")
 
                 class where_did_it_go:
-                    __subs = ['where did the grass go?', 'where did that all go?', 'hey where did that go?', "where's the grass?", "where's the grass now?", 'where is the grass?', 'where is the grass now?', 'where did it go?']
+                    __subs = ['where it go', 'where did the grass go', 'where did that all go', 'hey where did that go', "where's the grass", "where's the grass now", 'where is the grass', 'where is the grass now', 'where did it go', 'where does it all go', 'where do they go', 'where do they all go', 'where does it all go', 'where has it gone', 'where has it all gone']
                     def __init__(self):
-                        siprint("Where do that stuff I eat up go?")
+                        siprint("Where does the stuff I eat go?")
                         siprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
                         siprint("Whoa! Who's that? I think I heard this voice before. Who, or what, are you?")
                         siprint("<< Answer, this is the Unique Skill [Great Sage], the ability has adapted to best assist you. >>")
-                        siprint("Skills and predator? huh... Wonder what those are.")
-                        siprint("\n.... Or should I just forget about that and just move on?")
+                        siprint("Skills, Great Sage, Predator? huh... Wonder what those are. I should get moving too.")
 
     class in_water:
         __location = "Under water?"
@@ -185,7 +173,8 @@ def ch1_cave(rimuru):
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
                     siprint("Let's see if I can get out now.")
-                    rimuru.use_skill('hydraulic propulsion')
+                    if not last_skill('hydraulic propulsion'):
+                        rimuru.use_skill('hydraulic propulsion')
                     siprint("Ouch! I hit something, but at least it seems like I'm back on land.")
                     siprint("<< Notice, New skill [Hydraulic Propulsion] acquired. >>")
                     siprint("Oh cool, I wonder what else I can do with this skill.")
@@ -197,7 +186,7 @@ def ch1_cave(rimuru):
             __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
             def __init__(self):
                 rimuru.add_inventory('magic sword')
-                siprint("HEY! Look! It feels like a sword! Wonder if it's any good?")
+                siprint("HEY! Look! This shape, feels like a sword! Wonder if it's any good?")
                 siprint("<< Answer, analysis of sword shows it contains a magisteel core. This sword is above average. >>")
                 siprint("Would you look at that, that might come in handy later on. But I'm still stuck down here!")
                 clear_subs(self)  # Only able to grab sword once.
@@ -214,7 +203,7 @@ def ch1_cave(rimuru):
             game_action(self)
 
         class hello:
-            __subs = ['hi', 'reply', 'reply hi', 'reply with hi', 'repy with hello', "who's there?", 'who is there?', 'who is that?', 'somebody there?', "who's out there?", "is somebody there?", 'who is that speaking?', 'hello?', 'hello there!', "who's that speaking?", "who's that talking?"]
+            __subs = ['hi', 'reply', 'reply hi', 'reply with hi', 'repy with hello', "who's there", 'who is there', 'who is that', 'somebody there', "who's out there", "is somebody there", 'who is that speaking', 'hello', 'hello there', "who's that speaking", "who's that talking"]
             def __init__(self):
                 sprint("~ Keep following my voice small one. ~")
 
@@ -234,7 +223,7 @@ def ch1_cave(rimuru):
                 tempest_serpent_encounter()
 
         class shut_it:
-            __subs = ["shut it you baldy!", "screw you baldy!", 'shut up baldy!', 'shut up!', 'shut it!']
+            __subs = ["shut it you baldy", "screw you baldy", 'shut up baldy', 'shut up', 'shut it']
             def __init__(self):
                 sprint("~ BALDY, HAHAHA, SEEMS LIKE YOU HAVE A DEATH WISH!!! ~")
                 sprint("I'M SORRY!")
@@ -257,12 +246,13 @@ def ch1_cave(rimuru):
                 game_action(self)
 
             class _use_magic_perception(cave_actions):
-                __subs = ['try magic perception', 'try using magic perception', 'activate magic perception', 'yes', 'yes please!', 'yes do it', 'activate', 'activate it!', 'yes, activate it']
+                __subs = ['try magic perception', 'try using magic perception', 'activate magic perception', 'yes', 'yes please', 'yes do it', 'activate', 'activate it', 'yes, activate it']
                 def __init__(self):
                     idots(3)
                     show_art('magic perception')
-                    sprint("Like this?")
                     rimuru.add_attribute('Magic Perception')
+                    rimuru.use_skill('magic perception')
+                    sprint("Like this?")
                     sprint("I can see. I CAN SEE!")
                     sprint("~ Seems like you did it. You learn quickly small one. ~")
                     sprint("Yes, thank you!")
@@ -280,7 +270,7 @@ def ch1_cave(rimuru):
                         friend_veldora()
 
                 class _no:
-                    __subs = ['no!', 'nah', "let's move on", "don't", 'skip', 'skip it']
+                    __subs = ['no', 'nah', "let's move on", "don't", 'skip', 'skip it']
                     def __init__(self):
                         sprint("~ Alright fine, I won't. Hmmmmph ~")
                         friend_veldora()
@@ -297,6 +287,7 @@ def ch1_cave(rimuru):
                     sprint("Wait where are you going small one! Weren't we getting somewhere......")
                     sprint("Hello? Hellooooooooooo?!")
                     sprint("FINE! I don't need you anyways!")
+                    tempest_serpent_encounter()
 
     class friend_veldora(cave_actions):
         def __init__(self):
@@ -327,14 +318,13 @@ def ch1_cave(rimuru):
                 game_action(self)
 
             class _look_at_seal(cave_actions):
-                __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison']
+                __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison', 'look', 'inspect', 'inspect seal', 'inspect prison', 'inspect prison seal', 'analyse prison seal']
                 def __init__(self):
-                    rimuru.add_attribute('mimic')
                     global veldora
                     veldora = mobs.Veldora_Tempest()
-                    siprint("[Great Sage]?")
+                    siprint("Great Sage?")
                     siprint("<< Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks. >>")
-                    siprint("<< Notice, possible solution may be...")
+                    siprint("<< Notice, possible solution may be... >>")
                     sprint("Hey, don't ignore me.")
                     sprint("It might be possible if we both analyze [Infinity Prison] inside and out")
                     sprint("My skills were sealed away as well, I can't use analyze.")
@@ -350,21 +340,21 @@ def ch1_cave(rimuru):
                     sprint("Well... The alternative is to stay in this cave for the rest of my lonely time.")
                     sprint("Before that, let me give you a name, and you think of a name for both of us.")
                     sprint("Like a family name? hmmmmm...")
-                    family_name = str(input("\nFamily Name > "))
-                    veldora.family_name = family_name
 
-                    rimuru.family_name = family_name
-                    rimuru.divineProtection = 'Storm Crest'
-                    siprint("< Acquired: Storm Crest Divine Protection >\n")
-                    rimuru.update_ranking(8)
+                    new_family_name = str(input("\nFamily Name > "))
+                    veldora.update_lname(new_family_name)
+                    print()
+                    rimuru.update_lname(new_family_name)
+                    rimuru.add_protection('Storm Crest')
+                    rimuru.update_level(8)
 
-                    sprint(f"Hmmmmmm... How about {family_name}")
+                    sprint(f"Hmmmmmm... How about {new_family_name}")
                     sprint("That name is AWESOME!")
                     siprint("He actually likes it?")
-                    sprint(f"From now on I will be Veldora {family_name}")
+                    sprint(f"From now on I will be Veldora {new_family_name}")
                     sprint("And as for you...")
-                    rimuru.name = str(input("\nName > "))
-                    sprint(f"How about {rimuru.name}!")
+                    rimuru.update_name(str(input("\nName > ")))
+                    sprint(f"\nHow about {rimuru.name}!")
 
                     sprint("Until we meet again small one!")
                     siprint("<< Use Unique skill [Predator]? >>")
@@ -379,14 +369,13 @@ def ch1_cave(rimuru):
                 class _eat_veldora:
                     __subs = subs.all_yes + ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon']
                     def __init__(self):
-                        veldora.update_info()
-                        rimuru.add_inventory(veldora)
-                        rimuru.add_mimic(veldora)
-                        siprint("\n<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
+                        global veldora
+                        rimuru.add_inventory(veldora, show_analysis_msg=False)
+                        siprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
                         game_action(self)
 
                     class _start_analysis:
-                        __subs = subs.all_yes + ['start it!', 'yes start it please!', 'yes start it!']
+                        __subs = subs.all_yes + ['start it', 'yes start it please', 'yes start it']
                         def __init__(self):
                             siprint("Yes! Please take care of it [Great Sage].")
                             rimuru.update_status('veldora', 'Analyzing')
@@ -545,28 +534,29 @@ def ch1_cave(rimuru):
                     siprint("Wasn't necessary, but I suppose it had to be done.")
                     at_cave_exit._hfunc_leave_cave()
                 else:
-                    siprint("CRAP! I didn't kill all of them, the rest will kill me")
+                    siprint("CRAP! I didn't kill all of them, the rest will kill me!")
                     siprint("* Before the little slime could do or say anything else, he was swiftly smushed to death! *")
                     game_over()
 
         class _hfunc_leave_cave(cave_actions):
             __subs = ['leave this cave', 'leave', 'exit cave', 'exit']
             def __init__(self):
-                if game_cond('met veldora'):
+                if game_cond('met veldora', True):
                     siprint("Or... uhm... Should I go back to that pouty 'dragon'?")
 
                 game_action(self)
 
             class _go_to_veldora:
-                __subs = ['go find veldora', 'veldora', 'go back to veldora', 'go back to dragon', 'go find that voice', 'find voice', 'follow voice', 'follow voice again', 'go follow voice', 'follow weird voice']
+                __subs = ['go find veldora', 'veldora', 'go back to veldora', 'go back to dragon', 'go find that voice', 'find voice', 'follow voice', 'follow voice again', 'go follow voice', 'follow weird voice', 'locate voice', 'search for voice', 'search for weird voice', 'voice', 'what was that voice', 'where is that voice coming from', 'where is that voice', 'where was that voice', 'where was that voice again', 'go back to voice']
                 def __init__(self):
                     if rimuru.check_acquired('veldora'): return
 
+                    mobs_reset()
                     if game_cond('met veldora'):
                         siprint("Let's go check on that dragon.")
                         siprint("~ What are you doing back? ~")
                         friend_veldora()
-                    if game_cond('heard voice'):
+                    else:
                         siprint("I want to go find that weird voice in the cave!")
                         veldora_encounter()
 
@@ -576,5 +566,5 @@ def ch1_cave(rimuru):
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
-    wake_up()
-    #at_cave_exit()
+    #wake_up()
+    at_cave_exit()
