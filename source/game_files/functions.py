@@ -12,30 +12,32 @@ off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here.
 def update_rimuru(rimuru_object):
+    """ Update rimuru object to be used in rest of game files. """
     global rimuru
     rimuru = rimuru_object
     return rimuru
 
 def game_hud(actions):
+    """ Show game HUD, includes current mimic, mobs targeted, and available actions. """
+
     if rimuru.show_hud is False or rimuru.hardcore is True: return
 
     if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_hud: print()  # Adds extra space when needed.
 
     if rimuru.current_mimic:
-        print(f"Mimic: [{rimuru.current_mimic.name}]", end='')
+        print(f"Mimic: [{rimuru.current_mimic.name}]")
 
     if rimuru.targeted_mobs:
         # Adds X status to corresponding targets that are dead.
         targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
-        print(f'Target: {targets}', end='')
+        print(f'Target: {targets}')
 
     if rimuru.show_hud:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
-        print(f"\nActions: {actions_for_hud}", end='')
+        print(f"Actions: {actions_for_hud}", end='')
 
 def game_action(level=None):
-    global onetime
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
@@ -69,7 +71,7 @@ def game_action(level=None):
         if 'hfunc' in user_input: game_action(level)
         # Removes anything that's not alpha-numeric, easier for making __subs.
         user_input = ''.join(i for i in user_input if i.isalnum() or ' ')
-    print()
+        print()
 
     # Separates user input into command and command arguments.
     split_user_input = user_input.split(' ')
@@ -135,11 +137,13 @@ def game_action(level=None):
 
 #                    ========== Game Settings, Saves, Etc ==========
 def game_restart(*args):
-    print("\n    < Restarting Game... >\n")
+    """ Restart game. """
+
+    print("    < Restarting Game... >")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 def game_exit(*args):
-    """Saves game using pickle, then exits."""
+    """ Saves game using pickle, then exits. """
     game_save()
     exit(0)
 
@@ -172,6 +176,7 @@ def game_load(path):
     Returns:
         Loaded game save object.
     """
+
     global rimuru
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
@@ -191,7 +196,7 @@ def game_load(path):
     return rimuru
 
 def game_over():
-    """Deletes pickle save file."""
+    """ Deletes pickle save file. """
 
     rimuru.valid_save = False  # So you can't use copies of game save.
     game_save(show_msg=False)
@@ -302,6 +307,7 @@ def game_set_hardcore(arg):
 #                    ========== Level Functions ==========
 def game_cond(value, new_value=None):
     """ Set and fetch game variables. """
+
     if new_value:
         rimuru.conditional_data[value] = new_value
         return new_value
@@ -310,6 +316,15 @@ def game_cond(value, new_value=None):
         return rimuru.conditional_data[value]
     else:
         return False
+
+def last_skill(skill):
+    """ Sets last_skill variable as last successfully used skill's object. """
+
+    try:
+        if skill.lower() in rimuru.last_skill.name.lower():
+            return rimuru.last_skill
+        else: return False
+    except: return False
 
 def mobs_add(add_mobs):
     """
@@ -382,6 +397,14 @@ def mobs_reset():
 
     rimuru.active_mobs.clear()
     rimuru.targeted_mobs.clear()
+
+def get_level_mob(mob):
+    """ Get's mob's game object from active_mobs list. """
+
+    for i in rimuru.active_mobs:
+        if mob in i[0].name.lower():
+            return i[0]
+
 
 def continue_to(next_location):
     """
@@ -456,13 +479,14 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
         print(message)  # Print all lines instantly.
 
 def siprint(message, showing_history=False):
-    """Print tabbed in message."""
+    """ Print with indent. """
 
     if message[0] == '\n':
         print()
     sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
 
 def iprint(message, showing_history=False):
+    """ sprint but with indent. """
     if message[0] == '\n':
         print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
@@ -523,7 +547,6 @@ def idots(*args):
 def show_start_banner():
     """ Show game title, tips, and player stats/inv. """
 
-    print("OK")
     show_art('great sage')
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
@@ -546,7 +569,6 @@ def show_art(art):
     """
 
     if rimuru.show_art is False: return False
-    print("OK")
 
     # Gets corresponding variable from within art.py file.
     art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
@@ -558,6 +580,8 @@ def show_art(art):
         print(art)
 
 def show_settings(*args):
+    """ Shows game settings and there current on/off state. """
+
     print(f"""
     Game Settings:
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
@@ -610,6 +634,8 @@ def show_help(*args):
     """)
 
 def show_rank_chart(*args):
+    """ In universe ranking chart. """
+
     print("""
     Level/Ranking:
        Level      Rank         Risk

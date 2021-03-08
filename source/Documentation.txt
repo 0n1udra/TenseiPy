@@ -158,11 +158,11 @@ In function docstring's Usage section, '>' means example of user input in game.
     Variable accessible from Character object no need for Character.Info.)
     name str                -- Name of character.
     family_name str         -- Shared family name.
-    blessing str            -- Divine protection.
+    protections str         -- Divine protections, blessings.
     shared_blessing str     -- Divine protection to pass onto subordinates when naming.
     title str               -- Extra titles, like Demon Lord, Storm Dragon.
     species str             -- Species of character, like.
-    level str               -- Level of character, rank variable will change accordingly. Updated with update_ranking().
+    level str               -- Level of character, rank variable will change accordingly. Updated with update_level().
     info str                -- Info page for character, showing: name, title, species, is_alive, blessing, description, and appearance variables.
     appearance str          -- Appearance description.
     description str         -- Description.
@@ -174,7 +174,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     get_name()              -- Returns character's name in lowercase.
     show_info()             -- Shows info page for game objects.
     update_info()           -- Updates character info variable.
-    update_ranking()        -- Updates character's level, which will also update ranking.
+    update_level()        -- Updates character's level, which will also update ranking.
 
 
 -----character_inventory.py-----
