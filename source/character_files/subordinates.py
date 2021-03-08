@@ -12,7 +12,7 @@ class Subordinates:
 
     def add_subordinate(self, new_subordinate, new_name):
         """
-        Naming subordinates and give blessing.
+        Naming subordinates and give protections.
 
         Args:
             new_subordinate: Character name or object to be named.
@@ -24,7 +24,7 @@ class Subordinates:
 
         new_subordinate = self.get_object(new_subordinate, sub=True)
         new_subordinate.name = new_name
-        new_subordinate.blessing = self.shared_blessing
+        new_subordinate.protections += self.shared_protection
 
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)

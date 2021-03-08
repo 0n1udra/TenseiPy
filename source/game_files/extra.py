@@ -50,16 +50,30 @@ def get_any(match_to, input_list):
         bool: Returns True if match found.
     """
 
-    if any(i in match_to for i in input_list):
+    if any(i.lower() in match_to for i in input_list):
         return True
 
 def on_off(var):
+    """ Returns string 'on'/'off' depending on passed in variable. """
+
     if var is True:
         return 'on '
     else:
         return 'off'
 
 def format_info(name, var):
+    """
+    Returns object information to be shown in object's info_page.
+    If an object's variable is empty or has not been set, corresponding field will be hidden in info_page.
+
+    Args:
+        name: Name of field to show. Ex. 'Name:', 'Description:'.
+        var: Object variable to show.
+
+    Returns:
+        str: Returns string to be added to objects info_page variable.
+    """
+
     if not var: return None
 
     return_data = ''
@@ -70,16 +84,18 @@ def format_info(name, var):
     else:
         return_data += f"{name}: "
 
+    # If passed in a list, it'll sort than format it with ',' spacing.
     if type(var) is list:
         return_data += ", ".join(sorted(var))
     else:
-        return_data += str(var)
+        return_data += str(var).strip()
 
     return return_data
 
 
 def tbc():
-    """ To Be Continued message.."""
+    """ Print part of game/story is in development. """
 
     print("\n    < ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")
+    exit()

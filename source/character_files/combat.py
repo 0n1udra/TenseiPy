@@ -14,6 +14,7 @@ class Combat:
         Usage:
             > target tempest serpent, giant bat
         """
+
         targets = targets.lower()
 
         if get_any(targets, ['reset', 'clear']):

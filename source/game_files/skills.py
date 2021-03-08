@@ -21,15 +21,23 @@ class Skill:
         self.game_object_type = 'attribute'
 
     def get_name(self):
+        """ Returns skill's name in lowercase. """
+
         return self.name.lower()
 
     def __str__(self):
         return self.name.lower()
 
     def show_acquired_msg(self):
+        """ Print skill's acquired message. """
+
         print(f"    {self.acquired_msg}\n")
 
     def update_info(self):
+        """ Updates skills info_page. """
+
+        self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
+
         self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'
 
         info_dict = {'Type': self.type, 'Level': self.skill_level, 'Damage': self.damage_level, 'Damage Type': self.damage_type,
@@ -42,8 +50,6 @@ class Skill:
             self.info_page += "\n    Use Requirements:\n"
             for item, amount in self.use_requirements.items():
                 self.info_page += f"        {amount}x [{item}]\n"
-
-        self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
 
 class Resistance(Skill):
     def __init__(self):

@@ -25,6 +25,7 @@ class Map:
             str: Name of location or N/A if unknown.
 
         """
+
         print(f"\n    < {self.name} location: {self.current_location} >\n")
         return self.current_location
 

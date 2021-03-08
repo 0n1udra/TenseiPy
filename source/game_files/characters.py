@@ -80,6 +80,7 @@ class Rimuru_Tempest(Character):
         Usage:
             > mimic tempest serpent
         """
+
         if character == 'reset':
             # Resets mimic state (default Slime).
             self.current_mimic_species = 'Slime'
@@ -94,6 +95,8 @@ class Rimuru_Tempest(Character):
                 print(f'    < Now Mimicking [{new_mimic.name}] >')
 
     def check_mimic(self, match=None):
+        """ Return name (string) of character currently mimicking. """
+
         if m_object := self.mimic_object():
             if match is None:
                 return m_object.name

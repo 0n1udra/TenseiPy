@@ -77,7 +77,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         return self.name.lower()
 
     def set_start_state(self):
-        """Adds corresponding starter attributes and items to character."""
+        """ Adds corresponding starter attributes and items to character. """
 
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
@@ -131,7 +131,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         return None
 
     def check_acquired(self, check_object, amount=1):
-        """Checks if you pass in a list of strings or just a single string."""
+        """ Checks if you pass in a list of strings or just a single string. """
 
         if type(check_object) is list:
             for i in check_object:
@@ -165,6 +165,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             return False
 
     def update_status(self, game_object, new_status):
+        """ Update status of character. """
+
         if game_object := self.get_object(game_object):
             game_object.status = new_status
             game_object.update_info()

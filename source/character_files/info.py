@@ -2,7 +2,7 @@ from game_files.extra import format_info, get_any
 
 class Info:
     def get_name(self):
-        """Returns object name attribute in lowercase."""
+        """ Returns object name attribute in lowercase. """
 
         return self.name.lower()
 
@@ -32,7 +32,7 @@ class Info:
             print(game_object.info_page)
 
     def update_info(self):
-        """Updates character information."""
+        """ Updates character information. """
 
         # Sets ranking according to level
         ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
@@ -48,10 +48,13 @@ class Info:
                 self.info_page += f"    {formatted_info}\n"
 
     def update_name(self, name):
+        """ Updates name of character. """
+
         self.name = name
         self.update_info()
 
     def update_lname(self, name):
+        """ Update character's family name (last name). """
         self.family_name = name
         self.update_info()
 
@@ -71,7 +74,8 @@ class Info:
         print(f"    < [{self.name}] Level Up: {level} >\n")
 
     def add_protection(self, divine_protection):
-        """Adds divine protection to character.
+        """
+        Adds divine protection to character.
 
         List:
         Storm Crest: Veldora to Rimuru
@@ -87,6 +91,6 @@ class Info:
         print(f'    < [{self.name}] Acquired Protection: [{divine_protection}] >')
 
     def check_if_player(self):
-        """Checks if you're interacting with the player object (Rimuru)."""
+        """ Checks if you're interacting with the player object (Rimuru). """
 
         if self.__class__.__name__ == 'Rimuru_Tempest': return True
