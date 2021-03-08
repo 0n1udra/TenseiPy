@@ -6,7 +6,7 @@ class Rimuru_Tempest(Character):
         Character.__init__(self)
         self.name = 'Slime'
         self.canon_name = 'Rimuru Tempest'
-        self.shared_blessing = 'Protection of Tempest'
+        self.shared_protection = 'Protection of Tempest'
         self.level = 7
         self.current_mimic = None
         self.current_mimic_species = 'Slime'
@@ -43,7 +43,7 @@ class Rimuru_Tempest(Character):
             mimic.active = active
             return mimic
 
-    def add_mimic(self, mob):
+    def add_mimic(self, mob, show_msg=True):
         """
         Adds new monster mimicry.
 
@@ -66,8 +66,9 @@ class Rimuru_Tempest(Character):
         for attribute in mob.attributes_generator():
             self.add_attribute(attribute, top_newline=False, bot_newline=False)
 
-        print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
-        print(f"    << Notice, new skills and mimicry available. >>\n")
+        if show_msg:
+            print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
+            print(f"    << Notice, new skills and mimicry available. >>\n")
 
     def use_mimic(self, character):
         """
@@ -135,14 +136,14 @@ class Rimuru_Tempest(Character):
                 self.eat_targets()
 
 class Veldora_Tempest(Character):
-    def __init__(self, name=None):
+    def __init__(self):
         Character.__init__(self)
         self.name = "Veldora"
-        if name: self.name = name
         self.title = 'Storm Dragon'
         self.canon_name = 'Veldora Tempest'
         self.species = 'True Dragon'
-        self.blessing = 'Storm Crest'
+        self.protections = ['Protection of the Storm']
+        self.shared_protection = 'Storm Crest'
         self.is_alive = True
         self.level = 11
         self.inventory_capacity_add = 10
