@@ -47,7 +47,6 @@ class Attributes:
         # Print out skill category and corresponding skills indented.
         for i in self.attributes_generator(output=True):
             print(i)
-        print()
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False, top_newline=True, bot_newline=True):
         """
@@ -164,7 +163,9 @@ class Attributes:
         if skill_object := self.get_object(skill):
             try:
                 skill_object.use_skill(character)
+                self.last_skill = skill_object
             except:
                 return False
         else:
             return False
+        print()

@@ -31,8 +31,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.family_name = ''
         self.canon_name = ''  # Name from anime or manga storyline.
         self.title = ''  # E.g. True Dragon, Demon Lord.
-        self.blessing = ''  # E.g. Storm Crest (from Veldora)>
-        self.shared_blessing = ''
+        self.protections = []  # E.g. Storm Crest (from Veldora)>
+        self.shared_protection = ''
         self.species = ''
         self.rank = ''  # E.g. Catastrophe, Calamity.
         self.level = 1  # Same as rank just as integer.
@@ -51,9 +51,11 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
         self.game_object_type = 'character'
 
-        # Combat variables.
+        # Gameplay variables.
         self.active_mobs = []  # Current mobs around you that you can interact or attack.
         self.targeted_mobs = []  # Targets that will be attacked with 'attack' command.
+        self.last_command = ''
+        self.last_skill = None  # Last successfully used skill, game object.
 
         # Map functionality.
         self.available_locations = []
@@ -129,6 +131,15 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         return None
 
     def check_acquired(self, check_object, amount=1):
+        """Checks if you pass in a list of strings or just a single string."""
+
+        if type(check_object) is list:
+            for i in check_object:
+                return self._check_acquired(i, amount)
+        else:
+            return self._check_acquired(check_object, amount)
+
+    def _check_acquired(self, check_object, amount=1):
         """
         Checks to see if character has object/attribute/item/etc.
 
@@ -157,5 +168,3 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if game_object := self.get_object(game_object):
             game_object.status = new_status
             game_object.update_info()
-
-
