@@ -12,6 +12,7 @@ rimuru = None
 # Then pass that into update_character which will update the rimuru variable to be used here.
 def update_rimuru(rimuru_object):
     """ Update rimuru object to be used in rest of game files. """
+
     global rimuru
     rimuru = rimuru_object
     return rimuru
