@@ -1,6 +1,5 @@
-import pickle, time, sys, os
+import time, sys
 import game_files.art as game_art
-import game_files.characters as mobs
 from game_files.extra import *
 from game_files.settings import *
 

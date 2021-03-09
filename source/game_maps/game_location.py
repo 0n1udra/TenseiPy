@@ -1,7 +1,6 @@
 from game_files.functions import *
 
 class subs:
-
     move_on = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing', 'just move on', 'keep moving forward', 'continue forward', 'continue exploring']
     wait = ['wait', 'stay']
 
