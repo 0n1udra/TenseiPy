@@ -569,5 +569,5 @@ def ch1_cave(rimuru):
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
-    #wake_up()
-    at_cave_exit()
+    wake_up()
+    #at_cave_exit()

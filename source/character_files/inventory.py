@@ -64,7 +64,7 @@ class Inventory:
         if type(item_object) is str:
             item_object = self.get_object(item_object, new=True)
         if not item_object:
-            print("< Error: Adding item to inventory. >")
+            print("< Error: Adding item to inventory >")
             return False
 
         if not amount: amount = 1
@@ -153,7 +153,7 @@ class Inventory:
                 craft_amount = int(input(f"Craft > "))
                 print()
             except ValueError:
-                print("\n    < Error, need integer input. >")
+                print("\n    < Error: need integer input >")
                 return False
 
         # Checks if have enough ingredients.

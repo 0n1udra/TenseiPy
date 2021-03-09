@@ -16,8 +16,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                             'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
-        self.attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Special Skill': {}, 'Extra Skill': {}, 'Intrinsic Skill': {},
-                           'Common Skill': {}, 'Daily Skill': {}, 'Composite Skill': {}, 'Resistance': {}, 'Attribute': {}}
+        self.attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Extra Skill': {}, 'Intrinsic Skill': {},
+                           'Common Skill': {}, 'Skill': {}, 'Resistance': {}}
 
         # Character inventory.
         self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
@@ -109,8 +109,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
 
         for game_object in item_pool:
-            if type(game_object) is str:
-                continue
+            if type(game_object) is str: continue
 
             if new:
                 try: game_object = game_object()
