@@ -4,13 +4,13 @@ class Inventory:
         Yields all items in character's inventory (Currently only Rimuru).
 
         Args:
-            output: Yields a friendly string for printing in game purposes.
+            output bool(False): Yields a friendly string for printing in game purposes.
 
         Usage:
             .inventory_generator(output=True)
         """
 
-        # Generator responsible for getting printout data when using show_attribute.
+        # Generator is also responsible for getting printout data when using show_attribute.
         for item_type, items in self.inventory.items():
 
             # Yields item type if formatting for output to player.
@@ -20,10 +20,10 @@ class Inventory:
             for item_name, item_object in items.items():
                 if output:
                     item_text = f'    {item_object.inventory_capacity_add * item_object.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item_object.name}'
-                    if item_object.status:
+                    if item_object.status:  # if has a custom status set.
                         yield item_text + f' ({item_object.status})'
-                    else: yield item_text
-                else: yield item_object
+                    else: yield item_text  # Text to be shown for gameplay.
+                else: yield item_object  # Object to be used by code.
 
     def update_inventory_capacity(self):
         """ Updates inventory_capacity variable by going through all items in inventory and adding them up. """
@@ -31,8 +31,8 @@ class Inventory:
         total = 0
         for item in self.inventory_generator():
             total += item.quantity * item.inventory_capacity_add
-
         self.inventory_capacity = total
+
         return total
 
     def show_inventory(self, *args):
@@ -49,25 +49,30 @@ class Inventory:
         print(f'Capacity: {self.inventory_capacity:.1f}%\n')
         for i in self.inventory_generator(output=True): print(i)
 
-    def add_inventory(self, item_object, amount=None, show_msg=True, show_analysis_msg=None, bot_newline=True):
+    def add_inventory(self, item_object, amount=1, show_msg=True, show_analysis_msg=None, bot_newline=True):
         """
         Adds item to character (currently only Rimuru) inventory.
 
         Args:
-            item: Item to add to inventory.
-            amount: Amount of specified item to add to inventory. If not specified, will use item's .add_amount value.
+            item_object str, obj: Item to add to inventory.
+            amount int(None): Amount of specified item to add to inventory. If not specified, will use item's .add_amount value.
+            show_msg bool(True): Hide acquired and/or analyzed message.
+            show_analysis_msg bool(None): Show/Hide analyzed message.
+            bot_newline bool(True): Print newline at end.
 
         Usage:
             .add_inventory('hipokte grass')
         """
 
+        # Check if passed in a string to find corresponding object or a game object iteself.
         if type(item_object) is str:
             item_object = self.get_object(item_object, new=True)
+
         if not item_object:
             print("< Error: Adding item to inventory >")
             return False
 
-        if not amount: amount = 1
+        #if not amount: amount = 1
 
         if self.check_acquired(item_object):
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
@@ -75,6 +80,7 @@ class Inventory:
             self.inventory[item_object.item_type][item_object.name] = item_object
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
             if show_analysis_msg is None: show_analysis_msg = True
+        self.update_inventory_capacity()
 
         if show_msg:
             print(f'    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >')
@@ -82,15 +88,13 @@ class Inventory:
                 print(f'    << Analysis on [{item_object.name}] Complete. >>')
             if bot_newline: print()
 
-        self.update_inventory_capacity()
-
     def remove_inventory(self, item, amount=1):
         """
         Remove item from inventory (Currently only Rimuru).
 
         Args:
-            item: Item to remove from inventory.
-            amount: How many to remove from inventory. -1 to remove all.
+            item str: Item to remove from inventory.
+            amount int(1): How many to remove from inventory. -1 to remove all.
 
         Usage:
             .remove_inventory('hipokte grass')
@@ -101,14 +105,11 @@ class Inventory:
         item = self.get_object(item)
         if not item: return
 
-        if amount == -1:
-            item.quantity = 0
-        else: item.quantity -= amount
-
-        if item.quantity <= 0:
+        if item.quantity <= 0 or amount <= 0:
             del self.inventory[item.item_type][item.name]
             print(f"\n    < Removed Item: [{item.name}] >")
         else:
+            item.quantity -= amount
             print(f"\n    < Removed: {amount}x [{item.name}] >")
 
         self.update_inventory_capacity()
@@ -121,10 +122,11 @@ class Inventory:
         Will check if user has needed ingredients to craft item.
 
         Args:
-            item: Item to craft.
+            arg str: Item to craft and amount.
 
         Usage:
             > craft full potion
+            > craft full potion 10
         """
 
         # Gets craft amount and item name from passed in input.
@@ -145,8 +147,8 @@ class Inventory:
             print(f"    Recipe for {item.quantity_add}x {item.name}:")
             for ingredient, amount in item.recipe.items():
                 recipe += F"        {amount}x {ingredient}, "
-            print(f"{recipe[:-2]}")  # [:-2] cuts off last comma and space
-            print(f"\n    Inputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
+            # [:-2] will cuts off last comma and space.
+            print(f"{recipe[:-2]}\n    Inputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
 
             # Asks for how much to make. note that some items are crafted in batches.
             try:
@@ -156,10 +158,9 @@ class Inventory:
                 print("\n    < Error: need integer input >")
                 return False
 
-        # Checks if have enough ingredients.
+        # Checks if have all the ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
-            if self.check_acquired(ingredient_name, ingredient_amount * craft_amount):
-                continue
+            if self.check_acquired(ingredient_name, ingredient_amount * craft_amount): continue
             else:
                 print("    < Missing Ingredient(s) >")
                 return False

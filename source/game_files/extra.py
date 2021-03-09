@@ -1,15 +1,15 @@
 import random
 
-def get_random(min=1, max=100, target=None, range=None, return_int=False):
+def get_random(min=1, max=100, target=None, bigger_than=None, return_int=False):
     """
     Generate random number and check if matches passed in target parameter, returns True if so.
 
     Args:
-        min [int:1]: Starting number for randint function.
-        max [int:100]: End number for randint function.
-        target: Target number to match to random number.
-        range: Check if random number is bigger or equal to target.
-        return_int: Return randomly generated integer alongside boolean.
+        min int(1): Starting number for randint function.
+        max int(100): End number for randint function.
+        target int(None): Target number to match to random number.
+        bigger_than int(None): Check if random number is bigger or equal to target.
+        return_int bool(False): Return randomly generated integer alongside boolean.
 
     Returns:
         bool: Returns True or False if target matches random number.
@@ -21,20 +21,22 @@ def get_random(min=1, max=100, target=None, range=None, return_int=False):
         get_random(10, 50, range=20)
     """
 
+    # Default is the middle of min and max.
     if target is None:
         target = int(round(max / 2))
 
     rand = random.randint(min, max)
-    if range:
+
+    if bigger_than:
         if rand >= rand:
-            if return_int:
-                return True, rand
+            # Return random integer along with boolean.
+            if return_int: return True, rand
             return True
 
     if rand == target:
-        if return_int:
-            return True, rand
+        if return_int: return True, rand
         return True
+
     return False
 
 def get_any(match_to, input_list):
@@ -42,8 +44,8 @@ def get_any(match_to, input_list):
     Returns True if found a match from input_list with match_to.
 
     Args:
-        match_to: String to match with.
-        input_list: List of items to find match with.
+        match_to str: String to match with.
+        input_list list: List of items to find match with.
 
     Returns:
         bool: Returns True if match found.
@@ -52,10 +54,9 @@ def get_any(match_to, input_list):
     if any(i.lower() in match_to for i in input_list): return True
 
 def on_off(var):
-    """ Returns string 'on'/'off' depending on passed in variable. """
+    """ Returns string 'on'/'off' based on var. """
 
-    if var is True:
-        return 'on '
+    if var: return 'on '
     else: return 'off'
 
 def format_info(name, var):
@@ -64,8 +65,8 @@ def format_info(name, var):
     If an object's variable is empty or has not been set, corresponding field will be hidden in info_page.
 
     Args:
-        name: Name of field to show. Ex. 'Name:', 'Description:'.
-        var: Object variable to show.
+        name str: Name of field to show. Ex. 'Name:', 'Description:'.
+        var var: Variable data to show.
 
     Returns:
         str: Returns string to be added to objects info_page variable.
@@ -75,17 +76,15 @@ def format_info(name, var):
 
     return_data = ''
 
-    # Puts var info on newline and indented from name.
+    # Puts var info on newline and indented from field label.
     if '*' in name:
         return_data += f'\n    {name[1:]}:\n\t'
-    else:
-        return_data += f"{name}: "
+    else: return_data += f"{name}: "
 
-    # If passed in a list, it'll sort than format it with ',' spacing.
+    # If passed in a list. It'll sort, than space it them out with ','.
     if type(var) is list:
         return_data += ", ".join(sorted(var))
-    else:
-        return_data += str(var).strip()
+    else: return_data += str(var).strip()
 
     return return_data
 

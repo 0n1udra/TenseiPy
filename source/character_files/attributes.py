@@ -4,7 +4,7 @@ class Attributes:
         Yields character's attributes game objects (skills/resistances).
 
         Args:
-            output: Yields friendly string for in game printing.
+            output bool(False): Yields friendly string for in game printing.
 
         Usage:
             .attributes_generator()
@@ -52,9 +52,11 @@ class Attributes:
         Adds attribute to character.
 
         Args:
-            attribute: Attribute to add to character.
-            show_acquired_msg: Shows skill acquired message.
-            show_skill_info: Shows skill information page.
+            attribute str: Attribute to add to character.
+            show_acquired_msg bool(True): Shows skill acquired message.
+            show_skill_info bool(False): Shows skill information page.
+            top_newline bool(True): Print newline beforehand.
+            bot_newline bool(True): Print newline at end.
 
         Usage:
             .add_attribute('rimuru', 'water blade')
@@ -79,7 +81,7 @@ class Attributes:
         Removes attribute.
 
         Args:
-            attribute: Attribute to remove.
+            attribute str: Attribute to remove.
 
         Usage:
             .remove_attribute('resist poison')
@@ -97,7 +99,7 @@ class Attributes:
         Removes old skill and adds new skill.
 
         Args:
-            skill_from: Skill to upgrade from.
+            skill_from str: Skill to upgrade from.
             skill_to str: Skill to upgrade to.
 
         Usage:
@@ -123,8 +125,8 @@ class Attributes:
 
 
         Args:
-            attack: Attack to check resistance to.
-            target: Check if specified target has resistance.
+            attack str: Attack to check resistance to.
+            target str ,obj: Check if specified target has resistance.
 
         Usage:
             .check_resistance('resist pain')
@@ -145,8 +147,8 @@ class Attributes:
         Uses spell and passes arguments to spell's corresponding function.
 
         Args:
-            skill: Skill to use.
-            character: Character that will use skill.
+            skill str: Skill to use.
+            character str: Character that will use skill.
 
         Usage:
             > use sense heat source

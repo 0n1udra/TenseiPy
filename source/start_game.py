@@ -36,7 +36,7 @@ if __name__ == '__main__':
     if get_any(sys.argv, ['-hud', '-hidehud']): rimuru.show_hud = True
     if '-hard' in sys.argv: rimuru.hardcore = True
     if '-hints' in sys.argv: rimuru.show_hints = False
-    if '-slime' in sys.argv:
+    if '-slime' in sys.argv:  # For debug.
         rimuru.textcrawl = rimuru.show_art = False
         rimuru.show_hud = rimuru.show_hints = True
 
@@ -51,6 +51,7 @@ if __name__ == '__main__':
             print()
             siprint("< Text Crawl Activated >\n\n")
 
+    # Asks user if want to show gameplay hints.
     if rimuru.show_hints is None:
         print("\nShow game hints? Suggest leave enabled if first time playing.")
         if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:

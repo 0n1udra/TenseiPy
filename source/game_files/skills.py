@@ -31,13 +31,17 @@ class Skill:
     def use_skill(self, user=None, *args):
         """ Use skill, by default it'll just return True to signal it has been activated. """
 
+        # If skill need specific requirements to be used.
         if self.use_requirements:
             if not user: return False
+
+            # Check if user meets requirement or own prerequisites before using skill.
             for k, v in self.use_requirements.items():
-                if not user.check_acquired(i, v):
+                if not user.check_acquired(k, v):
                     print(f"\n    < Skill Requires: {v}x {k} >")
                     return False
 
+            # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
             for k, v in self.use_requirements.items():
                 user.remove_inventory(k, v)
 
@@ -69,6 +73,7 @@ class Skill:
 
         self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'
 
+        # Only show fields that have set data.
         info_dict = {'Type': self.type, 'Level': self.skill_level, 'Damage': self.damage_level, 'Damage Type': self.damage_type,
                      'Evolution': self.evolution, '*Description': self.description, '*Abilities': self.abilities}
         for k, v in info_dict.items():

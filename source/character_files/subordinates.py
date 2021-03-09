@@ -15,8 +15,8 @@ class Subordinates:
         Naming subordinates and give protections.
 
         Args:
-            new_subordinate: Character name or object to be named.
-            new_name: Set name to new subordinates.
+            new_subordinate str: Character name or object to be named.
+            new_name str: Set name to new subordinates.
 
         Usage:
             .add_subordinates('Tempest Wolf', 'Ranga')
