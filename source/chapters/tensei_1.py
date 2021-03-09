@@ -4,13 +4,13 @@ from game_files.functions import *
 from chapters.tensei_2 import ch2_goblin_encounter
 from game_maps.game_location import cave_actions
 from game_maps.game_location import *
+from game_files.characters import Veldora_Tempest
 
 def ch1_cave(rimuru):
-    class wake_up(cave_actions):
+    class wake_up:
         __location = 'Sealed Cave'
 
         def __init__(self):
-            rimuru.set_start_state()
             idots()
             print()
             siprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
@@ -320,7 +320,7 @@ def ch1_cave(rimuru):
                 __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison', 'look', 'inspect', 'inspect seal', 'inspect prison', 'inspect prison seal', 'analyse prison seal']
                 def __init__(self):
                     global veldora
-                    veldora = mobs.Veldora_Tempest()
+                    veldora = Veldora_Tempest()
                     siprint("Great Sage?")
                     siprint("<< Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks. >>")
                     siprint("<< Notice, possible solution may be... >>")
