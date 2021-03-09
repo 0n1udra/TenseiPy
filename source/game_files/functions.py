@@ -1,14 +1,16 @@
-import time, sys
+import pickle, time, sys, os
 import game_files.art as game_art
 from game_files.extra import *
-from game_files.settings import *
+from game_files.characters import Rimuru_Tempest
+
+on_subs = ['activate', 'true', 'enable', 'on', '1']
+off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
 
-
 # start_game.py will load game save if user has one, if not it'll create one.
-# Then pass that into update_character which will update the rimuru variable to be used here.
+# Then pass that into update_character which will update the rimuru variable to be used here and any other file that imports this file.
 def update_rimuru(rimuru_object):
     """ Update rimuru object to be used in rest of game files. """
 
@@ -16,6 +18,8 @@ def update_rimuru(rimuru_object):
     rimuru = rimuru_object
     return rimuru
 
+
+#                    ========== Level Functions ==========
 def game_hud(actions):
     """ Show game HUD, includes current mimic, mobs targeted, and available actions. """
 
@@ -129,8 +133,6 @@ def game_action(level=None):
 
     game_action(level)
 
-
-#                    ========== Level Functions ==========
 def game_cond(value, new_value=None):
     """ Set and fetch game variables. """
 
@@ -253,7 +255,178 @@ def clear_subs(level):
             eval(f"level.{i}.append('ACTIONBLOCKED')")
 
 
-#                    ========== Game Functions ==========
+#                    ========== Game Save/Settings ==========
+def game_restart(*args):
+    """ Restart game. """
+
+    print("    < Restarting Game... >")
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
+def game_exit(*args):
+    """ Saves game using pickle, then exits. """
+    game_save()
+    exit(0)
+
+def game_save(level=None, show_msg=True):
+    """
+    Pickels Rimuru_Tempest object.
+
+    Args:
+        level [bool]: Update rimuru.current_location_object
+        show_msg [bool:True]: Show Game Saved message.
+    """
+
+    if level:
+        rimuru.current_location_object = level
+
+    if rimuru.valid_save is None:
+        rimuru.valid_save = True
+
+    pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
+    if show_msg:
+        print("\n    < Game Saved >\n")
+
+def game_load(path):
+    """
+    Load game save.
+
+    Args:
+        path: Path of game save.
+
+    Returns:
+        Loaded game save object.
+    """
+
+    global rimuru
+
+    # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
+    try:
+        rimuru = pickle.load(open(path, 'rb'))
+    except:
+        rimuru = Rimuru_Tempest()
+        rimuru.save_path = path
+
+        import chapters.tensei_1 as tensei1
+        rimuru.current_location_object = tensei1.ch1_cave
+
+    if rimuru.valid_save is False:
+        os.remove(rimuru.save_path)
+        game_load(path)
+
+    return rimuru
+
+def game_over():
+    """ Deletes pickle save file. """
+
+    rimuru.valid_save = False  # So you can't use copies of game save.
+    game_save(show_msg=False)
+
+    try:
+        os.remove(rimuru.save_path)
+    except:
+        pass
+
+    print("\n    < GAME OVER >\n")
+    print("Play again?")
+    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
+        exit(0)
+    else:
+        game_restart()
+
+def set_hud(arg):
+    """
+    Updates and gets rimuru.show_hud boolean. Shows and hides available actions.
+
+    Args:
+        arg: Enable or disable text crawl.
+
+    Usage:
+        > menu on
+        > menu off
+    """
+
+    if rimuru.hardcore is True:
+        rimuru.show_hud = False
+        print("    < Error: Hardcore mode is active. \n>")
+        return
+
+    if arg in on_subs or rimuru.show_hud is True:
+        rimuru.show_hud = True
+    if arg in off_subs or rimuru.show_hud is False:
+        rimuru.show_hud = False
+    print(f"    < Action Menu: {'Enabled' if rimuru.show_hud else 'Disabled'} >\n")
+
+def set_art(arg):
+    """
+    Enable/Disable ASCII art.
+
+    Args:
+        arg: Enable or disable ASCII art.
+
+    Usage:
+        ascii on
+        ascii off
+    """
+
+    if arg in on_subs or rimuru.show_art is True:
+        rimuru.show_art = True
+    if arg in off_subs or rimuru.show_art is False:
+        rimuru.show_art = False
+    print(f"    < ASCII Art: {'Enabled' if rimuru.show_art else 'Disabled'} >\n")
+
+def set_textcrawl(arg):
+    """
+    Updates and gets status for textcrawl.
+
+    Args:
+        arg: Enable or disable text crawl.
+
+    Usage:
+        > textcrawl
+        > textcrawl on
+        > textcrawl off
+    """
+
+    if arg in on_subs or rimuru.textcrawl is True:
+        rimuru.textcrawl = True
+    if arg in off_subs or rimuru.textcrawl is False:
+        rimuru.textcrawl = False
+    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
+
+def set_hints(arg):
+    """ Enable/Disable game hints. """
+
+    if rimuru.hardcore is True:
+        rimuru.show_hud = False
+        print("    < Error: Hardcore mode is active. \n>")
+        return
+
+    if arg in on_subs or rimuru.show_hints is True:
+        rimuru.show_hints = True
+    if arg in off_subs or rimuru.show_hints is False:
+        rimuru.show_hints = False
+    print(f"    < Hints: {'Enabled' if rimuru.show_hints else 'Disabled'} >\n")
+
+def set_hardcore(arg):
+    """
+    Enable/Disable ASCII art.
+
+    Args:
+        arg: Enable or disable ASCII art.
+
+    Usage:
+        hardcore on
+        hardcore off
+    """
+
+    if arg in on_subs or rimuru.hardcore is True:
+        rimuru.hardcore = True
+    if arg in off_subs or rimuru.hardcore is False:
+        rimuru.hardcore = False
+    print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
+
+
+#                    ========== Game Printing/Output ==========
 def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
     """
     Text crawling. Slowly print out text to console.
@@ -306,26 +479,6 @@ def iprint(message, showing_history=False):
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
-def show_history(arg):
-    """
-    Shows x of last outputted story lines.
-
-    Args:
-        arg: Lines to show. Default is 5.
-    """
-
-    try: lines = int(arg)
-    except: lines = 5
-
-    for line in rimuru.line_history[-lines:]:
-        if line[1] == 'iprint':
-            iprint(line[0], showing_history=True)
-        elif line[1] == 'iprint':
-            sprint(line[0], showing_history=True)
-        elif line[1] == 'siprint':
-            siprint(line[0], showing_history=True)
-        else: print(line[0])
-
 def dots(length=3, times=5, indent=False):
     """
     Loading dot animation.
@@ -355,20 +508,6 @@ def idots(*args):
 
     dots(*args, indent=True)
 
-def show_start_banner():
-    """ Show game title, tips, and player stats/inv. """
-
-    show_art('great sage')
-    print(f"""
-    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
-    {game_art.rimuru_art.banner}
-    - Basic commands: stats, inv, save, info, and  help for more.
-    - Fullscreen recommended.
-    """)
-
-    if rimuru.valid_save is True:
-        print("\n    < Save Loaded >\n")
-
 def show_art(art):
     """
     Prints out ASCII art line by line or all at once dependding on textcrawl boolean.
@@ -388,6 +527,40 @@ def show_art(art):
             time.sleep(0.05)
         print(line)
     else: print(art)
+
+def show_history(arg):
+    """
+    Shows x of last outputted story lines.
+
+    Args:
+        arg: Lines to show. Default is 5.
+    """
+
+    try: lines = int(arg)
+    except: lines = 5
+
+    for line in rimuru.line_history[-lines:]:
+        if line[1] == 'iprint':
+            iprint(line[0], showing_history=True)
+        elif line[1] == 'iprint':
+            sprint(line[0], showing_history=True)
+        elif line[1] == 'siprint':
+            siprint(line[0], showing_history=True)
+        else: print(line[0])
+
+def show_start_banner():
+    """ Show game title, tips, and player stats/inv. """
+
+    show_art('great sage')
+    print(f"""
+    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
+    {game_art.rimuru_art.banner}
+    - Basic commands: stats, inv, save, info, and  help for more.
+    - Fullscreen recommended.
+    """)
+
+    if rimuru.valid_save is True:
+        print("\n    < Save Loaded >\n")
 
 def show_settings(*args):
     """ Shows game settings and there current on/off state. """
