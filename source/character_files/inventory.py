@@ -22,10 +22,8 @@ class Inventory:
                     item_text = f'    {item_object.inventory_capacity_add * item_object.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item_object.name}'
                     if item_object.status:
                         yield item_text + f' ({item_object.status})'
-                    else:
-                        yield item_text
-                else:
-                    yield item_object
+                    else: yield item_text
+                else: yield item_object
 
     def update_inventory_capacity(self):
         """ Updates inventory_capacity variable by going through all items in inventory and adding them up. """
@@ -82,8 +80,7 @@ class Inventory:
             print(f'    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >')
             if show_analysis_msg:
                 print(f'    << Analysis on [{item_object.name}] Complete. >>')
-            if bot_newline:
-                print()
+            if bot_newline: print()
 
         self.update_inventory_capacity()
 
@@ -102,13 +99,11 @@ class Inventory:
         """
 
         item = self.get_object(item)
-        if not item:
-            return
+        if not item: return
 
         if amount == -1:
             item.quantity = 0
-        else:
-            item.quantity -= amount
+        else: item.quantity -= amount
 
         if item.quantity <= 0:
             del self.inventory[item.item_type][item.name]

@@ -100,8 +100,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        if item_pool is None:
-            item_pool = []
+        if item_pool is None: item_pool = []
 
         if 'character' in self.game_object_type:
             item_pool = ([*self.inventory_generator(), *self.attributes_generator()])
@@ -114,10 +113,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
                 continue
 
             if new:
-                try:
-                    game_object = game_object()
-                except:
-                    pass
+                try: game_object = game_object()
+                except: pass
 
             if stricter:
                 if str(game_object).lower() == str(match).lower().strip():
@@ -125,8 +122,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             elif str(game_object).lower() in str(match).lower():
                 return game_object
 
-            if new:
-                del game_object
+            if new: del game_object
 
         return None
 
@@ -155,14 +151,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         """
 
         if item := self.get_object(check_object):
-            if item.game_object_type == 'item':
-                if item.quantity >= amount:
-                    return item
-                else:
-                    return False
-            return item
-        else:
-            return False
+            if item.quantity >= amount: return item
+        return False
 
     def update_status(self, game_object, new_status):
         """ Update status of character. """

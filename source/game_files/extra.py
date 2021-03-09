@@ -35,7 +35,6 @@ def get_random(min=1, max=100, target=None, range=None, return_int=False):
         if return_int:
             return True, rand
         return True
-
     return False
 
 def get_any(match_to, input_list):
@@ -50,16 +49,14 @@ def get_any(match_to, input_list):
         bool: Returns True if match found.
     """
 
-    if any(i.lower() in match_to for i in input_list):
-        return True
+    if any(i.lower() in match_to for i in input_list): return True
 
 def on_off(var):
     """ Returns string 'on'/'off' depending on passed in variable. """
 
     if var is True:
         return 'on '
-    else:
-        return 'off'
+    else: return 'off'
 
 def format_info(name, var):
     """

@@ -22,12 +22,10 @@ class Rimuru_Tempest(Character):
             mimic: Yields character objects that are in acquired_mimicries dictionary.
         """
 
-        if not self.mimic_object():
-            return None
+        if not self.mimic_object(): return None
 
         for level, mimics in self.mimic_object().acquired_mimicries.items():
-            for mimic_name, mimic in mimics.items():
-                yield mimic
+            for mimic_name, mimic in mimics.items(): yield mimic
 
     def mimic_object(self, active=None):
         """
@@ -52,12 +50,10 @@ class Rimuru_Tempest(Character):
         """
 
         # Basically checks if self is the rimuru object (player).
-        if not self.mimic_object():
-            return False
+        if not self.mimic_object(): return False
 
         # Checks if already acquired.
-        if mob.name in self.mimic_object().acquired_mimicries[mob.rank]:
-            return None
+        if mob.name in self.mimic_object().acquired_mimicries[mob.rank]: return None
 
         # Adds new mob object to usable mimicries dict.
         self.mimic_object().acquired_mimicries[mob.rank][mob.name] = mob
@@ -102,8 +98,7 @@ class Rimuru_Tempest(Character):
                 return m_object.name
             if match.lower() in m_object.name.lower():
                 return m_object.name
-            else: return False
-        else: return False
+        return False
 
     def eat_targets(self, input_targets=''):
         """
@@ -129,14 +124,12 @@ class Rimuru_Tempest(Character):
                     self.add_mimic(target[0])
                     self.add_inventory(target[0], target[1])
                     self.targeted_mobs.remove(target)
-                    try:
-                        self.active_mobs.remove(target)
+                    try: self.active_mobs.remove(target)
                     except: pass
 
         # For some reason I need this to check if it cleared out all dead mobs.
         for i in self.targeted_mobs:
-            if i[0].is_alive is False:
-                self.eat_targets()
+            if i[0].is_alive is False: self.eat_targets()
 
 class Veldora_Tempest(Character):
     def __init__(self):

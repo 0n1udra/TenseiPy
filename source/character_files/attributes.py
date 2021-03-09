@@ -45,8 +45,7 @@ class Attributes:
         print(f"Location: {self.current_location}\n")
 
         # Print out skill category and corresponding skills indented.
-        for i in self.attributes_generator(output=True):
-            print(i)
+        for i in self.attributes_generator(output=True): print(i)
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False, top_newline=True, bot_newline=True):
         """
@@ -62,8 +61,7 @@ class Attributes:
         """
 
         # Checks if already acquired.
-        if self.check_acquired(attribute):
-            return False
+        if self.check_acquired(attribute): return False
 
         if attribute := self.get_object(attribute, new=True):
             self.attributes[attribute.skill_level][attribute.name] = attribute
@@ -73,7 +71,6 @@ class Attributes:
                 if bot_newline: print()
             if show_skill_info:
                 self.show_info(attribute.name)
-
             return True
         return False
 
@@ -136,14 +133,12 @@ class Attributes:
 
         if type(target) == str:
             target = self.get_object(target)
-        if not target:
-            target = self
+        if not target: target = self
 
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
-                if attack.damage_type in resist:
-                    return True
+                if attack.damage_type in resist: return True
 
     def use_skill(self, skill, character=None):
         """
@@ -157,15 +152,12 @@ class Attributes:
             > use sense heat source
         """
 
-        if character is None:
-            character = self
+        if character is None: character = self
 
         if skill_object := self.get_object(skill):
             try:
-                skill_object.use_skill(character)
+                return_data = skill_object.use_skill(character)
                 self.last_skill = skill_object
-            except:
-                return False
-        else:
-            return False
+                return return_data
+            except: return False
         print()

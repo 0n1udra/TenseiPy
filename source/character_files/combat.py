@@ -27,13 +27,11 @@ class Combat:
                     skip = False
                     if str(mob[0]) in target:  # If targetable, by checking if in active_mobs list.
                         for i in self.targeted_mobs:
-                            if i[0] == mob[0]:
-                                skip = True
+                            if i[0] == mob[0]: skip = True
 
                         if skip is False:
                             self.targeted_mobs.append(mob)
-                        else:
-                            continue
+                        else: continue
 
     def attack(self, user_input):
         """
@@ -67,8 +65,7 @@ class Combat:
             if attack:
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
-            else:
-                continue
+            else: continue
 
         for current_target in self.targeted_mobs:
             for current_skill in skills:
