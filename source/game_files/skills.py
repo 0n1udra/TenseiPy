@@ -28,8 +28,18 @@ class Skill:
 
     def __str__(self): return self.name.lower()
 
-    def use_skill(self, *args):
+    def use_skill(self, user=None, *args):
         """ Use skill, by default it'll just return True to signal it has been activated. """
+
+        if self.use_requirements:
+            if not user: return False
+            for k, v in self.use_requirements.items():
+                if not user.check_acquired(i, v):
+                    print(f"\n    < Skill Requires: {v}x {k} >")
+                    return False
+
+            for k, v in self.use_requirements.items():
+                user.remove_inventory(k, v)
 
         return True
 
@@ -96,7 +106,7 @@ class Resistance:
 
 
 #                    ========== Manas ==========
-class Ciel_Skill(Skill, Manas):
+class Ciel_Skill(Manas, Skill):
     name = 'Ciel'
     description = "Evolved from Wisdom King Raphael."
     abilities = """Auto Battle Mode 
@@ -107,7 +117,7 @@ class Ciel_Skill(Skill, Manas):
 
 
 #                    ========== Ultimate Skill ==========
-class Raphael_Skill(Skill, Ultimate):
+class Raphael_Skill(Ultimate, Skill):
     name = 'Wisdom King Raphael'
     description = 'Evolved version of Great Sage.'
     abilities = """
@@ -118,7 +128,7 @@ class Raphael_Skill(Skill, Ultimate):
 
 
 #                    ========== Unique Skills ==========
-class Predator_Mimicry_Skill(Skill, Unique):
+class Predator_Mimicry_Skill(Unique, Skill):
     name = 'Mimic'
     acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                           'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
@@ -132,7 +142,7 @@ class Predator_Mimicry_Skill(Skill, Unique):
         data += "\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.\n"
         return data
 
-class Predator_Skill(Skill, Unique):
+class Predator_Skill(Unique, Skill):
     name = 'Predator'
     description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
     abilities = """Predation   
@@ -162,7 +172,7 @@ class Predator_Skill(Skill, Unique):
     """
     evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
 
-class Great_Sage_Skill(Skill, Unique):
+class Great_Sage_Skill(Unique, Skill):
     name = 'Great Sage'
     description = '''A Conceptual Intelligence that has a heartless and emotionless personality 
     and is solely driven by purely logical computations. It cares for nobody but the benefit 
@@ -199,10 +209,10 @@ class Great_Sage_Skill(Skill, Unique):
 
 
 #                    ========== Extra Skills ==========
-class Sage_Skill(Skill, Extra):
+class Sage_Skill(Extra, Skill):
     name = 'Sage'
 
-class Magic_Perception(Skill, Extra):
+class Magic_Perception(Extra, Skill):
     name = 'Magic Perception'
     description = '''One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
     the skill is rather simple.
@@ -212,14 +222,14 @@ class Magic_Perception(Skill, Extra):
     Ambushes become nearly impossible. It's an indispensable skill.
     '''
 
-class Water_Manipulation(Skill, Extra):
+class Water_Manipulation(Extra, Skill):
     name = "Water Manipulation"
     description = '''After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
     The three Skills are fused and evolved into Water Manipulation.
     '''
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
-class Vampirism(Skill, Extra):
+class Vampirism(Extra, Skill):
     name = 'Vampirism'
     skill_level = 'Intrinsic Skill'
     damage_type = 'Melee'
@@ -228,33 +238,32 @@ class Vampirism(Skill, Extra):
 
 
 #                    ========== Intrinsic Skills ==========
-class Absorb_Dissolve(Skill, Intrinsic):
+class Absorb_Dissolve(Intrinsic, Skill):
     name = 'Absorb/Dissolve'
     description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
 
-class Self_Regeneration(Skill, Intrinsic):
+class Self_Regeneration(Intrinsic, Skill):
     name = 'Self-Regeneration'
     status = 'Passive'
-    skill_level = 'Intrinsic Skill'
     description = '''Restores the user's damaged body. 
               It can restore even lost limbs as long as it's not a situation where the limbs get continuously chopped off or crushed. 
               The Skill's performance can be enhanced by other Skills.
               '''
     evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
 
-class Sticky_Thread(Skill, Extra):
+class Sticky_Thread(Extra, Skill):
     name = 'Sticky Thread'
     damage_type = 'Melee'
     damage_level = 2
     description = "A thin sticky thread that traps enemies and prevent them from moving."
 
-class Steel_Thread(Skill, Extra):
+class Steel_Thread(Extra, Skill):
     name = 'Steel Thread'
     damage_type = 'Melee'
     damage_level = 5
     description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
 
-class Sense_Heat_Source(Skill, Extra):
+class Sense_Heat_Source(Extra, Skill):
     name = 'Sense Heat Source'
     description = '''Identifies any heat reactions in the local area. 
     Not affected by any concealing effects.
@@ -269,35 +278,27 @@ class Sense_Heat_Source(Skill, Extra):
 
 
 #                    ========== Common Skills ==========
-class Hydraulic_Propulsion(Skill, Common):
+class Hydraulic_Propulsion(Common, Skill):
     name = 'Hydraulic Propulsion'
     description = 'Uses pressure to create a powerful water jet that can propel its user through vast distances.'
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
     use_requirements = {'Water': 1}
 
-    def use_skill(self, user):
-        if user.check_acquired("water", 1):
-            user.remove_inventory('water', 1)
-            return True
-        else:
-            print("\n    < Skill Requires: 1x [Water] >")
-            return False
-
-class Water_Blade(Skill, Common):
+class Water_Blade(Common, Skill):
     name = 'Water Blade'
     damage_type = 'Melee'
     damage_level = 6
     description = 'Shoot out a thin water blade with tremendous cutting power.'
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
-class Water_Bullet(Skill, Common):
+class Water_Bullet(Common, Skill):
     name = 'Water Bullet'
     damage_type = 'Melee'
     damage_level = 6
     description = "Shoot out a small powerful water bullet."
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
-class Poisonous_Breath(Skill, Common):
+class Poisonous_Breath(Common, Skill):
     name = 'Poisonous Breath'
     damage_type = 'Poison'
     damage_level = 8
@@ -305,13 +306,13 @@ class Poisonous_Breath(Skill, Common):
     Affects an area seven meters in front of the user in a 120-degree radius.
     '''
 
-class Paralyzing_Breath(Skill, Common):
+class Paralyzing_Breath(Common, Skill):
     name = 'Paralyzing Breath'
     damage_type = 'Poison'
     damage_level = 5
     description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
 
-class Ultrasound_Waves(Skill, Common):
+class Ultrasound_Waves(Common, Skill):
     name = 'Ultrasound Waves'
     damage_type = 'Melee'
     damage_level = 3
@@ -319,33 +320,33 @@ class Ultrasound_Waves(Skill, Common):
 
 
 #                    ========== Resistances ==========
-class Resist_Pain(Skill, Resistance):
+class Resist_Pain(Resistance, Skill):
     name = 'Resist Pain'
     resist_types = ['Pain']
     description = '''Tolerance-type Skill that grants immunity to physical pain sensation. 
     However, you still take damage.
     '''
 
-class Resist_Melee(Skill, Resistance):
+class Resist_Melee(Resistance, Skill):
     name = 'Resist Melee'
     resist_types = ['Melee']
     description = 'Tolerance-type Skill that grants immunity to melee attacks.'
 
-class Resist_Electricity(Skill, Resistance):
+class Resist_Electricity(Resistance, Skill):
     name = 'Resist Electricity'
     resist_types = ['Electricity']
     description = '''Tolerance-type Skill that grants resistance to electricity-types of attacks. 
     Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
 
-class Resist_Temperature(Skill, Resistance):
+class Resist_Temperature(Resistance, Skill):
     name = 'Resist Temperature'
     resist_types = ['hot', 'cold', 'temperature']
     description = '''Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
     Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
 
-class Resist_Poison(Skill, Resistance):
+class Resist_Poison(Resistance, Skill):
     name = 'Resist Poison'
     resist_types = ['Poison']
     description = '''Tolerance-type Skill that grants resistance to poison-types of attacks. 
