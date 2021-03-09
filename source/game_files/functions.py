@@ -2,11 +2,10 @@ import pickle, time, sys, os
 import game_files.art as game_art
 import game_files.characters as mobs
 from game_files.extra import *
+from game_files.settings import *
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = None
-on_subs = ['activate', 'true', 'enable', 'on', '1']
-off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
 
 # start_game.py will load game save if user has one, if not it'll create one.
@@ -68,7 +67,7 @@ def game_action(level=None):
     else:
         user_input = input("\n> ").strip().lower()
         # So user can't activate 'hfunc' actions.
-        if 'hfunc' in user_input: game_action(level)
+        if 'hfunc' in user_input: action(level)
         # Removes anything that's not alpha-numeric, easier for making __subs.
         user_input = ''.join(i for i in user_input if i.isalnum() or ' ')
         print()
@@ -93,15 +92,15 @@ def game_action(level=None):
         [show_help, ['help', 'commands']],
         [show_settings, ['settings', 'options']],
         [show_rank_chart, ['showrank', 'showranking', 'showlevel']],
-        [game_set_art, ['art', 'ascii', 'showart']],
-        [game_set_hud, ['hud', 'showhud', 'gamehud']],
-        [game_set_hints, ['hints', 'show hints', 'showhints', 'gamehints']],
-        [game_set_textcrawl, ['textcrawl', 'slowtext']],
-        [game_set_hardcore, ['hardcore', 'hardmode']],
+        [set_art, ['art', 'ascii', 'showart']],
+        [set_hud, ['hud', 'showhud', 'gamehud']],
+        [set_hints, ['hints', 'show hints', 'showhints', 'gamehints']],
+        [set_textcrawl, ['textcrawl', 'slowtext']],
+        [set_hardcore, ['hardcore', 'hardmode']],
         [show_history, ['history']],
         [game_restart, ['restart']],
         [game_exit, ['exit', 'quit', 'stop']],
-        ]
+    ]
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action in game_actions:
@@ -114,17 +113,13 @@ def game_action(level=None):
 
     for action in actions:
         # Currently need two evals to find __subs for action.
-        try:
-            action_subs = eval(f"level.{action}.{action}__subs")
-        except:
-            action_subs = []
-        try:
-            action_subs = eval(f"level.{action}._{action}__subs")
+        try: action_subs = eval(f"level.{action}.{action}__subs")
+        except: action_subs = []
+        try: action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
         # Usually used for when you want an action to be used only once.
-        if 'ACTIONBLOCKED' in action_subs:
-            continue
+        if 'ACTIONBLOCKED' in action_subs: continue
 
         # Adds action's class name to subs list, so you don't have to add it yourself in the chapter files.
         action_subs.append(action.replace('_', ' ').strip().lower())
@@ -134,175 +129,6 @@ def game_action(level=None):
 
     game_action(level)
 
-
-#                    ========== Game Settings, Saves, Etc ==========
-def game_restart(*args):
-    """ Restart game. """
-
-    print("    < Restarting Game... >")
-    os.execl(sys.executable, sys.executable, *sys.argv)
-
-def game_exit(*args):
-    """ Saves game using pickle, then exits. """
-    game_save()
-    exit(0)
-
-def game_save(level=None, show_msg=True):
-    """
-    Pickels Rimuru_Tempest object.
-
-    Args:
-        level [bool]: Update rimuru.current_location_object
-        show_msg [bool:True]: Show Game Saved message.
-    """
-
-    if level:
-        rimuru.current_location_object = level
-
-    if rimuru.valid_save is None:
-        rimuru.valid_save = True
-
-    pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
-    if show_msg:
-        print("\n    < Game Saved >\n")
-
-def game_load(path):
-    """
-    Load game save.
-
-    Args:
-        path: Path of game save.
-
-    Returns:
-        Loaded game save object.
-    """
-
-    global rimuru
-
-    # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
-    try:
-        rimuru = pickle.load(open(path, 'rb'))
-    except:
-        rimuru = mobs.Rimuru_Tempest()
-        rimuru.save_path = path
-
-        import chapters.tensei_1 as tensei1
-        rimuru.current_location_object = tensei1.ch1_cave
-
-    if rimuru.valid_save is False:
-        os.remove(rimuru.save_path)
-        game_load(path)
-
-    return rimuru
-
-def game_over():
-    """ Deletes pickle save file. """
-
-    rimuru.valid_save = False  # So you can't use copies of game save.
-    game_save(show_msg=False)
-
-    try:
-        os.remove(rimuru.save_path)
-    except: pass
-
-    print("\n    < GAME OVER >\n")
-    print("Play again?")
-    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
-        exit(0)
-    else:
-        game_restart()
-
-def game_set_hud(arg):
-    """
-    Updates and gets rimuru.show_hud boolean. Shows and hides available actions.
-
-    Args:
-        arg: Enable or disable text crawl.
-
-    Usage:
-        > menu on
-        > menu off
-    """
-
-    if rimuru.hardcore is True:
-        rimuru.show_hud = False
-        print("    < Error: Hardcore mode is active. \n>")
-        return
-
-    if arg in on_subs or rimuru.show_hud is True:
-        rimuru.show_hud = True
-    if arg in off_subs or rimuru.show_hud is False:
-        rimuru.show_hud = False
-    print(f"    < Action Menu: {'Enabled' if rimuru.show_hud else 'Disabled'} >\n")
-
-def game_set_art(arg):
-    """
-    Enable/Disable ASCII art.
-
-    Args:
-        arg: Enable or disable ASCII art.
-
-    Usage:
-        ascii on
-        ascii off
-    """
-
-    if arg in on_subs or rimuru.show_art is True:
-        rimuru.show_art = True
-    if arg in off_subs or rimuru.show_art is False:
-        rimuru.show_art = False
-    print(f"    < ASCII Art: {'Enabled' if rimuru.show_art else 'Disabled'} >\n")
-
-def game_set_textcrawl(arg):
-    """
-    Updates and gets status for textcrawl.
-
-    Args:
-        arg: Enable or disable text crawl.
-
-    Usage:
-        > textcrawl
-        > textcrawl on
-        > textcrawl off
-    """
-
-    if arg in on_subs or rimuru.textcrawl is True:
-        rimuru.textcrawl = True
-    if arg in off_subs or rimuru.textcrawl is False:
-        rimuru.textcrawl = False
-    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
-
-def game_set_hints(arg):
-    """ Enable/Disable game hints. """
-
-    if rimuru.hardcore is True:
-        rimuru.show_hud = False
-        print("    < Error: Hardcore mode is active. \n>")
-        return
-
-    if arg in on_subs or rimuru.show_hints is True:
-        rimuru.show_hints = True
-    if arg in off_subs or rimuru.show_hints is False:
-        rimuru.show_hints = False
-    print(f"    < Hints: {'Enabled' if rimuru.show_hints else 'Disabled'} >\n")
-
-def game_set_hardcore(arg):
-    """
-    Enable/Disable ASCII art.
-
-    Args:
-        arg: Enable or disable ASCII art.
-
-    Usage:
-        hardcore on
-        hardcore off
-    """
-
-    if arg in on_subs or rimuru.hardcore is True:
-        rimuru.hardcore = True
-    if arg in off_subs or rimuru.hardcore is False:
-        rimuru.hardcore = False
-    print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
 
 #                    ========== Level Functions ==========
 def game_cond(value, new_value=None):
@@ -314,8 +140,7 @@ def game_cond(value, new_value=None):
 
     if value in rimuru.conditional_data:
         return rimuru.conditional_data[value]
-    else:
-        return False
+    else: return False
 
 def last_skill(skill):
     """ Sets last_skill variable as last successfully used skill's object. """
@@ -344,15 +169,12 @@ def mobs_add(add_mobs):
         amount = 1
         if '*' in new_mob:
             amount, new_mob = new_mob.split('*')  # Add multiple of same mob, e.g. ['5 * goblin']
-            try:
-                amount = int(amount)
-            except:
-                pass
+            try: amount = int(amount)
+            except: pass
 
         if ':' in new_mob:
             new_mob, new_name = new_mob.split(':')  # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
-        else:
-            new_name = None
+        else: new_name = None
 
         if mob_object := rimuru.get_object(new_mob, new=True):
             if new_name:
@@ -387,10 +209,8 @@ def mobs_cleared():
     """
 
     for mob in rimuru.active_mobs:
-        if mob[0].is_alive:
-            return False
-    else:
-        return True
+        if mob[0].is_alive: return False
+    else: return True
 
 def mobs_reset():
     """ Resets active_mobs and targeted_mobs list. """
@@ -404,7 +224,6 @@ def get_level_mob(mob):
     for i in rimuru.active_mobs:
         if mob in i[0].name.lower():
             return i[0]
-
 
 def continue_to(next_location):
     """
@@ -446,11 +265,10 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
         showing_history [bool:False]: Variable used to make sure 'history' command doesn't effect itself.
     """
 
-    if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore):
-        return
+    if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore): return
 
     # So user can get the last x lines, in case the screen has been cluttered.
-    if showing_history is False:  # Without this, when showing history it'll add onto itself, which creates duplicate lines.
+    if showing_history is False:  # Without this, when showing history it'll add onto itwhich creates duplicate lines.
         rimuru.line_history.append([message, from_print])
         rimuru.line_history = rimuru.line_history[-25:]
 
@@ -475,20 +293,17 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
             sys.stdout.flush()
             time.sleep(sleep_time)
         print()
-    else:
-        print(message)  # Print all lines instantly.
+    else: print(message)  # Print all lines instantly.
 
 def siprint(message, showing_history=False):
     """ Print with indent. """
 
-    if message[0] == '\n':
-        print()
+    if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
 
 def iprint(message, showing_history=False):
     """ sprint but with indent. """
-    if message[0] == '\n':
-        print()
+    if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
 def show_history(arg):
@@ -499,10 +314,8 @@ def show_history(arg):
         arg: Lines to show. Default is 5.
     """
 
-    try:
-        lines = int(arg)
-    except:
-        lines = 5
+    try: lines = int(arg)
+    except: lines = 5
 
     for line in rimuru.line_history[-lines:]:
         if line[1] == 'iprint':
@@ -511,8 +324,7 @@ def show_history(arg):
             sprint(line[0], showing_history=True)
         elif line[1] == 'siprint':
             siprint(line[0], showing_history=True)
-        else:
-            print(line[0])
+        else: print(line[0])
 
 def dots(length=3, times=5, indent=False):
     """
@@ -536,7 +348,6 @@ def dots(length=3, times=5, indent=False):
             sys.stdout.write('.')
             sys.stdout.flush()
             time.sleep(0.5)
-
         print()
 
 def idots(*args):
@@ -575,9 +386,8 @@ def show_art(art):
     if rimuru.textcrawl or rimuru.textcrawl is None:
         for line in art.split('\n'):
             time.sleep(0.05)
-            print(line)
-    else:
-        print(art)
+        print(line)
+    else: print(art)
 
 def show_settings(*args):
     """ Shows game settings and there current on/off state. """
@@ -638,16 +448,16 @@ def show_rank_chart(*args):
 
     print("""
     Level/Ranking:
-       Level      Rank         Risk
-        11.     Special S   Catastrophe
-        10.     S           Disaster
-        9.      Special A   Calamity
-        8.      A+          Tragedy
-        7.      A           Hazard
-        6.      A-          Danger
-        5.      B           Pro
-        4.      C           Advance
-        3.      D           Intermediate
-        2.      E           Beginner
-        1.      F           Novice
-        """)
+    Level      Rank         Risk
+    11.     Special S   Catastrophe
+    10.     S           Disaster
+    9.      Special A   Calamity
+    8.      A+          Tragedy
+    7.      A           Hazard
+    6.      A-          Danger
+    5.      B           Pro
+    4.      C           Advance
+    3.      D           Intermediate
+    2.      E           Beginner
+    1.      F           Novice
+    """)
