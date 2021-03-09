@@ -13,7 +13,7 @@ def game_restart(*args):
 
 def game_exit(*args):
     """ Saves game using pickle, then exits. """
-    self.save()
+    game_save()
     exit(0)
 
 def game_save(level=None, show_msg=True):
@@ -60,15 +60,15 @@ def game_load(path):
 
     if rimuru.valid_save is False:
         os.remove(rimuru.save_path)
-        self.load(path)
+        game_load(path)
 
     return rimuru
 
-def game_over(self):
+def game_over():
     """ Deletes pickle save file. """
 
     rimuru.valid_save = False  # So you can't use copies of game save.
-    self.save(show_msg=False)
+    game_save(show_msg=False)
 
     try:
         os.remove(rimuru.save_path)
@@ -80,7 +80,7 @@ def game_over(self):
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
         exit(0)
     else:
-        self.frestart()
+        game_restart()
 
 def set_hud(arg):
     """
