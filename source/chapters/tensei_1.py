@@ -4,10 +4,9 @@ from game_files.functions import *
 from chapters.tensei_2 import ch2_goblin_encounter
 from game_maps.game_location import cave_actions
 from game_maps.game_location import *
-from random import randint
 
 def ch1_cave(rimuru):
-    class wake_up:
+    class wake_up(cave_actions):
         __location = 'Sealed Cave'
 
         def __init__(self):

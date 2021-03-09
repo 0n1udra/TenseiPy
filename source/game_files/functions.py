@@ -1,6 +1,5 @@
-import pickle, time, sys, os
+import time, sys
 import game_files.art as game_art
-import game_files.characters as mobs
 from game_files.extra import *
 from game_files.settings import *
 
@@ -68,7 +67,7 @@ def game_action(level=None):
     else:
         user_input = input("\n> ").strip().lower()
         # So user can't activate 'hfunc' actions.
-        if 'hfunc' in user_input: action(level)
+        if 'hfunc' in user_input: game_action(level)
         # Removes anything that's not alpha-numeric, easier for making __subs.
         user_input = ''.join(i for i in user_input if i.isalnum() or ' ')
         print()
