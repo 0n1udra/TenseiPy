@@ -14,10 +14,9 @@ class Skill:
         self.acquired_msg = ''
         self.status = ''
         self.use_requirements = {}
-
-        self.eat = True
+        self.quantity = 1
+        self.copy = True  # Able to copy ability by using analysis, predate, etc.
         self.sub_skills = {}
-
         self.game_object_type = 'attribute'
 
     def get_name(self):
@@ -50,6 +49,9 @@ class Skill:
             self.info_page += "\n    Use Requirements:\n"
             for item, amount in self.use_requirements.items():
                 self.info_page += f"        {amount}x [{item}]\n"
+
+class Intrinsic(Skill):
+    copy = False
 
 class Resistance(Skill):
     def __init__(self):
@@ -263,7 +265,7 @@ class Water_Bullet(Skill):
 
 
 #                    ========== Intrinsic Skills ==========
-class Absorb_Dissolve(Skill):
+class Absorb_Dissolve(Intrinsic):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Absorb/Dissolve'
@@ -271,7 +273,7 @@ class Absorb_Dissolve(Skill):
         self.description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
         self.update_info()
 
-class Self_Regeneration(Skill):
+class Self_Regeneration(Intrinsic):
     def __init__(self):
         Skill.__init__(self)
         self.name = 'Self-Regeneration'
