@@ -8,7 +8,9 @@ class Rimuru_Tempest(Character):
     level = 7
     current_mimic = None
     current_mimic_species = 'Slime'
-    starting_state = ['Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
+    acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                          'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
+    starting_state = ['Sage', 'Predator', 'Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
 
     # ========== Predator Functions
     def mimic_generator(self):
@@ -21,7 +23,7 @@ class Rimuru_Tempest(Character):
 
         if not self.mimic_object(): return None
 
-        for level, mimics in self.mimic_object().acquired_mimicries.items():
+        for level, mimics in self.acquired_mimicries.items():
             for mimic_name, mimic in mimics.items(): yield mimic
 
     def mimic_object(self, active=None):
@@ -52,14 +54,13 @@ class Rimuru_Tempest(Character):
         if not self.mimic_object(): return False
 
         # Checks if already acquired.
-        if mob.name in self.mimic_object().acquired_mimicries[mob.rank]: return None
+        if mob.name in self.acquired_mimicries[mob.rank]: return None
 
         # Adds new mob object to usable mimicries dict.
-        self.mimic_object().acquired_mimicries[mob.rank][mob.name] = mob
+        self.acquired_mimicries[mob.rank][mob.name] = mob
 
         # Adds attributes from mob just analyzed.
-        for attribute in mob.attributes_generator():
-            self.add_attribute(attribute, top_newline=False, bot_newline=False)
+        for attribute in mob.attributes_generator(): self.add_attribute(attribute)
 
         if show_msg:
             print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
@@ -106,6 +107,14 @@ class Rimuru_Tempest(Character):
             if match.lower() in m_object.name.lower():
                 return m_object.name
         return False
+
+    def show_mimics(self, *args):
+        print("    -----Available Mimicries-----")
+        for mob_level, mobs in self.acquired_mimicries.items():
+            print(f'    {mob_level}:')
+            for mob_name, mob in mobs.items():
+                print(f'        {mob_name}')
+        print("\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.")
 
     def eat_targets(self, input_targets=''):
         """
