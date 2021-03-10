@@ -90,6 +90,7 @@ def game_action(level=None):
         [rimuru.craft_item, ['craft', 'make', 'create']],
         [rimuru.eat_targets, ['eat', 'predate', 'predation']],
         [rimuru.use_mimic, ['mimic', 'mimicry']],
+        [rimuru.show_mimics, ['mimics', 'mimicries']],
         [rimuru.get_location, ['location']],
         [rimuru.use_skill, ['sense heat source', character], ['nearby', 'sense heat sources']],
         [show_help, ['help', 'commands']],
@@ -108,8 +109,7 @@ def game_action(level=None):
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action in game_actions:
         # If action needs custom parameters passed in.
-        if len(action) == 3:
-            if command in action[2]: action[0](*action[1])
+        if len(action) == 3 and command in action[2]: action[0](*action[1])
         # Run matched corresponding game function and pass rest of user input as parameter.
         if command in action[1]: action[0](parameters)
 
@@ -164,11 +164,11 @@ def last_skill(skill):
         bool False: If not match.
     """
 
-    try:
-        if skill.lower() in rimuru.last_skill.name.lower():
-            return rimuru.last_skill
-        else: return False
-    except: return False
+    if not rimuru.last_skill: return  # If last_skill var is not set.
+
+    if skill.lower() in rimuru.last_skill.name.lower():
+        return rimuru.last_skill
+    else: return False
 
 def mobs_add(add_mobs):
     """
@@ -200,6 +200,7 @@ def mobs_add(add_mobs):
         else: new_name = None
 
         if mob_object := rimuru.get_object(new_mob, new=True):
+            mob_object = mob_object()
             if new_name: mob_object.name = new_name.strip()  # If specified name for new mob.
 
             rimuru.active_mobs.append([mob_object, amount])
@@ -220,7 +221,7 @@ def mob_status(target):
     """
 
     for i in rimuru.active_mobs:
-        if target.lower() in i[0].get_name(): return i[0].is_alive
+        if target.lower() in i[0].name.lower(): return i[0].is_alive
 
 def mobs_cleared():
     """
@@ -287,7 +288,7 @@ def clear_subs(action):
     """
 
     for i in dir(action):
-        if '__subs' in i: eval(f"level.{i}.append('ACTIONBLOCKED')")
+        if '__subs' in i: eval(f"action.{i}.append('ACTIONBLOCKED')")
 
 
 #                    ========== Game Save/Settings ==========
@@ -319,7 +320,7 @@ def game_save(level=None, show_msg=True):
 
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
 
-    if show_msg: print("\n    < Game Saved >\n")
+    if show_msg: print("    < Game Saved >")
 
 def game_load(path):
     """
@@ -360,7 +361,7 @@ def game_over():
     try: os.remove(rimuru.save_path)
     except: pass
 
-    print("\n    < GAME OVER >\nPlay again?")
+    print("\n    < GAME OVER >\n\nPlay again?")
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']: exit(0)
     else: game_restart()
 
@@ -584,7 +585,7 @@ def show_start_banner():
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
-    - Basic commands: stats, inv, save, info, and  help for more.
+    - Basic commands: stats, inv, info, settings, and help for more.
     - Fullscreen recommended.
     """)
 
