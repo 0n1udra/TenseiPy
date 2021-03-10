@@ -147,8 +147,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .check_acquired('resist poison')
         """
 
-        if item := self.get_object(check_object):
-            if item.quantity >= amount: return item
+        item = self.get_object(check_object)
+        if item and item.quantity >= amount:
+            return item
         return False
 
     def update_status(self, game_object, new_status):

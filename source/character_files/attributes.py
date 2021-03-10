@@ -35,7 +35,7 @@ class Attributes:
             > stats tempest serpent
         """
 
-        print("-----Attributes/Skills-----")
+        print("----- Skills -----")
         print(f"Name: [{(self.name + ' ' + self.family_name).strip()}]")
         if self.current_mimic:
             print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
@@ -132,7 +132,7 @@ class Attributes:
             .check_resistance('resist pain', 'ranga')
         """
 
-        if type(target) == str:
+        if type(target) is str:
             target = self.get_object(target)
         if not target: target = self
 

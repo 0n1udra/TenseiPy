@@ -45,7 +45,7 @@ class Inventory:
             > inv
         """
 
-        print('-----Inventory-----')
+        print('----- Inventory -----')
         print(f'Capacity: {self.inventory_capacity:.1f}%\n')
         for i in self.inventory_generator(output=True): print(i)
 
@@ -145,7 +145,7 @@ class Inventory:
 
             # Asks for how much to make. note that some items are crafted in batches.
             try:
-                craft_amount = int(input(f"Craft > "))
+                craft_amount = int(input("Craft > "))
                 print()
             except ValueError:
                 print("\n    < Error: need integer input >")
@@ -154,9 +154,8 @@ class Inventory:
         # Checks if have all the ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
             if self.check_acquired(ingredient_name, ingredient_amount * craft_amount): continue
-            else:
-                print("    < Missing Ingredient(s) >")
-                return False
+            print("    < Missing Ingredient(s) >")
+            return False
 
         # Use up ingredients then add to inventory
         for ingredient_name, ingredient_amount in item.recipe.items():

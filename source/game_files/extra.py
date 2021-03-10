@@ -1,6 +1,6 @@
 import random
 
-def get_random(min=1, max=100, target=None, bigger_than=None, return_int=False):
+def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int=False):
     """
     Generate random number and check if matches passed in target parameter, returns True if so.
 
@@ -23,15 +23,14 @@ def get_random(min=1, max=100, target=None, bigger_than=None, return_int=False):
 
     # Default is the middle of min and max.
     if target is None:
-        target = int(round(max / 2))
+        target = int(round(max_int / 2))
 
-    rand = random.randint(min, max)
+    rand = random.randint(min_int, max_int)
 
-    if bigger_than:
-        if rand >= rand:
-            # Return random integer along with boolean.
-            if return_int: return True, rand
-            return True
+    if bigger_than and rand >= bigger_than:
+        # Return random integer along with boolean.
+        if return_int: return True, rand
+        return True
 
     if rand == target:
         if return_int: return True, rand
@@ -57,7 +56,7 @@ def on_off(var):
     """ Returns string 'on'/'off' based on var. """
 
     if var: return 'on '
-    else: return 'off'
+    return 'off'
 
 def format_info(name, var):
     """

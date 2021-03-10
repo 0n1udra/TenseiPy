@@ -7,7 +7,7 @@ from game_maps.game_location import *
 from game_files.characters import Veldora_Tempest
 
 def ch1_cave(rimuru):
-    class wake_up(cave_actions):
+    class wake_up:
         __location = 'Sealed Cave'
 
         def __init__(self):
@@ -172,7 +172,7 @@ def ch1_cave(rimuru):
             def __init__(self):
                 if rimuru.check_acquired('hydraulic propulsion'):
                     siprint("Let's see if I can get out now.")
-                    if not last_skill('hydraulic propulsion'):
+                    if not last_skill('hydraulic propulsion'):  # If skill was already used.
                         rimuru.use_skill('hydraulic propulsion')
                     siprint("Ouch! I hit something, but at least it seems like I'm back on land.")
                     siprint("<< Notice, New skill [Hydraulic Propulsion] acquired. >>")

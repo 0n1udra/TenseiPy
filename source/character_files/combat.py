@@ -72,11 +72,9 @@ class Combat:
         for current_target in self.targeted_mobs:
             for current_skill in skills:
                 # If target is too high of a level to damage with skill.
-                if current_target[0].level > current_skill.damage_level:
-                    print(f"    < Elimination Failed: {current_target[0].name}  >")
-                    continue
+                if current_target[0].level > current_skill.damage_level: continue
                 # Checking if have resistance.
-                elif self.check_resistance(current_skill, current_target[0]):
+                if self.check_resistance(current_skill, current_target[0]):
                     print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
                     continue
 

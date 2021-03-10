@@ -1,4 +1,5 @@
 class Map:
+    @staticmethod
     def get_location_variable(self, level_class=None):
         """
         Gets location name from __location var in current level's class object.

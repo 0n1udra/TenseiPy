@@ -64,7 +64,7 @@ class Rimuru_Tempest(Character):
 
         if show_msg:
             print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
-            print(f"    << Notice, new skills and mimicry available. >>\n")
+            print("    << Notice, new skills and mimicry available. >>\n")
 
     def use_mimic(self, character):
         """
@@ -109,19 +109,19 @@ class Rimuru_Tempest(Character):
         return False
 
     def show_mimics(self, *args):
-        print("    -----Available Mimicries-----")
+        print("    ----- Mimicries -----")
         for mob_level, mobs in self.acquired_mimicries.items():
             print(f'    {mob_level}:')
             for mob_name, mob in mobs.items():
                 print(f'        {mob_name}')
         print("\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.")
 
-    def eat_targets(self, input_targets=''):
+    def eat_targets(self, *args):
         """
         Predates targets that are being targeted. Also adds new mimicry.
 
         Args:
-            input_targets: Target to eat.
+            args: Catch all for use from game_action function.
 
         Usage:
             > eat

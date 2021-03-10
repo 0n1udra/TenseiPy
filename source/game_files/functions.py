@@ -86,7 +86,7 @@ def game_action(level=None):
         [rimuru.show_attributes, ['stats', 'skills', 'attrs', 'attributes']],
         [rimuru.set_targets, ['target', 'focus']],
         [rimuru.attack, [parameters], ['attack']],
-        [rimuru.use_skill, [parameters, character], ['use']],
+        [rimuru.use_skill, [character, parameters], ['use']],
         [rimuru.craft_item, ['craft', 'make', 'create']],
         [rimuru.eat_targets, ['eat', 'predate', 'predation']],
         [rimuru.use_mimic, ['mimic', 'mimicry']],
@@ -150,7 +150,7 @@ def game_cond(game_var, new_value=None):
     # Return game conditional data if found.
     if game_var in rimuru.conditional_data:
         return rimuru.conditional_data[game_var]
-    else: return False
+    return False
 
 def last_skill(skill):
     """
@@ -168,7 +168,7 @@ def last_skill(skill):
 
     if skill.lower() in rimuru.last_skill.name.lower():
         return rimuru.last_skill
-    else: return False
+    return False
 
 def mobs_add(add_mobs):
     """
@@ -332,8 +332,6 @@ def game_load(path):
     Returns:
         Loaded game save object.
     """
-
-    global rimuru
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
     try:
@@ -526,10 +524,10 @@ def dots(length=3, times=5, indent=False):
         print(('    ' if indent else '') + '.' * length)
         return
 
-    for i in range(times):
+    for _ in range(times):
         if indent: print('    ', end='')  # Print out dots instantly instead.
 
-        for j in range(length):
+        for _ in range(length):
             sys.stdout.write('.')
             sys.stdout.flush()
             time.sleep(0.5)

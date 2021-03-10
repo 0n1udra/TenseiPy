@@ -26,10 +26,17 @@ class Skill:
     def __str__(self): return self.name.lower()
 
     def use_skill(self, user=None, *args):
-        """ Use skill, by default it'll just return True to signal it has been activated. """
+        """
+        Use skill, by default it'll just return True to signal player has used the skill.
+
+        Args:
+            user:
+
+        """
 
         # If skill need specific requirements to be used.
         if self.use_requirements:
+            # Need to specify the user who needs to meet the prerequisites to use skill.
             if not user: return False
 
             # Check if user meets requirement or own prerequisites before using skill.
@@ -272,7 +279,7 @@ class Sense_Heat_Source(Extra, Skill):
     '''
 
     def use_skill(self, user):
-        print("    -----Nearby Heat Sources-----")
+        print("    ----- Nearby Heat Sources -----")
         for mob in user.active_mobs:
             if mob[0].is_alive:
                 print(f'    {mob[1]}x {mob[0].name}')
