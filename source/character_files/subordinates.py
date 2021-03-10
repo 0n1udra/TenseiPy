@@ -8,7 +8,8 @@ class Subordinates:
         """
 
         for level, sub_list in self.subordinates.items():
-            for subordinate in sub_list: yield subordinate
+            for subordinate in sub_list:
+                yield subordinate
 
     def add_subordinate(self, new_subordinate, new_name):
         """
@@ -28,4 +29,5 @@ class Subordinates:
 
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)
-        else: self.subordinates[new_subordinate.species] = [new_subordinate]
+        else:
+            self.subordinates[new_subordinate.species] = [new_subordinate]

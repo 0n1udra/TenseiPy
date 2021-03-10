@@ -1,5 +1,6 @@
 from game_files.extra import get_any
 
+
 class Combat:
     def set_targets(self, targets):
         """
@@ -27,10 +28,11 @@ class Combat:
             for target in targets.split(','):
                 # Only able to target mobs in active_mobs list.
                 for mob in self.active_mobs:
-                    skip = False  # I need to skip 'mob in active_mob' for loop within 'i intarget_mobs for loop'.
+                    skip = False  # I need to skip 'mob in active_mob' for loop within 'i in target_mobs' for loop.
                     if mob[0].name.lower() in target:
                         for i in self.targeted_mobs:
-                            if i[0] == mob[0]: skip = True  # If mob already being targeted.
+                            if i[0] == mob[0]:
+                                skip = True  # If mob already being targeted.
 
                         if skip is False:
                             self.targeted_mobs.append(mob)
@@ -66,13 +68,16 @@ class Combat:
         for attack in user_input.split(','):
             if attack := self.get_object(attack):
                 # Adds skill to list of attacks to use against enemies.
-                if attack.game_object_type == 'attribute': skills.append(attack)
+                if attack.game_object_type == 'attribute':
+                    skills.append(attack)
             else: continue
 
         for current_target in self.targeted_mobs:
             for current_skill in skills:
                 # If target is too high of a level to damage with skill.
-                if current_target[0].level > current_skill.damage_level: continue
+                if current_target[0].level > current_skill.damage_level:
+                    continue
+
                 # Checking if have resistance.
                 if self.check_resistance(current_skill, current_target[0]):
                     print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")

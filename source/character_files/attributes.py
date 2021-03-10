@@ -13,19 +13,22 @@ class Attributes:
 
         for skill_type, skills in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills: yield f'[{skill_type}]'
+            if output and skills:
+                yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
-                if not output: yield skill_object
+                if not output:
+                    yield skill_object
 
                 if skill_object.status:
                     yield f'    {skill_name} ({skill_object.status})'
-                else: yield f'    {skill_name}'
+                else:
+                    yield f'    {skill_name}'
 
     def show_attributes(self, *args):
         """
-        Prints out attribute of player or specified character. Includes info like Mimcking, Location, Full Name, etc.
+        Prints out attribute of player or specified character. Includes info like Mimicking, Location, Full Name, etc.
 
         Usage:
             .show_attributes()
@@ -68,9 +71,11 @@ class Attributes:
                 attribute.quantity = 1
             self.attributes[attribute.skill_level][attribute.name] = attribute
 
-            # If want to show acqusition message and/or skill's info page.
-            if show_acquired_msg: print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
-            if show_skill_info: self.show_info(attribute.name)
+            # If want to show acquisition message and/or skill's info page.
+            if show_acquired_msg:
+                print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
+            if show_skill_info:
+                self.show_info(attribute.name)
 
             return True
         return False
@@ -134,12 +139,14 @@ class Attributes:
 
         if type(target) is str:
             target = self.get_object(target)
-        if not target: target = self
+        if not target:
+            target = self
 
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
-                if attack.damage_type in resist: return True
+                if attack.damage_type in resist:
+                    return True
 
     def use_skill(self, skill, character=None):
         """
@@ -153,7 +160,8 @@ class Attributes:
             > use sense heat source
         """
 
-        if character is None: character = self
+        if character is None:
+            character = self
 
         if skill_object := self.get_object(skill):
             if return_data := skill_object.use_skill(character):

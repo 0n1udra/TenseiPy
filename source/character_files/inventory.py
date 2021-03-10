@@ -22,8 +22,10 @@ class Inventory:
                     item_text = f'    {item_object.inventory_capacity_add * item_object.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item_object.name}'
                     if item_object.status:  # if has a custom status set.
                         yield item_text + f' ({item_object.status})'
-                    else: yield item_text  # Text to be shown for gameplay.
-                else: yield item_object  # Object to be used by code.
+                    else:
+                        yield item_text  # Text to be shown for gameplay.
+                else:
+                    yield item_object  # Object to be used by code.
 
     def update_inventory_capacity(self):
         """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
@@ -47,7 +49,8 @@ class Inventory:
 
         print('----- Inventory -----')
         print(f'Capacity: {self.inventory_capacity:.1f}%\n')
-        for i in self.inventory_generator(output=True): print(i)
+        for i in self.inventory_generator(output=True):
+            print(i)
 
     def add_inventory(self, item_object, amount=1, show_acquired_msg=True, show_analysis_msg=None):
         """
@@ -75,11 +78,15 @@ class Inventory:
             if not item_object.initialized: item_object = item_object()
             self.inventory[item_object.item_type][item_object.name] = item_object
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
-            if show_analysis_msg is None: show_analysis_msg = True
+            if show_analysis_msg is None:
+                show_analysis_msg = True
+
         self.update_inventory_capacity()
 
-        if show_acquired_msg: print(f'    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >')
-        if show_analysis_msg: print(f'    << Analysis on [{item_object.name}] Complete. >>')
+        if show_acquired_msg:
+            print(f'    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >')
+        if show_analysis_msg:
+            print(f'    << Analysis on [{item_object.name}] Complete. >>')
 
     def remove_inventory(self, item, amount=1):
         """
@@ -153,7 +160,9 @@ class Inventory:
 
         # Checks if have all the ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
-            if self.check_acquired(ingredient_name, ingredient_amount * craft_amount): continue
+            if self.check_acquired(ingredient_name, ingredient_amount * craft_amount):
+                continue
+
             print("    < Missing Ingredient(s) >")
             return False
 

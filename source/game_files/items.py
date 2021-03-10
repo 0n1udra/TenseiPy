@@ -33,7 +33,7 @@ class Item:
         return self.description
 
     def update_info(self):
-        """Updates item's info."""
+        """Updates items info_page depending on what object variables has been set."""
 
         # If attribute/skill has a special status.
         self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'
@@ -41,6 +41,7 @@ class Item:
         # Only show fields that have set data.
         info_dict = {'Item Type': self.item_type, 'Damage Type': self.damage_type, 'Damage Level': self.damage_level,
                      '*Description': self.description, '*Appearance': self.appearance, '*Usage': self.usage}
+
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
@@ -57,6 +58,7 @@ class Item:
             self.info_page += f'\n    Recipe:\n        Will craft {self.quantity_add} at a time.\n'
             for item, amount in self.recipe.items():
                 self.info_page += f'        {amount}x [{item}]\n'
+
         self.info_page = self.info_page[:-1]
 
     def __str__(self): return self.name.lower()

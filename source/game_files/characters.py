@@ -1,5 +1,6 @@
 from character_files.character import Character
 
+
 # ========== Characters
 class Rimuru_Tempest(Character):
     name = 'Slime'
@@ -24,7 +25,8 @@ class Rimuru_Tempest(Character):
         if not self.mimic_object(): return None
 
         for level, mimics in self.acquired_mimicries.items():
-            for mimic_name, mimic in mimics.items(): yield mimic
+            for mimic_name, mimic in mimics.items():
+                yield mimic
 
     def mimic_object(self, active=None):
         """
@@ -140,13 +142,16 @@ class Rimuru_Tempest(Character):
                     self.add_mimic(target[0])
                     self.add_inventory(target[0], target[1])
                     self.targeted_mobs.remove(target)
-                    try: self.active_mobs.remove(target)
+                    try:
+                        self.active_mobs.remove(target)
                     except: pass
 
         # For some reason I need this to check if it cleared out all dead mobs.
         # If not it'll just run this function again. Have not ran into bugged looping, yet. Should probably change this huh?
         for i in self.targeted_mobs:
-            if i[0].is_alive is False: self.eat_targets()
+            if i[0].is_alive is False:
+                self.eat_targets()
+
 
 class Veldora_Tempest(Character):
     name = "Veldora"
@@ -159,6 +164,7 @@ class Veldora_Tempest(Character):
     level = 11
     inventory_capacity_add = 10
 
+
 # ===== Adventurers
 class Eren_Grimwold(Character):
     name = "Eren Grimwold"
@@ -170,6 +176,7 @@ class Eren_Grimwold(Character):
     appearance = "A blonde, 16y/o, green eyed adventurer from the Freedom Association."
     abilities = ['Mud Hand', 'Cleaning Magic', 'Elemental Magic']
 
+
 class Kaval(Character):
     name = "Kaval"
     level = 5
@@ -180,6 +187,7 @@ class Kaval(Character):
     he is also tasked as the secret bodyguard of Lady Elyune under the guise of an adventurer.'"""
     appearance = 'A young man with medium length hair, seemingly in his prime.'
     abilities = ['Fighting Spirit', 'Heavy Collision']
+
 
 class Gideo(Character):
     name = 'Gido'
@@ -203,6 +211,7 @@ class Tempest_Serpent(Character):
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['sense heat source', 'poisonous breath']
 
+
 class Giant_Bat(Character):
     name = 'Giant Bat'
     species = 'Bat'
@@ -214,6 +223,7 @@ class Giant_Bat(Character):
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['ultrasound waves', 'vampirism']
 
+
 class Evil_Centipede(Character):
     name = 'Evil Centipede'
     species = 'Centipede'
@@ -221,6 +231,7 @@ class Evil_Centipede(Character):
     appearance = 'Centipede monstrosity, a giant centipede.'
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['paralyzing breath']
+
 
 class Black_Spider(Character):
     name = 'Black Spider'
@@ -257,6 +268,7 @@ class Goblin(Character):
     For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
     '''
     evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
+
 
 class Hobgoblin(Goblin):
     name = 'Hobgoblin'

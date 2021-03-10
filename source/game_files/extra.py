@@ -1,4 +1,5 @@
-import random
+import random, sys
+
 
 def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int=False):
     """
@@ -29,14 +30,17 @@ def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int
 
     if bigger_than and rand >= bigger_than:
         # Return random integer along with boolean.
-        if return_int: return True, rand
+        if return_int:
+            return True, rand
         return True
 
     if rand == target:
-        if return_int: return True, rand
+        if return_int:
+            return True, rand
         return True
 
     return False
+
 
 def get_any(match_to, input_list):
     """
@@ -50,13 +54,17 @@ def get_any(match_to, input_list):
         bool: Returns True if match found.
     """
 
-    if any(i.lower() in match_to for i in input_list): return True
+    if any(i.lower() in match_to for i in input_list):
+        return True
+
 
 def on_off(var):
     """Returns string 'on'/'off' based on var."""
 
-    if var: return 'on '
+    if var:
+        return 'on '
     return 'off'
+
 
 def format_info(name, var):
     """
@@ -78,12 +86,14 @@ def format_info(name, var):
     # Puts var info on newline and indented from field label.
     if '*' in name:
         return_data += f'\n    {name[1:]}:\n\t'
-    else: return_data += f"{name}: "
+    else:
+        return_data += f"{name}: "
 
     # If passed in a list. It'll sort, than space it them out with ','.
     if type(var) is list:
         return_data += ", ".join(sorted(var))
-    else: return_data += str(var).strip()
+    else:
+        return_data += str(var).strip()
 
     return return_data
 
@@ -91,6 +101,6 @@ def format_info(name, var):
 def tbc():
     """Print part of game/story is in development."""
 
-    print("\n    < ---IN PREOGRESS--- >\n")
+    print("\n    < ---IN PROGRESS--- >\n")
     input("Press Enter to exit > ")
-    exit()
+    sys.exit(0)

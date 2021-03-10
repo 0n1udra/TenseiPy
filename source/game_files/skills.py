@@ -1,5 +1,6 @@
 from game_files.extra import format_info
 
+
 class Skill:
     name = 'N/A'
     type = 'Activatable Skill'
@@ -23,7 +24,8 @@ class Skill:
         self.initialized = True
         self.update_info()
 
-    def __str__(self): return self.name.lower()
+    def __str__(self):
+        return self.name.lower()
 
     def use_skill(self, user=None, *args):
         """
@@ -61,7 +63,7 @@ class Skill:
         self.update_info()
 
     def deactivate_skill(self, state=''):
-        """ Deactivates skill, then updates relevant variables."""
+        """Deactivates skill, then updates relevant variables."""
 
         print(f"    < {self.skill_level} {self.name}: Deactivated >")
         self.status = state
@@ -73,7 +75,7 @@ class Skill:
         print(f"    {self.acquired_msg}")
 
     def update_info(self):
-        """Updates skills info_page."""
+        """Updates skills info_page depending on what object variables has been set."""
 
         self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
 
@@ -82,6 +84,7 @@ class Skill:
         # Only show fields that have set data.
         info_dict = {'Type': self.type, 'Level': self.skill_level, 'Damage': self.damage_level, 'Damage Type': self.damage_type,
                      'Evolution': self.evolution, '*Description': self.description, '*Abilities': self.abilities}
+
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
@@ -90,25 +93,33 @@ class Skill:
             self.info_page += "\n    Use Requirements:\n"
             for item, amount in self.use_requirements.items():
                 self.info_page += f"        {amount}x [{item}]\n"
+
         self.info_page = self.info_page[:-1]
+
 
 class Manas:
     skill_level = 'Manas'
 
+
 class Ultimate:
     skill_level = 'Ultimate Skill'
+
 
 class Unique:
     skill_level = 'Unique Skill'
 
+
 class Extra:
     skill_level = 'Extra Skill'
+
 
 class Common:
     skill_level = 'Common Skill'
 
+
 class Intrinsic:
     skill_level = 'Intrinsic Skill'
+
 
 class Resistance:
     skill_level = 'Resistance'
@@ -177,6 +188,7 @@ class Predator_Skill(Unique, Skill):
     """
     evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
 
+
 class Great_Sage_Skill(Unique, Skill):
     name = 'Great Sage'
     description = '''A Conceptual Intelligence that has a heartless and emotionless personality 
@@ -217,6 +229,7 @@ class Great_Sage_Skill(Unique, Skill):
 class Sage_Skill(Extra, Skill):
     name = 'Sage'
 
+
 class Magic_Perception(Extra, Skill):
     name = 'Magic Perception'
     description = '''One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
@@ -227,9 +240,11 @@ class Magic_Perception(Extra, Skill):
         Ambushes become nearly impossible. It's an indispensable skill.
     '''
 
-    def use_skill(self, *args):
+    def use_skill(self, user=None, *args):
+        if not user: return False
         self.activate_skill()
         return True
+
 
 class Water_Manipulation(Extra, Skill):
     name = "Water Manipulation"
@@ -237,6 +252,7 @@ class Water_Manipulation(Extra, Skill):
         The three Skills are fused and evolved into Water Manipulation.
     '''
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+
 
 class Vampirism(Extra, Skill):
     name = 'Vampirism'
@@ -251,6 +267,7 @@ class Absorb_Dissolve(Intrinsic, Skill):
     name = 'Absorb/Dissolve'
     description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
 
+
 class Self_Regeneration(Intrinsic, Skill):
     name = 'Self-Regeneration'
     status = 'Passive'
@@ -260,11 +277,13 @@ class Self_Regeneration(Intrinsic, Skill):
               '''
     evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
 
+
 class Sticky_Thread(Extra, Skill):
     name = 'Sticky Thread'
     damage_type = 'Melee'
     damage_level = 2
     description = "A thin sticky thread that traps enemies and prevent them from moving."
+
 
 class Steel_Thread(Extra, Skill):
     name = 'Steel Thread'
@@ -272,13 +291,15 @@ class Steel_Thread(Extra, Skill):
     damage_level = 5
     description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
 
+
 class Sense_Heat_Source(Extra, Skill):
     name = 'Sense Heat Source'
     description = '''Identifies any heat reactions in the local area. 
         Not affected by any concealing effects.
     '''
 
-    def use_skill(self, user):
+    def use_skill(self, user=None, *args):
+        if not user: return False
         print("    ----- Nearby Heat Sources -----")
         for mob in user.active_mobs:
             if mob[0].is_alive:
@@ -293,6 +314,7 @@ class Hydraulic_Propulsion(Common, Skill):
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
     use_requirements = {'Water': 1}
 
+
 class Water_Blade(Common, Skill):
     name = 'Water Blade'
     damage_type = 'Melee'
@@ -300,12 +322,14 @@ class Water_Blade(Common, Skill):
     description = 'Shoot out a thin water blade with tremendous cutting power.'
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
+
 class Water_Bullet(Common, Skill):
     name = 'Water Bullet'
     damage_type = 'Melee'
     damage_level = 6
     description = "Shoot out a small powerful water bullet."
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+
 
 class Poisonous_Breath(Common, Skill):
     name = 'Poisonous Breath'
@@ -315,11 +339,13 @@ class Poisonous_Breath(Common, Skill):
         Affects an area seven meters in front of the user in a 120-degree radius.
     '''
 
+
 class Paralyzing_Breath(Common, Skill):
     name = 'Paralyzing Breath'
     damage_type = 'Poison'
     damage_level = 5
     description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
+
 
 class Ultrasound_Waves(Common, Skill):
     name = 'Ultrasound Waves'
@@ -336,10 +362,12 @@ class Resist_Pain(Resistance, Skill):
         However, you still take damage.
     '''
 
+
 class Resist_Melee(Resistance, Skill):
     name = 'Resist Melee'
     resist_types = ['Melee']
     description = 'Tolerance-type Skill that grants immunity to melee attacks.'
+
 
 class Resist_Electricity(Resistance, Skill):
     name = 'Resist Electricity'
@@ -348,12 +376,14 @@ class Resist_Electricity(Resistance, Skill):
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
 
+
 class Resist_Temperature(Resistance, Skill):
     name = 'Resist Temperature'
     resist_types = ['hot', 'cold', 'temperature']
     description = '''Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
+
 
 class Resist_Poison(Resistance, Skill):
     name = 'Resist Poison'

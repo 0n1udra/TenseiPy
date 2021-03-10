@@ -1,5 +1,4 @@
-from os import path
-from sys import argv
+import sys, os
 from game_files.functions import show_start_banner, update_rimuru, game_load, get_any, siprint
 
 __version__ = "5.0 Alpha"
@@ -7,7 +6,6 @@ __author__ = "D Thomas"
 __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
 __status__ = "Development"
-
 
 def help_page():
     print("""
@@ -24,20 +22,26 @@ def help_page():
 
 
 if __name__ == '__main__':
-    if '-h' in argv: help_page()
+    if '-h' in sys.argv: help_page()
 
-    save_path = path.dirname(path.abspath(__file__)) + '/game.save'
+    save_path = os.path.dirname(os.path.abspath(__file__)) + '/game.save'
 
     # Loads game save and updates rimuru object in game_functions alongside debug variable, and shows start banner.
     rimuru = update_rimuru(game_load(save_path))
 
-    if get_any(argv, ['-f', '-fast', '-fastmode']): rimuru.fast_mode = True
-    if get_any(argv, ['-t', '-text', '-textcrawl']): rimuru.textcrawl = False
-    if get_any(argv, ['-a', '-art', '-hideart']): rimuru.show_art = False
-    if get_any(argv, ['-hud', '-hidehud']): rimuru.show_hud = True
-    if '-hard' in argv: rimuru.hardcore = True
-    if '-hints' in argv: rimuru.show_hints = False
-    if '-slime' in argv:  # For debug.
+    if get_any(sys.argv, ['-f', '-fast', '-fastmode']):
+        rimuru.fast_mode = True
+    if get_any(sys.argv, ['-t', '-text', '-textcrawl']):
+        rimuru.textcrawl = False
+    if get_any(sys.argv, ['-a', '-art', '-hideart']):
+        rimuru.show_art = False
+    if get_any(sys.argv, ['-hud', '-hidehud']):
+        rimuru.show_hud = True
+    if '-hard' in sys.argv:
+        rimuru.hardcore = True
+    if '-hints' in sys.argv:
+        rimuru.show_hints = False
+    if '-slime' in sys.argv:  # For debug.
         rimuru.textcrawl = rimuru.show_art = False
         rimuru.show_hud = rimuru.show_hints = True
 

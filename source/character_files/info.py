@@ -1,5 +1,6 @@
 from game_files.extra import format_info, get_any
 
+
 class Info:
     def show_info(self, game_object):
         """
@@ -22,7 +23,8 @@ class Info:
             # Some skills or objects have special info pages, I couldn't get @property method working...
             if hasattr(game_object, 'show_info_page'):
                 print(game_object.show_info_page(self))
-            else: print(game_object.info_page)
+            else:
+                print(game_object.info_page)
 
     def update_info(self):
         """Updates character information."""
@@ -38,9 +40,11 @@ class Info:
         info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Divine Protections': self.protections,
                      'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
                      'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance}
+
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
+
         self.info_page = self.info_page[:-1]
 
     def update_name(self, name):
@@ -57,7 +61,7 @@ class Info:
 
     def update_level(self, level):
         """
-        Updates character level
+        Updates character level.
 
         Args:
             level int: New level for character.
