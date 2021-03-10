@@ -171,7 +171,6 @@ In function docstring's Usage section, '>' means example of user input in game.
     acquired_msg str        -- Message shown when acquired.
 
 :Functions:
-    get_name()              -- Returns character's name in lowercase.
     show_info()             -- Shows info page for game objects.
     update_info()           -- Updates character info variable.
     update_level()        -- Updates character's level, which will also update ranking.
@@ -244,7 +243,6 @@ update_character() - Updates rimuru (player) object.
     get_description()       -- Get's item description.
     show_acquired_msg()     -- Prints out item acquired message.
     update_info()           -- Updates item info page.
-    get_name()              -- Returns item name in lowercase.
 
 :Items:
 Hipokte_Grass
@@ -273,7 +271,6 @@ Water
 :Functions:
     show_acquired_msg()     -- Shows skill acquired message.
     update_info()           -- Updates skill info page.
-    get_name()              -- Returns skill name in lowercase.
 
 Resistance
     resist_types []         -- Resistance types. E.g. Pain, Melee

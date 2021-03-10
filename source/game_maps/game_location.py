@@ -1,7 +1,6 @@
 from game_files.functions import *
 
 class subs:
-
     move_on = ['explore', 'wonder', 'move', 'move on', 'move forward', 'keep moving', 'keep exploring', 'explore more', 'explore further', 'keep fumbling', 'fumble around more', 'fumble more', 'bounce around more', 'keep bouncing', 'just move on', 'keep moving forward', 'continue forward', 'continue exploring']
     wait = ['wait', 'stay']
 
@@ -21,10 +20,8 @@ class Game_Location:
 class cave_actions:
     class eat_grass:
         __subs = ['predate grass', 'eat hipokte grass', 'predate hipokte grass']
-        def __init__(self):
-            rimuru.add_inventory('hipokte grass', bot_newline=False)
+        def __init__(self): rimuru.add_inventory('hipokte grass')
 
     class eat_ore:
         __subs = ['predate ore', 'eat magic ore', 'predate magic ore', 'eat rock', 'predate rock', 'eat magic rock', 'predate magic rock']
-        def __init__(self):
-            rimuru.add_inventory('magic ore', bot_newline=False)
+        def __init__(self): rimuru.add_inventory('magic ore')

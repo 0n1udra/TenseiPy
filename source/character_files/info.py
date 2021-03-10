@@ -1,11 +1,6 @@
 from game_files.extra import format_info, get_any
 
 class Info:
-    def get_name(self):
-        """ Returns object name attribute in lowercase. """
-
-        return self.name.lower()
-
     def show_info(self, game_object):
         """
         Shows corresponding information for object.
@@ -18,34 +13,35 @@ class Info:
             > info tempest serpent
         """
 
+        # Need this so player can get the info page on itself.
         if get_any(game_object, ['me', 'self', 'player', self.name]):
             print(self.info_page)
             return True
 
-        # Checks to see if any acquired mimics has inputted ability to get info on.
         if game_object := self.get_object(game_object):
             # Some skills or objects have special info pages, I couldn't get @property method working...
-            try:
-                print(game_object.show_info_page())
-                return
-            except: pass
-            print(game_object.info_page)
+            if hasattr(game_object, 'show_info_page'):
+                print(game_object.show_info_page(self))
+            else: print(game_object.info_page)
 
     def update_info(self):
         """ Updates character information. """
 
-        # Sets ranking according to level
+        # Sets ranking according to level.
         ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
         self.rank = ranking[self.level - 1]
 
+        # Need this complex line because I don't want a weird space or formatting if character doesnt have a last name.
         self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] {"(" + self.status + ")" if self.status else ""}\n'
 
+        # Only show fields that have set data.
         info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Divine Protections': self.protections,
                      'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
                      'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance}
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
+        self.info_page = self.info_page[:-1]
 
     def update_name(self, name):
         """ Updates name of character. """
@@ -55,6 +51,7 @@ class Info:
 
     def update_lname(self, name):
         """ Update character's family name (last name). """
+
         self.family_name = name
         self.update_info()
 
@@ -63,7 +60,7 @@ class Info:
         Updates character level
 
         Args:
-            level: New level for character.
+            level int: New level for character.
 
         Usage:
             character_object.update_level(10)

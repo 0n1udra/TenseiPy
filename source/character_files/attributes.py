@@ -4,7 +4,7 @@ class Attributes:
         Yields character's attributes game objects (skills/resistances).
 
         Args:
-            output: Yields friendly string for in game printing.
+            output bool(False): Yields friendly string for in game printing.
 
         Usage:
             .attributes_generator()
@@ -13,18 +13,15 @@ class Attributes:
 
         for skill_type, skills in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills:
-                yield f'[{skill_type}]'
+            if output and skills: yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
-                if output is False:
-                    yield skill_object
+                if not output: yield skill_object
 
                 if skill_object.status:
                     yield f'    {skill_name} ({skill_object.status})'
-                else:
-                    yield f'    {skill_name}'
+                else: yield f'    {skill_name}'
 
     def show_attributes(self, *args):
         """
@@ -45,34 +42,35 @@ class Attributes:
         print(f"Location: {self.current_location}\n")
 
         # Print out skill category and corresponding skills indented.
-        for i in self.attributes_generator(output=True):
-            print(i)
+        for i in self.attributes_generator(output=True): print(i)
 
-    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False, top_newline=True, bot_newline=True):
+    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
         Adds attribute to character.
 
         Args:
-            attribute: Attribute to add to character.
-            show_acquired_msg: Shows skill acquired message.
-            show_skill_info: Shows skill information page.
+            attribute str: Attribute to add to character.
+            show_acquired_msg bool(True): Shows skill acquired message.
+            show_skill_info bool(False): Shows skill information page.
+            top_newline bool(True): Print newline beforehand.
 
         Usage:
             .add_attribute('rimuru', 'water blade')
         """
 
         # Checks if already acquired.
-        if self.check_acquired(attribute):
-            return False
+        if self.check_acquired(attribute): return False
 
         if attribute := self.get_object(attribute, new=True):
+            # Adds item to character's attributes dictionary, sets quantity so check_acquired func can work.
+            if not attribute.initialized:
+                attribute = attribute()
+                attribute.quantity = 1
             self.attributes[attribute.skill_level][attribute.name] = attribute
-            if show_acquired_msg:
-                if top_newline: print()
-                print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
-                if bot_newline: print()
-            if show_skill_info:
-                self.show_info(attribute.name)
+
+            # If want to show acqusition message and/or skill's info page.
+            if show_acquired_msg: print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
+            if show_skill_info: self.show_info(attribute.name)
 
             return True
         return False
@@ -82,7 +80,7 @@ class Attributes:
         Removes attribute.
 
         Args:
-            attribute: Attribute to remove.
+            attribute str: Attribute to remove.
 
         Usage:
             .remove_attribute('resist poison')
@@ -100,7 +98,7 @@ class Attributes:
         Removes old skill and adds new skill.
 
         Args:
-            skill_from: Skill to upgrade from.
+            skill_from str: Skill to upgrade from.
             skill_to str: Skill to upgrade to.
 
         Usage:
@@ -115,7 +113,7 @@ class Attributes:
 
         print(f"    < Evolving {skill_from.skill_level} [{skill_from.name}] >")
         if self.remove_attribute(skill_from) and self.add_attribute(skill_to, show_acquired_msg=False):
-            print(f"    < Evolution Successful {skill_from.skill_level} [{skill_from.name}] >>> {skill_to.skill_level} [{skill_to.name}] >")
+            print(f"    < Evolution Successful: {skill_from.skill_level} [{skill_from.name}] to {skill_to.skill_level} [{skill_to.name}] >")
 
     def check_resistance(self, attack, target=None):
         """
@@ -126,8 +124,8 @@ class Attributes:
 
 
         Args:
-            attack: Attack to check resistance to.
-            target: Check if specified target has resistance.
+            attack str: Attack to check resistance to.
+            target str ,obj: Check if specified target has resistance.
 
         Usage:
             .check_resistance('resist pain')
@@ -136,36 +134,29 @@ class Attributes:
 
         if type(target) == str:
             target = self.get_object(target)
-        if not target:
-            target = self
+        if not target: target = self
 
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
-                if attack.damage_type in resist:
-                    return True
+                if attack.damage_type in resist: return True
 
     def use_skill(self, skill, character=None):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
         Args:
-            skill: Skill to use.
-            character: Character that will use skill.
+            skill str: Skill to use.
+            character str: Character that will use skill.
 
         Usage:
             > use sense heat source
         """
 
-        if character is None:
-            character = self
+        if character is None: character = self
 
         if skill_object := self.get_object(skill):
-            try:
-                skill_object.use_skill(character)
+            if return_data := skill_object.use_skill(character):
                 self.last_skill = skill_object
-            except:
-                return False
-        else:
-            return False
+                return return_data
         print()

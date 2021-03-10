@@ -4,21 +4,20 @@ from game_files.functions import *
 from chapters.tensei_2 import ch2_goblin_encounter
 from game_maps.game_location import cave_actions
 from game_maps.game_location import *
-from random import randint
+from game_files.characters import Veldora_Tempest
 
 def ch1_cave(rimuru):
-    class wake_up:
+    class wake_up(cave_actions):
         __location = 'Sealed Cave'
 
         def __init__(self):
-            rimuru.set_start_state()
             idots()
             print()
             siprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
-            siprint("<< Confirmation Complete. Acquiring skill: [Predator]... >>")
-            rimuru.add_attribute('Predator', top_newline=False)
-            siprint("<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
-            rimuru.add_attribute('Sage', top_newline=False)
+            siprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
+            siprint("<< Acquired Extra Skill [Predator]. >>")
+            siprint("\n<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
+            siprint("<< Acquired Extra Skill [Sage]. >>")
             rimuru.upgrade_attribute('Sage', 'Great Sage')
             print()
             siprint("It's so dark? Where am I? What happened?")
@@ -130,7 +129,7 @@ def ch1_cave(rimuru):
                             iprint("< Hint: Try 'info hipokte grass'. Then try 'craft full potion'. >")
 
                 class where_did_it_go:
-                    __subs = ['where it go', 'where did the grass go', 'where did that all go', 'hey where did that go', "where's the grass", "where's the grass now", 'where is the grass', 'where is the grass now', 'where did it go', 'where does it all go', 'where do they go', 'where do they all go', 'where does it all go', 'where has it gone', 'where has it all gone']
+                    __subs = ['where it go', 'where did the grass go', 'where did that all go', 'hey where did that go', "where's the grass", "where's the grass now", 'where is the grass', 'where is the grass now', 'where did it go', 'where does it go', 'where does it all go', 'where do they go', 'where do they all go', 'where does it all go', 'where has it gone', 'where has it all gone']
                     def __init__(self):
                         siprint("Where does the stuff I eat go?")
                         siprint("<< Answer, they are stored inside the Unique Skill [Predator]'s stomach sack. >>")
@@ -321,7 +320,7 @@ def ch1_cave(rimuru):
                 __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison', 'look', 'inspect', 'inspect seal', 'inspect prison', 'inspect prison seal', 'analyse prison seal']
                 def __init__(self):
                     global veldora
-                    veldora = mobs.Veldora_Tempest()
+                    veldora = Veldora_Tempest()
                     siprint("Great Sage?")
                     siprint("<< Answer, analysis shows it's impossible to destroy [Infinity Prison] using any physical attacks. >>")
                     siprint("<< Notice, possible solution may be... >>")
@@ -382,7 +381,7 @@ def ch1_cave(rimuru):
                         def __init__(self):
                             siprint("Yes! Please take care of it [Great Sage].")
                             rimuru.update_status('veldora', 'Analyzing')
-                            siprint("< Analysis Started >")
+                            siprint("< Starting Analysis: Unique Skill [Unlimited Imprisonment] >")
                             siprint("I hope you get out quickly Veldora!")
                             tempest_serpent_encounter()
 
@@ -415,6 +414,7 @@ def ch1_cave(rimuru):
     class tempest_serpent_encounter:
         __location = 'Sealed Cave'
         def __init__(self):
+            rimuru.add_inventory('water')
             mobs_add(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
             siprint("\nI've been looking for the cave exit for a bit now.... This cave is so big! Or am I just small?")
             siprint("<< Answer, you are just small. >>")
@@ -450,22 +450,22 @@ def ch1_cave(rimuru):
                         siprint("\n< Hint: Try 'nearby' or 'use sense heat source' to locate nearby mobs. >")
                         siprint("< Hint: Then use 'target' and 'attack' on them, also try 'help' if lost.")
 
-        class _attack_water_bullet:
-            __subs = ['learn water bullet', 'learn fast water attack', 'learn water attack']
-            def __init__(self):
-                rimuru.add_attribute('water bullet')
-                rimuru.attack('water bullet')
-                siprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
-                siprint("Now I have a way to attack.\n")
-                tempest_serpent_encounter.hfunc_attack()
-
         class _attack_water_blade:
-            __subs = ['learn water blade', 'learn slashing water attack', 'learn water attack']
+            __subs = ['learn water attack', 'use quick water attack', 'attack with water', 'attack with water bullet', 'water bullet attack', 'use water bullet attack']
             def __init__(self):
                 rimuru.add_attribute('water blade')
                 rimuru.attack('water blade')
                 siprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
                 siprint("Lets try it out!")
+                tempest_serpent_encounter.hfunc_attack()
+
+        class _attack_water_bullet:
+            __subs = ['learn water attack', 'use water attack', 'attack with water', 'attack with water blade', 'water slash attack', 'use water slash attack']
+            def __init__(self):
+                rimuru.add_attribute('water bullet')
+                rimuru.attack('water bullet')
+                siprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
+                siprint("Now I have a way to attack.\n")
                 tempest_serpent_encounter.hfunc_attack()
 
         class hfunc_attack:
@@ -569,5 +569,4 @@ def ch1_cave(rimuru):
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
-    #wake_up()
-    at_cave_exit()
+    wake_up()
