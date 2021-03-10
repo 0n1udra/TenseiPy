@@ -1,7 +1,7 @@
 class Inventory:
     def inventory_generator(self, output=False):
         """
-        Yields all items in character's inventory (Currently only Rimuru).
+        Yields all items in character's inventory.
 
         Args:
             output bool(False): Yields a friendly string for printing in game purposes.
@@ -49,7 +49,7 @@ class Inventory:
         print(f'Capacity: {self.inventory_capacity:.1f}%\n')
         for i in self.inventory_generator(output=True): print(i)
 
-    def add_inventory(self, item_object, amount=1, show_msg=True, show_analysis_msg=None, bot_newline=True):
+    def add_inventory(self, item_object, amount=1, show_acquired_msg=True, show_analysis_msg=None):
         """
         Adds item to character (currently only Rimuru) inventory.
 
@@ -65,28 +65,21 @@ class Inventory:
         """
 
         # Check if passed in a string to find corresponding object or a game object iteself.
-        if type(item_object) is str:
-            item_object = self.get_object(item_object, new=True)
+        if type(item_object) is str: item_object = self.get_object(item_object, new=True)
 
-        if not item_object:
-            print("< Error: Adding item to inventory >")
-            return False
-
-        #if not amount: amount = 1
+        if not item_object: return False  # Does not have game object to add to inventory.
 
         if self.check_acquired(item_object):
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
         else:
+            if not item_object.initialized: item_object = item_object()
             self.inventory[item_object.item_type][item_object.name] = item_object
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
             if show_analysis_msg is None: show_analysis_msg = True
         self.update_inventory_capacity()
 
-        if show_msg:
-            print(f'    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >')
-            if show_analysis_msg:
-                print(f'    << Analysis on [{item_object.name}] Complete. >>')
-            if bot_newline: print()
+        if show_acquired_msg: print(f'    < Acquired: {amount * item_object.quantity_add}x [{item_object.name}] >')
+        if show_analysis_msg: print(f'    << Analysis on [{item_object.name}] Complete. >>')
 
     def remove_inventory(self, item, amount=1):
         """
@@ -107,10 +100,10 @@ class Inventory:
 
         if item.quantity <= 0 or amount <= 0:
             del self.inventory[item.item_type][item.name]
-            print(f"\n    < Removed Item: [{item.name}] >")
+            print(f"    < Removed Item: [{item.name}] >")
         else:
             item.quantity -= amount
-            print(f"\n    < Removed: {amount}x [{item.name}] >")
+            print(f"    < Removed: {amount}x [{item.name}] >")
 
         self.update_inventory_capacity()
 
@@ -170,4 +163,4 @@ class Inventory:
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
 
         print()
-        self.add_inventory(item, craft_amount, bot_newline=False)
+        self.add_inventory(item, craft_amount)
