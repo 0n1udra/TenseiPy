@@ -1,6 +1,5 @@
 from game_files.extra import format_info
 
-
 class Skill:
     name = 'N/A'
     type = 'Activatable Skill'
@@ -96,30 +95,23 @@ class Skill:
 
         self.info_page = self.info_page[:-1]
 
-
 class Manas:
     skill_level = 'Manas'
-
 
 class Ultimate:
     skill_level = 'Ultimate Skill'
 
-
 class Unique:
     skill_level = 'Unique Skill'
-
 
 class Extra:
     skill_level = 'Extra Skill'
 
-
 class Common:
     skill_level = 'Common Skill'
 
-
 class Intrinsic:
     skill_level = 'Intrinsic Skill'
-
 
 class Resistance:
     skill_level = 'Resistance'
@@ -157,7 +149,6 @@ class Mimicry_Skill(Unique, Skill):
         Only available once the target has been Analyzed.
     """
 
-
 class Predator_Skill(Unique, Skill):
     name = 'Predator'
     description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
@@ -187,7 +178,6 @@ class Predator_Skill(Unique, Skill):
             - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
     """
     evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
-
 
 class Great_Sage_Skill(Unique, Skill):
     name = 'Great Sage'
@@ -229,7 +219,6 @@ class Great_Sage_Skill(Unique, Skill):
 class Sage_Skill(Extra, Skill):
     name = 'Sage'
 
-
 class Magic_Perception(Extra, Skill):
     name = 'Magic Perception'
     description = '''One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
@@ -245,14 +234,12 @@ class Magic_Perception(Extra, Skill):
         self.activate_skill()
         return True
 
-
 class Water_Manipulation(Extra, Skill):
     name = "Water Manipulation"
     description = '''After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
         The three Skills are fused and evolved into Water Manipulation.
     '''
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
-
 
 class Vampirism(Extra, Skill):
     name = 'Vampirism'
@@ -267,7 +254,6 @@ class Absorb_Dissolve(Intrinsic, Skill):
     name = 'Absorb/Dissolve'
     description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
 
-
 class Self_Regeneration(Intrinsic, Skill):
     name = 'Self-Regeneration'
     status = 'Passive'
@@ -277,20 +263,17 @@ class Self_Regeneration(Intrinsic, Skill):
               '''
     evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
 
-
 class Sticky_Thread(Extra, Skill):
     name = 'Sticky Thread'
     damage_type = 'Melee'
     damage_level = 2
     description = "A thin sticky thread that traps enemies and prevent them from moving."
 
-
 class Steel_Thread(Extra, Skill):
     name = 'Steel Thread'
     damage_type = 'Melee'
     damage_level = 5
     description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
-
 
 class Sense_Heat_Source(Extra, Skill):
     name = 'Sense Heat Source'
@@ -314,7 +297,6 @@ class Hydraulic_Propulsion(Common, Skill):
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
     use_requirements = {'Water': 1}
 
-
 class Water_Blade(Common, Skill):
     name = 'Water Blade'
     damage_type = 'Melee'
@@ -322,14 +304,12 @@ class Water_Blade(Common, Skill):
     description = 'Shoot out a thin water blade with tremendous cutting power.'
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
-
 class Water_Bullet(Common, Skill):
     name = 'Water Bullet'
     damage_type = 'Melee'
     damage_level = 6
     description = "Shoot out a small powerful water bullet."
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
-
 
 class Poisonous_Breath(Common, Skill):
     name = 'Poisonous Breath'
@@ -339,13 +319,11 @@ class Poisonous_Breath(Common, Skill):
         Affects an area seven meters in front of the user in a 120-degree radius.
     '''
 
-
 class Paralyzing_Breath(Common, Skill):
     name = 'Paralyzing Breath'
     damage_type = 'Poison'
     damage_level = 5
     description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
-
 
 class Ultrasound_Waves(Common, Skill):
     name = 'Ultrasound Waves'
@@ -362,12 +340,10 @@ class Resist_Pain(Resistance, Skill):
         However, you still take damage.
     '''
 
-
 class Resist_Melee(Resistance, Skill):
     name = 'Resist Melee'
     resist_types = ['Melee']
     description = 'Tolerance-type Skill that grants immunity to melee attacks.'
-
 
 class Resist_Electricity(Resistance, Skill):
     name = 'Resist Electricity'
@@ -376,14 +352,12 @@ class Resist_Electricity(Resistance, Skill):
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
 
-
 class Resist_Temperature(Resistance, Skill):
     name = 'Resist Temperature'
     resist_types = ['hot', 'cold', 'temperature']
     description = '''Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
         Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
-
 
 class Resist_Poison(Resistance, Skill):
     name = 'Resist Poison'

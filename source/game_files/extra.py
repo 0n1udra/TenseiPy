@@ -1,6 +1,5 @@
 import random, sys
 
-
 def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int=False):
     """
     Generate random number and check if matches passed in target parameter, returns True if so.
@@ -41,7 +40,6 @@ def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int
 
     return False
 
-
 def get_any(match_to, input_list):
     """
     Returns True if found a match from input_list with match_to.
@@ -57,14 +55,12 @@ def get_any(match_to, input_list):
     if any(i.lower() in match_to for i in input_list):
         return True
 
-
 def on_off(var):
     """Returns string 'on'/'off' based on var."""
 
     if var:
         return 'on '
     return 'off'
-
 
 def format_info(name, var):
     """
@@ -96,7 +92,6 @@ def format_info(name, var):
         return_data += str(var).strip()
 
     return return_data
-
 
 def tbc():
     """Print part of game/story is in development."""

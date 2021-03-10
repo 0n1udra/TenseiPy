@@ -41,7 +41,6 @@ def game_hud(actions):
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
         print(f"Actions: {actions_for_hud}", end='')
 
-
 def game_action(level=None):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
@@ -138,7 +137,6 @@ def game_action(level=None):
 
     game_action(level)
 
-
 def game_cond(game_var, new_value=None):
     """
     Set and fetch game variables.
@@ -160,7 +158,6 @@ def game_cond(game_var, new_value=None):
         return rimuru.conditional_data[game_var]
     return False
 
-
 def last_skill(skill):
     """
     Checks what was the last successfully used skill.
@@ -178,7 +175,6 @@ def last_skill(skill):
     if skill.lower() in rimuru.last_skill.name.lower():
         return rimuru.last_skill
     return False
-
 
 def mobs_add(add_mobs):
     """
@@ -216,7 +212,6 @@ def mobs_add(add_mobs):
 
             rimuru.active_mobs.append([mob_object, amount])
 
-
 def mob_status(target):
     """
     Returns whether mob in active_mobs list is is_alive.
@@ -235,7 +230,6 @@ def mob_status(target):
     for i in rimuru.active_mobs:
         if target.lower() in i[0].name.lower():
             return i[0].is_alive
-
 
 def mobs_cleared():
     """
@@ -256,13 +250,11 @@ def mobs_cleared():
         if mob[0].is_alive: return False
     return True
 
-
 def mobs_reset():
     """Resets active_mobs and targeted_mobs list."""
 
     rimuru.active_mobs.clear()
     rimuru.targeted_mobs.clear()
-
 
 def get_level_mob(mob):
     """
@@ -279,7 +271,6 @@ def get_level_mob(mob):
     for i in rimuru.active_mobs:
         if mob in i[0].name.lower(): return i[0]
 
-
 def continue_to(next_location):
     """
     Saves game and continues to next location.
@@ -294,7 +285,6 @@ def continue_to(next_location):
     # Loads next story chapter.
     try: next_location(rimuru)
     except: print("    < Error Loading Next Location >")
-
 
 def clear_subs(action):
     """
@@ -317,12 +307,10 @@ def game_restart(*args):
     print("    < Restarting Game... >")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-
 def game_exit(*args):
     """Saves game using pickle, then exits."""
     game_save()
     sys.exit(0)
-
 
 def game_save(level=None, show_msg=True):
     """
@@ -344,7 +332,6 @@ def game_save(level=None, show_msg=True):
 
     if show_msg: print("    < Game Saved >")
 
-
 def game_load(path):
     """
     Load game save.
@@ -355,6 +342,8 @@ def game_load(path):
     Returns:
         Loaded game save object.
     """
+
+    global rimuru  # Need this!
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
     try:
@@ -373,7 +362,6 @@ def game_load(path):
 
     return rimuru
 
-
 def game_over():
     """Player died, deletes pickle save file."""
 
@@ -389,7 +377,6 @@ def game_over():
         sys.exit(0)
     else:
         game_restart()
-
 
 def set_hud(arg):
     """
@@ -415,7 +402,6 @@ def set_hud(arg):
         rimuru.show_hud = False
     print(f"    < Action Menu: {'Enabled' if rimuru.show_hud else 'Disabled'} >\n")
 
-
 def set_art(arg):
     """
     Enable/Disable ASCII art.
@@ -433,7 +419,6 @@ def set_art(arg):
     if arg in off_subs or rimuru.show_art is False:
         rimuru.show_art = False
     print(f"    < ASCII Art: {'Enabled' if rimuru.show_art else 'Disabled'} >\n")
-
 
 def set_textcrawl(arg):
     """
@@ -454,7 +439,6 @@ def set_textcrawl(arg):
         rimuru.textcrawl = False
     print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
 
-
 def set_hints(arg):
     """Enable/Disable game hints."""
 
@@ -468,7 +452,6 @@ def set_hints(arg):
     if arg in off_subs or rimuru.show_hints is False:
         rimuru.show_hints = False
     print(f"    < Hints: {'Enabled' if rimuru.show_hints else 'Disabled'} >\n")
-
 
 def set_hardcore(arg):
     """
@@ -536,19 +519,16 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
     else:
         print(message)  # Print instantly.
 
-
 def siprint(message, showing_history=False):
     """Print with indent."""
 
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
 
-
 def iprint(message, showing_history=False):
     """Just sprint but with indent."""
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
-
 
 def dots(length=3, times=5, indent=False):
     """
@@ -574,12 +554,10 @@ def dots(length=3, times=5, indent=False):
             time.sleep(0.5)
         print()
 
-
 def idots(*args):
     """Prints dots but wth indent."""
 
     dots(*args, indent=True)
-
 
 def show_art(art):
     """
@@ -601,7 +579,6 @@ def show_art(art):
             print(line)
     else:
         print(art)  # Instantly print out ASCII art to screen.
-
 
 def show_history(arg):
     """
@@ -626,7 +603,6 @@ def show_history(arg):
         else:
             print(line[0])
 
-
 def show_start_banner():
     """Show game title, tips, and player stats/inv."""
 
@@ -641,7 +617,6 @@ def show_start_banner():
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
 
-
 def show_settings(*args):
     """Shows game settings and there current on/off state."""
 
@@ -653,7 +628,6 @@ def show_settings(*args):
         {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
         {on_off(rimuru.show_hints)}\thints <on/off>\t\t-- Show game hints, highly recommended for first timers.
     """)
-
 
 def show_help(*args):
     """Shows help page."""
@@ -696,7 +670,6 @@ def show_help(*args):
         << Message >>               -- Great Sage (Raphael, Ciel).
         <<< Message >>>             -- Voice of the World.
     """)
-
 
 def show_rank_chart(*args):
     """In universe ranking chart."""

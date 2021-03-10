@@ -17,7 +17,6 @@ def ch2_goblin_encounter(rimuru):
 
         class _talk_to_goblins:
             __subs = ['speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
-
             def __init__(self):
                 mobs_add(['10* goblin'])
                 siprint("How should I introduce myself?")
@@ -25,7 +24,6 @@ def ch2_goblin_encounter(rimuru):
 
             class _friendly:
                 __subs = []
-
                 def __init__(self):
                     sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
                     sprint("...")
@@ -39,7 +37,6 @@ def ch2_goblin_encounter(rimuru):
 
             class _subjugate:
                 __subs = ['subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
-
                 def __init__(self):
                     sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
                     sprint("You have two options. You can worship me or you can die.")
@@ -56,7 +53,6 @@ def ch2_goblin_encounter(rimuru):
 
         class move_on:
             __subs = subs.move_on
-
             def __init__(self):
                 siprint("Nah... Lets move on.")
                 siprint("<< Warning, dangerous monsters are near. >>")
@@ -65,19 +61,16 @@ def ch2_goblin_encounter(rimuru):
 
             class nice:
                 __subs = ['minding my own business', 'none of your business', "Don't mind me", "I'm just a slime", "I'm just a cute little slime"]
-
                 def __init__(self):
                     siprint("Just a cute little slime minding his own business.")
 
             class rude:
                 __subs = ['weak', 'weak', 'who are you calling weak', "you're the weak one", "bad dog", "you talking to me?"]
-
                 def __init__(self):
                     siprint("Weak!?! Who are you calling weak, you mutt.")
 
             class what_you_want:
                 __subs = ['you need something', 'what do you want', 'what you guys want']
-
                 def __init__(self):
                     siprint("What do you want?")
 
@@ -105,7 +98,6 @@ def ch2_goblin_encounter(rimuru):
 
         class _compensation:
             __subs = ['what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
-
             def __init__(self):
                 sprint("So what, you want protection? What would my reward be?")
                 sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
@@ -115,9 +107,11 @@ def ch2_goblin_encounter(rimuru):
         class _attack:
             def __init__(self):
                 if mobs_cleared():
-                    siprint("They're all dead now. They were so weak.")
-                    siprint("What now?")
-                    hunt_wolves()
+                    print("Yeahhhhh.... Hello, developer here! First off, WTF is wrong with you. Second, sorry but as of now the story NEEDS those weak goblins.")
+                    print("ikik, I'm sooooo sorry that you can't go on a genocidal rampage right now (just yet), but yes, sadly the story just won't work with them all dead.")
+                    game_over()
+                    #siprint("They're all dead now. They were so weak.")
+                    #siprint("What now?")
 
                 if mob_status('goblin elder'):
                     sprint("Listen up! I am now you're new village chief!")
@@ -126,7 +120,6 @@ def ch2_goblin_encounter(rimuru):
 
         class _assist_goblins:
             __subs = ['assist the goblins', 'help goblins', 'help the goblins', 'help them', 'assist them']
-
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
@@ -134,7 +127,6 @@ def ch2_goblin_encounter(rimuru):
 
             class _setup_defenses:
                 __subs = ['go setup defenses', 'setup some defenses', 'setup border defenses']
-
                 def __init__(self):
                     sprint("Let's setup defenses.")
                     siprint("Hey! Get some goblins to setup defenses around the parameter.")
@@ -143,7 +135,6 @@ def ch2_goblin_encounter(rimuru):
 
             class _heal_wounded:
                 __subs = ['any wounded', 'any hurt', 'any goblins wounded']
-
                 def __init__(self):
                     sprint("Show me your wounded")
                     siprint("Looks like 9 wounded goblins..... How can I help them?")
@@ -151,7 +142,6 @@ def ch2_goblin_encounter(rimuru):
 
                 class _heal_goblins:
                     __subs = ['use full potions', 'use healing potions', 'use potions']
-
                     def __init__(self):
                         if rimuru.check_acquired('full potion', 9):
                             rimuru.remove_inventory('full potion', 9)
@@ -164,7 +154,6 @@ def ch2_goblin_encounter(rimuru):
 
                 class _let_die:
                     __subs = ['let them die', 'just let them die']
-
                     def __init__(self):
                         siprint("I'm going to save my potions for myself.")
                         sprint("Great one, please! If you can heal our wounded we would be most grateful!")
@@ -184,7 +173,6 @@ def ch2_goblin_encounter(rimuru):
 
         class _give_warning:
             __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
-
             def __init__(self):
                 sprint("Listen up, because I'm only going to say this once!")
                 sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")

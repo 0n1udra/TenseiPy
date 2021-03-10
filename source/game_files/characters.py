@@ -152,7 +152,6 @@ class Rimuru_Tempest(Character):
             if i[0].is_alive is False:
                 self.eat_targets()
 
-
 class Veldora_Tempest(Character):
     name = "Veldora"
     title = 'Storm Dragon'
@@ -176,7 +175,6 @@ class Eren_Grimwold(Character):
     appearance = "A blonde, 16y/o, green eyed adventurer from the Freedom Association."
     abilities = ['Mud Hand', 'Cleaning Magic', 'Elemental Magic']
 
-
 class Kaval(Character):
     name = "Kaval"
     level = 5
@@ -187,7 +185,6 @@ class Kaval(Character):
     he is also tasked as the secret bodyguard of Lady Elyune under the guise of an adventurer.'"""
     appearance = 'A young man with medium length hair, seemingly in his prime.'
     abilities = ['Fighting Spirit', 'Heavy Collision']
-
 
 class Gideo(Character):
     name = 'Gido'
@@ -211,7 +208,6 @@ class Tempest_Serpent(Character):
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['sense heat source', 'poisonous breath']
 
-
 class Giant_Bat(Character):
     name = 'Giant Bat'
     species = 'Bat'
@@ -223,7 +219,6 @@ class Giant_Bat(Character):
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['ultrasound waves', 'vampirism']
 
-
 class Evil_Centipede(Character):
     name = 'Evil Centipede'
     species = 'Centipede'
@@ -231,7 +226,6 @@ class Evil_Centipede(Character):
     appearance = 'Centipede monstrosity, a giant centipede.'
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['paralyzing breath']
-
 
 class Black_Spider(Character):
     name = 'Black Spider'

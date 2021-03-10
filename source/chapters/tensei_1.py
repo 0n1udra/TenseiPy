@@ -7,7 +7,7 @@ from game_maps.game_location import *
 from game_files.characters import Veldora_Tempest
 
 def ch1_cave(rimuru):
-    class wake_up:
+    class wake_up(cave_actions):
         __location = 'Sealed Cave'
 
         def __init__(self):

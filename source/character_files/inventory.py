@@ -75,7 +75,8 @@ class Inventory:
         if self.check_acquired(item_object):
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
         else:
-            if not item_object.initialized: item_object = item_object()
+            if not item_object.initialized:
+                item_object = item_object()
             self.inventory[item_object.item_type][item_object.name] = item_object
             self.inventory[item_object.item_type][item_object.name].quantity += amount * item_object.quantity_add
             if show_analysis_msg is None:
