@@ -52,7 +52,7 @@ class Skill:
         return True
 
     def activate_skill(self, state='Active'):
-        """ Activates skill, then updates relevant variables. """
+        """Activates skill, then updates relevant variables."""
 
         if state.lower() in self.status: return  # If skill is already at that state.
 
@@ -61,19 +61,19 @@ class Skill:
         self.update_info()
 
     def deactivate_skill(self, state=''):
-        """  Deactivates skill, then updates relevant variables. """
+        """ Deactivates skill, then updates relevant variables."""
 
         print(f"    < {self.skill_level} {self.name}: Deactivated >")
         self.status = state
         self.update_info()
 
     def show_acquired_msg(self):
-        """ Print skill's acquired message. """
+        """Print skill's acquired message."""
 
         print(f"    {self.acquired_msg}")
 
     def update_info(self):
-        """ Updates skills info_page. """
+        """Updates skills info_page."""
 
         self.acquired_msg = f"<< Acquired {self.skill_level} [{self.name}] successfully. >>"
 

@@ -79,7 +79,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __str__(self): return self.name.lower()
 
     def set_start_state(self):
-        """ Adds starter attributes and items to character. """
+        """Adds starter attributes and items to character."""
 
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
@@ -153,7 +153,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         return False
 
     def update_status(self, game_object, new_status):
-        """ Update status of character. """
+        """Update status of character."""
 
         if game_object := self.get_object(game_object):
             game_object.status = new_status

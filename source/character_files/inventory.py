@@ -26,7 +26,7 @@ class Inventory:
                 else: yield item_object  # Object to be used by code.
 
     def update_inventory_capacity(self):
-        """ Updates inventory_capacity variable by going through all items in inventory and adding them up. """
+        """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
 
         total = 0
         for item in self.inventory_generator():

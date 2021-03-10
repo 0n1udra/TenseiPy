@@ -33,7 +33,7 @@ class Item:
         return self.description
 
     def update_info(self):
-        """ Updates item's info. """
+        """Updates item's info."""
 
         # If attribute/skill has a special status.
         self.info_page = f'    Name: [{self.name}] {"(" + self.status + ")" if self.status else ""}\n'

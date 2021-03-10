@@ -53,7 +53,7 @@ def get_any(match_to, input_list):
     if any(i.lower() in match_to for i in input_list): return True
 
 def on_off(var):
-    """ Returns string 'on'/'off' based on var. """
+    """Returns string 'on'/'off' based on var."""
 
     if var: return 'on '
     return 'off'
@@ -89,7 +89,7 @@ def format_info(name, var):
 
 
 def tbc():
-    """ Print part of game/story is in development. """
+    """Print part of game/story is in development."""
 
     print("\n    < ---IN PREOGRESS--- >\n")
     input("Press Enter to exit > ")

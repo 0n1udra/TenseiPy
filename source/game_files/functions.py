@@ -12,7 +12,7 @@ rimuru = None
 # start_game.py will load game save if user has one, if not it'll create one.
 # Then pass that into update_character which will update the rimuru variable to be used here and any other file that imports this file.
 def update_rimuru(rimuru_object):
-    """ Update rimuru object to be used in rest of game files. """
+    """Update rimuru object to be used in rest of game files."""
 
     global rimuru
     rimuru = rimuru_object
@@ -21,7 +21,7 @@ def update_rimuru(rimuru_object):
 
 #                    ========== Level Functions ==========
 def game_hud(actions):
-    """ Show game HUD, includes current mimic, mobs targeted, and available actions. """
+    """Show game HUD, includes current mimic, mobs targeted, and available actions."""
 
     if rimuru.show_hud is False or rimuru.hardcore is True: return
 
@@ -243,7 +243,7 @@ def mobs_cleared():
     else: return True
 
 def mobs_reset():
-    """ Resets active_mobs and targeted_mobs list. """
+    """Resets active_mobs and targeted_mobs list."""
 
     rimuru.active_mobs.clear()
     rimuru.targeted_mobs.clear()
@@ -293,13 +293,13 @@ def clear_subs(action):
 
 #                    ========== Game Save/Settings ==========
 def game_restart(*args):
-    """ Restart game. """
+    """Restart game."""
 
     print("    < Restarting Game... >")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 def game_exit(*args):
-    """ Saves game using pickle, then exits. """
+    """Saves game using pickle, then exits."""
     game_save()
     exit(0)
 
@@ -351,7 +351,7 @@ def game_load(path):
     return rimuru
 
 def game_over():
-    """ Player died, deletes pickle save file. """
+    """Player died, deletes pickle save file."""
 
     rimuru.valid_save = False  # So you can't use this save file anymore.
     game_save(show_msg=False)
@@ -425,7 +425,7 @@ def set_textcrawl(arg):
     print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
 
 def set_hints(arg):
-    """ Enable/Disable game hints. """
+    """Enable/Disable game hints."""
 
     if rimuru.hardcore is True:
         rimuru.show_hud = False
@@ -499,13 +499,13 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
     else: print(message)  # Print instantly.
 
 def siprint(message, showing_history=False):
-    """ Print with indent. """
+    """Print with indent."""
 
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
 
 def iprint(message, showing_history=False):
-    """ sprint but with indent. """
+    """sprint but with indent."""
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
@@ -534,7 +534,7 @@ def dots(length=3, times=5, indent=False):
         print()
 
 def idots(*args):
-    """ Prints dots but wth indent. """
+    """Prints dots but wth indent."""
 
     dots(*args, indent=True)
 
@@ -577,7 +577,7 @@ def show_history(arg):
         else: print(line[0])
 
 def show_start_banner():
-    """ Show game title, tips, and player stats/inv. """
+    """Show game title, tips, and player stats/inv."""
 
     show_art('great sage')
     print(f"""
@@ -591,7 +591,7 @@ def show_start_banner():
     if rimuru.valid_save is True: print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
 
 def show_settings(*args):
-    """ Shows game settings and there current on/off state. """
+    """Shows game settings and there current on/off state."""
 
     print(f"""
     Game Settings:
@@ -603,7 +603,7 @@ def show_settings(*args):
     """)
 
 def show_help(*args):
-    """ Shows help page. """
+    """Shows help page."""
 
     print("""
     Command Required_Parameter [Optional_Parameter]
@@ -645,7 +645,7 @@ def show_help(*args):
     """)
 
 def show_rank_chart(*args):
-    """ In universe ranking chart. """
+    """In universe ranking chart."""
 
     print("""
     Level/Ranking:

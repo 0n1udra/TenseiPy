@@ -25,7 +25,7 @@ class Info:
             else: print(game_object.info_page)
 
     def update_info(self):
-        """ Updates character information. """
+        """Updates character information."""
 
         # Sets ranking according to level.
         ranking = ['F', 'E', 'D', 'C', 'B', 'A-', 'A', 'A+', 'Special A', 'S', 'Special S']
@@ -44,13 +44,13 @@ class Info:
         self.info_page = self.info_page[:-1]
 
     def update_name(self, name):
-        """ Updates name of character. """
+        """Updates name of character."""
 
         self.name = name
         self.update_info()
 
     def update_lname(self, name):
-        """ Update character's family name (last name). """
+        """Update character's family name (last name)."""
 
         self.family_name = name
         self.update_info()
@@ -88,6 +88,6 @@ class Info:
         print(f'    < [{self.name}] Acquired Protection: [{divine_protection}] >')
 
     def check_if_player(self):
-        """ Checks if you're interacting with the player object (Rimuru). """
+        """Checks if you're interacting with the player object (Rimuru)."""
 
         if self.__class__.__name__ == 'Rimuru_Tempest': return True
