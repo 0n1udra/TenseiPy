@@ -11,12 +11,12 @@ from game_files.map import Map
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     # Main character attributes, inventory, skills, resistances, etc.
-    starting_state = []
+    starting_state = []  # Character's starting skills/attributes.
     friends = subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                               'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
     attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Extra Skill': {},
-                  'Intrinsic Skill': {},'Common Skill': {}, 'Skill': {}, 'Resistance': {}}
+                  'Intrinsic Skill': {}, 'Common Skill': {}, 'Skill': {}, 'Resistance': {}}
 
     # Character inventory.
     inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
@@ -60,6 +60,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
     # Game variables.
     game_object_type = 'character'
+    initialized = False
     save_path = ''
     valid_save = None  # If you died in-game, the current save will be unusable.
     textcrawl = None  # Slow text crawl effect, letter by letter.
@@ -71,7 +72,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
     def __init__(self):
-        if self.starting_state: self.set_start_state()
+        self.initialized = True
+        self.set_start_state()
         self.update_info()
 
     def __str__(self): return self.name.lower()
@@ -82,7 +84,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, match, item_pool=None, new=False, stricter=True):
+    def get_object(self, match, item_pool=None, new=False):
         """
         Can take in either a str or obj, then returns object (will initialize if need to).
 
@@ -90,7 +92,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             match str:
             item_pool list: Add custom list of game items to search against.
             new bool(False): Return new instance of object (already already not necessary).
-            stricter bool(True): Find more of a exact match, still case insensitive. For example, sometimes Sage will be returned instead of Great Sage.
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
@@ -101,33 +102,20 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
+        if not type(match) is str:
+            match = match.name
         if item_pool is None: item_pool = []
 
-        if 'character' in self.game_object_type:
-            item_pool = ([*self.inventory_generator(), *self.attributes_generator()])
+        # Gets character's acquired attributes and items in inventory.
+        if 'character' in self.game_object_type: item_pool = ([*self.inventory_generator(), *self.attributes_generator()])
 
         # Create item_pool of all the game objects to be able to find match and return new instance of object if matched.
-        if new is True:
-            item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
+        if new: item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
 
-        for game_object in item_pool:
-            # Somehow strings get in the item_pool, need to filter those out.
-            if type(game_object) is str: continue
-
-            # If need to return a new instance of object.
-            if new:
-                try: game_object = game_object()
-                except: pass
-
-            # Find more exact name match.
-            if stricter:
-                if str(game_object).lower() == str(match).lower().strip():
-                    return game_object
-            elif str(game_object).lower() in str(match).lower():
-                return game_object
-
-            if new: del game_object
-
+        # Somehow strings get in the item_pool, need to filter those out.
+        for game_object in list(filter(lambda x: type(x) is not str, item_pool)):
+            # Returns game object if match found (uninitialized).
+            if game_object.name.lower() == match.lower(): return game_object
         return None
 
     def check_acquired(self, check_object, amount=1):
