@@ -9,15 +9,17 @@ class Item:
     quantity = 0
     quantity_add = 1
     inventory_capacity_add = 0.1
-    info_page = 'N/A'
+    info_page = ''
     description = ''
     usage = ''
     appearance = ''
     recipe = {}
     ingredient_for = []
     game_object_type = 'item'
+    initialized = False
 
     def __init__(self):
+        self.initialized = True
         self.update_info()
 
     def get_description(self):
@@ -55,16 +57,7 @@ class Item:
             self.info_page += f'\n    Recipe:\n        Will craft {self.quantity_add} at a time.\n'
             for item, amount in self.recipe.items():
                 self.info_page += f'        {amount}x [{item}]\n'
-
-    def get_name(self):
-        """
-        Returns item's name variable.
-
-        Returns:
-            Returns item lower() item name
-        """
-
-        return self.name.lower()
+        self.info_page = self.info_page[:-1]
 
     def __str__(self): return self.name.lower()
 
@@ -96,7 +89,7 @@ class Magic_Ore(Item):
     inventory_capacity_add = 0.1
     usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
     description = '''Magic ores form around high concentration of magic essence.
-    Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
+        Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
     '''
     appearance = 'A very colorful ore. Almost like a glowing shimmering rainbow effect, while giving off some magic essence.'
 

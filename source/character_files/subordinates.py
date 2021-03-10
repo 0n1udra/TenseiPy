@@ -28,5 +28,4 @@ class Subordinates:
 
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)
-        else:
-            self.subordinates[new_subordinate.species] = list([new_subordinate])
+        else: self.subordinates[new_subordinate.species] = list([new_subordinate])

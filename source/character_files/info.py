@@ -1,11 +1,6 @@
 from game_files.extra import format_info, get_any
 
 class Info:
-    def get_name(self):
-        """ Returns object name attribute in lowercase. """
-
-        return self.name.lower()
-
     def show_info(self, game_object):
         """
         Shows corresponding information for object.
@@ -25,11 +20,9 @@ class Info:
 
         if game_object := self.get_object(game_object):
             # Some skills or objects have special info pages, I couldn't get @property method working...
-            try:
-                print(game_object.show_info_page())
-                return
-            except: pass
-            print(game_object.info_page)
+            if hasattr(game_object, 'show_info_page'):
+                print(game_object.show_info_page(self))
+            else: print(game_object.info_page)
 
     def update_info(self):
         """ Updates character information. """
@@ -48,6 +41,7 @@ class Info:
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
+        self.info_page = self.info_page[:-1]
 
     def update_name(self, name):
         """ Updates name of character. """

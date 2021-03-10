@@ -28,7 +28,7 @@ class Combat:
                 # Only able to target mobs in active_mobs list.
                 for mob in self.active_mobs:
                     skip = False  # I need to skip 'mob in active_mob' for loop within 'i intarget_mobs for loop'.
-                    if str(mob[0]) in target:
+                    if mob[0].name.lower() in target:
                         for i in self.targeted_mobs:
                             if i[0] == mob[0]: skip = True  # If mob already being targeted.
 
@@ -64,10 +64,9 @@ class Combat:
 
         # Parse what attack(s) user wants to use.
         for attack in user_input.split(','):
-            attack = self.get_object(attack)
-            if attack:
-                if attack.game_object_type == 'attribute':
-                    skills.append(attack)
+            if attack := self.get_object(attack):
+                # Adds skill to list of attacks to use against enemies.
+                if attack.game_object_type == 'attribute': skills.append(attack)
             else: continue
 
         for current_target in self.targeted_mobs:
@@ -85,6 +84,5 @@ class Combat:
                 current_target[0].is_alive = False
                 current_target[0].status = 'Dead'
                 attack_success = True
-                print(f"    < Eliminated: {current_target[0].name} >\n")
 
         return attack_success
