@@ -13,18 +13,15 @@ class Skill:
     acquired_msg = ''
     status = ''
     use_requirements = {}
-    quantity = 1
+    quantity = 0
     predate_copy = True  # Able to copy ability by using analysis, predate, etc.
     sub_skills = {}
     game_object_type = 'attribute'
+    initialized = False
 
     def __init__(self):
+        self.initialized = True
         self.update_info()
-
-    def get_name(self):
-        """ Returns skill's name in lowercase. """
-
-        return self.name.lower()
 
     def __str__(self): return self.name.lower()
 
@@ -38,7 +35,7 @@ class Skill:
             # Check if user meets requirement or own prerequisites before using skill.
             for k, v in self.use_requirements.items():
                 if not user.check_acquired(k, v):
-                    print(f"\n    < Skill Requires: {v}x {k} >")
+                    print(f"    < Skill Requires: {v}x {k} >")
                     return False
 
             # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
@@ -50,21 +47,23 @@ class Skill:
     def activate_skill(self, state='Active'):
         """ Activates skill, then updates relevant variables. """
 
-        print(f"\n    < {self.skill_level} {self.name}: {state} >\n")
+        if state.lower() in self.status: return  # If skill is already at that state.
+
+        print(f"    < {self.skill_level} {self.name}: {state} >")
         self.status = state
         self.update_info()
 
     def deactivate_skill(self, state=''):
         """  Deactivates skill, then updates relevant variables. """
 
-        print(f"\n    < {self.skill_level} {self.name}: Deactivated >\n")
+        print(f"    < {self.skill_level} {self.name}: Deactivated >")
         self.status = state
         self.update_info()
 
     def show_acquired_msg(self):
         """ Print skill's acquired message. """
 
-        print(f"    {self.acquired_msg}\n")
+        print(f"    {self.acquired_msg}")
 
     def update_info(self):
         """ Updates skills info_page. """
@@ -84,6 +83,7 @@ class Skill:
             self.info_page += "\n    Use Requirements:\n"
             for item, amount in self.use_requirements.items():
                 self.info_page += f"        {amount}x [{item}]\n"
+        self.info_page = self.info_page[:-1]
 
 class Manas:
     skill_level = 'Manas'
@@ -133,82 +133,75 @@ class Raphael_Skill(Ultimate, Skill):
 
 
 #                    ========== Unique Skills ==========
-class Predator_Mimicry_Skill(Unique, Skill):
+class Mimicry_Skill(Unique, Skill):
     name = 'Mimic'
-    acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
-                          'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
+    description = """Reproduces the form and Skills of absorbed targets.
+        Only available once the target has been Analyzed.
+    """
 
-    def show_info_page(self):
-        data = "\n    -----Available Mimicries-----\n"
-        for mob_level, mobs in self.acquired_mimicries.items():
-            data += f'    {mob_level}:\n'
-            for mob_name, mob in mobs.items():
-                data += f'        {mob_name}\n'
-        data += "\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.\n"
-        return data
 
 class Predator_Skill(Unique, Skill):
     name = 'Predator'
     description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
     abilities = """Predation   
-        - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
-          The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
-          Usage:
-          > eat
-          > predate
-          
-    Analysis    
-        - The absorbed target is studied and analyzed. Craftable items can then be produced. 
-          If the required materials are present, duplicates can be produced. 
-          In the case of successful skill or magic analysis, the same technique can be acquired.
-          
-    Stomach     
-        - The target can be stored. Items produced via Analysis can also be stored. There is no storage time limit.
-          However, there is a capacity limit.
-          
-    Mimicry     
-        - Replicate the target's appearance. The skills and abilities used by the target can also be used. 
-          However, this depends on the successful analysis and acquisition of relative information regarding the target.
-          Usage:
-          > mimic tempest serpent
-          
-    Isolation   
-        - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
+            - Absorbs the target into the body. However, if the target is conscious, the success rate greatly decreases. 
+              The affected targets include, but isn't limited to: organic matter, inorganic matter, skills, and magic.
+              Usage:
+              > eat
+              > predate
+              
+        Analysis    
+            - The absorbed target is studied and analyzed. Craftable items can then be produced. 
+              If the required materials are present, duplicates can be produced. 
+              In the case of successful skill or magic analysis, the same technique can be acquired.
+              
+        Stomach     
+            - The target can be stored. Items produced via Analysis can also be stored. There is no storage time limit.
+              However, there is a capacity limit.
+              
+        Mimicry     
+            - Replicate the target's appearance. The skills and abilities used by the target can also be used. 
+              However, this depends on the successful analysis and acquisition of relative information regarding the target.
+              Usage:
+              > mimic tempest serpent
+              
+        Isolation   
+            - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
     """
     evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
 
 class Great_Sage_Skill(Unique, Skill):
     name = 'Great Sage'
     description = '''A Conceptual Intelligence that has a heartless and emotionless personality 
-    and is solely driven by purely logical computations. It cares for nobody but the benefit 
-    of its master, even going so far as to hide things from master if it deems it beneficial in the long run.
+        and is solely driven by purely logical computations. It cares for nobody but the benefit 
+        of its master, even going so far as to hide things from master if it deems it beneficial in the long run.
     '''
     abilities = '''Thought Acceleration
-        - Raises thought-processing speed by a thousand times.
+            - Raises thought-processing speed by a thousand times.
 
-    Analytical Appraisal
-        - The ability to analyze and appraise a target.
+        Analytical Appraisal
+            - The ability to analyze and appraise a target.
 
-    Parallel Processing
-        - The ability to detach thoughts and analysis of phenomena. 
-        - Detached thoughts are also under the effects of Thought Acceleration.
+        Parallel Processing
+            - The ability to detach thoughts and analysis of phenomena. 
+            - Detached thoughts are also under the effects of Thought Acceleration.
 
-    Chant Annulment
-        - When using magic, the chant is no longer necessary.
+        Chant Annulment
+            - When using magic, the chant is no longer necessary.
 
-    All of Creation
-        - The ability to comprehend any non-concealed phenomenon in this world. 
-          Depending on the things the user understands and the information the user knows about, additional information can be inferred. 
-          In other words, the user needs to see it (the phenomenon) at least once.
+        All of Creation
+            - The ability to comprehend any non-concealed phenomenon in this world. 
+              Depending on the things the user understands and the information the user knows about, additional information can be inferred. 
+              In other words, the user needs to see it (the phenomenon) at least once.
 
-    Analysis
-        - The absorbed target is studied and analyzed. Craftable items can then be produced. 
-          If the required materials are present, duplicates can be produced. 
-          In the case of successful skill or magic analysis, the same technique can be acquired. 
-        - Originally a part of Unique Skill [Predator] was transferred over to [Great Sage] when [Predator] evolved into Unique Skill Gluttony.
+        Analysis
+            - The absorbed target is studied and analyzed. Craftable items can then be produced. 
+              If the required materials are present, duplicates can be produced. 
+              In the case of successful skill or magic analysis, the same technique can be acquired. 
+            - Originally a part of Unique Skill [Predator] was transferred over to [Great Sage] when [Predator] evolved into Unique Skill Gluttony.
 
-    Auto Battle Mode
-        - By giving permission to [Great Sage], The master can let it control his body temporarily
+        Auto Battle Mode
+            - By giving permission to [Great Sage], The master can let it control his body temporarily
     '''
     evolution = 'Sage > Great Sage > Raphael > Ciel'
 
@@ -220,17 +213,21 @@ class Sage_Skill(Extra, Skill):
 class Magic_Perception(Extra, Skill):
     name = 'Magic Perception'
     description = '''One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
-    the skill is rather simple.
+        the skill is rather simple.
 
-    With this skill, one can see 360 degrees around them, without a single blind-spot. With this, 
-    even if one's eyes and ears are crushed, one can continue combat. 
-    Ambushes become nearly impossible. It's an indispensable skill.
+        With this skill, one can see 360 degrees around them, without a single blind-spot. With this, 
+        even if one's eyes and ears are crushed, one can continue combat. 
+        Ambushes become nearly impossible. It's an indispensable skill.
     '''
+
+    def use_skill(self, *args):
+        self.activate_skill()
+        return True
 
 class Water_Manipulation(Extra, Skill):
     name = "Water Manipulation"
     description = '''After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
-    The three Skills are fused and evolved into Water Manipulation.
+        The three Skills are fused and evolved into Water Manipulation.
     '''
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
@@ -271,7 +268,7 @@ class Steel_Thread(Extra, Skill):
 class Sense_Heat_Source(Extra, Skill):
     name = 'Sense Heat Source'
     description = '''Identifies any heat reactions in the local area. 
-    Not affected by any concealing effects.
+        Not affected by any concealing effects.
     '''
 
     def use_skill(self, user):
@@ -308,7 +305,7 @@ class Poisonous_Breath(Common, Skill):
     damage_type = 'Poison'
     damage_level = 8
     description = '''A powerful breath-type poison (corrosion) attack. 
-    Affects an area seven meters in front of the user in a 120-degree radius.
+        Affects an area seven meters in front of the user in a 120-degree radius.
     '''
 
 class Paralyzing_Breath(Common, Skill):
@@ -329,7 +326,7 @@ class Resist_Pain(Resistance, Skill):
     name = 'Resist Pain'
     resist_types = ['Pain']
     description = '''Tolerance-type Skill that grants immunity to physical pain sensation. 
-    However, you still take damage.
+        However, you still take damage.
     '''
 
 class Resist_Melee(Resistance, Skill):
@@ -341,19 +338,19 @@ class Resist_Electricity(Resistance, Skill):
     name = 'Resist Electricity'
     resist_types = ['Electricity']
     description = '''Tolerance-type Skill that grants resistance to electricity-types of attacks. 
-    Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
+        Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
 
 class Resist_Temperature(Resistance, Skill):
     name = 'Resist Temperature'
     resist_types = ['hot', 'cold', 'temperature']
     description = '''Tolerance-type Skill that grants extraordinary high resistance to fire, ice, heat and cold types of attacks. 
-    Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
+        Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
 
 class Resist_Poison(Resistance, Skill):
     name = 'Resist Poison'
     resist_types = ['Poison']
     description = '''Tolerance-type Skill that grants resistance to poison-types of attacks. 
-    Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
+        Imbued into a layer of Multilayer Barrier, doubling the resistance effect.
     '''
