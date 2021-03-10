@@ -13,18 +13,15 @@ class Attributes:
 
         for skill_type, skills in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills:
-                yield f'[{skill_type}]'
+            if output and skills: yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
-                if output is False:
-                    yield skill_object
+                if not output: yield skill_object
 
                 if skill_object.status:
                     yield f'    {skill_name} ({skill_object.status})'
-                else:
-                    yield f'    {skill_name}'
+                else: yield f'    {skill_name}'
 
     def show_attributes(self, *args):
         """
@@ -47,7 +44,7 @@ class Attributes:
         # Print out skill category and corresponding skills indented.
         for i in self.attributes_generator(output=True): print(i)
 
-    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False, top_newline=True, bot_newline=True):
+    def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
         Adds attribute to character.
 
@@ -56,7 +53,6 @@ class Attributes:
             show_acquired_msg bool(True): Shows skill acquired message.
             show_skill_info bool(False): Shows skill information page.
             top_newline bool(True): Print newline beforehand.
-            bot_newline bool(True): Print newline at end.
 
         Usage:
             .add_attribute('rimuru', 'water blade')
@@ -66,13 +62,16 @@ class Attributes:
         if self.check_acquired(attribute): return False
 
         if attribute := self.get_object(attribute, new=True):
+            # Adds item to character's attributes dictionary, sets quantity so check_acquired func can work.
+            if not attribute.initialized:
+                attribute = attribute()
+                attribute.quantity = 1
             self.attributes[attribute.skill_level][attribute.name] = attribute
-            if show_acquired_msg:
-                if top_newline: print()
-                print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
-                if bot_newline: print()
-            if show_skill_info:
-                self.show_info(attribute.name)
+
+            # If want to show acqusition message and/or skill's info page.
+            if show_acquired_msg: print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
+            if show_skill_info: self.show_info(attribute.name)
+
             return True
         return False
 
@@ -114,7 +113,7 @@ class Attributes:
 
         print(f"    < Evolving {skill_from.skill_level} [{skill_from.name}] >")
         if self.remove_attribute(skill_from) and self.add_attribute(skill_to, show_acquired_msg=False):
-            print(f"    < Evolution Successful {skill_from.skill_level} [{skill_from.name}] >>> {skill_to.skill_level} [{skill_to.name}] >")
+            print(f"    < Evolution Successful: {skill_from.skill_level} [{skill_from.name}] to {skill_to.skill_level} [{skill_to.name}] >")
 
     def check_resistance(self, attack, target=None):
         """
@@ -157,9 +156,7 @@ class Attributes:
         if character is None: character = self
 
         if skill_object := self.get_object(skill):
-            try:
-                return_data = skill_object.use_skill(character)
+            if return_data := skill_object.use_skill(character):
                 self.last_skill = skill_object
                 return return_data
-            except: return False
         print()
