@@ -7,7 +7,7 @@ on_subs = ['activate', 'true', 'enable', 'on', '1']
 off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
-rimuru = None
+rimuru = Rimuru_Tempest()
 
 
 # start_game.py will load game save if user has one, if not it'll create one.
@@ -309,8 +309,9 @@ def game_restart(*args):
 
 def game_exit(*args):
     """Saves game using pickle, then exits."""
+
     game_save()
-    sys.exit(0)
+    exit(0)
 
 def game_save(level=None, show_msg=True):
     """
@@ -321,6 +322,8 @@ def game_save(level=None, show_msg=True):
         show_msg [bool:True]: Show Game Saved message.
     """
 
+    global rimuru
+
     # Can specify what level to save at.
     if level: rimuru.current_location_object = level
 
@@ -330,7 +333,7 @@ def game_save(level=None, show_msg=True):
 
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
 
-    if show_msg: print("    < Game Saved >")
+    if show_msg: print("\n    < Game Saved >\n")
 
 def game_load(path):
     """
@@ -343,17 +346,16 @@ def game_load(path):
         Loaded game save object.
     """
 
-    global rimuru  # Need this!
+    global rimuru
 
     # Tries loading game. If can't, creates new Rimuru_Tempest object which contains all game data that will be picked.
-    try:
+    if os.path.isfile(path):
         rimuru = pickle.load(open(path, 'rb'))
-    except:
-        rimuru = Rimuru_Tempest()
-        rimuru.save_path = path
+        return rimuru
 
-        import chapters.tensei_1 as tensei1
-        rimuru.current_location_object = tensei1.ch1_cave
+    import chapters.tensei_1 as tensei1
+    rimuru.current_location_object = tensei1.ch1_cave
+    rimuru.save_path = path
 
     # If game save is invalid (using game_over function), save file will be deleted and game will restart.
     if rimuru.valid_save is False:
@@ -365,6 +367,7 @@ def game_load(path):
 def game_over():
     """Player died, deletes pickle save file."""
 
+    global rimuru
     rimuru.valid_save = False  # So you can't use this save file anymore.
     game_save(show_msg=False)
 
@@ -374,7 +377,7 @@ def game_over():
 
     print("\n    < GAME OVER >\n\nPlay again?")
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
-        sys.exit(0)
+        exit(0)
     else:
         game_restart()
 

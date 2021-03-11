@@ -12,14 +12,14 @@ class Skill:
     abilities = ''
     acquired_msg = ''
     status = ''
-    use_requirements = {}
     quantity = 0
     predate_copy = True  # Able to copy ability by using analysis, predate, etc.
-    sub_skills = {}
     game_object_type = 'attribute'
     initialized = False
 
     def __init__(self):
+        self.use_requirements = {}
+        self.sub_skills = {}
         self.initialized = True
         self.update_info()
 

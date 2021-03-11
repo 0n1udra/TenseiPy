@@ -10,16 +10,8 @@ from game_files.map import Map
 
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
-    # Main character attributes, inventory, skills, resistances, etc.
-    starting_state = []  # Character's starting skills/attributes.
-    friends = subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
-                              'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
-
-    attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Extra Skill': {},
-                  'Intrinsic Skill': {}, 'Common Skill': {}, 'Skill': {}, 'Resistance': {}}
-
     # Character inventory.
-    inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
+    starting_state = []  # Character's starting skills/attributes.
     inventory_capacity = 0  # Inventory capacity in percentage.
     inventory_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
     quantity = 0  # Item quantity in inventory.
@@ -46,8 +38,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     is_alive = True
     item_type = 'Living'
     status = ''  # E.g. Passive, Active, Analysing, etc
-    data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
-    conditional_data = {}  # Contains data that player has done, paths taken, etc.
 
     # Level/Map functionality.
     active_mobs = []  # Current mobs around you that you can interact or attack.
@@ -72,6 +62,17 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
     def __init__(self):
+        # Pickle/dill has some issue with dumping dictionaries, so these has to be initialized here.
+        self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                                            'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
+
+        self.attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Extra Skill': {},
+                          'Intrinsic Skill': {}, 'Common Skill': {}, 'Skill': {}, 'Resistance': {}}
+
+        self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
+
+        self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
+        self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
         self.initialized = True
         self.set_start_state()
         self.update_info()

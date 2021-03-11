@@ -99,6 +99,6 @@ def tbc():
     print("\n    < ----- SECTION IN PROGRESS ----- >\n")
     print("\nPlay again?")
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
-        sys.exit(0)
+        exit(0)
     else:
         os.execl(sys.executable, sys.executable, *sys.argv)
