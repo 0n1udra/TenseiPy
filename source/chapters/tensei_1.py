@@ -155,31 +155,20 @@ def ch1_cave(rimuru):
             def __init__(self):
                 idots(5)
 
-        class _hfunc_use_skill:
-            __subs = ['use hydraulic propulsion', 'use new skill', 'use skill']
-            def __init__(self):
-                in_water.try_getting_out()
-
         class eat_water:
             __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up', 'eat more water', 'predate more water', 'suck up more water']
             def __init__(self):
                 rimuru.add_inventory('water')
-                rimuru.add_attribute('Hydraulic Propulsion', show_acquired_msg=False)
                 siprint("Alright, now lets try this out.")
 
         class try_getting_out:
-            __subs = ['spew water', 'eject water', 'vomit water', 'try getting out', 'try to get out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out', 'use water to propel', 'propel with water', 'expel water to propel', 'expel', 'expel water', 'expel the water']
+            __subs = ['spew water', 'eject water', 'vomit water', 'try getting out', 'try to get out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out', 'use water to propel', 'propel with water', 'expel water to propel', 'expel', 'expel water', 'expel the water', 'use hydraulic propulsion']
             def __init__(self):
-                if rimuru.check_acquired('hydraulic propulsion'):
-                    siprint("Let's see if I can get out now.")
-                    if not last_skill('hydraulic propulsion'):  # If skill was already used.
-                        rimuru.use_skill('hydraulic propulsion')
-                    siprint("Ouch! I hit something, but at least it seems like I'm back on land.")
-                    siprint("<< Notice, New skill [Hydraulic Propulsion] acquired. >>")
-                    siprint("Oh cool, I wonder what else I can do with this skill.")
-                    veldora_encounter()
-                else:
-                    siprint("It's really hard to move in water, I need to find some way out!")
+                rimuru.add_attribute('Hydraulic Propulsion')
+                siprint("Let's see if I can get out now.")
+                siprint("Ouch! I hit something, but at least it seems like I'm back on land.")
+                siprint("I also got a new skill too, wonder what else I can do with it.")
+                veldora_encounter()
 
         class hfunc_grab_sword:
             __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
