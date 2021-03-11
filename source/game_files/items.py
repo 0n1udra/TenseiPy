@@ -13,12 +13,13 @@ class Item:
     description = ''
     usage = ''
     appearance = ''
+    recipe = {}
     ingredient_for = []
     game_object_type = 'item'
     initialized = False
 
     def __init__(self):
-        self.recipe = {}
+        self.recipe = self.recipe
         self.initialized = True
         self.update_info()
 
