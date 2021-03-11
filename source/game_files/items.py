@@ -59,8 +59,6 @@ class Item:
             for item, amount in self.recipe.items():
                 self.info_page += f'        {amount}x [{item}]\n'
 
-        self.info_page = self.info_page[:-1]
-
     def __str__(self): return self.name.lower()
 
 

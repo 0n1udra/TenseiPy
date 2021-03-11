@@ -9,6 +9,7 @@ def ch2_goblin_encounter(rimuru):
 
         def __init__(self):
             mobs_reset()
+            mobs_add(['10* goblin'])
             siprint("Where am I going?")
             siprint("*While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up*")
             sprint("You strong one.")
@@ -18,7 +19,6 @@ def ch2_goblin_encounter(rimuru):
         class _talk_to_goblins:
             __subs = ['speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
             def __init__(self):
-                mobs_add(['10* goblin'])
                 siprint("How should I introduce myself?")
                 game_action(self)
 
@@ -54,6 +54,7 @@ def ch2_goblin_encounter(rimuru):
         class move_on:
             __subs = subs.move_on
             def __init__(self):
+                tbc()
                 siprint("Nah... Lets move on.")
                 siprint("<< Warning, dangerous monsters are near. >>")
                 siprint("Oh crap! Is that a wolf pack!?! I should probably run!")

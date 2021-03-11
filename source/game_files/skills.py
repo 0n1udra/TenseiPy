@@ -93,8 +93,6 @@ class Skill:
             for item, amount in self.use_requirements.items():
                 self.info_page += f"        {amount}x [{item}]\n"
 
-        self.info_page = self.info_page[:-1]
-
 class Manas:
     skill_level = 'Manas'
 

@@ -414,7 +414,6 @@ def ch1_cave(rimuru):
     class tempest_serpent_encounter:
         __location = 'Sealed Cave'
         def __init__(self):
-            rimuru.add_inventory('water')
             mobs_add(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
             siprint("\nI've been looking for the cave exit for a bit now.... This cave is so big! Or am I just small?")
             siprint("<< Answer, you are just small. >>")

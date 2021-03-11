@@ -110,11 +110,9 @@ class Attributes:
             .upgrade_attribute('sage', 'great sage')
         """
 
-        skill_from = self.get_object(skill_from)
+        skill_from = self.check_acquired(skill_from)
         skill_to = self.get_object(skill_to, new=True)
-        if not skill_from and not skill_to:
-            print("    < Error Evolving Skill >")
-            return False
+        if not skill_from or not skill_to: return False
 
         print(f"    < Evolving {skill_from.skill_level} [{skill_from.name}] >")
         if self.remove_attribute(skill_from) and self.add_attribute(skill_to, show_acquired_msg=False):
@@ -167,4 +165,4 @@ class Attributes:
             if return_data := skill_object.use_skill(character):
                 self.last_skill = skill_object
                 return return_data
-        print()
+            print()

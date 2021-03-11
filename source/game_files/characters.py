@@ -13,6 +13,7 @@ class Rimuru_Tempest(Character):
                           'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
     starting_state = ['Sage', 'Predator', 'Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
 
+
     # ========== Predator Functions
     def mimic_generator(self):
         """

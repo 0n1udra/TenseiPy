@@ -45,8 +45,6 @@ class Info:
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
 
-        self.info_page = self.info_page[:-1]
-
     def update_name(self, name):
         """Updates name of character."""
 

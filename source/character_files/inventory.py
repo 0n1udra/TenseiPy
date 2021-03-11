@@ -68,7 +68,8 @@ class Inventory:
         """
 
         # Check if passed in a string to find corresponding object or a game object iteself.
-        if type(item_object) is str: item_object = self.get_object(item_object, new=True)
+        if type(item_object) is str:
+            item_object = self.get_object(item_object, new=True)
 
         if not item_object: return False  # Does not have game object to add to inventory.
 
