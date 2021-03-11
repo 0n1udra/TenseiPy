@@ -1,4 +1,4 @@
-import random, sys
+import random, sys, os
 
 def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int=False):
     """
@@ -96,6 +96,9 @@ def format_info(name, var):
 def tbc():
     """Print part of game/story is in development."""
 
-    print("\n    < ---IN PROGRESS--- >\n")
-    input("Press Enter to exit > ")
-    sys.exit(0)
+    print("\n    < ----- SECTION IN PROGRESS ----- >\n")
+    print("\nPlay again?")
+    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
+        sys.exit(0)
+    else:
+        os.execl(sys.executable, sys.executable, *sys.argv)
