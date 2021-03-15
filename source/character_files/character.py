@@ -6,7 +6,7 @@ from .inventory import Inventory
 from .attributes import Attributes
 from .combat import Combat
 from .subordinates import Subordinates
-from game_files.map import Map
+from character_files.map import Map
 
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
@@ -43,8 +43,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     active_mobs = []  # Current mobs around you that you can interact or attack.
     targeted_mobs = []  # Targets that will be attacked with 'attack' command.
     last_command = ''
-    last_skill = None  # Last successfully used skill, game object.
+    last_use_action = None  # Last successfully used skill, game object.
     available_locations = []
+    played_actions = set()
     current_location = ''
     current_location_object = None  # Current location's class object.
 
@@ -61,7 +62,10 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     fast_mode = None
     line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
-    def __init__(self):
+    def __init__(self, name=None, lname=None):
+        if not self.name: self.name = name
+        if not self.family_name: self.family_name = lname
+
         # Pickle/dill has some issue with dumping dictionaries, so these has to be initialized here.
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                             'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
@@ -72,7 +76,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
 
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
-        self.conditional_data = {}  # Contains data that player has done, paths taken, etc.
+        self.game_conditions = {}
         self.initialized = True
         self.set_start_state()
         self.update_info()

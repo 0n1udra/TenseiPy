@@ -38,7 +38,7 @@ class Combat:
                             self.targeted_mobs.append(mob)
                         else: continue
 
-    def attack(self, user_input):
+    def attack(self, user_input, character=None):
         """
         Checks if can attack, and if it was successful.
 

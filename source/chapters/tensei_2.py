@@ -97,13 +97,11 @@ def ch2_goblin_encounter(rimuru):
             sprint("There is a pack of 100 Dire Wolves that have been attacking us recently, and we are barely fending them off.")
             game_action(self)
 
-        class _compensation:
+        class compensation:
             __subs = ['what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
             def __init__(self):
-                sprint("So what, you want protection? What would my reward be?")
                 sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
                 sprint("That will have to do. For now.")
-                goto_goblin_village._assist_goblins()
 
         class _attack:
             def __init__(self):
@@ -124,6 +122,7 @@ def ch2_goblin_encounter(rimuru):
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
+                siprint("This village has no defenses, that might help. And a goblin said something about wounded victims.")
                 game_action(self)
 
             class _setup_defenses:
@@ -131,12 +130,12 @@ def ch2_goblin_encounter(rimuru):
                 def __init__(self):
                     sprint("Let's setup defenses.")
                     siprint("Hey! Get some goblins to setup defenses around the parameter.")
-                    game_cond('village defense', True)
                     wolf_attack()
 
             class _heal_wounded:
-                __subs = ['any wounded', 'any hurt', 'any goblins wounded']
+                __subs = ['any wounded', 'any hurt', 'any goblins wounded', 'show me your wounded', 'who is hurt', 'any victims', 'show me your injured', 'injured goblins', 'wounded goblins', 'hurt goblins']
                 def __init__(self):
+                    mobs_add(['9*goblin'])
                     sprint("Show me your wounded")
                     siprint("Looks like 9 wounded goblins..... How can I help them?")
                     game_action(self)
@@ -153,7 +152,7 @@ def ch2_goblin_encounter(rimuru):
                             sprint("I need some way to heal them.")
                             goto_goblin_village._assist_goblins()
 
-                class _let_die:
+                class _let_them_die:
                     __subs = ['let them die', 'just let them die']
                     def __init__(self):
                         siprint("I'm going to save my potions for myself.")

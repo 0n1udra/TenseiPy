@@ -24,7 +24,7 @@ class Subordinates:
         """
 
         new_subordinate = self.get_object(new_subordinate, sub=True)
-        new_subordinate.name = new_name
+        new_subordinate(new_name)
         new_subordinate.protections += self.shared_protection
 
         if new_subordinate.species in self.subordinates:
