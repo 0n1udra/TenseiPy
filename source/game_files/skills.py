@@ -27,20 +27,19 @@ class Skill:
     def __str__(self):
         return self.name.lower()
 
-    def use_skill(self, user=None, *args):
+    def use_action(self, user, *args):
         """
         Use skill, by default it'll just return True to signal player has used the skill.
 
         Args:
-            user:
+            user obj: Game character object of skill activator.
 
+        Returns:
+            bool: By default will return True to signal usage, if function not overwritten.
         """
 
         # If skill need specific requirements to be used.
         if self.use_requirements:
-            # Need to specify the user who needs to meet the prerequisites to use skill.
-            if not user: return False
-
             # Check if user meets requirement or own prerequisites before using skill.
             for k, v in self.use_requirements.items():
                 if not user.check_acquired(k, v):
@@ -228,7 +227,7 @@ class Magic_Perception(Extra, Skill):
         Ambushes become nearly impossible. It's an indispensable skill.
     '''
 
-    def use_skill(self, user=None, *args):
+    def use_action(self, user=None, *args):
         if not user: return False
         self.activate_skill()
         return True
@@ -280,7 +279,7 @@ class Sense_Heat_Source(Extra, Skill):
         Not affected by any concealing effects.
     '''
 
-    def use_skill(self, user=None, *args):
+    def use_action(self, user=None, *args):
         if not user: return False
         print("    ----- Nearby Heat Sources -----")
         for mob in user.active_mobs:

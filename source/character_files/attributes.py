@@ -146,7 +146,7 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-    def use_skill(self, skill, character=None):
+    def use_action(self, character, skill):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
@@ -158,11 +158,8 @@ class Attributes:
             > use sense heat source
         """
 
-        if character is None:
-            character = self
-
-        if skill_object := self.get_object(skill):
-            if return_data := skill_object.use_skill(character):
-                self.last_skill = skill_object
+        if skill_object := character.get_object(skill):
+            if return_data := skill_object.use_action(character):
+                character.last_use_action = skill_object
                 return return_data
             print()

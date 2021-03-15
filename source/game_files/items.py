@@ -15,11 +15,12 @@ class Item:
     appearance = ''
     recipe = {}
     ingredient_for = []
+    use_requirements = {}
     game_object_type = 'item'
     initialized = False
 
     def __init__(self):
-        self.recipe = self.recipe
+        self.recipe, self.use_requirements = self.recipe, self.use_requirements
         self.initialized = True
         self.update_info()
 
@@ -32,6 +33,32 @@ class Item:
         """
 
         return self.description
+
+    def use_action(self, user, *args):
+        """
+        Use Item, by default it'll just return True to signal player has used the item.
+
+        Args:
+            user: Game character object of skill activator.
+
+        """
+
+        if self.item_type == 'Consumable':
+            user.remove_inventory(self, 1)
+
+        # If item need specific prerequisites to be used.
+        if self.use_requirements:
+            # Check if user meets requirement or own prerequisites before using item.
+            for k, v in self.use_requirements.items():
+                if not user.check_acquired(k, v):
+                    print(f"    < Usage Requires: {v}x {k} >")
+                    return False
+
+            # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
+            for k, v in self.use_requirements.items():
+                user.remove_inventory(k, v)
+
+        return True
 
     def update_info(self):
         """Updates items info_page depending on what object variables has been set."""

@@ -79,7 +79,7 @@ def game_action(level=None):
     # Separates user input into command and command arguments.
     split_user_input = user_input.split(' ')
     command, parameters = split_user_input[0], ' '.join(split_user_input[1:])
-    character = rimuru
+    user = rimuru
 
     # [correspond_game_function, [optional_parameters], ['user_input_to_match_to']
     game_actions = [
@@ -88,13 +88,13 @@ def game_action(level=None):
         [rimuru.show_attributes, ['stats', 'skills', 'attrs', 'attributes']],
         [rimuru.set_targets, ['target', 'focus']],
         [rimuru.attack, [parameters], ['attack']],
-        [rimuru.use_skill, [character, parameters], ['use']],
+        [rimuru.use_action, [user, parameters], ['use']],
         [rimuru.craft_item, ['craft', 'make', 'create']],
         [rimuru.eat_targets, ['eat', 'predate', 'predation']],
         [rimuru.use_mimic, ['mimic', 'mimicry']],
         [rimuru.show_mimics, ['mimics', 'mimicries']],
         [rimuru.get_location, ['location']],
-        [rimuru.use_skill, ['sense heat source', character], ['nearby', 'sense heat sources']],
+        [rimuru.use_action, ['sense heat source', user], ['nearby', 'sense heat sources']],
         [show_help, ['help', 'commands']],
         [show_settings, ['settings', 'options']],
         [show_rank_chart, ['showrank', 'showranking', 'showlevel']],
@@ -133,6 +133,7 @@ def game_action(level=None):
 
         # play game action.
         if get_any(user_input, action_subs):
+            rimuru.add_played_action(action_subs[-1])
             eval(f"level.{action}()")
 
     game_action(level)
@@ -150,15 +151,17 @@ def game_cond(game_var, new_value=None):
 
     # Set new value to a game conditional.
     if new_value:
-        rimuru.conditional_data[game_var] = new_value
+        rimuru.game_conditions[game_var] = new_value
         return new_value
 
     # Return game conditional data if found.
-    if game_var in rimuru.conditional_data:
-        return rimuru.conditional_data[game_var]
+    if game_var in rimuru.game_conditions:
+        return rimuru.game_conditions[game_var]
+    if game_var in rimuru.played_actions:
+        return True
     return False
 
-def last_skill(skill):
+def last_use_action(skill):
     """
     Checks what was the last successfully used skill.
 
@@ -170,10 +173,10 @@ def last_skill(skill):
         bool False: If not match.
     """
 
-    if not rimuru.last_skill: return  # If last_skill var is not set.
+    if not rimuru.last_use_action: return  # If last_use_action var is not set.
 
-    if skill.lower() in rimuru.last_skill.name.lower():
-        return rimuru.last_skill
+    if skill.lower() in rimuru.last_use_action.name.lower():
+        return rimuru.last_use_action
     return False
 
 def mobs_add(add_mobs):
@@ -194,7 +197,7 @@ def mobs_add(add_mobs):
 
     for new_mob in add_mobs:
         amount = 1
-        # Add multiple of same mob, e.g. ['5 * goblin']
+        # Add multiple of same mob, e.g. ['5*goblin']
         if '*' in new_mob:
             amount, new_mob = new_mob.split('*')
             try: amount = int(amount)
@@ -203,13 +206,10 @@ def mobs_add(add_mobs):
         # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
         if ':' in new_mob:
             new_mob, new_name = new_mob.split(':')
-        else: new_name = None
+        else: new_name = ''
 
         if mob_object := rimuru.get_object(new_mob, new=True):
-            mob_object = mob_object()
-            if new_name:
-                mob_object.name = new_name.strip()  # If specified name for new mob.
-
+            mob_object = mob_object(new_name.strip())
             rimuru.active_mobs.append([mob_object, amount])
 
 def mob_status(target):
