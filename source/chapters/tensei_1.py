@@ -33,7 +33,6 @@ def ch1_cave(rimuru):
                 game_over()
 
             # Show user HUD and playable actions.
-            rimuru.update_name("Rimuru")
             game_action(self)
 
         class speak:
@@ -239,7 +238,7 @@ def ch1_cave(rimuru):
                     idots(3)
                     show_art('magic perception')
                     rimuru.add_attribute('Magic Perception')
-                    rimuru.use_skill('magic perception')
+                    rimuru.use_action('magic perception')
                     sprint("Like this?")
                     sprint("I can see. I CAN SEE!")
                     sprint("~ Seems like you did it. You learn quickly small one. ~")
@@ -281,7 +280,6 @@ def ch1_cave(rimuru):
         def __init__(self):
             sprint("Hmmmm, now what?")
             siprint("Should I try make a friend? Or just leave, there's something suspicious about him...")
-            game_cond('met veldora', True)
             game_action(self)
 
         class _leave:
@@ -532,7 +530,7 @@ def ch1_cave(rimuru):
         class _hfunc_leave_cave(cave_actions):
             __subs = ['leave this cave', 'leave', 'exit cave', 'exit']
             def __init__(self):
-                if game_cond('met veldora', True):
+                if game_cond('friend veldora', True):
                     siprint("Or... uhm... Should I go back to that pouty 'dragon'?")
 
                 game_action(self)
@@ -543,7 +541,7 @@ def ch1_cave(rimuru):
                     if rimuru.check_acquired('veldora'): return
 
                     mobs_reset()
-                    if game_cond('met veldora'):
+                    if game_cond('friend veldora'):
                         siprint("Let's go check on that dragon.")
                         siprint("~ What are you doing back? ~")
                         friend_veldora()

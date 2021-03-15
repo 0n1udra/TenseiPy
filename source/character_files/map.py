@@ -1,4 +1,14 @@
 class Map:
+    def add_played_action(self,  played_action):
+        """
+        Able to check what actions player has taken so far by adding action's class name to tuple.
+
+        Args:
+            played_action str: String parsed from game_action function.
+        """
+
+        self.played_actions.add(played_action)
+
     @staticmethod
     def get_location_variable(level_class=None):
         """
