@@ -89,7 +89,7 @@ class Inventory:
         if show_analysis_msg:
             print(f'    << Analysis on [{item.name}] Complete. >>')
 
-    def remove_inventory(self, item, amount=1):
+    def remove_inventory(self, item=None, amount=1):
         """
         Remove item from inventory (Currently only Rimuru).
 
@@ -103,11 +103,18 @@ class Inventory:
             .remove_inventory('water' -1)
         """
 
+        # Parses item and amount from item parameter if from game_input.
+        try:
+            amount = int(item[-1])
+            user_input = item.split()
+            item = ' '.join(user_input[:-1])
+        except: pass
+
         if type(item) is str:
             item = self.get_object(item)
         if not item: return False
 
-        if item.quantity <= 0 or amount <= 0:
+        if (item.quantity - amount) <= 0 or amount <= 0:
             del self.inventory[item.item_type][item.name]
             print(f"    < Removed Item: [{item.name}] >")
         else:

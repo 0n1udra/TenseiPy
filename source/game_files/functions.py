@@ -90,6 +90,7 @@ def game_action(level=None):
         [rimuru.attack, [parameters], ['attack']],
         [rimuru.use_action, [parameters, user], ['use']],
         [rimuru.craft_item, ['craft', 'make', 'create']],
+        [rimuru.remove_inventory, ['remove']],
         [rimuru.eat_targets, ['eat', 'predate', 'predation']],
         [rimuru.use_mimic, ['mimic', 'mimicry']],
         [rimuru.show_mimics, ['mimics', 'mimicries']],

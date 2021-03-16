@@ -142,11 +142,11 @@ class Magic_Sword(Item):
     Infusing magic into a sword, though you'd expect it to be a common technique, it's actually really difficult.
     """
     appearance = """Although they are usually made using a simple design, they are perfectly straight.
-    It could be said that there are no unnecessary parts to them.
-    It isn't meant for pure cutting, but still capable of slashing attacks.
-    The goal of this design is to use this simplicity as a base to make it easier to realize an individual's respective ideal form.
-    
-    Another special characteristic of magic swords is that the blade will never rust or become chipped.
-    The sword also has a life of its own.
-    If it became completely broken or bent, then the magic essence would bleed out and dissipate all at once.
+        It could be said that there are no unnecessary parts to them.
+        It isn't meant for pure cutting, but still capable of slashing attacks.
+        The goal of this design is to use this simplicity as a base to make it easier to realize an individual's respective ideal form.
+        
+        Another special characteristic of magic swords is that the blade will never rust or become chipped.
+        The sword also has a life of its own.
+        If it became completely broken or bent, then the magic essence would bleed out and dissipate all at once.
     """
