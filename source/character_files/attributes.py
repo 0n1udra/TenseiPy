@@ -26,7 +26,7 @@ class Attributes:
                 else:
                     yield f'    {skill_name}'
 
-    def show_attributes(self, *args):
+    def show_attributes(self, mob=None, *args):
         """
         Prints out attribute of player or specified character. Includes info like Mimicking, Location, Full Name, etc.
 
@@ -38,12 +38,18 @@ class Attributes:
             > stats tempest serpent
         """
 
+        if mob:
+            mob = self.get_object(mob, item_pool=[*self.mimic_generator()])
+        if not mob: mob = self
+
+
         print("----- Skills -----")
-        print(f"Name: [{(self.name + ' ' + self.family_name).strip()}]")
-        print(f"Location: {self.current_location}\n")
+        print(f"Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
+        print(f"Level: {mob.level}")
+        print(f"Location: {mob.current_location}\n")
 
         # Print out skill category and corresponding skills indented.
-        for i in self.attributes_generator(output=True):print(i)
+        for i in mob.attributes_generator(output=True):print(i)
 
         if self.current_mimic:
             print("\n----- Mimicked Attributes -----")

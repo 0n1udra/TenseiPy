@@ -123,7 +123,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if self.check_if_player():
             if mimic_pool:
                 for mob in self.mimic_generator():
-                    item_pool += [*mob.inventory_generator(), *mob.attributes_generator()]
+                    item_pool += [mob, *mob.inventory_generator(), *mob.attributes_generator()]
 
         # Create item_pool of all the game objects to be able to find match and return new instance of object if matched.
         if new: item_pool = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
