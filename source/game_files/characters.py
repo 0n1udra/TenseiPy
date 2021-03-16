@@ -63,7 +63,8 @@ class Rimuru_Tempest(Character):
         self.acquired_mimicries[mob.rank][mob.name] = mob
 
         # Adds attributes from mob just analyzed.
-        for attribute in mob.attributes_generator(): self.add_attribute(attribute)
+       # for attribute in mob.attributes_generator():
+       #     self.add_attribute(attribute)
 
         if show_msg:
             print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
@@ -141,7 +142,7 @@ class Rimuru_Tempest(Character):
                 # Can only eat targeted mobs that are dead.
                 if target[0].is_alive is False:
                     self.add_mimic(target[0])
-                    self.add_inventory(target[0], target[1])
+                    self.add_inventory(target[0], target[1], show_analysis_msg=False)
                     self.targeted_mobs.remove(target)
                     try:
                         self.active_mobs.remove(target)

@@ -62,9 +62,11 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     fast_mode = None
     line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
-    def __init__(self, name=None, lname=None):
-        if not self.name: self.name = name
-        if not self.family_name: self.family_name = lname
+    def __init__(self, name='', lname=''):
+        if name or lname:
+            self.name, self.family_name = name, lname
+        else:
+            self.name, self.family_name = self.name, self.family_name
 
         # Pickle/dill has some issue with dumping dictionaries, so these has to be initialized here.
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
@@ -83,6 +85,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
     def __str__(self):
         return self.name.lower()
+
 
     def set_start_state(self):
         """Adds starter attributes and items to character."""

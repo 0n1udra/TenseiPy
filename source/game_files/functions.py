@@ -88,7 +88,7 @@ def game_action(level=None):
         [rimuru.show_attributes, ['stats', 'skills', 'attrs', 'attributes']],
         [rimuru.set_targets, ['target', 'focus']],
         [rimuru.attack, [parameters], ['attack']],
-        [rimuru.use_action, [user, parameters], ['use']],
+        [rimuru.use_action, [parameters, user], ['use']],
         [rimuru.craft_item, ['craft', 'make', 'create']],
         [rimuru.eat_targets, ['eat', 'predate', 'predation']],
         [rimuru.use_mimic, ['mimic', 'mimicry']],
@@ -208,9 +208,8 @@ def mobs_add(add_mobs):
             new_mob, new_name = new_mob.split(':')
         else: new_name = ''
 
-        if mob_object := rimuru.get_object(new_mob, new=True):
-            mob_object = mob_object(new_name.strip())
-            rimuru.active_mobs.append([mob_object, amount])
+        if mob_object := rimuru.get_object(new_mob.strip(), new=True):
+            rimuru.active_mobs.append([mob_object(new_name.strip()), amount])
 
 def mob_status(target):
     """
@@ -310,7 +309,6 @@ def game_restart(*args):
 def game_exit(*args):
     """Saves game using pickle, then exits."""
 
-    game_save()
     exit(0)
 
 def game_save(level=None, show_msg=True):
