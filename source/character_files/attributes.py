@@ -40,12 +40,15 @@ class Attributes:
 
         print("----- Skills -----")
         print(f"Name: [{(self.name + ' ' + self.family_name).strip()}]")
-        if self.current_mimic:
-            print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
         print(f"Location: {self.current_location}\n")
 
         # Print out skill category and corresponding skills indented.
-        for i in self.attributes_generator(output=True): print(i)
+        for i in self.attributes_generator(output=True):print(i)
+
+        if self.current_mimic:
+            print("\n----- Mimicked Attributes -----")
+            print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
+            for i in self.current_mimic.attributes_generator(output=True):print(i)
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
@@ -137,8 +140,7 @@ class Attributes:
 
         if type(target) is str:
             target = self.get_object(target)
-        if not target:
-            target = self
+        if not target: target = self
 
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
@@ -146,7 +148,7 @@ class Attributes:
                 if attack.damage_type in resist:
                     return True
 
-    def use_action(self, character, skill):
+    def use_action(self, skill, character=None):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
@@ -157,6 +159,8 @@ class Attributes:
         Usage:
             > use sense heat source
         """
+
+        if character is None: character = self
 
         if skill_object := character.get_object(skill):
             if return_data := skill_object.use_action(character):

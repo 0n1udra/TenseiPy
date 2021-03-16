@@ -61,15 +61,24 @@ class Combat:
 
         attack_success = False
         skills = []
+        user = self
+        # If using mimic, allows usage of skills/attributes from mimicked mob.
+        if self.current_mimic: user = self.current_mimic
 
         # TODO set combat to use get_random
 
         # Parse what attack(s) user wants to use.
         for attack in user_input.split(','):
-            if attack := self.get_object(attack):
+            if attack := user.get_object(attack):
                 # Adds skill to list of attacks to use against enemies.
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
+                if attack.game_object_type == 'item':
+                    if attack.item_type == 'Weapon':
+                        skills.append(attack)
+                if attack.game_object_type == 'character':
+                    continue
+
             else: continue
 
         for current_target in self.targeted_mobs:
