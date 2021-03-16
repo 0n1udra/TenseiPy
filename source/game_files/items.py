@@ -139,7 +139,7 @@ class Magic_Sword(Item):
     damage_type = 'Melee'
     damage_level = 6
     description = """If a huge amount of magic essence was included in the raw materials of a sword, apparently it would become a sword that grows. 
-    Infusing magic into a sword, though you'd expect it to be a common technique, it's actually really difficult.
+        Infusing magic into a sword, though you'd expect it to be a common technique, it's actually really difficult.
     """
     appearance = """Although they are usually made using a simple design, they are perfectly straight.
         It could be said that there are no unnecessary parts to them.

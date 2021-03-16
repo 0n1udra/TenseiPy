@@ -19,7 +19,7 @@ class Info:
             print(self.info_page)
             return True
 
-        if game_object := self.get_object(game_object):
+        if game_object := self.get_object(game_object, mimic_pool=True):
             # Some skills or objects have special info pages, I couldn't get @property method working...
             if hasattr(game_object, 'show_info_page'):
                 print(game_object.show_info_page(self))

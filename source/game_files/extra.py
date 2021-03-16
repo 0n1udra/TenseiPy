@@ -52,7 +52,8 @@ def get_any(match_to, input_list):
         bool: Returns True if match found.
     """
 
-    if any(i.lower() in match_to for i in input_list):
+    if type(match_to) is not str: return False
+    if any(i.lower().strip() == match_to.lower().strip() for i in input_list):
         return True
 
 def on_off(var):

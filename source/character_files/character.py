@@ -86,14 +86,13 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __str__(self):
         return self.name.lower()
 
-
     def set_start_state(self):
         """Adds starter attributes and items to character."""
 
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, match, item_pool=None, new=False):
+    def get_object(self, match, item_pool=None, new=False, mimic_pool=False):
         """
         Can take in either a str or obj, then returns object (will initialize if need to).
 
@@ -118,10 +117,16 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         # Gets character's acquired attributes and items in inventory.
         if 'character' in self.game_object_type:
-            item_pool = ([*self.inventory_generator(), *self.attributes_generator()])
+            item_pool = [*self.inventory_generator(), *self.attributes_generator()]
+
+        # Adds all attributes/inventory items to pool from all acquired mimicries.
+        if self.check_if_player():
+            if mimic_pool:
+                for mob in self.mimic_generator():
+                    item_pool += [*mob.inventory_generator(), *mob.attributes_generator()]
 
         # Create item_pool of all the game objects to be able to find match and return new instance of object if matched.
-        if new: item_pool = ([*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()])
+        if new: item_pool = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
 
         # Somehow strings get in the item_pool, need to filter those out.
         for game_object in list(filter(lambda x: type(x) is not str, item_pool)):
