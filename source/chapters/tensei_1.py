@@ -2,11 +2,10 @@
 from game_files.functions import *
 # Import the next chapter to continue to.
 from chapters.tensei_2 import ch2_goblin_encounter
-from game_maps.game_location import cave_actions
 from game_maps.game_location import *
 from game_files.characters import Veldora_Tempest
 
-def ch1_cave(rimuru):
+def ch1_cave():
     class wake_up(cave_actions):
         __location = 'Sealed Cave'
 

@@ -3,7 +3,7 @@ from game_maps.game_location import *
 from chapters.tensei_3 import Chapter3
 
 
-def ch2_goblin_encounter(rimuru):
+def ch2_goblin_encounter():
     class goblin_encounter:
         __location = "Near the Sealed Cave"
 
@@ -35,13 +35,13 @@ def ch2_goblin_encounter(rimuru):
                     siprint("After some more clarification, they invited to their village. It looks like they need some help. Should I go?")
                     goto_goblin_village()
 
-            class _subjugate:
-                __subs = ['subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
+            class _subjugate_goblins:
+                __subs = ['subjugate', 'subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
                 def __init__(self):
                     sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
                     sprint("You have two options. You can worship me or you can die.")
                     dots(2, 10)
-                    if get_random(1, 10, 1):
+                    if get_random(1, 10, 1):  # 1/10 chance of goblins revolting
                         sprint("NEVER! We will never surrender to you!")
                         sprint("ATTACK!!!!!!!!")
                         game_over()

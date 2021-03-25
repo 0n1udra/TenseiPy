@@ -134,7 +134,7 @@ def game_action(level=None):
 
         # play game action.
         if get_any(user_input, action_subs):
-            rimuru.add_played_action(action_subs[-1])
+            rimuru.add_played_action(action_subs[-1])  # Check using game_cond('action_name') function.
             eval(f"level.{action}()")
 
     game_action(level)
@@ -310,6 +310,7 @@ def game_restart(*args):
 def game_exit(*args):
     """Saves game using pickle, then exits."""
 
+    #game_save()
     exit(0)
 
 def game_save(level=None, show_msg=True):

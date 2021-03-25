@@ -1,5 +1,6 @@
 import sys, os
 from game_files.functions import show_start_banner, update_rimuru, game_load, get_any, siprint
+from chapters.tensei_0 import ch0
 
 __version__ = "5.0 Alpha"
 __author__ = "D Thomas"
@@ -66,4 +67,5 @@ if __name__ == '__main__':
             print("\n < Hints: Disabled >\n")
 
     show_start_banner()
-    rimuru.current_location_object(rimuru)
+    ch0()  # Can be used for debugging.
+    rimuru.current_location_object()
