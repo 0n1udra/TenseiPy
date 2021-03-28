@@ -2,12 +2,17 @@ How to construct storyline.
 
 # Import most used functions like siprint, game_action, etc
 from game_files.game_functions import *
+
 # Import the next chapter to continue to.
 from chapters.tensei_2 import ch2_goblin_encounter
 
-# Pass in Rimuru_Tempest object which has player stats, inv and other data.
-def ChapterXX(Rimuru):
-    class in_cave():
+# Import pre-defined playable actions.
+from game_maps.game_location import *
+
+def ChapterXX():
+    # Actions from cave_actions will be able be playable by passing cave_actions in class.
+    # Will need to pass it in for every action class you want cave_actions' actions to be playable.
+    class in_cave(cave_actions):
         __location = 'Sealed Cave'  # Update location.
 
         def __init__(self):
@@ -22,7 +27,7 @@ def ChapterXX(Rimuru):
         # E.g. 'eat grass', 'predate grass', or 'eat more grass' run the same function for that action (sub path) without making multiple functions.
         # Adds some player freedom, however you will have to add all the different alternatives for that action.
         # Action with '_' is just for easy indication while looking at the code to see which actions will progress the storyline further, also used for debug mode.
-        class _exit_cave():
+        class _exit_cave(cave_actions):
             __subs = ['leave cave', 'move on', 'leave the cave', 'exit cave']
             def __init__(self):
                 # Regular message used for talking to other characters, even when using telepathy add ~to start and end~.
@@ -55,8 +60,8 @@ def ChapterXX(Rimuru):
                 # Add attribute (skill/resistances/etc).
                 rimuru.add_attribute('special skill')
 
-                # Set __subs to None to make action useable only once (only works with classes).
-                in_cave.hfunc_secret_action.__subs = None
+                # Clears __subs, to make action useable only once (only works with classes).
+                clear_subs(self)
 
                 # Move story to new section.
                 game_action(secret_place())
@@ -71,12 +76,12 @@ def ChapterXX(Rimuru):
 
 
 Reading Variable Names:
-Name []         -- List
-Name {}         -- Dictionary
-Name ()         -- Set
-Name True/False -- boolean
-Name()          -- Function
-Name:           -- Class
+    Name []                 -- List
+    Name {}                 -- Dictionary
+    Name ()                 -- Set
+    Name True/False         -- boolean
+    Name()                  -- Function
+    Name:                   -- Class
 
 When I say attribute it means skills and/or resistances.
 In function docstring's Usage section, '>' means example of user input in game.
@@ -117,7 +122,10 @@ In function docstring's Usage section, '>' means example of user input in game.
     show_settings()         -- Shows game setting commands and current states.
     show_help()             -- Shows help page.
     show_rank_chart()       -- Show in-universe ranking and levels.
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 
 ===== extra.py
     get_random()            -- Used for probability.
@@ -126,6 +134,16 @@ In function docstring's Usage section, '>' means example of user input in game.
     format_info()           -- Formats info from variables for info_page for game objects.
     tbc()                   -- Prints out To be continued.
 
+<<<<<<< HEAD
+===== extra.py
+    get_random()            -- Used for probability.
+    get_any()               -- If input matches anything in a list.
+    on_off()                -- Returns on/off string based in passed in boolean.
+    format_info()           -- Formats info from variables for info_page for game objects.
+    tbc()                   -- Prints out To be continued.
+
+=======
+>>>>>>> master
 
 ===== character.py
 Go to file to read comments for class variables.
@@ -136,8 +154,13 @@ Go to file to read comments for class variables.
     check_acquired()        -- Check if passed in list or string for _check_acquired.
     _check_acquired()       -- Checks if character has object (attribute/item).
     update_status()         -- Update status variable.
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> master
 ===== attributes.py
     attribute_generator()   -- Yields all attributes character has access to. Also used for printing out with show_attributes()
     show_attributes()       -- Shows character's attributes, can also show mimicked character's attributes.
@@ -145,9 +168,15 @@ Go to file to read comments for class variables.
     remove_attribute()      -- Remove attribute.
     upgrade_attribute       -- Upgrade attribute.
     check_resistance()      -- Checks if have resistance to attack.
+<<<<<<< HEAD
+    use_action()            -- Uses specified skill.
+
+
+=======
     use_action()             -- Uses specified skill.
 
 
+>>>>>>> master
 ===== combat.py
     set_targets()           -- Set targets to be focused.
     attack()                -- Attacks targets (including focused). Also checks resistance to attack.
@@ -161,8 +190,13 @@ Go to file to read comments for class variables.
     update_level()          -- Update character's level, which will also update ranking.
     add_protection()        -- Add a divine protect (blessing) to character.
     check_if_player()       -- Check if current object being manipulated is player object (Rimuru_Tempest).
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> master
 ===== inventory.py
     inventory_generator()   -- Yields character's inventory objects.
     update_inv_capacity()   -- Calculates current inventory capacity from all items acquired.
@@ -171,6 +205,7 @@ Go to file to read comments for class variables.
     remove_inventory()      -- Removes item from inventory.
     craft_item()            -- Craft game item.
 
+<<<<<<< HEAD
 
 ===== map.py
     add_played_action()     -- Adds played actions by user to a set().
@@ -180,6 +215,17 @@ Go to file to read comments for class variables.
     update_location()       -- Update characters current_location variable.
 
 
+=======
+
+===== map.py
+    add_played_action()     -- Adds played actions by user to a set().
+    get_loction_variable()  -- Gets __location variable from action class.
+    get_location()          -- returns current_location from character object.
+    get_map()               --
+    update_location()       -- Update characters current_location variable.
+
+
+>>>>>>> master
 ===== subordinates.py
     subordinates_generator()-- Yields subordinates character object.
     add_subordinate()       -- Add new subordinate.
@@ -190,6 +236,31 @@ Go to file to read comments for class variables.
     great_sage              -- Great Sage.
     magic_perception        -- When acquired and use magic perception.
     cave_veldora            -- Veldora introducing himself.
+<<<<<<< HEAD
+
+
+===== characters.py
+    Rimuru_Tempest:         -- Player character.
+        mimic_generator()   -- Yields character object acquired for mimicry.
+        mimic_object()      -- Returns mimic skill object from attributes dictionary.
+        show_mimics()       -- Show acquired mimics.
+        add_mimic()         -- Adds new character object to acquired_mimicries dictionary.
+        use_mimic()         -- Activate mimicry.
+        eat_target()        -- Predates inputted and focused targets. Either adds skill, item, or character.
+
+    Veldora_Tempest:
+    Eren_Grimwold:
+    Kaval:
+    Gido:
+
+    Tempest_Serpent:
+    Giant_Bat:
+    Evil_Centipede:
+    Black_Spider:
+    Direwolf:
+    Goblin:
+    Hobgoblin:
+=======
 
 
 ===== characters.py
@@ -205,6 +276,7 @@ Go to file to read comments for class variables.
     Eren_Grimwold:
     Kaval:
     Gido:
+>>>>>>> master
 
     Tempest_Serpent:
     Giant_Bat:
@@ -214,7 +286,10 @@ Go to file to read comments for class variables.
     Goblin:
     Hobgoblin:
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 ===== items.py
 Item:                       -- Item parent class.
     name str                -- Item name.
@@ -253,7 +328,11 @@ Skill:
     skill_level str         -- Skill level like: Common Skill, Extra Skill, etc
     damage_level 1          -- Skill damage level.
     damage_type str         -- Skill damage types.
+<<<<<<< HEAD
+    info_page str           -- Information page for skill.
+=======
     info_page str                -- Information page for skill.
+>>>>>>> master
     description str         -- Skill description.
     evolution str           -- Evolution line.
     abilities str           -- Skill abilities description.
