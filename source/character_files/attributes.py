@@ -170,6 +170,6 @@ class Attributes:
 
         if skill_object := character.get_object(skill):
             if return_data := skill_object.use_action(character):
-                character.last_use_action = skill_object
+                character.last_use_skill = skill_object
                 return return_data
             print()

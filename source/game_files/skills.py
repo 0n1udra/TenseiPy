@@ -5,8 +5,8 @@ class Skill:
     type = 'Activatable Skill'
     skill_level = 'Skill'
     damage_level = 1
-    info_page = ''
     damage_type = ''
+    info_page = ''
     description = ''
     evolution = ''
     abilities = ''
@@ -301,6 +301,7 @@ class Water_Blade(Common, Skill):
     damage_level = 6
     description = 'Shoot out a thin water blade with tremendous cutting power.'
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+    use_requirements = {'Water': 1}
 
 class Water_Bullet(Common, Skill):
     name = 'Water Bullet'
@@ -308,6 +309,7 @@ class Water_Bullet(Common, Skill):
     damage_level = 6
     description = "Shoot out a small powerful water bullet."
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+    use_requirements = {'Water': 1}
 
 class Poisonous_Breath(Common, Skill):
     name = 'Poisonous Breath'

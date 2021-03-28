@@ -13,7 +13,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     # Character inventory.
     starting_state = []  # Character's starting skills/attributes.
     inventory_capacity = 0  # Inventory capacity in percentage.
-    inventory_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
+    inv_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
     quantity = 0  # Item quantity in inventory.
     quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
 
@@ -43,7 +43,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     active_mobs = []  # Current mobs around you that you can interact or attack.
     targeted_mobs = []  # Targets that will be attacked with 'attack' command.
     last_command = ''
-    last_use_action = None  # Last successfully used skill, game object.
+    last_use_skill = None  # Last successfully used skill, game object.
     available_locations = []
     played_actions = set()
     current_location = ''

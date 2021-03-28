@@ -19,7 +19,7 @@ class Inventory:
 
             for item_name, item in items.items():
                 if output:
-                    item_text = f'    {item.inventory_capacity_add * item.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item.name}'
+                    item_text = f'    {item.inv_capacity_add * item.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item.name}'
                     if item.status:  # if has a custom status set.
                         yield item_text + f' ({item.status})'
                     else:
@@ -32,7 +32,7 @@ class Inventory:
 
         total = 0
         for item in self.inventory_generator():
-            total += item.quantity * item.inventory_capacity_add
+            total += item.quantity * item.inv_capacity_add
         self.inventory_capacity = total
 
         return total

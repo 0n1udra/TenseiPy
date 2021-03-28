@@ -8,7 +8,7 @@ class Item:
     damage_level = None
     quantity = 0
     quantity_add = 1
-    inventory_capacity_add = 0.1
+    inv_capacity_add = 0.1
     info_page = ''
     description = ''
     usage = ''
@@ -95,7 +95,7 @@ class Water(Item):
     name = 'Water'
     item_type = 'Material'
     quantity_add = 100
-    inventory_capacity_add = 0.01
+    inv_capacity_add = 0.01
     usage = 'Can be used in high pressure attacks.'
     description = '''It's wet, and it's clear, it is just water...'''
     appearance = "Clear flowing liquid, oh, and it's wet too!"
@@ -104,7 +104,7 @@ class Hipokte_Grass(Item):
     name = 'Hipokte Grass'
     item_type = 'Material'
     quantity_add = 50
-    inventory_capacity_add = 0.01
+    inv_capacity_add = 0.01
     usage = 'Mainly used for making healing potions.'
     description = 'Magicule infused grass, found in locations with high Magicule concentration'
     appearance = 'Looks like regular grass, but gives off small amounts of magic essence.'
@@ -114,7 +114,7 @@ class Magic_Ore(Item):
     name = 'Magic Ore'
     item_type = 'Material'
     quantity_add = 25
-    inventory_capacity_add = 0.1
+    inv_capacity_add = 0.1
     usage = 'Mainly used for making magic items and magic reinforced weapons and armor.'
     description = '''Magic ores form around high concentration of magic essence.
         Magic ore is the raw form of magic steel. Even in its unrefined form, magic ore is considered to be valuable.
@@ -125,7 +125,7 @@ class Full_Potion(Item):
     name = 'Full Potion'
     item_type = 'Consumable'
     quantity_add = 25
-    inventory_capacity_add = 0.1
+    inv_capacity_add = 0.1
     usage = 'Heals major wounds even severed limbs and illnesses. However, can not resurrect.'
     description = '''Can heal subject to optimum condition, but cannot revive the dead.'''
     appearance = 'Blue potion in a glass bottle.'

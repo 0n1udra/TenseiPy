@@ -44,6 +44,14 @@ class Rimuru_Tempest(Character):
             mimic.active = active
             return mimic
 
+    def show_mimics(self, *args):
+        print("    ----- Mimicries -----")
+        for mob_level, mobs in self.acquired_mimicries.items():
+            print(f'    {mob_level}:')
+            for mob_name, mob in mobs.items():
+                print(f'        {mob_name}')
+        print("\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.")
+
     def add_mimic(self, mob, show_msg=True):
         """
         Adds new monster mimicry.
@@ -69,6 +77,7 @@ class Rimuru_Tempest(Character):
         if show_msg:
             print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
             print("    << Notice, new skills and mimicry available. >>\n")
+
 
     def use_mimic(self, character):
         """
@@ -112,13 +121,6 @@ class Rimuru_Tempest(Character):
                 return m_object.name
         return False
 
-    def show_mimics(self, *args):
-        print("    ----- Mimicries -----")
-        for mob_level, mobs in self.acquired_mimicries.items():
-            print(f'    {mob_level}:')
-            for mob_name, mob in mobs.items():
-                print(f'        {mob_name}')
-        print("\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.")
 
     def eat_targets(self, *args):
         """
@@ -163,7 +165,7 @@ class Veldora_Tempest(Character):
     shared_protection = 'Storm Crest'
     is_alive = True
     level = 11
-    inventory_capacity_add = 10
+    inv_capacity_add = 10
 
 
 # ===== Adventurers
@@ -188,7 +190,7 @@ class Kaval(Character):
     appearance = 'A young man with medium length hair, seemingly in his prime.'
     abilities = ['Fighting Spirit', 'Heavy Collision']
 
-class Gideo(Character):
+class Gido(Character):
     name = 'Gido'
     level = 5
     species = 'Human'
@@ -264,7 +266,6 @@ class Goblin(Character):
     For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
     '''
     evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
-
 
 class Hobgoblin(Goblin):
     name = 'Hobgoblin'

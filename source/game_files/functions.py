@@ -162,7 +162,7 @@ def game_cond(game_var, new_value=None):
         return True
     return False
 
-def last_use_action(skill):
+def last_use_skill(skill):
     """
     Checks what was the last successfully used skill.
 
@@ -174,10 +174,10 @@ def last_use_action(skill):
         bool False: If not match.
     """
 
-    if not rimuru.last_use_action: return  # If last_use_action var is not set.
+    if not rimuru.last_use_skill: return  # If last_use_skill var is not set.
 
-    if skill.lower() in rimuru.last_use_action.name.lower():
-        return rimuru.last_use_action
+    if skill.lower() in rimuru.last_use_skill.name.lower():
+        return rimuru.last_use_skill
     return False
 
 def mobs_add(add_mobs):
@@ -365,7 +365,7 @@ def game_load(path):
     return rimuru
 
 def game_over():
-    """Player died, deletes pickle save file."""
+    """Player died, deletes pickle save file after invalidates it.."""
 
     global rimuru
     rimuru.valid_save = False  # So you can't use this save file anymore.

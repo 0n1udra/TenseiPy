@@ -1,6 +1,5 @@
 from game_files.extra import format_info, get_any
 
-
 class Info:
     def show_info(self, game_object):
         """
