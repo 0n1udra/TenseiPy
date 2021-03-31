@@ -3,8 +3,6 @@ import game_files.art as game_art
 from game_files.extra import *
 from game_files.characters import Rimuru_Tempest
 
-on_subs = ['activate', 'true', 'enable', 'on', '1']
-off_subs = ['deactivate', 'false', 'disable', 'off', '0']
 
 # I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
 rimuru = Rimuru_Tempest()
@@ -97,13 +95,7 @@ def game_action(level=None):
         [rimuru.get_location, ['location']],
         [rimuru.use_action, ['sense heat source', user], ['nearby', 'sense heat sources']],
         [show_help, ['help', 'commands']],
-        [show_settings, ['settings', 'options']],
-        [show_rank_chart, ['showrank', 'showranking', 'showlevel']],
-        [set_art, ['art', 'ascii', 'showart']],
-        [set_hud, ['hud', 'showhud', 'gamehud']],
-        [set_hints, ['hints', 'show hints', 'showhints', 'gamehints']],
-        [set_textcrawl, ['textcrawl', 'slowtext']],
-        [set_hardcore, ['hardcore', 'hardmode']],
+        [change_settings, ['settings', 'options']],
         [show_history, ['history']],
         [game_restart, ['restart']],
         [game_exit, ['exit', 'quit', 'stop']],
@@ -381,99 +373,6 @@ def game_over():
     else:
         game_restart()
 
-def set_hud(arg):
-    """
-    Updates and gets rimuru.show_hud boolean. Shows and hides available actions.
-
-    Args:
-        arg: Enable or disable text crawl.
-
-    Usage:
-        > menu on
-        > menu off
-    """
-
-    # If hardcore boolean is True, HUD will be disabled.
-    if rimuru.hardcore is True:
-        rimuru.show_hud = False
-        print("    < Error: Hardcore mode is active. \n>")
-        return
-
-    if arg in on_subs or rimuru.show_hud is True:
-        rimuru.show_hud = True
-    if arg in off_subs or rimuru.show_hud is False:
-        rimuru.show_hud = False
-    print(f"    < Action Menu: {'Enabled' if rimuru.show_hud else 'Disabled'} >\n")
-
-def set_art(arg):
-    """
-    Enable/Disable ASCII art.
-
-    Args:
-        arg: Enable or disable ASCII art.
-
-    Usage:
-        ascii on
-        ascii off
-    """
-
-    if arg in on_subs or rimuru.show_art is True:
-        rimuru.show_art = True
-    if arg in off_subs or rimuru.show_art is False:
-        rimuru.show_art = False
-    print(f"    < ASCII Art: {'Enabled' if rimuru.show_art else 'Disabled'} >\n")
-
-def set_textcrawl(arg):
-    """
-    Updates and gets status for textcrawl.
-
-    Args:
-        arg: Enable or disable text crawl.
-
-    Usage:
-        > textcrawl
-        > textcrawl on
-        > textcrawl off
-    """
-
-    if arg in on_subs or rimuru.textcrawl is True:
-        rimuru.textcrawl = True
-    if arg in off_subs or rimuru.textcrawl is False:
-        rimuru.textcrawl = False
-    print(f"    < Text Crawl: {'Enabled' if rimuru.textcrawl else 'Disabled'} >\n")
-
-def set_hints(arg):
-    """Enable/Disable game hints."""
-
-    if rimuru.hardcore is True:
-        rimuru.show_hud = False
-        print("    < Error: Hardcore mode is active. \n>")
-        return
-
-    if arg in on_subs or rimuru.show_hints is True:
-        rimuru.show_hints = True
-    if arg in off_subs or rimuru.show_hints is False:
-        rimuru.show_hints = False
-    print(f"    < Hints: {'Enabled' if rimuru.show_hints else 'Disabled'} >\n")
-
-def set_hardcore(arg):
-    """
-    Enable/Disable ASCII art.
-
-    Args:
-        arg: Enable or disable ASCII art.
-
-    Usage:
-        hardcore on
-        hardcore off
-    """
-
-    if arg in on_subs or rimuru.hardcore is True:
-        rimuru.hardcore = True
-    if arg in off_subs or rimuru.hardcore is False:
-        rimuru.hardcore = False
-    print(f"    < Hardcore Mode: {'Enabled' if rimuru.hardcore else 'Disabled'} >\n")
-
 
 #                    ========== Game Printing/Output ==========
 def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
@@ -533,7 +432,7 @@ def iprint(message, showing_history=False):
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
-def dots(length=3, times=5, indent=False):
+def dots(length=5, times=3, indent=False):
     """
     Loading dot animation.
 
@@ -620,75 +519,123 @@ def show_start_banner():
     if rimuru.valid_save is True:
         print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
 
+def change_settings(user_input):
+    """
+    Show or change game settings.
+
+    Args:
+        user_input: Get input from game_action function.
+
+    Usage:
+        > settings
+        > settings hud on
+        > options hud hints off
+    """
+
+    new_value = None
+    # Tries to extract game settings and on/off section from user_input.
+    try:
+        split_input = user_input.split()
+        # Checks if player wants to enable/disable a setting.
+        if get_any(split_input[-1], off_subs):
+            new_value = False
+        elif get_any(split_input[-1], on_subs):
+            new_value = True
+        # User can change multiple game settings with one go.
+        settings_input = ''.join(user_input[:-1])
+    except: new_value = None
+
+    # If not detected game settings with usable on/off data from user_input.
+    if not user_input or new_value is None:
+        show_settings()
+        return
+
+    if 'textcrawl' in settings_input:
+        rimuru.textcrawl = new_value
+    if 'hardcore' in settings_input:
+        rimuru.hardcore = new_value
+    # strict_match is false so user can change multiple game settings in one go.
+    if get_any(settings_input, ['hud', 'interface'], strict_match=False):
+        rimuru.show_hud = new_value
+    if get_any(settings_input, ['art', 'ascii'], strict_match=False):
+        rimuru.show_art = new_value
+    if get_any(settings_input, ['hints', 'clues'], strict_match=False):
+        rimuru.show_hints = new_value
+
+    show_settings()
+
+
 def show_settings(*args):
     """Shows game settings and there current on/off state."""
 
-    print(f"""
-    Game Settings:
+    print(f"""    Game Settings:
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
-        {on_off(rimuru.show_hud)}\thud/showhud <on/off>\t-- Show available actions player can take.
-        {on_off(rimuru.show_art)}\tascii/showart <on/off>\t-- Show ASCII art.
+        {on_off(rimuru.show_hud)}\thud/interface <on/off>\t-- Show available actions player can take.
+        {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
+        {on_off(rimuru.show_hints)}\thints/clues <on/off>\t\t-- Show game hints, highly recommended for first timers.
         {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
-        {on_off(rimuru.show_hints)}\thints <on/off>\t\t-- Show game hints, highly recommended for first timers.
-    """)
+    
+    Change Settings:
+        settings/options COMMAND(S) on/off
+        Example: 'settings textcrawl off', 'options hud hints off'""")
 
-def show_help(*args):
+def show_help(arg):
     """Shows help page."""
 
-    print("""
-    Command Required_Parameter [Optional_Parameter]
+    if get_any(arg, ['rank', 'level', 'ranking', 'showrank', 'showlevel'], strict_match=False):
+        show_rank_chart()
+        return
+
+    print("""    Command Required_Parameter [Optional_Parameter]
     
     Commands:
-        inv/inventory               -- Show inventory.
-        stats/skills [TARGET]       -- Show skills and resistances. attribute also works.
-                                       Example: 'stats tempest serpent', 'attributes evil centipede'
-        info/data TARGET            -- Show info on skill, item or character. 
-                                       Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        target TARGET(S)            -- Target mob(s), to be able to use skills/abilities/etc on them.
-                                       Example: 'target tempest serpent', 'target tempest serpent, black spider'
-          - target nearby           -- Target nearby mobs.
-          - target reset            -- Clear targeted.
-        attack SKILL	            -- Attack targeted_mobs. 
-                                       Example: 'attack water blade'
-        use SKILL                   -- Use a skill.
-                                       Example: 'use sense heat source'
-        craft ITEM [amount]         -- Craft items if have necessary ingredients. 
-                                       Example: 'craft full potion', 'craft full potion 10'
-                                       Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
-        mimic TARGET                -- Mimics appearance of of eatd.
-                                       Example: 'mimic tempest serpent'
-          - info mimic              -- Shows available mimicries.
-          - mimic reset             -- Resets mimic (Back to slime).
-        eat/predate                 -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
-        nearby                      -- Once acquired [Sense Heat Source] skill, you can use nearby instead of typing 'use sense heat source' every time.
-        help                        -- Show this help page.
-        settings                    -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
-        showrank                    -- Show mob level chart and corresponding ranking.
-        exit                        -- Exits after save.
+        inv/inventory           -- Show inventory.
+        stats/skills [TARGET]   -- Show skills and resistances. attribute also works.
+                                   Example: 'stats tempest serpent', 'attributes evil centipede'
+        info/data TARGET        -- Show info on skill, item or character. 
+                                   Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
+        target TARGET(S)        -- Target mob(s), to be able to use skills/abilities/etc on them.
+                                   Example: 'target tempest serpent', 'target tempest serpent, black spider'
+          - target nearby       -- Target nearby mobs.
+          - target reset        -- Clear targeted.
+        attack SKILL	        -- Attack targeted_mobs. 
+                                   Example: 'attack water blade'
+        use SKILL               -- Use a skill.
+                                   Example: 'use sense heat source'
+        craft ITEM [amount]     -- Craft items if have necessary ingredients. 
+                                   Example: 'craft full potion', 'craft full potion 10'
+                                   Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
+        mimic TARGET            -- Mimics appearance of of eatd.
+                                   Example: 'mimic tempest serpent'
+          - info mimic          -- Shows available mimicries.
+          - mimic reset         -- Resets mimic (Back to slime).
+        eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
+        nearby                  -- Once acquired [Sense Heat Source] skill, you can use nearby instead of typing 'use sense heat source' every time.
+        help                    -- Show this help page.
+        settings                -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
+        showrank                -- Show mob level chart and corresponding ranking.
+        exit                    -- Exits after save.
 
     Game Dialogue:
-        ~Message~                   -- Telepathy, thought communication.
-        *Message*                   -- Story context.
-        < Message >                 -- Game info, acquisition, game help, etc.
-        << Message >>               -- Great Sage (Raphael, Ciel).
-        <<< Message >>>             -- Voice of the World.
-    """)
+        ~Message~               -- Telepathy, thought communication.
+        *Message*               -- Story context.
+        < Message >             -- Game info, acquisition, game help, etc.
+        << Message >>           -- Great Sage (Raphael, Ciel).
+        <<< Message >>>         -- Voice of the World.""")
 
 def show_rank_chart(*args):
     """In universe ranking chart."""
 
-    print("""
-    Level/Ranking:
-    Level      Rank         Risk
-    11.     Special S   Catastrophe
-    10.     S           Disaster
-    9.      Special A   Calamity
-    8.      A+          Tragedy
-    7.      A           Hazard
-    6.      A-          Danger
-    5.      B           Pro
-    4.      C           Advance
-    3.      D           Intermediate
-    2.      E           Beginner
-    1.      F           Novice
-    """)
+    print("""    Level/Ranking:
+        Level      Rank         Risk
+        11.     Special S   Catastrophe
+        10.     S           Disaster
+        9.      Special A   Calamity
+        8.      A+          Tragedy
+        7.      A           Hazard
+        6.      A-          Danger
+        5.      B           Pro
+        4.      C           Advance
+        3.      D           Intermediate
+        2.      E           Beginner
+        1.      F           Novice""")
