@@ -1,5 +1,5 @@
 import sys, os
-from game_files.functions import show_start_banner, update_rimuru, game_load, get_any, siprint
+from game_files.functions import show_start_banner, update_rimuru, game_load, get_any, siprint, ask_on_off
 from chapters.tensei_0 import ch0
 
 __version__ = "5.0 Alpha"
@@ -17,8 +17,7 @@ def help_page():
     -hud    --  Hide game HUD.
     -hard   --  Enable Hardcore mode.
     -hints  --  Hide game hints.
-    -slime  --  Same as: -t -a
-    """)
+    -slime  --  Enables: hud, hints | Disables: textcrawl, art""")
     exit(0)
 
 
@@ -46,25 +45,11 @@ if __name__ == '__main__':
         rimuru.textcrawl = rimuru.show_art = False
         rimuru.show_hud = rimuru.show_hints = True
 
-    # Text output is slowed and looks like it's being typed out character by character. For dramatic effect.
+    # Only asks player if variables are not already set.
     if rimuru.textcrawl is None:
-        print("\nEnable Text Crawl? (Recommended for easier reading)")
-        if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
-            print("\n    < Text Crawl Deactivated >\n")
-            rimuru.textcrawl = False
-        else:
-            rimuru.textcrawl = True
-            siprint("\n< Text Crawl Activated >\n\n")
-
-    # Asks user if want to show gameplay hints.
+        rimuru.textcrawl = ask_on_off('textcrawl', 'Enable textcrawl effect (Recommended for slower reading)')
     if rimuru.show_hints is None:
-        print("\nShow game hints? Suggest leave enabled if first time playing.")
-        if str(input("No / Yes or Enter > ")).lower() in ['n', 'no']:
-            print("\n    < Hints: Enabled >\n")
-            rimuru.show_hints = False
-        else:
-            rimuru.show_hints = True
-            print("\n < Hints: Disabled >\n")
+        rimuru.show_hints = ask_on_off('show_hints', "Show game hints? (Recommended for first time)")
 
     show_start_banner()
     ch0()  # Can be used for debugging.
