@@ -42,6 +42,8 @@ class Attributes:
             mob = self.get_object(mob, item_pool=[*self.mimic_generator()])
         if not mob: mob = self
 
+        # Shows players reputation/standing also.
+        self.show_standings()
 
         print("----- Skills -----")
         print(f"Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
