@@ -108,13 +108,28 @@ class Info:
 
         # Create dictionary item if for loop found no match.
         self.standings[match] = new_value
-        print(f"\n    < {match} Standing: {self.standings[match]} \n>")
+        print(f"\n    < {match} Standing: {self.standings[match]} >\n")
 
     def show_standings(self):
         print("-----Standings-----")
         for k, v in self.standings.items():
             print(f"{k}: {v}")
         print()
+
+    def get_standing(self, match, value=1):
+        """
+        Returns integer value of standing that player has with a character/faction/etc.
+
+        Args:
+            match str: Name of character/faction/etc to check standing with.
+
+        Returns:
+            int: Returns integer denoting reputation player has with specified.
+        """
+
+        for k, v in self.standings.items():
+            if k in match.capitalize():
+                return self.standings[k]
 
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""
