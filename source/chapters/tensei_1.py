@@ -12,6 +12,8 @@ def ch1_cave():
         def __init__(self):
             idots()
             print()
+            rimuru.update_standing('fArmus')
+            rimuru.update_standing('farmUs', 1)
             siprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             siprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
             siprint("<< Acquired Extra Skill [Predator]. >>")
@@ -346,6 +348,7 @@ def ch1_cave():
 
                     sprint("I am ready now, until we meet again small one!")
                     siprint("<< Use Unique skill [Predator]? >>")
+                    rimuru.update_standing('veldora', 1)
                     game_action(self)
 
                 class eat_grass:
@@ -360,6 +363,7 @@ def ch1_cave():
                         global veldora
                         rimuru.add_inventory(veldora, show_analysis_msg=False)
                         siprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
+                        rimuru.update_standing('veldora')
                         game_action(self)
 
                     class _start_analysis:
@@ -369,12 +373,15 @@ def ch1_cave():
                             rimuru.update_status('veldora', 'Analyzing')
                             siprint("< Starting Analysis: Unique Skill [Unlimited Imprisonment] >")
                             siprint("I hope you get out quickly Veldora!")
+                            rimuru.update_standing('veldora', 1)
                             tempest_serpent_encounter()
 
                     class ignore:
                         __subs = subs.no + ['do not start analysis', "don't start analysis", 'cancel analysis', "don't start", 'ignore him', 'leave it', 'leave him', 'trap him', "don't help him", 'do not help him']
                         def __init__(self):
                             siprint("You know what, no. I think I'll just leave that for now. Hehehe...")
+                            if not played_action(self):
+                                rimuru.update_standing('veldora', -2)
 
                     class _move_on:
                         __subs = subs.move_on + ['ignore him, lets move on']

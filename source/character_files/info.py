@@ -88,6 +88,34 @@ class Info:
         self.update_info()
         print(f'    < [{self.name}] Acquired Protection: [{divine_protection}] >')
 
+    def update_standing(self, match, new_value=1):
+        """
+        Updates player standing/reputation.
+
+        Args:
+            match str: Character/faction/etc to update.
+            new_value int(1): Increase or decrease standing. Pass in either positive or negative integer.
+
+        Usage:
+            rimuru.update_standing('veldora', 2)
+            rimuru.update_standing('gobta', -1)
+        """
+
+        match = match.capitalize()
+        for k, v in self.standings.items():
+            if k in match:
+                self.standings[k] += new_value
+
+        # Create dictionary item if for loop found no match.
+        self.standings[match] = new_value
+        print(f"\n    < {match} Standing: {self.standings[match]} \n>")
+
+    def show_standings(self):
+        print("-----Standings-----")
+        for k, v in self.standings.items():
+            print(f"{k}: {v}")
+        print()
+
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""
 

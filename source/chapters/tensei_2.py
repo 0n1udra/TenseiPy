@@ -147,6 +147,7 @@ def ch2_goblin_encounter():
                             rimuru.remove_inventory('full potion', 9)
                             sprint("Wow, ")
                             clear_subs(self)
+                            rimuru.update_standing('goblins', 1)
                             goto_goblin_village._assist_goblins()
                         else:
                             sprint("I need some way to heal them.")
@@ -159,6 +160,7 @@ def ch2_goblin_encounter():
                         sprint("Great one, please! If you can heal our wounded we would be most grateful!")
                         sprint("Nah, I can't waste my precious healing potions on such weak monsters who are so undeserving.")
                         sprint("I see, we are sorry for troubling you.")
+                        rimuru.update_standing('goblins', -1)
                         goto_goblin_village._assist_goblins()
 
     class wolf_attack:
