@@ -54,6 +54,14 @@ def ChapterXX():
 
                 siprint("ooooooooohhh!, a secret action!")
 
+                # If first time playing action.
+                if not played_action(self):
+                    print("First time playing secret action.")
+
+                # Only if action has been played already.
+                if played_action(self):
+                    print("Played this action already")
+
                 # Add item to player inventory.
                 rimuru.add_inventory('special item')
 

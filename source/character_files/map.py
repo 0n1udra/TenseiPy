@@ -7,7 +7,10 @@ class Map:
             played_action str: String parsed from game_action function.
         """
 
-        self.played_actions.add(played_action)
+        if played_action in self.played_actions:
+            self.played_actions[played_action] += 1
+        else:
+            self.played_actions[played_action] = 1
 
     @staticmethod
     def get_location_variable(level_class=None):

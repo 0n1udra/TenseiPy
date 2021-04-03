@@ -45,7 +45,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     last_command = ''
     last_use_skill = None  # Last successfully used skill, game object.
     available_locations = []
-    played_actions = set()
     current_location = ''
     current_location_object = None  # Current location's class object.
 
@@ -79,6 +78,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.game_conditions = {}
+        self.played_actions = {}
+        self.standings = {}  # Reputation/standing of characters/factions.
         self.initialized = True
         self.set_start_state()
         self.update_info()

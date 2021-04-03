@@ -151,8 +151,30 @@ def game_cond(game_var, new_value=None):
     if game_var in rimuru.game_conditions:
         return rimuru.game_conditions[game_var]
     if game_var in rimuru.played_actions:
-        return True
+        return rimuru.played_actions[game_var]
     return False
+
+def played_action(match):
+    """
+    Checks if game action has been played.
+
+    Args:
+        match obj: Pass in game level object to check if it has been played already.
+
+    Returns:
+        bool True: Returns True if game action has been played.
+
+    Usage:
+        played_action(self)
+    """
+
+    # Extracts and parses level action name from passed in level object.
+    # E.g. Extracts "speak now" from "<class 'chapters.tensei_1.ch1_cave.<locals>.wake_up.speak_now'>"
+    match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2]
+
+    # Checks if action has been played more than once.
+    if game_cond(match_action) > 1:
+        return True
 
 def last_use_skill(skill):
     """
@@ -422,13 +444,13 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
         print(message)  # Print instantly.
 
 def siprint(message, showing_history=False):
-    """Print with indent."""
+    """sprint with indent."""
 
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
 
 def iprint(message, showing_history=False):
-    """Just sprint but with indent."""
+    """Print without textcrawl and with indent."""
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
