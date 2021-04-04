@@ -81,24 +81,24 @@ def game_action(level=None):
 
     # [correspond_game_function, [optional_parameters], ['user_input_to_match_to']
     game_actions = [
-        [rimuru.show_info, ['info', 'data', 'detail', 'details']],
-        [rimuru.show_inventory, ['inv', 'inventory', 'stomach']],
-        [rimuru.show_attributes, ['stats', 'skills', 'attrs', 'attributes']],
-        [rimuru.set_targets, ['target', 'focus']],
+        [rimuru.show_info, ['info']],
+        [rimuru.show_inventory, ['inv']],
+        [rimuru.show_attributes, ['stats']],
+        [rimuru.set_targets, ['target']],
         [rimuru.attack, [parameters], ['attack']],
         [rimuru.use_action, [parameters, user], ['use']],
-        [rimuru.craft_item, ['craft', 'make', 'create']],
+        [rimuru.craft_item, ['craft']],
         [rimuru.remove_inventory, ['remove']],
-        [rimuru.eat_targets, ['eat', 'predate', 'predation']],
-        [rimuru.use_mimic, ['mimic', 'mimicry']],
+        [rimuru.eat_targets, ['eat', 'predate']],
+        [rimuru.use_mimic, ['mimic']],
         [rimuru.show_mimics, ['mimics', 'mimicries']],
         [rimuru.get_location, ['location']],
         [rimuru.use_action, ['sense heat source', user], ['nearby', 'sense heat sources']],
-        [show_help, ['help', 'commands']],
+        [show_help, ['help']],
         [change_settings, ['settings', 'options']],
         [show_history, ['history']],
         [game_restart, ['restart']],
-        [game_exit, ['exit', 'quit', 'stop']],
+        [game_exit, ['exit']],
     ]
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
@@ -297,7 +297,7 @@ def continue_to(next_location):
     game_save()
 
     # Loads next story chapter.
-    try: next_location(rimuru)
+    try: next_location()
     except: print("    < Error Loading Next Location >")
 
 def clear_subs(action):
@@ -611,18 +611,18 @@ def show_help(arg):
     print("""    Command Required_Parameter [Optional_Parameter]
     
     Commands:
-        inv/inventory           -- Show inventory.
-        stats/skills [TARGET]   -- Show skills and resistances. attribute also works.
+        inv                     -- Show inventory.
+        stats [TARGET]          -- Show skills and resistances. attribute also works.
                                    Example: 'stats tempest serpent', 'attributes evil centipede'
-        info/data TARGET        -- Show info on skill, item or character. 
+        info TARGET             -- Show info on skill, item or character. 
                                    Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
         target TARGET(S)        -- Target mob(s), to be able to use skills/abilities/etc on them.
                                    Example: 'target tempest serpent', 'target tempest serpent, black spider'
           - target nearby       -- Target nearby mobs.
           - target reset        -- Clear targeted.
-        attack SKILL	        -- Attack targeted_mobs. 
+        attack SKILL/ITEM 	    -- Attack targeted_mobs. 
                                    Example: 'attack water blade'
-        use SKILL               -- Use a skill.
+        use SKILL/ITEM          -- Use a skill.
                                    Example: 'use sense heat source'
         craft ITEM [amount]     -- Craft items if have necessary ingredients. 
                                    Example: 'craft full potion', 'craft full potion 10'
@@ -634,13 +634,14 @@ def show_help(arg):
         eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
         nearby                  -- Once acquired [Sense Heat Source] skill, you can use nearby instead of typing 'use sense heat source' every time.
         help                    -- Show this help page.
+          - help rank           -- Show game level, rank, risk chart.
         settings                -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
-        showrank                -- Show mob level chart and corresponding ranking.
+                                Example: 'settings hud off', 'options hud hints on'
         exit                    -- Exits after save.
 
     Game Dialogue:
-        ~Message~               -- Telepathy, thought communication.
-        *Message*               -- Story context.
+        ~ Message ~             -- Telepathy, thought communication.
+        * Message *             -- Story context.
         < Message >             -- Game info, acquisition, game help, etc.
         << Message >>           -- Great Sage (Raphael, Ciel).
         <<< Message >>>         -- Voice of the World.""")

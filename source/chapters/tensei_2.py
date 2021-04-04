@@ -11,42 +11,42 @@ def ch2_goblin_encounter():
             mobs_reset()
             mobs_add(['10* goblin'])
             siprint("Where am I going?")
-            siprint("*While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up*")
-            sprint("You strong one.")
-            siprint("Who's that? Wait... They look like goblins! Should I talk to them?")
+            siprint("\n* While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up *")
+            sprint("\nYou strong one.")
+            siprint("\nWho's that? Wait... They look like goblins! Should I talk to them?")
             game_action(self)
 
         class _talk_to_goblins:
-            __subs = ['speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
+            __subs = ['talk', 'say hi', 'speak to goblins', 'interact with goblin', 'say hi to goblin', 'meet goblins', 'talk to them']
             def __init__(self):
-                siprint("How should I introduce myself?")
+                siprint("How should I introduce myself? Should I be friendly or....?")
                 game_action(self)
 
             class _friendly:
-                __subs = []
+                __subs = subs.be_nice_subs + ['my name is']
                 def __init__(self):
                     sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
                     sprint("...")
                     sprint("Strong one we have already recognized your strength. Please, lower your voice!")
-                    sprint("oh, ok. I was just exploring around here. Is there something you need?")
+                    sprint("Oh, ok. I was just exploring around here. Is there something you need?")
                     sprint("No, you see, our village is near. We felt a strong demonic aura and decided to immediately investigate.")
-                    siprint("Demonic aura? what? Great Sage can you change my viewpoint, I want to see this demonic aura.")
+                    siprint("\nDemonic aura? what? Great Sage can you change my viewpoint, I want to see this demonic aura.")
                     siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
-                    siprint("After some more clarification, they invited to their village. It looks like they need some help. Should I go?")
+                    siprint("After some more clarification, they invited to their village. It looks like they need some help.")
                     goto_goblin_village()
 
             class _subjugate_goblins:
                 __subs = ['subjugate', 'subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
                 def __init__(self):
-                    sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
+                    sprint("\nAlright you weaklings, listen here you little shits, I'll only say this once!")
                     sprint("You have two options. You can worship me or you can die.")
                     dots(2, 10)
                     if get_random(1, 10, 1):  # 1/10 chance of goblins revolting
-                        sprint("NEVER! We will never surrender to you!")
+                        sprint("\nNEVER! We will never surrender to you!")
                         sprint("ATTACK!!!!!!!!")
                         game_over()
 
-                    sprint("Ok, good choice. So, you guys have a base, village, anything?")
+                    sprint("\nOk, good choice. So, you guys have a base, village, anything?")
                     sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
                     sprint("Of course you would. Lets start moving.")
                     goto_goblin_village()
@@ -89,12 +89,13 @@ def ch2_goblin_encounter():
 
         def __init__(self):
             mobs_add(['goblin: Goblin Chief'])
-            siprint("Wow, this place looks like a dump... ")
-            sprint("I am the village elder. I'm sorry we don't have much to serve you.")
+            siprint("\nWow, this place looks like a dump... ")
+            sprint("\nI am the village elder. I'm sorry we don't have much to serve you.")
             sprint("So I'm guessing you didn't invite me here just for pleasantries.")
             sprint("We've heard about your hidden strength. Would you please listen to our request.")
             sprint("About a month ago our Dragon guardian disappeared, and nearby monsters have started expand there territory.")
             sprint("There is a pack of 100 Dire Wolves that have been attacking us recently, and we are barely fending them off.")
+            siprint("\nHmmmmm... Should I help them? What about compensation?")
             game_action(self)
 
         class compensation:

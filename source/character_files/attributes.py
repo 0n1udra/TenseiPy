@@ -55,7 +55,7 @@ class Attributes:
 
         if self.current_mimic:
             print("\n----- Mimicked Attributes -----")
-            print(f"Mimicking: [{self.current_mimic.name}]")  # If currently using Mimic.
+            print(f"Mimicking: [{self.current_mimic.name}]\n")  # If currently using Mimic.
             for i in self.current_mimic.attributes_generator(output=True):print(i)
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):

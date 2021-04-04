@@ -75,7 +75,7 @@ class Rimuru_Tempest(Character):
        #     self.add_attribute(attribute)
 
         if show_msg:
-            print(f"\n    << Information, analysis on [{mob.name}] completed. >>")
+            print(f"    << Information, analysis on [{mob.name}] completed. >>")
             print("    << Notice, new skills and mimicry available. >>\n")
 
 
