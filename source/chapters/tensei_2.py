@@ -23,7 +23,7 @@ def ch2_goblin_encounter():
                 game_action(self)
 
             class _friendly:
-                __subs = subs.be_nice_subs + ['my name is']
+                __subs = subs.be_nice_subs + ['my name is rimuru', 'say hi', 'talk', 'chat', 'talk to goblins']
                 def __init__(self):
                     sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
                     sprint("...")
@@ -99,7 +99,7 @@ def ch2_goblin_encounter():
             game_action(self)
 
         class compensation:
-            __subs = ['what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
+            __subs = ['ask for compensation', 'ask for reward', 'what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
             def __init__(self):
                 sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
                 sprint("That will have to do. For now.")
@@ -119,7 +119,7 @@ def ch2_goblin_encounter():
                     game_action(self)
 
         class _assist_goblins:
-            __subs = ['assist the goblins', 'help goblins', 'help the goblins', 'help them', 'assist them']
+            __subs = ['assist', 'lend help', 'assist them', 'assist the goblins', 'help goblins', 'help the goblins', 'help them', 'assist them']
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("Thank you so much, we will be forever loyal to you.")
@@ -134,7 +134,7 @@ def ch2_goblin_encounter():
                     wolf_attack()
 
             class _heal_wounded:
-                __subs = ['any wounded', 'any hurt', 'any goblins wounded', 'show me your wounded', 'who is hurt', 'any victims', 'show me your injured', 'injured goblins', 'wounded goblins', 'hurt goblins']
+                __subs = ['heal wounded', 'heal wounded victims', 'give potions', 'gift full potions', 'gift potions', 'give healing potions', 'see wounded', 'see wounded victims', 'go to wounded victims', 'any wounded', 'any hurt', 'any goblins wounded', 'show me your wounded', 'who is hurt', 'any victims', 'show me your injured', 'injured goblins', 'wounded goblins', 'hurt goblins']
                 def __init__(self):
                     mobs_add(['9*goblin'])
                     sprint("Show me your wounded")

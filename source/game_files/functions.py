@@ -31,7 +31,7 @@ def game_hud(actions):
 
     if rimuru.targeted_mobs:
         # Adds X status to corresponding targets that are dead.
-        targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'X-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
+        targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'Dead-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'Target: {targets}')
 
     if rimuru.show_hud:
@@ -454,7 +454,7 @@ def iprint(message, showing_history=False):
     if message[0] == '\n': print()
     sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
 
-def dots(length=5, times=3, indent=False):
+def dots(length=5, times=1, indent=False):
     """
     Loading dot animation.
 

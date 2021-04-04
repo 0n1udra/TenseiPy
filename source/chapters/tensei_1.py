@@ -79,10 +79,10 @@ def ch1_cave():
                 def __init__(self):
                     show_art('slime')
                     print(game_art.rimuru_art.died)
-                    idots(3, 8)
+                    idots()
                     siprint("Dissolving and absorbing, this streamlined elastic feeling body....")
                     siprint("It looks like I have been stabbed, died and reincarnated as a slime!")
-                    idots(10, 3)
+                    idots(10, 2)
                     siprint("\nIt's been a long time since I have accepted myself a slime. I am getting use to this body.")
                     siprint("No need for sleep or food. I don't feel too hot nor cold. Even after taking some damage I can heal myself..\n")
                     siprint("All I can do is fumble around in the dark and eat what I find... I'M SO BORED!")
@@ -150,10 +150,10 @@ def ch1_cave():
         class stay_in_water:
             __subs = subs.wait + ['stay in water', 'wait in water']
             def __init__(self):
-                idots(5)
+                idots()
 
         class eat_water:
-            __subs = ['intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up', 'eat more water', 'predate more water', 'suck up more water']
+            __subs = ['suck it up', 'intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up', 'eat more water', 'predate more water', 'suck up more water']
             def __init__(self):
                 rimuru.add_inventory('water')
                 siprint("\nAlright, now lets try this out.")
@@ -303,7 +303,7 @@ def ch1_cave():
                 game_action(self)
 
             class _look_at_seal(cave_actions):
-                __subs = ['analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison', 'look', 'inspect', 'inspect seal', 'inspect prison', 'inspect prison seal', 'analyse prison seal']
+                __subs = ['take a look', 'analyze seal', 'analyze', 'scan', 'scan seal', 'scan prison', 'look at prison', 'analyse seal', 'analyse prison', 'check seal', 'check prison', 'scan seal', 'scan prison', 'check out seal', 'check out prison', 'look', 'inspect', 'inspect seal', 'inspect prison', 'inspect prison seal', 'analyse prison seal']
                 def __init__(self):
                     global veldora
                     veldora = Veldora_Tempest()
@@ -316,13 +316,13 @@ def ch1_cave():
                     sprint("\nIf you give me the information [Great Sage] can analyze your side as well")
                     sprint("\nWon't that take a long time? Didn't you say something about going out to find other reincarnates?")
                     sprint("\nI have a suggestion!")
-                    dots(10, 2)
+                    dots(10)
                     sprint("\nHow about you get in my belly!")
                     sprint("\nhahaha")
                     sprint("ku hahaha")
                     sprint("HAHAHAHAHAHAHA")
                     siprint("\nUmmmm, did he just use the 3 stage laugh?!?")
-                    dots(5, 2)
+                    dots(5)
                     sprint("\nMy life is in your hands.")
                     sprint("\nWow how trusting of you.")
                     sprint("\nWell... The alternative is to stay in this cave for the rest of my lonely time. Which is about another 100 years.")
@@ -345,7 +345,7 @@ def ch1_cave():
                     sprint(f"\nHow about {rimuru.name}!")
                     rimuru.update_standing('veldora', 1)
 
-                    sprint("I am ready now, until we meet again small one!")
+                    sprint("\nI am ready now, until we meet again small one!")
                     siprint("\n<< Use Unique skill [Predator]? >>")
                     game_action(self)
 
@@ -487,11 +487,12 @@ def ch1_cave():
             siprint("\nHow can I understand them?")
             siprint("<< Answer, [Magic Perception] converts sound waves to comprehensible sentences which I interpret for you. >>")
             siprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
-            sprint("I shouldn't show, they'll probably get scared and attack me")
+            sprint("\nI shouldn't show, they'll probably get scared and attack me")
             game_action(self)
 
         class _wait:
             subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
+
             def __init__(self):
                 if get_random(1, 20, 1):
                     siprint("I sense a monster nearby! There! A slime!")
@@ -499,7 +500,7 @@ def ch1_cave():
                     siprint("\n* And before another word could be uttered by the little slime, he was swiftly smushed. *")
                     game_over()
 
-                siprint("Phew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
+                siprint("\nPhew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
                 at_cave_exit._hfunc_leave_cave()
 
         class _say_hi:

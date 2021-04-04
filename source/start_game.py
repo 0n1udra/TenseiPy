@@ -17,7 +17,8 @@ def help_page():
     -hud    --  Hide game HUD.
     -hard   --  Enable Hardcore mode.
     -hints  --  Hide game hints.
-    -slime  --  Enables: hud, hints | Disables: textcrawl, art""")
+    -slime  --  Enables: hud, hints | Disables: textcrawl, art
+    """)
     exit(0)
 
 
@@ -48,8 +49,8 @@ if __name__ == '__main__':
     # Only asks player if variables are not already set.
     if rimuru.textcrawl is None:
         rimuru.textcrawl = ask_on_off('textcrawl', 'Enable textcrawl effect (Recommended for slower reading)')
-    if rimuru.show_hints is None:
-        rimuru.show_hints = ask_on_off('show_hints', "Show game hints? (Recommended for first time)")
+    if rimuru.hardcore is None:
+        rimuru.hardcore = ask_on_off('hardcore', "Play in hardcore mode? (NOT recommended for first timers)")
 
     show_start_banner()
     ch0()  # Can be used for debugging.

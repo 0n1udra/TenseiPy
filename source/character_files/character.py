@@ -54,7 +54,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     save_path = ''
     valid_save = None  # If you died in-game, the current save will be unusable.
     textcrawl = None  # Slow text crawl effect, letter by letter.
-    show_hud = None  # Show available actions player can take.
+    show_hud = True  # Show available actions player can take.
     show_art = True  # Show ASCII art. Disable to save room on screen.
     show_hints = None  # If hardcore is True, this boolean will be ignored.
     hardcore = None  # Hides targets, mimicking, and actions.
