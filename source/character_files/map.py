@@ -1,4 +1,12 @@
 class Map:
+    def show_nearby(self, *args, valid_usage=False):
+        # Either you have to own [Magic Perception] or change the valid_usage boolean to use this funtion.
+        if not valid_usage and not self.check_acquired('magic perception'): return
+
+        print("    ----- Nearby -----")
+        for mob in self.active_mobs:
+            print(f"    {mob[1]}x {mob[0].name} {'(Dead)' if mob[0].status else ''}")
+
     def add_played_action(self,  played_action):
         """
         Able to check what actions player has taken so far by adding action's class name to tuple.
