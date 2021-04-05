@@ -56,7 +56,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     textcrawl = None  # Slow text crawl effect, letter by letter.
     show_hud = True  # Show available actions player can take.
     show_art = True  # Show ASCII art. Disable to save room on screen.
-    show_hints = None  # If hardcore is True, this boolean will be ignored.
+    show_hints = True  # If hardcore is True, this boolean will be ignored.
     hardcore = None  # Hides targets, mimicking, and actions.
     fast_mode = None
     line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
@@ -118,7 +118,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         # Gets character's acquired attributes and items in inventory.
         if 'character' in self.game_object_type:
-            item_pool = [*self.inventory_generator(), *self.attributes_generator()]
+            item_pool += [*self.inventory_generator(), *self.attributes_generator()]
 
         # Adds all attributes/inventory items to pool from all acquired mimicries.
         if self.check_if_player():
@@ -166,7 +166,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .check_acquired('resist poison')
         """
 
-        item = self.get_object(check_object)
+        item = self.get_object(check_object, mimic_pool=True)
         if item and item.quantity >= amount:
             return item
         return False
