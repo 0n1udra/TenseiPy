@@ -157,7 +157,8 @@ class Inventory:
             for ingredient, amount in item.recipe.items():
                 recipe += F"        {amount}x {ingredient}, "
             # [:-2] will cuts off last comma and space.
-            print(f"\n{recipe[:-2]}\n    Inputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
+            print(f"{recipe[:-2]}")
+            print("\nInputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
 
             # Asks for how much to make. note that some items are crafted in batches.
             try:

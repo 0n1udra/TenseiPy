@@ -17,7 +17,7 @@ def help_page():
     -hud    --  Hide game HUD.
     -hard   --  Enable Hardcore mode.
     -hints  --  Hide game hints.
-    -slime  --  Enables: hud, hints | Disables: textcrawl, art
+    -slime  --  Enables: hud, hints | Disables: textcrawl, art, hardcore
     """)
     exit(0)
 
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     if '-hints' in sys.argv:
         rimuru.show_hints = False
     if '-slime' in sys.argv:  # For debug.
-        rimuru.textcrawl = rimuru.show_art = False
+        rimuru.textcrawl = rimuru.show_art = rimuru.hardcore = False
         rimuru.show_hud = rimuru.show_hints = True
 
     # Only asks player if variables are not already set.
