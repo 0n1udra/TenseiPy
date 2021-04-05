@@ -170,7 +170,11 @@ class Attributes:
 
         if character is None: character = self
 
-        if skill_object := character.get_object(skill):
+        # If using mimicry skill, tries to get skill object from mimicked mob's attributes.
+        try: skill_object = self.current_mimic.get_object(skill)
+        except: skill_object = character.get_object(skill)
+
+        if skill_object:
             if return_data := skill_object.use_action(character):
                 character.last_use_skill = skill_object
                 return return_data
