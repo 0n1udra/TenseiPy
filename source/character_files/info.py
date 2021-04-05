@@ -36,7 +36,7 @@ class Info:
         self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] {"(" + self.status + ")" if self.status else ""}\n'
 
         # Only show fields that have set data.
-        info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Divine Protections': self.protections,
+        info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Blessing': self.protections,
                      'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
                      'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance}
 
