@@ -2,7 +2,7 @@ import pathlib, sys, os
 from game_files.functions import show_start_banner, update_rimuru, game_load, get_any, siprint, ask_on_off
 from chapters.tensei_0 import ch0
 
-__version__ = "5.0 Alpha"
+__version__ = "5.1 Alpha"
 __author__ = "D Thomas"
 __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
