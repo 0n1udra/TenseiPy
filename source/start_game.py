@@ -38,20 +38,20 @@ if __name__ == '__main__':
     if get_any(sys.argv, ['-a', '-art', '-hideart']):
         rimuru.show_art = False
     if get_any(sys.argv, ['-hud', '-hidehud']):
-        rimuru.show_hud = True
+        rimuru.show_actions = True
     if '-hard' in sys.argv:
         rimuru.hardcore = True
     if '-hints' in sys.argv:
         rimuru.show_hints = False
     if '-slime' in sys.argv:  # For debug.
         rimuru.textcrawl = rimuru.show_art = rimuru.hardcore = False
-        rimuru.show_hud = rimuru.show_hints = True
+        rimuru.show_actions = rimuru.show_hints = True
 
     # Only asks player if variables are not already set.
     if rimuru.textcrawl is None:
-        rimuru.textcrawl = ask_on_off('textcrawl', 'Enable textcrawl effect (Recommended for slower reading)')
-    if rimuru.hardcore is None:
-        rimuru.hardcore = ask_on_off('hardcore', "Play in hardcore mode? (NOT recommended for first timers)")
+        rimuru.textcrawl = ask_on_off('textcrawl', 'Enable textcrawl effect (Recommended for easier reading)')
+    if rimuru.show_actions is None:
+        rimuru.show_actions = ask_on_off('Show Actions', "Show playable actions? (Recommended for first timers)")
 
     show_start_banner()
     ch0()  # Can be used for debugging.

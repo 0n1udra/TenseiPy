@@ -22,9 +22,9 @@ def update_rimuru(rimuru_object):
 def game_hud(actions):
     """Show game HUD, includes current mimic, mobs targeted, and available actions."""
 
-    if rimuru.show_hud is False or rimuru.hardcore is True: return
+    if rimuru.show_actions is False or rimuru.hardcore is True: return
 
-    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_hud: print()  # Adds extra space when needed.
+    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_actions: print()  # Adds extra space when needed.
 
     if rimuru.current_mimic:
         print(f"Mimic: [{rimuru.current_mimic.name}]")  # Only show if currently using mimic.
@@ -34,7 +34,7 @@ def game_hud(actions):
         targets = ', '.join([(f'x{mob[1]}({mob[0].name})' if mob[0].is_alive else f'Dead-x{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'Target: {targets}')
 
-    if rimuru.show_hud:
+    if rimuru.show_actions:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
         print(f"Actions: {actions_for_hud}", end='')
@@ -286,6 +286,19 @@ def get_level_mob(mob):
     for i in rimuru.active_mobs:
         if mob in i[0].name.lower(): return i[0]
 
+def clear_subs(action):
+    """
+    Clears __subs list of passed in class.
+    Adds 'ACTIONBLOCK' string to action's __subs list.
+    game_action function will see that 'ACTIONBLOCK' string is in the __subs list and will not allow player to do action.
+
+    Args:
+        level: Playable action class object from chapter file.
+    """
+
+    for i in dir(action):
+        if '__subs' in i: eval(f"action.{i}.append('ACTIONBLOCKED')")
+
 def continue_to(next_location):
     """
     Saves game and continues to next location.
@@ -301,32 +314,19 @@ def continue_to(next_location):
     try: next_location()
     except: print("    < Error Loading Next Location >")
 
-def clear_subs(action):
-    """
-    Clears __subs list of passed in class.
-    Adds 'ACTIONBLOCK' string to action's __subs list.
-    game_action function will see that 'ACTIONBLOCK' string is in the __subs list and will not allow player to do action.
-
-    Args:
-        level: Playable action class object from chapter file.
-    """
-
-    for i in dir(action):
-        if '__subs' in i: eval(f"action.{i}.append('ACTIONBLOCKED')")
-
 
 #                    ========== Game Save/Settings ==========
-def game_restart(*args):
-    """Restart game."""
-
-    print("    < Restarting Game... >")
-    os.execl(sys.executable, sys.executable, *sys.argv)
-
 def game_exit(*args):
     """Saves game using pickle, then exits."""
 
     game_save()
     exit(0)
+
+def game_restart(*args):
+    """Restart game."""
+
+    print("    < Restarting Game... >")
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 def game_save(level=None, show_msg=True):
     """
@@ -573,7 +573,7 @@ def change_settings(user_input):
         rimuru.hardcore = new_value
     # strict_match is false so user can change multiple game settings in one go.
     if get_any(settings_input, ['hud', 'interface'], strict_match=False):
-        rimuru.show_hud = new_value
+        rimuru.show_actions = new_value
     if get_any(settings_input, ['art', 'ascii'], strict_match=False):
         rimuru.show_art = new_value
     if get_any(settings_input, ['hints', 'clues'], strict_match=False):
@@ -588,7 +588,8 @@ def show_start_banner():
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
-    - Basic commands: stats, inv, info, /settings, /exit and /help for more.
+    - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
+    - Enabling hardcore mode will hide playable actions and game hints, enable with '/settings hardcore on'.
     - Fullscreen recommended.""")
 
     if rimuru.valid_save is True:
@@ -599,7 +600,7 @@ def show_settings(*args):
 
     print(f"""    Game Settings:
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
-        {on_off(rimuru.show_hud)}\thud/interface <on/off>\t-- Show available actions player can take.
+        {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
         {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
         {on_off(rimuru.show_hints)}\thints/clues <on/off>\t\t-- Show game hints, highly recommended for first timers.
         {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.

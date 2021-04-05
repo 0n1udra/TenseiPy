@@ -9,6 +9,7 @@ def ch2_goblin_encounter():
 
         def __init__(self):
             mobs_reset()
+            siprint("< Hint: The game only starts at the last save point, so make sure you know when the game saves. >")
             mobs_add(['10* goblin'])
             siprint("Where am I going?")
             siprint("\n* While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up *")
