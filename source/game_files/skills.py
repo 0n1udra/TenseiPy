@@ -28,19 +28,41 @@ class Skill:
         return self.name.lower()
 
     def meet_requirements(self, user):
+        """
+        Checks if user meets prerequisite requirements to use skill.
+
+        Args:
+            user: Character object that is using skill.
+
+        Returns:
+            bool: If user meets requirements or not.
+        """
+
         if self.use_requirements:
             # Check if user meets requirement or own prerequisites before using skill.
             for k, v in self.use_requirements.items():
                 if not user.check_acquired(k, v):
                     print(f"    < Skill Requires: {v}x {k} >")
                     return False
+        return True
 
     def expend_requirements(self, user):
-        # If skill need specific requirements to be used.
-        self.meet_requirements(user)
+        """
+        Expends (uses up) items/etc to activate skill.
+
+        Args:
+            user: Character object that is using skill.
+
+        Returns:
+            bool: If successfully expended requirements.
+        """
+
+        if not self.meet_requirements(user): return False
+
         # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
         for k, v in self.use_requirements.items():
             user.remove_inventory(k, v)
+        return True
 
     def use_action(self, user, *args):
         """

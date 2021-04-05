@@ -86,7 +86,7 @@ class Info:
 
         self.protections.append(divine_protection)
         self.update_info()
-        print(f'    < [{self.name}] Acquired Protection: [{divine_protection}] >')
+        print(f'    < [{self.name}] Acquired Blessing: [{divine_protection}] >')
 
     def update_standing(self, match, new_value=1):
         """

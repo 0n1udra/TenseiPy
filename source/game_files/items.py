@@ -29,35 +29,67 @@ class Item:
         Returns item description variable.
 
         Returns:
-            Returns Item description.
+            str: Returns Item description.
         """
 
         return self.description
+
+    def meet_requirements(self, user):
+        """
+        Checks if user meets prerequisite requirements to use item.
+
+        Args:
+            user: Character object that is using item.
+
+        Returns:
+            bool: If user meets requirements or not.
+        """
+
+        if self.use_requirements:
+            # Check if user meets requirement or own prerequisites before using skill.
+            for k, v in self.use_requirements.items():
+                if not user.check_acquired(k, v):
+                    print(f"    < Usage Requires: {v}x {k} >")
+                    return False
+        return True
+
+    def expend_requirements(self, user):
+        """
+        Expends (uses up) items/etc to activate item.
+
+        Args:
+            user: Character object that is using item.
+
+        Returns:
+            bool: If successfully expended requirements.
+        """
+
+        if not self.meet_requirements(user): return False
+
+        for k, v in self.use_requirements.items():
+            user.remove_inventory(k, v)
+        return True
+
+    def consume_item(self, user, amount=1):
+
+        if self.item_type == 'Consumable':
+            user.remove_inventory(self, amount)
+        return True
 
     def use_action(self, user, *args):
         """
         Use Item, by default it'll just return True to signal player has used the item.
 
         Args:
-            user: Game character object of skill activator.
+            user: Game character object of item user.
 
+        Returns:
+            bool: By default will return True to signal usage or consumption, if function not overwritten.
         """
 
-        if self.item_type == 'Consumable':
-            user.remove_inventory(self, 1)
-
-        # If item need specific prerequisites to be used.
-        if self.use_requirements:
-            # Check if user meets requirement or own prerequisites before using item.
-            for k, v in self.use_requirements.items():
-                if not user.check_acquired(k, v):
-                    print(f"    < Usage Requires: {v}x {k} >")
-                    return False
-
-            # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
-            for k, v in self.use_requirements.items():
-                user.remove_inventory(k, v)
-
+        if not user: user = self
+        self.expend_requirements(user)
+        self.consume_item(user)
         return True
 
     def update_info(self):

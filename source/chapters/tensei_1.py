@@ -356,12 +356,12 @@ def ch1_cave():
                         sprint("Hey what are you doing there? Focus on me... ME!")
 
                 class _eat_veldora:
-                    __subs = subs.all_yes + ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon']
+                    __subs = subs.all_yes + ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon', 'predate the dragon', 'swallow dragon', 'swallow veldora']
                     def __init__(self):
                         global veldora
                         rimuru.add_inventory(veldora, show_analysis_msg=False)
-                        siprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
                         rimuru.update_standing('veldora')
+                        siprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
                         game_action(self)
 
                     class _start_analysis:

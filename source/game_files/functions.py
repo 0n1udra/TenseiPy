@@ -94,12 +94,12 @@ def game_action(level=None):
         [rimuru.show_mimics, ['mimics', 'mimicries']],
         [rimuru.show_nearby, ['nearby']],
         [rimuru.get_location, ['location']],
-        [show_help, ['help']],
-        [change_settings, ['settings', 'options']],
-        [show_history, ['history']],
-        [game_restart, ['restart']],
-        [game_reset, ['reset']],
-        [game_exit, ['exit']],
+        [show_help, ['/help']],
+        [change_settings, ['/settings', '/options']],
+        [show_history, ['/history']],
+        [game_restart, ['/restart']],
+        [game_reset, ['/reset']],
+        [game_exit, ['/exit']],
     ]
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
@@ -257,7 +257,7 @@ def mobs_cleared():
         if mobs_cleared():
 
     Returns:
-        Bool: If all mobs in active_mobs list are dead.
+        bool: If all mobs in active_mobs list are dead.
     """
 
     # If just one mob's is_alive boolean var is True this function will return False.
@@ -358,7 +358,7 @@ def game_load(path):
         path: Path of game save.
 
     Returns:
-        Loaded game save object.
+        obj: Loaded game save object.
     """
 
     global rimuru
@@ -398,8 +398,9 @@ def game_over():
 
 def game_reset(*args):
     """Deletes game.save file and restarts game."""
+
     try:
-        os.remove('game.save')
+        os.remove(rimuru.source_folder_path + '/game.save')
     except: pass
     game_restart()
 
@@ -535,20 +536,6 @@ def show_history(arg):
         else:
             print(line[0])
 
-def show_start_banner():
-    """Show game title, tips, and player stats/inv."""
-
-    show_art('great sage')
-    print(f"""
-    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
-    {game_art.rimuru_art.banner}
-    - Basic commands: stats, inv, info, settings, and help for more.
-    - Fullscreen recommended.
-    """)
-
-    if rimuru.valid_save is True:
-        print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
-
 def change_settings(user_input):
     """
     Show or change game settings.
@@ -594,6 +581,18 @@ def change_settings(user_input):
 
     show_settings()
 
+def show_start_banner():
+    """Show game title, tips, and player stats/inv."""
+
+    show_art('great sage')
+    print(f"""
+    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
+    {game_art.rimuru_art.banner}
+    - Basic commands: stats, inv, info, /settings, /exit and /help for more.
+    - Fullscreen recommended.""")
+
+    if rimuru.valid_save is True:
+        print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
 
 def show_settings(*args):
     """Shows game settings and there current on/off state."""
@@ -641,11 +640,12 @@ def show_help(arg):
           - mimic reset         -- Resets mimic (Back to slime).
         eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
         nearby                  -- Show's neearby mobs if acquired [Magic Perception] skill.
-        help                    -- Show this help page.
-          - help rank           -- Show game level, rank, risk chart.
-        settings                -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
-                                Example: 'settings hud off', 'options hud hints on'
-        exit                    -- Exits after save.
+        /help                   -- Show this help page.
+          - /help rank          -- Show game level, rank, risk chart.
+        /settings               -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
+                                   Example: 'settings hud off', 'options hud hints on'
+        /reset                  -- Deletes player save and restarts game.
+        /exit                   -- Exits after save.
 
     Game Dialogue:
         ~ Message ~             -- Telepathy, thought communication.

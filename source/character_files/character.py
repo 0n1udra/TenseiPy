@@ -60,6 +60,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     hardcore = None  # Hides targets, mimicking, and actions.
     fast_mode = None
     line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
+    source_folder_path = ''
 
     def __init__(self, name='', lname=''):
         if name or lname:
@@ -160,7 +161,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             amount int(1): Check quaintly of item, only works for inventory right now.
 
         Returns:
-            Boolean: If specified character has attribute or object.
+            bool: If specified character has attribute or object.
 
         Usage:
             .check_acquired('resist poison')
