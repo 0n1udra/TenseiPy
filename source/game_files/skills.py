@@ -27,6 +27,21 @@ class Skill:
     def __str__(self):
         return self.name.lower()
 
+    def meet_requirements(self, user):
+        if self.use_requirements:
+            # Check if user meets requirement or own prerequisites before using skill.
+            for k, v in self.use_requirements.items():
+                if not user.check_acquired(k, v):
+                    print(f"    < Skill Requires: {v}x {k} >")
+                    return False
+
+    def expend_requirements(self, user):
+        # If skill need specific requirements to be used.
+        self.meet_requirements(user)
+        # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
+        for k, v in self.use_requirements.items():
+            user.remove_inventory(k, v)
+
     def use_action(self, user, *args):
         """
         Use skill, by default it'll just return True to signal player has used the skill.
@@ -38,18 +53,7 @@ class Skill:
             bool: By default will return True to signal usage, if function not overwritten.
         """
 
-        # If skill need specific requirements to be used.
-        if self.use_requirements:
-            # Check if user meets requirement or own prerequisites before using skill.
-            for k, v in self.use_requirements.items():
-                if not user.check_acquired(k, v):
-                    print(f"    < Skill Requires: {v}x {k} >")
-                    return False
-
-            # TODO Make it so skill can use up items or just need to own them but don't use them up (remove them).
-            for k, v in self.use_requirements.items():
-                user.remove_inventory(k, v)
-
+        self.expend_requirements(user)
         return True
 
     def activate_skill(self, state='Active'):
@@ -281,10 +285,7 @@ class Sense_Heat_Source(Extra, Skill):
 
     def use_action(self, user=None, *args):
         if not user: return False
-        print("    ----- Nearby Heat Sources -----")
-        for mob in user.active_mobs:
-            if mob[0].is_alive:
-                print(f'    {mob[1]}x {mob[0].name}')
+        user.show_nearby(valid_usage=True)
         return True
 
 
