@@ -3,5 +3,3 @@ from game_maps.game_location import *
 
 def ch0():
     pass
-
-

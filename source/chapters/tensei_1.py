@@ -163,7 +163,7 @@ def ch1_cave():
             def __init__(self):
                 rimuru.add_attribute('Hydraulic Propulsion')
                 rimuru.use_action('hydraulic propulsion')
-                siprint("Let's see if I can get out now.")
+                siprint("\nLet's see if I can get out now.")
                 siprint("\nOuch! I went flying and hit something, but at least it seems like I'm back on land.")
                 siprint("I also got a new skill too, wonder what else I can do with it.")
                 veldora_encounter()
@@ -205,7 +205,7 @@ def ch1_cave():
                 sprint("...")
                 sprint("~ Wait where are you going? ~")
                 sprint("\nYou seem pretty suspicious...")
-                sprint("~ Nooooo.... I'm not suspicious at all.l.l.. ~")
+                sprint("\n~ Nooooo.... I'm not suspicious at all.l.l.. ~")
                 tempest_serpent_encounter()
 
         class shut_it:
@@ -252,7 +252,7 @@ def ch1_cave():
                         show_art('cave veldora')
                         sprint("~ I am one of the four True Dragons of this world. ~")
                         sprint("\nHOLY SHIT, you're a real dragon!")
-                        sprint("~ Didn't I tell you not to get scared. ~")
+                        sprint("\n~ Didn't I tell you not to get scared. ~")
                         friend_veldora()
 
                 class _no:
@@ -277,7 +277,7 @@ def ch1_cave():
 
     class friend_veldora(cave_actions):
         def __init__(self):
-            sprint("Hmmmm, now what?")
+            sprint("\nHmmmm, now what?")
             siprint("Should I try make a friend? Or just leave, there's something suspicious about him...")
             game_action(self)
 
@@ -413,8 +413,10 @@ def ch1_cave():
             siprint("\nWhat is that? it looks like a big snake!")
             siprint("<< Answer, analysis indicating [Tempest Serpent]. >>")
             siprint("Still, it's not as scary as Veldora. I should be able to handle it.")
-            siprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...")
-            siprint("\n< Hint: Try 'target tempest serpent'. Then try 'attack water blade' or 'attack water bullet'. >")
+            siprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
+            rimuru.add_attribute('water blade')
+            siprint("\nHey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
+            siprint("\n< Hint: First target with 'target tempest serpent'. Then attack with 'attack water blade'. >")
             game_action(self)
 
         class sneak_away:
@@ -422,54 +424,32 @@ def ch1_cave():
             def __init__(self):
                 siprint("Crap! It noticed me, no sneaking out now!")
 
-        class _hfunc_predate:
-            __subs = ['eat']
-            def __init__(self):
-                if rimuru.check_acquired('sense heat source'):
-                    siprint("< HINT: Try [Sense Heat Source] to detect foes using the 'use' command, or use 'nearby'. 'help' for more info. >")
-
         class _move_on:
             __subs = subs.move_on
             def __init__(self):
                 if mobs_cleared():
                     at_cave_exit()
                 else:
-                    siprint("I still sense some enemies around.")
+                    siprint("I still sense some enemies around. I should clear them out before they give me trouble.")
                     if rimuru.check_acquired('sense heat source'):
                         siprint("Oh yeah! I have that new [Sense Heat Source] skill, that might be useful.")
-                        siprint("\n< Hint: Try 'nearby' or 'use sense heat source' to locate nearby mobs. >")
-                        siprint("< Hint: Then use 'target' and 'attack' on them, also try 'help' if lost.")
-
-        class _attack_water_blade:
-            __subs = ['learn water attack', 'use quick water attack', 'attack with water', 'attack with water bullet', 'water bullet attack', 'use water bullet attack']
-            def __init__(self):
-                rimuru.add_attribute('water blade')
-                rimuru.attack('water blade')
-                siprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
-                siprint("Lets try it out!")
-                tempest_serpent_encounter.hfunc_attack()
-
-        class _attack_water_bullet:
-            __subs = ['learn water attack', 'use water attack', 'attack with water', 'attack with water blade', 'water slash attack', 'use water slash attack']
-            def __init__(self):
-                rimuru.add_attribute('water bullet')
-                rimuru.attack('water bullet')
-                siprint("Nice, it worked. After learning [Hydraulic Propulsion], I was thinking I could use water as an attack too.")
-                siprint("Now I have a way to attack.\n")
-                tempest_serpent_encounter.hfunc_attack()
+                        siprint("\n< Hint: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. 'help' for more info on commands. >")
+                        siprint("< Hint: While mimicking, use 'stats' to see your's and mimicked monster's attributes and skills. > ")
+                    if rimuru.check_acquired('magic perception'):
+                        siprint("< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")
+                    if played_action(self):  # Show extra help if _move_on action has been played more than once and mobs_cleared() returns False.
+                        siprint("< Hint: After eating (predation) [Tempest Serpent], try 'mimic tempest serpent', then 'use sense heat source' >")
+                        siprint("< Hint: Clear out the rest of the mobs you find before moving forward. >")
 
         class hfunc_attack:
+            __subs = ['attack water blade']
             def __init__(self):
                 if not mob_status('tempest serpent'):
-                    siprint("\nWow, what a powerful attack. I should probably use that only when needed.")
-                    siprint("<< Suggestion, Use Unique Skill [Predator]. >>")
+                    siprint("Wow, what a powerful attack. I should probably use that only when needed.")
+                    siprint("<< Suggestion, Use Unique Skill [Predator]? >>")
                     siprint("Oh...? What will that do?")
                     siprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
-                    siprint("\n< Hint: Try 'eat' or 'predate' to use predation. >")
-                    siprint("\nWait, are those bats over there?")
-                    siprint("<< Answer, they are commonly known as [Giant Bat]. >>")
-                    siprint("And it seems like there's some other small monsters dwelling in here aswell.")
-                    siprint("Should I clear them out before they notice me? Or try sneaking out.")
+                    siprint("\n< Hint: Try 'eat' or 'predate' on targeted mobs that are dead to use predation. >")
 
                 if mobs_cleared():
                     at_cave_exit()
@@ -561,3 +541,4 @@ def ch1_cave():
                     continue_to(ch2_goblin_encounter)
 
     wake_up()
+    #tempest_serpent_encounter()
