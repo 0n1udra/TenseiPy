@@ -13,7 +13,6 @@ class Rimuru_Tempest(Character):
                           'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
     starting_state = ['Sage', 'Predator', 'Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
 
-
     # ========== Predator Functions
     def mimic_generator(self):
         """
@@ -29,20 +28,23 @@ class Rimuru_Tempest(Character):
             for mimic_name, mimic in mimics.items():
                 yield mimic
 
-    def mimic_object(self, active=None):
+    def mimic_object(self, update_status=None):
         """
         Return mimic ability game object, and can also set active status.
 
         Args:
-            active: Sets whether mimic is being used or not.
+            update_status: Sets whether mimic is being used or not.
 
         Returns:
             mimic: Mimic game object from character.
         """
 
-        if mimic := self.check_acquired('Mimic'):
-            mimic.active = active
-            return mimic
+        try:
+            mimic_object = self.attributes['Unique Skill']['Mimic']
+            if update_status is not None:
+                mimic_object.status = update_status
+            return mimic_object
+        except: pass
 
     def show_mimics(self, *args):
         print("    ----- Mimicries -----")
@@ -50,7 +52,7 @@ class Rimuru_Tempest(Character):
             print(f'    {mob_level}:')
             for mob_name, mob in mobs.items():
                 print(f'        {mob_name}')
-        print("\n    Note: To reset mimicry use 'mimic reset'. use 'info predator' for more info on mimicry.")
+        print("\n    Note: Reset mimic with 'mimic reset'.")
 
     def add_mimic(self, mob, show_msg=True):
         """
@@ -61,6 +63,10 @@ class Rimuru_Tempest(Character):
             show_msg bool(True): Show acquired message.
         """
 
+        if type(mob) is str:
+            mob = self.get_object(mob, new=True)()
+        if not mob: return False
+
         # Basically checks if self is the rimuru object (player).
         if not self.mimic_object(): return False
 
@@ -70,14 +76,8 @@ class Rimuru_Tempest(Character):
         # Adds new mob object to usable mimicries dict.
         self.acquired_mimicries[mob.rank][mob.name] = mob
 
-        # Adds attributes from mob just analyzed.
-       # for attribute in mob.attributes_generator():
-       #     self.add_attribute(attribute)
-
         if show_msg:
-            print(f"    << Information, analysis on [{mob.name}] completed. >>")
-            print("    << Notice, new skills and mimicry available. >>\n")
-
+            print(f"    << Information, analysis on [{mob.name}] completed. New mimicry available. >>")
 
     def use_mimic(self, character):
         """
@@ -94,13 +94,13 @@ class Rimuru_Tempest(Character):
         if character == 'reset':
             self.current_mimic_species = 'Slime'
             self.current_mimic = None
-            self.mimic_object(active=False)
+            self.mimic_object(update_status='')
             print("    < Mimicry Reset >")
         else:
             if new_mimic := self.get_object(character, [*self.mimic_generator()]):
                 self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
-                self.mimic_object(active=True)
+                self.mimic_object(update_status='Active')
                 print(f'    < Now Mimicking [{new_mimic.name}] >')
 
     def check_mimic(self, match=None):
@@ -120,7 +120,6 @@ class Rimuru_Tempest(Character):
             if match.lower() in m_object.name.lower():
                 return m_object.name
         return False
-
 
     def eat_targets(self, *args):
         """
@@ -245,8 +244,13 @@ class Direwolf(Character):
     name = 'Direwolf'
     species = 'Direwolf'
     level = 5
-    appearance = 'Most of the body is yellow-ish, while the legs are black.'
-    description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
+    appearance = """They have silver-blue fur, with the exception of the Direwolf Boss' Son, 
+    who also has star mark on his forehead in a darker shade of blue, and a silver-white mane and snout.
+    """
+    description = """The wolves did not require food to survive. Their sustenance lay in the world's magicules.
+    By attacking stronger monsters or slaughtering droves of humans, they can evolve into calamity-level creatures, although none of these options was feasible for them.
+    The Forest of Jura was bountiful of magic and had no monsters strong enough to threaten the wolves.
+    However, Veldora's overwhelming magical force prevented them from entering."""
     evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
     starting_state = []
 
