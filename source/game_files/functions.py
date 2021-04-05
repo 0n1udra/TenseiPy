@@ -31,7 +31,7 @@ def game_hud(actions):
 
     if rimuru.targeted_mobs:
         # Adds X status to corresponding targets that are dead.
-        targets = ', '.join([(f'{mob[1]}({mob[0].name})' if mob[0].is_alive else f'Dead-{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
+        targets = ', '.join([(f'x{mob[1]}({mob[0].name})' if mob[0].is_alive else f'Dead-x{mob[1]}({mob[0].name})') for mob in rimuru.targeted_mobs])
         print(f'Target: {targets}')
 
     if rimuru.show_hud:
@@ -92,8 +92,8 @@ def game_action(level=None):
         [rimuru.eat_targets, ['eat', 'predate']],
         [rimuru.use_mimic, ['mimic']],
         [rimuru.show_mimics, ['mimics', 'mimicries']],
+        [rimuru.show_nearby, ['nearby']],
         [rimuru.get_location, ['location']],
-        [rimuru.use_action, ['sense heat source', user], ['nearby', 'sense heat sources']],
         [show_help, ['help']],
         [change_settings, ['settings', 'options']],
         [show_history, ['history']],
@@ -154,7 +154,7 @@ def game_cond(game_var, new_value=None):
         return rimuru.played_actions[game_var]
     return False
 
-def played_action(match):
+def played_action(match, amount=1):
     """
     Checks if game action has been played.
 
@@ -170,10 +170,10 @@ def played_action(match):
 
     # Extracts and parses level action name from passed in level object.
     # E.g. Extracts "speak now" from "<class 'chapters.tensei_1.ch1_cave.<locals>.wake_up.speak_now'>"
-    match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2]
+    match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
 
     # Checks if action has been played more than once.
-    if game_cond(match_action) > 1:
+    if game_cond(match_action) > amount:
         return True
 
 def last_use_skill(skill):
@@ -627,12 +627,12 @@ def show_help(arg):
         craft ITEM [amount]     -- Craft items if have necessary ingredients. 
                                    Example: 'craft full potion', 'craft full potion 10'
                                    Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
-        mimic TARGET            -- Mimics appearance of of eatd.
+        mimic TARGET            -- Mimics appearance and attributes of analysed mob.
                                    Example: 'mimic tempest serpent'
           - info mimic          -- Shows available mimicries.
           - mimic reset         -- Resets mimic (Back to slime).
         eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
-        nearby                  -- Once acquired [Sense Heat Source] skill, you can use nearby instead of typing 'use sense heat source' every time.
+        nearby                  -- Show's neearby mobs if acquired [Magic Perception] skill.
         help                    -- Show this help page.
           - help rank           -- Show game level, rank, risk chart.
         settings                -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
