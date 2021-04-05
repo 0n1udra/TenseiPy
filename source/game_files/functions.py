@@ -98,6 +98,7 @@ def game_action(level=None):
         [change_settings, ['settings', 'options']],
         [show_history, ['history']],
         [game_restart, ['restart']],
+        [game_reset, ['reset']],
         [game_exit, ['exit']],
     ]
 
@@ -324,7 +325,7 @@ def game_restart(*args):
 def game_exit(*args):
     """Saves game using pickle, then exits."""
 
-    #game_save()
+    game_save()
     exit(0)
 
 def game_save(level=None, show_msg=True):
@@ -394,6 +395,13 @@ def game_over():
         exit(0)
     else:
         game_restart()
+
+def game_reset(*args):
+    """Deletes game.save file and restarts game."""
+    try:
+        os.remove('game.save')
+    except: pass
+    game_restart()
 
 
 #                    ========== Game Printing/Output ==========
