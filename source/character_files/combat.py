@@ -38,7 +38,7 @@ class Combat:
                             self.targeted_mobs.append(mob)
                         else: continue
 
-    def attack(self, user_input, character=None):
+    def attack(self, user_input, user=None):
         """
         Checks if can attack, and if it was successful.
 
@@ -61,15 +61,21 @@ class Combat:
 
         attack_success = False
         skills = []
-        user = self
+        if not user: user = self
         # If using mimic, allows usage of skills/attributes from mimicked mob.
-        if self.current_mimic: user = self.current_mimic
 
         # TODO set combat to use get_random
 
         # Parse what attack(s) user wants to use.
-        for attack in user_input.split(','):
-            if attack := user.get_object(attack):
+        for current_attack in user_input.split(','):
+            attack = user.get_object(current_attack)
+            # If using mimic but player already has skill, will use player's skill instead of mimicked mob's.
+            if not attack:
+                try:
+                    attack = self.current_mimic.get_object(current_attack)
+                except: pass
+
+            if attack:
                 # Adds skill to list of attacks to use against enemies.
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
