@@ -433,7 +433,7 @@ def ch1_cave():
                     siprint("I still sense some enemies around. I should clear them out before they give me trouble.")
                     if rimuru.check_acquired('sense heat source'):
                         siprint("Oh yeah! I have that new [Sense Heat Source] skill, that might be useful.")
-                        siprint("\n< Hint: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. 'help' for more info on commands. >")
+                        siprint("\n< Hint: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. '/help' for more info on commands. >")
                         siprint("< Hint: While mimicking, use 'stats' to see your's and mimicked monster's attributes and skills. > ")
                     if rimuru.check_acquired('magic perception'):
                         siprint("< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")

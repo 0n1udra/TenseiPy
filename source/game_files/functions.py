@@ -319,7 +319,7 @@ def continue_to(next_location):
 def game_exit(*args):
     """Saves game using pickle, then exits."""
 
-    game_save()
+    #game_save()
     exit(0)
 
 def game_restart(*args):
@@ -590,6 +590,7 @@ def show_start_banner():
     {game_art.rimuru_art.banner}
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
     - Enabling hardcore mode will hide playable actions and game hints, enable with '/settings hardcore on'.
+    - Game will only save at specific points in the story, look out for '< Game Saved >' message.
     - Fullscreen recommended.""")
 
     if rimuru.valid_save is True:
