@@ -88,6 +88,12 @@ class Info:
         self.update_info()
         print(f'    < [{self.name}] Acquired Blessing: [{divine_protection}] >')
 
+    def show_standings(self):
+        print("-----Standings-----")
+        for k, v in self.standings.items():
+            print(f"{k}: {v}")
+        print()
+
     def update_standing(self, match, new_value=1):
         """
         Updates player standing/reputation.
@@ -109,12 +115,6 @@ class Info:
         # Create dictionary item if for loop found no match.
         self.standings[match] = new_value
         print(f"    < {match} Standing: {self.standings[match]} >")
-
-    def show_standings(self):
-        print("-----Standings-----")
-        for k, v in self.standings.items():
-            print(f"{k}: {v}")
-        print()
 
     def get_standing(self, match, value=1):
         """

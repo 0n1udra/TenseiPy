@@ -1,7 +1,11 @@
 -----Story Layout-----
+
+Launch:
+    :ASCII: Great Sage
+    :Start banner:
+
 ch1_cave()
     chapter_1:
-        :ASCII: Great Sage
         :Set: player's start state, acquire starting abilities and resistances.
         :Skill Acquired: Predator
         :Skill Acquired: Sage

@@ -3,19 +3,8 @@ import game_files.art as game_art
 from game_files.extra import *
 from game_files.characters import Rimuru_Tempest
 
-
-# I'm not exactly sure what actions will be taken in debug_mode, but so far it does get to the end of a chapter.
+# Initiates new Rimuru_Tempest object which will be updated with game_save if save exists.
 rimuru = Rimuru_Tempest()
-
-
-# start_game.py will load game save if user has one, if not it'll create one.
-# Then pass that into update_character which will update the rimuru variable to be used here and any other file that imports this file.
-def update_rimuru(rimuru_object):
-    """Update rimuru object to be used in rest of game files."""
-
-    global rimuru
-    rimuru = rimuru_object
-    return rimuru
 
 
 #                    ========== Level Functions ==========

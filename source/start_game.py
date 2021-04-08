@@ -1,5 +1,5 @@
 import pathlib, sys, os
-from game_files.functions import show_start_banner, update_rimuru, game_load, get_any, siprint, ask_on_off
+from game_files.functions import show_start_banner, game_load, get_any, siprint, ask_on_off
 from chapters.tensei_0 import ch0
 
 __version__ = "5.1 Alpha"
@@ -27,8 +27,8 @@ if __name__ == '__main__':
 
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/game.save'
 
-    # Loads game save and updates rimuru object in game_functions alongside debug variable, and shows start banner.
-    rimuru = update_rimuru(game_load(save_path))
+    # Loads game save and updates rimuru object from game_functions.
+    rimuru = game_load(save_path)
     rimuru.source_folder_path = str(pathlib.Path(__file__).parent.absolute())
 
     if get_any(sys.argv, ['-f', '-fast', '-fastmode']):

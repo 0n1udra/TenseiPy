@@ -10,6 +10,7 @@ def ch1_cave():
         __location = 'Sealed Cave'
 
         def __init__(self):
+            siprint("\n< Chapter 1 >\n")
             idots()
             siprint("\n<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             siprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
