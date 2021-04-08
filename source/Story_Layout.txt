@@ -1,83 +1,117 @@
 -----Story Layout-----
+Chapter()
+    main_level_actions(optional_additional_actions):
+        - Summary
+        actions: Description.
+        action: > jump_to_action Description.
+        action: ?> conditional_jump Jump to actions based on game conditions/circumstances.
+        action: ?> action / action May jump to specific action based on conditions.
+        :Game Function: Update game conditions, like Standing, Acquiring skills/items, Adding Mobs/Resetting, Update location, etc
 
-Launch:
+At Launch
     :ASCII: Great Sage
-    :Start banner:
+    :Start Banner:
 
-ch1_cave()
-    chapter_1:
-        :Set: player's start state, acquire starting abilities and resistances.
-        :Skill Acquired: Predator
-        :Skill Acquired: Sage
+ch0 - Used for debugging.
+
+ch1_cave - In the Sealed cave where Veldora is imprisoned.
+    wake_up
+        :Location: Sealed Cave
+        Set player's start state, acquire starting abilities and resistances.
+        :Skill Acquired: Predator, Sage
         :Skill Upgrade: Sage > Great Sage
-        :Show: Attributes & Inventory
-        > _tempest_serpent_encounter
 
-    _move:
-        _inspect:
-            explore()
-            puyo()
-            _eat_grass() > _learn_about_skills
+        speak - Try to talk.
+        move - Try to move limbs.
+        _inspect(cave_actions) - Inspect your body.
+            puyo
+            eat_grass - Eat Hipokte Grass.
+            eat_ore - Eat Magic Ore.
+            _explore(cave_actions) - Keep exploring.
+                :ASCII: Slime
+                _hfunc_craft_full_potion - Crafting a Full Potion.
+                _keep_exploring > in_water - Keep exploring, fall into body of water.
+                what_are_skills - Ask what are skills.
+                what_is_predator - Ask what is Predator.
+                what_is_great_sage - Ask what is Great Sage.
+                where_did_it_go - Ask where does stuff you eat go.
 
-    _learn_about_skills:
-        what_is_predator()
-            analyze_grass()
-            _create_potions() > _learn_about_skills
-        eat_grass()
-        _in_water:
-            stay_in_water:
-                stay_in_water()
-                _expel_water() > _veldora_encounter
-    _veldora_encounter:
-        _leave:
-            _help_me_see() > _respond
-            _leave() > _leave_cave
-        _hello() > _respond:
-        _shutit_baldy() > _respond:
+    in_water: Under water, try and find a way out.
+        :Location: Under water?
+        stay_in_water
+        eat_water - Predate some water to use as propulsion.
+        try_getting_out ?> veldora_encounter - Only after acquired some water, you obtain new skill then use it to escape.
+            :Skill Acquired - Hydraulic Propulsion
+            :Skill Use: Hydraulic Propulsion
+        hfunc_grab_sword - Hidden sword you can grab.
 
-    _respond:
-        Skill Acquired: Magic Perception
-        _use_magic_perception:
-            _sure() > _friend_veldora
-                :ASCII: cave_veldora
-            _run() > _friend_veldora
 
-    _friend_veldora:
-        _leave() > _leave_cave
-        _friend_dragon() > _help_with_seal
+    _veldora_encounter(cave_actions) - You hear some strange voice.
+        :Location: Sealed Cave
+        hello - Ask who is there.
+        great_sage - Ask if it was Great Sage.
+        _leave > tempest_serpent_encounter
+        shut_it - Tells voice to shut up.
+        _follow_voice - Follow mysterious voice.
+            _use_magic_perception(cave_actions) - Meet veldora, he teaches you Magic Perception.
+                :ASCII: Magic Perception
+                :Skill Acquired: Magic Perception
+                - Veldora asks if he should formally introduce himself.
+                _yes > friend_veldora:
+                    :ASCII: Cave Veldora
+                _no > friend_veldora:
+            wait
+            _leave > tempest_serpent_encounter
 
-    _help_with_seal:
-        Set new family name
-        Set player's name
-        _eat_veldora:
-            :Item Add: Veldora
-            :Show: Inventory
-            _start_analysis() > _leave_cave
-        _move_on() > _leave_cave
+    _friend_veldora(cave_actions) - Befriend strange dragon.
+        _leave > _leave_cave
+        _friend_dragon(cave_actions)
+            _look_at_seal(cave_actions) - Set family name for you and Veldora, and then set your own name.
+                _eat_grass - Veldora asks what are you doing.
+                _eat_veldora - Predate Veldora.
+                    _start_analysis > tempest_serpent_encounter - Start analysis on Veldora's seal.
+                        :Standing: Veldora +1
+                    _move_on - Do not start analysis on seal.
+                        :Standing: Veldora -2
+            _leave_veldora(cave_actions) > tempest_serpent_encounter
 
-    _leave_cave() > ch2_goblin_encounter
+    tempest_serpent_encounter - Fight mobs to progress.
+        :Mob Add: Tempest Serpent, Giant Bat, Black Spider, Evil Centipede
+        :Skill Acquired: Water Blade
+        sneak_away - Can't sneak away.
+        _move_on ?> at_cave_exit - Can only progress once all mobs have been killed.
+        hfunc_attack ?> at_cave_exit - If all mobs cleared, you move forward.
 
-ch2_goblin_encounter()
-    chapter_2:
-        eat_ore()
-        _move_on() > _tempest_serpent_encounter
+    _at_cave_exit
+        _wait - Wait for adventurers to pass before exiting cave.
+        _say_hi: > GAME_OVER - Get killed by adventurers.
+        _sneak_out() ?> GAME_OVER - If at least one adventurer survives, you die.
+        _leave_cave(cave_actions)
+            :Mob Reset:
+            _go_to_veldora ?> friend_veldora / veldora_encounter - Go back to veldora if you haven't acquired him already.
+            _leave > continue_to(ch2_goblin_encounter) Leave cave.
 
-    _tempest_serpent_encounter:
-        :Mob Add: Tempest Serpent
-        _try_escaping() > _after_serpent
-        _learn_water_bullet() > _attack_serpent
-        _learn_water_blade() > _attack_serpent
 
-    _attack_serpent:
-        eat_ore()
-        _attack()
+ch2_goblin_encounter - Meet goblins, and go to there village to assit them.
+    :Location: Near the Sealed Cave
+    :Mob Reset:
+    _talk_to_goblins
+        _friendly
+        _subjugate_goblins
+    move_on TBC
 
-    _after_serpent:
-        eat_ore()
-        _sneak_away() > _at_cave_exit()
+    goto_goblin_village
+    :Location: Goblin Village
+    compensation
+    _attack
+    _assist_goblins
+        _setup_defenses
+        _heal_wounded
 
-    _attack: > _at_cave_exit()/_after_serpent
+    wolf_attack
+        _attack
+        _give_warning
+        _do_nothing
 
-    _at_cave_exit:
-        _sneak_out() > Chapter3
-        _say_hi() > :Death:
+
+

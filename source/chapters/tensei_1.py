@@ -162,12 +162,15 @@ def ch1_cave():
         class try_getting_out:
             __subs = ['spew water', 'eject water', 'vomit water', 'try getting out', 'try to get out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out', 'use water to propel', 'propel with water', 'expel water to propel', 'expel', 'expel water', 'expel the water', 'use hydraulic propulsion']
             def __init__(self):
-                rimuru.add_attribute('Hydraulic Propulsion')
-                rimuru.use_action('hydraulic propulsion')
-                siprint("\nLet's see if I can get out now.")
-                siprint("\nOuch! I went flying and hit something, but at least it seems like I'm back on land.")
-                siprint("I also got a new skill too, wonder what else I can do with it.")
-                veldora_encounter()
+                if rimuru.check_acquired('water'):
+                    rimuru.add_attribute('Hydraulic Propulsion')
+                    rimuru.use_action('hydraulic propulsion')
+                    siprint("\nLet's see if I can get out now.")
+                    siprint("\nOuch! I went flying and hit something, but at least it seems like I'm back on land.")
+                    siprint("I also got a new skill too, wonder what else I can do with it.")
+                    veldora_encounter()
+                else:
+                    siprint("I need figure out a way to get out of this situation.")
 
         class hfunc_grab_sword:
             __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
@@ -375,17 +378,11 @@ def ch1_cave():
                             siprint("I hope you get out quickly Veldora!")
                             tempest_serpent_encounter()
 
-                    class ignore:
-                        __subs = subs.no + ['do not start analysis', "don't start analysis", 'cancel analysis', "don't start", 'ignore him', 'leave it', 'leave him', 'trap him', "don't help him", 'do not help him']
-                        def __init__(self):
-                            siprint("You know what, no. I think I'll just leave that for now. Hehehe...")
-                            if not played_action(self):
-                                rimuru.update_standing('veldora', -2)
-
                     class _move_on:
                         __subs = subs.move_on + ['ignore him, lets move on']
                         def __init__(self):
                             siprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
+                            rimuru.update_standing('veldora', -2)
                             tempest_serpent_encounter()
 
                 class ask_about_seal:
@@ -404,7 +401,6 @@ def ch1_cave():
                     tempest_serpent_encounter()
 
     class tempest_serpent_encounter:
-        __location = 'Sealed Cave'
         def __init__(self):
             mobs_add(['tempest serpent', 'giant bat', 'black spider', 'evil centipede'])
             siprint("\nI've been looking for the cave exit for a bit now.... This cave is so big! Or am I just small?")
@@ -473,7 +469,6 @@ def ch1_cave():
 
         class _wait:
             subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
-
             def __init__(self):
                 if get_random(1, 20, 1):
                     siprint("I sense a monster nearby! There! A slime!")
@@ -513,7 +508,7 @@ def ch1_cave():
                     siprint("\n* Before the little slime could do or say anything else, he was swiftly smushed to death! *")
                     game_over()
 
-        class _hfunc_leave_cave(cave_actions):
+        class _leave_cave(cave_actions):
             __subs = ['leave this cave', 'leave', 'exit cave', 'exit']
             def __init__(self):
                 if game_cond('friend veldora', True):

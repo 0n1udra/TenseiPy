@@ -185,4 +185,7 @@ def ch2_goblin_encounter():
                 else:
                     siprint("How dare you! We not accept this!")
 
+        class _do_nothing:
+            pass
+
     goblin_encounter()

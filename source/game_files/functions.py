@@ -544,10 +544,8 @@ def change_settings(user_input):
         show_settings()
         return
 
-    if 'textcrawl' in settings_input:
-        rimuru.textcrawl = new_value
-    if 'hardcore' in settings_input:
-        rimuru.hardcore = new_value
+    if 'textcrawl' in settings_input: rimuru.textcrawl = new_value
+    if 'hardcore' in settings_input: rimuru.hardcore = new_value
     # strict_match is false so user can change multiple game settings in one go.
     if get_any(settings_input, ['hud', 'interface'], strict_match=False):
         rimuru.show_actions = new_value
