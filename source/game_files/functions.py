@@ -98,8 +98,7 @@ def game_action(level=None):
             action[0](*action[1])
 
         # Run matched corresponding game function and pass rest of user input as parameter.
-        if command in action[1]:
-            action[0](parameters)
+        if command in action[1]: action[0](parameters)
 
     for action in actions:
         # Currently need two evals to find __subs for action.
@@ -163,8 +162,7 @@ def played_action(match, amount=1):
     match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
 
     # Checks if action has been played more than once.
-    if game_cond(match_action) > amount:
-        return True
+    if game_cond(match_action) > amount: return True
 
 def last_use_skill(skill):
     """
@@ -232,8 +230,7 @@ def mob_status(target):
     """
 
     for i in rimuru.active_mobs:
-        if target.lower() in i[0].name.lower():
-            return i[0].is_alive
+        if target.lower() in i[0].name.lower(): return i[0].is_alive
 
 def mobs_cleared():
     """
@@ -332,8 +329,7 @@ def game_save(level=None, show_msg=True):
     if level: rimuru.current_location_object = level
 
     # If called from game_over function, the save will no longer be usable.
-    if rimuru.valid_save is None:
-        rimuru.valid_save = True
+    if rimuru.valid_save is None: rimuru.valid_save = True
 
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
 
@@ -380,16 +376,13 @@ def game_over():
     except: pass
 
     print("\n    < GAME OVER >\n\nPlay again?")
-    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
-        exit(0)
-    else:
-        game_restart()
+    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']: exit(0)
+    else: game_restart()
 
 def game_reset(*args):
     """Deletes game.save file and restarts game."""
 
-    try:
-        os.remove(rimuru.source_folder_path + '/game.save')
+    try: os.remove(rimuru.source_folder_path + '/game.save')
     except: pass
     game_restart()
 
@@ -427,8 +420,7 @@ def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
             total_time = 1.5
         elif message_length > 10:
             total_time = 1
-        else:
-            total_time = 2
+        else: total_time = 2
 
         # Use sys module to print letter by letter and time module for delay between each letter.
         sleep_time = total_time / message_length
@@ -499,8 +491,7 @@ def show_art(art):
         for line in art.split('\n'):
             time.sleep(0.05)
             print(line)
-    else:
-        print(art)  # Instantly print out ASCII art to screen.
+    else: print(art)  # Instantly print out ASCII art to screen.
 
 def show_history(arg):
     """
@@ -522,8 +513,7 @@ def show_history(arg):
             sprint(line[0], showing_history=True)
         elif line[1] == 'siprint':
             siprint(line[0], showing_history=True)
-        else:
-            print(line[0])
+        else: print(line[0])
 
 def change_settings(user_input):
     """
@@ -543,10 +533,8 @@ def change_settings(user_input):
     try:
         split_input = user_input.split()
         # Checks if player wants to enable/disable a setting.
-        if get_any(split_input[-1], off_subs):
-            new_value = False
-        elif get_any(split_input[-1], on_subs):
-            new_value = True
+        if get_any(split_input[-1], off_subs): new_value = False
+        elif get_any(split_input[-1], on_subs): new_value = True
         # User can change multiple game settings with one go.
         settings_input = ''.join(user_input[:-1])
     except: new_value = None
@@ -582,8 +570,7 @@ def show_start_banner():
     - Game will only save at specific points in the story, look out for '< Game Saved >' message.
     - Fullscreen recommended.""")
 
-    if rimuru.valid_save is True:
-        print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
+    if rimuru.valid_save is True: print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
 
 def show_settings(*args):
     """Shows game settings and there current on/off state."""

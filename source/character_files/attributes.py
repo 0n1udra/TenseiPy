@@ -13,18 +13,15 @@ class Attributes:
 
         for skill_type, skills in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills:
-                yield f'[{skill_type}]'
+            if output and skills: yield f'[{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
-                if not output:
-                    yield skill_object
+                if not output: yield skill_object
 
                 if skill_object.status:
                     yield f'    {skill_name} ({skill_object.status})'
-                else:
-                    yield f'    {skill_name}'
+                else: yield f'    {skill_name}'
 
     def show_attributes(self, mob=None, *args):
         """
@@ -38,8 +35,7 @@ class Attributes:
             > stats tempest serpent
         """
 
-        if mob:
-            mob = self.get_object(mob, item_pool=[*self.mimic_generator()])
+        if mob: mob = self.get_object(mob, item_pool=[*self.mimic_generator()])
         if not mob: mob = self
 
         # Shows players reputation/standing also.
@@ -83,10 +79,8 @@ class Attributes:
             self.attributes[attribute.skill_level][attribute.name] = attribute
 
             # If want to show acquisition message and/or skill's info page.
-            if show_acquired_msg:
-                print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
-            if show_skill_info:
-                self.show_info(attribute.name)
+            if show_acquired_msg: print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
+            if show_skill_info: self.show_info(attribute.name)
 
             return True
         return False
@@ -153,8 +147,7 @@ class Attributes:
         # Checks if character has resistances.
         for resist_name, resist_object in target.attributes['Resistance'].items():
             for resist in resist_object.resist_types:
-                if attack.damage_type in resist:
-                    return True
+                if attack.damage_type in resist: return True
 
     def use_action(self, skill, character=None):
         """

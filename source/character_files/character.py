@@ -65,8 +65,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __init__(self, name='', lname=''):
         if name or lname:
             self.name, self.family_name = name, lname
-        else:
-            self.name, self.family_name = self.name, self.family_name
+        else: self.name, self.family_name = self.name, self.family_name
 
         # Pickle/dill has some issue with dumping dictionaries, so these has to be initialized here.
         self.friends = self.subordinates = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
@@ -85,8 +84,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.set_start_state()
         self.update_info()
 
-    def __str__(self):
-        return self.name.lower()
+    def __str__(self): return self.name.lower()
 
     def set_start_state(self):
         """Adds starter attributes and items to character."""
@@ -112,10 +110,8 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        if not type(match) is str:
-            match = match.name
-        if item_pool is None:
-            item_pool = []
+        if not type(match) is str: match = match.name
+        if item_pool is None: item_pool = []
 
         # Gets character's acquired attributes and items in inventory.
         if 'character' in self.game_object_type:
@@ -133,8 +129,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         # Somehow strings get in the item_pool, need to filter those out.
         for game_object in list(filter(lambda x: type(x) is not str, item_pool)):
             # Returns game object if match found (uninitialized).
-            if game_object.name.lower() == match.lower():
-                return game_object
+            if game_object.name.lower() == match.lower(): return game_object
         return None
 
     def check_acquired(self, check_object, amount=1):
@@ -149,8 +144,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if type(check_object) is list:
             for i in check_object:
                 return self._check_acquired(i, amount)
-        else:
-            return self._check_acquired(check_object, amount)
+        else: return self._check_acquired(check_object, amount)
 
     def _check_acquired(self, check_object, amount=1):
         """
@@ -168,8 +162,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         """
 
         item = self.get_object(check_object, mimic_pool=True)
-        if item and item.quantity >= amount:
-            return item
+        if item and item.quantity >= amount: return item
         return False
 
     def update_status(self, game_object, new_status):

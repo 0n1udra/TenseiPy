@@ -25,8 +25,7 @@ class Rimuru_Tempest(Character):
         if not self.mimic_object(): return None
 
         for level, mimics in self.acquired_mimicries.items():
-            for mimic_name, mimic in mimics.items():
-                yield mimic
+            for mimic_name, mimic in mimics.items(): yield mimic
 
     def mimic_object(self, update_status=None):
         """
@@ -76,8 +75,7 @@ class Rimuru_Tempest(Character):
         # Adds new mob object to usable mimicries dict.
         self.acquired_mimicries[mob.rank][mob.name] = mob
 
-        if show_msg:
-            print(f"    << Information, analysis on [{mob.name}] completed. New mimicry available. >>")
+        if show_msg: print(f"    << Information, analysis on [{mob.name}] completed. New mimicry available. >>")
 
     def use_mimic(self, character):
         """
@@ -145,15 +143,13 @@ class Rimuru_Tempest(Character):
                     self.add_mimic(target[0])
                     self.add_inventory(target[0], target[1], show_analysis_msg=False)
                     self.targeted_mobs.remove(target)
-                    try:
-                        self.active_mobs.remove(target)
+                    try: self.active_mobs.remove(target)
                     except: pass
 
         # For some reason I need this to check if it cleared out all dead mobs.
         # If not it'll just run this function again. Have not ran into bugged looping, yet. Should probably change this huh?
         for i in self.targeted_mobs:
-            if i[0].is_alive is False:
-                self.eat_targets()
+            if i[0].is_alive is False: self.eat_targets()
 
 class Veldora_Tempest(Character):
     name = "Veldora"

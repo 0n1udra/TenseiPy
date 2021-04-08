@@ -17,8 +17,7 @@ class Map:
 
         if played_action in self.played_actions:
             self.played_actions[played_action] += 1
-        else:
-            self.played_actions[played_action] = 1
+        else: self.played_actions[played_action] = 1
 
     @staticmethod
     def get_location_variable(level_class=None):

@@ -31,11 +31,9 @@ class Combat:
                     skip = False  # I need to skip 'mob in active_mob' for loop within 'i in target_mobs' for loop.
                     if mob[0].name.lower() in target:
                         for i in self.targeted_mobs:
-                            if i[0] == mob[0]:
-                                skip = True  # If mob already being targeted.
+                            if i[0] == mob[0]: skip = True  # If mob already being targeted.
 
-                        if skip is False:
-                            self.targeted_mobs.append(mob)
+                        if skip is False: self.targeted_mobs.append(mob)
                         else: continue
 
     def attack(self, user_input, user=None):
@@ -71,8 +69,7 @@ class Combat:
             attack = user.get_object(current_attack)
             # If using mimic but player already has skill, will use player's skill instead of mimicked mob's.
             if not attack:
-                try:
-                    attack = self.current_mimic.get_object(current_attack)
+                try: attack = self.current_mimic.get_object(current_attack)
                 except: pass
 
             if attack:
@@ -82,16 +79,14 @@ class Combat:
                 if attack.game_object_type == 'item':
                     if attack.item_type == 'Weapon':
                         skills.append(attack)
-                if attack.game_object_type == 'character':
-                    continue
+                if attack.game_object_type == 'character': continue
 
             else: continue
 
         for current_target in self.targeted_mobs:
             for current_skill in skills:
                 # If target is too high of a level to damage with skill.
-                if current_target[0].level > current_skill.damage_level:
-                    continue
+                if current_target[0].level > current_skill.damage_level: continue
 
                 # Checking if have resistance.
                 if self.check_resistance(current_skill, current_target[0]):

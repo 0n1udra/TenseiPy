@@ -31,18 +31,12 @@ if __name__ == '__main__':
     rimuru = game_load(save_path)
     rimuru.source_folder_path = str(pathlib.Path(__file__).parent.absolute())
 
-    if get_any(sys.argv, ['-f', '-fast', '-fastmode']):
-        rimuru.fast_mode = True
-    if get_any(sys.argv, ['-t', '-text', '-textcrawl']):
-        rimuru.textcrawl = False
-    if get_any(sys.argv, ['-a', '-art', '-hideart']):
-        rimuru.show_art = False
-    if get_any(sys.argv, ['-hud', '-hidehud']):
-        rimuru.show_actions = True
-    if '-hard' in sys.argv:
-        rimuru.hardcore = True
-    if '-hints' in sys.argv:
-        rimuru.show_hints = False
+    if get_any(sys.argv, ['-f', '-fast', '-fastmode']): rimuru.fast_mode = True
+    if get_any(sys.argv, ['-t', '-text', '-textcrawl']): rimuru.textcrawl = False
+    if get_any(sys.argv, ['-a', '-art', '-hideart']): rimuru.show_art = False
+    if get_any(sys.argv, ['-hud', '-hidehud']): rimuru.show_actions = True
+    if '-hard' in sys.argv: rimuru.hardcore = True
+    if '-hints' in sys.argv: rimuru.show_hints = False
     if '-slime' in sys.argv:  # For debug.
         rimuru.textcrawl = rimuru.show_art = rimuru.hardcore = False
         rimuru.show_actions = rimuru.show_hints = True

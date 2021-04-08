@@ -26,20 +26,17 @@ def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int
     """
 
     # Default is the middle of min and max.
-    if target is None:
-        target = int(round(max_int / 2))
+    if target is None: target = int(round(max_int / 2))
 
     rand = random.randint(min_int, max_int)
 
     if bigger_than and rand >= bigger_than:
         # Return random integer along with boolean.
-        if return_int:
-            return True, rand
+        if return_int: return True, rand
         return True
 
     if rand == target:
-        if return_int:
-            return True, rand
+        if return_int: return True, rand
         return True
 
     return False
@@ -70,8 +67,7 @@ def get_any(match_to, input_list, strict_match=True):
 def on_off(var):
     """Returns string 'on'/'off' based on var."""
 
-    if var:
-        return 'on '
+    if var: return 'on '
     return 'off'
 
 def ask_on_off(variable, text):
@@ -118,14 +114,12 @@ def format_info(name, var):
     # Puts var info on newline and indented from field label.
     if '*' in name:
         return_data += f'\n    {name[1:]}:\n\t'
-    else:
-        return_data += f"{name}: "
+    else: return_data += f"{name}: "
 
     # If passed in a list. It'll sort, than space it them out with ','.
     if type(var) is list:
         return_data += ", ".join(sorted(var))
-    else:
-        return_data += str(var).strip()
+    else: return_data += str(var).strip()
 
     return return_data
 
@@ -134,7 +128,5 @@ def tbc():
 
     print("\n    < ----- SECTION IN PROGRESS ----- >\n")
     print("\nPlay again?")
-    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']:
-        exit(0)
-    else:
-        os.execl(sys.executable, sys.executable, *sys.argv)
+    if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']: exit(0)
+    else: os.execl(sys.executable, sys.executable, *sys.argv)

@@ -22,8 +22,7 @@ class Info:
             # Some skills or objects have special info pages, I couldn't get @property method working...
             if hasattr(game_object, 'show_info_page'):
                 print(game_object.show_info_page(self))
-            else:
-                print(game_object.info_page)
+            else: print(game_object.info_page)
 
     def update_info(self):
         """Updates character information."""
@@ -109,8 +108,7 @@ class Info:
 
         match = match.capitalize()
         for k, v in self.standings.items():
-            if k in match:
-                self.standings[k] += new_value
+            if k in match: self.standings[k] += new_value
 
         # Create dictionary item if for loop found no match.
         self.standings[match] = new_value
@@ -128,8 +126,7 @@ class Info:
         """
 
         for k, v in self.standings.items():
-            if k in match.capitalize():
-                return self.standings[k]
+            if k in match.capitalize(): return self.standings[k]
 
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""
