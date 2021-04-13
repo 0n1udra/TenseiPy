@@ -433,10 +433,7 @@ def ch1_cave():
                         siprint("\n< Hint: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. '/help' for more info on commands. >")
                         siprint("< Hint: While mimicking, use 'stats' to see your's and mimicked monster's attributes and skills. > ")
                     if rimuru.check_acquired('magic perception'):
-                        siprint("< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")
-                    if played_action(self):  # Show extra help if _move_on action has been played more than once and mobs_cleared() returns False.
-                        siprint("< Hint: After eating (predation) [Tempest Serpent], try 'mimic tempest serpent', then 'use sense heat source' >")
-                        siprint("< Hint: Clear out the rest of the mobs you find before moving forward. >")
+                        siprint("\n< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")
 
         class hfunc_attack:
             __subs = ['attack water blade']
@@ -512,7 +509,7 @@ def ch1_cave():
             __subs = ['leave this cave', 'leave', 'exit cave', 'exit']
             def __init__(self):
                 if game_cond('friend veldora', True):
-                    siprint("Or... uhm... Should I go back to that pouty 'dragon'?")
+                    siprint("Or... uhm... Should I go back to that pouty dragon or just move on?")
 
                 game_action(self)
 
@@ -531,7 +528,7 @@ def ch1_cave():
                         veldora_encounter()
 
             class _leave:
-                __subs = ['leave', 'leave cave', 'exit', 'exit cave']
+                __subs = ['leave', 'leave cave', 'exit', 'exit cave', 'move on', 'continue']
                 def __init__(self):
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
