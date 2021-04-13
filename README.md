@@ -3,6 +3,10 @@
 Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)
 Python text adventure game based off of Tensei Slime managa. (Voice lines are not 100% accurate)
 
+# Run using Python3.8+
+1. Clone this repositiory. 
+2. Run `python3 start_game.py` to start game. Optionally, run with `-h` argument to see other runtime options.
+
 # Download
 1. Go to [Releases](https://github.com/dthomas550/TenseiPy/releases) 
 2. Click on a release, then click on 'Assets' list to show list of files you can download.
