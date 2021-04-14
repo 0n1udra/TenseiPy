@@ -4,16 +4,18 @@ Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)
 Python text adventure game based off of Tensei Slime managa. (Voice lines are not 100% accurate)
 
 # Run using Python3.8+
-1. Clone this repositiory. 
-2. Run `python3 start_game.py` to start game. Optionally, run with `-h` argument to see other runtime options.
+1. Clone or download repositiory: https://github.com/0n1udra/TenseiPy
+2. In source folder, run `python3 start_game.py` to start game, optionally, run with `-h` argument to see other runtime options.
 
 # Download
+NOTE: Windows and Mac might flag game as malicious, this is due to me using PyInstaller to make executables. If you don't trust it, use Python3 to run the code itself.
+
 1. Go to [Releases](https://github.com/dthomas550/TenseiPy/releases) 
 2. Click on a release, then click on 'Assets' list to show list of files you can download.
-3. Download .exe file for Windows, and .cpgz for Mac.
+3. Download Tensei_XX.zip folder, or the source code.
 
 For Macs:
-1. Double click the .cpgz file to extract the game. 
+1. Double click the .zip folder to extract the files. 
 2. You might have to click 'Open Anyway' under System Preferences > Security & Privacy > General 
 
 NOTE: Game will display ASCII art, adjust window size accordingly. Recommend Fullscreening.
