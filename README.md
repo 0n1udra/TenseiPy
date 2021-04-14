@@ -33,6 +33,7 @@ NOTE: Game will display ASCII art, adjust window size accordingly. Recommend Ful
   - Meet Veldora
   - Fight low level mobs
 - Exit Cave
+  - Meet Gobilns and help their village.
   - -IN PROGRESS-
   
   
