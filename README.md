@@ -8,15 +8,13 @@ Python text adventure game based off of Tensei Slime managa. (Voice lines are no
 2. In source folder, run `python3 start_game.py` to start game, optionally, run with `-h` argument to see other runtime options.
 
 # Download
-NOTE: Windows and Mac might flag game as malicious, this is due to me using PyInstaller to make executables. If you don't trust it, use Python3 to run the code itself.
+NOTE: Windows, Mac and anti-virus programs might flag game as malicious, this may be due to PyInstaller's executables. If you don't trust it, use Python3 to run the code itself.
 
 1. Go to [Releases](https://github.com/dthomas550/TenseiPy/releases) 
-2. Click on a release, then click on 'Assets' list to show list of files you can download.
-3. Download Tensei_XX.zip folder, or the source code.
-
-For Macs:
-1. Double click the .zip folder to extract the files. 
-2. You might have to click 'Open Anyway' under System Preferences > Security & Privacy > General 
+2. Click on 'Assets' drop-down to show list of downloadables. Download `TenseiPy_XX.zip` folder.
+3. Extract the files from the `.zip` folder, and launch game.
+    1. Windows: right-click and `Extract All...`, then double-click the `Win_TenseiPy_XX.exe` file.
+    2. Mac: Double click it to extract the files, then double-click the `Mac_TenseiPy_XX` file, you might have to go into `System Preferences > Security & Privacy > General > Open Anyway` to launch game correctly.
 
 NOTE: Game will display ASCII art, adjust window size accordingly. Recommend Fullscreening.
 
