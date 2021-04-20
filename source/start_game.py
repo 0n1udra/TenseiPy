@@ -1,5 +1,5 @@
 import pathlib, sys, os
-from game_files.functions import show_start_banner, game_load, get_any, siprint, ask_on_off
+from game_files.functions import show_start_banner, game_load, get_any, ask_on_off
 from chapters.tensei_0 import ch0
 
 __version__ = "5.1 Alpha"

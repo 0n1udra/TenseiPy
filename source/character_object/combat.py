@@ -1,5 +1,5 @@
 from game_files.extra import get_any
-
+from game_files.output import gprint
 
 class Combat:
     def set_targets(self, targets):
@@ -90,7 +90,7 @@ class Combat:
 
                 # Checking if have resistance.
                 if self.check_resistance(current_skill, current_target[0]):
-                    print(f"    << Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
+                    gprint(f"<< Warning, {current_target.name} has resistance to {current_skill.damage_type}. >>")
                     continue
 
                 self.data['kills'] += 1

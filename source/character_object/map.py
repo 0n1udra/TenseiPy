@@ -1,3 +1,5 @@
+from game_files.output import gprint
+
 class Map:
     def show_nearby(self, *args, valid_usage=False):
         # Either you have to own [Magic Perception] or change the valid_usage boolean to use this funtion.
@@ -48,7 +50,7 @@ class Map:
         """
 
         # TODO Separate this function into two.
-        print(f"\n    < {self.name} location: {self.current_location} >\n")
+        gprint(f"\n< {self.name} location: {self.current_location} >\n")
         return self.current_location
 
     def get_map(self, level):

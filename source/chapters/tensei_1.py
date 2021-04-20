@@ -10,16 +10,16 @@ def ch1_cave():
         __location = 'Sealed Cave'
 
         def __init__(self):
-            siprint("\n< Chapter 1 >\n")
+            gprint("\n< Chapter 1 >\n")
             idots()
-            siprint("\n<< Confirmation Complete. Constructing body that does not require blood... >>\n")
-            siprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
-            siprint("<< Acquired Extra Skill [Predator]. >>")
-            siprint("\n<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
-            siprint("<< Acquired Extra Skill [Sage]. >>")
+            gprint("\n<< Confirmation Complete. Constructing body that does not require blood... >>\n")
+            gprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
+            gprint("<< Acquired Extra Skill [Predator]. >>")
+            gprint("\n<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
+            gprint("<< Acquired Extra Skill [Sage]. >>")
             rimuru.upgrade_attribute('Sage', 'Great Sage')
-            print()
-            siprint("It's so dark? Where am I? What happened?")
+
+            siprint("\nIt's so dark? Where am I? What happened?")
             siprint("I remember now, I got stabbed! A-am I dead?")
             siprint("Was I saved? Can I move? Should I try to say something?")
 
@@ -52,7 +52,7 @@ def ch1_cave():
             __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'confirm body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around', 'check', 'check if human']
             def __init__(self):
                 siprint("What is that feeling? Is....is that grass?! It feels like it's dissolving...")
-                iprint("\n< Hint: Try to 'eat grass' or 'eat ore', see what happens. >")
+                gprint("\n< Tutorial: Try to 'eat grass' or 'eat ore', see what happens. >")
                 game_action(self)
 
             class puyo:
@@ -114,17 +114,17 @@ def ch1_cave():
                     def __init__(self):
                         siprint("<< Answer, unique skill [Predator] allows one to 'eat' targets, store said targets in skill's stomach, or isolate as hazardous material. >>")
                         siprint("<< Also, after successful analysis on a monster one can use mimicry to replicate appearance, and use replaceable abilities from target. >>")
-                        iprint("\n< Hint: Try 'info predator' to get more information. >")
+                        gprint("\n< Hint: Try 'info predator' to get more information. >")
 
                 class what_is_great_sage:
                     __subs = ['what is this great sage', 'what is great sage', 'great sage', 'tell me more about great sage', 'what are you', 'tell me more about you', 'tell me more about yourself great sage', 'tell me more about yourself', 'what are you', 'who are you', 'what is you']
                     def __init__(self):
                         siprint("<< Answer, my function is to assist my master (you) to the best of my abilities. >>")
                         siprint("<< Information, some of my basic functions are: Analysis, skill control and manipulation, crafting, and more. >>")
-                        iprint("\n< Hint: Use 'info great sage' to get more information. >")
+                        gprint("\n< Hint: Use 'info great sage' to get more information. >")
 
                         if rimuru.check_acquired('hipokte grass'):
-                            iprint("< Hint: Try 'info hipokte grass'. Then try 'craft full potion'. >")
+                            gprint("< Hint: Try 'info hipokte grass'. Then try 'craft full potion'. >")
 
                 class where_did_it_go:
                     __subs = ['where it go', 'where did the grass go', 'where did that all go', 'hey where did that go', "where's the grass", "where's the grass now", 'where is the grass', 'where is the grass now', 'where did it go', 'where does it go', 'where does it all go', 'where do they go', 'where do they all go', 'where does it all go', 'where has it gone', 'where has it all gone']
@@ -373,7 +373,7 @@ def ch1_cave():
                         def __init__(self):
                             siprint("Yes! Please take care of it [Great Sage].")
                             rimuru.update_status('veldora', 'Analyzing')
-                            siprint("< Starting Analysis: Unique Skill [Unlimited Imprisonment] >")
+                            gprint("< Starting Analysis: Unique Skill [Unlimited Imprisonment] >")
                             rimuru.update_standing('veldora', 1)
                             siprint("I hope you get out quickly Veldora!")
                             tempest_serpent_encounter()
@@ -413,7 +413,7 @@ def ch1_cave():
             siprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
             rimuru.add_attribute('water blade')
             siprint("\nHey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
-            siprint("\n< Hint: First target with 'target tempest serpent'. Then attack with 'attack water blade'. >")
+            gprint("\n< Hint: First target with 'target tempest serpent'. Then attack with 'attack water blade'. >")
             game_action(self)
 
         class sneak_away:
@@ -430,10 +430,10 @@ def ch1_cave():
                     siprint("I still sense some enemies around. I should clear them out before they give me trouble.")
                     if rimuru.check_acquired('sense heat source'):
                         siprint("Oh yeah! I have that new [Sense Heat Source] skill, that might be useful.")
-                        siprint("\n< Hint: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. '/help' for more info on commands. >")
-                        siprint("< Hint: While mimicking, use 'stats' to see your's and mimicked monster's attributes and skills. > ")
+                        gprint("\n< Hint: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. '/help' for more info on commands. >")
+                        gprint("< Hint: While mimicking, use 'stats' to see your's and mimicked monster's attributes and skills. > ")
                     if rimuru.check_acquired('magic perception'):
-                        siprint("\n< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")
+                        gprint("\n< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")
 
         class hfunc_attack:
             __subs = ['attack water blade']
@@ -443,7 +443,7 @@ def ch1_cave():
                     siprint("<< Suggestion, Use Unique Skill [Predator]? >>")
                     siprint("Oh...? What will that do?")
                     siprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
-                    siprint("\n< Hint: Try 'eat' or 'predate' on targeted mobs that are dead to use predation. >")
+                    gprint("\n< Hint: Try 'eat' or 'predate' on targeted mobs that are dead to use predation. >")
 
                 if mobs_cleared():
                     at_cave_exit()

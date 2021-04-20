@@ -1,4 +1,5 @@
 from game_files.extra import format_info
+from game_files.output import gprint
 
 class Skill:
     name = 'N/A'
@@ -42,7 +43,7 @@ class Skill:
             # Check if user meets requirement or own prerequisites before using skill.
             for k, v in self.use_requirements.items():
                 if not user.check_acquired(k, v):
-                    print(f"    < Skill Requires: {v}x {k} >")
+                    gprint(f"< Skill Requires: {v}x {k} >")
                     return False
         return True
 
@@ -83,14 +84,14 @@ class Skill:
 
         if state.lower() in self.status: return  # If skill is already at that state.
 
-        print(f"    < {self.skill_level} {self.name}: {state} >")
+        gprint(f"< {self.skill_level} {self.name}: {state} >")
         self.status = state
         self.update_info()
 
     def deactivate_skill(self, state=''):
         """Deactivates skill, then updates relevant variables."""
 
-        print(f"    < {self.skill_level} {self.name}: Deactivated >")
+        gprint(f"< {self.skill_level} {self.name}: Deactivated >")
         self.status = state
         self.update_info()
 

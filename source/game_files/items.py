@@ -1,4 +1,5 @@
 from game_files.extra import format_info
+from game_files.output import gprint
 
 class Item:
     name = ''
@@ -49,7 +50,7 @@ class Item:
             # Check if user meets requirement or own prerequisites before using skill.
             for k, v in self.use_requirements.items():
                 if not user.check_acquired(k, v):
-                    print(f"    < Usage Requires: {v}x {k} >")
+                    gprint(f"< Usage Requires: {v}x {k} >")
                     return False
         return True
 

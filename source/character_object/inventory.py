@@ -1,3 +1,5 @@
+from game_files.output import gprint
+
 class Inventory:
     def inventory_generator(self, output=False):
         """
@@ -78,8 +80,8 @@ class Inventory:
 
         self.update_inventory_capacity()
 
-        if show_acquired_msg: print(f'    < Acquired: {amount * item.quantity_add}x [{item.name}] >')
-        if show_analysis_msg: print(f'    << Analysis on [{item.name}] Complete. >>')
+        if show_acquired_msg: gprint(f'< Acquired: {amount * item.quantity_add}x [{item.name}] >')
+        if show_analysis_msg: gprint(f'<< Analysis on [{item.name}] Complete. >>')
 
     def remove_inventory(self, item=None, amount=1):
         """
@@ -107,10 +109,10 @@ class Inventory:
 
         if (item.quantity - amount) <= 0 or amount <= 0:
             del self.inventory[item.item_type][item.name]
-            print(f"    < Removed Item: [{item.name}] >")
+            gprint(f"< Removed Item: [{item.name}] >")
         else:
             item.quantity -= amount
-            print(f"    < Removed: {amount}x [{item.name}] >")
+            gprint(f"< Removed: {amount}x [{item.name}] >")
 
         self.update_inventory_capacity()
 
@@ -156,14 +158,14 @@ class Inventory:
                 craft_amount = int(input("Craft > "))
                 print()
             except ValueError:
-                print("\n    < Error: need integer input >")
+                gprint("\n< Error: need integer input >")
                 return False
 
         # Checks if have all the ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():
             if self.check_acquired(ingredient_name, ingredient_amount * craft_amount): continue
 
-            print("    < Missing Ingredient(s) >")
+            gprint("< Missing Ingredient(s) >")
             return False
 
         # Use up ingredients then add to inventory

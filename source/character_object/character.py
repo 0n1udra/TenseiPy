@@ -6,7 +6,7 @@ from .inventory import Inventory
 from .attributes import Attributes
 from .combat import Combat
 from .subordinates import Subordinates
-from character_files.map import Map
+from character_object.map import Map
 
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
@@ -59,7 +59,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     show_hints = True  # If hardcore is True, this boolean will be ignored.
     hardcore = None  # Hides targets, mimicking, and actions.
     fast_mode = None
-    line_history = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
+    storyline_log = game_log = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
     source_folder_path = ''
 
     def __init__(self, name='', lname=''):

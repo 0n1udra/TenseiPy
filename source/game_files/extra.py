@@ -1,4 +1,5 @@
 import random, sys, os
+from game_files.output import gprint
 
 # Input substitutes used for enabling/disabling game settings.
 on_subs = ['activate', 'true', 'enable', 'on', 'yes', '1']
@@ -88,10 +89,10 @@ def ask_on_off(variable, text):
     print(f"\n{text}")
     # User will have to type in anything that matches in off_subs to disable.
     if str(input("No / Yes or Enter > ")).lower() in off_subs:
-        print(f"\n    < {variable}: Disabled >")
+        gprint(f"\n< {variable}: Disabled >")
         return False
     else:
-        print(f"\n    < {variable}: Enabled >")
+        gprint(f"\n< {variable}: Enabled >")
         return True
 
 def format_info(name, var):

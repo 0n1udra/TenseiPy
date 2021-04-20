@@ -1,5 +1,5 @@
-from character_files.character import Character
-
+from character_object.character import Character
+from game_files.output import gprint
 
 # ========== Characters
 class Rimuru_Tempest(Character):
@@ -75,7 +75,7 @@ class Rimuru_Tempest(Character):
         # Adds new mob object to usable mimicries dict.
         self.acquired_mimicries[mob.rank][mob.name] = mob
 
-        if show_msg: print(f"    << Information, analysis on [{mob.name}] completed. New mimicry available. >>")
+        if show_msg: gprint(f"<< Information, analysis on [{mob.name}] completed. New mimicry available. >>")
 
     def use_mimic(self, character):
         """
@@ -93,13 +93,13 @@ class Rimuru_Tempest(Character):
             self.current_mimic_species = 'Slime'
             self.current_mimic = None
             self.mimic_object(update_status='')
-            print("    < Mimicry Reset >")
+            gprint("< Mimicry Reset >")
         else:
             if new_mimic := self.get_object(character, [*self.mimic_generator()]):
                 self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
                 self.mimic_object(update_status='Active')
-                print(f'    < Now Mimicking [{new_mimic.name}] >')
+                gprint(f'< Now Mimicking [{new_mimic.name}] >')
 
     def check_mimic(self, match=None):
         """

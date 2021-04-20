@@ -1,3 +1,5 @@
+from game_files.output import gprint
+
 class Attributes:
     def attributes_generator(self, output=False):
         """
@@ -79,7 +81,7 @@ class Attributes:
             self.attributes[attribute.skill_level][attribute.name] = attribute
 
             # If want to show acquisition message and/or skill's info page.
-            if show_acquired_msg: print(f"    < Acquired: {attribute.skill_level} [{attribute.name}] >")
+            if show_acquired_msg: gprint(f"< Acquired: {attribute.skill_level} [{attribute.name}] >")
             if show_skill_info: self.show_info(attribute.name)
 
             return True
@@ -119,9 +121,9 @@ class Attributes:
         skill_to = self.get_object(skill_to, new=True)
         if not skill_from or not skill_to: return False
 
-        print(f"    < Evolving {skill_from.skill_level} [{skill_from.name}] >")
+        gprint(f"< Evolving {skill_from.skill_level} [{skill_from.name}] >")
         if self.remove_attribute(skill_from) and self.add_attribute(skill_to, show_acquired_msg=False):
-            print(f"    < Evolution Successful: {skill_from.skill_level} [{skill_from.name}] to {skill_to.skill_level} [{skill_to.name}] >")
+            gprint(f"< Evolution Successful: {skill_from.skill_level} [{skill_from.name}] to {skill_to.skill_level} [{skill_to.name}] >")
 
     def check_resistance(self, attack, target=None):
         """

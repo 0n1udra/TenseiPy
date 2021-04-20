@@ -6,6 +6,8 @@ from game_files.characters import Rimuru_Tempest
 # Initiates new Rimuru_Tempest object which will be updated with game_save if save exists.
 rimuru = Rimuru_Tempest()
 
+from game_files.output import *
+update_rimuru_output(rimuru)
 
 #                    ========== Level Functions ==========
 def game_hud(actions):
@@ -85,7 +87,7 @@ def game_action(level=None):
         [rimuru.get_location, ['location']],
         [show_help, ['/help']],
         [change_settings, ['/settings', '/options']],
-        [show_history, ['/history']],
+        [show_history, ['/history', '/log']],
         [game_restart, ['/restart']],
         [game_reset, ['/reset']],
         [game_exit, ['/exit']],
@@ -298,7 +300,7 @@ def continue_to(next_location):
 
     # Loads next story chapter.
     try: next_location()
-    except: print("    < Error Loading Next Location >")
+    except: gprint("< Error Loading Next Location >")
 
 
 #                    ========== Game Save/Settings ==========
@@ -311,7 +313,7 @@ def game_exit(*args):
 def game_restart(*args):
     """Restart game."""
 
-    print("    < Restarting Game... >")
+    gprint("< Restarting Game... >")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 def game_save(level=None, show_msg=True):
@@ -333,7 +335,7 @@ def game_save(level=None, show_msg=True):
 
     pickle.dump(rimuru, open(rimuru.save_path, 'wb'))
 
-    if show_msg: print("\n    < Game Saved >\n")
+    if show_msg: gprint("\n< Game Saved >\n")
 
 def game_load(path):
     """
@@ -386,135 +388,6 @@ def game_reset(*args):
     except: pass
     game_restart()
 
-
-#                    ========== Game Printing/Output ==========
-def sprint(message, from_print='sprint', showing_history=False, no_crawl=False):
-    """
-    Text crawling. Slowly print out text to console. Kinda like typewriter effect.
-
-    Args:
-        message str: Message to delay print.
-        from_ssprint bool(False): Variable used to properly print out lines for 'history' game commmand.
-        from_iprint bool(False): If coming from iprint function.
-        showing_history bool(False): Variable used to make sure 'history' command doesn't effect itself.
-    """
-
-    # Will not use textcrawl effect on gameplay hint printouts.
-    if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore): return
-
-    # So user can get the last x lines, in case the screen has been cluttered.
-    # Without this, when showing history it'll add onto itself, which creates duplicate lines.
-    if showing_history is False:
-        rimuru.line_history.append([message, from_print])
-        rimuru.line_history = rimuru.line_history[-25:]
-
-    if rimuru.textcrawl is True and no_crawl is False:
-        message_length = len(message)
-
-        # Textcrawl speed based on message character length.
-        if message_length > 200:
-            total_time = 0.1
-        elif message_length > 50:
-            total_time = 3
-        elif message_length > 25:
-            total_time = 1.5
-        elif message_length > 10:
-            total_time = 1
-        else: total_time = 2
-
-        # Use sys module to print letter by letter and time module for delay between each letter.
-        sleep_time = total_time / message_length
-        for letter in message:
-            sys.stdout.write(letter)
-            sys.stdout.flush()
-            time.sleep(sleep_time)
-        print()
-
-    else:
-        print(message)  # Print instantly.
-
-def siprint(message, showing_history=False):
-    """sprint with indent."""
-
-    if message[0] == '\n': print()
-    sprint('    ' + message.lstrip(), from_print='siprint', showing_history=showing_history)
-
-def iprint(message, showing_history=False):
-    """Print without textcrawl and with indent."""
-    if message[0] == '\n': print()
-    sprint('    ' + message.lstrip(), no_crawl=True, showing_history=showing_history)
-
-def dots(length=5, times=1, indent=False):
-    """
-    Loading dot animation.
-
-    Args:
-        times int(3): How many times to do animation.
-        length int(5): How many dots per cycle.
-        indent bool(False): Add 4 spaces.
-    """
-
-    # If textcrawl boolean is False, it'll just print the dots once.
-    if not rimuru.textcrawl:
-        print(('    ' if indent else '') + '.' * length)
-        return
-
-    for _ in range(times):
-        if indent: print('    ', end='')  # Print out dots instantly instead.
-
-        for _ in range(length):
-            sys.stdout.write('.')
-            sys.stdout.flush()
-            time.sleep(0.5)
-        print()
-
-def idots(*args):
-    """Prints dots but wth indent."""
-
-    dots(*args, indent=True)
-
-def show_art(art):
-    """
-    Prints out ASCII art line by line or all at once depending on textcrawl boolean.
-
-    Args:
-        art str: Name of variable that is located in art.py file. The functions will replace spaces with _ if needed.
-    """
-
-    if rimuru.show_art is False: return False
-
-    # Gets corresponding variable from within art.py file.
-    art = eval(f"game_art.{art.lower().strip().replace(' ', '_')}")
-
-    if rimuru.textcrawl or rimuru.textcrawl is None:
-        # Print ASCII art line by line with quick textcrawl effect.
-        for line in art.split('\n'):
-            time.sleep(0.05)
-            print(line)
-    else: print(art)  # Instantly print out ASCII art to screen.
-
-def show_history(arg):
-    """
-    Shows x of last outputted story lines.
-
-    Args:
-        arg: Lines to show. Default is 5.
-    """
-
-    # Defaults to 5 lines to show of dialog history.
-    try: lines = int(arg)
-    except: lines = 5
-
-    # Runs corresponding function to print out gameplay dialog based on what was used in hard code.
-    for line in rimuru.line_history[-lines:]:
-        if line[1] == 'iprint':
-            iprint(line[0], showing_history=True)
-        elif line[1] == 'iprint':
-            sprint(line[0], showing_history=True)
-        elif line[1] == 'siprint':
-            siprint(line[0], showing_history=True)
-        else: print(line[0])
-
 def change_settings(user_input):
     """
     Show or change game settings.
@@ -564,11 +437,11 @@ def show_start_banner():
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
-    - Enabling hardcore mode will hide playable actions and game hints, enable with '/settings hardcore on'.
+    - To enable/disable game settings like hardcore mode or show/hide hints use /settings, e.g. '/settings hardcore on'.
     - Game will only save at specific points in the story, look out for '< Game Saved >' message.
     - Fullscreen recommended.""")
 
-    if rimuru.valid_save is True: print("\n    < Save Loaded >\n")  # Show's if game was loaded from a save.
+    if rimuru.valid_save is True: gprint("\n< Save Loaded >\n")  # Shows if game was loaded from a save.
 
 def show_settings(*args):
     """Shows game settings and there current on/off state."""
@@ -615,7 +488,10 @@ def show_help(arg):
           - info mimic          -- Shows available mimicries.
           - mimic reset         -- Resets mimic (Back to slime).
         eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
-        nearby                  -- Show's neearby mobs if acquired [Magic Perception] skill.
+        nearby                  -- Shows neearby mobs if acquired [Magic Perception] skill.
+        /log [LINES]            -- Shows x line history from game story voicelines.
+          - /log game [LINES]   -- Shows x game event history log (skill/item acquisitions, hints, etc).
+                                   Example: '/log', '/log 10', '/log game 15'
         /help                   -- Show this help page.
           - /help rank          -- Show game level, rank, risk chart.
         /settings               -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
