@@ -25,10 +25,10 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
     if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore): return
 
     # So user can get the last x lines, in case the screen has been cluttered.
-    # Without this, when showing history it'll add onto itself, which creates duplicate lines.
-    if log_output:
+    # Makes sure when showing history it won't add onto itself. Also, checks if line has already been logged (if player played action multiple times).
+    if log_output and message not in rimuru.storyline_log:
         rimuru.storyline_log.append(message)
-        rimuru.storyline_log = rimuru.storyline_log[-25:]
+        rimuru.storyline_log = rimuru.storyline_log[-99:]
 
     if rimuru.textcrawl and use_textcrawl:
         message_length = len(message)
@@ -69,7 +69,7 @@ def iprint(message):
 def gprint(message):
     """For game events. Adds indent, disables and textcrawl. Appends to game_log list."""
 
-    rimuru.game_log.append(sprint(message, add_indent=True, use_textcrawl=False, log_output=False))
+    rimuru.game_log.append(sprint(message, add_indent=True, use_textcrawl=False))
 
 def dots(length=5, times=1, indent=False):
     """
@@ -118,10 +118,9 @@ def show_history(arg):
     try: lines = int(arg[-2:])
     except: lines = 5
 
-    # Runs corresponding function to print out gameplay dialog based on what was used in hard code.
+    print('-------------------- History --------------------\n')
     for line in log_data[-lines:]: print(line, end='')
-
-    print("\n    NOTE: use '/log game' to show history of game events (skill/item acquisitions, hints, etc).")
+    print('\n-------------------- History --------------------')
 
 def show_art(art):
     """

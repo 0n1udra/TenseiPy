@@ -88,7 +88,7 @@ class Info:
         print(f'    < [{self.name}] Acquired Blessing: [{divine_protection}] >')
 
     def show_standings(self):
-        print("-----Standings-----")
+        print("----- Standing -----")
         for k, v in self.standings.items():
             print(f"{k}: {v}")
         print()

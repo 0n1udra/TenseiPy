@@ -474,7 +474,7 @@ def show_help(arg):
                                    Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
         target TARGET(S)        -- Target mob(s), to be able to use skills/abilities/etc on them.
                                    Example: 'target tempest serpent', 'target tempest serpent, black spider'
-          - target nearby       -- Target nearby mobs.
+          - target all          -- Target all nearby targetable mobs.
           - target reset        -- Clear targeted.
         attack SKILL/ITEM 	    -- Attack targeted_mobs. 
                                    Example: 'attack water blade'
