@@ -450,6 +450,7 @@ def ch1_cave():
 
     class at_cave_exit:
         def __init__(self):
+            mobs_reset()
             mobs_add(['kaval', 'gido', 'eren grimwold'])
             siprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
             siprint("Water attack? No, that'll probably be overkill. Wait somethings happening.")
@@ -505,6 +506,7 @@ def ch1_cave():
                 if game_cond('friend veldora', True):
                     siprint("Or... uhm... Should I go back to that pouty dragon or just move on?")
 
+                mobs_reset()
                 siprint("Phew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
 
                 game_action(self)

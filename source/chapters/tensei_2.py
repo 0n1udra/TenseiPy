@@ -19,15 +19,15 @@ def ch2_goblin_encounter():
         class _friendly:
             __subs = subs.be_nice_subs + ['my name is rimuru', 'say hi', 'talk', 'chat', 'talk to goblins']
             def __init__(self):
-                           sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
-                           sprint("...")
-                           sprint("Strong one we have already recognized your strength. Please, lower your voice!")
-                           sprint("Oh, ok. I was just exploring around here. Is there something you need?")
-                           sprint("No, you see, our village is near. We felt a strong demonic aura and decided to immediately investigate.")
-                           siprint("\nDemonic aura? what? Great Sage can you change my viewpoint, I want to see this demonic aura.")
-                           siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
-                           siprint("After some more clarification, they invited to their village. It looks like they need some help.")
-                           goto_goblin_village()
+                sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
+                sprint("...")
+                sprint("Strong one we have already recognized your strength. Please, lower your voice!")
+                sprint("Oh, ok. I was just exploring around here. Is there something you need?")
+                sprint("No, you see, our village is near. We felt a strong demonic aura and decided to immediately investigate.")
+                siprint("\nDemonic aura? what? Great Sage can you change my viewpoint, I want to see this demonic aura.")
+                siprint("OH!, so uh that's why everyone is drawn to me and why the wolves ran away at the sight of me. I should rein that in.")
+                siprint("After some more clarification, they invited to their village. It looks like they need some help.")
+                goto_goblin_village()
 
         class _subjugate_goblins:
             __subs = ['subjugate', 'subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
