@@ -1,4 +1,5 @@
 import time, sys
+import game_files.art as game_art
 
 def update_rimuru_output(rimuru_obj):
     global rimuru

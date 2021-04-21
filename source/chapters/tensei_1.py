@@ -6,7 +6,7 @@ from game_maps.game_location import *
 from game_files.characters import Veldora_Tempest
 
 def ch1_cave():
-    class wake_up(cave_actions):
+    class wake_up():
         __location = 'Sealed Cave'
 
         def __init__(self):
@@ -464,17 +464,16 @@ def ch1_cave():
             sprint("\nI shouldn't show, they'll probably get scared and attack me")
             game_action(self)
 
-        class _wait:
-            subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
+        class _attack:
+            __subs = ['attack adventurers', 'attack them']
             def __init__(self):
-                if get_random(1, 20, 1):
-                    siprint("I sense a monster nearby! There! A slime!")
-                    siprint("\nCrap! How did they notice me!")
-                    siprint("\n* And before another word could be uttered by the little slime, he was swiftly smushed. *")
+                if mobs_cleared():
+                    siprint("Wasn't necessary, but I suppose it had to be done.")
+                    at_cave_exit._hfunc_leave_cave()
+                else:
+                    siprint("CRAP! I didn't kill all of them, the rest will kill me!")
+                    siprint("\n* Before the little slime could do or say anything else, he was swiftly smushed to death! *")
                     game_over()
-
-                siprint("\nPhew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
-                at_cave_exit._hfunc_leave_cave()
 
         class _say_hi:
             def __init__(self):
@@ -494,22 +493,19 @@ def ch1_cave():
 
                 game_over()
 
-        class _attack:
-            __subs = ['attack adventurers', 'attack them']
+        class _wait:
+            __subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
             def __init__(self):
-                if mobs_cleared():
-                    siprint("Wasn't necessary, but I suppose it had to be done.")
-                    at_cave_exit._hfunc_leave_cave()
-                else:
-                    siprint("CRAP! I didn't kill all of them, the rest will kill me!")
-                    siprint("\n* Before the little slime could do or say anything else, he was swiftly smushed to death! *")
+                if get_random(1, 20, 1):
+                    siprint("I sense a monster nearby! There! A slime!")
+                    siprint("\nCrap! How did they notice me!")
+                    siprint("\n* And before another word could be uttered by the little slime, he was swiftly smushed. *\n")
                     game_over()
 
-        class _leave_cave(cave_actions):
-            __subs = ['leave this cave', 'leave', 'exit cave', 'exit']
-            def __init__(self):
                 if game_cond('friend veldora', True):
                     siprint("Or... uhm... Should I go back to that pouty dragon or just move on?")
+
+                siprint("Phew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
 
                 game_action(self)
 
@@ -533,5 +529,6 @@ def ch1_cave():
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
-    wake_up()
+    at_cave_exit()
+    #wake_up()
     #tempest_serpent_encounter()

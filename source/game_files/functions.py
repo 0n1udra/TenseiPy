@@ -1,13 +1,11 @@
-import pickle, time, sys, os
-import game_files.art as game_art
+import pickle, sys, os
 from game_files.extra import *
+from game_files.output import *
 from game_files.characters import Rimuru_Tempest
 
 # Initiates new Rimuru_Tempest object which will be updated with game_save if save exists.
 rimuru = Rimuru_Tempest()
 
-from game_files.output import *
-update_rimuru_output(rimuru)
 
 #                    ========== Level Functions ==========
 def game_hud(actions):
@@ -450,7 +448,7 @@ def show_settings(*args):
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
         {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
         {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
-        {on_off(rimuru.show_hints)}\thints/clues <on/off>\t\t-- Show game hints, highly recommended for first timers.
+        {on_off(rimuru.show_hints)}\thints/clues <on/off>\t-- Show game hints, highly recommended for first timers.
         {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
     
     Change Settings:
