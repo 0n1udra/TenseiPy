@@ -364,6 +364,13 @@ def game_load(path):
 
     return rimuru
 
+def game_reset(*args):
+    """Deletes game.save file and restarts game."""
+
+    try: os.remove(rimuru.source_folder_path + '/game.save')
+    except: pass
+    game_restart()
+
 def game_over():
     """Player died, deletes pickle save file after invalidates it.."""
 
@@ -378,13 +385,6 @@ def game_over():
     print("\n    < GAME OVER >\n\nPlay again?")
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']: exit(0)
     else: game_restart()
-
-def game_reset(*args):
-    """Deletes game.save file and restarts game."""
-
-    try: os.remove(rimuru.source_folder_path + '/game.save')
-    except: pass
-    game_restart()
 
 def change_settings(user_input):
     """
@@ -418,105 +418,9 @@ def change_settings(user_input):
     if 'textcrawl' in settings_input: rimuru.textcrawl = new_value
     if 'hardcore' in settings_input: rimuru.hardcore = new_value
     # strict_match is false so user can change multiple game settings in one go.
-    if get_any(settings_input, ['hud', 'interface'], strict_match=False):
-        rimuru.show_actions = new_value
-    if get_any(settings_input, ['art', 'ascii'], strict_match=False):
-        rimuru.show_art = new_value
-    if get_any(settings_input, ['hints', 'clues'], strict_match=False):
-        rimuru.show_hints = new_value
+    if get_any(settings_input, ['hud', 'interface'], strict_match=False): rimuru.show_actions = new_value
+    if get_any(settings_input, ['art', 'ascii'], strict_match=False): rimuru.show_art = new_value
+    if get_any(settings_input, ['hints', 'clues'], strict_match=False): rimuru.show_hints = new_value
 
     show_settings()
 
-def show_start_banner():
-    """Show game title, tips, and player stats/inv."""
-
-    show_art('great sage')
-    print(f"""
-    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
-    {game_art.rimuru_art.banner}
-    - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
-    - To enable/disable game settings like hardcore mode or show/hide hints use /settings, e.g. '/settings hardcore on'.
-    - Game will only save at specific points in the story, look out for '< Game Saved >' message.
-    - Fullscreen recommended.""")
-
-    if rimuru.valid_save is True: gprint("\n< Save Loaded >\n")  # Shows if game was loaded from a save.
-
-def show_settings(*args):
-    """Shows game settings and there current on/off state."""
-
-    print(f"""    Game Settings:
-        {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
-        {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
-        {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
-        {on_off(rimuru.show_hints)}\thints/clues <on/off>\t-- Show game hints, highly recommended for first timers.
-        {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
-    
-    Change Settings:
-        settings/options COMMAND(S) on/off
-        Example: 'settings textcrawl off', 'options hud hints off'""")
-
-def show_help(arg):
-    """Shows help page."""
-
-    if get_any(arg, ['rank', 'level', 'ranking', 'showrank', 'showlevel'], strict_match=False):
-        show_rank_chart()
-        return
-
-    print("""    Command Required_Parameter [Optional_Parameter]
-    
-    Commands:
-        inv                     -- Show inventory.
-        stats [TARGET]          -- Show skills and resistances. attribute also works.
-                                   Example: 'stats tempest serpent', 'attributes evil centipede'
-        info TARGET             -- Show info on skill, item or character. 
-                                   Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        target TARGET(S)        -- Target mob(s), to be able to use skills/abilities/etc on them.
-                                   Example: 'target tempest serpent', 'target tempest serpent, black spider'
-          - target all          -- Target all nearby targetable mobs.
-          - target reset        -- Clear targeted.
-        attack SKILL/ITEM 	    -- Attack targeted_mobs. 
-                                   Example: 'attack water blade'
-        use SKILL/ITEM          -- Use a skill.
-                                   Example: 'use sense heat source'
-        craft ITEM [amount]     -- Craft items if have necessary ingredients. 
-                                   Example: 'craft full potion', 'craft full potion 10'
-                                   Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
-        mimic TARGET            -- Mimics appearance and attributes of analysed mob.
-                                   Example: 'mimic tempest serpent'
-          - info mimic          -- Shows available mimicries.
-          - mimic reset         -- Resets mimic (Back to slime).
-        eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
-        nearby                  -- Shows neearby mobs if acquired [Magic Perception] skill.
-        /log [LINES]            -- Shows x line history from game story voicelines.
-          - /log game [LINES]   -- Shows x game event history log (skill/item acquisitions, hints, etc).
-                                   Example: '/log', '/log 10', '/log game 15'
-        /help                   -- Show this help page.
-          - /help rank          -- Show game level, rank, risk chart.
-        /settings               -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
-                                   Example: 'settings hud off', 'options hud hints on'
-        /reset                  -- Deletes player save and restarts game.
-        /exit                   -- Exits after save.
-
-    Game Dialogue:
-        ~ Message ~             -- Telepathy, thought communication.
-        * Message *             -- Story context.
-        < Message >             -- Game info, acquisition, game help, etc.
-        << Message >>           -- Great Sage (Raphael, Ciel).
-        <<< Message >>>         -- Voice of the World.""")
-
-def show_rank_chart(*args):
-    """In universe ranking chart."""
-
-    print("""    Level/Ranking:
-        Level      Rank         Risk
-        11.     Special S   Catastrophe
-        10.     S           Disaster
-        9.      Special A   Calamity
-        8.      A+          Tragedy
-        7.      A           Hazard
-        6.      A-          Danger
-        5.      B           Pro
-        4.      C           Advance
-        3.      D           Intermediate
-        2.      E           Beginner
-        1.      F           Novice""")

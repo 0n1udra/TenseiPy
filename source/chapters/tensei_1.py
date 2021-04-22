@@ -531,6 +531,4 @@ def ch1_cave():
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
-    at_cave_exit()
-    #wake_up()
-    #tempest_serpent_encounter()
+    wake_up()
