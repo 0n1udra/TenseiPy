@@ -435,7 +435,7 @@ def ch1_cave():
                     if rimuru.check_acquired('magic perception'):
                         gprint("\n< Hint: If acquired [Magic Perception], you can use 'nearby' command to see nearby mobs. >")
 
-        class hfunc_attack:
+        class attack:
             __subs = ['attack water blade']
             def __init__(self):
                 if not mob_status('tempest serpent'):
@@ -444,9 +444,6 @@ def ch1_cave():
                     siprint("Oh...? What will that do?")
                     siprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
                     gprint("\n< Tutorial: Try 'eat' or 'predate' on targeted mobs that are dead to use predation. >")
-
-                if mobs_cleared():
-                    at_cave_exit()
 
     class at_cave_exit:
         def __init__(self):
@@ -532,4 +529,5 @@ def ch1_cave():
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
+    tempest_serpent_encounter()
     wake_up()
