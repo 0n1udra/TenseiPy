@@ -6,7 +6,7 @@ class Rimuru_Tempest(Character):
     name = 'Slime'
     canon_name = 'Rimuru Tempest'
     shared_protection = 'Protection of Tempest'
-    level = 7
+    level = 3
     current_mimic = None
     current_mimic_species = 'Slime'
     acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
@@ -210,7 +210,7 @@ class Tempest_Serpent(Character):
 class Giant_Bat(Character):
     name = 'Giant Bat'
     species = 'Bat'
-    level = 6
+    level = 4
     appearance = '''
     It's a giant bat...
     Due to its wings that regulate its own gravity, it's capable of flight
@@ -239,23 +239,28 @@ class Black_Spider(Character):
 class Direwolf(Character):
     name = 'Direwolf'
     species = 'Direwolf'
-    level = 5
+    level = 4
     appearance = """They have silver-blue fur, with the exception of the Direwolf Boss' Son, 
     who also has star mark on his forehead in a darker shade of blue, and a silver-white mane and snout.
     """
     description = """The wolves did not require food to survive. Their sustenance lay in the world's magicules.
     By attacking stronger monsters or slaughtering droves of humans, they can evolve into calamity-level creatures, although none of these options was feasible for them.
     The Forest of Jura was bountiful of magic and had no monsters strong enough to threaten the wolves.
-    However, Veldora's overwhelming magical force prevented them from entering."""
+    However, Veldora's overwhelming magical force prevented them from entering.
+    As individuals they're C rank, and B if as a pack."""
     evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
     starting_state = []
+
+class Direwolf_boss(Direwolf, Character):
+    name = 'Direwolf Boss'
+    level = 4
 
 
 # ========== Goblins
 class Goblin(Character):
     name = 'Goblin'
     species = 'Goblin'
-    level = 4
+    level = 2
     appearance = 'They have green skin and a big nose. Their average height is 150 centimeters.'
     description = '''
     Goblins are of the monsters that populate The Great Jura Forest, with many different tribes dotting around the forest. 
@@ -270,7 +275,7 @@ class Goblin(Character):
 class Hobgoblin(Goblin):
     name = 'Hobgoblin'
     species = 'Hobgoblin'
-    level = 5
+    level = 4
     appearance = 'They have green skin like their pre-evolved form, but their average height is improved and his height now reaches around 180 centimeters.'
     description = 'Hobglins are evolved form of Gobins.'
     evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
