@@ -143,10 +143,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     show_settings()         -- Shows game setting commands and current states.
     show_help()             -- Shows help page.
     show_rank_chart()       -- Show in-universe ranking and levels.
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 
 ===== extra.py
     get_random()            -- Used for probability.
@@ -155,7 +152,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     format_info()           -- Formats info from variables for info_page for game objects.
     tbc()                   -- Prints out To be continued.
 
-<<<<<<< HEAD
+
 ===== extra.py
     get_random()            -- Used for probability.
     get_any()               -- If input matches anything in a list.
@@ -163,25 +160,17 @@ In function docstring's Usage section, '>' means example of user input in game.
     format_info()           -- Formats info from variables for info_page for game objects.
     tbc()                   -- Prints out To be continued.
 
-=======
->>>>>>> master
 
 ===== character.py
 Go to file to read comments for class variables.
-
     __str__()               -- Returns lowercase of name variable.
     set_start_state()       -- Adds starting attributes to character
     get_object()            -- Returns game corresponding game object, usually used for when inputting with string.
     check_acquired()        -- Check if passed in list or string for _check_acquired.
     _check_acquired()       -- Checks if character has object (attribute/item).
-    update_status()         -- Update status variable.
-<<<<<<< HEAD
+    set_status()         -- Update status variable.
 
 
-=======
-
-
->>>>>>> master
 ===== attributes.py
     attribute_generator()   -- Yields all attributes character has access to. Also used for printing out with show_attributes()
     show_attributes()       -- Shows character's attributes, can also show mimicked character's attributes.
@@ -189,15 +178,9 @@ Go to file to read comments for class variables.
     remove_attribute()      -- Remove attribute.
     upgrade_attribute       -- Upgrade attribute.
     check_resistance()      -- Checks if have resistance to attack.
-<<<<<<< HEAD
     use_action()            -- Uses specified skill.
 
 
-=======
-    use_action()             -- Uses specified skill.
-
-
->>>>>>> master
 ===== combat.py
     set_targets()           -- Set targets to be focused.
     attack()                -- Attacks targets (including focused). Also checks resistance to attack.
@@ -211,13 +194,8 @@ Go to file to read comments for class variables.
     update_level()          -- Update character's level, which will also update ranking.
     add_protection()        -- Add a divine protect (blessing) to character.
     check_if_player()       -- Check if current object being manipulated is player object (Rimuru_Tempest).
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> master
 ===== inventory.py
     inventory_generator()   -- Yields character's inventory objects.
     update_inv_capacity()   -- Calculates current inventory capacity from all items acquired.
@@ -226,7 +204,6 @@ Go to file to read comments for class variables.
     remove_inventory()      -- Removes item from inventory.
     craft_item()            -- Craft game item.
 
-<<<<<<< HEAD
 
 ===== map.py
     add_played_action()     -- Adds played actions by user to a set().
@@ -236,8 +213,6 @@ Go to file to read comments for class variables.
     update_location()       -- Update characters current_location variable.
 
 
-=======
-
 ===== map.py
     add_played_action()     -- Adds played actions by user to a set().
     get_loction_variable()  -- Gets __location variable from action class.
@@ -246,7 +221,6 @@ Go to file to read comments for class variables.
     update_location()       -- Update characters current_location variable.
 
 
->>>>>>> master
 ===== subordinates.py
     subordinates_generator()-- Yields subordinates character object.
     add_subordinate()       -- Add new subordinate.
@@ -257,7 +231,6 @@ Go to file to read comments for class variables.
     great_sage              -- Great Sage.
     magic_perception        -- When acquired and use magic perception.
     cave_veldora            -- Veldora introducing himself.
-<<<<<<< HEAD
 
 
 ===== characters.py
@@ -281,36 +254,8 @@ Go to file to read comments for class variables.
     Direwolf:
     Goblin:
     Hobgoblin:
-=======
 
 
-===== characters.py
-    Rimuru_Tempest:          -- Player character.
-        mimic_generator()    -- Yields character object acquired for mimicry.
-        mimic_object()       -- Returns mimic skill object from attributes dictionary.
-        show_mimics()        -- Show acquired mimics.
-        add_mimic()          -- Adds new character object to acquired_mimicries dictionary.
-        use_mimic()          -- Activate mimicry.
-        eat_target()         -- Predates inputted and focused targets. Either adds skill, item, or character.
-
-    Veldora_Tempest:
-    Eren_Grimwold:
-    Kaval:
-    Gido:
->>>>>>> master
-
-    Tempest_Serpent:
-    Giant_Bat:
-    Evil_Centipede:
-    Black_Spider:
-    Direwolf:
-    Goblin:
-    Hobgoblin:
-
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 ===== items.py
 Item:                       -- Item parent class.
     name str                -- Item name.
@@ -349,11 +294,7 @@ Skill:
     skill_level str         -- Skill level like: Common Skill, Extra Skill, etc
     damage_level 1          -- Skill damage level.
     damage_type str         -- Skill damage types.
-<<<<<<< HEAD
     info_page str           -- Information page for skill.
-=======
-    info_page str                -- Information page for skill.
->>>>>>> master
     description str         -- Skill description.
     evolution str           -- Evolution line.
     abilities str           -- Skill abilities description.
