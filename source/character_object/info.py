@@ -112,7 +112,7 @@ class Info:
 
         # Create dictionary item if for loop found no match.
         self.standings[match] = new_value
-        print(f"    < {match} Standing: {self.standings[match]} >")
+        print(f"\n    < {match} Standing: {self.standings[match]} >\n")
 
     def get_standing(self, match, value=1):
         """

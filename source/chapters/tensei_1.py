@@ -349,7 +349,7 @@ def ch1_cave():
                     sprint(f"\nHow about {rimuru.name}!")
                     rimuru.update_standing('veldora', 1)
 
-                    sprint("\nI am ready now, until we meet again small one!")
+                    sprint("I am ready now, until we meet again small one!")
                     siprint("\n<< Use Unique skill [Predator]? >>")
                     game_action(self)
 
@@ -465,7 +465,7 @@ def ch1_cave():
             sprint("\nI shouldn't show, they'll probably get scared and attack me")
             game_action(self)
 
-        class _attack:
+        class hfunc_attack:
             __subs = ['attack adventurers', 'attack them']
             def __init__(self):
                 if mobs_cleared():
