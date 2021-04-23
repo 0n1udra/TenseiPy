@@ -43,21 +43,28 @@ class Info:
             if formatted_info := format_info(k, v):
                 self.info_page += f"    {formatted_info}\n"
 
-    def update_name(self, name):
+    def set_name(self, name):
         """Updates name of character."""
 
         self.name = name
         self.update_info()
 
-    def update_lname(self, name):
+    def set_lname(self, name):
         """Update character's family name (last name)."""
 
         self.family_name = name
         self.update_info()
 
-    def update_level(self, level):
+    def add_level(self, add_level):
+        """Adds to current level."""
+
+        print(f"    < [{self.name}] Level Up: {self.level} to {self.level + add_level}>\n")
+        self.level += add_level
+        self.update_info()
+
+    def set_level(self, level):
         """
-        Updates character level.
+        Set character level.
 
         Args:
             level int: New level for character.
@@ -68,7 +75,7 @@ class Info:
 
         self.level = level
         self.update_info()
-        print(f"    < [{self.name}] Level Up: {level} >\n")
+        print(f"    < [{self.name}] Level: {level} >\n")
 
     def add_protection(self, divine_protection):
         """
@@ -93,9 +100,9 @@ class Info:
             print(f"{k}: {v}")
         print()
 
-    def update_standing(self, match, new_value=1):
+    def add_standing(self, match, new_value=1):
         """
-        Updates player standing/reputation.
+        Adds to player standing/reputation.
 
         Args:
             match str: Character/faction/etc to update.
@@ -110,7 +117,7 @@ class Info:
         for k, v in self.standings.items():
             if k in match: self.standings[k] += new_value
 
-        # Create dictionary item if for loop found no match.
+        # Create new dictionary entry if for loop found no match.
         self.standings[match] = new_value
         print(f"\n    < {match} Standing: {self.standings[match]} >\n")
 

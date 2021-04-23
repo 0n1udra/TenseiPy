@@ -473,4 +473,3 @@ def change_settings(user_input):
     if get_any(settings_input, ['hints', 'clues'], strict_match=False): rimuru.show_hints = new_value
 
     show_settings()
-

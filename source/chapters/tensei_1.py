@@ -334,18 +334,18 @@ def ch1_cave():
                     sprint("\nLike a family name? hmmmmm...")
 
                     new_family_name = str(input("\nPick a shared family name (last name) > "))
-                    veldora.update_lname(new_family_name)
+                    veldora.set_lname(new_family_name)
                     print()
-                    rimuru.update_lname(new_family_name)
+                    rimuru.set_lname(new_family_name)
                     rimuru.add_protection('Storm Crest')
-                    rimuru.update_level(8)
+                    rimuru.update_level(5)
 
                     sprint(f"Hmmmmmm... How about {new_family_name}")
                     sprint("\nThat. Name. Is. AWESOME!")
                     siprint("\nHe actually likes it?")
                     sprint(f"\nFrom now on I will be Veldora {new_family_name}")
                     sprint("\nAnd as for you...")
-                    rimuru.update_name(str(input("\nPick name for yourself > ")))
+                    rimuru.set_name(str(input("\nPick name for yourself > ")))
                     sprint(f"\nHow about {rimuru.name}!")
                     rimuru.update_standing('veldora', 1)
 
@@ -529,5 +529,4 @@ def ch1_cave():
                     siprint("Let's leave this cave already!")
                     continue_to(ch2_goblin_encounter)
 
-    tempest_serpent_encounter()
     wake_up()
