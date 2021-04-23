@@ -104,7 +104,7 @@ def ch2_goblin_encounter():
                         rimuru.remove_inventory('full potion', 9)
                         sprint("Wow, ")
                         clear_subs(self)
-                        rimuru.update_standing('goblins', 1)
+                        rimuru.add_reputation('goblins', 1)
                         goto_goblin_village._assist_goblins()
                     else:
                         sprint("I need some way to heal them.")
@@ -115,11 +115,11 @@ def ch2_goblin_encounter():
 
     class wolf_attack:
         def __init__(self):
-            mobs_add(['25* direwolf'])
+            mobs_add(['25* direwolf', 'direwolf boss'])
             sprint("The Dire Wolves, they're here!")
             game_action(self)
 
-        class _attack:
+        class attack:
             def __init__(self):
                 siprint("Best defence is a good offense, right?")
 
@@ -131,8 +131,7 @@ def ch2_goblin_encounter():
                 sprint("So, which is it?")
                 if get_random(1, 3, 1):
                     siprint("We accept you as our new leader!")
-                else:
-                    siprint("How dare you! We not accept this!")
+                else: siprint("How dare you! We not accept this!")
 
         class _do_nothing:
             pass

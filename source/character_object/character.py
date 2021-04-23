@@ -79,7 +79,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.game_conditions = {}
         self.actions_played = {}
-        self.standings = {}  # Reputation/standing of characters/factions.
+        self.reputations = {}  # Reputation/standing of characters/factions.
         self.initialized = True
         self.set_start_state()
         self.update_info()
@@ -164,7 +164,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if item and item.quantity >= amount: return item
         return False
 
-    def update_status(self, game_object, new_status):
+    def set_status(self, game_object, new_status):
         """Update status of character."""
 
         if game_object := self.get_object(game_object):

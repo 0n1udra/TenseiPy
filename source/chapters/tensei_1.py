@@ -338,7 +338,7 @@ def ch1_cave():
                     print()
                     rimuru.set_lname(new_family_name)
                     rimuru.add_protection('Storm Crest')
-                    rimuru.update_level(5)
+                    rimuru.add_level()
 
                     sprint(f"Hmmmmmm... How about {new_family_name}")
                     sprint("\nThat. Name. Is. AWESOME!")
@@ -347,7 +347,7 @@ def ch1_cave():
                     sprint("\nAnd as for you...")
                     rimuru.set_name(str(input("\nPick name for yourself > ")))
                     sprint(f"\nHow about {rimuru.name}!")
-                    rimuru.update_standing('veldora', 1)
+                    rimuru.add_reputation('veldora', 1)
 
                     sprint("I am ready now, until we meet again small one!")
                     siprint("\n<< Use Unique skill [Predator]? >>")
@@ -364,7 +364,7 @@ def ch1_cave():
                     def __init__(self):
                         global veldora
                         rimuru.add_inventory(veldora, show_analysis_msg=False)
-                        rimuru.update_standing('veldora')
+                        rimuru.add_reputation('veldora')
                         siprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
                         game_action(self)
 
@@ -372,9 +372,9 @@ def ch1_cave():
                         __subs = subs.all_yes + ['start it', 'yes start it please', 'yes start it']
                         def __init__(self):
                             siprint("Yes! Please take care of it [Great Sage].")
-                            rimuru.update_status('veldora', 'Analyzing')
+                            rimuru.set_status('veldora', 'Analyzing')
                             gprint("< Starting Analysis: Unique Skill [Unlimited Imprisonment] >")
-                            rimuru.update_standing('veldora', 1)
+                            rimuru.add_reputation('veldora', 1)
                             siprint("I hope you get out quickly Veldora!")
                             tempest_serpent_encounter()
 
@@ -382,7 +382,7 @@ def ch1_cave():
                         __subs = subs.move_on + ['ignore him, lets move on']
                         def __init__(self):
                             siprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
-                            rimuru.update_standing('veldora', -2)
+                            rimuru.add_reputation('veldora', -2)
                             tempest_serpent_encounter()
 
                 class ask_about_seal:

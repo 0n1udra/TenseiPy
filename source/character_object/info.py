@@ -55,7 +55,7 @@ class Info:
         self.family_name = name
         self.update_info()
 
-    def add_level(self, add_level):
+    def add_level(self, add_level=1):
         """Adds to current level."""
 
         print(f"    < [{self.name}] Level Up: {self.level} to {self.level + add_level}>\n")
@@ -94,46 +94,49 @@ class Info:
         self.update_info()
         print(f'    < [{self.name}] Acquired Blessing: [{divine_protection}] >')
 
-    def show_standings(self):
+    def show_reputations(self):
         print("----- Standing -----")
-        for k, v in self.standings.items():
+        for k, v in self.reputations.items():
             print(f"{k}: {v}")
         print()
 
-    def add_standing(self, match, new_value=1):
+    def add_reputation(self, match, add_value=1):
         """
         Adds to player standing/reputation.
 
         Args:
             match str: Character/faction/etc to update.
-            new_value int(1): Increase or decrease standing. Pass in either positive or negative integer.
+            add_value int(1): Increase or decrease reputations. Pass in either positive or negative integer.
 
         Usage:
-            rimuru.update_standing('veldora', 2)
-            rimuru.update_standing('gobta', -1)
+            rimuru.add_reputation('veldora', 2)
+            rimuru.add_reputation('gobta', -1)
         """
 
         match = match.capitalize()
-        for k, v in self.standings.items():
-            if k in match: self.standings[k] += new_value
+        for k, v in self.reputations.items():
+            if k in match:
+                print(f"\n    < [{match}] Reputation Update: {self.reputations[k]} to {self.reputations[k] + add_value} >\n")
+                self.reputations[k] += add_value
+                return self.reputations[k]
 
         # Create new dictionary entry if for loop found no match.
-        self.standings[match] = new_value
-        print(f"\n    < {match} Standing: {self.standings[match]} >\n")
+        self.reputations[match] = add_value
+        print(f"\n    < [{match}] New Reputation: {self.reputations[match]} >\n")
 
-    def get_standing(self, match, value=1):
+    def get_reputations(self, match):
         """
-        Returns integer value of standing that player has with a character/faction/etc.
+        Returns integer value of reputations that player has with a character/faction/etc.
 
         Args:
-            match str: Name of character/faction/etc to check standing with.
+            match str: Name of character/faction/etc to check reputations with.
 
         Returns:
             int: Returns integer denoting reputation player has with specified.
         """
 
-        for k, v in self.standings.items():
-            if k in match.capitalize(): return self.standings[k]
+        for k, v in self.reputations.items():
+            if k in match.capitalize(): return self.reputations[k]
 
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""

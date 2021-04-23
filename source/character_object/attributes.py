@@ -41,7 +41,7 @@ class Attributes:
         if not mob: mob = self
 
         # Shows players reputation/standing also.
-        self.show_standings()
+        self.show_reputations()
 
         print("----- Skills -----")
         print(f"Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
