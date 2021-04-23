@@ -9,17 +9,17 @@ class Map:
         for mob in self.active_mobs:
             print(f"    {mob[1]}x {mob[0].name} {'(Dead)' if mob[0].status else ''}")
 
-    def add_played_action(self,  played_action):
+    def add_action_played(self,  action_played):
         """
         Able to check what actions player has taken so far by adding action's class name to tuple.
 
         Args:
-            played_action str: String parsed from game_action function.
+            action_played str: String parsed from game_action function.
         """
 
-        if played_action in self.played_actions:
-            self.played_actions[played_action] += 1
-        else: self.played_actions[played_action] = 1
+        if action_played in self.actions_played:
+            self.actions_played[action_played][0] += 1
+        else: self.actions_played[action_played] = [1, None]
 
     @staticmethod
     def get_location_variable(level_class=None):
