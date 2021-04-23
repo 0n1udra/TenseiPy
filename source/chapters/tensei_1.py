@@ -471,7 +471,8 @@ def ch1_cave():
                 if mobs_cleared():
                     siprint("Wasn't necessary, but I suppose it had to be done.")
                     at_cave_exit._hfunc_leave_cave()
-                else:
+
+                if check_attack_success():  # Will only run if you successfully killed at least one of them.
                     siprint("CRAP! I didn't kill all of them, the rest will kill me!")
                     siprint("\n* Before the little slime could do or say anything else, he was swiftly smushed to death! *")
                     game_over()

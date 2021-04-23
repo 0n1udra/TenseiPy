@@ -84,6 +84,7 @@ class Combat:
             else: continue
 
         for current_target in self.targeted_mobs:
+            if not current_target[0].is_alive: continue
             for current_skill in skills:
                 # If target is too high of a level to damage with skill.
                 if current_target[0].level > current_skill.damage_level: continue

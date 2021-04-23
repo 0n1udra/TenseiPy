@@ -5,7 +5,7 @@ from game_files.characters import Rimuru_Tempest
 
 # Initiates new Rimuru_Tempest object which will be updated with game_save if save exists.
 rimuru = Rimuru_Tempest()
-
+successful_attack = False
 
 #                    ========== Level Functions ==========
 def game_hud(actions):
@@ -49,12 +49,17 @@ def game_action(level=None):
         > attack tempest serpent with water blade
     """
 
-    rimuru.update_location(rimuru.get_location_variable(level))  # Updates player's location.
+    global successful_attack
 
+    # Updates player's location.
+    rimuru.update_location(rimuru.get_location_variable(level))
+
+    # Get's playable actions from parsing inputted class subclasses.
     actions = []
     for action in dir(level):  # Gets subclass functions.
         if '__' in action: continue  # Filters out unwanted variables and functions.
-        if 'x_' in action[:3] and not action_playable(action): continue  # Hides any action with 'x_' in name, unless action_playable return True.
+        # Hides any action with 'x_' in name, unless action_playable return True.
+        if 'x_' in action[:3] and not action_playable(action): continue
         actions.append(action)
 
     game_hud(actions)
@@ -102,6 +107,11 @@ def game_action(level=None):
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
     for action in game_actions:
+        if 'attack' in command:
+            # Used for check_attack_success().
+            successful_attack = rimuru.attack(parameters)
+            break
+
         # If action needs custom parameters passed in.
         if len(action) == 3 and command in action[2]:
             action[0](*action[1])
@@ -122,9 +132,10 @@ def game_action(level=None):
         # Adds action's class name to subs list, so you don't have to add it yourself.
         action_subs = set_action_subs(action, action_subs)
 
-        # play game action.
+        # play game action if matching from player input.
         if get_any(user_input, action_subs, strict_match=False):
-            rimuru.add_action_played(action_subs[-1])  # Check using game_cond('action_name') function.
+            # So you can check if action has been played using game_cond('action_name') function.
+            rimuru.add_action_played(action_subs[-1])
             eval(f"level.{action}()")
 
     game_action(level)
@@ -197,7 +208,6 @@ def action_playable(match, status=None):
         rimuru.actions_played[match] = [0, True]
         return True
 
-
 def last_use_skill(skill):
     """
     Checks what was the last successfully used skill.
@@ -210,11 +220,17 @@ def last_use_skill(skill):
         bool False: If not match.
     """
 
-    if not rimuru.last_use_skill: return  # If last_use_skill var is not set.
+    # If last_use_skill var is not set.
+    if not rimuru.last_use_skill: return
 
     if skill.lower() in rimuru.last_use_skill.name.lower():
         return rimuru.last_use_skill
     return False
+
+def check_attack_success():
+    """Check if last attack was successful."""
+
+    return successful_attack
 
 def mobs_add(add_mobs):
     """
