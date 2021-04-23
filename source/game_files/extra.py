@@ -64,7 +64,6 @@ def get_any(match_to, input_list, strict_match=True):
         else:
             if i in match_to: return True
 
-
 def on_off(var):
     """Returns string 'on'/'off' based on var."""
 
@@ -123,6 +122,28 @@ def format_info(name, var):
     else: return_data += str(var).strip()
 
     return return_data
+
+def set_action_subs(action, action_subs):
+    """
+    Formats inputted action __subs list to be used to check play action match from user input.
+
+    Args:
+        action: Current action's name.
+        action_subs: __subs list of corresponding action.
+
+    Returns:
+        list: Returns newly formated __subs list to be used to check user input match.
+
+    """
+
+    # If action name has _x in it it'll extract the important part of the action name to add to subs list.
+    if 'x_' in action[:3]:
+        action_subs = [' '.join(list(filter(None, action.split('_')))[1:])] + action_subs
+    # Adds action's class name to list of subs for possible user input matches.
+    else: action_subs.append(action.replace('_', ' ').strip().lower())
+
+    return action_subs
+
 
 def tbc():
     """Print part of game/story is in development."""

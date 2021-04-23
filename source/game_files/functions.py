@@ -11,6 +11,14 @@ rimuru = Rimuru_Tempest()
 def game_hud(actions):
     """Show game HUD, includes current mimic, mobs targeted, and available actions."""
 
+    # Formats actions to be displayed to user.
+    hud_actions = actions[:]
+    for action in hud_actions:
+        # If action has x_ in it's name it'll parse that out to be displayed to user.
+        if 'x_' in action[:3]:
+            hud_actions.remove(action)
+            hud_actions = [' '.join(list(filter(None, action.split('_')))[1:])] + hud_actions
+
     if rimuru.show_actions is False or rimuru.hardcore is True: return
 
     if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_actions: print()  # Adds extra space when needed.
@@ -25,7 +33,7 @@ def game_hud(actions):
 
     if rimuru.show_actions:
         # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
-        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in actions if 'hfunc' not in action])
+        actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in hud_actions if 'hfunc' not in action])
         print(f"Actions: {actions_for_hud}", end='')
 
 def game_action(level=None):
@@ -46,6 +54,7 @@ def game_action(level=None):
     actions = []
     for action in dir(level):  # Gets subclass functions.
         if '__' in action: continue  # Filters out unwanted variables and functions.
+        if 'x_' in action[:3] and not action_playable(action): continue  # Hides any action with 'x_' in name, unless action_playable return True.
         actions.append(action)
 
     game_hud(actions)
@@ -110,15 +119,36 @@ def game_action(level=None):
         # Usually used for when you want an action to be used only once.
         if 'ACTIONBLOCKED' in action_subs: continue
 
-        # Adds action's class name to subs list, so you don't have to add it yourself in the chapter files.
-        action_subs.append(action.replace('_', ' ').strip().lower())
+        # Adds action's class name to subs list, so you don't have to add it yourself.
+        action_subs = set_action_subs(action, action_subs)
 
         # play game action.
-        if get_any(user_input, action_subs):
-            rimuru.add_played_action(action_subs[-1])  # Check using game_cond('action_name') function.
+        if get_any(user_input, action_subs, strict_match=False):
+            rimuru.add_action_played(action_subs[-1])  # Check using game_cond('action_name') function.
             eval(f"level.{action}()")
 
     game_action(level)
+
+def action_played(match, amount=1):
+    """
+    Checks if game action has been played.
+
+    Args:
+        match obj: Pass in game level object to check if it has been played already.
+
+    Returns:
+        bool True: Returns True if game action has been played.
+
+    Usage:
+        action_played(self)
+    """
+
+    # Extracts and parses level action name from passed in level object.
+    # E.g. Extracts "speak now" from "<class 'chapters.tensei_1.ch1_cave.<locals>.wake_up.speak_now'>"
+    match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
+
+    # Checks if action has been played more than once.
+    if game_cond(match_action) > amount: return True
 
 def game_cond(game_var, new_value=None):
     """
@@ -139,30 +169,34 @@ def game_cond(game_var, new_value=None):
     # Return game conditional data if found.
     if game_var in rimuru.game_conditions:
         return rimuru.game_conditions[game_var]
-    if game_var in rimuru.played_actions:
-        return rimuru.played_actions[game_var]
+    if game_var in rimuru.actions_played:
+        return rimuru.actions_played[game_var][0]
     return False
 
-def played_action(match, amount=1):
+def action_playable(match, status=None):
     """
-    Checks if game action has been played.
+    Checks and sets if action is playable. If action is disabled, it's also hidden on HUD.
+    hfunc_action is for hidden action from HUD, but still playable. x_action are hidden and unplayable until enabled with this function.
 
     Args:
-        match obj: Pass in game level object to check if it has been played already.
+        match: Action to check/set playability.
+        status: Optionally set new status of playability of action.
 
     Returns:
-        bool True: Returns True if game action has been played.
-
-    Usage:
-        played_action(self)
+        bool: Returns True/False if action is playable.
     """
 
-    # Extracts and parses level action name from passed in level object.
-    # E.g. Extracts "speak now" from "<class 'chapters.tensei_1.ch1_cave.<locals>.wake_up.speak_now'>"
-    match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
+    for action, data in rimuru.actions_played.items():
+        if action in match:
+            # If function received new status to set to action playability.
+            if status is not None: data[1] = status
+            return data[1]
 
-    # Checks if action has been played more than once.
-    if game_cond(match_action) > amount: return True
+    # Using function to just check action's playability.
+    if status is not None:
+        rimuru.actions_played[match] = [0, True]
+        return True
+
 
 def last_use_skill(skill):
     """

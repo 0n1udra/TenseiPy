@@ -38,41 +38,54 @@ def ChapterXX():
                 # Calling this will give player opportunity to input a action.
                 game_action(self)
 
-        # hfunc or _hfunc are hidden on the action menu (still playable, player just won't know the input to play the action).
-        # Add __subs list for substitute or alternative inputs user can use for same action.
-        class hfunc_secret_action:
-            __subs = ['the secret action', 'do the secret action']
-            def __init__(self):
-                # Add mobs to current section. This will add 10 of them. Read other mob related functions like mob_status, mobs_cleared, and mobs_reset.
-                mobs_add(['10* scary mob'])
+            class x_locked_action():
+                def __init__(self):
+                    siprint("This action unlocked after you played 'play me'")
 
-                # Set game conditions that will be used later. game_cond() manipulates rimuru.game_conditions dictionary.
-                game_cond('found_hidden', True)
+            class play_me():
+                __subs = ['do me', 'try me']
+                def __init__(self):
+                    siprint("You played this action")
 
-                # Loading dots animation (only works when textcrawl is True)
-                sdots(5, 5)
+                    # Enables 'x_locked_action' to be visible on HUD and playable.
+                    action_playable('locked_action', True)
 
-                siprint("ooooooooohhh!, a secret action!")
 
-                # If first time playing action.
-                if not played_action(self):
-                    print("First time playing secret action.")
+            # hfunc or _hfunc are hidden on the action menu (still playable, just not visible on HUD, player just won't know the input to play the action).
+            # Add __subs list for substitute or alternative inputs user can use for same action.
+            class hfunc_secret_action:
+                __subs = ['the secret action', 'do the secret action']
+                def __init__(self):
+                    # Add mobs to current section. This will add 10 of them. Read other mob related functions like mob_status, mobs_cleared, and mobs_reset.
+                    mobs_add(['10* scary mob'])
 
-                # Only if action has been played already.
-                if played_action(self):
-                    print("Played this action already")
+                    # Set game conditions that will be used later. game_cond() manipulates rimuru.game_conditions dictionary.
+                    game_cond('found_hidden', True)
 
-                # Add item to player inventory.
-                rimuru.add_inventory('special item')
+                    # Loading dots animation (only works when textcrawl is True)
+                    sdots(5, 5)
 
-                # Add attribute (skill/resistances/etc).
-                rimuru.add_attribute('special skill')
+                    siprint("ooooooooohhh!, a secret action!")
 
-                # Clears __subs, to make action useable only once (only works with classes).
-                clear_subs(self)
+                    # If first time playing action.
+                    if not played_action(self):
+                        print("First time playing secret action.")
 
-                # Move story to new section.
-                game_action(secret_place())
+                    # Only if action has been played already.
+                    if played_action(self):
+                        print("Played this action already")
+
+                    # Add item to player inventory.
+                    rimuru.add_inventory('special item')
+
+                    # Add attribute (skill/resistances/etc).
+                    rimuru.add_attribute('special skill')
+
+                    # Clears __subs, to make action useable only once (only works with classes).
+                    clear_subs(self)
+
+                    # Move story to new section.
+                    game_action(secret_place())
 
 
 > Start with ChapterXX function with Chapter_XX class to start with.
