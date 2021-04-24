@@ -256,13 +256,14 @@ def mobs_add(add_mobs):
             try: amount = int(amount)
             except: pass
 
-        # Sets mob name when creating new Character object, e.g. ['goblin name: Goblin Chief']
+        # Sets mob name when creating new Character object, e.g. ['tempest serpent: john']
         if ':' in new_mob:
             new_mob, new_name = new_mob.split(':')
         else: new_name = ''
 
         if mob_object := rimuru.get_object(new_mob.strip(), new=True):
-            rimuru.active_mobs.append([mob_object(new_name.strip()), amount])
+            mob_list_adder([mob_object(new_name.strip()), amount], rimuru.active_mobs, amount_mode=True)
+
 
 def mob_status(target):
     """

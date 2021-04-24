@@ -1,4 +1,4 @@
-from game_files.extra import get_any
+from game_files.extra import get_any, mob_list_adder
 from game_files.output import gprint
 
 class Combat:
@@ -28,13 +28,8 @@ class Combat:
             for target in targets.split(','):
                 # Only able to target mobs in active_mobs list.
                 for mob in self.active_mobs:
-                    skip = False  # I need to skip 'mob in active_mob' for loop within 'i in target_mobs' for loop.
                     if mob[0].name.lower() in target:
-                        for i in self.targeted_mobs:
-                            if i[0] == mob[0]: skip = True  # If mob already being targeted.
-
-                        if skip is False: self.targeted_mobs.append(mob)
-                        else: continue
+                        mob_list_adder(mob, self.targeted_mobs)
 
     def attack(self, user_input, user=None):
         """
