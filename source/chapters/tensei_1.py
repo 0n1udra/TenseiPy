@@ -495,26 +495,25 @@ def ch1_cave():
         class _wait:
             __subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
             def __init__(self):
+                mobs_reset()
                 if get_random(1, 20, 1):
                     siprint("I sense a monster nearby! There! A slime!")
                     siprint("\nCrap! How did they notice me!")
-                    siprint("\n* And before another word could be uttered by the little slime, he was swiftly smushed. *\n")
+                    siprint("\n* And before another word could be uttered by the little slime, he was swiftly smushed. *")
                     game_over()
 
-                if game_cond('friend veldora', True):
-                    siprint("Or... uhm... Should I go back to that pouty dragon or just move on?")
-
-                mobs_reset()
                 siprint("Phew, their gone now. I can finally leave now. They even left the door open for me, how nice.")
+
+                # Only if you met veldora, and you haven't already 'eaten' him.
+                if game_cond('friend veldora') and not rimuru.check_acquired('veldora'):
+                    siprint("Or... uhm... Should I go back to that pouty dragon or just move on?")
+                    action_playable('go_to_veldora', True)
 
                 game_action(self)
 
-            class _go_to_veldora:
+            class _x_go_to_veldora:
                 __subs = ['go find veldora', 'veldora', 'go back to veldora', 'go back to dragon', 'go find that voice', 'find voice', 'follow voice', 'follow voice again', 'go follow voice', 'follow weird voice', 'locate voice', 'search for voice', 'search for weird voice', 'voice', 'what was that voice', 'where is that voice coming from', 'where is that voice', 'where was that voice', 'where was that voice again', 'go back to voice']
                 def __init__(self):
-                    if rimuru.check_acquired('veldora'): return
-
-                    mobs_reset()
                     if game_cond('friend veldora'):
                         siprint("Let's go check on that dragon.")
                         siprint("\n~ What are you doing back? ~")
