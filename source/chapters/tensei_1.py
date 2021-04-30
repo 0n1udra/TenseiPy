@@ -419,6 +419,9 @@ def ch1_cave():
         class sneak_away:
             __subs = ['sneak out', 'try sneaking out', 'try to sneak out', 'try escaping', 'try to sneak away', 'try sneaking away', 'try sneaking out', 'try slipping out', 'try to slip away', 'try to slip out', 'slip away']
             def __init__(self):
+                if not mob_status('tempest serpent'):
+                    at_cave_exit()
+
                 siprint("Crap! It noticed me, no sneaking out now!")
 
         class _move_on:
