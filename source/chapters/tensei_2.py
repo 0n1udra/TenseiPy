@@ -45,11 +45,20 @@ def ch2_goblin_encounter():
                 sprint("Of course you would. Lets start moving.")
                 goto_goblin_village()
 
+        class hfunc_attack:
+            def __init__(self):
+                if mobs_cleared():
+                    print("Yeahhhhh.... Hello, developer here! First off, WTF is wrong with you. Second, sorry but as of now the story NEEDS those weak goblins.")
+                    print("ikik, I'm sooooo sorry that you can't go on a genocidal rampage right now (just yet), but yes, sadly the story just won't work with them all dead.")
+                    game_over()
+                elif check_attack_success():
+                    siprint("oh")
+
     class goto_goblin_village:
         __location = "Goblin Village"
 
         def __init__(self):
-            mobs_add(['goblin: Goblin Chief'])
+            mobs_reset()
             siprint("\nWow, this place looks like a dump... ")
             sprint("\nI am the village elder. I'm sorry we don't have much to serve you.")
             sprint("So I'm guessing you didn't invite me here just for pleasantries.")
@@ -65,20 +74,6 @@ def ch2_goblin_encounter():
                 sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
                 sprint("That will have to do. For now.")
 
-        class _attack:
-            def __init__(self):
-                if mobs_cleared():
-                    print("Yeahhhhh.... Hello, developer here! First off, WTF is wrong with you. Second, sorry but as of now the story NEEDS those weak goblins.")
-                    print("ikik, I'm sooooo sorry that you can't go on a genocidal rampage right now (just yet), but yes, sadly the story just won't work with them all dead.")
-                    game_over()
-                    #siprint("They're all dead now. They were so weak.")
-                    #siprint("What now?")
-
-                if mob_status('goblin elder'):
-                    sprint("Listen up! I am now you're new village chief!")
-                    sprint("Anyone that disagrees will be cut down on the spot!")
-                    game_action(self)
-
         class _assist_goblins:
             __subs = ['assist', 'lend help', 'assist them', 'assist the goblins', 'help goblins', 'help the goblins', 'help them', 'assist them']
             def __init__(self):
@@ -92,36 +87,35 @@ def ch2_goblin_encounter():
                 def __init__(self):
                     sprint("Let's setup defenses.")
                     siprint("Hey! Get some goblins to setup defenses around the parameter.")
+
+                    if rimuru.check_acquired('sticky thread'):
+                        siprint("I can use [Sticky Thread] as a trap also.")
+                        game_cond('sticky thread trap', True)
+                    if rimuru.check_acquired('steel thread'):
+                        siprint("Perhaps [Steel Thread] can be use as a last line of defense.")
+                        game_cond('steel thread trap', True)
+
                     wolf_attack()
 
             class _heal_wounded:
                 __subs = ['heal wounded', 'heal wounded victims']
                 def __init__(self):
-                    mobs_add(['9*goblin'])
                     sprint("Show me your wounded")
                     siprint("Looks like 9 wounded goblins..... How can I help them?")
                     if rimuru.check_acquired('full potion', 9):
                         rimuru.remove_inventory('full potion', 9)
-                        sprint("Wow, ")
-                        clear_subs(self)
+                        sprint("Wow, those potions are really impressive.")
                         rimuru.add_reputation('goblins', 1)
+                        clear_subs(self)  # Makes this option usable once.
                         goto_goblin_village._assist_goblins()
                     else:
                         sprint("I need some way to heal them.")
                         goto_goblin_village._assist_goblins()
 
-            class look_around:
-                __subs = ['inspect village', 'look around village', '']
-
     class wolf_attack:
         def __init__(self):
-            mobs_add(['25* direwolf', 'direwolf boss'])
             sprint("The Dire Wolves, they're here!")
             game_action(self)
-
-        class attack:
-            def __init__(self):
-                siprint("Best defence is a good offense, right?")
 
         class _give_warning:
             __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
@@ -129,11 +123,28 @@ def ch2_goblin_encounter():
                 sprint("Listen up, because I'm only going to say this once!")
                 sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
                 sprint("So, which is it?")
-                if get_random(1, 3, 1):
-                    siprint("We accept you as our new leader!")
-                else: siprint("How dare you! We not accept this!")
+                sprint('\nOur wolf pack will not be initimdated by a mere slime!')
+                sprint("ATTACK!!!")
+                siprint("\nWelp.... That didn't work...")
 
-        class _do_nothing:
-            pass
+                if game_cond('sticky thread trap'):
+                    siprint("Those [Sticky Thread] traps are working well I see.")
+                    sprint("\nYour tricks will not stop me! I am the pack leader!")
+
+                if game_cond('steel thread trap'):
+                    sprint("W-w-what is this!?")
+                    sprint("That would be [Steel Thread]! Can't bite through that, can you!")
+                else:
+                    siprint("\nThat wolf is coming at me way to fast!")
+                    sprint("\nYOU'RE DEAD, YOU SLIME!")
+                    sprint("\n*CHOMP*")
+                    game_over()
+
+                game_action(self)
+
+            class _kill_leader:
+                __subs = []
+                def __init__(self):
+                    mobs_add(['direwolf boss'])
 
     goblin_encounter()
