@@ -87,7 +87,7 @@ def game_action(level=None):
         [rimuru.show_info, ['info']],
         [rimuru.show_inventory, ['inv']],
         [rimuru.show_attributes, ['stats']],
-        [rimuru.set_targets, ['target']],
+        [set_targets, ['target']],
         [rimuru.attack, [parameters], ['attack']],
         [rimuru.use_action, [parameters, user], ['use']],
         [rimuru.craft_item, ['craft']],
@@ -232,6 +232,35 @@ def check_attack_success():
 
     return successful_attack
 
+def set_targets(targets):
+    """
+    Adds inputted targets to targeted_mobs list from user input.
+
+    Separates user inputted targets by ',' then checks to see if mob is in active_mobs list.
+    If so, adds to setTargets list.
+
+    Args:
+        targets str: String of target(s) to add to targeted_mobs (list)
+
+    Usage:
+        > target tempest serpent, giant bat
+    """
+
+    targets = targets.lower()
+
+    # Clears currently targeted.
+    if get_any(targets, ['reset', 'clear']):
+        rimuru.targeted_mobs.clear()
+    # Target all nearby targetable mobs.
+    elif 'all' in targets:
+        rimuru.targeted_mobs = rimuru.active_mobs[:]
+    else:
+        for target in targets.split(','):
+            # Only able to target mobs in active_mobs list.
+            for mob in rimuru.active_mobs:
+                if mob[0].name.lower() in target:
+                    mob_list_adder(mob, rimuru.targeted_mobs)
+
 def mobs_add(add_mobs):
     """
     Add new mob to current level, and able to set name at creation.
@@ -263,7 +292,6 @@ def mobs_add(add_mobs):
 
         if mob_object := rimuru.get_object(new_mob.strip(), new=True):
             mob_list_adder([mob_object(new_name.strip()), amount], rimuru.active_mobs, amount_mode=True)
-
 
 def mob_status(target):
     """

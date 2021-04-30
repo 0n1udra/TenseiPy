@@ -2,35 +2,6 @@ from game_files.extra import get_any, mob_list_adder
 from game_files.output import gprint
 
 class Combat:
-    def set_targets(self, targets):
-        """
-        Adds inputted targets to targeted_mobs list from user input.
-
-        Separates user inputted targets by ',' then checks to see if mob is in active_mobs list.
-        If so, adds to setTargets list.
-
-        Args:
-            targets str: String of target(s) to add to targeted_mobs (list)
-
-        Usage:
-            > target tempest serpent, giant bat
-        """
-
-        targets = targets.lower()
-
-        # Clears currently targeted.
-        if get_any(targets, ['reset', 'clear']):
-            self.targeted_mobs.clear()
-        # Target all nearby targetable mobs.
-        elif 'all' in targets:
-            self.targeted_mobs = self.active_mobs[:]
-        else:
-            for target in targets.split(','):
-                # Only able to target mobs in active_mobs list.
-                for mob in self.active_mobs:
-                    if mob[0].name.lower() in target:
-                        mob_list_adder(mob, self.targeted_mobs)
-
     def attack(self, user_input, user=None):
         """
         Checks if can attack, and if it was successful.
