@@ -14,8 +14,10 @@ def game_hud(actions):
     # Formats actions to be displayed to user.
     hud_actions = actions[:]
     for action in hud_actions:
+        # Removes action from HUD if not playable.
+        if action_playable(action) is False: hud_actions.remove(action)
         # If action has x_ in it's name it'll parse that out to be displayed to user.
-        if 'x_' in action[:3]:
+        elif 'x_' in action[:3]:
             hud_actions.remove(action)
             hud_actions = [' '.join(list(filter(None, action.split('_')))[1:])] + hud_actions
 
@@ -57,9 +59,10 @@ def game_action(level=None):
     # Get's playable actions from parsing inputted class subclasses.
     actions = []
     for action in dir(level):  # Gets subclass functions.
+        if action_playable(action) is False: continue
         if '__' in action: continue  # Filters out unwanted variables and functions.
         # Hides any action with 'x_' in name, unless action_playable return True.
-        if 'x_' in action[:3] and not action_playable(action): continue
+        if 'x_' in action[:3]: continue
         actions.append(action)
 
     game_hud(actions)
@@ -201,12 +204,12 @@ def action_playable(match, status=None):
         if action in match:
             # If function received new status to set to action playability.
             if status is not None: data[1] = status
+
             return data[1]
 
-    # Using function to just check action's playability.
-    if status is not None:
-        rimuru.actions_played[match] = [0, True]
-        return True
+    rimuru.actions_played[match] = [0, status]
+    return status
+
 
 def last_use_skill(skill):
     """
@@ -376,7 +379,7 @@ def continue_to(next_location):
     game_save()
 
     # Loads next story chapter.
-    try: next_location()
+    try: next_location(rimuru)
     except: gprint("< Error Loading Next Location >")
 
 

@@ -3,7 +3,7 @@ from game_maps.game_location import *
 from chapters.tensei_3 import Chapter3
 
 
-def ch2_goblin_encounter():
+def ch2_goblin_encounter(rimuru):
     class goblin_encounter:
         __location = "Near the Sealed Cave"
 
@@ -101,20 +101,19 @@ def ch2_goblin_encounter():
                 __subs = ['heal wounded', 'heal wounded victims']
                 def __init__(self):
                     sprint("Show me your wounded")
-                    siprint("Looks like 9 wounded goblins..... How can I help them?")
                     if rimuru.check_acquired('full potion', 9):
+                        siprint("I could try eating them and splashing them with the potion...")
+                        sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
-                        sprint("Wow, those potions are really impressive.")
                         rimuru.add_reputation('goblins', 1)
-                        clear_subs(self)  # Makes this option usable once.
-                        goto_goblin_village._assist_goblins()
+                        action_playable('_heal_wounded', False)
                     else:
+                        siprint("Looks like 9 wounded goblins..... How can I help them?")
                         sprint("I need some way to heal them.")
-                        goto_goblin_village._assist_goblins()
 
     class wolf_attack:
         def __init__(self):
-            sprint("The Dire Wolves, they're here!")
+            sprint("\nMaster! The Direwolves are here!")
             game_action(self)
 
         class _give_warning:
@@ -134,8 +133,9 @@ def ch2_goblin_encounter():
                 if game_cond('steel thread trap'):
                     sprint("W-w-what is this!?")
                     sprint("That would be [Steel Thread]! Can't bite through that, can you!")
+                # Without setting up steel thread as defense, the pack leader will kill you!
                 else:
-                    siprint("\nThat wolf is coming at me way to fast!")
+                    siprint("\nThat wolf is coming at me way to fast! I have nothing to stop him!")
                     sprint("\nYOU'RE DEAD, YOU SLIME!")
                     sprint("\n*CHOMP*")
                     game_over()

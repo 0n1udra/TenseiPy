@@ -5,7 +5,7 @@ from chapters.tensei_2 import ch2_goblin_encounter
 from game_maps.game_location import *
 from game_files.characters import Veldora_Tempest
 
-def ch1_cave():
+def ch1_cave(rimuru):
     class wake_up():
         __location = 'Sealed Cave'
 
@@ -173,7 +173,7 @@ def ch1_cave():
                     siprint("I need figure out a way to get out of this situation.")
 
         class hfunc_grab_sword:
-            __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'grab treasure', 'eat treasure', 'predate treasure']
+            __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'get treasure', 'grab treasure', 'eat treasure', 'predate treasure']
             def __init__(self):
                 rimuru.add_inventory('magic sword')
                 siprint("\nHEY! Look! This shape, feels like a sword! Wonder if it's any good?")
@@ -349,7 +349,7 @@ def ch1_cave():
                     sprint(f"\nHow about {rimuru.name}!")
                     rimuru.add_reputation('veldora', 1)
 
-                    sprint("I am ready now, until we meet again small one!")
+                    sprint("\nI am ready now, until we meet again small one!")
                     siprint("\n<< Use Unique skill [Predator]? >>")
                     game_action(self)
 
@@ -360,7 +360,7 @@ def ch1_cave():
                         sprint("Hey what are you doing there? Focus on me... ME!")
 
                 class _eat_veldora:
-                    __subs = subs.all_yes + ['predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon', 'predate the dragon', 'swallow dragon', 'swallow veldora']
+                    __subs = subs.all_yes + ['eat', 'predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon', 'predate the dragon', 'swallow dragon', 'swallow veldora']
                     def __init__(self):
                         global veldora
                         rimuru.add_inventory(veldora, show_analysis_msg=False)
@@ -369,7 +369,7 @@ def ch1_cave():
                         game_action(self)
 
                     class _start_analysis:
-                        __subs = subs.all_yes + ['start it', 'yes start it please', 'yes start it']
+                        __subs = subs.all_yes + ['start', 'start it', 'yes start it please', 'yes start it']
                         def __init__(self):
                             siprint("Yes! Please take care of it [Great Sage].")
                             rimuru.set_status('veldora', 'Analyzing')
@@ -379,7 +379,7 @@ def ch1_cave():
                             tempest_serpent_encounter()
 
                     class _move_on:
-                        __subs = subs.move_on + ['ignore him, lets move on']
+                        __subs = subs.move_on + subs.no + ['no', 'ignore him, lets move on']
                         def __init__(self):
                             siprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
                             rimuru.add_reputation('veldora', -2)
@@ -510,7 +510,7 @@ def ch1_cave():
                 # Only if you met veldora, and you haven't already 'eaten' him.
                 if game_cond('friend veldora') and not rimuru.check_acquired('veldora'):
                     siprint("Or... uhm... Should I go back to that pouty dragon or just move on?")
-                    action_playable('go_to_veldora', True)
+                    action_playable('_x_go_to_veldora', True)
 
                 game_action(self)
 

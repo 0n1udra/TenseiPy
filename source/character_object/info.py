@@ -122,7 +122,7 @@ class Info:
 
         # Create new dictionary entry if for loop found no match.
         self.reputations[match] = add_value
-        print(f"\n    < [{match}] New Reputation: {self.reputations[match]} >\n")
+        print(f"\n    < [{match}] New Reputation: {self.reputations[match]} >")
 
     def get_reputations(self, match):
         """
