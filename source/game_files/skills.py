@@ -266,15 +266,9 @@ class Water_Manipulation(Extra, Skill):
     '''
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
-class Vampirism(Extra, Skill):
-    name = 'Vampirism'
-    skill_level = 'Intrinsic Skill'
-    damage_type = 'Melee'
-    damage_level = 4
-    description = "By sucking the target's blood the user can temporarily gain its Skills."
-
 
 #                    ========== Intrinsic Skills ==========
+# Slime
 class Absorb_Dissolve(Intrinsic, Skill):
     name = 'Absorb/Dissolve'
     description = 'Slime-species intrinsic Skills that are inferior versions of Unique Skills Predator and Glutton.'
@@ -288,19 +282,16 @@ class Self_Regeneration(Intrinsic, Skill):
               '''
     evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
 
-class Sticky_Thread(Extra, Skill):
-    name = 'Sticky Thread'
-    damage_type = 'Melee'
-    damage_level = 2
-    description = "A thin sticky thread that traps enemies and prevent them from moving."
+# Tempest Serpent
+class Poisonous_Breath(Intrinsic, Skill):
+    name = 'Poisonous Breath'
+    damage_type = 'Poison'
+    damage_level = 8
+    description = '''A powerful breath-type poison (corrosion) attack. 
+        Affects an area seven meters in front of the user in a 120-degree radius.
+    '''
 
-class Steel_Thread(Extra, Skill):
-    name = 'Steel Thread'
-    damage_type = 'Melee'
-    damage_level = 5
-    description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
-
-class Sense_Heat_Source(Extra, Skill):
+class Sense_Heat_Source(Intrinsic, Skill):
     name = 'Sense Heat Source'
     description = '''Identifies any heat reactions in the local area. 
         Not affected by any concealing effects.
@@ -310,6 +301,53 @@ class Sense_Heat_Source(Extra, Skill):
         if not user: return False
         user.show_nearby(valid_usage=True)
         return True
+
+# Evil Centipede
+class Paralyzing_Breath(Intrinsic, Skill):
+    name = 'Paralyzing Breath'
+    damage_type = 'Poison'
+    damage_level = 5
+    description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
+
+# Giant Bat
+class Vampirism(Intrinsic, Skill):
+    name = 'Vampirism'
+    damage_type = 'Melee'
+    damage_level = 4
+    description = "By sucking the target's blood the user can temporarily gain its Skills."
+
+class Ultrasound_Waves(Intrinsic, Skill):
+    name = 'Ultrasound Waves'
+    damage_type = 'Melee'
+    damage_level = 3
+    description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
+
+# Black Spider
+class Sticky_Thread(Intrinsic, Skill):
+    name = 'Sticky Thread'
+    damage_type = 'Melee'
+    damage_level = 2
+    description = "A thin sticky thread that traps enemies and prevent them from moving."
+
+class Steel_Thread(Intrinsic, Skill):
+    name = 'Steel Thread'
+    damage_type = 'Melee'
+    damage_level = 5
+    description = "A strong thin steel thread used to defend against enemy attacks or when making a nest."
+
+# Direwolf
+class Coercion(Intrinsic, Skill):
+    name = 'Coercion'
+    damage_type = 'Melee'
+    damage_level = 1
+    description = "Intimidate low level mobs with loud howling, can barely damage anything except very low level beings (like humnas)."
+
+class Keen_smell(Intrinsic, Skill):
+    name = 'Keen Smell'
+
+class Thought_Communication(Intrinsic, Skill):
+    name = 'Thought Communication'
+    description = "Able to transmit thoughts/ideas/feelings to other beings, not just language."
 
 
 #                    ========== Common Skills ==========
@@ -334,26 +372,6 @@ class Water_Bullet(Common, Skill):
     description = "Shoot out a small powerful water bullet."
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
     use_requirements = {'Water': 1}
-
-class Poisonous_Breath(Common, Skill):
-    name = 'Poisonous Breath'
-    damage_type = 'Poison'
-    damage_level = 8
-    description = '''A powerful breath-type poison (corrosion) attack. 
-        Affects an area seven meters in front of the user in a 120-degree radius.
-    '''
-
-class Paralyzing_Breath(Common, Skill):
-    name = 'Paralyzing Breath'
-    damage_type = 'Poison'
-    damage_level = 5
-    description = "The ability to release a powerful paralyzing breath. A good skill to use during an ambush."
-
-class Ultrasound_Waves(Common, Skill):
-    name = 'Ultrasound Waves'
-    damage_type = 'Melee'
-    damage_level = 3
-    description = "Used bewilder the enemy or causing him to faint. The Skill can also pinpoint one's location"
 
 
 #                    ========== Resistances ==========
