@@ -85,8 +85,7 @@ def ch2_goblin_encounter(rimuru):
             class _setup_defenses:
                 __subs = ['go setup defenses', 'setup some defenses', 'setup border defenses']
                 def __init__(self):
-                    sprint("Let's setup defenses.")
-                    siprint("Hey! Get some goblins to setup defenses around the parameter.")
+                    sprint("Hey! Get some goblins to setup defenses around the parameter.")
 
                     if rimuru.check_acquired('sticky thread'):
                         siprint("I can use [Sticky Thread] as a trap also.")
@@ -98,13 +97,14 @@ def ch2_goblin_encounter(rimuru):
                     wolf_attack()
 
             class _heal_wounded:
-                __subs = ['heal wounded', 'heal wounded victims']
+                __subs = ['heal wounded', 'heal wounded victims', 'heal hurt', 'help injured', 'heal injured', 'assist injured', 'assist wounded']
                 def __init__(self):
                     sprint("Show me your wounded")
                     if rimuru.check_acquired('full potion', 9):
                         siprint("I could try eating them and splashing them with the potion...")
                         sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
+                        sprint("\nW-w-whoa! You really are a powerful great one!")
                         rimuru.add_reputation('goblins', 1)
                         action_playable('_heal_wounded', False)
                     else:
@@ -113,7 +113,10 @@ def ch2_goblin_encounter(rimuru):
 
     class wolf_attack:
         def __init__(self):
+            mobs_add(['direwolf leader'])
             sprint("\nMaster! The Direwolves are here!")
+            sprint("\nWe are the Direwolves! And I am they're leader!")
+            sprint("This village shall be soaked in goblin blood soon enough!")
             game_action(self)
 
         class _give_warning:
@@ -121,18 +124,17 @@ def ch2_goblin_encounter(rimuru):
             def __init__(self):
                 sprint("Listen up, because I'm only going to say this once!")
                 sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
-                sprint("So, which is it?")
                 sprint('\nOur wolf pack will not be initimdated by a mere slime!')
                 sprint("ATTACK!!!")
-                siprint("\nWelp.... That didn't work...")
+                siprint("\nIntimidating not work...")
 
                 if game_cond('sticky thread trap'):
                     siprint("Those [Sticky Thread] traps are working well I see.")
-                    sprint("\nYour tricks will not stop me! I am the pack leader!")
+                    sprint("\nYour tricks will not stop us!")
 
                 if game_cond('steel thread trap'):
                     sprint("W-w-what is this!?")
-                    sprint("That would be [Steel Thread]! Can't bite through that, can you!")
+                    sprint("\nThat would be [Steel Thread]! Can't bite through that can you!")
                 # Without setting up steel thread as defense, the pack leader will kill you!
                 else:
                     siprint("\nThat wolf is coming at me way to fast! I have nothing to stop him!")
@@ -140,11 +142,45 @@ def ch2_goblin_encounter(rimuru):
                     sprint("\n*CHOMP*")
                     game_over()
 
+                set_targets('direwolf leader')
                 game_action(self)
 
-            class _kill_leader:
+            class _attack_water_blade:
                 __subs = []
                 def __init__(self):
-                    mobs_add(['direwolf boss'])
+                    siprint("Perhaps they'll take me more seriously if I take out the leader.")
+                    if mobs_cleared():
+                        siprint("I did it! The leader is dead! Maybe they will listen if I...")
+                    else:
+                        siprint("\nHow the leader survive!?")
+                        game_over()
+
+                    game_action(self)
+
+                class _eat:
+                    def __init__(self):
+                        siprint("What can I do to possibly coerce them?")
+                        game_action(self)
+
+                    class _mimic_direwolf_leader:
+                        def __init__(self):
+                            siprint("This skill looks useful!")
+                            game_action(self)
+
+                        class _use_coercion:
+                            def __init__(self):
+                                sprint("HOOWWWLLLLLL!!!!!..........")
+                                dots(5)
+                                sprint("HOWWLLLL!!!!......")
+                                sprint("\nW-we surrender.")
+                                sprint("Our pack is now yours to command.")
+                                naming_mobs()
+
+
+
+    class naming_mobs:
+        def __init__(self):
+            tbc()
+            pass
 
     goblin_encounter()
