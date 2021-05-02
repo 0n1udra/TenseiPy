@@ -48,5 +48,5 @@ if __name__ == '__main__':
         rimuru.show_actions = ask_on_off('Show Actions', "Show playable actions? (Recommended for first timers)")
 
     show_start_banner()
-    ch0()  # Can be used for debugging.
-    rimuru.current_location_object()
+    ch0(rimuru)  # Can be used for debugging.
+    rimuru.current_location_object(rimuru)
