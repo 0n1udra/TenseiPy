@@ -76,6 +76,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
 
+        self.acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
+                                   'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
+
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.game_conditions = {}
         self.actions_played = {}

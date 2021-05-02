@@ -9,8 +9,6 @@ class Rimuru_Tempest(Character):
     level = 3
     current_mimic = None
     current_mimic_species = 'Slime'
-    acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
-                          'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
     starting_state = ['Sage', 'Predator', 'Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
 
     # ========== Predator Functions
@@ -249,10 +247,10 @@ class Direwolf(Character):
     However, Veldora's overwhelming magical force prevented them from entering.
     As individuals they're C rank, and B if as a pack."""
     evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
-    starting_state = []
+    starting_state = ['keen smell', 'coercion', 'thought communication']
 
-class Direwolf_boss(Direwolf, Character):
-    name = 'Direwolf Boss'
+class Direwolf_Leader(Direwolf, Character):
+    name = 'Direwolf Leader'
     level = 4
 
 
