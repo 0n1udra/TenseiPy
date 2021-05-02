@@ -1,7 +1,7 @@
 # TenseiPy
 
 Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)
-Python text adventure game based off of Tensei Slime managa. (Voice lines are not 100% accurate)
+Python text adventure game based off of the managa. (events and dialogue are NOT 100% accurate)
 
 If you have any questions, or would like to contribute: dt01@pm.me
 
