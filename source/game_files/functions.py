@@ -61,8 +61,8 @@ def game_action(level=None):
     for action in dir(level):  # Gets subclass functions.
         if action_playable(action) is False: continue
         if '__' in action: continue  # Filters out unwanted variables and functions.
-        # Hides any action with 'x_' in name, unless action_playable return True.
-        if 'x_' in action[:3]: continue
+        # Hides any action with 'x_' in name, unless action_playable() return True.
+        if 'x_' in action[:3] and action_playable(action) is not True: continue
         actions.append(action)
 
     game_hud(actions)
