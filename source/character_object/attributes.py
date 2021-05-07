@@ -173,4 +173,3 @@ class Attributes:
             if return_data := skill_object.use_action(character):
                 character.last_use_skill = skill_object
                 return return_data
-            print()

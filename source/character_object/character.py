@@ -36,7 +36,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     evolution = ''  # Species evolution of character.
     acquired_msg = ''  # Message for when newly acquired.
     is_alive = True
-    item_type = 'Living'
+    item_type = 'Mob'
     status = ''  # E.g. Passive, Active, Analysing, etc
 
     # Level/Map functionality.
@@ -74,7 +74,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.attributes = {'Manas': {}, 'Ultimate Skill': {}, 'Unique Skill': {}, 'Extra Skill': {},
                           'Intrinsic Skill': {}, 'Common Skill': {}, 'Skill': {}, 'Resistance': {}}
 
-        self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Living': {}, 'Weapon': {}, 'Misc': {}}
+        self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Mob': {}, 'Weapon': {}, 'Misc': {}}
 
         self.acquired_mimicries = {'Special S': {}, 'S': {}, 'Special A': {}, 'A+': {}, 'A': {},
                                    'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
