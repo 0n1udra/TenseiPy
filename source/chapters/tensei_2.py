@@ -130,7 +130,7 @@ def ch2_goblin_encounter(rimuru):
         class _give_warning:
             __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
             def __init__(self):
-                mobs_add(['direwolf leader'])
+                mobs_add(['10*direwolf', 'direwolf leader'])
                 sprint("Stop where you are! Listen up, because I'm only going to say this once!")
                 sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
                 sprint('\nOur wolf pack will not be intimidated by a mere slime!')
@@ -167,7 +167,7 @@ def ch2_goblin_encounter(rimuru):
                         sprint("\nYour leader is dead. Your choice now is fealty or death!")
                         siprint("They're not doing anything now... What are they waiting for? A leader perhaps?")
                     else:
-                        siprint("\nHow did he survive!?")
+                        siprint("\nHow did that not work!?")
                         game_over()
 
                     game_action(self)
