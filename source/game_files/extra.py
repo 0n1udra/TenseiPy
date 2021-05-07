@@ -1,5 +1,4 @@
 import random, sys, os
-from game_files.output import gprint
 
 # Input substitutes used for enabling/disabling game settings.
 on_subs = ['activate', 'true', 'enable', 'on', 'yes', '1']
@@ -70,12 +69,11 @@ def on_off(var):
     if var: return 'on '
     return 'off'
 
-def ask_on_off(variable, text):
+def ask_on_off(variable):
     """
     Asks player if they want to enable or disable.
 
     Args:
-        text: Ask if user want to enable/disable variable. Ex. 'Enable textcrawl effect? (Recommended for slower reading)'
         variable: Variable name to show in message once variable has been updated. Ex. 'textcrawl'
 
     Returns:
@@ -85,13 +83,12 @@ def ask_on_off(variable, text):
         rimuru.textcrawl = ask_on_off('Enable textcrawl effect? (Recommended for slower reading)', 'textcrawl')
     """
 
-    print(f"\n{text}")
     # User will have to type in anything that matches in off_subs to disable.
     if str(input("No / Yes or Enter > ")).lower() in off_subs:
-        gprint(f"\n< {variable}: Disabled >")
+        print(f"\n    < {variable}: Disabled >")
         return False
     else:
-        gprint(f"\n< {variable}: Enabled >")
+        print(f"\n    < {variable}: Enabled >")
         return True
 
 def format_info(name, var):
