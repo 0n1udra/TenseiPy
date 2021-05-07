@@ -146,12 +146,12 @@ class Inventory:
         if craft_amount is None:
             # Shows recipe.
             recipe = ''
-            print(f"    Recipe for {item.quantity_add}x {item.name}:")
+            print(f"    ----- Recipe for [{item.name}] -----")
             for ingredient, amount in item.recipe.items():
-                recipe += F"        {amount}x {ingredient}, "
+                recipe += F"{amount}x {ingredient}, "
             # [:-2] will cuts off last comma and space.
-            print(f"{recipe[:-2]}")
-            print("\nInputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
+            print(f"    {recipe[:-2]}")
+            print(f"\nInputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
 
             # Asks for how much to make. note that some items are crafted in batches.
             try:
@@ -160,6 +160,8 @@ class Inventory:
             except ValueError:
                 gprint("\n< Error: need integer input >")
                 return False
+
+        if craft_amount <= 0: return False
 
         # Checks if have all the ingredients.
         for ingredient_name, ingredient_amount in item.recipe.items():

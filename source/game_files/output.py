@@ -206,7 +206,7 @@ def show_help(arg):
           - info mimic          -- Shows available mimicries.
           - mimic reset         -- Resets mimic (Back to slime).
         eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
-        nearby                  -- Shows neearby mobs if acquired [Magic Perception] skill.
+        nearby                  -- Shows nearby mobs if acquired [Magic Perception] skill. Same as 'use magic perception'.
         /log [LINES]            -- Shows x line history from game story voicelines.
           - /log game [LINES]   -- Shows x game event history log (skill/item acquisitions, hints, etc).
                                    Example: '/log', '/log 10', '/log game 15'

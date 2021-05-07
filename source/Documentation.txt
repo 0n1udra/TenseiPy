@@ -117,7 +117,7 @@ In function docstring's Usage section, '>' means example of user input in game.
     mob_status()            -- Returns True if mob is in active_mobs list.
     mobs_cleared()          -- Returns True if player cleared all mobs. Usually used for to let player continue on or not.
     mobs_reset()            -- Reset active_mobs and targeted_mobs list.
-    get_level_mob()         -- Get object from active_mobs list.
+    mob_obj()         -- Get object from active_mobs list.
     continue_to()           -- Saves game and asks if user wants to continue to next section.
     clear_subs()            -- Clear's action's __subs list.
 
