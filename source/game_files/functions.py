@@ -1,5 +1,4 @@
 import pickle, sys, os
-from game_files.extra import *
 from game_files.output import *
 from game_files.characters import Rimuru_Tempest
 
@@ -296,7 +295,7 @@ def mobs_add(add_mobs):
         if mob_object := rimuru.get_object(new_mob.strip(), new=True):
             mob_list_adder([mob_object(new_name.strip()), amount], rimuru.active_mobs, amount_mode=True)
 
-def mob_status(target):
+def mob_status(target, set_var=None):
     """
     Returns whether mob in active_mobs list is is_alive.
     Returns character objects is_alive var.
@@ -312,7 +311,9 @@ def mob_status(target):
     """
 
     for i in rimuru.active_mobs:
-        if target.lower() in i[0].name.lower(): return i[0].is_alive
+        if target.lower() in i[0].name.lower():
+            if set_var is not None: i[0].is_alive = set_var
+            return i[0].is_alive
 
 def mobs_cleared():
     """
@@ -339,7 +340,7 @@ def mobs_reset():
     rimuru.active_mobs.clear()
     rimuru.targeted_mobs.clear()
 
-def get_level_mob(mob):
+def mob_obj(mob):
     """
     Get's mob's game object from active_mobs list.
 
