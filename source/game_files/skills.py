@@ -204,6 +204,12 @@ class Predator_Skill(Unique, Skill):
     """
     evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
 
+    def use_action(self, user=None, *args):
+        if user.check_if_player:
+            user.eat_targets()
+            return True
+        return False
+
 class Great_Sage_Skill(Unique, Skill):
     name = 'Great Sage'
     description = '''A Conceptual Intelligence that has a heartless and emotionless personality 
@@ -256,7 +262,7 @@ class Magic_Perception(Extra, Skill):
 
     def use_action(self, user=None, *args):
         if not user: return False
-        self.activate_skill()
+        user.show_nearby()
         return True
 
 class Water_Manipulation(Extra, Skill):
