@@ -110,18 +110,18 @@ def ch1_cave(rimuru):
                         siprint("What an interesting world! It's nice to have someone to talk to, even if it is a one way with a skill.")
 
                 class what_is_predator:
-                    __subs = ['predator', 'what is predator', 'what is this predator', 'what is this predator skill', 'predator huh', 'tell me more about predator', 'tell me more about predator']
+                    __subs = ['what is predator', 'what is this predator', 'what is this predator skill', 'predator huh', 'tell me more about predator', 'tell me more about predator']
                     def __init__(self):
-                        siprint("<< Answer, unique skill [Predator] allows one to 'eat' targets, store said targets in skill's stomach, or isolate as hazardous material. >>")
+                        siprint("<< Answer, unique skill [Predator] allows one to 'predate' targets, store said targets in skill's stomach, or isolate as hazardous material. >>")
                         siprint("<< Also, after successful analysis on a monster one can use mimicry to replicate appearance, and use replaceable abilities from target. >>")
                         gprint("\n< Tutorial: Try 'info predator' to get more information. >")
 
                 class what_is_great_sage:
-                    __subs = ['what is this great sage', 'what is great sage', 'great sage', 'tell me more about great sage', 'what are you', 'tell me more about you', 'tell me more about yourself great sage', 'tell me more about yourself', 'what are you', 'who are you', 'what is you']
+                    __subs = ['what is this great sage', 'what is great sage', 'tell me more about great sage', 'what are you', 'tell me more about you', 'tell me more about yourself great sage', 'tell me more about yourself', 'what are you', 'who are you', 'what is you']
                     def __init__(self):
                         siprint("<< Answer, my function is to assist my master (you) to the best of my abilities. >>")
                         siprint("<< Information, some of my basic functions are: Analysis, skill control and manipulation, crafting, and more. >>")
-                        gprint("\n< Tutorial: Use 'info great sage' to get more information. >")
+                        gprint("\n< Tutorial: Use 'info great sage' to get more information on skill. >")
 
                         if rimuru.check_acquired('hipokte grass'):
                             gprint("< Tutorial: Try 'info hipokte grass'. Then try 'craft full potion'. >")
@@ -193,7 +193,7 @@ def ch1_cave(rimuru):
             game_action(self)
 
         class hello:
-            __subs = ['hi', 'reply', 'reply hi', 'reply with hi', 'repy with hello', "who's there", 'who is there', 'who is that', 'somebody there', "who's out there", "is somebody there", 'who is that speaking', 'hello', 'hello there', "who's that speaking", "who's that talking"]
+            __subs = ['say hi', 'reply', 'reply hi', 'reply with hi', 'repy with hello', "who's there", 'who is there', 'who is that', 'somebody there', "who's out there", "is somebody there", 'who is that speaking', 'hello', 'hello there', "who's that speaking", "who's that talking"]
             def __init__(self):
                 sprint("~ Keep following my voice small one. ~")
 
@@ -232,7 +232,7 @@ def ch1_cave(rimuru):
                 siprint("<< Answer, this world is covered with magic essence for example, the body of a slime can move because it absorbs magic essence from it's surroundings. >>")
                 sprint("\n~ With this skill you will be able to 'see', 'hear' and much more! ~")
                 sprint("\nEh... this feels really complicated. It won't hurt to try though... Will it???")
-                siprint("<< Suggestion, in order to organize large amount of information, would you like to activate linking with [Great Sage] and [Magic Perception]. >>")
+                siprint("<< Notice, to help parse the large amount of incoming data, activating sync with [Great Sage] and [Magic Perception]. >>")
                 game_action(self)
 
             class _use_magic_perception(cave_actions):
@@ -241,7 +241,6 @@ def ch1_cave(rimuru):
                     idots(3)
                     show_art('magic perception')
                     rimuru.add_attribute('Magic Perception')
-                    rimuru.use_action('magic perception')
                     sprint("\nLike this?")
                     sprint("I can see. I CAN SEE!")
                     sprint("\n~ Looks like you did it. You learn quickly small one. ~")
@@ -269,7 +268,7 @@ def ch1_cave(rimuru):
                 __subs = subs.no
                 def __init__(self):
                     sprint("~ Welllll? I'm waiting..... ~")
-                    siprint("\n<< Notice, activate linking? >>")
+                    siprint("\n<< Activate [Magic Perception]? >>")
 
             class _leave:
                 __subs = subs.move_on + ['no, leave', 'leave', 'leave him', 'leave dragon', 'escape']
@@ -359,13 +358,13 @@ def ch1_cave(rimuru):
                         rimuru.add_inventory('hipokte grass')
                         sprint("Hey what are you doing there? Focus on me... ME!")
 
-                class _eat_veldora:
-                    __subs = subs.all_yes + ['eat', 'predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon', 'predate the dragon', 'swallow dragon', 'swallow veldora']
+                class _use_predator:
+                    __subs = subs.all_yes + ['predate', 'eat', 'predate veldora', 'eat dragon', 'eat the dragon', 'predate dragon', 'predate the dragon', 'swallow dragon', 'swallow veldora']
                     def __init__(self):
                         global veldora
                         rimuru.add_inventory(veldora, show_analysis_msg=False)
                         rimuru.add_reputation('veldora')
-                        siprint("<< Notice, start analyzing Unique Skill [Infinity Prison]? >>")
+                        siprint("<< Start analyzing Unique Skill [Infinity Prison]? >>")
                         game_action(self)
 
                     class _start_analysis:
@@ -446,7 +445,7 @@ def ch1_cave(rimuru):
                     siprint("<< Suggestion, Use Unique Skill [Predator]? >>")
                     siprint("Oh...? What will that do?")
                     siprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
-                    gprint("\n< Tutorial: Try 'eat' or 'predate' on targeted mobs that are dead to use predation. >")
+                    gprint("\n< Tutorial: Try 'predate' or 'eat' on targeted mobs that are dead to use [Predator] skill. >")
 
     class at_cave_exit:
         def __init__(self):
