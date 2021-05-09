@@ -5,6 +5,8 @@ Python text adventure game based off of the managa. (events and dialogue are NOT
 
 If you have any questions, or would like to contribute: dt01@pm.me
 
+NOTE: Currently, knowing the story from manga/LN/anime is recommended. I am trying my best to make the game as intuitive as I can for people that don't, but knowing the story beforehand will help you not get lost in the parts that aren't as straight forward.
+
 # Run using Python3.8+
 1. Clone or download repositiory: https://github.com/0n1udra/TenseiPy
 2. In source folder, run `python3 start_game.py` to start game, optionally, run with `-h` argument to see other runtime options.
