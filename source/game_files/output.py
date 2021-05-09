@@ -155,9 +155,9 @@ def show_start_banner():
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
-    - To enable/disable game settings like hardcore mode or show/hide hints use /settings, e.g. '/settings hardcore on'.
+    - To set game settings like hardcore mode or hints use '/settings', e.g. '/settings hardcore on', '/settings hints off'.
     - Game will only save at specific points in the story, look out for '< Game Saved >' message.
-    - Fullscreen recommended.""")
+    - Fullscreen recommended to show ASCII art correctly.""")
 
     if rimuru.valid_save is True: gprint("\n< Save Loaded >\n")  # Shows if game was loaded from a save.
 
