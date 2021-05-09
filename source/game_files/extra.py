@@ -144,8 +144,7 @@ def set_action_subs(action, action_subs):
 def mob_list_adder(item, input_list, amount_mode=False):
     # Only able to target mobs in active_mobs list.
     for i in input_list:
-
-        if i[0].name in item[0].name:
+        if i[0].name == item[0].name:
             # Adds the quantity integer in list.
             if amount_mode: i[1] += item[1]
             return True

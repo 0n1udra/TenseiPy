@@ -260,7 +260,7 @@ def set_targets(targets):
         for target in targets.split(','):
             # Only able to target mobs in active_mobs list.
             for mob in rimuru.active_mobs:
-                if mob[0].name.lower() in target:
+                if mob[0].name.lower() == target.strip().lower():
                     mob_list_adder(mob, rimuru.targeted_mobs)
 
 def mobs_add(add_mobs):
