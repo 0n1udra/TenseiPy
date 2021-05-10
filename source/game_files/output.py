@@ -186,34 +186,25 @@ def show_help(arg):
 
     Commands:
         inv                     -- Show inventory.
-        stats [TARGET]          -- Show skills and resistances. attribute also works.
-                                   Example: 'stats tempest serpent', 'attributes evil centipede'
-        info TARGET             -- Show info on skill, item or character. 
-                                   Example: 'info great sage, 'info hipokte grass', 'info tempest serpent'
-        target TARGET(S)        -- Target mob(s), to be able to use skills/abilities/etc on them.
-                                   Example: 'target tempest serpent', 'target tempest serpent, black spider'
+        stats [TARGET]          -- Show skills and resistances. E.g. 'stats tempest serpent'
+        info TARGET             -- Show info on skill/item/mob. E.g. 'info great sage'
+        target TARGET(S)        -- Target mob. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
           - target all          -- Target all nearby targetable mobs.
           - target reset        -- Clear targeted.
-        attack SKILL/ITEM 	    -- Attack targeted_mobs. 
-                                   Example: 'attack water blade'
-        use SKILL/ITEM          -- Use a skill.
-                                   Example: 'use sense heat source'
-        craft ITEM [amount]     -- Craft items if have necessary ingredients. 
-                                   Example: 'craft full potion', 'craft full potion 10'
+        attack SKILL/ITEM 	    -- Attack targeted mobs. E.g. 'attack water blade'
+        use SKILL/ITEM          -- Use a skill. E.g. 'use sense heat source'
+        craft ITEM [amount]     -- Craft items. E.g. 'craft full potion', 'craft full potion 5'
                                    Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.
-        mimic TARGET            -- Mimics appearance and attributes of analysed mob.
-                                   Example: 'mimic tempest serpent'
-          - info mimic          -- Shows available mimicries.
+        mimic TARGET            -- Mimics appearance and attributes of analysed mob. E.g. 'mimic tempest serpent'
+          - mimics              -- Shows available mimicries.
           - mimic reset         -- Resets mimic (Back to slime).
-        eat/predate             -- Predate target(s). Can only eat mobs that are targeted_mobs and dead.
+        eat                     -- Predate target(s). Can only eat mobs that are targeted_mobs and also dead. can also use 'predate'.
         nearby                  -- Shows nearby mobs if acquired [Magic Perception] skill. Same as 'use magic perception'.
-        /log [LINES]            -- Shows x line history from game story voicelines.
+        /log [LINES]            -- Shows x dialogue line history. E.g. '/log', '/log 10', '/log game 15'
           - /log game [LINES]   -- Shows x game event history log (skill/item acquisitions, hints, etc).
-                                   Example: '/log', '/log 10', '/log game 15'
         /help                   -- Show this help page.
           - /help rank          -- Show game level, rank, risk chart.
-        /settings               -- Show commands to change/set game settings, like textcrawl, hardcore, art, and menu.
-                                   Example: 'settings hud off', 'options hud hints on'
+        /settings               -- Shows or change game settings. E.g. '/settings', '/settings hud off', '/options hud hints on'
         /reset                  -- Deletes player save and restarts game.
         /exit                   -- Exits after save.
 
