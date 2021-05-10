@@ -129,11 +129,14 @@ def ch2_goblin_encounter(rimuru):
             game_action(self)
 
         class _hfunc_attack:
+            __subs = subs.attack
             def __init__(self):
                 if mobs_cleared():
                     sprint("That takes care of that...")
                     siprint("Probably unwarranted, but now we don't have to worry about them.")
                     naming_mobs()
+                elif not mob_status('direwolf leader'):
+                    wolf_attack._give_warning._attack_water_blade()
 
         class _give_warning:
             __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
@@ -171,9 +174,9 @@ def ch2_goblin_encounter(rimuru):
                     if not mob_status('direwolf leader'):
                         sprint("No, Dad!")
                         sprint("\nYour leader is dead. Your choice now is fealty or death!")
-                        siprint("They're not doing anything now... What are they waiting for? A leader perhaps?")
+                        siprint("They're not doing anything now... What are they waiting for? Do they need a leader perhaps?")
                     else:
-                        sprint("You're DEAD you slime!")
+                        sprint("You're DEAD you puny slime!")
                         siprint("\nHow did he get free!?")
                         game_over()
 
