@@ -209,7 +209,6 @@ def action_playable(match, status=None):
     rimuru.actions_played[match] = [0, status]
     return status
 
-
 def last_use_skill(skill):
     """
     Checks what was the last successfully used skill.
@@ -294,6 +293,22 @@ def mobs_add(add_mobs):
 
         if mob_object := rimuru.get_object(new_mob.strip(), new=True):
             mob_list_adder([mob_object(new_name.strip()), amount], rimuru.active_mobs, amount_mode=True)
+
+def mobs_remove(remove_mobs):
+    """
+    Removes mob(s) from active_mobs list.
+
+    Args:
+        remove_mobs list: Mobs to remove.
+
+    Usage:
+        mobs_remove(['tempest serpent'])
+    """
+
+    for mob in remove_mobs:
+        for active_mob in rimuru.active_mobs:
+            if mob.lower() in active_mob[0].name.lower():
+                rimuru.active_mobs.remove(active_mob)
 
 def mob_status(target, set_var=None):
     """

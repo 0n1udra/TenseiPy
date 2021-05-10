@@ -107,17 +107,18 @@ def ch2_goblin_encounter(rimuru):
                     sprint("Show me your wounded")
                     if rimuru.check_acquired('full potion', 9):
                         siprint("I could try eating them and splashing them with the potion...")
+                        idots(5)
                         sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
-                        sprint("\nW-w-whoa! You really are a powerful great one!")
+                        sprint("\nW-w-whoa! You really are a powerful, great one!")
                         rimuru.add_reputation('goblins', 1)
                         action_playable('_heal_wounded', False)
                     else:
                         siprint("Looks like 9 wounded goblins..... How can I help them?")
-                        siprint("I need some way to heal them.")
 
     class wolf_attack:
         def __init__(self):
+            mobs_add(['direwolf leader', '10*direwolf'])
             sprint("\n* Meanwhile... *")
             sprint("\nIt is a full and bright moon tonight.")
             sprint("Tonight we shall lay waste to the goblin village.")
@@ -127,10 +128,16 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nMaster! The Direwolves are here!")
             game_action(self)
 
+        class _hfunc_attack:
+            def __init__(self):
+                if mobs_cleared():
+                    sprint("That takes care of that...")
+                    siprint("Probably unwarranted, but now we don't have to worry about them.")
+                    naming_mobs()
+
         class _give_warning:
             __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
             def __init__(self):
-                mobs_add(['10*direwolf', 'direwolf leader'])
                 sprint("Stop where you are! Listen up, because I'm only going to say this once!")
                 sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
                 sprint('\nOur wolf pack will not be intimidated by a mere slime!')
@@ -144,11 +151,10 @@ def ch2_goblin_encounter(rimuru):
                     sprint("\nYour tricks will not stop us!")
 
                 siprint("\nSome are still getting past my traps.")
-
                 sprint("\nEnough of this! I will kill you slime!")
                 sprint("\nFather! No!")
                 if game_cond('steel thread trap'):
-                    sprint("W-w-what is this! Why can't I move!")
+                    sprint("\nW-w-what is this! Why can't I move!")
                     sprint("\nThat would be [Steel Thread]!")
                 # Without setting up steel thread as defense, the pack leader will kill you!
                 else:
@@ -162,12 +168,13 @@ def ch2_goblin_encounter(rimuru):
             class _attack_water_blade:
                 __subs = []
                 def __init__(self):
-                    if mobs_cleared():
+                    if not mob_status('direwolf leader'):
                         sprint("No, Dad!")
                         sprint("\nYour leader is dead. Your choice now is fealty or death!")
                         siprint("They're not doing anything now... What are they waiting for? A leader perhaps?")
                     else:
-                        siprint("\nHow did that not work!?")
+                        sprint("You're DEAD you slime!")
+                        siprint("\nHow did he get free!?")
                         game_over()
 
                     game_action(self)
