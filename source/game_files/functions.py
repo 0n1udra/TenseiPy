@@ -128,6 +128,10 @@ def game_action(level=None):
         try: action_subs = eval(f"level.{action}._{action}__subs")
         except: pass
 
+        # Able to activate a hfunc or _hfunc action without needing to add redundant item to __subs.
+        # E.g. 'hfunc_attack' action you would've needed to add __subs = ['attack'], if not for this line.
+        if 'hfunc' in action: action_subs.append(' '.join([i for i in action.split('_') if i][1:]))
+
         # Usually used for when you want an action to be used only once.
         if 'ACTIONBLOCKED' in action_subs: continue
 
