@@ -40,3 +40,4 @@ NOTE: Game will display ASCII art, adjust window size accordingly. Recommend Ful
   
   
 ![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)
+![start_game](https://user-images.githubusercontent.com/15573136/117866464-2c52d880-b265-11eb-8947-eb22ecc25af7.jpg)
