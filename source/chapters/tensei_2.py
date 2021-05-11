@@ -9,6 +9,7 @@ def ch2_goblin_encounter(rimuru):
 
         def __init__(self):
             mobs_reset()
+            gprint("< Chapter 2 >\n")
             mobs_add(['10* goblin'])
             siprint("Where am I going?")
             siprint("\n* While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up *")
@@ -52,38 +53,69 @@ def ch2_goblin_encounter(rimuru):
         class hfunc_attack:
             def __init__(self):
                 if mobs_cleared():
-                    print("Yeahhhhh.... Hello, developer here! First off, WTF is wrong with you. Second, sorry but as of now the story NEEDS those weak goblins.")
-                    print("ikik, I'm sooooo sorry that you can't go on a genocidal rampage right now (just yet), but yes, sadly the story just won't work with them all dead.")
-                    game_over()
+                    sprint("Uhhhh....... Was that totally necessary...")
+                    game_cond('killed village', True)
                 elif check_attack_success():
-                    siprint("oh")
+                    sprint("HOW COULD YOU! ATTACK!")
+                    siprint("\nCRAP, now there pissed!")
+                    sprint("* Before anything else could happen, the rest of the goblins charged to kill the slime. *")
+                    game_over()
 
     class goto_goblin_village:
         __location = "Goblin Village"
 
         def __init__(self):
             mobs_reset()
-            siprint("Wow, this place looks like a dump... ")
-            sprint("\nI am the village elder. I'm sorry we don't have much to offer you.")
-            sprint("\nSo I'm guessing you didn't invite me here just for pleasantries.")
-            sprint("\nWe've heard about your hidden strength. Would you please listen to our request.")
-            sprint("About a month ago our Dragon guardian disappeared, and nearby monsters have started expand there territory.")
-            sprint("There is a pack of 100 Dire Wolves that have been attacking us recently, and we are barely fending them off.")
-            siprint("\nHmmmmm... Should I help them? What about compensation?")
+            mobs_add(['goblin:goblin chief', 'goblin'])
+            siprint("Wow, this place looks like a dump... Such a primitive house.")
+            sprint("\nThank you for waiting visitor.")
+            sprint("I am the village elder. I'm sorry we don't have much to offer you.")
+            sprint("\nAnyway, what's up? I assume you invited me here for a reason.")
+            sprint("\nI've heard about your incredible strength. Would you please listen to our request.")
+            sprint("\nSpeak.")
+            sprint("\nAbout a month ago our Dragon guardian disappeared, and nearby monsters have started expand there territory.")
+            sprint("\nThere is a pack of 100 Direwolves that have been attacking us recently, and we are barely fending them off.")
+            sprint("\nRigur, my older brother, died to bring us this information. A Demon gifted him the name.")
+            sprint("He the vilage's greatest warrior, we have survived this long because of him.")
+            siprint("\nHmmmmm... 100 huh... That's a lot. Should I help them? What about compensation?")
             game_action(self)
+
+        # TODO Check dialogue
+        class hfunc_more_about_rigur:
+            __subs = ['so rigur is not around anymore', 'rigur died', 'sorry for your lost', "rigur's not around anymore"]
+            def __init__(self):
+                sprint("So, Rigur is no longer around?")
+                sprint("\nYes, my son was the pride of my life.")
+                sprint("Even if we weaklings are destined to perish, we must find a way to survive and honor his strength!")
+
+        class hfunc_attack:
+            def __init__(self):
+                if not mob_status('goblin chief'):
+                    sprint("W-why... Why would you do this!")
+                    sprint("\nListen up, I'm the new leader of this village!")
+                    sprint("If anyone has a problem with that, you will end up like your previous leader here!")
+                    sprint("\nW-w-we will give our fealty to you.")
+                    game_cond('killed goblin chief', True)
+                elif not mob_status('goblin'):
+                    siprint("Now they're pissed!")
+                    sprint("\nYou will not get away with this!")
+                    sprint("YOU WILL NOT LEAVE THIS VILLAGE ALIVE!")
+                    sprint("\n* The little slime couldn't not escape the fury of the whole goblin village. *")
+                    game_over()
 
         class compensation:
             __subs = ['ask for compensation', 'ask for reward', 'what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
             def __init__(self):
-                sprint("W-we don't have much to reward you with, but we can offer our unwavering loyalty.")
-                sprint("That will have to do. For now.")
+                sprint("\nIf I do decide to help save your village, what will I get in return?")
+                sprint("\nW-we don't have much to reward you with, but we can offer our unwavering loyalty.")
+                sprint("That will have to do, for now.")
 
         class _assist_goblins:
             __subs = ['assist', 'lend help', 'assist them', 'assist the goblins', 'help goblins', 'help the goblins', 'help them', 'assist them']
             def __init__(self):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
-                sprint("Thank you so much, we will be forever loyal to you.")
-                siprint("This village has no defenses, that might help. And a goblin said something about wounded victims.")
+                sprint("\nThank you so much, we will be forever loyal to you.")
+                siprint("This village has no defenses, those might help... And a goblin said something about wounded victims?")
                 game_action(self)
 
             class _setup_defenses:
@@ -105,6 +137,7 @@ def ch2_goblin_encounter(rimuru):
                 __subs = ['heal wounded', 'heal wounded victims', 'heal hurt', 'help injured', 'heal injured', 'assist injured', 'assist wounded']
                 def __init__(self):
                     sprint("Show me your wounded")
+
                     if rimuru.check_acquired('full potion', 9):
                         siprint("I could try eating them and splashing them with the potion...")
                         idots(5)
@@ -139,7 +172,7 @@ def ch2_goblin_encounter(rimuru):
                     wolf_attack._give_warning._attack_water_blade()
 
         class _give_warning:
-            __subs = ['give them a warning', 'take over', 'take over as king', 'become new king', 'subjugate goblins', 'subjugate them']
+            __subs = ['give them a warning', 'warn direwolves', 'warn wolves', 'give direwolf warning', 'warn them']
             def __init__(self):
                 sprint("Stop where you are! Listen up, because I'm only going to say this once!")
                 sprint("Acknowledge me as your king, or retreat now and never show yourselves again!")
@@ -195,14 +228,12 @@ def ch2_goblin_encounter(rimuru):
                         class _use_coercion:
                             def __init__(self):
                                 sprint("HOOWWWLLLLLL!!!!!..........")
-                                siprint("I know I said fealty or death, but I'm hoping they'll just run away...")
+                                siprint("I know I said fealty or death, but I'm hoping they would just run away in fear....")
                                 dots(5)
                                 sprint("HOWWLLLL!!!!......")
-                                sprint("\nW-we surrender.")
-                                sprint("Our pack is now yours to command.")
+                                sprint("\nWE WILL FOLLOW YOU TO THE ENDS OF THE EARTH, MASTER!!!")
+                                sprint("\nhuh?")
                                 naming_mobs()
-
-
 
     class naming_mobs:
         def __init__(self):
