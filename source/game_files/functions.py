@@ -330,7 +330,7 @@ def mob_status(target, set_var=None):
     """
 
     for i in rimuru.active_mobs:
-        if target.lower() in i[0].name.lower():
+        if target.lower() == i[0].name.lower():
             if set_var is not None: i[0].is_alive = set_var
             return i[0].is_alive
 
