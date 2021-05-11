@@ -18,9 +18,11 @@ def ch2_goblin_encounter(rimuru):
             game_action(self)
 
         class _be_friendly:
-            __subs = subs.be_nice_subs + ['my name is rimuru', 'say hi', 'talk', 'chat', 'talk to goblins']
+            __subs = subs.be_nice_subs + ['say hi', 'talk', 'chat', 'talk to goblins']
             def __init__(self):
-                sprint("HELLO, MY NAME IS RIMURU. I'M A SLIME.")
+                if rimuru.name:
+                    sprint(f"HELLO, MY NAME IS {rimuru.name.upper()}. I'M A SLIME.")
+                else: sprint(f"HELLO, I'M A SLIME.")
                 sprint("...")
                 sprint("Strong one we have already recognized your strength. Please, lower your voice!")
                 sprint("Oh, ok. I was just exploring around here. Is there something you need?")
@@ -53,8 +55,15 @@ def ch2_goblin_encounter(rimuru):
         class hfunc_attack:
             def __init__(self):
                 if mobs_cleared():
-                    sprint("Uhhhh....... Was that totally necessary...")
+                    siprint("Uhhhh....... Was that totally necessary...")
                     game_cond('killed village', True)
+                    siprint("Anyways.... Lets keep moving. WAIT! What are those? Are those wolves?!")
+                    sprint("\nLook at what we have here boys, it's a weak little slime.")
+                    sprint("Hahahaha")
+                    sprint("\nAhahahahahaha")
+                    sprint("\nI've heard slimes tastes good!")
+                    sprint("\n* Before the little slime could do anything else, the wolves charged at it... and they had a little snack. *")
+                    game_over()
                 elif check_attack_success():
                     sprint("HOW COULD YOU! ATTACK!")
                     siprint("\nCRAP, now there pissed!")
@@ -80,7 +89,6 @@ def ch2_goblin_encounter(rimuru):
             siprint("\nHmmmmm... 100 huh... That's a lot. Should I help them? What about compensation?")
             game_action(self)
 
-        # TODO Check dialogue
         class hfunc_more_about_rigur:
             __subs = ['so rigur is not around anymore', 'rigur died', 'sorry for your lost', "rigur's not around anymore"]
             def __init__(self):
@@ -140,6 +148,7 @@ def ch2_goblin_encounter(rimuru):
 
                     if rimuru.check_acquired('full potion', 9):
                         siprint("I could try eating them and splashing them with the potion...")
+                        sprint("\nLord ")
                         idots(5)
                         sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
@@ -216,6 +225,7 @@ def ch2_goblin_encounter(rimuru):
                     game_action(self)
 
                 class _eat:
+                    __subs = subs.eat
                     def __init__(self):
                         sprint("\nMaybe they need a push...")
                         game_action(self)

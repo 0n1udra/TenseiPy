@@ -486,7 +486,7 @@ def ch1_cave(rimuru):
 
         class _say_hi:
             def __init__(self):
-                sprint("HELLO THERE! My name is Rimu........")
+                sprint("HELLO THERE! My name is.....")
                 sprint("\nAHHHHHHHHHHHHHH MONSTER.")
                 sprint("\nKILL IT. KILL IT.")
                 sprint("\nKILL IT!!!!")
