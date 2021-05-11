@@ -36,8 +36,9 @@ NOTE: Game will display ASCII art, adjust window size accordingly. Recommend Ful
   - Fight low level mobs
 - Exit Cave
   - Meet Gobilns and help their village.
+  - The Direwolves attack.
   - -IN PROGRESS-
   
   
 ![Puyo!](https://vignette.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest?cb=20180922214304)
-![start_game](https://user-images.githubusercontent.com/15573136/117866464-2c52d880-b265-11eb-8947-eb22ecc25af7.jpg)
+![start_game-slime](https://user-images.githubusercontent.com/15573136/117882345-3c27e800-b278-11eb-9cf0-0aedf02c8c51.png)
