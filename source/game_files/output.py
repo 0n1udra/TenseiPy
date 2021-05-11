@@ -106,6 +106,23 @@ def idots(*args):
 
 
 #                    ========== Extra ==========
+def show_version(game_version, version_date):
+    print(f"\n    Version: {game_version} ({version_date})")
+    exit(0)
+
+def show_sysargs():
+    print("""
+    -help       --  This help page.
+    -version    --  Show version.
+    -textcrawl  --  Disable text crawl effect.
+    -hideart    --  Diable ASCII art.
+    -hidehud    --  Disable game HUD.
+    -hidehints  --  Disable game hints.
+    -hardmode   --  Enable Hardcore mode.
+    -fast       --  Enable Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
+    -slime      --  Enables: hud, hints | Disables: textcrawl, art, hardcore""")
+    exit(0)
+
 def show_art(art):
     """
     Prints out ASCII art line by line or all at once depending on textcrawl boolean.
@@ -147,13 +164,14 @@ def show_history(arg):
     for line in log_data[-lines:]: print(line, end='')
     print('\n-------------------- History --------------------')
 
-def show_start_banner():
+def show_start_banner(game_version, version_date):
     """Show game title, tips, and player stats/inv."""
 
     show_art('great sage')
     print(f"""
     ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
     {game_art.rimuru_art.banner}
+    - Version: {game_version} ({version_date})
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
     - To set game settings like hardcore mode or hints use '/settings', e.g. '/settings hardcore on', '/settings hints off'.
     - Game will only save at specific points in the story, look out for '< Game Saved >' message.
