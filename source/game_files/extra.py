@@ -69,7 +69,7 @@ def on_off(var):
     if var: return 'on '
     return 'off'
 
-def ask_on_off(variable):
+def ask_on_off(variable, text):
     """
     Asks player if they want to enable or disable.
 
@@ -80,10 +80,11 @@ def ask_on_off(variable):
         bool: Returns True/False depending on if user typed in anything from off_subs or pressed Enter.
 
     Usage:
-        rimuru.textcrawl = ask_on_off('Enable textcrawl effect? (Recommended for slower reading)', 'textcrawl')
+        rimuru.textcrawl = ask_on_off('textcrawl', 'Enable textcrawl effect? (Recommended for slower reading)')
     """
 
     # User will have to type in anything that matches in off_subs to disable.
+    print('\n' + text)
     if str(input("No / Yes or Enter > ")).lower() in off_subs:
         print(f"\n    < {variable}: Disabled >")
         return False
