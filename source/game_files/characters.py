@@ -130,6 +130,8 @@ class Rimuru_Tempest(Character):
 
         for target in self.targeted_mobs:
             if not target[0]: continue  # If no game object found.
+            # Check if target has specific game object to be used when using predation.
+            #if target[0].predation_return: target = target[0].predation_return
 
             if target[0].game_object_type == 'item':
                 self.add_inventory(target[0])
