@@ -44,12 +44,13 @@ class Rimuru_Tempest(Character):
         except: pass
 
     def show_mimics(self, *args):
-        print("    ----- Mimicries -----")
+        print("    <<<<<<<<<< Mimicries >>>>>>>>>>\n")
         for mob_level, mobs in self.acquired_mimicries.items():
             print(f'    {mob_level}:')
             for mob_name, mob in mobs.items():
                 print(f'        {mob_name}')
         print("\n    Note: Reset mimic with 'mimic reset'.")
+        print("\n    <<<<<<<<<< Mimicries >>>>>>>>>>")
 
     def add_mimic(self, mob, show_msg=True):
         """
@@ -181,7 +182,7 @@ class Kaval(Character):
     occupations = ['Adventurer']
     affiliations = ["Kaval's Party", "Freedom Association"]
     description = """Leader of his adventure's party, where he serves as the 'fighter' role. Alongside Gido,
-    he is also tasked as the secret bodyguard of Lady Elyune under the guise of an adventurer.'"""
+        he is also tasked as the secret bodyguard of Lady Elyune under the guise of an adventurer.'"""
     appearance = 'A young man with medium length hair, seemingly in his prime.'
     abilities = ['Fighting Spirit', 'Heavy Collision']
 
@@ -192,9 +193,9 @@ class Gido(Character):
     occupations = ['Adventurer']
     affiliations = ["Kaval's Party", "Freedom Association"]
     description = """A member of Kaval's Party who serves as the 'thief' role. However,
-    he is actually serving as one of the bodyguards of Lady Elyune secretly while under the guise of an adventurer."""
+        he is actually serving as one of the bodyguards of Lady Elyune secretly while under the guise of an adventurer."""
     appearance = """Gido has a tall and strong build and a rectangular head. 
-    His brown hair is cut short and has a goatee, whereas his cheeks have distinct depressions."""
+        His brown hair is cut short and has a goatee, whereas his cheeks have distinct depressions."""
     abilities = ['Stealth']
 
 
@@ -211,10 +212,8 @@ class Giant_Bat(Character):
     name = 'Giant Bat'
     species = 'Bat'
     level = 4
-    appearance = '''
-    It's a giant bat...
-    Due to its wings that regulate its own gravity, it's capable of flight
-    '''
+    appearance = '''It's a giant bat...
+        Due to its wings that regulate its own gravity, it's capable of flight'''
     description = 'Found in the Sealed cave, spawned from the massive amount of magic essence emanating from the sealed Veldora.'
     starting_state = ['ultrasound waves', 'vampirism']
 
@@ -241,13 +240,12 @@ class Direwolf(Character):
     species = 'Direwolf'
     level = 4
     appearance = """They have silver-blue fur, with the exception of the Direwolf Boss' Son, 
-    who also has star mark on his forehead in a darker shade of blue, and a silver-white mane and snout.
-    """
+        who also has star mark on his forehead in a darker shade of blue, and a silver-white mane and snout."""
     description = """The wolves did not require food to survive. Their sustenance lay in the world's magicules.
-    By attacking stronger monsters or slaughtering droves of humans, they can evolve into calamity-level creatures, although none of these options was feasible for them.
-    The Forest of Jura was bountiful of magic and had no monsters strong enough to threaten the wolves.
-    However, Veldora's overwhelming magical force prevented them from entering.
-    As individuals they're C rank, and B if as a pack."""
+        By attacking stronger monsters or slaughtering droves of humans, they can evolve into calamity-level creatures, although none of these options was feasible for them.
+        The Forest of Jura was bountiful of magic and had no monsters strong enough to threaten the wolves.
+        However, Veldora's overwhelming magical force prevented them from entering.
+        As individuals they're C rank, and B if as a pack."""
     evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
     starting_state = ['keen smell', 'coercion', 'thought communication']
 
@@ -262,13 +260,10 @@ class Goblin(Character):
     species = 'Goblin'
     level = 2
     appearance = 'They have green skin and a big nose. Their average height is 150 centimeters.'
-    description = '''
-    Goblins are of the monsters that populate The Great Jura Forest, with many different tribes dotting around the forest. 
-    Although there are many different tribes of goblins, they will usually stand together in the face of great danger.
-    
-    Many of the goblins revere the Storm Dragon as their God and protector of the forest.
-
-    For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
+    description = '''Goblins are of the monsters that populate The Great Jura Forest, with many different tribes dotting around the forest. 
+        Although there are many different tribes of goblins, they will usually stand together in the face of great danger.
+        Many of the goblins revere the Storm Dragon as their God and protector of the forest.
+        For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
     '''
     evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
 
