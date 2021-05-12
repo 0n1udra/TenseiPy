@@ -28,16 +28,6 @@ class Inventory:
                     yield item_text + f' ({item.status})'
                 else: yield item_text  # Text to be shown for gameplay.
 
-    def update_inventory_capacity(self):
-        """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
-
-        total = 0
-        for item in self.inventory_generator():
-            total += item.quantity * item.inv_capacity_add
-        self.inventory_capacity = total
-
-        return total
-
     def show_inventory(self, *args):
         """
         Prints out inventory items, corresponding category, and capacity.
@@ -51,6 +41,16 @@ class Inventory:
         print('----- Inventory -----')
         print(f'Capacity: {self.inventory_capacity:.1f}%\n')
         for i in self.inventory_generator(output=True): print(i)
+
+    def update_inventory_capacity(self):
+        """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
+
+        total = 0
+        for item in self.inventory_generator():
+            total += item.quantity * item.inv_capacity_add
+        self.inventory_capacity = total
+
+        return total
 
     def add_inventory(self, item, amount=1, show_acquired_msg=True, show_analysis_msg=None):
         """
