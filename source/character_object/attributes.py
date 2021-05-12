@@ -15,7 +15,7 @@ class Attributes:
 
         for skill_type, skills in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills: yield f'[{skill_type}]'
+            if output and skills: yield f'    [{skill_type}]'
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
@@ -24,8 +24,8 @@ class Attributes:
                     continue
 
                 if skill_object.status:
-                    yield f'    {skill_name} ({skill_object.status})'
-                else: yield f'    {skill_name}'
+                    yield f'        {skill_name} ({skill_object.status})'
+                else: yield f'        {skill_name}'
 
     def show_attributes(self, mob=None, *args):
         """
@@ -39,24 +39,21 @@ class Attributes:
             > stats tempest serpent
         """
 
-        if mob: mob = self.get_object(mob, item_pool=[*self.mimic_generator()])
+        if mob: mob = self.get_object(mob, item_pool=[*self.mimic_generator()], sub_pool=True)
         if not mob: mob = self
 
-        # Shows players reputation/standing also.
-        self.show_reputations()
-
-        print("----- Skills -----")
-        print(f"Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
-        print(f"Level: {mob.level}")
-        print(f"Location: {mob.current_location}\n")
-
+        print("    <<<<<<<<<< ATTRIBUTES >>>>>>>>>>\n")
+        print(f"    Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
+        print(f"    Level: {mob.level}")
+        print(f"    Location: {mob.current_location}\n")
         # Print out skill category and corresponding skills indented.
         for i in mob.attributes_generator(output=True):print(i)
 
-        if self.current_mimic:
-            print("\n----- Mimicked Attributes -----")
-            print(f"Mimicking: [{self.current_mimic.name}]\n")  # If currently using Mimic.
+        if self.current_mimic and self.check_if_player():
+            print(f"\n    Mimicking: [{self.current_mimic.name}]\n")  # If currently using Mimic.
             for i in self.current_mimic.attributes_generator(output=True):print(i)
+
+        print("\n    <<<<<<<<<< ATTRIBUTES >>>>>>>>>>")
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
