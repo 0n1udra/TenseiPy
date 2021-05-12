@@ -1,3 +1,5 @@
+from game_files.output import gprint
+
 class Subordinates:
     def subordinates_generator(self, output=False):
         """
@@ -38,7 +40,7 @@ class Subordinates:
         # Asks player to set name, if nothing, uses canon name (story accurate name).
         if not new_name:
             while True:
-                if new_name := str(input(f"Choose name or Enter for default ({canon_name}) > " if canon_name else "Set name > ")).strip():
+                if new_name := str(input(f"\nChoose name or Enter for default ({canon_name}) > " if canon_name else "Set name > ")).strip():
                     if new_name.isalnum(): break
                 # If passed in canon_name, if user doesn't type in some alpha-numeric, will use canon_name.
                 elif canon_name:
@@ -52,3 +54,5 @@ class Subordinates:
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)
         else: self.subordinates[new_subordinate.species] = [new_subordinate]
+
+        gprint(f"\n< New Subordinate: {new_name} >\n")
