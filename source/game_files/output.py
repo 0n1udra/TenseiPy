@@ -160,16 +160,16 @@ def show_history(arg):
     try: lines = int(arg[-2:])
     except: lines = 5
 
-    print('-------------------- History --------------------\n')
+    print('<<<<<<<<<<<<<<<<<<<< HISTORY >>>>>>>>>>>>>>>>>>>>\n')
     for line in log_data[-lines:]: print(line, end='')
-    print('\n-------------------- History --------------------')
+    print('\n<<<<<<<<<<<<<<<<<<<< HISTORY >>>>>>>>>>>>>>>>>>>>')
 
 def show_start_banner(game_version, version_date):
     """Show game title, tips, and player stats/inv."""
 
     show_art('great sage')
     print(f"""
-    ----------Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime)----------
+    ---------- Tensei Shitara Slime Datta Ken (That Time I Got Reincarnated as a Slime) ----------
     {game_art.rimuru_art.banner}
     - Version: {game_version} ({version_date})
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
