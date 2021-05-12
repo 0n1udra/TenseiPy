@@ -22,17 +22,28 @@ class Subordinates:
         for i in self.subordinates_generator(output=True): print(i)
         print('\n    <<<<<<<<<< Subordinates >>>>>>>>>>')
 
-    def add_subordinate(self, new_subordinate, new_name):
+    def add_subordinate(self, new_subordinate, canon_name=None, new_name=None):
         """
         Naming subordinates and give protections.
 
         Args:
-            new_subordinate str: Character name or object to be named.
-            new_name str: Set name to new subordinates.
+            new_subordinate str: Character name or game object to be named.
+            canon_name str(None): Allow user press enter once to use default name from story.
+            new_name str(None): Set name to new subordinates.
 
         Usage:
             .add_subordinates('Tempest Wolf', 'Ranga')
         """
+
+        # Asks player to set name, if nothing, uses canon name (story accurate name).
+        if not new_name:
+            while True:
+                if new_name := str(input(f"Choose name or Enter for default ({canon_name}) > " if canon_name else "Set name > ")).strip():
+                    if new_name.isalnum(): break
+                # If passed in canon_name, if user doesn't type in some alpha-numeric, will use canon_name.
+                elif canon_name:
+                    new_name = canon_name
+                    break
 
         # Get's game character object, initializes it, sets name, then adds protection(s) (blessing).
         new_subordinate = self.get_object(new_subordinate, new=True)(new_name)

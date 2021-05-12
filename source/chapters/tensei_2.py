@@ -8,6 +8,7 @@ def ch2_goblin_encounter(rimuru):
         __location = "Near the Sealed Cave"
 
         def __init__(self):
+            rimuru.add_subordinate('goblin', 'Rigurd')
             mobs_reset()
             gprint("< Chapter 2 >\n")
             mobs_add(['10* goblin'])
@@ -259,7 +260,7 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nWhat's the big deal anyways? Everyone get in a line, so I can give you names.")
             dots(5)
             siprint("What should I name the village elder...")
-            rimuru.add_subordinate('goblin', str(input("Name >")))
+            rimuru.add_subordinate('goblin', 'Rigurd')
             pass
 
     goblin_encounter()
