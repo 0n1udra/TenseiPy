@@ -1,5 +1,5 @@
 class Subordinates:
-    def subordinates_generator(self):
+    def subordinates_generator(self, output=False):
         """
         Yields the subordinates under specified character.
 
@@ -8,7 +8,19 @@ class Subordinates:
         """
 
         for level, sub_list in self.subordinates.items():
-            for subordinate in sub_list: yield subordinate
+            if output and sub_list: yield f'    {level}:'
+
+            for subordinate in sub_list:
+                if output:
+                    yield f'        {subordinate.name}'
+                else: yield subordinate
+
+    def show_subordinates(self, *args):
+
+        print('    <<<<<<<<<< Subordinates >>>>>>>>>>\n')
+        print(f'    Leader: {self.name}\n')
+        for i in self.subordinates_generator(output=True): print(i)
+        print('\n    <<<<<<<<<< Subordinates >>>>>>>>>>')
 
     def add_subordinate(self, new_subordinate, new_name):
         """
@@ -22,9 +34,9 @@ class Subordinates:
             .add_subordinates('Tempest Wolf', 'Ranga')
         """
 
-        new_subordinate = self.get_object(new_subordinate, sub=True)
-        new_subordinate(new_name)
-        new_subordinate.protections += self.shared_protection
+        # Get's game character object, initializes it, sets name, then adds protection(s) (blessing).
+        new_subordinate = self.get_object(new_subordinate, new=True)(new_name)
+        new_subordinate.protections.append(self.shared_protection)
 
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)

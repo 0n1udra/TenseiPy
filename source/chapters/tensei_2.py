@@ -145,15 +145,16 @@ def ch2_goblin_encounter(rimuru):
                 __subs = ['heal wounded', 'heal wounded victims', 'heal hurt', 'help injured', 'heal injured', 'assist injured', 'assist wounded']
                 def __init__(self):
                     sprint("Show me your wounded")
-
                     if rimuru.check_acquired('full potion', 9):
                         siprint("I could try eating them and splashing them with the potion...")
-                        sprint("\nLord ")
+                        sprint("\nMy lord... What are you doing...")
                         idots(5)
                         sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
-                        sprint("\nW-w-whoa! You really are a powerful, great one!")
                         rimuru.add_reputation('goblins', 1)
+                        sprint("\n* The slime ate, healed, and spat out the rest of the wounded goblins. *")
+                        sprint("\nThere, all healed!")
+                        sprint("\nW-w-whoa! You really are magnificent, great one! We thank you!")
                         action_playable('_heal_wounded', False)
                     else:
                         siprint("Looks like 9 wounded goblins..... How can I help them?")
@@ -247,7 +248,18 @@ def ch2_goblin_encounter(rimuru):
 
     class naming_mobs:
         def __init__(self):
-            tbc()
+            siprint("Quite a wild retinue I've built up for myself.")
+            siprint("I should probably lay down some rules for everyone to follow.")
+            sprint("By the way elder, what your name?")
+            sprint("\nMonsters usually don't have names. Not having names do not get in the way of communicating anyways.")
+            sprint("\nOk, I see. Still, it would be convenient if I have a way to call you if I need to.")
+            sprint("I suppose, I'll just have to give you guys names!")
+            sprint("\nWHAAAAT!????")
+            sprint("A-are you certain?")
+            sprint("\nWhat's the big deal anyways? Everyone get in a line, so I can give you names.")
+            dots(5)
+            siprint("What should I name the village elder...")
+            rimuru.add_subordinate('goblin', str(input("Name >")))
             pass
 
     goblin_encounter()
