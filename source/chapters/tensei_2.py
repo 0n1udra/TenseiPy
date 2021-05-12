@@ -8,7 +8,6 @@ def ch2_goblin_encounter(rimuru):
         __location = "Near the Sealed Cave"
 
         def __init__(self):
-            rimuru.add_subordinate('goblin', 'Rigurd')
             mobs_reset()
             gprint("< Chapter 2 >\n")
             mobs_add(['10* goblin'])
@@ -162,6 +161,7 @@ def ch2_goblin_encounter(rimuru):
 
     class wolf_attack:
         def __init__(self):
+            mobs_reset()
             mobs_add(['direwolf leader', '10*direwolf'])
             sprint("\n* Meanwhile... *")
             sprint("\nIt is a full and bright moon tonight.")
@@ -259,8 +259,21 @@ def ch2_goblin_encounter(rimuru):
             sprint("A-are you certain?")
             sprint("\nWhat's the big deal anyways? Everyone get in a line, so I can give you names.")
             dots(5)
-            siprint("What should I name the village elder...")
+            show_art('village elder')
+            siprint("What should I name the village elder? He had son named Rigurd, who died protecting this village...")
             rimuru.add_subordinate('goblin', 'Rigurd')
+            sprint("I am honored great one!")
+            sprint("\nAlright, next...")
+            show_art('rigur')
+            siprint("Now... The elder's younger son, the younger brother of the lost Rigurd...")
+            rimuru.add_subordinate('goblin', 'Rigur')
+            sprint("Thank you master!")
+            show_art('gobta')
+            sprint("\nSo, who's next? You seem like a chipper goblin...")
+            rimuru.add_subordinate('goblin', 'Gobta')
+
+
+
             pass
 
     goblin_encounter()
