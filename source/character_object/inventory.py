@@ -19,12 +19,14 @@ class Inventory:
             if output and items: yield f'[{item_type}]'
 
             for item_name, item in items.items():
-                if output:
-                    item_text = f'    {item.inv_capacity_add * item.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item.name}'
-                    if item.status:  # if has a custom status set.
-                        yield item_text + f' ({item.status})'
-                    else: yield item_text  # Text to be shown for gameplay.
-                else: yield item  # Object to be used by code.
+                if not output:
+                    yield item
+                    continue
+
+                item_text = f'    {item.inv_capacity_add * item.quantity:.1f}% - {self.inventory[item_type][item_name].quantity}x {item.name}'
+                if item.status:  # if has a custom status set.
+                    yield item_text + f' ({item.status})'
+                else: yield item_text  # Text to be shown for gameplay.
 
     def update_inventory_capacity(self):
         """Updates inventory_capacity variable by going through all items in inventory and adding them up."""

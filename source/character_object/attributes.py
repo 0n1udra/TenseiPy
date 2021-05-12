@@ -19,7 +19,9 @@ class Attributes:
 
             for skill_name, skill_object in skills.items():
                 # Yields skill game object if not in printing mode.
-                if not output: yield skill_object
+                if not output:
+                    yield skill_object
+                    continue
 
                 if skill_object.status:
                     yield f'    {skill_name} ({skill_object.status})'
