@@ -99,6 +99,8 @@ def game_action(level=None):
         [rimuru.show_mimics, ['mimics', 'mimicries']],
         [rimuru.show_nearby, ['nearby']],
         [rimuru.get_location, ['location']],
+        [rimuru.show_subordinates, ['subordinates']],
+        [rimuru.show_reputations, ['reputations', 'standings']],
         [show_help, ['/help']],
         [change_settings, ['/settings', '/options']],
         [show_history, ['/history', '/log']],
