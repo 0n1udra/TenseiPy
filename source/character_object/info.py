@@ -18,7 +18,7 @@ class Info:
             print(self.info_page)
             return True
 
-        if game_object := self.get_object(game_object, mimic_pool=True):
+        if game_object := self.get_object(game_object, mimic_pool=True, sub_pool=True):
             # Some skills or objects have special info pages, I couldn't get @property method working...
             if hasattr(game_object, 'show_info_page'):
                 print(game_object.show_info_page(self))
@@ -94,11 +94,12 @@ class Info:
         self.update_info()
         print(f'    < [{self.name}] Acquired Blessing: [{divine_protection}] >')
 
-    def show_reputations(self):
-        print("----- Standing -----")
-        for k, v in self.reputations.items():
-            print(f"{k}: {v}")
-        print()
+    def show_reputations(self, *args):
+        """Shows player's reputation (standing) with factions/characters."""
+
+        print("    <<<<<<<<<< REPUTATION >>>>>>>>>>\n")
+        for k, v in self.reputations.items(): print(f"    {k}: {v}")
+        print("\n    <<<<<<<<<< REPUTATION >>>>>>>>>>")
 
     def add_reputation(self, match, add_value=1):
         """
