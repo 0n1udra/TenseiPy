@@ -20,8 +20,9 @@ class Item:
     game_object_type = 'item'
     initialized = False
 
-    def __init__(self):
+    def __init__(self, quantity=0):
         self.recipe, self.use_requirements = self.recipe, self.use_requirements
+        self.quantity = quantity
         self.initialized = True
         self.update_info()
 

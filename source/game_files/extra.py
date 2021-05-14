@@ -156,7 +156,7 @@ def parse_input(user_input):
     """
     Extracts item name and amount from user input. (Use only in try/except).
 
-    E.g. 'remove hipokte grass 100' returns str(Hipokte Grass), int(100)
+    E.g. 'remove hipokte grass 100' returns str('Hipokte Grass'), int(100)
 
     Args:
         user_input str: User inputted command.
