@@ -1,4 +1,4 @@
-from game_files.output import gprint
+from game_files.output import gprint, print_header
 
 class Subordinates:
     def subordinates_generator(self, output=False):
@@ -19,10 +19,9 @@ class Subordinates:
 
     def show_subordinates(self, *args):
 
-        print('    <<<<<<<<<< Subordinates >>>>>>>>>>\n')
+        print_header('Subordinates')
         print(f'    Leader: {self.name}\n')
         for i in self.subordinates_generator(output=True): print(i)
-        print('\n    <<<<<<<<<< Subordinates >>>>>>>>>>')
 
     def add_subordinate(self, new_subordinate, canon_name=None, new_name=None):
         """

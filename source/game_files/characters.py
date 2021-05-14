@@ -1,5 +1,5 @@
 from character_object.character import Character
-from game_files.output import gprint
+from game_files.output import gprint, print_header
 
 # ========== Characters
 class Rimuru_Tempest(Character):
@@ -44,13 +44,12 @@ class Rimuru_Tempest(Character):
         except: pass
 
     def show_mimics(self, *args):
-        print("    <<<<<<<<<< Mimicries >>>>>>>>>>\n")
+        print_header('Mimicries')
         for mob_level, mobs in self.acquired_mimicries.items():
             print(f'    {mob_level}:')
             for mob_name, mob in mobs.items():
                 print(f'        {mob_name}')
         print("\n    Note: Reset mimic with 'mimic reset'.")
-        print("\n    <<<<<<<<<< Mimicries >>>>>>>>>>")
 
     def add_mimic(self, mob, show_msg=True):
         """

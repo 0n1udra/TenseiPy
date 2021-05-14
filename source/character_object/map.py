@@ -1,11 +1,11 @@
-from game_files.output import gprint
+from game_files.output import gprint, print_header
 
 class Map:
     def show_nearby(self, *args, valid_usage=False):
         # Either you have to own [Magic Perception] or change the valid_usage boolean to use this funtion.
         if not valid_usage and not self.check_acquired('magic perception'): return
 
-        print("    ----- Nearby -----")
+        print_header('Nearby', 10)
         for mob in self.active_mobs:
             print(f"    {mob[1]}x {mob[0].name} {'(Dead)' if mob[0].status else ''}")
 

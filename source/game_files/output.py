@@ -104,6 +104,13 @@ def idots(*args):
 
     dots(*args, indent=True)
 
+def print_header(text, multiplier=10, char='-'):
+
+    print('    ' + char * multiplier, end='')
+    print(f' {text} ', end='')
+    print(char * multiplier, '\n')
+
+
 
 #                    ========== Extra ==========
 def show_version(game_version, version_date):
