@@ -4,6 +4,8 @@ from game_files.extra import *
 
 #                    ========== Printing ==========
 def update_rimuru_output(rimuru_obj):
+    """Updates rimuru object to be used here."""
+    
     global rimuru
     rimuru = rimuru_obj
 
@@ -105,19 +107,32 @@ def idots(*args):
     dots(*args, indent=True)
 
 def print_header(text, multiplier=10, char='-'):
+    """
+    Prints header for in-game interfaces, like inv, stats, reputation, etc.
+
+    E.g. '---------- Inventory ----------'
+
+    Args:
+        text: Title of interface, e.g. 'Inventory', 'Attributes'.
+        multiplier: Number of lines on both sides of text.
+        char: Character to make line.
+    """
 
     print('    ' + char * multiplier, end='')
     print(f' {text} ', end='')
     print(char * multiplier, '\n')
 
 
-
 #                    ========== Extra ==========
 def show_version(game_version, version_date):
+    """Shows game version."""
+
     print(f"\n    Version: {game_version} ({version_date})")
     exit(0)
 
 def show_sysargs():
+    """Shows available runtime arguments."""
+
     print("""
     -help       --  This help page.
     -version    --  Show version.
@@ -152,7 +167,7 @@ def show_art(art):
 
 def show_history(arg):
     """
-    Shows x of last outputted story lines.
+    Shows history of x lines from storyline dialogue.
 
     Args:
         arg: Lines to show. Default is 5.
@@ -167,9 +182,8 @@ def show_history(arg):
     try: lines = int(arg[-2:])
     except: lines = 5
 
-    print('<<<<<<<<<<<<<<<<<<<< HISTORY >>>>>>>>>>>>>>>>>>>>\n')
+    print_header('History', 35)
     for line in log_data[-lines:]: print(line, end='')
-    print('\n<<<<<<<<<<<<<<<<<<<< HISTORY >>>>>>>>>>>>>>>>>>>>')
 
 def show_start_banner(game_version, version_date):
     """Show game title, tips, and player stats/inv."""
@@ -180,7 +194,7 @@ def show_start_banner(game_version, version_date):
     {game_art.rimuru_art.banner}
     - Version: {game_version} ({version_date})
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
-    - To set game settings like hardcore mode or hints use '/settings', e.g. '/settings hardcore on', '/settings hints off'.
+    - To set game settings like hardcore mode or hints use '/settings', e.g. '/settings hardcore on'.
     - Game will only save at specific points in the story, look out for '< Game Saved >' message.
     - Fullscreen recommended to show ASCII art correctly.""")
 
@@ -196,9 +210,9 @@ def show_settings(*args):
         {on_off(rimuru.show_hints)}\thints/clues <on/off>\t-- Show game hints, highly recommended for first timers.
         {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
 
-    Change Settings:
-        settings/options COMMAND(S) on/off
-        Example: 'settings textcrawl off', 'options hud hints off'""")
+    Usage:
+        /settings/options COMMAND(S) on/off
+        Example: '/settings textcrawl off', '/options hud hints off'""")
 
 def show_help(arg):
     """Shows help page."""

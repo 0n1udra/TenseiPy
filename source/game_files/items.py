@@ -73,6 +73,7 @@ class Item:
         return True
 
     def consume_item(self, user, amount=1):
+        """Uses up item, by default 1."""
 
         if self.item_type == 'Consumable':
             user.remove_inventory(self, amount)
