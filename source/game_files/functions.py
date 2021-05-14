@@ -97,7 +97,7 @@ def game_action(level=None):
         [rimuru.eat_targets, ['eat', 'predate']],
         [rimuru.use_mimic, ['mimic']],
         [rimuru.show_mimics, ['mimics', 'mimicries']],
-        [rimuru.show_nearby, ['nearby']],
+        [rimuru.use_action, ['magic perception'], ['nearby']],
         [rimuru.get_location, ['location']],
         [rimuru.show_subordinates, ['sub', 'subs', 'subordinates']],
         [rimuru.show_reputations, ['rep', 'reps', 'reputations', 'standings']],
@@ -153,7 +153,7 @@ def action_played(match, amount=1):
     Checks if game action has been played.
 
     Args:
-        match obj: Pass in game level object to check if it has been played already.
+        match obj: Pass game level object to check if it has been played already.
 
     Returns:
         bool True: Returns True if game action has been played.

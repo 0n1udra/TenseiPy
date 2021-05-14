@@ -262,7 +262,7 @@ class Magic_Perception(Extra, Skill):
 
     def use_action(self, user=None, *args):
         if not user: return False
-        user.show_nearby()
+        user.show_nearby(valid_usage=True)
         return True
 
 class Water_Manipulation(Extra, Skill):
