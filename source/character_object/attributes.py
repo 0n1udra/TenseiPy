@@ -1,35 +1,35 @@
-from game_files.output import gprint
+from game_files.output import gprint, print_header
 
 class Attributes:
-    def attributes_generator(self, output=False):
+    def attributes_generator(self, output_mode=False):
         """
-        Yields character's attributes game objects (skills/resistances).
+        Yields all the character's attributes (skills/resistances).
 
         Args:
-            output bool(False): Yields friendly string for in game printing.
+            output bool(False): Yields text for in-game interface.
 
         Usage:
             .attributes_generator()
-            .attributes_generator(output=True)
+            .attributes_generator(output_mode=True)
         """
 
-        for skill_type, skills in self.attributes.items():
+        for skill_type, skills_list in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output and skills: yield f'    [{skill_type}]'
+            if output_mode and skills_list: yield f'    [{skill_type}]'
 
-            for skill_name, skill_object in skills.items():
+            for skill_name, skill in skills_list.items():
                 # Yields skill game object if not in printing mode.
-                if not output:
-                    yield skill_object
+                if not output_mode:
+                    yield skill
                     continue
 
-                if skill_object.status:
-                    yield f'        {skill_name} ({skill_object.status})'
+                if skill.status:
+                    yield f'        {skill_name} ({skill.status})'
                 else: yield f'        {skill_name}'
 
     def show_attributes(self, mob=None, *args):
         """
-        Prints out attribute of player or specified character. Includes info like Mimicking, Location, Full Name, etc.
+        Shows acquired attribute. Might include: Mimicking, Location, etc.
 
         Usage:
             .show_attributes()
@@ -40,50 +40,46 @@ class Attributes:
         """
 
         if mob: mob = self.get_object(mob, item_pool=[*self.mimic_generator()], sub_pool=True)
-        if not mob: mob = self
+        if not mob: mob = self  # If no specified mob, shows player's stats.
 
-        print("    <<<<<<<<<< ATTRIBUTES >>>>>>>>>>\n")
+        print_header('Attributes', 10)
         print(f"    Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
         print(f"    Level: {mob.level}")
         print(f"    Location: {mob.current_location}\n")
         # Print out skill category and corresponding skills indented.
-        for i in mob.attributes_generator(output=True):print(i)
+        for i in mob.attributes_generator(output_mode=True): print(i)
 
+        # Shows only if using mimic and if getting stats on thyself.
         if self.current_mimic and self.check_if_player():
-            print(f"\n    Mimicking: [{self.current_mimic.name}]\n")  # If currently using Mimic.
-            for i in self.current_mimic.attributes_generator(output=True): print(i)
-        print("\n    <<<<<<<<<< ATTRIBUTES >>>>>>>>>>")
+            print(f"\n    Mimicking: [{self.current_mimic.name}]\n")
+            for i in self.current_mimic.attributes_generator(output_mode=True): print(i)
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
         Adds attribute to character.
 
         Args:
-            attribute str: Attribute to add to character.
+            attribute str: Attribute to acquire.
             show_acquired_msg bool(True): Shows skill acquired message.
-            show_skill_info bool(False): Shows skill information page.
-            top_newline bool(True): Print newline beforehand.
+            show_skill_info bool(False): Shows skill information page after acquisition.
 
         Usage:
             .add_attribute('rimuru', 'water blade')
         """
 
         # Checks if already acquired.
-        if self.check_acquired(attribute): return False
+        if self.check_acquired(attribute): return True
 
         if attribute := self.get_object(attribute, new=True):
             # Adds item to character's attributes dictionary, sets quantity so check_acquired func can work.
-            if not attribute.initialized:
-                attribute = attribute()
-                attribute.quantity = 1
+            #if not attribute.initialized:
+            attribute = attribute()
             self.attributes[attribute.skill_level][attribute.name] = attribute
 
-            # If want to show acquisition message and/or skill's info page.
+            # Show acquisition message and/or skill's info page.
             if show_acquired_msg: gprint(f"< Acquired: {attribute.skill_level} [{attribute.name}] >")
             if show_skill_info: self.show_info(attribute.name)
-
             return True
-        return False
 
     def remove_attribute(self, attribute):
         """
@@ -102,19 +98,17 @@ class Attributes:
 
     def upgrade_attribute(self, skill_from, skill_to):
         """
-        Upgrades skill.
-
-        Grabs game object for skill_from, and creates new game object for skill_to.
-        Removes old skill and adds new skill.
+        Evolve skill.
 
         Args:
-            skill_from str: Skill to upgrade from.
-            skill_to str: Skill to upgrade to.
+            skill_from str: Original skill.
+            skill_to str: Skill to upgrade into.
 
         Usage:
             .upgrade_attribute('sage', 'great sage')
         """
 
+        # Gets skill object from attributes dict, then
         skill_from = self.check_acquired(skill_from)
         skill_to = self.get_object(skill_to, new=True)
         if not skill_from or not skill_to: return False
