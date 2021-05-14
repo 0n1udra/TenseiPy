@@ -73,7 +73,7 @@ class Attributes:
         if attribute := self.get_object(attribute, new=True):
             # Adds item to character's attributes dictionary, sets quantity so check_acquired func can work.
             #if not attribute.initialized:
-            attribute = attribute()
+            attribute = attribute(1)
             self.attributes[attribute.skill_level][attribute.name] = attribute
 
             # Show acquisition message and/or skill's info page.
