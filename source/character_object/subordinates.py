@@ -20,7 +20,7 @@ class Subordinates:
     def show_subordinates(self, *args):
 
         print_header('Subordinates')
-        print(f'    Leader: {self.name}\n')
+        print(f'    Master: {self.name}\n')
         for i in self.subordinates_generator(output=True): print(i)
 
     def add_subordinate(self, new_subordinate, canon_name=None, new_name=None):

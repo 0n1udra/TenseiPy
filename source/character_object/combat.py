@@ -6,21 +6,15 @@ class Combat:
         """
         Checks if can attack, and if it was successful.
 
-        First separates the targets and attacks by splitting up targets_and_attacks by commas ','.
-        Then Adds the targets and attacks to corresponding lists.
-        Checks if target is not too high of a level for attack, then if it has resistance to said attack.
-        Will return booleans if attack was attempted and  successful.
-
         Args:
             user_input str: Targets to attack, if multiple, separated by comma ','.
 
         Returns:
-            attacked: If attack was attempted.
-            attack_success: If attack was successful.
+            bool: If attack was successful.
 
         Usage:
-            > attack with water blade
             > attack water blade
+            > attack magic sword
         """
 
         attack_success = False

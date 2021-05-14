@@ -20,8 +20,9 @@ class Skill:
     game_object_type = 'attribute'
     initialized = False
 
-    def __init__(self):
+    def __init__(self, quantity=0):
         self.use_requirements, self.sub_skills = self.use_requirements, self.use_requirements
+        self.quantity = quantity
         self.initialized = True
         self.update_info()
 

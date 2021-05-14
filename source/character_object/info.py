@@ -1,16 +1,19 @@
 from game_files.extra import format_info, get_any
+from game_files.output import print_header
 
 class Info:
     def show_info(self, game_object):
         """
-        Shows corresponding information for object.
+        Shows info page.
 
         Args:
-            game_object: Game object that you want to get information on.
+            game_object: skill/item/mob/etc.
 
         Usage:
             > info predator
+            > info hipokte grass
             > info tempest serpent
+            > info gobta
         """
 
         # Need this so player can get the info page on itself.
@@ -55,11 +58,16 @@ class Info:
         self.family_name = name
         self.update_info()
 
-    def add_level(self, add_level=1):
-        """Adds to current level."""
+    def add_level(self, add_amount=1):
+        """
+        Add x levels to character's level.
 
-        print(f"    < [{self.name}] Level Up: {self.level} to {self.level + add_level}>\n")
-        self.level += add_level
+        Args:
+            add_amount int: To be added to current level.
+        """
+
+        print(f"    < [{self.name}] Level Up: {self.level} to {self.level + add_amount}>\n")
+        self.level += add_amount
         self.update_info()
 
     def set_level(self, level):
@@ -81,7 +89,7 @@ class Info:
         """
         Adds divine protection to character.
 
-        List:
+        Protections:
         Storm Crest: Veldora to Rimuru
         Protection of Tempest: Rimuru to subs
         Protection of the Storm: True Dragons, Veldora, etc
@@ -97,9 +105,8 @@ class Info:
     def show_reputations(self, *args):
         """Shows player's reputation (standing) with factions/characters."""
 
-        print("    <<<<<<<<<< REPUTATION >>>>>>>>>>\n")
+        print_header('Reputation')
         for k, v in self.reputations.items(): print(f"    {k}: {v}")
-        print("\n    <<<<<<<<<< REPUTATION >>>>>>>>>>")
 
     def add_reputation(self, match, add_value=1):
         """
@@ -127,10 +134,10 @@ class Info:
 
     def get_reputations(self, match):
         """
-        Returns integer value of reputations that player has with a character/faction/etc.
+        Returns integer value of reputation that player has with a character/faction/etc.
 
         Args:
-            match str: Name of character/faction/etc to check reputations with.
+            match str: Name of character/faction/etc to check reputation with.
 
         Returns:
             int: Returns integer denoting reputation player has with specified.

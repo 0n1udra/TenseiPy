@@ -42,23 +42,18 @@ class Map:
 
     def get_location(self, *args):
         """
-        Prints and returns character's current location.
+        Prints and returns player's current location.
 
         Returns
             str: Name of location or N/A if unknown.
-
         """
 
-        # TODO Separate this function into two.
         gprint(f"\n< {self.name} location: {self.current_location} >\n")
         return self.current_location
 
-    def get_map(self, level):
-        pass
-
     def update_location(self, new_location=None):
         """
-        Updates character current_location variable.
+        Updates character's current_location variable.
 
         Args:
             new_location str: Location name

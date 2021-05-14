@@ -216,7 +216,7 @@ def show_help(arg):
         target TARGET(S)        -- Target mob. E.g. 'target tempest serpent', 'target tempest serpent, black spider'
           - target all          -- Target all nearby targetable mobs.
           - target reset        -- Clear targeted.
-        attack SKILL/ITEM 	    -- Attack targeted mobs. E.g. 'attack water blade'
+        attack SKILL/ITEM 	    -- Attack targeted mob(s) with skill/item. E.g. 'attack water blade'
         use SKILL/ITEM          -- Use a skill. E.g. 'use sense heat source'
         craft ITEM [amount]     -- Craft items. E.g. 'craft full potion', 'craft full potion 5'
                                    Note: Some items are crafted in batches, suggest reading the item's info page for the recipe and more.

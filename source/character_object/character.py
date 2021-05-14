@@ -10,48 +10,46 @@ from character_object.map import Map
 
 
 class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
-    # Character inventory.
     starting_state = []  # Character's starting skills/attributes.
-    inventory_capacity = 0  # Inventory capacity in percentage.
+    inventory_capacity = 0
     inv_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
     quantity = 0  # Item quantity in inventory.
-    quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass, Magical Ore.
+    quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass (50), Magical Ore (25).
 
-    # Character information and data related variables.
     name = ''
     family_name = ''
-    canon_name = ''  # Name from anime or manga storyline.
+    canon_name = ''  # Name from manga storyline.
     title = ''  # E.g. True Dragon, Demon Lord.
-    protections = []  # E.g. Storm Crest (from Veldora)>
-    shared_protection = ''  # Divine protection to be shared.
     species = ''
     rank = ''  # E.g. Catastrophe, Calamity.
-    level = 1  # Same as rank just as integer.
-    occupations = []
-    affiliations = []
+    level = 1  # Integer corresponding to rank.
     info_page = ''  # Info page for character.
+    status = ''  # E.g. Passive, Active, Analysing, etc
     description = ''
     appearance = ''  # Description of character appearance.
-    abilities = []
     evolution = ''  # Species evolution of character.
     acquired_msg = ''  # Message for when newly acquired.
+    shared_protection = ''  # Divine protection to be shared when giving mob a name.
+    protections = []  # E.g. Storm Crest (from Veldora).
+    occupations = []
+    affiliations = []
+    abilities = []  # Extra abilities that are not considered a [Skill].
     is_alive = True
     item_type = 'Mob'
-    status = ''  # E.g. Passive, Active, Analysing, etc
 
-    # Level/Map functionality.
-    active_mobs = []  # Current mobs around you that you can interact or attack.
-    targeted_mobs = []  # Targets that will be attacked with 'attack' command.
     last_command = ''
     last_use_skill = None  # Last successfully used skill, game object.
-    available_locations = []
     current_location = ''
     current_location_object = None  # Current location's class object.
+    available_locations = []
+    active_mobs = []  # Current mobs around you that you can interact or attack.
+    targeted_mobs = []  # Targets that will be attacked with 'attack' command.
 
     # Game variables.
+    save_path = ''
+    source_folder_path = ''
     game_object_type = 'character'
     initialized = False
-    save_path = ''
     valid_save = None  # If you died in-game, the current save will be unusable.
     textcrawl = None  # Slow text crawl effect, letter by letter.
     show_actions = None  # Show available actions player can take.
@@ -60,7 +58,6 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     hardcore = None  # Hides targets, mimicking, and actions.
     fast_mode = None
     storyline_log = game_log = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
-    source_folder_path = ''
 
     def __init__(self, name='', lname=''):
         if name or lname:
@@ -90,7 +87,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     def __str__(self): return self.name.lower()
 
     def set_start_state(self):
-        """Adds starter attributes and items to character."""
+        """Adds starter attributes to character."""
 
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
@@ -144,8 +141,12 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         Checks if you pass in a list of strings or just a single string.
 
         Args:
-            check_object str: Object to check if acquired.
+            check_object str/list: Object(s) to check if acquired.
             amount int(1): Base amount to check if own.
+
+        Usage:
+            .check_acquired('resist poison')
+
         """
 
         if type(check_object) is list:
@@ -154,26 +155,15 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         else: return self._check_acquired(check_object, amount)
 
     def _check_acquired(self, check_object, amount=1):
-        """
-        Checks to see if character has object/attribute/item/etc.
-
-        Args:
-            check_object str: Object to check if specified character has item, attribute, skill, etc.
-            amount int(1): Check quaintly of item, only works for inventory right now.
-
-        Returns:
-            bool: If specified character has attribute or object.
-
-        Usage:
-            .check_acquired('resist poison')
-        """
+        """Check if own skill/item/etc."""
 
         item = self.get_object(check_object, mimic_pool=True)
-        if item and item.quantity >= amount: return item
+        if item and item.quantity >= amount:
+            return item
         return False
 
     def set_status(self, game_object, new_status):
-        """Update status of character."""
+        """Update status variable."""
 
         if game_object := self.get_object(game_object):
             game_object.status = new_status
