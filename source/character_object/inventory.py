@@ -33,8 +33,6 @@ class Inventory:
         Prints out inventory items, corresponding category, and capacity.
 
         Usage:
-            .show_inventory('gobta')
-
             > inv
         """
 
@@ -59,9 +57,8 @@ class Inventory:
         Args:
             item str, obj: Item to add to inventory.
             amount int(None): Amount of specified item to add to inventory. If not specified, will use item's .add_amount value.
-            show_msg bool(True): Hide acquired and/or analyzed message.
-            show_analysis_msg bool(None): Show/Hide analyzed message.
-            bot_newline bool(True): Print newline at end.
+            show_acquired_msg bool(True): Show item acquired message.
+            show_analysis_msg bool(None): Show analysis complete message.
 
         Usage:
             .add_inventory('hipokte grass')
@@ -82,6 +79,7 @@ class Inventory:
 
         if show_acquired_msg: gprint(f'< Acquired: {amount * item.quantity_add}x [{item.name}] >')
         if show_analysis_msg: gprint(f'<< Analysis on [{item.name}] Complete. >>')
+        return True
 
     def remove_inventory(self, item=None, amount=1):
         """
