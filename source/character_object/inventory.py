@@ -1,4 +1,4 @@
-from game_files.output import gprint
+from game_files.output import gprint, print_header, parse_input
 
 class Inventory:
     def inventory_generator(self, output=False):
@@ -6,7 +6,7 @@ class Inventory:
         Yields all items in character's inventory.
 
         Args:
-            output bool(False): Yields a friendly string for printing in game purposes.
+            output bool(False): Yields a friendly string for printing in-game purposes.
 
         Usage:
             .inventory_generator(output=True)
@@ -38,10 +38,9 @@ class Inventory:
             > inv
         """
 
-        print('    <<<<<<<<<< INVENTORY >>>>>>>>>>\n')
+        print_header('Inventory')
         print(f'    Capacity: {self.inventory_capacity:.1f}%\n')
         for i in self.inventory_generator(output=True): print(i)
-        print('\n    <<<<<<<<<< INVENTORY >>>>>>>>>>')
 
     def update_inventory_capacity(self):
         """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
@@ -68,9 +67,7 @@ class Inventory:
             .add_inventory('hipokte grass')
         """
 
-        # Check if passed in a string to find corresponding object or a game object iteself.
-        if type(item) is str:
-            item = self.get_object(item, new=True)
+        item = self.get_object(item, new=True)
         if not item: return False  # Does not have game object to add to inventory.
 
         if self.check_acquired(item):
@@ -88,7 +85,7 @@ class Inventory:
 
     def remove_inventory(self, item=None, amount=1):
         """
-        Remove item from inventory (Currently only Rimuru).
+        Remove item from inventory.
 
         Args:
             item str: Item to remove from inventory.
@@ -98,16 +95,18 @@ class Inventory:
             .remove_inventory('hipokte grass')
             .remove_inventory('magic ore', 5)
             .remove_inventory('water' -1)
+
+            > remove hipokte grass
+            > remove magic ore 5
+            > remove water -1
         """
 
-        # Parses item and amount from item parameter if from game_input.
-        try:
-            amount = int(item[-1])
-            user_input = item.split()
-            item = ' '.join(user_input[:-1])
+        # Parses item and amount from user input.
+        try: item, amount = parse_input(item)
         except: pass
+        if amount == 0: return False
 
-        if type(item) is str: item = self.get_object(item)
+        item = self.get_object(item)
         if not item: return False
 
         if (item.quantity - amount) <= 0 or amount <= 0:
@@ -118,26 +117,23 @@ class Inventory:
             gprint(f"< Removed: {amount}x [{item.name}] >")
 
         self.update_inventory_capacity()
+        return True
 
     def craft_item(self, args):
         """
         Craft item if have necessary material.
 
-        Use 'craft' command in game to craft items. It will ask how many you want to make.
-        Will check if user has needed ingredients to craft item.
+        In in-game command, if not specify amount, will show recipe than ask for amount.
 
         Args:
-            arg str: Item to craft and amount.
+            arg str: User input, item to craft and amount.
 
         Usage:
             > craft full potion
             > craft full potion 10
         """
 
-        # Gets craft amount and item name from passed in input.
-        try:
-            craft_amount = int(args.split(' ')[-1])
-            item = ' '.join((args.split(' ')[:-1]))
+        try: item, craft_amount = parse_input(args)
         except:
             craft_amount = None
             item = args
@@ -145,16 +141,15 @@ class Inventory:
         item = self.get_object(item, new=True)
         if item is None: return
 
-        # You can craft an item with specific amount with 'craft full potion 2', or 'craft full potion' then specify amount.
+        # 'craft full potion 2', or 'craft full potion' to show recipe then input amount.
         if craft_amount is None:
             # Shows recipe.
             recipe = ''
-            print(f"    ----- Recipe for [{item.name}] -----")
+            print_header(f'Recipe for: [{item.name}]', 5)
             for ingredient, amount in item.recipe.items():
                 recipe += F"{amount}x {ingredient}, "
-            # [:-2] will cuts off last comma and space.
-            print(f"    {recipe[:-2]}")
-            print(f"\nInputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
+            print(f"    {recipe[:-2]}")  # [:-2] will cuts off last comma and space.
+            print(f"\n    Inputting 1 will craft {item.quantity_add}. 0 will cancel crafting.\n")
 
             # Asks for how much to make. note that some items are crafted in batches.
             try:
@@ -173,9 +168,9 @@ class Inventory:
             gprint("< Missing Ingredient(s) >")
             return False
 
-        # Use up ingredients then add to inventory
+        # Removes ingredients then adds new crafted item to inventory
         for ingredient_name, ingredient_amount in item.recipe.items():
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
-
         print()
         self.add_inventory(item, craft_amount)
+        return True

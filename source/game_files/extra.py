@@ -152,6 +152,22 @@ def mob_list_adder(item, input_list, amount_mode=False):
 
     input_list.append(item)
 
+def parse_input(user_input):
+    """
+    Extracts item name and amount from user input. (Use only in try/except).
+
+    E.g. 'remove hipokte grass 100' returns str(Hipokte Grass), int(100)
+
+    Args:
+        user_input str: User inputted command.
+
+    Returns:
+        list: Returns item name, and amount integer.
+    """
+
+    split_data = user_input.split()
+    return ' '.join(split_data[:-1]), int(split_data[-1])
+
 def tbc():
     """Print part of game/story is in development."""
 
