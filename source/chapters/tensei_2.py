@@ -272,8 +272,17 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nSo, who's next? You seem like a chipper goblin...")
             rimuru.add_subordinate('goblin', 'Gobta')
 
+            game_action(self)
+
+        class _skip_naming:
+            def __init__(self):
+                pass
+
+        class _next_goblin:
+            __subs = ['next one', 'continue naming', 'continue giving names']
+            def __init__(self):
+                pass
 
 
-            pass
 
     goblin_encounter()
