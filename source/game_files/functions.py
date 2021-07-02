@@ -20,7 +20,7 @@ def game_hud(actions):
             hud_actions.remove(action)
             hud_actions = [' '.join(list(filter(None, action.split('_')))[1:])] + hud_actions
 
-    if rimuru.show_actions is False or rimuru.hardcore is True: return
+    if rimuru.show_actions is False or rimuru.hardcore is True: return False
 
     if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_actions: print()  # Adds extra space when needed.
 
@@ -228,7 +228,7 @@ def last_use_skill(skill):
     """
 
     # If last_use_skill var is not set.
-    if not rimuru.last_use_skill: return
+    if not rimuru.last_use_skill: return False
 
     if skill.lower() in rimuru.last_use_skill.name.lower():
         return rimuru.last_use_skill
@@ -423,8 +423,8 @@ def game_save(level=None, show_msg=True):
     Pickels Rimuru_Tempest object.
 
     Args:
-        level [bool]: Update rimuru.current_location_object
-        show_msg [bool:True]: Show Game Saved message.
+        level (bool): Update rimuru.current_location_object
+        show_msg (bool True): Show Game Saved message.
     """
 
     global rimuru

@@ -106,7 +106,7 @@ def idots(*args):
 
     dots(*args, indent=True)
 
-def print_header(text, multiplier=10, char='-'):
+def print_header(text, multiplier=10, char='-', newline=False):
     """
     Prints header for in-game interfaces, like inv, stats, reputation, etc.
 
@@ -120,7 +120,8 @@ def print_header(text, multiplier=10, char='-'):
 
     print('    ' + char * multiplier, end='')
     print(f' {text} ', end='')
-    print(char * multiplier, '\n')
+    print(char * multiplier)
+    if newline: print()
 
 
 #                    ========== Extra ==========
