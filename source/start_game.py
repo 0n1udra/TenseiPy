@@ -4,7 +4,7 @@ from chapters.tensei_0 import ch0
 
 __version__ = "5.2 Alpha"
 __date__ = '5/11/2021'
-__author__ = "D Thomas"
+__author__ = "DT"
 __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
 __status__ = "Development"

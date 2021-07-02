@@ -49,7 +49,7 @@ def ch1_cave(rimuru):
                 siprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
                 siprint("What is this? Feels like I'm 'absorbing' something. This body? Am I even human anymore!?!?!")
 
-        class _inspect_body(cave_actions):
+        class _inspect_body:
             __subs = ['examine', 'examine body', 'examine self', 'examine myself', 'inspect', 'check body', 'confirm body', 'inspect my body', 'feel body', 'feel', 'feel around', 'move around', 'check', 'check if human']
             def __init__(self):
                 siprint("What is that feeling? Is....is that grass?! It feels like it's dissolving...")
@@ -61,22 +61,7 @@ def ch1_cave(rimuru):
                 def __init__(self):
                     sprint("Puuuuuuuuuuuuyooooooooooo!")
 
-            class eat_grass:
-                __subs = cave_actions.eat_grass.__subs
-                def __init__(self):
-                    rimuru.add_inventory('hipokte grass')
-                    wake_up._inspect_body._explore()
-
-            class eat_ore:
-                __subs = cave_actions.eat_ore.__subs
-                def __init__(self):
-                    rimuru.add_inventory('magic ore')
-                    siprint("What is this hard feeling stuff?")
-                    siprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
-                    siprint("Ok, might be useful in the future. Guess I should get as much as I can")
-                    wake_up._inspect_body._explore()
-
-            class _explore(cave_actions):
+            class _explore:
                 __subs = subs.move_on
                 def __init__(self):
                     show_art('slime')
@@ -90,6 +75,22 @@ def ch1_cave(rimuru):
                     siprint("All I can do is fumble around in the dark and eat what I find... I'M SO BORED!")
 
                     game_action(self)
+
+                class eat_grass:
+                    __subs = cave_actions.eat_grass.__subs
+                    def __init__(self):
+                        rimuru.add_inventory('hipokte grass')
+                        siprint("What is this I'm feeling... Could it be?")
+                        siprint("<< Information, analysis indicates this is [Hipokte Grass]. Commonly used for crafting healing potions. >>")
+                        siprint("Healing potions? Like in those fantasy video games... Interesting.")
+
+                class eat_ore:
+                    __subs = cave_actions.eat_ore.__subs
+                    def __init__(self):
+                        rimuru.add_inventory('magic ore')
+                        siprint("What is this hard feeling stuff?")
+                        siprint("<< Information, analysis shows this is the raw form of [Magisteel]. Can be used for crafting weapons, armor, and more. >>")
+                        siprint("Ok, might be useful in the future. Guess I should get as much as I can")
 
                 class _hfunc_craft_full_potion:
                     def __init__(self):
@@ -469,7 +470,7 @@ def ch1_cave(rimuru):
             siprint("\nHow can I understand them?")
             siprint("<< Answer, [Magic Perception] converts sound waves to comprehensible sentences which I interpret for you. >>")
             siprint("<< Also, sound waves can also be used to communicate your thoughts. >>")
-            sprint("\nI shouldn't show, they'll probably get scared and attack me.")
+            sprint("\nI shouldn't show, they'll probably get scared and attack me. I should wait for them to move on.")
             game_action(self)
 
         class hfunc_attack:
