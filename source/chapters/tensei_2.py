@@ -272,16 +272,14 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nSo, who's next? You seem like a chipper goblin...")
             rimuru.add_subordinate('goblin', 'Gobta')
 
+            # TODO allow more naming, or add some other functionality to change names....
+            siprint("\nThere are so many to name, and I'm running out of ideas...")
+            siprint("Alright, the goblins are done. Now for the Direwolves.")
+            sprint("You're the son of the Direwolf boss right?")
+            show_art('ranga')
+            rimuru.add_subordinate('direwolf', 'Ranga')
+
             game_action(self)
-
-        class _skip_naming:
-            def __init__(self):
-                pass
-
-        class _next_goblin:
-            __subs = ['next one', 'continue naming', 'continue giving names']
-            def __init__(self):
-                pass
 
 
 
