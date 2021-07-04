@@ -169,6 +169,5 @@ class Inventory:
         # Removes ingredients then adds new crafted item to inventory
         for ingredient_name, ingredient_amount in item.recipe.items():
             self.remove_inventory(ingredient_name, ingredient_amount * craft_amount)
-        print()
         self.add_inventory(item, craft_amount)
         return True
