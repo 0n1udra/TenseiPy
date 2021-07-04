@@ -7,7 +7,7 @@ class Info:
         Shows info page.
 
         Args:
-            game_object: skill/item/mob/etc.
+            game_object str: skill/item/mob/etc.
 
         Usage:
             > info predator
@@ -50,7 +50,7 @@ class Info:
         """Updates name of character."""
 
         self.name = name
-        self.update_info()
+        self.update_info()  # Need this to update the info in info_page variable.
 
     def set_lname(self, name):
         """Update character's family name (last name)."""
@@ -63,7 +63,7 @@ class Info:
         Add x levels to character's level.
 
         Args:
-            add_amount int: To be added to current level.
+            add_amount int(1): To be added to current level.
         """
 
         print(f"    < [{self.name}] Level Up: {self.level} to {self.level + add_amount}>\n")
@@ -108,12 +108,12 @@ class Info:
         print_header('Reputation')
         for k, v in self.reputations.items(): print(f"    {k}: {v}")
 
-    def add_reputation(self, match, add_value=1):
+    def add_reputation(self, faction_name, add_value=1):
         """
         Adds to player standing/reputation.
 
         Args:
-            match str: Character/faction/etc to update.
+            faction_name str: Character/faction/etc to update.
             add_value int(1): Increase or decrease reputations. Pass in either positive or negative integer.
 
         Usage:
@@ -121,30 +121,31 @@ class Info:
             rimuru.add_reputation('gobta', -1)
         """
 
-        match = match.capitalize()
+        faction_name = faction_name.capitalize()
+        # Checks if already have repudiation with faction.
         for k, v in self.reputations.items():
-            if k in match:
-                print(f"\n    < [{match}] Reputation Update: {self.reputations[k]} to {self.reputations[k] + add_value} >\n")
+            if k in faction_name:
+                print(f"\n    < [{faction_name}] Reputation Update: {self.reputations[k]} to {self.reputations[k] + add_value} >\n")
                 self.reputations[k] += add_value
-                return self.reputations[k]
+                return self.reputations[k]  # Returns new value of reputation standing.
 
-        # Create new dictionary entry if for loop found no match.
-        self.reputations[match] = add_value
-        print(f"\n    < [{match}] New Reputation: {self.reputations[match]} >")
+        # Adds new faction to reputations list.
+        self.reputations[faction_name] = add_value
+        print(f"\n    < [{faction_name}] New Reputation: {self.reputations[faction_name]} >")
 
-    def get_reputations(self, match):
+    def get_reputations(self, faction_name):
         """
         Returns integer value of reputation that player has with a character/faction/etc.
 
         Args:
-            match str: Name of character/faction/etc to check reputation with.
+            faction_name str: Name of character/faction/etc to check reputation with.
 
         Returns:
             int: Returns integer denoting reputation player has with specified.
         """
 
         for k, v in self.reputations.items():
-            if k in match.capitalize(): return self.reputations[k]
+            if k in faction_name.capitalize(): return self.reputations[k]
 
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""

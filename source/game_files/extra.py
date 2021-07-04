@@ -41,7 +41,7 @@ def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int
 
     return False
 
-def get_any(match_to, input_list, strict_match=True):
+def get_any(match_target, input_list, strict_match=True):
     """
     Returns True if found a match from input_list with match_to.
 
@@ -53,8 +53,9 @@ def get_any(match_to, input_list, strict_match=True):
         bool: Returns True if match found.
     """
 
-    if type(match_to) is not str: return False
-    match_to = match_to.lower().strip()
+    # Will only accept strings.
+    if type(match_target) is not str: return False
+    match_to = match_target.lower().strip()
 
     for i in input_list:
         i.lower().strip()
@@ -64,7 +65,7 @@ def get_any(match_to, input_list, strict_match=True):
             if i in match_to: return True
 
 def on_off(var):
-    """Returns string 'on'/'off' based on var."""
+    """Returns string 'on'/'off' based on received boolean variable."""
 
     if var: return 'on '
     return 'off'
@@ -74,7 +75,8 @@ def ask_on_off(variable, text):
     Asks player if they want to enable or disable.
 
     Args:
-        variable: Variable name to show in message once variable has been updated. Ex. 'textcrawl'
+        variable str: Variable name to show in message once variable has been updated. Ex. 'textcrawl'
+        text str: Description text.
 
     Returns:
         bool: Returns True/False depending on if user typed in anything from off_subs or pressed Enter.
@@ -126,8 +128,8 @@ def set_action_subs(action, action_subs):
     Formats inputted action __subs list to be used to check play action match from user input.
 
     Args:
-        action: Current action's name.
-        action_subs: __subs list of corresponding action.
+        action str: Current action's name.
+        action_subs list: __subs list of corresponding action.
 
     Returns:
         list: Returns newly formated __subs list to be used to check user input match.

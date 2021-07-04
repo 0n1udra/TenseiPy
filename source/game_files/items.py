@@ -41,7 +41,7 @@ class Item:
         Checks if user meets prerequisite requirements to use item.
 
         Args:
-            user: Character object that is using item.
+            user obj: Character object that is using item.
 
         Returns:
             bool: If user meets requirements or not.
@@ -60,7 +60,7 @@ class Item:
         Expends (uses up) items/etc to activate item.
 
         Args:
-            user: Character object that is using item.
+            user obj: Character object that is using item.
 
         Returns:
             bool: If successfully expended requirements.
@@ -84,7 +84,7 @@ class Item:
         Use Item, by default it'll just return True to signal player has used the item.
 
         Args:
-            user: Game character object of item user.
+            user obj: Game character object of item user.
 
         Returns:
             bool: By default will return True to signal usage or consumption, if function not overwritten.

@@ -26,7 +26,7 @@ class Map:
         """
         Gets location name from __location var in current level's class object.
         Args:
-            level_class obj: Class object that contains __location variable.
+            level_class obj(None): Class object that contains __location variable.
 
         Returns:
             None: If no location found.
@@ -56,7 +56,7 @@ class Map:
         Updates character's current_location variable.
 
         Args:
-            new_location str: Location name
+            new_location str(None): Location name
         """
 
         if not new_location: return False

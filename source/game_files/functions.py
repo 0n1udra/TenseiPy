@@ -318,8 +318,8 @@ def mobs_remove(remove_mobs):
 
 def mob_status(target, set_var=None):
     """
-    Returns whether mob in active_mobs list is is_alive.
-    Returns character objects is_alive var.
+    Returns mob alive status mob in active_mobs list.
+    Returns character objects is_alive variable.
 
     Args:
         target str: Target character to check is_alive status.

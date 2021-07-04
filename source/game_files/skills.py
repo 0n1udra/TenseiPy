@@ -34,7 +34,7 @@ class Skill:
         Checks if user meets prerequisite requirements to use skill.
 
         Args:
-            user: Character object that is using skill.
+            user obj: Character object that is using skill.
 
         Returns:
             bool: If user meets requirements or not.
@@ -53,7 +53,7 @@ class Skill:
         Expends (uses up) items/etc to activate skill.
 
         Args:
-            user: Character object that is using skill.
+            user obj: Character object that is using skill.
 
         Returns:
             bool: If successfully expended requirements.

@@ -8,6 +8,7 @@ class Combat:
 
         Args:
             user_input str: Targets to attack, if multiple, separated by comma ','.
+            user obj(None): The one who is attacking.
 
         Returns:
             bool: If attack was successful.
@@ -37,10 +38,8 @@ class Combat:
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
                 if attack.game_object_type == 'item':
-                    if attack.item_type == 'Weapon':
-                        skills.append(attack)
+                    if attack.item_type == 'Weapon': skills.append(attack)
                 if attack.game_object_type == 'character': continue
-
             else: continue
 
         for current_target in self.targeted_mobs:

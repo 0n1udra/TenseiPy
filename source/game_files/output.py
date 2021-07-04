@@ -137,9 +137,10 @@ def print_header(text, multiplier=10, char='-', newline=False):
     E.g. '---------- Inventory ----------'
 
     Args:
-        text: Title of interface, e.g. 'Inventory', 'Attributes'.
-        multiplier: Number of lines on both sides of text.
-        char: Character to make line.
+        text str: Title of interface, e.g. 'Inventory', 'Attributes'.
+        multiplier int(10: Number of lines on both sides of text.
+        char str('-'): Character to make line from.
+        newline bool(False): Add newline under header.
     """
 
     print('    ' + char * multiplier, end='')
@@ -195,7 +196,7 @@ def show_history(arg):
     Shows history of x lines from storyline dialogue.
 
     Args:
-        arg: Lines to show. Default is 5.
+        arg int: Lines to show. Default is 5.
     """
 
     # Show game event log instead of game storyline (voicelines)

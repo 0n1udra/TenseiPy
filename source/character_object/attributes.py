@@ -1,7 +1,7 @@
 from game_files.output import gprint, print_header
 
 class Attributes:
-    def attributes_generator(self, output_mode=False):
+    def attributes_generator(self, printout_mode=False):
         """
         Yields all the character's attributes (skills/resistances).
 
@@ -10,20 +10,20 @@ class Attributes:
 
         Usage:
             .attributes_generator()
-            .attributes_generator(output_mode=True)
+            .attributes_generator(printout_mode=True)
         """
 
         for skill_type, skills_list in self.attributes.items():
             # Prints out skill category (Ultimate, Unique, etc). So far it's easier to put the code for printing user stat info here.
-            if output_mode and skills_list: yield f'    [{skill_type}]'
+            if printout_mode and skills_list: yield f'    [{skill_type}]'
 
             for skill_name, skill in skills_list.items():
                 # Yields skill game object if not in printing mode.
-                if not output_mode:
+                if not printout_mode:
                     yield skill
                     continue
 
-                if skill.status:
+                if skill.status:  # e.g. Active, Passive, etc.
                     yield f'        {skill_name} ({skill.status})'
                 else: yield f'        {skill_name}'
 
@@ -46,13 +46,13 @@ class Attributes:
         print(f"    Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
         print(f"    Level: {mob.level}")
         print(f"    Location: {mob.current_location}\n")
-        # Print out skill category and corresponding skills indented.
-        for i in mob.attributes_generator(output_mode=True): print(i)
+        # Print out skills organized in corresponding category (Unique Skill, Extra Skill, etc).
+        for i in mob.attributes_generator(printout_mode=True): print(i)
 
         # Shows only if using mimic and if getting stats on thyself.
         if self.current_mimic and self.check_if_player():
             print(f"\n    Mimicking: [{self.current_mimic.name}]\n")
-            for i in self.current_mimic.attributes_generator(output_mode=True): print(i)
+            for i in self.current_mimic.attributes_generator(printout_mode=True): print(i)
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
@@ -71,8 +71,7 @@ class Attributes:
         if self.check_acquired(attribute): return True
 
         if attribute := self.get_object(attribute, new=True):
-            # Adds item to character's attributes dictionary, sets quantity so check_acquired func can work.
-            #if not attribute.initialized:
+            # Add to attributes dictionary, sets quantity to 1 so check_acquired func can work properly.
             attribute = attribute(1)
             self.attributes[attribute.skill_level][attribute.name] = attribute
 
@@ -114,6 +113,7 @@ class Attributes:
         if not skill_from or not skill_to: return False
 
         gprint(f"< Evolving {skill_from.skill_level} [{skill_from.name}] >")
+        # Removes old attribute and adds new one.
         if self.remove_attribute(skill_from) and self.add_attribute(skill_to, show_acquired_msg=False):
             gprint(f"< Evolution Successful: {skill_from.skill_level} [{skill_from.name}] to {skill_to.skill_level} [{skill_to.name}] >")
 
@@ -127,7 +127,7 @@ class Attributes:
 
         Args:
             attack str: Attack to check resistance to.
-            target str ,obj: Check if specified target has resistance.
+            target str(None): Check if specified target has resistance. Can also take game object.
 
         Usage:
             .check_resistance('resist pain')
@@ -149,7 +149,7 @@ class Attributes:
 
         Args:
             skill str: Skill to use.
-            character str: Character that will use skill.
+            character str(None): Character that will use skill.
 
         Usage:
             > use sense heat source
@@ -161,7 +161,9 @@ class Attributes:
         try: skill_object = self.current_mimic.get_object(skill)
         except: skill_object = character.get_object(skill)
 
-        if skill_object:
-            if return_data := skill_object.use_action(character):
-                character.last_use_skill = skill_object
-                return return_data
+        if not skill_object: return False  # No skill was found.
+
+        # Activates skill and returns any usage data.
+        if return_data := skill_object.use_action(character):
+            character.last_use_skill = skill_object
+            return return_data

@@ -1,7 +1,7 @@
 from game_files.output import gprint, print_header
 
 class Subordinates:
-    def subordinates_generator(self, output=False):
+    def subordinates_generator(self, output_mode=False):
         """
         Yields the subordinates under specified character.
 
@@ -10,10 +10,10 @@ class Subordinates:
         """
 
         for level, sub_list in self.subordinates.items():
-            if output and sub_list: yield f'    {level}:'
+            if output_mode and sub_list: yield f'    {level}:'
 
             for subordinate in sub_list:
-                if output:
+                if output_mode:
                     yield f'        {subordinate.name}'
                 else: yield subordinate
 
@@ -22,18 +22,23 @@ class Subordinates:
 
         print_header('Subordinates')
         print(f'    Master: {self.name}\n')
-        for i in self.subordinates_generator(output=True): print(i)
+        for i in self.subordinates_generator(output_mode=True): print(i)
 
     def get_subordinate(self, name, use_canon_name=False):
-        """Get's character object from subordinates dictionary."""
+        """
+        Get's character object from subordinates dictionary either from anme or from canon name.
+
+        Args:
+            name (str): Name of character.
+            use_canon_name (bool
+
+        """
 
         for mob in self.subordinates_generator():
             if use_canon_name:
                 if mob.canon_name.lower() == name.lower(): return mob
             else:
                 if mob.name.lower() == name.lower(): return mob
-
-
 
     def add_subordinate(self, game_character, canon_name=None, new_name=None):
         """

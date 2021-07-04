@@ -1,7 +1,7 @@
 from game_files.output import gprint, print_header, parse_input
 
 class Inventory:
-    def inventory_generator(self, output=False):
+    def inventory_generator(self, printout_mode=False):
         """
         Yields all items in character's inventory.
 
@@ -9,17 +9,17 @@ class Inventory:
             output bool(False): Yields a friendly string for printing in-game purposes.
 
         Usage:
-            .inventory_generator(output=True)
+            .inventory_generator(printout_mode=True)
         """
 
         # Generator is also responsible for getting printout data when using show_attribute.
         for item_type, items in self.inventory.items():
 
             # Yields item type if formatting for output to player.
-            if output and items: yield f'    [{item_type}]'
+            if printout_mode and items: yield f'    [{item_type}]'
 
             for item_name, item in items.items():
-                if not output:
+                if not printout_mode:
                     yield item
                     continue
 
@@ -38,7 +38,7 @@ class Inventory:
 
         print_header('Inventory')
         print(f'    Capacity: {self.inventory_capacity:.1f}%\n')
-        for i in self.inventory_generator(output=True): print(i)
+        for i in self.inventory_generator(printout_mode=True): print(i)
 
     def update_inventory_capacity(self):
         """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
@@ -55,7 +55,7 @@ class Inventory:
         Adds item to character (currently only Rimuru) inventory.
 
         Args:
-            item str, obj: Item to add to inventory.
+            item str/obj: Item to add to inventory.
             amount int(None): Amount of specified item to add to inventory. If not specified, will use item's .add_amount value.
             show_acquired_msg bool(True): Show item acquired message.
             show_analysis_msg bool(None): Show analysis complete message.
@@ -67,8 +67,10 @@ class Inventory:
         item = self.get_object(item, new=True)
         if not item: return False  # Does not have game object to add to inventory.
 
+        # Adds to item quantity variable if already acquired some.
         if self.check_acquired(item):
             self.inventory[item.item_type][item.name].quantity += amount * item.quantity_add
+        # Adds new item to inventory.
         else:
             if not item.initialized: item = item()
             self.inventory[item.item_type][item.name] = item
@@ -86,7 +88,7 @@ class Inventory:
         Remove item from inventory.
 
         Args:
-            item str: Item to remove from inventory.
+            item str(None): Item to remove from inventory.
             amount int(1): How many to remove from inventory. -1 to remove all.
 
         Usage:
@@ -107,9 +109,11 @@ class Inventory:
         item = self.get_object(item)
         if not item: return False
 
+        # Removes x amount of said item.
         if (item.quantity - amount) <= 0 or amount <= 0:
             del self.inventory[item.item_type][item.name]
             gprint(f"< Removed Item: [{item.name}] >")
+        # Removes item from inventory completely if item's quantity is 0.
         else:
             item.quantity -= amount
             gprint(f"< Removed: {amount}x [{item.name}] >")
@@ -157,6 +161,7 @@ class Inventory:
                 gprint("\n< Error: need integer input >")
                 return False
 
+        # Let's player enter 0 to cancel.
         if craft_amount <= 0: return False
 
         # Checks if have all the ingredients.

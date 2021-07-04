@@ -27,10 +27,10 @@ class Rimuru_Tempest(Character):
 
     def mimic_object(self, update_status=None):
         """
-        Return mimic ability game object, and can also set active status.
+        Return mimic ability's game object, and can also set active status.
 
         Args:
-            update_status: Sets whether mimic is being used or not.
+            update_status str(None): Sets whether mimic is being used or not.
 
         Returns:
             mimic: Mimic game object from character.
@@ -44,6 +44,7 @@ class Rimuru_Tempest(Character):
         except: pass
 
     def show_mimics(self, *args):
+        """Lists acquired mimicries by species."""
         print_header('Mimicries')
         for mob_level, mobs in self.acquired_mimicries.items():
             print(f'    {mob_level}:')
@@ -56,7 +57,7 @@ class Rimuru_Tempest(Character):
         Adds new monster mimicry.
 
         Args:
-            mob: Character object to add to acquired_mimicries list
+            mob str/obj: Character object to add to acquired_mimicries list
             show_msg bool(True): Show acquired message.
         """
 
@@ -93,7 +94,9 @@ class Rimuru_Tempest(Character):
             self.mimic_object(update_status='')
             gprint("< Mimicry Reset >")
         else:
+            # Get's character game object from acquired_mimicries dictionary.
             if new_mimic := self.get_object(character, [*self.mimic_generator()]):
+                # Updates relevant player information when mimicry is activated.
                 self.current_mimic_species = new_mimic.species
                 self.current_mimic = new_mimic
                 self.mimic_object(update_status='Active')
@@ -101,20 +104,20 @@ class Rimuru_Tempest(Character):
 
     def check_mimic(self, match=None):
         """
-        Return name (string) of character currently mimicking, can also check if using specific mimic.
+        Return name (str) of character currently mimicking, can also check if using specific mimic.
 
         Args:
-            match str: Check if currently mimicking specified mob by name.
+            match str(None): Check if currently mimicking specified mob by name.
 
         Returns:
             str: Returns name of mob currently mimicking.
         """
 
         if m_object := self.mimic_object():
-            if match is None:
-                return m_object.name
-            if match.lower() in m_object.name.lower():
-                return m_object.name
+            if match is None: return m_object.name
+
+            # Optionally check if player is mimicking something specific.
+            if match.lower() in m_object.name.lower(): return m_object.name
         return False
 
     def eat_targets(self, *args):
@@ -141,7 +144,9 @@ class Rimuru_Tempest(Character):
                 # Can only eat targeted mobs that are dead.
                 if target[0].is_alive is False:
                     self.add_mimic(target[0])
+                    # Adds dead mob to inventory.
                     self.add_inventory(target[0], target[1], show_analysis_msg=False)
+                    # Removes mob from targeted and active mobs lists.
                     self.targeted_mobs.remove(target)
                     try: self.active_mobs.remove(target)
                     except: pass

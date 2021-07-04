@@ -97,7 +97,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
 
         Args:
             match str:
-            item_pool list: Add custom list of game items to search against.
+            item_pool list(None): Add custom list of game items to search against.
             new bool(False): Return new instance of object (already already not necessary).
             mimic_pool bool(False): Adds acquired mimics character objects and their attribute/inventory to pool.
             sub_pool bool(False): Adds subordinates character objects to pool.
