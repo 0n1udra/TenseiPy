@@ -18,10 +18,17 @@ class Subordinates:
                 else: yield subordinate
 
     def show_subordinates(self, *args):
+        """Lists subordinates by species."""
 
         print_header('Subordinates')
         print(f'    Master: {self.name}\n')
         for i in self.subordinates_generator(output=True): print(i)
+
+    def get_subordinate(self, canon_name):
+        """Get's subordinate corresponding character from canon name."""
+
+        for mob in self.subordinates_generator():
+            if mob.canon_name.lower() == canon_name.lower(): return mob
 
     def add_subordinate(self, game_character, canon_name=None, new_name=None):
         """
@@ -40,17 +47,17 @@ class Subordinates:
         if not new_name:
             while True:
                 if new_name := str(input(f"\nChoose name or Enter for default ({canon_name}) > " if canon_name else "Set name > ")).strip():
-                    if new_name.isalnum():
-                        new_name = new_name.capitalize()
-                        break
+                    if new_name.isalnum(): break
                 # Let's user use default canon name for new subordinate. Requires canon_name argument.
                 elif canon_name:
                     new_name = canon_name
                     break
+        new_name = new_name.capitalize()
 
         # Get's game character object, initializes it, sets name, then adds protection(s) (blessing).
         new_subordinate = self.get_object(game_character, new=True)(new_name)
         new_subordinate.protections.append(self.shared_protection)
+        new_subordinate.canon_name = canon_name
 
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)

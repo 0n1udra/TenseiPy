@@ -280,12 +280,21 @@ def ch2_goblin_encounter(rimuru):
             show_art('ranga')
             rimuru.add_subordinate('direwolf', 'Ranga')
 
-            siprint("Wait w-what's happening...")
-            siprint("Why am I so sleepy now?")
+            siprint("Wait w-what's happening... My [Magic Perception] stopped working!")
+            siprint("Why am I so sleepy now? What's happening Great Sage?")
+            siprint("<< Answer, going into 'Sleep Mode' due to low magicule levels. >>")
+            siprint("I was only giving them names, I didn't know it would use up that much.")
+            siprint("Huhhh?")
+            siprint("<< Notice, estimated time for recovery is three days. >>")
+            siprint("Was that common knowledge? They shoulda warned me! Did they?")
 
+            dots()
+
+            siprint("So it's been three days already.")
+            sprint("\nLord Rimuru! How are you feeling?")
+            siprint("\nWho is this?")
+            sprint(f"\nI'll go call elder {rimuru.get_subordinate('rigurd')}")
 
             game_action(self)
-
-
 
     goblin_encounter()
