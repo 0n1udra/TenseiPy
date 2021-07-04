@@ -22,7 +22,7 @@ def parse_name(text):
             # Gets name, e.g. $Gobta$ > Gobta
             placeholder = re.search('\$(.*?)\$', word).groups()[0]
             # Finds corresponding character from canon name.
-            if name := rimuru.get_subordinate(str(placeholder)):
+            if name := rimuru.get_subordinate(str(placeholder), use_canon_name=True):
                 # Only replaces what's in between $, preserves symbols e.g. $Gobta$!
                 return_text.append(re.sub('\$(.*?)\$', str(name), word))
             # This means there's something wrong with the storyline. Need to fix the story to fix this not the code itself.
