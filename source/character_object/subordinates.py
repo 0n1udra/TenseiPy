@@ -24,11 +24,16 @@ class Subordinates:
         print(f'    Master: {self.name}\n')
         for i in self.subordinates_generator(output=True): print(i)
 
-    def get_subordinate(self, canon_name):
-        """Get's subordinate corresponding character from canon name."""
+    def get_subordinate(self, name, use_canon_name=False):
+        """Get's character object from subordinates dictionary."""
 
         for mob in self.subordinates_generator():
-            if mob.canon_name.lower() == canon_name.lower(): return mob
+            if use_canon_name:
+                if mob.canon_name.lower() == name.lower(): return mob
+            else:
+                if mob.name.lower() == name.lower(): return mob
+
+
 
     def add_subordinate(self, game_character, canon_name=None, new_name=None):
         """
