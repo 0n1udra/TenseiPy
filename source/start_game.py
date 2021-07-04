@@ -10,8 +10,8 @@ __license__ = "GPL 3"
 __status__ = "Development"
 
 if __name__ == '__main__':
-    if '-help' in sys.argv: show_sysargs()
-    if '-version' in sys.argv: show_version(__version__, __date__)
+    if '--help' in sys.argv: show_sysargs()
+    if '--version' in sys.argv: show_version(__version__, __date__)
 
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/game.save'
 
@@ -20,14 +20,14 @@ if __name__ == '__main__':
     rimuru.source_folder_path = str(pathlib.Path(__file__).parent.absolute())
     update_rimuru_output(rimuru)  # Updates rimuru object for ouput.py file... idk, idk, you just have to...
 
-    if '-textcrawl' in sys.argv: rimuru.textcrawl = False
-    if '-hideart' in sys.argv: rimuru.show_art = False
-    if '-hidehud' in sys.argv: rimuru.show_actions = True
-    if '-hard' in sys.argv: rimuru.hardcore = True
-    if '-hints' in sys.argv: rimuru.show_hints = False
+    if '--nocrawl' in sys.argv: rimuru.textcrawl = False
+    if '--noart' in sys.argv: rimuru.show_art = False
+    if '--nohud' in sys.argv: rimuru.show_actions = True
+    if '--nohints' in sys.argv: rimuru.show_hints = False
+    if '--hardcore' in sys.argv: rimuru.hardcore = True
     # For debugging.
-    if '-fast' in sys.argv: rimuru.fast_mode = True
-    if '-slime' in sys.argv:
+    if '--fastmode' in sys.argv: rimuru.fast_mode = True
+    if '--slime' in sys.argv:
         rimuru.textcrawl = rimuru.show_art = rimuru.hardcore = False
         rimuru.show_actions = rimuru.show_hints = True
 

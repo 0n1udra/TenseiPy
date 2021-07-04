@@ -48,8 +48,8 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
         else: message = '    ' + message
     message = message + '\n'
 
-    # Will not use textcrawl effect on gameplay hint printouts.
-    if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore): return
+    # Hides game tutorial and hints.
+    if ('< Hint:' in message or '< Tutorial' in message) and (not rimuru.show_hints or rimuru.hardcore): return
 
     # Let's you use $NAME$ to get corresponding character's name from canon name (is just to make it easier to write the storyline).
     message = parse_name(message)
@@ -159,15 +159,15 @@ def show_sysargs():
     """Shows available runtime arguments."""
 
     print("""
-    -help       --  This help page.
-    -version    --  Show version.
-    -textcrawl  --  Disable text crawl effect.
-    -hideart    --  Diable ASCII art.
-    -hidehud    --  Disable game HUD.
-    -hidehints  --  Disable game hints.
-    -hardmode   --  Enable Hardcore mode.
-    -fast       --  Enable Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
-    -slime      --  Enables: hud, hints | Disables: textcrawl, art, hardcore""")
+    --help      --  This help page.
+    --version   --  Show version.
+    --nocrawl   --  Disable text crawl effect.
+    --noart     --  Diable ASCII art.
+    --nohud     --  Disable game HUD.
+    --nohints   --  Disable game hints.
+    --hardcore  --  Enable Hardcore mode.
+    --fastmode  --  Enable Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
+    --slime     --  Enables: hud, hints | Disables: textcrawl, art, hardcore""")
     exit(0)
 
 def show_art(art):
@@ -233,10 +233,10 @@ def show_settings(*args):
         {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
         {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
         {on_off(rimuru.show_hints)}\thints/clues <on/off>\t-- Show game hints, highly recommended for first timers.
-        {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Enable hardcore mode.
+        {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Hides playable actions, tutorial, and hints.
 
     Usage:
-        /settings/options COMMAND(S) on/off
+        /settings COMMAND(S) on/off
         Example: '/settings textcrawl off', '/options hud hints off'""")
 
 def show_help(arg):
