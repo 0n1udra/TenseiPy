@@ -1,4 +1,4 @@
-import time, sys
+import time, sys, re
 import game_files.art as game_art
 from game_files.extra import *
 
@@ -8,6 +8,27 @@ def update_rimuru_output(rimuru_obj):
     
     global rimuru
     rimuru = rimuru_obj
+
+def parse_name(text):
+    """
+    Replaces $NAME$ in storyline text with correct corresponding character's set name that player has given.
+    e.g. Why $Gobta$?! Why?! > Why Dumbo? Why?!
+    """
+
+    return_text = []
+    # Splits up by words while preserving spacing (including newlines)
+    for word in re.split(r'(\s+)', text):
+        if word.startswith('$'):
+            # Gets name, e.g. $Gobta$ > Gobta
+            placeholder = re.search('\$(.*?)\$', word).groups()[0]
+            # Finds corresponding character from canon name.
+            if name := rimuru.get_subordinate(str(placeholder)):
+                # Only replaces what's in between $, preserves symbols e.g. $Gobta$!
+                return_text.append(re.sub('\$(.*?)\$', str(name), word))
+            # This means there's something wrong with the storyline. Need to fix the story to fix this not the code itself.
+            else: game_error()
+        else: return_text.append(word)
+    return ''.join(return_text)
 
 def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
     """
@@ -29,6 +50,9 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
 
     # Will not use textcrawl effect on gameplay hint printouts.
     if ('< Hint:' in message) and (not rimuru.show_hints or rimuru.hardcore): return
+
+    # Let's you use $NAME$ to get corresponding character's name from canon name (is just to make it easier to write the storyline).
+    message = parse_name(message)
 
     # So user can get the last x lines, in case the screen has been cluttered.
     # Makes sure when showing history it won't add onto itself. Also, checks if line has already been logged (if player played action multiple times).
