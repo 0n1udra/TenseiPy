@@ -278,7 +278,7 @@ def ch2_goblin_encounter(rimuru):
             siprint("Alright, the goblins are done. Now for the Direwolves.")
             sprint("You're the son of the Direwolf boss right?")
             show_art('ranga')
-            rimuru.add_subordinate('direwolf', 'Ranga')
+            rimuru.add_subordinate('tempest wolf', 'Ranga')
 
             siprint("Wait w-what's happening... My [Magic Perception] stopped working!")
             siprint("Why am I so sleepy now? What's happening Great Sage?")
@@ -293,8 +293,11 @@ def ch2_goblin_encounter(rimuru):
             siprint("So it's been three days already.")
             sprint("\nLord Rimuru! How are you feeling?")
             siprint("\nWho is this?")
-            sprint(f"\nI'll go call elder {rimuru.get_subordinate('rigurd')}")
+            sprint(f"\nI'll go call elder $Rigurd$.")
+
+            sprint("\nLord Rimuru you're awake!")
+            sprint("\n$Rigurd$ is that you?")
 
             game_action(self)
-
-    goblin_encounter()
+    naming_mobs()
+    #goblin_encounter()
