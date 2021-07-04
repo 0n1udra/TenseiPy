@@ -164,7 +164,16 @@ class Veldora_Tempest(Character):
 
 
 # ===== Adventurers
-class Eren_Grimwold(Character):
+class Human(Character):
+    name = 'Human'
+    species = 'Human'
+    level = 2
+    appearance = 'A featherless biped.'
+    evolution = '''
+        Human > Enlightened > Saint
+              > Maijin'''
+
+class Eren_Grimwold(Human, Character):
     name = "Eren Grimwold"
     level = 5
     species = 'Human'
@@ -174,7 +183,7 @@ class Eren_Grimwold(Character):
     appearance = "A blonde, 16y/o, green eyed adventurer from the Freedom Association."
     abilities = ['Mud Hand', 'Cleaning Magic', 'Elemental Magic']
 
-class Kaval(Character):
+class Kaval(Human, Character):
     name = "Kaval"
     level = 5
     species = 'Human'
@@ -185,7 +194,7 @@ class Kaval(Character):
     appearance = 'A young man with medium length hair, seemingly in his prime.'
     abilities = ['Fighting Spirit', 'Heavy Collision']
 
-class Gido(Character):
+class Gido(Human, Character):
     name = 'Gido'
     level = 5
     species = 'Human'
@@ -238,19 +247,29 @@ class Direwolf(Character):
     name = 'Direwolf'
     species = 'Direwolf'
     level = 4
-    appearance = """They have silver-blue fur, with the exception of the Direwolf Boss' Son, 
+    appearance = """They have silver-blue fur, with the exception of the Direwolf Leader's Son, 
         who also has star mark on his forehead in a darker shade of blue, and a silver-white mane and snout."""
     description = """The wolves did not require food to survive. Their sustenance lay in the world's magicules.
         By attacking stronger monsters or slaughtering droves of humans, they can evolve into calamity-level creatures, although none of these options was feasible for them.
         The Forest of Jura was bountiful of magic and had no monsters strong enough to threaten the wolves.
         However, Veldora's overwhelming magical force prevented them from entering.
         As individuals they're C rank, and B if as a pack."""
-    evolution = 'Direwolf > Tempest Wolf > Star Wolf > Tempest Star Wolf'
+    evolution = """
+        Direwolf > Black Direwolf
+                 > Tempest Wolf > Star Wolf > Tempest Star Wolf
+                                > Star Leader"""
     starting_state = ['keen smell', 'coercion', 'thought communication']
 
 class Direwolf_Leader(Direwolf, Character):
     name = 'Direwolf Leader'
     level = 4
+
+class Tempest_Wolf(Direwolf, Character):
+    name = 'Tempest Wolf'
+    species = 'Tempest Wolf'
+    level = 5
+    appearance = '''Tempest Wolves have jet black fur, which gives a feeling of bewitching gloss and a glossy finish.
+        The storm element gave the wolf pack an ever-so-slight purplish shine to their black color.'''
 
 
 # ========== Goblins
@@ -263,13 +282,14 @@ class Goblin(Character):
         Although there are many different tribes of goblins, they will usually stand together in the face of great danger.
         Many of the goblins revere the Storm Dragon as their God and protector of the forest.
         For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
-    '''
-    evolution = 'Goblin > Hobgoblin > Ogre > Kijin'
+        '''
+    evolution = '''
+        Goblin > Hobgoblin > Ogre > Kijin > Fair Oni
+                                          > Wicked Oni'''
 
-class Hobgoblin(Goblin):
+class Hobgoblin(Goblin, Character):
     name = 'Hobgoblin'
     species = 'Hobgoblin'
     level = 4
     appearance = 'They have green skin like their pre-evolved form, but their average height is improved and his height now reaches around 180 centimeters.'
     description = 'Hobglins are evolved form of Gobins.'
-    evolution = 'Goblin > Hobgoblin > Ogre > Kijin'

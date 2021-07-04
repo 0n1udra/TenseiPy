@@ -40,7 +40,7 @@ class Info:
         # Only show fields that have set data.
         info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Blessing': self.protections,
                      'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
-                     'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance}
+                     'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance, '*Evolution': self.evolution}
 
         for k, v in info_dict.items():
             if formatted_info := format_info(k, v):
