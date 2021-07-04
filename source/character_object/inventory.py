@@ -146,7 +146,7 @@ class Inventory:
             print_header(f'Recipe for: [{item.name}]', 5)
             for ingredient, amount in item.recipe.items():
                 recipe += F"{amount}x {ingredient}, "
-            print(f"    {recipe[:-2]}")  # [:-2] will cuts off last comma and space.
+            print(f"    {recipe[:-2]}")  # [:-2] will cuts off trailing comma and space.
             print(f"\n    Inputting 1 will craft {item.quantity_add}. 0 cancel.\n")
 
             # Asks for how much to make. note that some items are crafted in batches.

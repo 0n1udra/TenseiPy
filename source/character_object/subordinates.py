@@ -23,7 +23,7 @@ class Subordinates:
         print(f'    Master: {self.name}\n')
         for i in self.subordinates_generator(output=True): print(i)
 
-    def add_subordinate(self, new_subordinate, canon_name=None, new_name=None):
+    def add_subordinate(self, game_character, canon_name=None, new_name=None):
         """
         Naming subordinates and give protections.
 
@@ -40,14 +40,16 @@ class Subordinates:
         if not new_name:
             while True:
                 if new_name := str(input(f"\nChoose name or Enter for default ({canon_name}) > " if canon_name else "Set name > ")).strip():
-                    if new_name.isalnum(): break
-                # If passed in canon_name, if user doesn't type in some alpha-numeric, will use canon_name.
+                    if new_name.isalnum():
+                        new_name = new_name.capitalize()
+                        break
+                # Let's user use default canon name for new subordinate. Requires canon_name argument.
                 elif canon_name:
                     new_name = canon_name
                     break
 
         # Get's game character object, initializes it, sets name, then adds protection(s) (blessing).
-        new_subordinate = self.get_object(new_subordinate, new=True)(new_name)
+        new_subordinate = self.get_object(game_character, new=True)(new_name)
         new_subordinate.protections.append(self.shared_protection)
 
         if new_subordinate.species in self.subordinates:
