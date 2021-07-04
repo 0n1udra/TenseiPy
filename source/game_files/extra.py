@@ -175,3 +175,12 @@ def tbc():
     print("\nPlay again?")
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']: exit(0)
     else: os.execl(sys.executable, sys.executable, *sys.argv)
+
+def game_error():
+    """
+    Exit game when error that needs to be fixed is found.
+    If the game is coded correctly, you shouldn't ever see this message.
+    """
+
+    print("\n    < GAME ERROR FOUND >")
+    print("    If you are seeing this, please contact developer.\n")
