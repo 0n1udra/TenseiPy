@@ -245,6 +245,7 @@ def ch2_goblin_encounter(rimuru):
                                 sprint("HOWWLLLL!!!!......")
                                 sprint("\nWE WILL FOLLOW YOU TO THE ENDS OF THE EARTH, MASTER!!!")
                                 sprint("\nhuh?")
+                                rimuru.use_mimic('reset')
                                 naming_mobs()
 
     class naming_mobs:
@@ -273,11 +274,15 @@ def ch2_goblin_encounter(rimuru):
             rimuru.add_subordinate('goblin', 'Gobta')
 
             # TODO allow more naming, or add some other functionality to change names....
-            siprint("\nThere are so many to name, and I'm running out of ideas...")
+            siprint("There are so many to name, and I'm running out of ideas...")
             siprint("Alright, the goblins are done. Now for the Direwolves.")
             sprint("You're the son of the Direwolf boss right?")
             show_art('ranga')
             rimuru.add_subordinate('direwolf', 'Ranga')
+
+            siprint("Wait w-what's happening...")
+            siprint("Why am I so sleepy now?")
+
 
             game_action(self)
 
