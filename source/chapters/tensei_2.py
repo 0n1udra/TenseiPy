@@ -49,7 +49,6 @@ def ch2_goblin_encounter(rimuru):
                 sprint("\nWe offer our loyalty to you strong one!")
                 sprint("\nOk, good choice. So, you guys have a base, village, anything?")
                 sprint("Y-yes sir, our village is just up ahead. We would be delighted to have you.")
-                sprint("Of course you would. Lets start moving.\n")
                 goto_goblin_village()
 
         class hfunc_attack:
@@ -59,7 +58,6 @@ def ch2_goblin_encounter(rimuru):
                     game_cond('killed village', True)
                     siprint("Anyways.... Lets keep moving. WAIT! What are those? Are those wolves?!")
                     sprint("\nLook at what we have here boys, it's a weak little slime.")
-                    sprint("Hahahaha")
                     sprint("\nAhahahahahaha")
                     sprint("\nI've heard slimes tastes good!")
                     sprint("\n* Before the little slime could do anything else, the wolves charged at it... and they had a little snack. *")
@@ -77,15 +75,14 @@ def ch2_goblin_encounter(rimuru):
             mobs_reset()
             mobs_add(['goblin:goblin chief', 'goblin'])
             siprint("Wow, this place looks like a dump... Such a primitive house.")
-            sprint("\nThank you for waiting visitor.")
-            sprint("I am the village elder. I'm sorry we don't have much to offer you.")
+            sprint("\nI am the village elder. I'm sorry we don't have much to offer you.")
             sprint("\nAnyway, what's up? I assume you invited me here for a reason.")
             sprint("\nI've heard about your incredible strength. Would you please listen to our request.")
             sprint("\nSpeak.")
             sprint("\nAbout a month ago our Dragon guardian disappeared, and nearby monsters have started expand there territory.")
             sprint("\nThere is a pack of 100 Direwolves that have been attacking us recently, and we are barely fending them off.")
             sprint("\nRigur, my older brother, died to bring us this information. A Demon gifted him the name.")
-            sprint("He the vilage's greatest warrior, we have survived this long because of him.")
+            sprint("He was the village's greatest warrior, we have survived this long because of him.")
             siprint("\nHmmmmm... 100 huh... That's a lot. Should I help them? What about compensation?")
             game_action(self)
 
@@ -163,9 +160,8 @@ def ch2_goblin_encounter(rimuru):
         def __init__(self):
             mobs_reset()
             mobs_add(['direwolf leader', '10*direwolf'])
-            sprint("\n* Meanwhile... *")
-            sprint("\nIt is a full and bright moon tonight.")
-            sprint("Tonight we shall lay waste to the goblin village.")
+            sprint("\n* Meanwhile, the direwolves are getting ready... *")
+            sprint("\nTonight we shall lay waste to the goblin village.")
             sprint("And take our first step towards conquering The Forest of Jura!")
             sprint("They no longer have protection from that accursed dragon!")
 
@@ -256,8 +252,7 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nMonsters usually don't have names. Not having names do not get in the way of communicating anyways.")
             sprint("\nOk, I see. Still, it would be convenient if I have a way to call you if I need to.")
             sprint("I suppose, I'll just have to give you guys names!")
-            sprint("\nWHAAAAT!????")
-            sprint("A-are you certain?")
+            sprint("WHAAAAT!!!??? A-are you certain?")
             sprint("\nWhat's the big deal anyways? Everyone get in a line, so I can give you names.")
             dots(5)
             show_art('village elder')
@@ -284,19 +279,23 @@ def ch2_goblin_encounter(rimuru):
             siprint("Why am I so sleepy now? What's happening Great Sage?")
             siprint("<< Answer, going into 'Sleep Mode' due to low magicule levels. >>")
             siprint("I was only giving them names, I didn't know it would use up that much.")
-            siprint("Huhhh?")
-            siprint("<< Notice, estimated time for recovery is three days. >>")
-            siprint("Was that common knowledge? They shoulda warned me! Did they?")
+            siprint("<< Notice, estimated time for recovery is three days. >>\n")
 
-            dots()
+            idots(10, 3)
 
-            siprint("So it's been three days already.")
-            sprint("\nLord Rimuru! How are you feeling?")
-            siprint("\nWho is this?")
-            sprint(f"\nI'll go call elder $Rigurd$.")
-
+            siprint("\nSo it's been three days already.")
             sprint("\nLord Rimuru you're awake!")
             sprint("\n$Rigurd$ is that you?")
+            sprint("\nOf coursed my lord! Now please follow me, the feast is nearly ready.")
+            siprint("Wow, it looks like almost everyone has changed in some way.")
+            sprint("\nAllow me to express my deepest joy at your recovery my lord!")
+            sprint("\nIt's $Ranga$! Even he's different. He's so big!")
+
+            sprint("* After the party to celebrate your awakening. *")
+            sprint("\nAlright everyone, gather around! I'm going to set some ground rules.")
+            sprint("One.")
+
+
 
             game_action(self)
     naming_mobs()
