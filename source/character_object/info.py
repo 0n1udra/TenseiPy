@@ -108,7 +108,7 @@ class Info:
         print_header('Reputation')
         for k, v in self.reputations.items(): print(f"    {k}: {v}")
 
-    def add_reputation(self, faction_name, add_value=1):
+    def update_reputation(self, faction_name, add_value=1):
         """
         Adds to player standing/reputation.
 
@@ -117,8 +117,8 @@ class Info:
             add_value int(1): Increase or decrease reputations. Pass in either positive or negative integer.
 
         Usage:
-            rimuru.add_reputation('veldora', 2)
-            rimuru.add_reputation('gobta', -1)
+            rimuru.update_reputation('veldora', 2)
+            rimuru.update_reputation('gobta', -1)
         """
 
         faction_name = faction_name.capitalize()

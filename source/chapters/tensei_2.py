@@ -148,7 +148,7 @@ def ch2_goblin_encounter(rimuru):
                         idots(5)
                         sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
-                        rimuru.add_reputation('goblins', 1)
+                        rimuru.update_reputation('goblins', 1)
                         sprint("\n* The slime ate, healed, and spat out the rest of the wounded goblins. *")
                         sprint("\nThere, all healed!")
                         sprint("\nW-w-whoa! You really are magnificent, great one! We thank you!")
@@ -287,11 +287,11 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nLord Rimuru you're awake!")
             sprint("\n$Rigurd$ is that you?")
             sprint("\nOf coursed my lord! Now please follow me, the feast is nearly ready.")
-            siprint("Wow, it looks like almost everyone has changed in some way.")
+            siprint("Wow, it looks lggike almost everyone has changed in some way.")
             sprint("\nAllow me to express my deepest joy at your recovery my lord!")
             sprint("\nIt's $Ranga$! Even he's different. He's so big!")
 
-            sprint("* After the party to celebrate your awakening. *")
+            sprint("* ggAfter the party to celebrate your awakening. *")
             sprint("\nAlright everyone, gather around! I'm going to set some ground rules.")
             sprint("One.")
 

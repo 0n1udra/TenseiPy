@@ -276,7 +276,7 @@ def show_help(arg):
         /exit                   -- Exits after save.
 
     Game Dialogue:
-            Message             -- Indented messages are Rimuru's inner thoughts.
+            Message             -- Indented messages are inner thoughts.
         ~ Message ~             -- Telepathy, thought communication.
         * Message *             -- Story context.
         < Message >             -- Game info, acquisition, game help, etc.
