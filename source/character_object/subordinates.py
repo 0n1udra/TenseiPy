@@ -40,7 +40,7 @@ class Subordinates:
             else:
                 if mob.name.lower() == name.lower(): return mob
 
-    def add_subordinate(self, game_character, canon_name=None, new_name=None):
+    def add_subordinate(self, game_character, canon_name=None, new_name=None, level=None):
         """
         Naming subordinates and give protections.
 
@@ -48,6 +48,7 @@ class Subordinates:
             new_subordinate str: Character name or game object to be named.
             canon_name str(None): Allow user press enter once to use default name from story.
             new_name str(None): Set name to new subordinates.
+            level int(None): Set character's rank status post evolution.
 
         Usage:
             .add_subordinates('Tempest Wolf', 'Ranga')
@@ -64,10 +65,11 @@ class Subordinates:
                     break
         new_name = new_name.capitalize()
 
-        # Get's game character object, initializes it, sets name, then adds protection(s) (blessing).
+        # Get's game character object and sets relavant variables.
         new_subordinate = self.get_object(game_character, new=True)(new_name)
         new_subordinate.protections.append(self.shared_protection)
         new_subordinate.canon_name = canon_name
+        if level: new_subordinate.level = level
 
         if new_subordinate.species in self.subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)

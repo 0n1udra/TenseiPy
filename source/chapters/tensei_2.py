@@ -257,23 +257,23 @@ def ch2_goblin_encounter(rimuru):
             dots(5)
             show_art('village elder')
             siprint("What should I name the village elder? He had son named Rigurd, who died protecting this village...")
-            rimuru.add_subordinate('goblin', 'Rigurd')
+            rimuru.add_subordinate('goblin', 'Rigurd', level=4)
             sprint("I am honored great one!")
             sprint("\nAlright, next...")
             show_art('rigur')
             siprint("Now... The elder's younger son, the younger brother of the lost Rigurd...")
-            rimuru.add_subordinate('goblin', 'Rigur')
+            rimuru.add_subordinate('goblin', 'Rigur', level=4)
             sprint("Thank you master!")
             show_art('gobta')
             sprint("\nSo, who's next? You seem like a chipper goblin...")
-            rimuru.add_subordinate('goblin', 'Gobta')
+            rimuru.add_subordinate('goblin', 'Gobta', level=4)
 
             # TODO allow more naming, or add some other functionality to change names....
             siprint("There are so many to name, and I'm running out of ideas...")
             siprint("Alright, the goblins are done. Now for the Direwolves.")
             sprint("You're the son of the Direwolf boss right?")
             show_art('ranga')
-            rimuru.add_subordinate('tempest wolf', 'Ranga')
+            rimuru.add_subordinate('tempest star wolf', 'Ranga')
 
             siprint("Wait w-what's happening... My [Magic Perception] stopped working!")
             siprint("Why am I so sleepy now? What's happening Great Sage?")
@@ -291,12 +291,15 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nAllow me to express my deepest joy at your recovery my lord!")
             sprint("\nIt's $Ranga$! Even he's different. He's so big!")
 
-            sprint("* ggAfter the party to celebrate your awakening. *")
+            sprint("* After the party to celebrate your awakening. *")
             sprint("\nAlright everyone, gather around! I'm going to set some ground rules.")
-            sprint("One.")
-
+            sprint("1. No infighting.")
+            sprint("2. No discriminating other species.")
+            sprint("3. No Attacking Humans.")
+            sprint("Also, $Rigurd$ I hereby place in the position of Goblin Lord!")
+            #TODO Give player the option to set different rules which will effect story later on
 
 
             game_action(self)
-    naming_mobs()
-    #goblin_encounter()
+    #naming_mobs()
+    goblin_encounter()
