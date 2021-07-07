@@ -2,6 +2,7 @@ import time, sys, re
 import game_files.art as game_art
 from game_files.extra import *
 
+
 #                    ========== Printing ==========
 def update_rimuru_output(rimuru_obj):
     """Updates rimuru object to be used here."""
@@ -209,7 +210,11 @@ def show_history(arg):
     except: lines = 5
 
     print_header('History', 35)
-    for line in log_data[-lines:]: print(line, end='')
+    for line in log_data[-lines:]:
+        # Removes preserved spacing for game event log output.
+        if 'game' in arg:
+            print('    ' + line.strip())
+        else: print(line, end='')
 
 def show_start_banner(game_version, version_date):
     """Show game title, tips, and player stats/inv."""
