@@ -4,7 +4,7 @@ import random, sys, os
 on_subs = ['activate', 'true', 'enable', 'on', 'yes', '1', 'y']
 off_subs = ['deactivate', 'false', 'disable', 'off', 'no',  '0', 'n']
 
-def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int=False):
+def get_random(min_int=1, max_int=2, target=None, bigger_than=None, return_int=False):
     """
     Generate random number and check if matches passed in target parameter, returns True if so.
 
@@ -22,10 +22,10 @@ def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int
     Usage:
         get_random(1, 1_000, 666)
         get_random(1, 50)
-        get_random(10, 50, range=20)
+        get_random(10, 50)
     """
 
-    # Default is the middle of min and max.
+    # Default target set to half of max, 50/50 chance.
     if target is None: target = int(round(max_int / 2))
 
     rand = random.randint(min_int, max_int)
@@ -194,4 +194,4 @@ def game_error():
     """
 
     print("\n    < GAME ERROR FOUND >")
-    print("    If you are seeing this, please contact developer.\n")
+    print("    If you are seeing this, please contact the dumb developer that let this happen. Oh the shame that developer must be feelin!\n")
