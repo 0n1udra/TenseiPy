@@ -1,5 +1,7 @@
-from game_files.functions import *
-from game_maps.game_location import *
+import game_files.functions as game
+import game_files.extra as extra
+from game_files.output import gprint, sprint, siprint, idots, dots, show_art
+from game_maps.game_location import subs
 from chapters.tensei_3 import Chapter3
 
 
@@ -8,14 +10,14 @@ def ch2_goblin_encounter(rimuru):
         __location = "Near the Sealed Cave"
 
         def __init__(self):
-            mobs_reset()
+            game.mobs_reset()
             gprint("< Chapter 2 >\n")
-            mobs_add(['10* goblin'])
+            game.mobs_add(['10* goblin'])
             siprint("Where am I going?")
             siprint("\n* While practicing pronunciation with [Ultrasound Waves]. A pack of [Dire Wolves] shows up *")
             sprint("\nYou strong one.")
             siprint("\nWho's that? Wait... They look like goblins! Should I be nice?")
-            game_action(self)
+            game.actions(self)
 
         class _be_friendly:
             __subs = subs.be_nice_subs + ['say hi', 'talk', 'chat', 'talk to goblins']
@@ -41,10 +43,10 @@ def ch2_goblin_encounter(rimuru):
                 sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
                 sprint("You have two options. You can worship me or you can die.\n")
                 dots(5, 2)
-                if get_random(1, 10, 1):  # 1/10 chance of goblins revolting
+                if extra.get_random(1, 10, 1):  # 1/10 chance of goblins revolting
                     sprint("\nNEVER! We will never surrender to you!")
                     sprint("ATTACK!!!!!!!!")
-                    game_over()
+                    game.game_over()
 
                 sprint("\nWe offer our loyalty to you strong one!")
                 sprint("\nOk, good choice. So, you guys have a base, village, anything?")
@@ -53,27 +55,27 @@ def ch2_goblin_encounter(rimuru):
 
         class hfunc_attack:
             def __init__(self):
-                if mobs_cleared():
+                if game.mobs_cleared():
                     siprint("Uhhhh....... Was that totally necessary...")
-                    game_cond('killed village', True)
+                    game.game.conditions('killed village', True)
                     siprint("Anyways.... Lets keep moving. WAIT! What are those? Are those wolves?!")
                     sprint("\nLook at what we have here boys, it's a weak little slime.")
                     sprint("\nAhahahahahaha")
                     sprint("\nI've heard slimes tastes good!")
                     sprint("\n* Before the little slime could do anything else, the wolves charged at it... and they had a little snack. *")
-                    game_over()
-                elif check_attack_success():
+                    game.game_over()
+                elif game.check_attack_success():
                     sprint("HOW COULD YOU! ATTACK!")
                     siprint("\nCRAP, now there pissed!")
                     sprint("* Before anything else could happen, the rest of the goblins charged to kill the slime. *")
-                    game_over()
+                    game.game_over()
 
     class goto_goblin_village:
         __location = "Goblin Village"
 
         def __init__(self):
-            mobs_reset()
-            mobs_add(['goblin:goblin chief', 'goblin'])
+            game.mobs_reset()
+            game.mobs_add(['goblin:goblin chief', 'goblin'])
             siprint("Wow, this place looks like a dump... Such a primitive house.")
             sprint("\nI am the village elder. I'm sorry we don't have much to offer you.")
             sprint("\nAnyway, what's up? I assume you invited me here for a reason.")
@@ -84,7 +86,7 @@ def ch2_goblin_encounter(rimuru):
             sprint("\nRigur, my older brother, died to bring us this information. A Demon gifted him the name.")
             sprint("He was the village's greatest warrior, we have survived this long because of him.")
             siprint("\nHmmmmm... 100 huh... That's a lot. Should I help them? What about compensation?")
-            game_action(self)
+            game.actions(self)
 
         class hfunc_more_about_rigur:
             __subs = ['so rigur is not around anymore', 'rigur died', 'sorry for your lost', "rigur's not around anymore"]
@@ -95,18 +97,18 @@ def ch2_goblin_encounter(rimuru):
 
         class hfunc_attack:
             def __init__(self):
-                if not mob_status('goblin chief'):
+                if not game.mob_status('goblin chief'):
                     sprint("W-why... Why would you do this!")
                     sprint("\nListen up, I'm the new leader of this village!")
                     sprint("If anyone has a problem with that, you will end up like your previous leader here!")
                     sprint("\nW-w-we will give our fealty to you.")
-                    game_cond('killed goblin chief', True)
-                elif not mob_status('goblin'):
+                    game.conditions('killed goblin chief', True)
+                elif not game.mob_status('goblin'):
                     siprint("Now they're pissed!")
                     sprint("\nYou will not get away with this!")
                     sprint("YOU WILL NOT LEAVE THIS VILLAGE ALIVE!")
                     sprint("\n* The little slime couldn't not escape the fury of the whole goblin village. *")
-                    game_over()
+                    game.game_over()
 
         class compensation:
             __subs = ['ask for compensation', 'ask for reward', 'what about pay', 'reward', 'is there a reward', 'will i be compensated', 'compensation']
@@ -121,7 +123,7 @@ def ch2_goblin_encounter(rimuru):
                 sprint("Ok, I'll try the best of my abilities to protect your village.")
                 sprint("\nThank you so much, we will be forever loyal to you.")
                 siprint("This village has no defenses, those might help... And a goblin said something about wounded victims?")
-                game_action(self)
+                game.actions(self)
 
             class _setup_defenses:
                 __subs = ['setup', 'go setup defenses', 'setup some defenses', 'setup border defenses']
@@ -131,10 +133,10 @@ def ch2_goblin_encounter(rimuru):
 
                     if rimuru.check_acquired('steel thread'):
                         siprint("I can use [Steel Thread] as invisible traps.")
-                        game_cond('steel thread trap', True)
+                        game.conditions('steel thread trap', True)
                     if rimuru.check_acquired('sticky thread'):
                         siprint("I wonder what I can do with [Sticky Thread].")
-                        game_cond('sticky thread trap', True)
+                        game.conditions('sticky thread trap', True)
 
                     wolf_attack()
 
@@ -152,30 +154,30 @@ def ch2_goblin_encounter(rimuru):
                         sprint("\n* The slime ate, healed, and spat out the rest of the wounded goblins. *")
                         sprint("\nThere, all healed!")
                         sprint("\nW-w-whoa! You really are magnificent, great one! We thank you!")
-                        action_playable('_heal_wounded', False)
+                        game.action_playable('_heal_wounded', False)
                     else:
                         siprint("Looks like 9 wounded goblins..... How can I help them?")
 
     class wolf_attack:
         def __init__(self):
-            mobs_reset()
-            mobs_add(['direwolf leader', '10*direwolf'])
+            game.mobs_reset()
+            game.mobs_add(['direwolf leader', '10*direwolf'])
             sprint("\n* Meanwhile, the direwolves are getting ready... *")
             sprint("\nTonight we shall lay waste to the goblin village.")
             sprint("And take our first step towards conquering The Forest of Jura!")
             sprint("They no longer have protection from that accursed dragon!")
 
             sprint("\nMaster! The Direwolves are here!")
-            game_action(self)
+            game.actions(self)
 
         class _hfunc_attack:
             __subs = subs.attack
             def __init__(self):
-                if mobs_cleared():
+                if game.mobs_cleared():
                     sprint("That takes care of that...")
                     siprint("Probably unwarranted, but now we don't have to worry about them.")
                     naming_mobs()
-                elif not mob_status('direwolf leader'):
+                elif not game.mob_status('direwolf leader'):
                     wolf_attack._give_warning._attack_water_blade()
 
         class _give_warning:
@@ -188,7 +190,7 @@ def ch2_goblin_encounter(rimuru):
                 siprint("\nIntimidating not working...")
                 siprint("Some of the goblins that are using bows are getting a few of them, but it's not enough.")
 
-                if game_cond('steel thread trap'):
+                if game.conditions('steel thread trap'):
                     sprint("\nWhat was that!")
                     sprint("That would be [Steel Thread].")
                     sprint("\nYour tricks will not stop us!")
@@ -196,7 +198,7 @@ def ch2_goblin_encounter(rimuru):
                 siprint("\nSome are still getting past my traps.")
                 sprint("\nEnough of this! I will kill you slime!")
                 sprint("\nFather! No!")
-                if game_cond('steel thread trap'):
+                if game.conditions('steel thread trap'):
                     sprint("\nW-w-what is this! Why can't I move!")
                     sprint("\nThat would be [Steel Thread]!")
                 # Without setting up steel thread as defense, the pack leader will kill you!
@@ -204,34 +206,34 @@ def ch2_goblin_encounter(rimuru):
                     siprint("\nThat wolf is coming at me way to fast! I have nothing to stop him!")
                     sprint("\nYOU'RE DEAD, YOU SLIME!")
                     sprint("\n*CHOMP*")
-                    game_over()
-                set_targets('direwolf leader')
-                game_action(self)
+                    game.game_over()
+                game.set_targets('direwolf leader')
+                game.actions(self)
 
-            class _attack_water_blade:
+            class _attack:
                 __subs = []
                 def __init__(self):
-                    if not mob_status('direwolf leader'):
+                    if not game.mob_status('direwolf leader'):
                         sprint("No, Dad!")
                         sprint("\nYour leader is dead. Your choice now is fealty or death!")
                         siprint("They're not doing anything now... What are they waiting for? Do they need a leader perhaps?")
                     else:
                         sprint("You're DEAD you puny slime!")
                         siprint("\nHow did he get free!?")
-                        game_over()
+                        game.game_over()
 
-                    game_action(self)
+                    game.actions(self)
 
                 class _eat:
                     __subs = subs.eat
                     def __init__(self):
                         sprint("\nMaybe they need a push...")
-                        game_action(self)
+                        game.actions(self)
 
                     class _mimic_direwolf_leader:
                         def __init__(self):
                             siprint("This skill looks useful!")
-                            game_action(self)
+                            game.actions(self)
 
                         class _use_coercion:
                             def __init__(self):
@@ -275,7 +277,7 @@ def ch2_goblin_encounter(rimuru):
             show_art('ranga')
             rimuru.add_subordinate('tempest star wolf', 'Ranga')
 
-            siprint("Wait w-what's happening... My [Magic Perception] stopped working!")
+            siprint("Wait w-what's happening... My [Magic Sense] stopped working!")
             siprint("Why am I so sleepy now? What's happening Great Sage?")
             siprint("<< Answer, going into 'Sleep Mode' due to low magicule levels. >>")
             siprint("I was only giving them names, I didn't know it would use up that much.")
@@ -300,6 +302,6 @@ def ch2_goblin_encounter(rimuru):
             #TODO Give player the option to set different rules which will effect story later on
 
 
-            game_action(self)
+            game.actions(self)
     #naming_mobs()
     goblin_encounter()

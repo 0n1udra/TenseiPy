@@ -1,6 +1,6 @@
 import time, sys, re
 import game_files.art as game_art
-from game_files.extra import *
+from game_files.extra import get_any, on_off
 
 
 #                    ========== Printing ==========
@@ -269,7 +269,7 @@ def show_help(arg):
           - mimics              -- Shows available mimicries.
           - mimic reset         -- Resets mimic (Back to slime).
         eat                     -- Predate target(s). Can only eat mobs that are targeted_mobs and also dead. can also use 'predate'.
-        nearby                  -- Shows nearby mobs if acquired [Magic Perception] skill. Same as 'use magic perception'.
+        nearby                  -- Shows nearby mobs if acquired [Magic Sense] skill. Same as 'use magic sense'.
         subordinates/sub        -- Show subordinates you have named.
         reputations/rep         -- Show factions/characters standing with player.
         /log [LINES]            -- Shows x dialogue line history. E.g. '/log', '/log 10', '/log game 15'

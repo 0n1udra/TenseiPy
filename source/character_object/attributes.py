@@ -145,7 +145,7 @@ class Attributes:
             for resist in resist_object.resist_types:
                 if attack.damage_type in resist: return True
 
-    def use_action(self, skill, character=None):
+    def use(self, skill, character=None):
         """
         Uses spell and passes arguments to spell's corresponding function.
 
@@ -166,6 +166,6 @@ class Attributes:
         if not skill_object: return False  # No skill was found.
 
         # Activates skill and returns any usage data.
-        if return_data := skill_object.use_action(character):
+        if return_data := skill_object.use(character):
             character.last_use_skill = skill_object
             return return_data

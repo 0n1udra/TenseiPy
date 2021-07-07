@@ -1,4 +1,5 @@
-from game_files.output import gprint, print_header, parse_input
+from game_files.output import gprint, print_header
+from game_files.extra import parse_input
 
 class Inventory:
     def inventory_generator(self, printout_mode=False):

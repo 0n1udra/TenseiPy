@@ -1,5 +1,7 @@
 import pathlib, sys, os
-from game_files.functions import show_start_banner, game_load, ask_on_off, update_rimuru_output, show_sysargs, show_version
+from game_files.functions import save_load
+from game_files.output import show_start_banner, update_rimuru_output, show_sysargs, show_version
+from game_files.extra import ask_on_off
 from chapters.tensei_0 import ch0
 
 __version__ = "5.3 Alpha"
@@ -16,7 +18,7 @@ if __name__ == '__main__':
     save_path = os.path.dirname(os.path.abspath(__file__)) + '/game.save'
 
     # Loads game save and updates rimuru object from game_functions.
-    rimuru = game_load(save_path)
+    rimuru = save_load(save_path)
     rimuru.source_folder_path = str(pathlib.Path(__file__).parent.absolute())
     update_rimuru_output(rimuru)  # Updates rimuru object for ouput.py file... idk, idk, you just have to...
 

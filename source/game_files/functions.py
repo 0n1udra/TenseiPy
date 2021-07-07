@@ -1,17 +1,18 @@
 import pickle, sys, os
-from game_files.output import *
+from game_files.output import gprint, show_help, show_history, show_settings
+from game_files.extra import set_action_subs, get_any, mob_list_adder
 from game_files.characters import Rimuru_Tempest
 
-# Initiates new Rimuru_Tempest object which will be updated with game_save if save exists.
+# Initiates new Rimuru_Tempest object which will be updated with save if save exists.
 rimuru = Rimuru_Tempest()
 successful_attack = False
 
 #                    ========== Level Functions ==========
-def game_hud(actions):
+def game_hud(playable_actions):
     """Show game HUD, includes current mimic, mobs targeted, and available actions."""
 
     # Formats actions to be displayed to user.
-    hud_actions = actions[:]
+    hud_actions = playable_actions[:]
     for action in hud_actions:
         # Removes action from HUD if not playable.
         if action_playable(action) is False: hud_actions.remove(action)
@@ -33,11 +34,11 @@ def game_hud(actions):
         print(f'Target: {targets}')
 
     if rimuru.show_actions:
-        # Formats actions available to user. Replaces _ with spaces and adds commas when needed.
+        # Formats playable_actions available to user. Replaces _ with spaces and adds commas when needed.
         actions_for_hud = ' '.join([f"({action.replace('_', ' ').strip()})" for action in hud_actions if 'hfunc' not in action])
         print(f"Actions: {actions_for_hud}", end='')
 
-def game_action(level=None):
+def actions(level=None):
     """
     Updates player's location, Shows HUD, takes user input and runs corresponding actions.
 
@@ -56,25 +57,25 @@ def game_action(level=None):
     rimuru.update_location(rimuru.get_location_variable(level))
 
     # Get's playable actions from parsing inputted class subclasses.
-    actions = []
+    playable_actions = []
     for action in dir(level):  # Gets subclass functions.
         if action_playable(action) is False: continue
         if '__' in action: continue  # Filters out unwanted variables and functions.
         # Hides any action with 'x_' in name, unless action_playable() return True.
         if 'x_' in action[:3] and action_playable(action) is not True: continue
-        actions.append(action)
+        playable_actions.append(action)
 
-    game_hud(actions)
+    game_hud(playable_actions)
 
     # ========== Debug Mode
     # Runs first available action that will progress the storyline.
     if rimuru.fast_mode is True:
-        for action in actions:
+        for action in playable_actions:
             if action[0] == '_':
                 user_input = action.replace('_', ' ').strip()
     else:
         user_input = input("\n> ").strip().lower()
-        if 'hfunc' in user_input: game_action(level)  # So user can't so easily activate 'hfunc' actions.
+        if 'hfunc' in user_input: actions(level)  # So user can't so easily activate 'hfunc' actions.
         # Removes anything that's not alpha-numeric, easier for making __subs.
         user_input = ''.join(i for i in user_input if i.isalnum() or ' ')
         print()
@@ -91,22 +92,22 @@ def game_action(level=None):
         [rimuru.show_attributes, ['stats']],
         [set_targets, ['target']],
         [rimuru.attack, [parameters], ['attack']],
-        [rimuru.use_action, [parameters, user], ['use']],
+        [rimuru.use, [parameters, user], ['use']],
         [rimuru.craft_item, ['craft']],
         [rimuru.remove_inventory, ['remove']],
         [rimuru.eat_targets, ['eat', 'predate']],
         [rimuru.use_mimic, ['mimic']],
         [rimuru.show_mimics, ['mimics', 'mimicries']],
-        [rimuru.use_action, ['magic perception'], ['nearby']],
+        [rimuru.use, ['magic sense'], ['nearby']],
         [rimuru.get_location, ['location']],
         [rimuru.show_subordinates, ['sub', 'subs', 'subordinates']],
         [rimuru.show_reputations, ['rep', 'reps', 'reputations', 'standings']],
         [show_help, ['/help']],
         [change_settings, ['/settings', '/options']],
         [show_history, ['/history', '/log']],
-        [game_restart, ['/restart']],
-        [game_reset, ['/reset']],
-        [game_exit, ['/exit']],
+        [restart, ['/restart']],
+        [save_reset, ['/reset']],
+        [exit, ['/exit']],
     ]
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
@@ -123,7 +124,7 @@ def game_action(level=None):
         # Run matched corresponding game function and pass rest of user input as parameter.
         if command in action[1]: action[0](parameters)
 
-    for action in actions:
+    for action in playable_actions:
         # Currently need two evals to find __subs for action.
         try: action_subs = eval(f"level.{action}.{action}__subs")
         except: action_subs = []
@@ -142,11 +143,11 @@ def game_action(level=None):
 
         # play game action if matching from player input.
         if get_any(user_input, action_subs, strict_match=False):
-            # So you can check if action has been played using game_cond('action_name') function.
+            # So you can check if action has been played using game.conditions('action_name') function.
             rimuru.add_action_played(action_subs[-1])
             eval(f"level.{action}()")
 
-    game_action(level)
+    actions(level)
 
 def action_played(match, amount=1):
     """
@@ -167,9 +168,9 @@ def action_played(match, amount=1):
     match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
 
     # Checks if action has been played more than once.
-    if game_cond(match_action) > amount: return True
+    if conditions(match_action) > amount: return True
 
-def game_cond(game_var, new_value=None):
+def conditions(game_var, new_value=None):
     """
     Set and fetch game variables.
 
@@ -398,7 +399,7 @@ def continue_to(next_location):
     """
 
     rimuru.current_location_object = next_location
-    game_save()
+    save()
 
     # Loads next story chapter.
     try: next_location(rimuru)
@@ -406,19 +407,19 @@ def continue_to(next_location):
 
 
 #                    ========== Game Save/Settings ==========
-def game_exit(*args):
+def exit(*args):
     """Saves game using pickle, then exits."""
 
-    #game_save()
+    #save()
     exit(0)
 
-def game_restart(*args):
+def restart(*args):
     """Restart game."""
 
     gprint("< Restarting Game... >")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-def game_save(level=None, show_msg=True):
+def save(level=None, show_msg=True):
     """
     Pickels Rimuru_Tempest object.
 
@@ -439,7 +440,7 @@ def game_save(level=None, show_msg=True):
 
     if show_msg: gprint("\n< Game Saved >\n")
 
-def game_load(path):
+def save_load(path):
     """
     Load game save.
 
@@ -464,23 +465,23 @@ def game_load(path):
     # If game save is invalid (using game_over function), save file will be deleted and game will restart.
     if rimuru.valid_save is False:
         os.remove(rimuru.save_path)
-        game_load(path)
+        save_load(path)
 
     return rimuru
 
-def game_reset(*args):
+def save_reset(*args):
     """Deletes game.save file and restarts game."""
 
     try: os.remove(rimuru.source_folder_path + '/game.save')
     except: pass
-    game_restart()
+    restart()
 
 def game_over():
     """Player died, deletes pickle save file after invalidates it.."""
 
     global rimuru
     rimuru.valid_save = False  # So you can't use this save file anymore.
-    game_save(show_msg=False)
+    save(show_msg=False)
 
     # Deletes player's save file.
     try: os.remove(rimuru.save_path)
@@ -488,7 +489,7 @@ def game_over():
 
     print("\n    < GAME OVER >\n\nPlay again?")
     if str(input('No / Yes or Enter > ')).lower() in ['n', 'no']: exit(0)
-    else: game_restart()
+    else: restart()
 
 def change_settings(user_input):
     """

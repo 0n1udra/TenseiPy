@@ -1,4 +1,4 @@
-from game_files.functions import *
+from game_files.functions import rimuru
 
 class subs:
     attack = ['attack']

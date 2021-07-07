@@ -201,7 +201,7 @@ mmmmmmmmmmmmmhdmmmmmmmmmmmmmmmmmmmddhoddhhyyyyddmmmddmmmhh.`hmmyhdmmmmdmmmmmmddm
 ddmmmmmmmmmmydmmmmmmmmmmmmmmmmmmmdddhsdddoydyhddhyyhddddyy.`ymdyydmmmdmmmmmmmmmmmhyss+yhddddddddddddddddhymmmmNNNNNNNNNm 
 """
 
-magic_perception = """
+magic_sense = """
 MNdmMN//yyhyosh-.`.N+oy` .ys+- -oyd   .:-+dh-ohdmddh . `o::o+./:oo.h: /y-hds+hMMMyoNN/:-`+hd:`hoymh/: -ms`    `+//oMMMm. o-    +odhssdhho:::.hd`  +o/mMMM+` +MM- dMM:./`  
 MMMN++o/+soh-.+:/-sM/.o-  y+yhy:.oh`   ``.:s:--+dmdd`   ss:`o`/ss+ h  `y.ym+:sMMMy:sds:` -sm+ o`smmd` /dd      :/.sMNy. -` ../y+dyshdmhs+/s+NMd:`-:mMMMMM-`-sMM+`hMM. :-.:
 MMMM+``/ydhs/  ydo/++`dms:yhyyyys/o.      `::-+/+shd.   +oo`-+`/y/ `   +.+d/::dMMN`-+d+  `dm/ - dmmh  -dm.    .+:/:ho/-ssyysohmosssyhss++o+hMMs/:`+MMMMMM+``oMM:.hMm//+:/+

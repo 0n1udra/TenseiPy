@@ -53,9 +53,9 @@ ch1_cave - In the Sealed cave where Veldora is imprisoned.
         _leave > tempest_serpent_encounter
         shut_it - Tells voice to shut up.
         _follow_voice - Follow mysterious voice.
-            _use_magic_perception(cave_actions) - Meet veldora, he teaches you Magic Perception.
-                :ASCII: Magic Perception
-                :Skill Acquired: Magic Perception
+            _use_magic_sense(cave_actions) - Meet veldora, he teaches you Magic Sense.
+                :ASCII: Magic Sense
+                :Skill Acquired: Magic Sense
                 - Veldora asks if he should formally introduce himself.
                 _yes > friend_veldora:
                     :ASCII: Cave Veldora

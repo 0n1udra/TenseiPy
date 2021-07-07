@@ -20,7 +20,7 @@ def ChapterXX():
             sprint("What a dark cave, what to do...what to do.")
 
             # Update relevant actions player can take.
-            game_action(self)
+            game.actions(self)
 
         # If you want more sub paths (actions) or to use use classes, else can use functions or classes for actions with no further sub paths.
         # However, you will need to use classes to use __subs list feature. Substitute inputs for the same actions.
@@ -36,7 +36,7 @@ def ChapterXX():
                 siprint("Moving on...")
 
                 # Calling this will give player opportunity to input a action.
-                game_action(self)
+                game.actions(self)
 
             class x_locked_action():
                 def __init__(self):
@@ -59,8 +59,8 @@ def ChapterXX():
                     # Add mobs to current section. This will add 10 of them. Read other mob related functions like mob_status, mobs_cleared, and mobs_reset.
                     mobs_add(['10* scary mob'])
 
-                    # Set game conditions that will be used later. game_cond() manipulates rimuru.game_conditions dictionary.
-                    game_cond('found_hidden', True)
+                    # Set game conditions that will be used later. conditions) manipulates rimuru.game_conditions dictionary.
+                    game.conditions('found_hidden', True)
 
                     # Loading dots animation (only works when textcrawl is True)
                     sdots(5, 5)
@@ -85,7 +85,7 @@ def ChapterXX():
                     clear_subs(self)
 
                     # Move story to new section.
-                    game_action(secret_place())
+                    game.actions(secret_place())
 
 
 > Start with ChapterXX function with Chapter_XX class to start with.
@@ -110,8 +110,8 @@ In function docstring's Usage section, '>' means example of user input in game.
 ===== functions.py
     update_rimuru()         -- Need to update local rimuru object for this file.
     game_hud()              -- Shows current mimic, targeted and available actions.
-    game_action()           -- Takes care of user input and runs corresponding functions, and shows user HUDs.
-    game_cond()             -- Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
+    actions()           -- Takes care of user input and runs corresponding functions, and shows user HUDs.
+    conditions)             -- Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
     last_use_skill()        -- Check what was the last successfully used skill/item.
     mobs_add([])            -- Adds new character object to current game level. Must pass in list.
     mob_status()            -- Returns True if mob is in active_mobs list.
@@ -178,7 +178,7 @@ Go to file to read comments for class variables.
     remove_attribute()      -- Remove attribute.
     upgrade_attribute       -- Upgrade attribute.
     check_resistance()      -- Checks if have resistance to attack.
-    use_action()            -- Uses specified skill.
+    use()            -- Uses specified skill.
 
 
 ===== combat.py
@@ -229,7 +229,7 @@ Go to file to read comments for class variables.
 ===== game_art.py
     slime                   -- Rimuru.
     great_sage              -- Great Sage.
-    magic_perception        -- When acquired and use magic perception.
+    magic_sense        -- When acquired and use magic sense.
     cave_veldora            -- Veldora introducing himself.
 
 
@@ -308,7 +308,7 @@ Skill:
     initialized False       -- If object has been initialized.
 
     __str__()               -- Returns lowercase name variable.
-    use_action()            -- Use skill, also checks if meets prerequisites.
+    use()            -- Use skill, also checks if meets prerequisites.
     activate_skill()        -- Update skill status variable, by default to 'Active'.
     deactivate_skill()      -- Resets skill status variable.
     update_info()           -- Update skill info page.
@@ -324,15 +324,15 @@ Resistance:
     resist_types []         -- Resistance types. E.g. Pain, Melee
 
 :Skills:
-    Ciel_Skill:
+    Ciel:
 
-    Raphael_Skill:
+    Raphael:
 
-    Mimicry_Skill:
-    Predator_Skill:
-    Great_Sage_Skill:
+    Mimicry:
+    Predator:
+    Great_Sage:
 
-    Sage_Skill:
+    Sage:
     Magic_Perception:
     Water_Manipulation:
     Vampirism:
