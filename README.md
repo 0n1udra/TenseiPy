@@ -22,6 +22,8 @@ NOTE: Windows, Mac and anti-virus programs might flag game as malicious, this ma
 
 NOTE: Game will display ASCII art, adjust window size accordingly. Recommend Fullscreening.
 
+NOTE: If playing on GNU/Linux/Mac systems, the `game.save` file might be saved where the shell opens up. i.e. save file might be in user's home folder or somewhere else instead of where actual game executable is located. Will try to fix in future.
+
 # TODO
 - Add skills, and Items
 - Continue Chapter 2 Story...
