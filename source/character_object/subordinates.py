@@ -36,9 +36,9 @@ class Subordinates:
 
         for mob in self.subordinates_generator():
             if use_canon_name:
-                if mob.canon_name.lower() == name.lower(): return mob
+                if name.lower() in mob.canon_name.lower(): return mob
             else:
-                if mob.name.lower() == name.lower(): return mob
+                if name.lower() in mob.name.lower(): return mob
 
     def add_subordinate(self, game_character, canon_name=None, new_name=None, level=None):
         """

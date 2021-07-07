@@ -23,7 +23,7 @@ def ch2_goblin_encounter(rimuru):
             def __init__(self):
                 if rimuru.name:
                     sprint(f"HELLO, MY NAME IS {rimuru.name.upper()}. I'M A SLIME.")
-                else: sprint(f"HELLO, I'M A SLIME.")
+                else: sprint("HELLO I AM $Rimuru$!, I'M A SLIME!!!.")
                 sprint("...")
                 sprint("Strong one we have already recognized your strength. Please, lower your voice!")
                 sprint("Oh, ok. I was just exploring around here. Is there something you need?")
