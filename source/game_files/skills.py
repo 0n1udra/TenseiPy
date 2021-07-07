@@ -273,6 +273,13 @@ class Water_Manipulation(Extra, Skill):
     '''
     evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
+class Shadow_step(Extra, Skill):
+    name = 'Shadow Step'
+    description = '''allows the user to merge into the shadows.
+        It also allows the user to appear out of the shadows in another location. Depending on the strength of an individual the range can vary.
+        It allows for very fast travel between locations.'''
+    evolution = 'Shadow Step > Spatial Travel > Teleportation'
+
 
 #                    ========== Intrinsic Skills ==========
 # Slime
