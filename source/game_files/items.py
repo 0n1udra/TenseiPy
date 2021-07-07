@@ -79,7 +79,7 @@ class Item:
             user.remove_inventory(self, amount)
         return True
 
-    def use_action(self, user, *args):
+    def use(self, user, *args):
         """
         Use Item, by default it'll just return True to signal player has used the item.
 
