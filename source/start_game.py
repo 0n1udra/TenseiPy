@@ -5,7 +5,7 @@ from game_files.extra import ask_on_off
 from chapters.tensei_0 import ch0
 
 __version__ = "5.3 Alpha"
-__date__ = '7/4/2021'
+__date__ = '7/7/2021'
 __author__ = "DT"
 __email__ = "dt01@pm.me"
 __license__ = "GPL 3"
