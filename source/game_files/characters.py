@@ -158,7 +158,7 @@ class Rimuru_Tempest(Character):
 
 class Veldora_Tempest(Character):
     name = "Veldora"
-    title = 'Storm Dragon'
+    title = ['Storm Dragon']
     canon_name = 'Veldora Tempest'
     species = 'True Dragon'
     protections = ['Protection of the Storm']
@@ -276,6 +276,10 @@ class Tempest_Wolf(Direwolf, Character):
     appearance = '''Tempest Wolves have jet black fur, which gives a feeling of bewitching gloss and a glossy finish.
         The storm element gave the wolf pack an ever-so-slight purplish shine to their black color.'''
 
+class Tempest_Star_Wolf(Tempest_Wolf, Character):
+    name = 'Tempest Star Wolf'
+    level = 5
+    starting_state = Tempest_Wolf.starting_state + ['shadow step']
 
 # ========== Goblins
 class Goblin(Character):
@@ -295,6 +299,6 @@ class Goblin(Character):
 class Hobgoblin(Goblin, Character):
     name = 'Hobgoblin'
     species = 'Hobgoblin'
-    level = 4
+    level = 3
     appearance = 'They have green skin like their pre-evolved form, but their average height is improved and his height now reaches around 180 centimeters.'
     description = 'Hobglins are evolved form of Gobins.'
