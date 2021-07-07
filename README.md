@@ -9,7 +9,7 @@ NOTE: Currently, knowing the story from manga/LN/anime is recommended. I am tryi
 
 # Run using Python3.8+
 1. Clone or download repositiory: https://github.com/0n1udra/TenseiPy
-2. In source folder, run `python3 start_game.py` to start game, optionally, run with `-h` argument to see other runtime options.
+2. In source folder, run `python3 start_game.py` to start game, optionally, run with `--help` argument to see other runtime options.
 
 # Download
 NOTE: Windows, Mac and anti-virus programs might flag game as malicious, this may be due to PyInstaller's executables. If you don't trust it, use Python3 to run the code itself.
