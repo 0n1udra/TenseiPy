@@ -43,8 +43,8 @@ class Rimuru_Tempest(Slime, Character):
 
         if not self.mimic_object(): return None
 
-        for level, mimics in self.acquired_mimicries.items():
-            for mimic_name, mimic in mimics.items(): yield mimic
+        for _mob_rank, mimics in self.acquired_mimicries.items():
+            for _mob_name, mimic in mimics.items(): yield mimic
 
     def mimic_object(self, update_status=None):
         """
@@ -66,10 +66,11 @@ class Rimuru_Tempest(Slime, Character):
 
     def show_mimics(self, *args):
         """Lists acquired mimicries by species."""
+
         print_header('Mimicries')
-        for mob_level, mobs in self.acquired_mimicries.items():
-            print(f'    {mob_level}:')
-            for mob_name, mob in mobs.items():
+        for mob_rank, mobs in self.acquired_mimicries.items():
+            print(f'    {mob_rank}:')
+            for mob_name, _mob_obj in mobs.items():
                 print(f'        {mob_name}')
         print("\n    Note: Reset mimic with 'mimic reset'.")
 

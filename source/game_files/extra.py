@@ -145,6 +145,15 @@ def set_action_subs(action, action_subs):
     return action_subs
 
 def mob_list_adder(item, input_list, amount_mode=False):
+    """
+    Special list adder for mob two-dimensional lists.
+    e.g. [[game_character_object, quantity_integer],...]
+
+    Args:
+        input_list list: List to add game mob to.
+        amount_mode bool(False): Able to add to quantity of mobs (second object in list).
+    """
+
     # Only able to target mobs in active_mobs list.
     for i in input_list:
         if i[0].name == item[0].name:

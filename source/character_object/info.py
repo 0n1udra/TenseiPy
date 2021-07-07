@@ -154,17 +154,17 @@ class Info:
 
         faction_name = faction_name.capitalize()
         # Checks if already have repudiation with faction.
-        for k, v in self.reputations.items():
-            if k in faction_name:
-                gprint(f"\n< [{faction_name}] Reputation Update: {self.reputations[k]} to {self.reputations[k] + add_value} >\n")
-                self.reputations[k] += add_value
-                return self.reputations[k]  # Returns new value of reputation standing.
+        for _faction_name, reputation_value in self.reputations.items():
+            if _faction_name.lower() in faction_name.lower():
+                gprint(f"\n< [{faction_name}] Reputation Update: {self.reputations[reputation_value]} to {self.reputations[reputation_value] + add_value} >\n")
+                self.reputations[reputation_value] += add_value
+                return self.reputations[reputation_value]  # Returns new value of reputation standing.
 
         # Adds new faction to reputations list.
         self.reputations[faction_name] = add_value
         gprint(f"\n< [{faction_name}] New Reputation: {self.reputations[faction_name]} >")
 
-    def get_reputations(self, faction_name):
+    def get_reputation(self, faction_name):
         """
         Returns integer value of reputation that player has with a character/faction/etc.
 
@@ -175,8 +175,9 @@ class Info:
             int: Returns integer denoting reputation player has with specified.
         """
 
-        for k, v in self.reputations.items():
-            if k in faction_name.capitalize(): return self.reputations[k]
+        for _faction_name, reputation_value in self.reputations.items():
+            if _faction_name.lower() in faction_name.lower():
+                return reputation_value
 
     def check_if_player(self):
         """Checks if you're interacting with the player object (Rimuru)."""

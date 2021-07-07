@@ -1,4 +1,3 @@
-#from game_files.extra import get_any, mob_list_adder
 from game_files.output import gprint
 
 class Combat:
@@ -37,9 +36,9 @@ class Combat:
                 # Adds skill to list of attacks to use against enemies.
                 if attack.game_object_type == 'attribute':
                     skills.append(attack)
-                if attack.game_object_type == 'item':
+                elif attack.game_object_type == 'item':
                     if attack.item_type == 'Weapon': skills.append(attack)
-                if attack.game_object_type == 'character': continue
+                elif attack.game_object_type == 'character': continue
             else: continue
 
         for current_target in self.targeted_mobs:

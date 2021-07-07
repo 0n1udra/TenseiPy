@@ -1,9 +1,10 @@
 import time, sys, re
 import game_files.art as game_art
-from game_files.extra import get_any, on_off
+from game_files.extra import get_any, on_off, game_error
 
 
 #                    ========== Printing ==========
+rimuru = None
 def update_rimuru_output(rimuru_obj):
     """Updates rimuru object to be used here."""
     
@@ -88,7 +89,7 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
     return message
 
 def siprint(message, use_textcrawl=True):
-    """sprint with adds indent and textcrawl."""
+    """Just sprint() with indent and textcrawl parameter."""
 
     sprint(message, add_indent=True, use_textcrawl=use_textcrawl)
 

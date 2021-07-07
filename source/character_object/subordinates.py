@@ -9,8 +9,8 @@ class Subordinates:
             .subordinates_generator('milim')
         """
 
-        for level, sub_list in self.subordinates.items():
-            if output_mode and sub_list: yield f'    {level}:'
+        for mob_rank, sub_list in self.subordinates.items():
+            if output_mode and sub_list: yield f'    {mob_rank}:'
 
             for subordinate in sub_list:
                 if output_mode:

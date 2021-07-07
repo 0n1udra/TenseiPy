@@ -107,7 +107,7 @@ def actions(level=None):
         [show_history, ['/history', '/log']],
         [restart, ['/restart']],
         [save_reset, ['/reset']],
-        [exit, ['/exit']],
+        [game_exit, ['/exit']],
     ]
 
     # Passes in user inputted arguments as parameters and runs corresponding action.
@@ -407,7 +407,7 @@ def continue_to(next_location):
 
 
 #                    ========== Game Save/Settings ==========
-def exit(*args):
+def game_exit(*args):
     """Saves game using pickle, then exits."""
 
     #save()

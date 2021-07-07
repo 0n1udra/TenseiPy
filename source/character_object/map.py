@@ -1,9 +1,17 @@
 from game_files.output import gprint, print_header
 
 class Map:
-    def show_nearby(self, *args, valid_usage=False):
-        # Either you have to own [Magic Sense] or change the valid_usage boolean to use this funtion.
-        if not valid_usage and not self.check_acquired('magic sense'): return
+    def show_nearby(self, *args, force_usage=False):
+        """
+        Prints out nearby mobs.
+
+        Args:
+            *args: Catch all.
+            force_usage bool(False): Usually this can only be used through specific in-game [Skills], this can bypass that.
+        """
+
+        # Either you have to own [Magic Sense] skill or change the valid_usage boolean to use this function.
+        if not force_usage and not self.check_acquired('magic sense'): return
 
         print_header('Nearby', 10)
         for mob in self.active_mobs:
