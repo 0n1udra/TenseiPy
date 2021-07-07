@@ -66,7 +66,7 @@ class Skill:
             user.remove_inventory(k, v)
         return True
 
-    def use_action(self, user, *args):
+    def use(self, user, *args):
         """
         Use skill, by default it'll just return True to signal player has used the skill.
 
@@ -147,35 +147,35 @@ class Resistance:
 
 
 #                    ========== Manas ==========
-class Ciel_Skill(Manas, Skill):
+class Ciel(Manas, Skill):
     name = 'Ciel'
     description = "Evolved from Wisdom King Raphael."
     abilities = """Auto Battle Mode 
-        - Great sage can battle on behalf of user of permission granted
+      - Great sage can battle on behalf of user of permission granted
     """
     evolution = "Sage > Great Sage > Raphael > Ciel"
     acquired_msg = "<< Ultimate Skill Core Manas [Ciel] Acquired! >>"
 
 
 #                    ========== Ultimate Skill ==========
-class Raphael_Skill(Ultimate, Skill):
+class Raphael(Ultimate, Skill):
     name = 'Wisdom King Raphael'
     description = 'Evolved version of Great Sage.'
     abilities = """
     Auto Battle Mode 
-        - Great sage can battle on behalf of user of permission granted
+      - Great sage can battle on behalf of user of permission granted
     """
-    evolution = "Sage > Great Sage > Wisdom King Raphael > Ciel"
+    evolution = "Sage > Great Sage > Wisdom King Raphael > ???"
 
 
 #                    ========== Unique Skills ==========
-class Mimicry_Skill(Unique, Skill):
+class Mimicry(Unique, Skill):
     name = 'Mimic'
     description = """Reproduces the form and Skills of absorbed targets.
         Only available once the target has been Analyzed.
     """
 
-class Predator_Skill(Unique, Skill):
+class Predator(Unique, Skill):
     name = 'Predator'
     description = "Once target is in [Predators]'s Stomach, user can now use Analysis, Micmicry, and/or Isolation."
     abilities = """Predation   
@@ -203,56 +203,65 @@ class Predator_Skill(Unique, Skill):
         Isolation   
             - Materials harmful or unnecessary for analysis can also be stored. They will be used to replace magic energy.
     """
-    evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
+    evolution = 'Predator > ???'
+    #evolution = 'Predator > Gluttony > Gluttonous King Beelzebub > Void God Azathoth'
 
-    def use_action(self, user=None, *args):
+    def use(self, user=None, *args):
         if user.check_if_player:
             user.eat_targets()
             return True
         return False
 
-class Great_Sage_Skill(Unique, Skill):
+class Great_Sage(Unique, Skill):
     name = 'Great Sage'
     description = '''A Conceptual Intelligence that has a heartless and emotionless personality 
         and is solely driven by purely logical computations. It cares for nobody but the benefit 
         of its master, even going so far as to hide things from master if it deems it beneficial in the long run.
     '''
     abilities = '''Thought Acceleration
-            - Raises thought-processing speed by a thousand times.
+          - Raises thought-processing speed by a thousand times.
 
         Analytical Appraisal
-            - The ability to analyze and appraise a target.
+          - The ability to analyze and appraise a target.
 
         Parallel Processing
-            - The ability to detach thoughts and analysis of phenomena. 
-            - Detached thoughts are also under the effects of Thought Acceleration.
+          - The ability to detach thoughts and analysis of phenomena. 
+          - Detached thoughts are also under the effects of Thought Acceleration.
 
         Chant Annulment
-            - When using magic, the chant is no longer necessary.
+          - When using magic, the chant is no longer necessary.
 
         All of Creation
-            - The ability to comprehend any non-concealed phenomenon in this world. 
-              Depending on the things the user understands and the information the user knows about, additional information can be inferred. 
-              In other words, the user needs to see it (the phenomenon) at least once.
+          - The ability to comprehend any non-concealed phenomenon in this world. 
+            Depending on the things the user understands and the information the user knows about, additional information can be inferred. 
+            In other words, the user needs to see it (the phenomenon) at least once.
 
         Analysis
-            - The absorbed target is studied and analyzed. Craftable items can then be produced. 
-              If the required materials are present, duplicates can be produced. 
-              In the case of successful skill or magic analysis, the same technique can be acquired. 
-            - Originally a part of Unique Skill [Predator] was transferred over to [Great Sage] when [Predator] evolved into Unique Skill Gluttony.
+          - The absorbed target is studied and analyzed. Craftable items can then be produced. 
+            If the required materials are present, duplicates can be produced. 
+            In the case of successful skill or magic analysis, the same technique can be acquired. 
+          - Originally a part of Unique Skill [Predator] was transferred over to [Great Sage] when [Predator] evolved into Unique Skill Gluttony.
 
         Auto Battle Mode
-            - By giving permission to [Great Sage], The master can let it control his body temporarily
+          - By giving permission to [Great Sage], The master can let it control his body temporarily
     '''
-    evolution = 'Sage > Great Sage > Raphael > Ciel'
+    evolution = 'Sage > Great Sage > ???'
 
+class Investigator(Unique, Skill):
+    name = 'Investigator'
+    description = '''A unique skill which allow Veldora to consult a record of the world’s event, 
+        giving him the ability to analyze things.'''
+    abilities = '''Multiple Barrier
+          - An ability which surrounds the user with multiple barriers. Defensive barriers prevent to entry of magic power.
+        Magic Sense
+          - An ability to perceive the surrounding magical energy.'''
 
 #                    ========== Extra Skills ==========
-class Sage_Skill(Extra, Skill):
+class Sage(Extra, Skill):
     name = 'Sage'
 
-class Magic_Perception(Extra, Skill):
-    name = 'Magic Perception'
+class Magic_Sense(Extra, Skill):
+    name = 'Magic Sense'
     description = '''One can perceive the surrounding magical energy. It's not a major skill, and acquiring 
         the skill is rather simple.
 
@@ -261,7 +270,7 @@ class Magic_Perception(Extra, Skill):
         Ambushes become nearly impossible. It's an indispensable skill.
     '''
 
-    def use_action(self, user=None, *args):
+    def use(self, user=None, *args):
         if not user: return False
         user.show_nearby(valid_usage=True)
         return True
@@ -271,14 +280,16 @@ class Water_Manipulation(Extra, Skill):
     description = '''After learned Hydraulic Propulsion, Water Current Control, and Water Blade. 
         The three Skills are fused and evolved into Water Manipulation.
     '''
-    evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+    evolution = '* > Hydraulic Propulsion > Water Manipulation > ???'
+    #evolution = '* > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
 
 class Shadow_step(Extra, Skill):
     name = 'Shadow Step'
     description = '''allows the user to merge into the shadows.
         It also allows the user to appear out of the shadows in another location. Depending on the strength of an individual the range can vary.
         It allows for very fast travel between locations.'''
-    evolution = 'Shadow Step > Spatial Travel > Teleportation'
+    evolution = 'Shadow Step > ???'
+    #evolution = 'Shadow Step > Spatial Travel > Teleportation'
 
 
 #                    ========== Intrinsic Skills ==========
@@ -294,7 +305,8 @@ class Self_Regeneration(Intrinsic, Skill):
               It can restore even lost limbs as long as it's not a situation where the limbs get continuously chopped off or crushed. 
               The Skill's performance can be enhanced by other Skills.
               '''
-    evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
+    evolution = 'Self-Regeneration > ???'
+    #evolution = 'Self-Regeneration > Ultraspeed Regeneration > Endless Regeneration'
 
 # Tempest Serpent
 class Poisonous_Breath(Intrinsic, Skill):
@@ -311,7 +323,7 @@ class Sense_Heat_Source(Intrinsic, Skill):
         Not affected by any concealing effects.
     '''
 
-    def use_action(self, user=None, *args):
+    def use(self, user=None, *args):
         if not user: return False
         user.show_nearby(valid_usage=True)
         return True
@@ -368,7 +380,8 @@ class Thought_Communication(Intrinsic, Skill):
 class Hydraulic_Propulsion(Common, Skill):
     name = 'Hydraulic Propulsion'
     description = 'Uses pressure to create a powerful water jet that can propel its user through vast distances.'
-    evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+    evolution = 'Hydraulic Propulsion > ???'
+    #evolution = 'Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
     use_requirements = {'Water': 1}
 
 class Water_Blade(Common, Skill):
@@ -376,7 +389,7 @@ class Water_Blade(Common, Skill):
     damage_type = 'Melee'
     damage_level = 6
     description = 'Shoot out a thin water blade with tremendous cutting power.'
-    evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+    evolution = 'Water Blade > ???'
     use_requirements = {'Water': 1}
 
 class Water_Bullet(Common, Skill):
@@ -384,7 +397,7 @@ class Water_Bullet(Common, Skill):
     damage_type = 'Melee'
     damage_level = 6
     description = "Shoot out a small powerful water bullet."
-    evolution = '??? > Hydraulic Propulsion > Water Manipulation > Molecular Manipulation > Magic Manipulation > Law Manipulation'
+    evolution = 'Water Bullet > ???'
     use_requirements = {'Water': 1}
 
 
