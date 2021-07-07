@@ -91,16 +91,17 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         for i in self.starting_state:
             self.add_attribute(i, show_acquired_msg=False)
 
-    def get_object(self, match, only_item_pool=None, new=False, mimic_pool=False, sub_pool=False):
+    def get_object(self, match, item_pool_add=None, item_pool_only=None, new=False, mimic_pool=False, sub_pool=False):
         """
         Can take in either a str or obj, then returns object (will initialize if need to).
 
         Args:
             match str:
+            item_pool_add list(None): Add to item pool.
+            item_pool_only list(None): Add custom list of game items to search against only.
             new bool(False): Return new instance of object (already already not necessary).
             mimic_pool bool(False): Adds acquired mimics character objects and their attribute/inventory to pool.
             sub_pool bool(False): Adds subordinates character objects to pool.
-            only_item_pool list(None): Add custom list of game items to search against only.
 
         Returns:
             Corresponding object, will initialize if one hasn't been already in inventory.
@@ -111,8 +112,9 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
             .get_object('hipokte grass')
         """
 
-        if not type(match) is str: match = match.name
         item_pool = []
+        if not type(match) is str: match = match.name
+        if item_pool_add: item_pool += item_pool_add
 
         # Gets character's acquired attributes and items in inventory.
         if 'character' in self.game_object_type:
@@ -130,7 +132,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if new: item_pool = [*game_items.Item.__subclasses__(), *game_skills.Skill.__subclasses__(), *game_characters.Character.__subclasses__()]
 
         # Use only item pool that was passed in.
-        if only_item_pool: item_pool = only_item_pool
+        if item_pool_only: item_pool = item_pool_only
 
         # Somehow strings get in the item_pool, need to filter those out.
         for game_object in list(filter(lambda x: type(x) is not str, item_pool)):
