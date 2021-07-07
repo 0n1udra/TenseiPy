@@ -58,21 +58,22 @@ class Info:
         self.family_name = name
         self.update_info()
 
-    def update_status(self, target=None, new_state=None):
+    def update_status(self, game_object=None, new_state=None):
         """
         Updates character/item/etc .status variable.
         Args:
-            target str(None): Status to update. Can also be game object.
+            game_object str(None): Character/skill/item status to update. Can also be game object.
             new_state str(None): Required argument. New status to set, Passive, Active, Analyzing.
         """
 
         if not new_state: return
 
-        if target:
-            target = self.get_object(target)
-        else: target = self
+        if game_object:
+            game_object = self.get_object(game_object)
+        else: game_object = self
 
-        target.status = new_state
+        game_object.status = new_state
+        game_object.update_info()
 
     def update_titles(self, add_title=None, remove_title=None):
         """

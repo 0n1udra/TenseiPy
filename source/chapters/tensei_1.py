@@ -372,7 +372,7 @@ def ch1_cave(rimuru):
                         __subs = subs.all_yes + ['start', 'start it', 'yes start it please', 'yes start it']
                         def __init__(self):
                             siprint("Yes, of course.")
-                            rimuru.set_status('veldora', 'Analyzing')
+                            rimuru.update_status('veldora', 'Analyzing')
                             gprint("< Starting Analysis: Unique Skill [Unlimited Imprisonment] >")
                             rimuru.update_reputation('veldora', 1)
                             siprint("I hope you get out quickly Veldora!")

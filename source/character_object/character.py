@@ -160,10 +160,3 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
         if item and item.quantity >= amount:
             return item
         return False
-
-    def set_status(self, game_object, new_status):
-        """Update status variable."""
-
-        if game_object := self.get_object(game_object):
-            game_object.status = new_status
-            game_object.update_info()
