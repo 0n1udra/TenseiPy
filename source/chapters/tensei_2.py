@@ -299,8 +299,7 @@ def ch2_goblin_encounter(rimuru):
             sprint("3. No Attacking Humans.")
             sprint("Also, $Rigurd$ I hereby place in the position of Goblin Lord!")
             #TODO Give player the option to set different rules which will effect story later on
+            extra.tbc()
 
-
-            game.actions(self)
-    #naming_mobs()
+            #game.actions(self)
     goblin_encounter()
