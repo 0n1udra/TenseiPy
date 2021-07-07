@@ -100,7 +100,7 @@ def actions(level=None):
         [rimuru.show_mimics, ['mimics', 'mimicries']],
         [rimuru.use, ['magic sense'], ['nearby']],
         [rimuru.get_location, ['location']],
-        [rimuru.show_subordinates, ['sub', 'subs', 'subordinates']],
+        [rimuru.show_subordinates, ['subs', 'subordinates']],
         [rimuru.show_reputations, ['rep', 'reps', 'reputations', 'standings']],
         [show_help, ['/help']],
         [change_settings, ['/settings', '/options']],
