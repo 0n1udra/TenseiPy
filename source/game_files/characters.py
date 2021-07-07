@@ -118,11 +118,14 @@ class Rimuru_Tempest(Slime, Character):
         else:
             # Get's character game object from acquired_mimicries dictionary.
             if new_mimic := self.get_object(character, [*self.mimic_generator()]):
-                # Updates relevant player information when mimicry is activated.
-                self.current_mimic_species = new_mimic.species
-                self.current_mimic = new_mimic
-                self.mimic_object(update_status='Active')
-                gprint(f'< Now Mimicking [{new_mimic.name}] >')
+                # Can't mimic items/skills, only mobs that you have acquried.
+                try: self.current_mimic_species = new_mimic.species
+                except: pass
+                else:
+                    # Updates relevant player information when mimicry is activated.
+                    self.current_mimic = new_mimic
+                    self.mimic_object(update_status='Active')
+                    gprint(f'< Now Mimicking [{new_mimic.name}] >')
 
     def check_mimic(self, match=None):
         """
