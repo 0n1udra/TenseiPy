@@ -38,7 +38,7 @@ class Info:
         self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] {"(" + self.status + ")" if self.status else ""}\n'
 
         # Only show fields that have set data.
-        info_dict = {'Title': self.titles, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Blessing': self.protections,
+        info_dict = {'Titles': self.titles, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Blessing': self.protections,
                      'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
                      'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance, '*Evolution': self.evolution}
 
@@ -57,6 +57,22 @@ class Info:
 
         self.family_name = name
         self.update_info()
+
+    def update_status(self, target=None, new_state=None):
+        """
+        Updates character/item/etc .status variable.
+        Args:
+            target str(None): Status to update. Can also be game object.
+            new_state str(None): Required argument. New status to set, Passive, Active, Analyzing.
+        """
+
+        if not new_state: return
+
+        if target:
+            target = self.get_object(target)
+        else: target = self
+
+        target.status = new_state
 
     def update_titles(self, add_title=None, remove_title=None):
         """
