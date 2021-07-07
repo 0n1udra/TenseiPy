@@ -272,7 +272,7 @@ class Magic_Sense(Extra, Skill):
 
     def use(self, user=None, *args):
         if not user: return False
-        user.show_nearby(valid_usage=True)
+        user.show_nearby(force_usage=True)
         return True
 
 class Water_Manipulation(Extra, Skill):
@@ -325,7 +325,7 @@ class Sense_Heat_Source(Intrinsic, Skill):
 
     def use(self, user=None, *args):
         if not user: return False
-        user.show_nearby(valid_usage=True)
+        user.show_nearby(force_usage=True)
         return True
 
 # Evil Centipede

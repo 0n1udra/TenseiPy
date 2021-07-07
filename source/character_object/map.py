@@ -10,7 +10,7 @@ class Map:
             force_usage bool(False): Usually this can only be used through specific in-game [Skills], this can bypass that.
         """
 
-        # Either you have to own [Magic Sense] skill or change the valid_usage boolean to use this function.
+        # Either you have to own [Magic Sense] skill or change the force_usage boolean to use this function.
         if not force_usage and not self.check_acquired('magic sense'): return
 
         print_header('Nearby', 10)
