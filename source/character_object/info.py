@@ -68,9 +68,8 @@ class Info:
 
         if not new_state: return
 
-        if game_object:
-            game_object = self.get_object(game_object)
-        else: game_object = self
+        game_object = self.get_object(game_object)
+        if not game_object: game_object = self
 
         game_object.status = new_state
         game_object.update_info()
