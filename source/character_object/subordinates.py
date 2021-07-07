@@ -75,4 +75,4 @@ class Subordinates:
             self.subordinates[new_subordinate.species].append(new_subordinate)
         else: self.subordinates[new_subordinate.species] = [new_subordinate]
 
-        gprint(f"\n< New Subordinate: {new_name} >\n")
+        gprint(f"\n< New Subordinate: {new_name} >")

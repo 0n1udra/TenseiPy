@@ -1,6 +1,6 @@
 import pickle, sys, os
 from game_files.output import gprint, show_help, show_history, show_settings
-from game_files.extra import set_action_subs, get_any, mob_list_adder, off_subs, on_subs
+from game_files.extra import set_action_subs, get_any, mob_list_adder, off_subs, on_subs, game_error
 from game_files.characters import Rimuru_Tempest
 
 # Initiates new Rimuru_Tempest object which will be updated with save if save exists.
@@ -404,6 +404,33 @@ def continue_to(next_location):
     # Loads next story chapter.
     try: next_location(rimuru)
     except: gprint("< Error Loading Next Location >")
+
+#                    ========== Extra Functionality ==========
+def multi_attr_adder(mobs, attrs):
+    """
+    Add multiple attributes to multiple characters.
+    Only works on self or subordinates.
+
+    Args:
+        mobs list:
+        attrs list:
+
+    Returns:
+
+    """
+
+    characters = []
+    if 'rimuru' in mobs: characters.append(rimuru)
+
+    # Get's game character's objects to add attributes to, if fails calls game_error().
+    for char_name in mobs:
+        if char_object := rimuru.get_subordinate(char_name):
+            characters.append(char_object)
+
+    # Loops through characters and adds each attribute.
+    for char_object in characters:
+        for attr_name in attrs:
+            char_object.add_attribute(attr_name, show_acquired_msg=False)
 
 
 #                    ========== Game Save/Settings ==========

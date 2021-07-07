@@ -275,6 +275,7 @@ def ch2_goblin_encounter(rimuru):
             sprint("You're the son of the Direwolf boss right?")
             show_art('ranga')
             rimuru.add_subordinate('tempest star wolf', 'Ranga')
+            game.multi_attr_adder(['gobta', 'rigurd', 'rigur'], ['thought communication'])
 
             siprint("Wait w-what's happening... My [Magic Sense] stopped working!")
             siprint("Why am I so sleepy now? What's happening Great Sage?")
@@ -294,11 +295,14 @@ def ch2_goblin_encounter(rimuru):
 
             sprint("* After the party to celebrate your awakening. *")
             sprint("\nAlright everyone, gather around! I'm going to set some ground rules.")
-            sprint("1. No infighting.")
-            sprint("2. No discriminating other species.")
-            sprint("3. No Attacking Humans.")
-            sprint("Also, $Rigurd$ I hereby place in the position of Goblin Lord!")
+            sprint("One, No infighting. Two, No discriminating other species. Three, No Attacking Humans.")
             #TODO Give player the option to set different rules which will effect story later on
+            sprint("That's it. Oh and also, $Rigurd$ I hereby place in the position of Goblin Lord!")
+            sprint("\nMy lord! I will not let you down!")
+            siprint("\nI just gave him that title so I have less responsibilities...")
+            siprint("\nAfter looking at the state of the village I decided to take some goblins and go to a nearby Dwarven kingdom.")
+            siprint("\nSince these goblins can't build or craft for shit, hearing about Dwarves gave me a great idea.")
+
             extra.tbc()
 
             #game.actions(self)
