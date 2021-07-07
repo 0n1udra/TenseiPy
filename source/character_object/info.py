@@ -1,5 +1,5 @@
 from game_files.extra import format_info, get_any
-from game_files.output import print_header
+from game_files.output import print_header, gprint
 
 class Info:
     def show_info(self, game_object):
@@ -38,7 +38,7 @@ class Info:
         self.info_page = f'    Name: [{self.name}{" " + self.family_name if self.family_name else ""}] {"(" + self.status + ")" if self.status else ""}\n'
 
         # Only show fields that have set data.
-        info_dict = {'Title': self.title, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Blessing': self.protections,
+        info_dict = {'Title': self.titles, 'Species': self.species, 'Rank': self.rank, 'Level': self.level, 'Blessing': self.protections,
                      'Affiliations': self.affiliations, 'Occupations': self.occupations, 'Abilities': self.abilities,
                      'Location': self.current_location, '*Description': self.description, '*Appearance': self.appearance, '*Evolution': self.evolution}
 
@@ -58,6 +58,21 @@ class Info:
         self.family_name = name
         self.update_info()
 
+    def update_titles(self, add_title=None, remove_title=None):
+        """
+        Add/Remove title from character.
+
+        Args:
+            add_title str(None): Add new title to titles list.
+            remove_title str(None): Remove title from titles list. Case sensitive.
+        """
+
+        if add_title:
+            self.titles.append(add_title)
+            gprint(f"< [{self.name}] Acquired Title: {add_title} >")
+        if remove_title: self.titles.remove(remove_title)
+        self.update_info()
+
     def add_level(self, add_amount=1):
         """
         Add x levels to character's level.
@@ -66,7 +81,7 @@ class Info:
             add_amount int(1): To be added to current level.
         """
 
-        print(f"    < [{self.name}] Level Up: {self.level} to {self.level + add_amount}>\n")
+        gprint(f"< [{self.name}] Level Up: {self.level} to {self.level + add_amount}>\n")
         self.level += add_amount
         self.update_info()
 
@@ -83,7 +98,7 @@ class Info:
 
         self.level = level
         self.update_info()
-        print(f"    < [{self.name}] Level: {level} >\n")
+        gprint(f"< [{self.name}] Level: {level} >\n")
 
     def add_protection(self, divine_protection):
         """
@@ -100,7 +115,7 @@ class Info:
 
         self.protections.append(divine_protection)
         self.update_info()
-        print(f'    < [{self.name}] Acquired Blessing: [{divine_protection}] >')
+        gprint(f'< [{self.name}] Acquired Blessing: {divine_protection} >')
 
     def show_reputations(self, *args):
         """Shows player's reputation (standing) with factions/characters."""
@@ -125,13 +140,13 @@ class Info:
         # Checks if already have repudiation with faction.
         for k, v in self.reputations.items():
             if k in faction_name:
-                print(f"\n    < [{faction_name}] Reputation Update: {self.reputations[k]} to {self.reputations[k] + add_value} >\n")
+                gprint(f"\n< [{faction_name}] Reputation Update: {self.reputations[k]} to {self.reputations[k] + add_value} >\n")
                 self.reputations[k] += add_value
                 return self.reputations[k]  # Returns new value of reputation standing.
 
         # Adds new faction to reputations list.
         self.reputations[faction_name] = add_value
-        print(f"\n    < [{faction_name}] New Reputation: {self.reputations[faction_name]} >")
+        gprint(f"\n< [{faction_name}] New Reputation: {self.reputations[faction_name]} >")
 
     def get_reputations(self, faction_name):
         """

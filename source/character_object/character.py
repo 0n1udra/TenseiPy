@@ -19,7 +19,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     name = ''
     family_name = ''
     canon_name = ''  # Name from manga storyline.
-    title = ''  # E.g. True Dragon, Demon Lord.
+    titles = []  # E.g. True Dragon, Demon Lord.
     species = ''
     rank = ''  # E.g. Catastrophe, Calamity.
     level = 1  # Integer corresponding to rank.
