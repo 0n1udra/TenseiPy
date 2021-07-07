@@ -2,11 +2,32 @@ from character_object.character import Character
 from game_files.output import gprint, print_header
 
 # ========== Characters
-class Rimuru_Tempest(Character):
+class Slime(Character):
     name = 'Slime'
+    level = 1
+    appearance = 'Slimey slime!'
+    description = '''One of the weakest Monsters known to exist.
+        They lack hunger and simply dine on magical energy, and thus have no need for physical nourishment. 
+        In areas with poor magical energy concentration, monsters and small animals serve as an alternative.
+
+        Slime bodies are a composition of identical cells.
+        Every cell can serve as a brain cell, nerve ending, and muscle at the same time.
+        Thus, as the thought process is undertaken by different cells at different times, sleep is unnecessary.
+        Slime bodies move with magical energy. Since oxygen is unnecessary, no form of breathing occurs.
+        
+        The Slimes of energy-deprived regions are extremely violent and strong since there is a need for survival.
+        Self-awareness is something impossible for a Slime.
+        Slime species are typically thoughtless creatures that only absorb, split, and regenerate.
+        They also usually never leave their territories.
+        It is possible for an intelligent Slime to naturally come into existence as a Unique Monster, 
+        though there hasn't been any such occurrence as of yet.'''
+    evolution = 'Slime > ???'
+
+
+class Rimuru_Tempest(Slime, Character):
     canon_name = 'Rimuru Tempest'
     shared_protection = 'Protection of Tempest'
-    level = 3
+    level = 2
     current_mimic = None
     current_mimic_species = 'Slime'
     starting_state = ['Sage', 'Predator', 'Mimic', 'Self-Regeneration', 'Absorb/Dissolve', 'Pain Resist', 'Melee Resist', 'Electricity Resist']
@@ -158,10 +179,11 @@ class Rimuru_Tempest(Character):
 
 class Veldora_Tempest(Character):
     name = "Veldora"
-    title = ['Storm Dragon']
+    titles = ['Storm Dragon']
     canon_name = 'Veldora Tempest'
     species = 'True Dragon'
     protections = ['Protection of the Storm']
+    starting_state = ['investigator']
     shared_protection = 'Storm Crest'
     is_alive = True
     level = 11
@@ -174,9 +196,10 @@ class Human(Character):
     species = 'Human'
     level = 2
     appearance = 'A featherless biped.'
-    evolution = '''
-        Human > Enlightened > Saint
-              > Maijin'''
+    evolution = 'Human > ???'
+    #evolution = '''
+    #    Human > Enlightened > Saint
+    #          > Maijin'''
 
 class Eren_Grimwold(Human, Character):
     name = "Eren Grimwold"
@@ -259,10 +282,7 @@ class Direwolf(Character):
         The Forest of Jura was bountiful of magic and had no monsters strong enough to threaten the wolves.
         However, Veldora's overwhelming magical force prevented them from entering.
         As individuals they're C rank, and B if as a pack."""
-    evolution = """
-        Direwolf > Black Direwolf
-                 > Tempest Wolf > Star Wolf > Tempest Star Wolf
-                                > Star Leader"""
+    evolution = 'Direwolf > ???'
     starting_state = ['keen smell', 'coercion', 'thought communication']
 
 class Direwolf_Leader(Direwolf, Character):
@@ -276,10 +296,22 @@ class Tempest_Wolf(Direwolf, Character):
     appearance = '''Tempest Wolves have jet black fur, which gives a feeling of bewitching gloss and a glossy finish.
         The storm element gave the wolf pack an ever-so-slight purplish shine to their black color.'''
 
+    evolution = """
+       Direwolf > Black Direwolf
+                > Tempest Wolf > ???"""
+    # evolution = """
+    #    Direwolf > Black Direwolf
+    #             > Tempest Wolf > Star Wolf > Tempest Star Wolf
+    #                            > Star Leader"""
+
 class Tempest_Star_Wolf(Tempest_Wolf, Character):
     name = 'Tempest Star Wolf'
     level = 5
     starting_state = Tempest_Wolf.starting_state + ['shadow step']
+    evolution = """
+       Direwolf > Black Direwolf
+                > Tempest Wolf > Star Wolf > Tempest Star Wolf > ???
+                               > Star Leader"""
 
 # ========== Goblins
 class Goblin(Character):
@@ -292,9 +324,9 @@ class Goblin(Character):
         Many of the goblins revere the Storm Dragon as their God and protector of the forest.
         For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
         '''
-    evolution = '''
-        Goblin > Hobgoblin > Ogre > Kijin > Fair Oni
-                                          > Wicked Oni'''
+    evolution = 'Goblin > ???'
+
+
 
 class Hobgoblin(Goblin, Character):
     name = 'Hobgoblin'
@@ -302,3 +334,7 @@ class Hobgoblin(Goblin, Character):
     level = 3
     appearance = 'They have green skin like their pre-evolved form, but their average height is improved and his height now reaches around 180 centimeters.'
     description = 'Hobglins are evolved form of Gobins.'
+    evolution = 'Goblin > Hobgoblin > ???'
+    #evolution = '''
+    #    Goblin > Hobgoblin > Ogre > Kijin > Fair Oni
+    #                                      > Wicked Oni'''
