@@ -271,7 +271,7 @@ def show_help(arg):
           - mimic reset         -- Resets mimic (Back to slime).
         eat                     -- Predate target(s). Can only eat mobs that are targeted_mobs and also dead. can also use 'predate'.
         nearby                  -- Shows nearby mobs if acquired [Magic Sense] skill. Same as 'use magic sense'.
-        subordinates/sub        -- Show subordinates you have named.
+        subordinates/subs       -- Show subordinates you have named.
         reputations/rep         -- Show factions/characters standing with player.
         /log [LINES]            -- Shows x dialogue line history. E.g. '/log', '/log 10', '/log game 15'
           - /log game [LINES]   -- Shows x game event history log (skill/item acquisitions, hints, etc).
