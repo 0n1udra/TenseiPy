@@ -45,7 +45,9 @@ class Attributes:
         print_header('Attributes', 10)
         print(f"    Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
         print(f"    Level: {mob.level}")
-        print(f"    Location: {mob.current_location}\n")
+        if mob.current_location: print(f"    Location: {mob.current_location}")
+        if mob.titles: print(f"    Titles: {', '.join(mob.titles)}")
+        print()
         # Print out skills organized in corresponding category (Unique Skill, Extra Skill, etc).
         for i in mob.attributes_generator(printout_mode=True): print(i)
 
