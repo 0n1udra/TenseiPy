@@ -1,6 +1,6 @@
 import pickle, sys, os
 from game_files.output import gprint, show_help, show_history, show_settings
-from game_files.extra import set_action_subs, get_any, mob_list_adder
+from game_files.extra import set_action_subs, get_any, mob_list_adder, off_subs, on_subs
 from game_files.characters import Rimuru_Tempest
 
 # Initiates new Rimuru_Tempest object which will be updated with save if save exists.

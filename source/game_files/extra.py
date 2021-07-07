@@ -1,8 +1,8 @@
 import random, sys, os
 
 # Input substitutes used for enabling/disabling game settings.
-on_subs = ['activate', 'true', 'enable', 'on', 'yes', '1']
-off_subs = ['deactivate', 'false', 'disable', 'off', 'no',  '0']
+on_subs = ['activate', 'true', 'enable', 'on', 'yes', '1', 'y']
+off_subs = ['deactivate', 'false', 'disable', 'off', 'no',  '0', 'n']
 
 def get_random(min_int=1, max_int=100, target=None, bigger_than=None, return_int=False):
     """
