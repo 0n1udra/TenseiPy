@@ -4,7 +4,7 @@ from game_files.output import show_start_banner, update_rimuru_output, show_sysa
 from game_files.extra import ask_on_off
 from chapters.tensei_0 import ch0
 
-__version__ = "6.0 Alpha"
+__version__ = "6.1 Alpha"
 __date__ = '7/7/2021'
 __author__ = "DT"
 __email__ = "dt01@pm.me"
