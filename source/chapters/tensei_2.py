@@ -76,7 +76,7 @@ def ch2_goblin_encounter(rimuru):
             game.clear_all()
             game.mobs_add(['goblin:goblin chief', 'goblin'])
             siprint("Wow, this place looks like a dump... Such a primitive house.")
-            sprint("\nI am the village elder. I'm sorry we don't have much to offer you.")
+            sprint("\nI am the village chief. I'm sorry we don't have much to offer you.")
             sprint("\nAnyway, what's up? I assume you invited me here for a reason.")
             sprint("\nI've heard about your incredible strength. Would you please listen to our request.")
             sprint("\nSpeak.")
@@ -101,7 +101,8 @@ def ch2_goblin_encounter(rimuru):
                     sprint("\nListen up, I'm the new leader of this village!")
                     sprint("If anyone has a problem with that, you will end up like your previous leader here!")
                     sprint("\nW-w-we will give our fealty to you.")
-                    game.conditions('killed goblin chief', True)
+                    game.conditions('killed village chief', True)
+                    rimuru.update_reputation('goblins', -5)
                 elif not game.mob_status('goblin'):
                     siprint("Now they're pissed!")
                     sprint("\nYou will not get away with this!")
@@ -149,11 +150,10 @@ def ch2_goblin_encounter(rimuru):
                         idots(5)
                         sprint("Wow, those potions are really impressive.\n")
                         rimuru.remove_inventory('full potion', 9)
-                        rimuru.update_reputation('goblins', 1)
+                        rimuru.update_reputation('goblins', 2)
                         sprint("\n* The slime ate, healed, and spat out the rest of the wounded goblins. *")
                         sprint("\nThere, all healed!")
                         sprint("\nW-w-whoa! You really are magnificent, great one! We thank you!")
-                        game.action_playable('_heal_wounded', False)
                     else:
                         siprint("Looks like 9 wounded goblins..... How can I help them?")
 
@@ -168,6 +168,15 @@ def ch2_goblin_encounter(rimuru):
 
             sprint("\nMaster! The Direwolves are here!")
             game.actions(self)
+
+        class _do_nothing:
+            __subs = ['wait', 'stall', 'nothing']
+            def __init__(self):
+                sprint("My lord please help us! We will all surely die if you don't do anything!")
+                sprint("\nNah I'm just going to sit here and do nothing!")
+                rimuru.update_reputation('goblins', -10)
+                sprint("* The Direwolf pack killed every last goblin including you. *")
+                game.game_over()
 
         class _hfunc_attack:
             __subs = subs.attack
@@ -253,20 +262,24 @@ def ch2_goblin_encounter(rimuru):
             game.clear_all()
             siprint("Quite a wild retinue I've built up for myself.")
             siprint("I should probably lay down some rules for everyone to follow.")
-            sprint("By the way elder, what your name?")
+            if game.conditions('killed village chief'):
+                sprint("You, goblin, what are your names?")
+            else:
+                sprint("By the way chief, what your name?")
             sprint("\nMonsters usually don't have names. Not having names do not get in the way of communicating anyways.")
             sprint("\nOk, I see. Still, it would be convenient if I have a way to call you if I need to.")
             sprint("I suppose, I'll just have to give you guys names!")
             sprint("WHAAAAT!!!??? A-are you certain?")
             sprint("\nWhat's the big deal anyways? Everyone get in a line, so I can give you names.")
             dots(5)
-            show_art('village elder')
-            siprint("What should I name the village elder? He had son named Rigurd, who died protecting this village...")
-            rimuru.add_subordinate('goblin', 'Rigurd', level=4)
-            sprint("I am honored great one!")
-            sprint("\nAlright, next...")
+            if not game.conditions('killed village chief'):
+                show_art('village chief')
+                siprint("What should I name the village chief? He had son named Rigurd, who died protecting this village...")
+                rimuru.add_subordinate('goblin', 'Rigurd', level=4)
+                sprint("I am honored great one!")
+                sprint("\nAlright, next...")
             show_art('rigur')
-            siprint("Now... The elder's younger son, the younger brother of the lost Rigurd...")
+            siprint("Now... The chief's younger son, the younger brother of the lost Rigurd...")
             rimuru.add_subordinate('goblin', 'Rigur', level=4)
             sprint("Thank you master!")
             show_art('gobta')
@@ -436,7 +449,6 @@ def ch2_goblin_encounter(rimuru):
             __subs = ['bring all of them', 'bring all', 'let all come', 'let them all come', 'bring them all', 'go all together']
             def __init__(self):
                 sprint("Screw it, you can all come. Let's go.")
-
 
     class dwargon_jail_coercion:
         def __init__(self):

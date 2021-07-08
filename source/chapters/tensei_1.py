@@ -382,7 +382,7 @@ def ch1_cave(rimuru):
                         __subs = subs.move_on + subs.no + ['no', 'ignore him, lets move on']
                         def __init__(self):
                             siprint("ehehhh... Veldora is gonna be pissed that I didn't immediately start, will he think I betrayed him...")
-                            rimuru.update_reputation('veldora', -2)
+                            rimuru.update_reputation('veldora', -10)
                             tempest_serpent_encounter()
 
                 class ask_about_seal:
@@ -532,6 +532,7 @@ def ch1_cave(rimuru):
             class _leave:
                 __subs = ['leave', 'leave cave', 'exit', 'exit cave', 'move on', 'continue']
                 def __init__(self):
+                    game.clear_all()
                     siprint("Let's leave this cave already!")
                     game.continue_to(ch2_goblin_encounter)
 

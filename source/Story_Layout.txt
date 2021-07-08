@@ -6,112 +6,145 @@ Chapter()
         action: > jump_to_action Description.
         action: ?> conditional_jump Jump to actions based on game conditions/circumstances.
         action: ?> action / action May jump to specific action based on conditions.
-        :Game Function: Update game conditions, like Standing, Acquiring skills/items, Adding Mobs/Resetting, Update location, etc
+        :Game Function: Update game conditions, like Reputation, Acquiring skills/items, Adding Mobs/Resetting, Update location, etc
+            :Clear All: Resets currently targeting, mobs_actives list, and mimic.
 
 At Launch
     :ASCII: Great Sage
     :Start Banner:
 
-ch0 - Used for debugging.
+ch0 - Use for debugging.
 
 ch1_cave - In the Sealed cave where Veldora is imprisoned.
-    wake_up
-        :Location: Sealed Cave
-        Set player's start state, acquire starting abilities and resistances.
-        :Skill Acquired: Predator, Sage
-        :Skill Upgrade: Sage > Great Sage
+wake_up
+    :Location: Sealed Cave
+    Set player's start state, acquire starting abilities and resistances.
+    :Skill: Acquired Predator, Sage
+    :Skill: Upgraded Sage > Great Sage
 
-        speak - Try to talk.
-        move - Try to move limbs.
-        _inspect(cave_actions) - Inspect your body.
-            puyo
+    :Random: 1/1,000 Chance of just dying right off the bat cus why not ;p
+    speak - Try to talk.
+    move - Try to move limbs.
+    _inspect(cave_actions) - Inspect your body.
+        puyo
+        _explore(cave_actions) - Keep exploring.
+            :ASCII: Slime
             eat_grass - Eat Hipokte Grass.
             eat_ore - Eat Magic Ore.
-            _explore(cave_actions) - Keep exploring.
-                :ASCII: Slime
-                _hfunc_craft_full_potion - Crafting a Full Potion.
-                _keep_exploring > in_water - Keep exploring, fall into body of water.
-                what_are_skills - Ask what are skills.
-                what_is_predator - Ask what is Predator.
-                what_is_great_sage - Ask what is Great Sage.
-                where_did_it_go - Ask where does stuff you eat go.
+            _hfunc_craft_full_potion - Crafting a Full Potion.
+            _keep_exploring > in_water - Keep exploring, fall into body of water.
+            what_are_skills - Ask what are skills.
+            what_is_predator - Ask what is Predator.
+            what_is_great_sage - Ask what is Great Sage.
+            where_did_it_go - Ask where does stuff you eat go.
 
-    in_water: Under water, try and find a way out.
-        :Location: Under water?
-        stay_in_water
-        eat_water - Predate some water to use as propulsion.
-        try_getting_out ?> veldora_encounter - Only after acquired some water, you obtain new skill then use it to escape.
-            :Skill Acquired - Hydraulic Propulsion
-            :Skill Use: Hydraulic Propulsion
-        hfunc_grab_sword - Hidden sword you can grab.
+in_water: Under water, try and find a way out.
+    :Location: Under water?
+    stay_in_water
+    eat_water - Predate some water to use as propulsion.
+    try_getting_out ?> veldora_encounter - Only after acquired some water, you obtain new skill then use it to escape.
+        :Skill: Acquired Hydraulic Propulsion
+        :Skill: Used Hydraulic Propulsion
+    hfunc_grab_sword - Hidden [Magic Sword] you can grab.
 
-
-    _veldora_encounter(cave_actions) - You hear some strange voice.
-        :Location: Sealed Cave
-        hello - Ask who is there.
-        great_sage - Ask if it was Great Sage.
+_veldora_encounter(cave_actions) - You hear some strange voice.
+    :Location: Sealed Cave
+    hello - Ask who is there.
+    great_sage - Ask if it was Great Sage.
+    _leave > tempest_serpent_encounter
+    shut_it - Tells voice to shut up.
+    _follow_voice - Follow mysterious voice.
+        _use_magic_sense(cave_actions) - Meet veldora, he teaches you Magic Sense.
+            :ASCII: Magic Sense
+            :Skill: Acquired Magic Sense
+            - Veldora asks if he should formally introduce himself.
+            _yes > friend_veldora:
+                :ASCII: Cave Veldora
+            _no > friend_veldora:
+        wait
         _leave > tempest_serpent_encounter
-        shut_it - Tells voice to shut up.
-        _follow_voice - Follow mysterious voice.
-            _use_magic_sense(cave_actions) - Meet veldora, he teaches you Magic Sense.
-                :ASCII: Magic Sense
-                :Skill Acquired: Magic Sense
-                - Veldora asks if he should formally introduce himself.
-                _yes > friend_veldora:
-                    :ASCII: Cave Veldora
-                _no > friend_veldora:
-            wait
-            _leave > tempest_serpent_encounter
 
-    _friend_veldora(cave_actions) - Befriend strange dragon.
-        _leave > _leave_cave
-        _friend_dragon(cave_actions)
-            _look_at_seal(cave_actions) - Set family name for you and Veldora, and then set your own name.
-                _eat_grass - Veldora asks what are you doing.
-                _eat_veldora - Predate Veldora.
-                    _start_analysis > tempest_serpent_encounter - Start analysis on Veldora's seal.
-                        :Standing: Veldora +1
-                    _move_on - Do not start analysis on seal.
-                        :Standing: Veldora -2
-            _leave_veldora(cave_actions) > tempest_serpent_encounter
+_friend_veldora(cave_actions) - Befriend strange dragon.
+    _leave > _leave_cave
+    _friend_dragon(cave_actions)
+        _look_at_seal(cave_actions) - Set family name for you and Veldora, and then set your own name.
+            _eat_grass - Veldora asks what are you doing.
+            _use_veldora - Predate Veldora.
+                :Inventory: Acquired 1x Veldora
+                :Reputation: Veldora +1
+                _start_analysis > tempest_serpent_encounter - Start analysis on Veldora's seal.
+                    :Reputation: Veldora +1
+                _move_on - Do not start analysis on seal.
+                    :Reputation: Veldora -10
+        _leave_veldora(cave_actions) > tempest_serpent_encounter
+            :Reputation: Veldora -1
 
-    tempest_serpent_encounter - Fight mobs to progress.
-        :Mob Add: Tempest Serpent, Giant Bat, Black Spider, Evil Centipede
-        :Skill Acquired: Water Blade
-        sneak_away - Can't sneak away.
-        _move_on ?> at_cave_exit - Can only progress once all mobs have been killed.
-        hfunc_attack ?> at_cave_exit - If all mobs cleared, you move forward.
+tempest_serpent_encounter - Fight mobs to progress.
+    :Mob: Add Tempest Serpent, Giant Bat, Black Spider, Evil Centipede
+    :Skill: Acquired Water Blade
+    sneak_away - Can't sneak away.
+    _move_on ?> at_cave_exit - Can only progress once all mobs have been killed.
+    hfunc_attack ?> at_cave_exit - If all mobs cleared, you move forward.
 
-    _at_cave_exit
-        _wait - Wait for adventurers to pass before exiting cave.
-        _say_hi: > GAME_OVER - Get killed by adventurers.
-        _sneak_out() ?> GAME_OVER - If at least one adventurer survives, you die.
-        _leave_cave(cave_actions)
-            :Mob Reset:
-            _go_to_veldora ?> friend_veldora / veldora_encounter - Go back to veldora if you haven't acquired him already.
-            _leave > continue_to(ch2_goblin_encounter) Leave cave.
+_at_cave_exit
+    :Clear All:
+    :Mob: Add Kaval, Gido, Eren Grimwold
+    _wait - Wait for adventurers to pass before exiting cave.
+        :Clear All:
+    _say_hi: > GAME OVER - Get killed by adventurers.
+    _sneak_out() ?> GAME OVER - If at least one adventurer survives, you die.
+    _leave_cave(cave_actions)
+        :Clear All:
+        _go_to_veldora ?> friend_veldora / veldora_encounter - Go back to veldora if you haven't acquired him already.
+        _leave > continue_to(ch2_goblin_encounter) Leave cave.
 
 
 ch2_goblin_encounter - Meet goblins, and go to there village to assit them.
-    :Location: Near the Sealed Cave
-    :Mob Reset:
+:Location: Near the Sealed Cave
+:Clear All:
+:Mob Add: 10x goblin
+goblin_encounter - Meet the goblins.
     _talk_to_goblins
-        _friendly
+        _be_friendly
         _subjugate_goblins
-    move_on TBC
+            :Random: ?> GAME OVER - 1/10 Chance goblins will revolt and kill you.
+        hfunc_attack > GAME OVER Goblins will kill you if you don't kill them all. If you don't, the wolves will.
 
-    goto_goblin_village
-    :Location: Goblin Village
-    compensation
-    _attack
-    _assist_goblins
-        _setup_defenses
-        _heal_wounded
+goto_goblin_village
+:Location: Goblin Village
+:Clear All:
+:Mob Add: Goblin Chief, goblin.
+hfunc_more_about_rigur - Talks a bit more about Rigur
+hfunc_attack ?> GAME OVER - Dead if just killed goblin chief attack the goblin chief and not the other goblin.
+    :Condition: 'killed goblin chief' True
+    :Reputation: Goblins -5
+compensation - Ask for compensation from goblins.
+_assist_goblins - Assist the goblins with direwolves and possibly the wounded.
+    _setup_defenses > wolf_attack
+        :Condition: If acquired [Steel Thread] 'steel thread trap' True
+        :Condition: If acquired [Sticky Thread] 'Sticky Thread trap' True
+    _heal_wounded - Heal the wounded if you have healing potions.
+        :Inventory: Removed 9x Full Potion
+        :Reputation: Goblins +2
 
-    wolf_attack
-        _attack
-        _give_warning
-        _do_nothing
+wolf_attack
+    :Clear All:
+    :Mob: Add Direwolf Leader, 18x Direwolf
+    _do_nothing > GAME OVER
+        :Reputation: Goblins -10
+    _hfunc_attack ?> wolf_attack._give_warning._attack / naming_mobs - If killed all or just leader
+        :Reputation: If killed all Direwolves, Goblins +1
+    _give_warning ?> GAME OVER - Dead if you didn't setup steel thread trap.
+        :Target: Direwolf Leader
+        _attack ?> GAME OVER - If did not kill Direwolf Leader.
+        _eat - Predate Direwolf Leader to acquire mimicry to scare the Direwolves.
+            _mimic_direwolf_leader
+                _use_coercion > naming_mobs
+                    :Skill: Use Coercion
+                    :Reputation: Direwolves +1, Goblins +2
+
+naming_mobs - Acquire new subordinates.
+
 
 
 

@@ -321,7 +321,7 @@ o:::om+//.--...:++ossso---`   `..-----::/osssyysso-.-ooso/:---..``:o+-.-----..  
 //-:/++/:://+oo/:/oyo:--.``.``.:::---::+osssyys++/.-osossos+++oo- ``  -ss+sso//++sossssysys++o+:+sssyyos+::++++-`.:ooooo
 """
 
-village_elder = '''
+village_chief = '''
 ssU|yyyyyyyyyyyyyyyytyyyyyyyyyyyytttt2eeeeeeewmwG2eqhhh0000000h00000000qe2e2Ujte
 sssU|yyyyyyyyyyyyyyyyyyyyyyyyyyyytyyt2eeeeeG|jywwe22ewwne|h00hyq000000he}sszy2ee
 ssssoyyyyyyyyyyyyyyyyyyyyyyyytffffffGGeeGf|tvsttytff22tyjthgmwUg00R00hqy}yfGeeee
