@@ -25,21 +25,21 @@ def get_random(min_int=1, max_int=2, target=None, bigger_than=None, return_int=F
         get_random(10, 50)
     """
 
+    return_bool = False
+
     # Default target set to half of max, 50/50 chance.
     if target is None: target = int(round(max_int / 2))
-
     rand = random.randint(min_int, max_int)
 
     if bigger_than and rand >= bigger_than:
-        # Return random integer along with boolean.
-        if return_int: return True, rand
-        return True
+        return_bool = True
+    elif rand == target:
+        return_bool = True
 
-    if rand == target:
-        if return_int: return True, rand
-        return True
-
-    return False
+    # Return random integer along with boolean.
+    if return_int:
+        return return_bool, rand
+    return return_bool
 
 def get_any(match_target, input_list, strict_match=True):
     """
