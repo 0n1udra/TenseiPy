@@ -356,12 +356,6 @@ def mobs_cleared():
         if mob[0].is_alive: return False
     return True
 
-def mobs_reset():
-    """Resets active_mobs and targeted_mobs list."""
-
-    rimuru.active_mobs.clear()
-    rimuru.targeted_mobs.clear()
-
 def mob_obj(mob):
     """
     Get's mob's game object from active_mobs list.
@@ -389,6 +383,13 @@ def clear_subs(action):
 
     for i in dir(action):
         if '__subs' in i: eval(f"action.{i}.append('ACTIONBLOCKED')")
+
+def clear_all(clear_targeting=True, clear_mimic=True, clear_active_mobs=True):
+    """Optionally reset targeted_mobs list, active_mobs list and/or current mimic."""
+
+    if clear_targeting: rimuru.targeted_mobs.clear()
+    if clear_active_mobs: rimuru.active_mobs.clear()
+    if clear_mimic: rimuru.use_mimic('reset')
 
 def continue_to(next_location):
     """

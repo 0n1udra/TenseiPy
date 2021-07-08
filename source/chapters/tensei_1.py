@@ -455,7 +455,7 @@ def ch1_cave(rimuru):
 
     class at_cave_exit:
         def __init__(self):
-            game.mobs_reset()
+            game.clear_all()
             game.mobs_add(['kaval', 'gido', 'eren grimwold'])
             siprint("Finally! Found the exit. Wow, that's a pretty big door. How am I going to open that?")
             siprint("Water attack? No, that'll probably be overkill. Wait somethings happening.")
@@ -501,7 +501,7 @@ def ch1_cave(rimuru):
         class _wait:
             __subs = ['wait', 'sneak out', 'wait to sneak out', 'wait to slip out', 'try to slip out', 'sneak away', 'sneak out after them', 'wait to sneak away', 'sneak past them']
             def __init__(self):
-                game.mobs_reset()
+                game.clear_all()
                 siprint("C'mon just go already!")
                 if extra.get_random(1, 20, 1):  # 1/20 chance they will notice you.
                     siprint("I sense a monster nearby! There! A slime!")

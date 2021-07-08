@@ -9,7 +9,7 @@ def ch2_goblin_encounter(rimuru):
         __location = "Near the Sealed Cave"
 
         def __init__(self):
-            game.mobs_reset()
+            game.clear_all()
             gprint("< Chapter 2 >\n")
             game.mobs_add(['10* goblin'])
             siprint("Where am I going?")
@@ -73,7 +73,7 @@ def ch2_goblin_encounter(rimuru):
         __location = "Goblin Village"
 
         def __init__(self):
-            game.mobs_reset()
+            game.clear_all()
             game.mobs_add(['goblin:goblin chief', 'goblin'])
             siprint("Wow, this place looks like a dump... Such a primitive house.")
             sprint("\nI am the village elder. I'm sorry we don't have much to offer you.")
@@ -159,7 +159,7 @@ def ch2_goblin_encounter(rimuru):
 
     class wolf_attack:
         def __init__(self):
-            game.mobs_reset()
+            game.clear_all()
             game.mobs_add(['direwolf leader', '10*direwolf'])
             sprint("\n* Meanwhile, the direwolves are getting ready... *")
             sprint("\nTonight we shall lay waste to the goblin village.")
@@ -175,9 +175,10 @@ def ch2_goblin_encounter(rimuru):
                 if game.mobs_cleared():
                     sprint("That takes care of that...")
                     siprint("Probably unwarranted, but now we don't have to worry about them.")
+                    rimuru.update_reputation('goblins', 1)
                     naming_mobs()
                 elif not game.mob_status('direwolf leader'):
-                    wolf_attack._give_warning._attack_water_blade()
+                    wolf_attack._give_warning._attack()
 
         class _give_warning:
             __subs = ['give them a warning', 'warn direwolves', 'warn wolves', 'give direwolf warning', 'warn them']
@@ -242,11 +243,14 @@ def ch2_goblin_encounter(rimuru):
                                 sprint("HOWWLLLL!!!!......")
                                 sprint("\nWE WILL FOLLOW YOU TO THE ENDS OF THE EARTH, MASTER!!!")
                                 sprint("\nhuh?")
-                                rimuru.use_mimic('reset')
+                                game.conditions('tamed direwolves', True)
+                                rimuru.update_reputation('direwolves', 1)
+                                rimuru.update_reputation('goblins', 2)  # You get better reputation for taming them instead of killing them all.
                                 naming_mobs()
 
     class naming_mobs:
         def __init__(self):
+            game.clear_all()
             siprint("Quite a wild retinue I've built up for myself.")
             siprint("I should probably lay down some rules for everyone to follow.")
             sprint("By the way elder, what your name?")
@@ -271,11 +275,13 @@ def ch2_goblin_encounter(rimuru):
 
             # TODO allow more naming, or add some other functionality to change names....
             siprint("There are so many to name, and I'm running out of ideas...")
-            siprint("Alright, the goblins are done. Now for the Direwolves.")
-            sprint("You're the son of the Direwolf boss right?")
-            show_art('ranga')
-            rimuru.add_subordinate('tempest star wolf', 'Ranga')
-            game.multi_attr_adder(['gobta', 'rigurd', 'rigur'], ['thought communication'])
+
+            if game.conditions('tamed direwolves'):
+                siprint("Alright, the goblins are done. Now for the Direwolves.")
+                sprint("You're the son of the Direwolf boss right?")
+                show_art('ranga')
+                rimuru.add_subordinate('tempest star wolf', 'Ranga')
+                game.multi_attr_adder(['gobta', 'rigurd', 'rigur'], ['thought communication'])
 
             siprint("Wait w-what's happening... My [Magic Sense] stopped working!")
             siprint("Why am I so sleepy now? What's happening Great Sage?")
@@ -286,12 +292,14 @@ def ch2_goblin_encounter(rimuru):
             idots(10, 3)
 
             siprint("\nSo it's been three days already.")
-            sprint("\nLord Rimuru you're awake!")
+            sprint("\nLord $Rimuru$ you're awake!")
             sprint("\n$Rigurd$ is that you?")
             sprint("\nOf coursed my lord! Now please follow me, the feast is nearly ready.")
-            siprint("Wow, it looks lggike almost everyone has changed in some way.")
-            sprint("\nAllow me to express my deepest joy at your recovery my lord!")
-            sprint("\nIt's $Ranga$! Even he's different. He's so big!")
+            siprint("Wow, it looks like almost everyone has changed in some way.")
+
+            if game.conditions('tamed direwolves'):
+                sprint("\nAllow me to express my deepest joy at your recovery my lord!")
+                sprint("\nIt's $Ranga$! Even he's different. He's so big!")
 
             sprint("* After the party to celebrate your awakening. *")
             sprint("\nAlright everyone, gather around! I'm going to set some ground rules.")
@@ -300,10 +308,155 @@ def ch2_goblin_encounter(rimuru):
             sprint("That's it. Oh and also, $Rigurd$ I hereby place in the position of Goblin Lord!")
             sprint("\nMy lord! I will not let you down!")
             siprint("\nI just gave him that title so I have less responsibilities...")
+
+            if game.conditions('tamed direwolves'):
+                siprint("I also had the direwolves pair up with some goblins so they can start working together more productively.")
+                siprint("I have a feeling having these direwolves on our side, it'll be benefit us in the combat and transportation department.")
+
             siprint("\nAfter looking at the state of the village I decided to take some goblins and go to a nearby Dwarven kingdom.")
-            siprint("\nSince these goblins can't build or craft for shit, hearing about Dwarves gave me a great idea.")
+            siprint("Since these goblins can't build or craft for shit, hearing about Dwarves gave me a great idea.")
 
-            extra.tbc()
+            if game.conditions('tamed direwolves'):
+                siprint("Since it was hard talking while riding Direwolves so fast, we used our new skill [Thought Communication].")
 
-            #game.actions(self)
-    goblin_encounter()
+            siprint("$Gobta$ told me about how this Gelmud guy gave Rigur his name. I also learned there are Demon Lords in this world.")
+            siprint("Also, apparently there's more than just Dwarves in this kingdom, there's also humans and elves!")
+            siprint("\n$Gobta$ also explained how Dwargon is a bastion of free trade, and there's a rule of no fighting in there borders.")
+            siprint("So us monsters should be ok going in. $Gobta$ did seem to have some hesitations though, but it shouldn't be a big problem.")
+            welcome_to_dwargon()
+
+    class welcome_to_dwargon():
+        def __init__(self):
+            if game.conditions('tamed direwolves'):
+                sprint("\n* After 3 days of travel. *\n")
+                siprint("Bringing in the direwolves and the rest of the group might attract unwanted attention...")
+            else:
+                sprint("\n* After 5 days of travel. *")
+                siprint("Bringing the whole group might attract unwanted attention...")
+            siprint("Should I just leave the group behind and just go in with $Gobta$?")
+            game.actions(self)
+
+        class _leave_behind:
+            __subs = ['leave group', 'tell them to stay', 'leave group behind']
+            def __init__(self):
+                game.mobs_add(['2*human:Bandit'])
+                rimuru.add_mimic('direwolf', show_msg=False)
+                sprint("You guys stay here, we don't want to attract any unwanted attention.")
+                siprint("I feel kinda bad for just leaving them, but this group would just stick out too much.")
+                siprint("We're at the gate now and it's a pretty long line.")
+                sprint("\nOnce we get inside, we can go anywhere.")
+                sprint("\nLook what we have here, we got some monsters here!")
+                sprint("Since we're not technically not in Dwargon we can do whatever we want!")
+                game.actions(self)
+
+            class try_talking:
+                __subs = ['try talking it out', 'try calming them down', 'chat', 'talk']
+                def __init__(self):
+                    sprint("Why would we talk to such pathetic monsters that are below us!")
+                    siprint("\nOk.... That isn't going to work...")
+
+            class scare_them_away:
+                __subs = ['make them fear', 'scare them']
+                def __init__(self):
+                    if game.conditions('tamed direwolves'):
+                        siprint("I wonder if I can scare them away somehow...")
+                        siprint("Wait! I think Direwolves have a skill like that...")
+                    else:
+                        siprint("Maybe I can use a skill to attack to show my power without directly targeting them to scare them off.")
+
+            class _attack:
+                def __init__(self):
+                    # Kill the bandits and you go straight to Dwargon jail, and no you can't eat the humans.
+                    if game.mobs_cleared():
+                        sprint("My lord... Was that really necessary? Oh crap here comes the guards!\n")
+                        idots(50)
+                        dwargon_jail_murder()
+
+            class _run_away:
+                __subs = ['run', 'flee', 'escape', 'try fleeing', 'try running away', 'try escaping']
+                def __init__(self):
+                    if game.conditions('no fleeing'):
+                        sprint("\n* The thugs stabbed and killed the both of you while you were trying to flee. *")
+                        game.game_over()  # No running away for you!
+
+                    if extra.get_random(1, 10):  # 1/10 chance they won't let you flee.
+                        siprint("Crap they won't even us flee. What a pain!")
+                        game.conditions('no fleeing', True)
+                    else:
+                        siprint("We successful fled from those thugs. What a pain!")
+                        siprint("We decided to go back to our group and spend the night just outside the gate and try again tomorrow.\n")
+                        dots(25)
+                        inside_dwargon()
+
+            class _hfunc_use:
+                def __init__(self):
+                    if game.last_use_skill('coercion'):
+                        sprint("HOWWWLLLLLLLLLL!!!!!!!!!!!!")
+                        siprint("Hopefully this scares them away.\n")
+                        idots(30)
+                        dwargon_jail_coercion()
+                    if game.last_use_skill('water blade'):
+                        if extra.get_random(1, 3, 1):  # 1/3 chances, can do it multiple times to try and scare them off.
+                            sprint("\nL-lets get out of here, they're not worth our time.")
+                            sprint("Finally, they're gone, and nobody got hurt.")
+                            sprint("\nMy lord you did it! They won't be troubling us anymore.")
+                            sprint("\nFinally, we can go into dwargon with no trouble. Not the best first impression, but at least nobody got hurt.")
+                            inside_dwargon()
+                        else:
+                            if extra.get_random(1, 3, 1):  # 1/3 chance they will charge at you to kill you.
+                                sprint("\nYou think you can scare us so easily!")
+                                siprint("\nCrap now their charging straight for us with a knife!")
+                                sprint("\nMy lord what should we do!")
+                                game.actions(self)
+                            else:
+                                sprint('\nYou think that will scare us you puny slime!')
+
+                class _do_nothing:
+                    __subs = ['nothing']
+                    def __init__(self):
+                        sprint("AHHHHH MY LORD THEY GOT ME!")
+                        sprint("I-I think i-i'm dying!")
+                        sprint("* In an instant both you and $Gobta$ died from the two bandits. *")
+                        game.game_over()
+
+                class _attack:
+                    def __init__(self):
+                        if game.mobs_cleared():
+                            sprint("My lord! You saved me! I am forever grateful!")
+                            sprint("However... The guards are now on there way!")
+                            siprint("\n*sigh* This trip has not been going well at all!")
+                            dwargon_jail_murder()
+                        else:
+                            sprint("I-I'm sorry my lord! I have failed you!")
+                            siprint("\nNot good, not good, now we're both going to die!")
+                            siprint("I should have done something! WHY DIDN'T I DO ANYTHING!")
+                            game.game_over()
+
+        class _bring_all:
+            __subs = ['bring all of them', 'bring all', 'let all come', 'let them all come', 'bring them all', 'go all together']
+            def __init__(self):
+                sprint("Screw it, you can all come. Let's go.")
+
+
+    class dwargon_jail_coercion:
+        def __init__(self):
+            game.clear_all()
+            siprint("\n...First time here and we're already in jail...")
+            siprint("I didn't think just screaming would cause so much damage to the environment and the nearby people.")
+            siprint("I guess my mimicry evolved with $Ranga$'s evolution.")
+
+    class dwargon_jail_murder:
+        def __init__(self):
+            game.clear_all()
+            siprint("\n...... Since I kinda just murdured two bandits in cold blood, we landed ourselves in jail...")
+            siprint("This journey sure is going well...")
+            sprint("\nI thought my lord would have more self restraint.")
+            sprint("Shut it $Gobta$.")
+
+    class inside_dwargon:
+        def __init__(self):
+            game.clear_all()
+            sprint("\nFinally! We made it inside!")
+
+    welcome_to_dwargon()
+    #goblin_encounter()
