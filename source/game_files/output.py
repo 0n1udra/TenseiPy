@@ -228,6 +228,7 @@ def show_start_banner(game_version, version_date):
     - Basic commands: stats, inv, info, /settings, /exit, and /help for more commands and help.
     - To set game settings like hardcore mode or hints use '/settings', e.g. '/settings hardcore on'.
     - Game will only save at specific points in the story, look out for '< Game Saved >' message.
+    - Also, note that not all playable actions and paths will be shown to you, try experimenting, see where the story takes you!
     - Fullscreen recommended to show ASCII art correctly.""")
 
     if rimuru.valid_save is True: gprint("\n< Save Loaded >\n")  # Shows if game was loaded from a save.

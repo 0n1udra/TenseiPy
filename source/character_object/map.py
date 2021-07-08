@@ -15,7 +15,7 @@ class Map:
 
         print_header('Nearby', 10)
         for mob in self.active_mobs:
-            print(f"    {mob[1]}x {mob[0].name} {'(Dead)' if mob[0].status else ''}")
+            print(f"    {mob[1]}x {mob[0].name} (lvl {mob[0].level}) {'(Dead)' if mob[0].status else ''}")
 
     def add_action_played(self,  action_played):
         """

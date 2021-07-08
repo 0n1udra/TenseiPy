@@ -490,9 +490,9 @@ def ch1_cave(rimuru):
                 siprint("\n* The adventurers attacked and killed the little slime monster before he could say anything else. *")
 
                 if rimuru.check_acquired('veldora'):
-                    siprint("* After the little slime died. All of his stomach contents spewed outwards. *")
-                    siprint("* Unfortunately, this particular little slime had somehow absorbed a whole dragon! *")
-                    siprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
+                    sprint("* After the little slime died. All of his stomach contents spewed outwards. *")
+                    sprint("* Unfortunately, this particular little slime had somehow absorbed a whole dragon! *")
+                    sprint("* Now with the three low-level adventurers swiftly flattened by such a massive object. They Have failed there simple mission. *")
                     sprint("\nWhat is this? Where is that little slime? Hello.... Friend?")
                     sprint("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!")
 
@@ -503,7 +503,7 @@ def ch1_cave(rimuru):
             def __init__(self):
                 game.mobs_reset()
                 siprint("C'mon just go already!")
-                if extra.get_random(1, 20, 1):
+                if extra.get_random(1, 20, 1):  # 1/20 chance they will notice you.
                     siprint("I sense a monster nearby! There! A slime!")
                     siprint("\nCrap! How did they notice me!")
                     siprint("\n* And before another word could be uttered by the little slime, he was swiftly smushed. *")
