@@ -32,13 +32,15 @@ NOTE: If playing on GNU/Linux/Mac systems, the `game.save` file might be saved w
 
 
 # Layout
-- Intro (Cave)
+- ch1 (Cave)
   - Learn about skills
   - Meet Veldora
   - Fight low level mobs
-- Exit Cave
+- ch2 (Exit Cave)
   - Meet Gobilns and help their village.
   - The Direwolves attack.
+  - Give names
+  - Travel to Dwargon
   - -IN PROGRESS-
   
   
