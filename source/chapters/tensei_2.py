@@ -342,113 +342,99 @@ def ch2_goblin_encounter(rimuru):
         def __init__(self):
             if game.conditions('tamed direwolves'):
                 sprint("\n* After 3 days of travel. *\n")
-                siprint("Bringing in the direwolves and the rest of the group might attract unwanted attention...")
-            else:
-                sprint("\n* After 5 days of travel. *")
-                siprint("Bringing the whole group might attract unwanted attention...")
-            siprint("Should I just leave the group behind and just go in with $Gobta$?")
+            else: sprint("\n* After 5 days of travel. *")
+            siprint("Bringing the whole group might attract unwanted attention.")
+            siprint("So we'll just continue with $Gobta$ and $Ranga$ in my shadow.")
+
+            game.mobs_add(['2*human:Bandit'])
+            siprint("We're at the gate now and it's a pretty long line.")
+            sprint("\nOnce we get inside, we can go anywhere.")
+            sprint("\nLook what we have here, we got some monsters here!")
+            sprint("Since we're not technically not in Dwargon we can do whatever we want!")
             game.actions(self)
 
-        class _leave_behind:
-            __subs = ['leave group', 'tell them to stay', 'leave group behind']
+        class try_talking:
+            __subs = ['try talking it out', 'try calming them down', 'chat', 'talk']
             def __init__(self):
-                game.mobs_add(['2*human:Bandit'])
-                rimuru.add_mimic('direwolf', show_msg=False)
-                sprint("You guys stay here, we don't want to attract any unwanted attention.")
-                siprint("I feel kinda bad for just leaving them, but this group would just stick out too much.")
-                siprint("We're at the gate now and it's a pretty long line.")
-                sprint("\nOnce we get inside, we can go anywhere.")
-                sprint("\nLook what we have here, we got some monsters here!")
-                sprint("Since we're not technically not in Dwargon we can do whatever we want!")
-                game.actions(self)
+                sprint("Why would we talk to such pathetic monsters that are below us!")
+                siprint("\nOk.... That isn't going to work...")
 
-            class try_talking:
-                __subs = ['try talking it out', 'try calming them down', 'chat', 'talk']
-                def __init__(self):
-                    sprint("Why would we talk to such pathetic monsters that are below us!")
-                    siprint("\nOk.... That isn't going to work...")
+        class scare_them_away:
+            __subs = ['make them fear', 'scare them']
+            def __init__(self):
+                if game.conditions('tamed direwolves'):
+                    siprint("I wonder if I can scare them away somehow...")
+                    siprint("Wait! I think Direwolves have a skill like that...")
+                else:
+                    siprint("Maybe I can use a skill to attack to show my power without directly targeting them to scare them off.")
 
-            class scare_them_away:
-                __subs = ['make them fear', 'scare them']
-                def __init__(self):
-                    if game.conditions('tamed direwolves'):
-                        siprint("I wonder if I can scare them away somehow...")
-                        siprint("Wait! I think Direwolves have a skill like that...")
+        class _attack:
+            def __init__(self):
+                # Kill the bandits and you go straight to Dwargon jail, and no you can't eat the humans.
+                if game.mobs_cleared():
+                    sprint("My lord... Was that really necessary? Oh crap here comes the guards!\n")
+                    idots(50)
+                    dwargon_jail_murder()
+
+        class _run_away:
+            __subs = ['run', 'flee', 'escape', 'try fleeing', 'try running away', 'try escaping']
+            def __init__(self):
+                if game.conditions('no fleeing'):
+                    sprint("\n* The thugs stabbed and killed the both of you while you were trying to flee. *")
+                    game.game_over()  # No running away for you!
+
+                if extra.get_random(1, 10):  # 1/10 chance they won't let you flee.
+                    siprint("Crap they won't even us flee. What a pain!")
+                    game.conditions('no fleeing', True)
+                else:
+                    siprint("We successful fled from those thugs. What a pain!")
+                    siprint("We decided to go back to our group and spend the night just outside the gate and try again tomorrow.\n")
+                    dots(25)
+                    inside_dwargon()
+
+        class _hfunc_use:
+            def __init__(self):
+                if game.last_use_skill('coercion'):
+                    sprint("HOWWWLLLLLLLLLL!!!!!!!!!!!!")
+                    siprint("Hopefully this scares them away.\n")
+                    idots(30)
+                    dwargon_jail_coercion()
+                if game.last_use_skill('water blade'):
+                    if extra.get_random(1, 3, 1):  # 1/3 chances, can do it multiple times to try and scare them off.
+                        sprint("\nL-lets get out of here, they're not worth our time.")
+                        sprint("Finally, they're gone, and nobody got hurt.")
+                        sprint("\nMy lord you did it! They won't be troubling us anymore.")
+                        sprint("\nFinally, we can go into dwargon with no trouble. Not the best first impression, but at least nobody got hurt.")
+                        inside_dwargon()
                     else:
-                        siprint("Maybe I can use a skill to attack to show my power without directly targeting them to scare them off.")
+                        if extra.get_random(1, 3, 1):  # 1/3 chance they will charge at you to kill you.
+                            sprint("\nYou think you can scare us so easily!")
+                            siprint("\nCrap now their charging straight for us with a knife!")
+                            sprint("\nMy lord what should we do!")
+                            game.actions(self)
+                        else:
+                            sprint('\nYou think that will scare us you puny slime!')
+
+            class _do_nothing:
+                __subs = ['nothing']
+                def __init__(self):
+                    sprint("AHHHHH MY LORD THEY GOT ME!")
+                    sprint("I-I think i-i'm dying!")
+                    sprint("* In an instant both you and $Gobta$ died from the two bandits. *")
+                    game.game_over()
 
             class _attack:
                 def __init__(self):
-                    # Kill the bandits and you go straight to Dwargon jail, and no you can't eat the humans.
                     if game.mobs_cleared():
-                        sprint("My lord... Was that really necessary? Oh crap here comes the guards!\n")
-                        idots(50)
+                        sprint("My lord! You saved me! I am forever grateful!")
+                        sprint("However... The guards are now on there way!")
+                        siprint("\n*sigh* This trip has not been going well at all!")
                         dwargon_jail_murder()
-
-            class _run_away:
-                __subs = ['run', 'flee', 'escape', 'try fleeing', 'try running away', 'try escaping']
-                def __init__(self):
-                    if game.conditions('no fleeing'):
-                        sprint("\n* The thugs stabbed and killed the both of you while you were trying to flee. *")
-                        game.game_over()  # No running away for you!
-
-                    if extra.get_random(1, 10):  # 1/10 chance they won't let you flee.
-                        siprint("Crap they won't even us flee. What a pain!")
-                        game.conditions('no fleeing', True)
                     else:
-                        siprint("We successful fled from those thugs. What a pain!")
-                        siprint("We decided to go back to our group and spend the night just outside the gate and try again tomorrow.\n")
-                        dots(25)
-                        inside_dwargon()
-
-            class _hfunc_use:
-                def __init__(self):
-                    if game.last_use_skill('coercion'):
-                        sprint("HOWWWLLLLLLLLLL!!!!!!!!!!!!")
-                        siprint("Hopefully this scares them away.\n")
-                        idots(30)
-                        dwargon_jail_coercion()
-                    if game.last_use_skill('water blade'):
-                        if extra.get_random(1, 3, 1):  # 1/3 chances, can do it multiple times to try and scare them off.
-                            sprint("\nL-lets get out of here, they're not worth our time.")
-                            sprint("Finally, they're gone, and nobody got hurt.")
-                            sprint("\nMy lord you did it! They won't be troubling us anymore.")
-                            sprint("\nFinally, we can go into dwargon with no trouble. Not the best first impression, but at least nobody got hurt.")
-                            inside_dwargon()
-                        else:
-                            if extra.get_random(1, 3, 1):  # 1/3 chance they will charge at you to kill you.
-                                sprint("\nYou think you can scare us so easily!")
-                                siprint("\nCrap now their charging straight for us with a knife!")
-                                sprint("\nMy lord what should we do!")
-                                game.actions(self)
-                            else:
-                                sprint('\nYou think that will scare us you puny slime!')
-
-                class _do_nothing:
-                    __subs = ['nothing']
-                    def __init__(self):
-                        sprint("AHHHHH MY LORD THEY GOT ME!")
-                        sprint("I-I think i-i'm dying!")
-                        sprint("* In an instant both you and $Gobta$ died from the two bandits. *")
+                        sprint("I-I'm sorry my lord! I have failed you!")
+                        siprint("\nNot good, not good, now we're both going to die!")
+                        siprint("I should have done something! WHY DIDN'T I DO ANYTHING!")
                         game.game_over()
-
-                class _attack:
-                    def __init__(self):
-                        if game.mobs_cleared():
-                            sprint("My lord! You saved me! I am forever grateful!")
-                            sprint("However... The guards are now on there way!")
-                            siprint("\n*sigh* This trip has not been going well at all!")
-                            dwargon_jail_murder()
-                        else:
-                            sprint("I-I'm sorry my lord! I have failed you!")
-                            siprint("\nNot good, not good, now we're both going to die!")
-                            siprint("I should have done something! WHY DIDN'T I DO ANYTHING!")
-                            game.game_over()
-
-        class _bring_all:
-            __subs = ['bring all of them', 'bring all', 'let all come', 'let them all come', 'bring them all', 'go all together']
-            def __init__(self):
-                sprint("Screw it, you can all come. Let's go.")
 
     class dwargon_jail_coercion:
         def __init__(self):
