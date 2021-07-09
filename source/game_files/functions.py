@@ -389,7 +389,9 @@ def clear_all(clear_targeting=True, clear_mimic=True, clear_active_mobs=True):
 
     if clear_targeting: rimuru.targeted_mobs.clear()
     if clear_active_mobs: rimuru.active_mobs.clear()
-    if clear_mimic: rimuru.use_mimic('reset')
+    # Only resets mimicry if it's active.
+    if clear_mimic and rimuru.check_mimic(): rimuru.use_mimic('reset')
+
 
 def continue_to(next_location):
     """

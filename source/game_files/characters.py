@@ -23,7 +23,6 @@ class Slime(Character):
         though there hasn't been any such occurrence as of yet.'''
     evolution = 'Slime > ???'
 
-
 class Rimuru_Tempest(Slime, Character):
     canon_name = 'Rimuru Tempest'
     shared_protection = 'Protection of Tempest'
@@ -127,7 +126,7 @@ class Rimuru_Tempest(Slime, Character):
                     self.mimic_object(update_status='Active')
                     gprint(f'< Now Mimicking [{new_mimic.name}] >')
 
-    def check_mimic(self, match=None):
+    def check_mimic(self, match=''):
         """
         Return name (str) of character currently mimicking, can also check if using specific mimic.
 
@@ -138,11 +137,9 @@ class Rimuru_Tempest(Slime, Character):
             str: Returns name of mob currently mimicking.
         """
 
-        if m_object := self.mimic_object():
-            if match is None: return m_object.name
-
-            # Optionally check if player is mimicking something specific.
-            if match.lower() in m_object.name.lower(): return m_object.name
+        if m_object := self.current_mimic:
+            if self.current_mimic.name.lower() in match.lower():
+                return m_object.name
         return False
 
     def eat_targets(self, *args):
