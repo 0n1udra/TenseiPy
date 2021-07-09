@@ -264,8 +264,7 @@ def ch2_goblin_encounter(rimuru):
             siprint("I should probably lay down some rules for everyone to follow.")
             if game.conditions('killed village chief'):
                 sprint("You, goblin, what are your names?")
-            else:
-                sprint("By the way chief, what your name?")
+            else: sprint("By the way chief, what your name?")
             sprint("\nMonsters usually don't have names. Not having names do not get in the way of communicating anyways.")
             sprint("\nOk, I see. Still, it would be convenient if I have a way to call you if I need to.")
             sprint("I suppose, I'll just have to give you guys names!")
@@ -362,9 +361,9 @@ def ch2_goblin_encounter(rimuru):
         class scare_them_away:
             __subs = ['make them fear', 'scare them']
             def __init__(self):
-                if game.conditions('tamed direwolves'):
-                    siprint("I wonder if I can scare them away somehow...")
-                    siprint("Wait! I think Direwolves have a skill like that...")
+                siprint("I wonder if I can scare them away somehow...")
+                if rimuru.check_acquired('coercion'):
+                    siprint("Wait! Can't I use that Direwolves skill?")
                 else:
                     siprint("Maybe I can use a skill to attack to show my power without directly targeting them to scare them off.")
 
@@ -404,7 +403,7 @@ def ch2_goblin_encounter(rimuru):
                         sprint("\nL-lets get out of here, they're not worth our time.")
                         sprint("Finally, they're gone, and nobody got hurt.")
                         sprint("\nMy lord you did it! They won't be troubling us anymore.")
-                        sprint("\nFinally, we can go into dwargon with no trouble. Not the best first impression, but at least nobody got hurt.")
+                        sprint("\nNot the best first impression of Dwargon, but at least nobody got hurt.")
                         inside_dwargon()
                     else:
                         if extra.get_random(1, 3, 1):  # 1/3 chance they will charge at you to kill you.
@@ -412,8 +411,7 @@ def ch2_goblin_encounter(rimuru):
                             siprint("\nCrap now their charging straight for us with a knife!")
                             sprint("\nMy lord what should we do!")
                             game.actions(self)
-                        else:
-                            sprint('\nYou think that will scare us you puny slime!')
+                        else: sprint('\nYou think that will scare us you puny slime!')
 
             class _do_nothing:
                 __subs = ['nothing']
@@ -436,6 +434,7 @@ def ch2_goblin_encounter(rimuru):
                         siprint("I should have done something! WHY DIDN'T I DO ANYTHING!")
                         game.game_over()
 
+    # Go to Dwargon jail after using [Coercion] skill on bandits.
     class dwargon_jail_coercion:
         def __init__(self):
             game.clear_all()
@@ -443,18 +442,22 @@ def ch2_goblin_encounter(rimuru):
             siprint("I didn't think just screaming would cause so much damage to the environment and the nearby people.")
             siprint("I guess my mimicry evolved with $Ranga$'s evolution.")
 
+    # To jail and then death penalty after murdering bandits.
     class dwargon_jail_murder:
         def __init__(self):
             game.clear_all()
             siprint("\n...... Since I kinda just murdured two bandits in cold blood, we landed ourselves in jail...")
             siprint("This journey sure is going well...")
             sprint("\nI thought my lord would have more self restraint.")
-            sprint("Shut it $Gobta$.")
+            sprint("\nShut it.")
+            sprint("\n* After a swift trial, the both of you were executed shortly after for murder. *")
+            game.game_over()
+
 
     class inside_dwargon:
         def __init__(self):
             game.clear_all()
-            sprint("\nFinally! We made it inside!")
+            sprint("\nWe made it inside!")
 
     welcome_to_dwargon()
     #goblin_encounter()
