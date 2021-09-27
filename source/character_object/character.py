@@ -57,6 +57,7 @@ class Character(Info, Attributes, Inventory, Combat, Subordinates, Map):
     show_hints = True  # If hardcore is True, this boolean will be ignored.
     hardcore = None  # Hides targets, mimicking, and actions.
     fast_mode = None
+    last_print_func_used = 'sprint'
     storyline_log = game_log = []  # So user can see the last x number of lines from game, if screen gets cluttered from other commands.
 
     def __init__(self, name=''):

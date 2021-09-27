@@ -11,6 +11,10 @@ successful_attack = False
 def game_hud(playable_actions):
     """Show game HUD, includes current mimic, mobs targeted, and available actions."""
 
+    # Removes unnecessary spacing when no usable input is recieved.
+    if rimuru.last_print_func_used != 'menu': print()
+    rimuru.last_print_func_used = 'menu'
+
     # Formats actions to be displayed to user.
     hud_actions = playable_actions[:]
     for action in hud_actions:
@@ -23,7 +27,6 @@ def game_hud(playable_actions):
 
     if rimuru.show_actions is False or rimuru.hardcore is True: return False
 
-    if rimuru.current_mimic or rimuru.targeted_mobs or rimuru.show_actions: print()  # Adds extra space when needed.
 
     if rimuru.current_mimic:
         print(f"Mimic: [{rimuru.current_mimic.name}]")  # Only show if currently using mimic.
@@ -78,7 +81,6 @@ def actions(level=None):
         if 'hfunc' in user_input: actions(level)  # So user can't so easily activate 'hfunc' actions.
         # Removes anything that's not alpha-numeric, easier for making __subs.
         user_input = ''.join(i for i in user_input if i.isalnum() or ' ')
-        print()
 
     # Separates user input into command and command arguments.
     split_user_input = user_input.split(' ')
@@ -208,7 +210,7 @@ def action_playable(match, status=None):
 
     for action, data in rimuru.actions_played.items():
         if action in match:
-            # If function received new status to set to action playability.
+            # If received new status parameter, set action's playability status.
             if status is not None: data[1] = status
 
             return data[1]

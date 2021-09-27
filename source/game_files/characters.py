@@ -124,7 +124,7 @@ class Rimuru_Tempest(Slime, Character):
                     # Updates relevant player information when mimicry is activated.
                     self.current_mimic = new_mimic
                     self.mimic_object(update_status='Active')
-                    gprint(f'< Now Mimicking [{new_mimic.name}] >')
+                    gprint(f"< Now Mimicking [{new_mimic.name}] >")
 
     def check_mimic(self, match=''):
         """

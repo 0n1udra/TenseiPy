@@ -131,7 +131,7 @@ class Info:
 
         self.protections.append(divine_protection)
         self.update_info()
-        gprint(f'< [{self.name}] Acquired Blessing: {divine_protection} >')
+        gprint(f"< [{self.name}] Acquired Blessing: {divine_protection} >")
 
     def show_reputations(self, *args):
         """Shows player's reputation (standing) with factions/characters."""

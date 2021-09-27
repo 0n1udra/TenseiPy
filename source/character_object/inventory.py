@@ -81,8 +81,8 @@ class Inventory:
 
         self.update_inventory_capacity()
 
-        if show_acquired_msg: gprint(f'< Acquired: {amount * item.quantity_add}x [{item.name}] >')
-        if show_analysis_msg: gprint(f'<< Analysis on [{item.name}] Complete. >>')
+        if show_acquired_msg: gprint(f"< Acquired: {amount * item.quantity_add}x [{item.name}] >")
+        if show_analysis_msg: gprint(f"<< Analysis on [{item.name}] Complete. >>")
         return True
 
     def remove_inventory(self, item=None, amount=1):
@@ -163,7 +163,7 @@ class Inventory:
                 craft_amount = int(input("Craft > "))
                 print()
             except ValueError:
-                gprint("\n< Error: need integer input >")
+                gprint("< Error: need integer input >")
                 return False
 
         # Let's player enter 0 to cancel.

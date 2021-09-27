@@ -15,14 +15,14 @@ def ch1_cave(rimuru):
             rimuru.add_mimic('slime', show_msg=False)
             print("\n    < Chapter 1 >\n")
             idots()
-            gprint("\n<< Confirmation Complete. Constructing body that does not require blood... >>\n")
+            gprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             gprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
             gprint("<< Acquired Extra Skill [Predator]. >>")
-            gprint("\n<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
+            gprint("<< Confirmation Complete. Acquiring: Extra Skill [Sage]... >>")
             gprint("<< Acquired Extra Skill [Sage]. >>")
             rimuru.upgrade_attribute('Sage', 'Great Sage')
 
-            siprint("\nIt's so dark? Where am I? What happened?")
+            siprint("It's so dark? Where am I? What happened?")
             siprint("I remember now, I got stabbed! A-am I dead?")
             siprint("Was I saved? Can I move? Should I try to say something?")
 
@@ -118,14 +118,14 @@ def ch1_cave(rimuru):
                         siprint("<< Answer, unique skill [Predator] 'predates' targets, stashes in skill's 'stomach'. >>")
                         siprint("<< Addendum, after successful analysis of monster, [Mimic] can be used to replicate appearance and skills.")
                         siprint("Wow, that sounds like a OP skill!")
-                        gprint("\n< Tutorial: Try 'info predator' to get more information. >")
+                        gprint("< Tutorial: Try 'info predator' to get more information. >")
 
                 class what_is_great_sage:
                     __subs = ['what is this great sage', 'what is great sage', 'tell me more about great sage', 'what are you', 'tell me more about you', 'tell me more about yourself great sage', 'tell me more about yourself', 'what are you', 'who are you', "what's this voice"]
                     def __init__(self):
                         siprint("<< Answer, my function is to assist my master to the best of my abilities. >>")
                         siprint("<< Information, some of my basic functions are: Analysis, skill control and manipulation, crafting, and more. >>")
-                        gprint("\n< Tutorial: Use 'info great sage' to get more information on skill. >")
+                        gprint("< Tutorial: Use 'info great sage' to get more information on skill. >")
 
                         if rimuru.check_acquired('hipokte grass'):
                             gprint("< Tutorial: Try 'info hipokte grass'. Then try 'craft full potion'. >")
@@ -160,7 +160,7 @@ def ch1_cave(rimuru):
             __subs = ['suck it up', 'intake water', 'suck water', 'suck up water', 'suck in water', 'suck up some water', 'intake some water', 'suck water up', 'eat more water', 'predate more water', 'suck up more water']
             def __init__(self):
                 rimuru.add_inventory('water')
-                siprint("\nAlright, now lets try this out.")
+                siprint("Alright, now lets try this out.")
 
         class try_getting_out:
             __subs = ['spew water', 'eject water', 'vomit water', 'try getting out', 'try to get out', 'swim', 'swim up', 'swim out', 'try swimming', 'leave water', 'try to swim', 'find a way out', 'get out', 'use water to propel', 'propel with water', 'expel water to propel', 'expel', 'expel water', 'expel the water', 'use hydraulic propulsion']
@@ -179,7 +179,7 @@ def ch1_cave(rimuru):
             __subs = ['look for treasure', 'look for things', 'search for things', 'search for treasure', 'grab sword', 'get sword', 'eat sword', 'predate sword', 'find treasure', 'get treasure', 'grab treasure', 'eat treasure', 'predate treasure']
             def __init__(self):
                 rimuru.add_inventory('magic sword')
-                siprint("\nHEY! Look! This shape, feels like a sword! Wonder if it's any good?")
+                siprint("HEY! Look! This shape, feels like a sword! Wonder if it's any good?")
                 siprint("<< Answer, analysis of [Magic Sword] indicates a magisteel core, sword is above average grade. >>")
                 siprint("Would you look at that, that might come in handy later on. But I'm still stuck down here!")
                 game.clear_subs(self)  # Only able to grab sword once.
@@ -248,7 +248,7 @@ def ch1_cave(rimuru):
                     show_art('magic sense')
                     rimuru.add_attribute('Magic Sense')
                     rimuru.update_status('magic sense', 'Active')
-                    sprint("\nLike this?")
+                    sprint("nike this?")
                     sprint("I can see. I CAN SEE!")
                     sprint("\n Looks like you did it. You learn quickly small one. ")
                     sprint("Yes, thank you!")
@@ -415,8 +415,8 @@ def ch1_cave(rimuru):
             siprint("Still, it's not as scary as Veldora. I should be able to handle it.")
             siprint("However, I don't think I have any ways to attack or damage it if it's hostile. Hmmmmmm. I wonder...\n")
             rimuru.add_attribute('water blade')
-            siprint("\nHey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
-            gprint("\n< Tutorial: First target with 'target tempest serpent'. Then attack with 'attack water blade'. >")
+            siprint("Hey, it worked. Since I already have [Hydraulic Propulsion], I was thinking I could use super high pressure water as a blade attack also.")
+            gprint("< Tutorial: First target with 'target tempest serpent'. Then attack with 'attack water blade'. >")
             game.actions(self)
 
         class sneak_away:
@@ -438,10 +438,10 @@ def ch1_cave(rimuru):
                     siprint("I still sense some enemies around. I should clear them out before they give me trouble.")
                     if rimuru.check_acquired('sense heat source'):
                         siprint("Oh yeah! I have that new [Sense Heat Source] skill, that might be useful.")
-                        gprint("\n< Tutorial: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. '/help' for more info on commands. >")
+                        gprint("< Tutorial: Try Mimicking [Tempest Serpent] and using it's [Sense Heat Source] to locate nearby mobs. '/help' for more info on commands. >")
                         gprint("< Tutorial: While mimicking, use 'stats' to see your's and mimicked monster's attributes and skills. > ")
                     if rimuru.check_acquired('magic sense'):
-                        gprint("\n< Hint: If acquired [Magic Sense], you can use 'nearby' command to see nearby mobs. >")
+                        gprint("< Hint: If acquired [Magic Sense], you can use 'nearby' command to see nearby mobs. >")
 
         class attack:
             __subs = ['attack water blade']
@@ -451,7 +451,7 @@ def ch1_cave(rimuru):
                     siprint("<< Suggestion, Use Unique Skill [Predator]? >>")
                     siprint("Oh...? What will that do?")
                     siprint("<< Answer, after predation, information and target's skills may be obtained through analysis. >>")
-                    gprint("\n< Tutorial: Try 'predate' or 'eat' on targeted mobs that are dead to use [Predator] skill. >")
+                    gprint("< Tutorial: Try 'predate' or 'eat' on targeted mobs that are dead to use [Predator] skill. >")
 
     class at_cave_exit:
         def __init__(self):

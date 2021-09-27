@@ -56,7 +56,7 @@ class Map:
             str: Name of location or N/A if unknown.
         """
 
-        gprint(f"\n< {self.name} location: {self.current_location} >\n")
+        gprint(f"< {self.name} location: {self.current_location} >\n")
         return self.current_location
 
     def update_location(self, new_location=None):

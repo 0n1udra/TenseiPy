@@ -32,7 +32,7 @@ def parse_name(text):
         else: return_text.append(word)
     return ''.join(return_text)
 
-def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
+def sprint(message, add_indent=False, use_textcrawl=True, log_output=True, print_func_used='sprint'):
     """
     Text crawling. Slowly print out text to console. Kinda like typewriter effect.
 
@@ -51,7 +51,7 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
     message = message + '\n'
 
     # Hides game tutorial and hints.
-    if ('< Hint:' in message or '< Tutorial' in message) and (not rimuru.show_hints or rimuru.hardcore): return
+    if ("< Hint:" in message or "< Tutorial" in message) and (not rimuru.show_hints or rimuru.hardcore): return
 
     # Let's you use $NAME$ to get corresponding character's name from canon name (is just to make it easier to write the storyline).
     message = parse_name(message)
@@ -61,6 +61,9 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
     if log_output and message not in rimuru.storyline_log:
         rimuru.storyline_log.append(message)
         rimuru.storyline_log = rimuru.storyline_log[-99:]
+
+    if print_func_used in ['sprint', 'siprint'] and rimuru.last_print_func_used == 'gprint': print()
+    if rimuru.last_print_func_used == 'menu': print()
 
     if rimuru.textcrawl and use_textcrawl:
         message_length = len(message)
@@ -82,26 +85,26 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True):
             sys.stdout.write(letter)
             sys.stdout.flush()
             time.sleep(sleep_time)
-        print()
 
     else: print(message, end='')  # Print instantly.
 
+    rimuru.last_print_func_used = print_func_used
     return message
 
 def siprint(message, use_textcrawl=True):
     """Just sprint() with indent and textcrawl parameter."""
 
-    sprint(message, add_indent=True, use_textcrawl=use_textcrawl)
+    sprint(message, add_indent=True, use_textcrawl=use_textcrawl, print_func_used='siprint')
 
 def iprint(message):
     """Print with adds indent and disabled textcrawl."""
 
-    sprint(message, add_indent=True, use_textcrawl=False)
+    sprint(message, add_indent=True, use_textcrawl=False, print_func_used='iprint')
 
 def gprint(message):
     """For game events. Adds indent, disables and textcrawl. Appends to game_log list."""
 
-    rimuru.game_log.append(sprint(message, add_indent=True, use_textcrawl=False))
+    rimuru.game_log.append(sprint(message, add_indent=True, use_textcrawl=False, print_func_used='gprint'))
 
 def dots(length=5, times=1, indent=False):
     """
@@ -112,6 +115,8 @@ def dots(length=5, times=1, indent=False):
         length int(5): How many dots per cycle.
         indent bool(False): Add 4 spaces.
     """
+
+    if rimuru.last_print_func_used == 'menu': print()
 
     # If textcrawl boolean is False, it'll just print the dots once.
     if not rimuru.textcrawl:
@@ -125,12 +130,12 @@ def dots(length=5, times=1, indent=False):
             sys.stdout.write('.')
             sys.stdout.flush()
             time.sleep(0.5)
-        print()
+    print()
 
-def idots(*args):
+def idots(length=5, times=1, indent=True):
     """Prints dots but wth indent."""
 
-    dots(*args, indent=True)
+    dots(length, times, indent)
 
 def print_header(text, multiplier=10, char='-', newline=False):
     """
@@ -231,7 +236,7 @@ def show_start_banner(game_version, version_date):
     - Also, note that not all playable actions and paths will be shown to you, try experimenting, see where the story takes you!
     - Fullscreen recommended to show ASCII art correctly.""")
 
-    if rimuru.valid_save is True: gprint("\n< Save Loaded >\n")  # Shows if game was loaded from a save.
+    if rimuru.valid_save is True: gprint("< Save Loaded >\n")  # Shows if game was loaded from a save.
 
 def show_settings(*args):
     """Shows game settings and there current on/off state."""
