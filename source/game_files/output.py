@@ -50,7 +50,7 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True, print
         else: message = '    ' + message
     message = message + '\n'
 
-    # Hides game tutorial and hints.
+    # Hides game tutorial and hints if .show_hints or .hardcore.
     if ("< Hint:" in message or "< Tutorial" in message) and (not rimuru.show_hints or rimuru.hardcore): return
 
     # Let's you use $NAME$ to get corresponding character's name from canon name (is just to make it easier to write the storyline).
@@ -150,7 +150,7 @@ def print_header(text, multiplier=10, char='-', newline=False):
         newline bool(False): Add newline under header.
     """
 
-    print('    ' + char * multiplier, end='')
+    print('\n    ' + char * multiplier, end='')
     print(f' {text} ', end='')
     print(char * multiplier)
     if newline: print()
@@ -215,7 +215,7 @@ def show_history(arg):
     try: lines = int(arg[-2:])
     except: lines = 5
 
-    print_header('History', 35)
+    print_header('HISTORY', 35)
     for line in log_data[-lines:]:
         # Removes preserved spacing for game event log output.
         if 'game' in arg:
@@ -238,20 +238,6 @@ def show_start_banner(game_version, version_date):
 
     if rimuru.valid_save is True: gprint("< Save Loaded >\n")  # Shows if game was loaded from a save.
 
-def show_settings(*args):
-    """Shows game settings and there current on/off state."""
-
-    print(f"""    Game Settings:
-        {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
-        {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
-        {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
-        {on_off(rimuru.show_hints)}\thints/clues <on/off>\t-- Show game hints, highly recommended for first timers.
-        {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Hides playable actions, tutorial, and hints.
-
-    Usage:
-        /settings COMMAND(S) on/off
-        Example: '/settings textcrawl off', '/options hud hints off'""")
-
 def show_help(arg):
     """Shows help page."""
 
@@ -259,8 +245,9 @@ def show_help(arg):
         show_rank_chart()
         return
 
-    print("""    Command Required_Parameter [Optional_Parameter]
-
+    print("""        -------------------- HELP -------------------- 
+    Usage: Command Required_Parameter [Optional_Parameter]  --  Description
+    
     Commands:
         inv                     -- Show inventory.
         stats [TARGET]          -- Show skills and resistances. E.g. 'stats tempest serpent'
@@ -293,7 +280,8 @@ def show_help(arg):
         * Message *             -- Story context.
         < Message >             -- Game info, acquisition, game help, etc.
         << Message >>           -- Great Sage (Raphael, Ciel).
-        <<< Message >>>         -- Voice of the World.""")
+        <<< Message >>>         -- Voice of the World.
+        """)
 
 def show_rank_chart(*args):
     """In universe ranking chart."""

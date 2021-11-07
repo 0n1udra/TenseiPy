@@ -1,6 +1,6 @@
 import pickle, sys, os
-from game_files.output import gprint, show_help, show_history, show_settings
-from game_files.extra import set_action_subs, get_any, mob_list_adder, off_subs, on_subs, game_error
+from game_files.output import gprint, show_help, show_history
+from game_files.extra import set_action_subs, get_any, mob_list_adder, off_subs, on_subs, game_error, on_off
 from game_files.characters import Rimuru_Tempest
 
 # Initiates new Rimuru_Tempest object which will be updated with save if save exists.
@@ -536,6 +536,18 @@ def change_settings(user_input):
         > options hud hints off
     """
 
+    settings_printout = f"""        -------------------- Game Settings --------------------
+        {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
+        {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
+        {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
+        {on_off(rimuru.show_hints)}\thints/clues <on/off>\t-- Show game hints, highly recommended for first timers.
+        {on_off(rimuru.hardcore)}\thardcore <on/off>\t-- Hides playable actions, tutorial, and hints.
+
+    Usage:
+        /settings COMMAND(S) on/off
+        Example: '/settings textcrawl off', '/options hud hints off
+    """
+
     new_value = None
     # Tries to extract game settings and on/off section from user_input.
     try:
@@ -549,7 +561,7 @@ def change_settings(user_input):
 
     # If not detected game settings with usable on/off data from user_input.
     if not user_input or new_value is None:
-        show_settings()
+        print(settings_printout)
         return
 
     if 'textcrawl' in settings_input: rimuru.textcrawl = new_value
@@ -559,4 +571,4 @@ def change_settings(user_input):
     if get_any(settings_input, ['art', 'ascii'], strict_match=False): rimuru.show_art = new_value
     if get_any(settings_input, ['hints', 'clues'], strict_match=False): rimuru.show_hints = new_value
 
-    show_settings()
+    print(settings_printout)
