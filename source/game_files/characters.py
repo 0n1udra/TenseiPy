@@ -66,7 +66,7 @@ class Rimuru_Tempest(Slime, Character):
     def show_mimics(self, *args):
         """Lists acquired mimicries by species."""
 
-        print_header('Mimicries')
+        print_header('MIMICRIES')
         for mob_rank, mobs in self.acquired_mimicries.items():
             print(f'    {mob_rank}:')
             for mob_name, _mob_obj in mobs.items():

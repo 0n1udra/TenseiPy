@@ -20,7 +20,7 @@ class Subordinates:
     def show_subordinates(self, *args):
         """Lists subordinates by species."""
 
-        print_header('Subordinates')
+        print_header('SUBORDINATES')
         print(f'    Master: {self.name}\n')
         for i in self.subordinates_generator(output_mode=True): print(i)
 

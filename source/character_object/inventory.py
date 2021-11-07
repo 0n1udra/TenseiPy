@@ -37,9 +37,11 @@ class Inventory:
             > inv
         """
 
-        print_header('Inventory')
-        print(f'    Capacity: {self.inventory_capacity:.1f}%\n')
-        for i in self.inventory_generator(printout_mode=True): print(i)
+        print_header('INVENTORY')
+        if self.inventory_capacity:
+            print(f'    Capacity: {self.inventory_capacity:.1f}%\n')
+            for i in self.inventory_generator(printout_mode=True): print(i)
+        print()
 
     def update_inventory_capacity(self):
         """Updates inventory_capacity variable by going through all items in inventory and adding them up."""
@@ -152,16 +154,17 @@ class Inventory:
         if craft_amount is None:
             # Shows recipe.
             recipe = ''
-            print_header(f'Recipe for: [{item.name}]', 5)
+
+            print_header('CRAFTING', 5)
+            print(f"    Recipe for [{item.name}]:")
             for ingredient, amount in item.recipe.items():
-                recipe += F"{amount}x {ingredient}, "
+                recipe += F"    {amount}x {ingredient}, "
             print(f"    {recipe[:-2]}")  # [:-2] will cuts off trailing comma and space.
             print(f"\n    Inputting 1 will craft {item.quantity_add}. 0 cancel.\n")
 
             # Asks for how much to make. note that some items are crafted in batches.
             try:
                 craft_amount = int(input("Craft > "))
-                print()
             except ValueError:
                 gprint("< Error: need integer input >")
                 return False

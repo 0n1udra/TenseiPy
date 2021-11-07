@@ -13,7 +13,7 @@ class Map:
         # Either you have to own [Magic Sense] skill or change the force_usage boolean to use this function.
         if not force_usage and not self.check_acquired('magic sense'): return
 
-        print_header('Nearby', 10)
+        print_header('NEARBY', 10)
         for mob in self.active_mobs:
             print(f"    {mob[1]}x {mob[0].name} (lvl {mob[0].level}) {'(Dead)' if mob[0].status else ''}")
 

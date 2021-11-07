@@ -136,7 +136,7 @@ class Info:
     def show_reputations(self, *args):
         """Shows player's reputation (standing) with factions/characters."""
 
-        print_header('Reputation')
+        print_header('REPUTATION')
         for k, v in self.reputations.items(): print(f"    {k}: {v}")
 
     def update_reputation(self, faction_name, add_value=1):

@@ -43,7 +43,7 @@ class Attributes:
         if not mob: mob = self  # If no specified mob, shows player's stats.
         if not mob.game_object_type == 'character': return
 
-        print_header('Attributes', 10)
+        print_header('ATTRIBUTES', 10)
         print(f"    Name: [{(mob.name + ' ' + mob.family_name).strip()}]")
         print(f"    Level: {mob.level}")
         if mob.current_location: print(f"    Location: {mob.current_location}")
@@ -56,6 +56,8 @@ class Attributes:
         if self.current_mimic and self.check_if_player():
             print(f"\n    Mimicking: [{self.current_mimic.name}]\n")
             for i in self.current_mimic.attributes_generator(printout_mode=True): print(i)
+
+        print()
 
     def add_attribute(self, attribute, show_acquired_msg=True, show_skill_info=False):
         """
