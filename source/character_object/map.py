@@ -29,25 +29,6 @@ class Map:
             self.actions_played[action_played][0] += 1
         else: self.actions_played[action_played] = [1, None]
 
-    @staticmethod
-    def get_location_variable(level_class=None):
-        """
-        Gets location name from __location var in current level's class object.
-        Args:
-            level_class obj(None): Class object that contains __location variable.
-
-        Returns:
-            None: If no location found.
-            str: location name.
-        """
-
-        if level_class is None: return None
-
-        # Looks for variable names that has __location in it, then uses eval to get the location variable data.
-        for function_name in dir(level_class):
-            if 'location' in function_name:
-                return eval(f"level_class.{function_name}")
-
     def get_location(self, *args):
         """
         Prints and returns player's current location.
@@ -56,7 +37,7 @@ class Map:
             str: Name of location or N/A if unknown.
         """
 
-        gprint(f"< {self.name} location: {self.current_location} >\n")
+        gprint(f"< {self.name} location: {self.current_location if self.current_location else 'N/A'} >")
         return self.current_location
 
     def update_location(self, new_location=None):

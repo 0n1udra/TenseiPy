@@ -1,6 +1,6 @@
 import pickle, sys, os
 from game_files.output import gprint, show_help, show_history
-from game_files.extra import set_action_subs, get_any, mob_list_adder, off_subs, on_subs, game_error, on_off
+from game_files.extra import set_action_subs, get_class_var, get_any, mob_list_adder, off_subs, on_subs, on_off
 from game_files.characters import Rimuru_Tempest
 
 # Initiates new Rimuru_Tempest object which will be updated with save if save exists.
@@ -57,7 +57,7 @@ def actions(level=None):
     global successful_attack
 
     # Updates player's location.
-    rimuru.update_location(rimuru.get_location_variable(level))
+    rimuru.update_location(get_class_var(level, '__location'))
 
     # Get's playable actions from parsing inputted class subclasses.
     playable_actions = []
@@ -145,9 +145,14 @@ def actions(level=None):
 
         # play game action if matching from player input.
         if get_any(user_input, action_subs, strict_match=False):
+
+            # If level class has __accept_params variable, pass in parameters parsed from player input.
+            if get_class_var(level, '__accept_params'):
+                eval(f"level.{action}(parameters)")
+            else: eval(f"level.{action}()")
+
             # So you can check if action has been played using game.conditions('action_name') function.
             rimuru.add_action_played(action_subs[-1])
-            eval(f"level.{action}()")
 
     actions(level)
 

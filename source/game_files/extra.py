@@ -64,6 +64,23 @@ def get_any(match_target, input_list, strict_match=True):
         else:
             if i in match_to: return True
 
+def get_class_var(class_obj, var_name):
+    """
+    Gets a __variable name from class object.
+    Args:
+        class_obj obj: Class object that contains __location variable.
+        var_name str: variable to locate and return data.
+
+    Returns:
+        None: If variable not found.
+    """
+
+    if class_obj is None: return None
+
+    for thing in dir(class_obj):
+        if var_name in thing:
+            return eval(f"class_obj.{thing}")
+
 def on_off(var):
     """Returns string 'on'/'off' based on received boolean variable."""
 
@@ -178,6 +195,7 @@ def parse_input(user_input):
 
     split_data = user_input.split()
     return ' '.join(split_data[:-1]), int(split_data[-1])
+
 
 def tbc():
     """Print part of game/story is in development."""

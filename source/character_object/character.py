@@ -1,4 +1,4 @@
-from .base import Base
+from .object import Base
 from .info import Info
 from .inventory import Inventory
 from .attributes import Attributes
