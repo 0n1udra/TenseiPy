@@ -12,8 +12,8 @@ def game_hud(playable_actions):
     """Show game HUD, includes current mimic, mobs targeted, and available actions."""
 
     # Removes unnecessary spacing when no usable input is recieved.
-    if rimuru.last_print_func_used != 'menu': print()
-    rimuru.last_print_func_used = 'menu'
+    if rimuru.last_print_func_used != 'hud': print()
+    rimuru.last_print_func_used = 'hud'
 
     # Formats actions to be displayed to user.
     hud_actions = playable_actions[:]

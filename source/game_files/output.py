@@ -63,7 +63,7 @@ def sprint(message, add_indent=False, use_textcrawl=True, log_output=True, print
         rimuru.storyline_log = rimuru.storyline_log[-99:]
 
     if print_func_used in ['sprint', 'siprint'] and rimuru.last_print_func_used == 'gprint': print()
-    if rimuru.last_print_func_used == 'menu': print()
+    if rimuru.last_print_func_used == 'hud': print()
 
     if rimuru.textcrawl and use_textcrawl:
         message_length = len(message)
@@ -116,20 +116,21 @@ def dots(length=5, times=1, indent=False):
         indent bool(False): Add 4 spaces.
     """
 
-    if rimuru.last_print_func_used == 'menu': print()
+    print()
 
-    # If textcrawl boolean is False, it'll just print the dots once.
+    # If textcrawl boolean is False will not utilize 'times' parameter. Will only print out one time.
     if not rimuru.textcrawl:
-        print(('    ' if indent else '') + '.' * length)
+        print(('    ' if indent else '') + '.' * length, '\n')
         return
 
     for _ in range(times):
-        if indent: print('    ', end='')  # Print out dots instantly instead.
+        if indent: print('    ', end='')
 
         for _ in range(length):
             sys.stdout.write('.')
             sys.stdout.flush()
             time.sleep(0.5)
+
     print()
 
 def idots(length=5, times=1, indent=True):
