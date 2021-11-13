@@ -40,7 +40,7 @@ def ch2_goblin_encounter(rimuru):
             __subs = ['subjugate', 'subjugate goblins', 'rule goblins', 'ruthless', 'be ruthless', 'enslave', 'enslave goblins']
             def __init__(self):
                 sprint("Alright you weaklings, listen here you little shits, I'll only say this once!")
-                sprint("You have two options. You can worship me or you can die.\n")
+                sprint("You have two options. You can worship me or you can die.")
                 dots(5, 2)
                 if extra.get_random(1, 10, 1):  # 1/10 chance of goblins revolting
                     sprint("\nNEVER! We will never surrender to you!")
@@ -299,7 +299,7 @@ def ch2_goblin_encounter(rimuru):
             siprint("Why am I so sleepy now? What's happening Great Sage?")
             siprint("<< Answer, going into 'Sleep Mode' due to low magicule levels. >>")
             siprint("I was only giving them names, I didn't know it would use up that much.")
-            siprint("<< Notice, estimated time for recovery is three days. >>\n")
+            siprint("<< Notice, estimated time for recovery is three days. >>")
 
             idots(10, 3)
 
@@ -371,7 +371,7 @@ def ch2_goblin_encounter(rimuru):
             def __init__(self):
                 # Kill the bandits and you go straight to Dwargon jail, and no you can't eat the humans.
                 if game.mobs_cleared():
-                    sprint("My lord... Was that really necessary? Oh crap here comes the guards!\n")
+                    sprint("My lord... Was that really necessary? Oh crap here comes the guards!")
                     idots(50)
                     dwargon_jail_murder()
 
@@ -387,7 +387,7 @@ def ch2_goblin_encounter(rimuru):
                     game.conditions('no fleeing', True)
                 else:
                     siprint("We successful fled from those thugs. What a pain!")
-                    siprint("We decided to go back to our group and spend the night just outside the gate and try again tomorrow.\n")
+                    siprint("We decided to go back to our group and spend the night just outside the gate and try again tomorrow.")
                     dots(25)
                     inside_dwargon()
 
@@ -395,7 +395,7 @@ def ch2_goblin_encounter(rimuru):
             def __init__(self):
                 if game.last_use_skill('coercion'):
                     sprint("HOWWWLLLLLLLLLL!!!!!!!!!!!!")
-                    siprint("Hopefully this scares them away.\n")
+                    siprint("Hopefully this scares them away.")
                     idots(30)
                     dwargon_jail_coercion()
                 if game.last_use_skill('water blade'):
@@ -441,19 +441,57 @@ def ch2_goblin_encounter(rimuru):
             siprint("\n...First time here and we're already in jail...")
             siprint("I didn't think just screaming would cause so much damage to the environment and the nearby people.")
             siprint("I guess my mimicry evolved with $Ranga$'s evolution.")
+            sprint("\nYou guys sit tight while we wait to decide what to do with---.")
+            sprint("\nCAPTAIN COME QUICK! There was a beast in the Mines! It was delt with, however.")
+            sprint("We need to get all the healing potions to help the injured.")
+
+            class _make_potions:
+                def __init__(self):
+                    if rimuru.check_acquired('full potion', 50):
+                        sprint("\nHey, you said you need healing potions?")
+                        sprint("\nShut it, this is important!")
+                        sprint("\nCalm down, I want to help. Here's a barrel of healing potions for ya.")
+                        sprint("\nHmmmm... How can we trust someone behind bars...")
+                        sprint("\nIt sounds like you don't have much of a choice, that is if you want to help your friends...")
+                        sprint("\nFine. Stay here!")
+                        rimuru.remove_inventory('full potion', 50)
+                        game.conditions('helped dwarves', True)
+                        dots(10)
+                        sprint("We're back, and your potions was somethin else!")
+                        sprint("Some of my friends wanted to come by and say thanks to their savior.")
+                        sprint("\nYEAH! If it wasn't for your medicine I would definitely be dead by now!")
+                        sprint("\nThank you! It was even able to regrow my entire arm!")
+                        sprint("\nMmmmmmmhmmmmmmmm")
+                        sprint("\nThanks again slime, my friends and I are indebted to you, if there's anything you need, let me know!")
+                        sprint("Also, we got some good news for you! You guys are free to go.")
+                    else:
+                        siprint("I should make sure I give them enough to help everyone, who knows how many were injured.")
+
+            class _do_nothing:
+                def __init__(self):
+                    sprint("\n.....")
+
+            class hfunc_the_trial:
+                def __init__(self):
+                    sprint('')
+
+            game.actions(self)
+
+
 
     # To jail and then death penalty after murdering bandits.
     class dwargon_jail_murder:
         def __init__(self):
             game.clear_all()
-            siprint("\n...... Since I kinda just murdured two bandits in cold blood, we landed ourselves in jail...")
+            siprint("\n...... Since I kinda just murdered two bandits in cold blood, we are now in jail...")
             siprint("This journey sure is going well...")
             sprint("\nI thought my lord would have more self restraint.")
             sprint("\nShut it.")
+            # TODO Add trial?
             sprint("\n* After a swift trial, the both of you were executed shortly after for murder. *")
             game.game_over()
 
-
+    # Got into Dwargon.
     class inside_dwargon:
         def __init__(self):
             game.clear_all()

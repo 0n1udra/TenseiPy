@@ -13,7 +13,7 @@ def ch1_cave(rimuru):
 
         def __init__(self):
             rimuru.add_mimic('slime', show_msg=False)
-            print("\n    < Chapter 1 >\n")
+            print("\n    < Chapter 1 >")
             idots()
             gprint("<< Confirmation Complete. Constructing body that does not require blood... >>\n")
             gprint("<< Confirmation Complete. Acquiring Extra Skill: [Predator]... >>")
@@ -47,6 +47,7 @@ def ch1_cave(rimuru):
         class move:
             __subs = ['move around', 'try to move', 'look around', 'explore']
             def __init__(self):
+                dots()
                 siprint("I can't see anything! Where are my arms, I can't feel them!")
                 siprint("Did I just move? I can't see anything, can't hear, can't even smell anything...")
                 siprint("What is this? Feels like I'm 'absorbing' something. This body? Am I even human anymore!?!?!")
@@ -68,8 +69,8 @@ def ch1_cave(rimuru):
                     show_art('slime')
                     print(game_art.rimuru_art.died)
                     idots()
-                    siprint("\nDissolving and absorbing, this streamlined elastic feeling body....")
-                    siprint("It looks like I have been stabbed, died and reincarnated as a slime!\n")
+                    siprint("Dissolving and absorbing, this streamlined elastic feeling body....")
+                    siprint("It looks like I have been stabbed, died and reincarnated as a slime!")
                     idots(10, 2)
                     siprint("\nIt has been a long time now since I have accepted myself a slime. I am getting use to this body.")
                     siprint("No need for sleep or food. I don't feel too hot nor cold. Even after taking some damage I can heal myself..\n")
@@ -146,7 +147,7 @@ def ch1_cave(rimuru):
             siprint("SHIT! I've finally reincarnated and I'm already going to die!")
             siprint("O'Great sage how painful thy death will be? Am I really going to suffocate to death?!?!")
             siprint("<< Answer, A slime's body does not require oxygen to survive. >>")
-            siprint("Huh.... Feeling pain I am not... But what am I going to do now?\n")
+            siprint("Huh.... Feeling pain I am not... But what am I going to do now?")
             idots()
             game.actions(self)
 
@@ -325,7 +326,7 @@ def ch1_cave(rimuru):
                     sprint("\nhahaha")
                     sprint("ku hahaha")
                     sprint("HAHAHAHAHAHAHA")
-                    siprint("\nUmmmm, did he just use the 3 stage laugh?!?\n")
+                    siprint("\nUmmmm, did he just use the 3 stage laugh?!?")
                     dots(5)
                     sprint("\nMy life is in your hands.")
                     sprint("\nWow how trusting of you.")
