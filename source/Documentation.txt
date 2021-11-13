@@ -63,7 +63,7 @@ def ChapterXX():
                     game.conditions('found_hidden', True)
 
                     # Loading dots animation (only works when textcrawl is True)
-                    sdots(5, 5)
+                    dots(5, 5)
 
                     siprint("ooooooooohhh!, a secret action!")
 

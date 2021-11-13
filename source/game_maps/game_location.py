@@ -19,7 +19,44 @@ class subs:
     all_yes = activate + do_it + yes + do_it
 
 class Game_Location:
-    pass
+    __location = ''
+
+
+
+class Shopping_Hub(Game_Location):
+    __shops = ''
+
+    class go_to:
+        def __init__(self): pass
+
+
+    class list_shops:
+        def __init__(self):
+            print(f'    ----- {self.location.upper() + " SHOPS" if self.location else "SHOPS"} -----')
+            print(self.shops)
+
+
+class Shop(Game_Location):
+    __accept_params = True
+    __description = ''
+
+    class leave:
+        def __init__(self, _):
+            pass
+
+
+class dwargon_shops(Shop):
+    __shops = '''
+    Weapons     -- Weapons shop'''
+
+
+    class buy:
+        def __init__(self, params):
+            print(params)
+
+    class sell:
+        def __init__(self, params):
+            pass
 
 class cave_actions:
     class eat_grass:
