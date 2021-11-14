@@ -2,7 +2,6 @@ import time, sys, re
 import game_files.art as game_art
 from game_files.extra import get_any, on_off, game_error
 
-
 #                    ========== Printing ==========
 rimuru = None
 def update_rimuru_output(rimuru_obj):
@@ -246,7 +245,7 @@ def show_help(arg):
         show_rank_chart()
         return
 
-    print("""        -------------------- HELP -------------------- 
+    print("""\n        -------------------- HELP -------------------- 
     Usage: Command Required_Parameter [Optional_Parameter]  --  Description
     
     Commands:

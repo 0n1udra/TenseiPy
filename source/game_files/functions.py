@@ -399,7 +399,6 @@ def clear_all(clear_targeting=True, clear_mimic=True, clear_active_mobs=True):
     # Only resets mimicry if it's active.
     if clear_mimic and rimuru.check_mimic(): rimuru.use_mimic('reset')
 
-
 def continue_to(next_location):
     """
     Saves game and continues to next location.
@@ -414,6 +413,7 @@ def continue_to(next_location):
     # Loads next story chapter.
     try: next_location(rimuru)
     except: gprint("< Error Loading Next Location >")
+
 
 #                    ========== Extra Functionality ==========
 def multi_attr_adder(mobs, attrs):
@@ -541,7 +541,7 @@ def change_settings(user_input):
         > options hud hints off
     """
 
-    settings_printout = f"""        -------------------- Game Settings --------------------
+    settings_printout = f"""\n        -------------------- SETTINGS --------------------
         {on_off(rimuru.textcrawl)}\ttextcrawl <on/off>\t-- Enable or disable text crawl effect.
         {on_off(rimuru.show_actions)}\thud/interface <on/off>\t-- Show available actions player can take.
         {on_off(rimuru.show_art)}\tart/ascii <on/off>\t-- Show ASCII art.
