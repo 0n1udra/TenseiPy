@@ -30,7 +30,7 @@ class Base:
         if item_pool_add: item_pool += item_pool_add
 
         # Gets character's acquired attributes and items in inventory.
-        if 'character' in self.game_object_type:
+        if 'character' in self.object_type:
             item_pool += [*self.inventory_generator(), *self.attributes_generator()]
 
         # Adds all attributes/inventory items to pool from all acquired mimicries, including the character object itself.
@@ -52,6 +52,16 @@ class Base:
             # Returns game object if match found (uninitialized).
             if game_object.name.lower() == match.lower(): return game_object
         return None
+
+    def set_start_state(self):
+        """Adds starter attributes to character."""
+
+        for i in self.starting_state:
+            if obj := self.get_object(i):
+                if obj.object_type == 'item':
+                    self.add_inventory(obj, show_acquired_msg=False)
+                elif obj.object_type == 'attribute':
+                    self.add_attribute(obj, show_acquired_msg=False)
 
     def check_acquired(self, check_object, amount=1):
         """

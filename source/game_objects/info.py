@@ -109,7 +109,7 @@ class Info:
             level int: New level for character.
 
         Usage:
-            character_object.update_level(10)
+            game_object.update_level(10)
         """
 
         self.level = level

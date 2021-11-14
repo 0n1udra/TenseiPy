@@ -1,19 +1,13 @@
 from .object import Base
 from .info import Info
 from .inventory import Inventory
-from .attributes import Attributes
+from .attribute import Attributes
 from .combat import Combat
-from .subordinates import Subordinates
-from character_object.map import Map
+from .subordinate import Subordinates
+from game_objects.map import Map
 
 
 class Character(Base, Info, Attributes, Inventory, Combat, Subordinates, Map):
-    starting_state = []  # Character's starting skills/attributes.
-    inventory_capacity = 0
-    inv_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
-    quantity = 0  # Item quantity in inventory.
-    quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass (50), Magical Ore (25).
-
     name = ''
     family_name = ''
     canon_name = ''  # Name from manga storyline.
@@ -33,7 +27,13 @@ class Character(Base, Info, Attributes, Inventory, Combat, Subordinates, Map):
     affiliations = []
     abilities = []  # Extra abilities that are not considered a [Skill].
     is_alive = True
-    item_type = 'Mob'
+    balance = 50
+    inventory_capacity = 0
+    inv_capacity_add = 0.1  # Add to overall capacity when adding items to inventory.
+    quantity = 0  # Item quantity in inventory.
+    quantity_add = 1  # Usually items are added in batches, E.g. Hipokte Grass (50), Magical Ore (25).
+    item_type = 'Mob'  # Categorization for inventory items.
+    starting_state = []  # Character's starting skills/attributes.
 
     last_command = ''
     last_use_skill = None  # Last successfully used skill, game object.
@@ -46,7 +46,7 @@ class Character(Base, Info, Attributes, Inventory, Combat, Subordinates, Map):
     # Game variables.
     save_path = ''
     source_folder_path = ''
-    game_object_type = 'character'
+    object_type = 'character'  # Different from 'item_type' var, used for backend code differentiation.
     initialized = False
     valid_save = None  # If you died in-game, the current save will be unusable.
     textcrawl = None  # Slow text crawl effect, letter by letter.
@@ -84,9 +84,4 @@ class Character(Base, Info, Attributes, Inventory, Combat, Subordinates, Map):
 
     def __str__(self): return self.name
 
-    def set_start_state(self):
-        """Adds starter attributes to character."""
-
-        for i in self.starting_state:
-            self.add_attribute(i, show_acquired_msg=False)
 

@@ -41,7 +41,7 @@ class Attributes:
 
         if mob: mob = self.get_object(mob, item_pool_add=[*self.mimic_generator()], sub_pool=True)
         if not mob: mob = self  # If no specified mob, shows player's stats.
-        if not mob.game_object_type == 'character': return
+        if not mob.object_type == 'character': return
 
         print_header('ATTRIBUTES', 10)
         print(f"    Name: [{(mob.name + ' ' + mob.family_name).strip()}]")

@@ -34,11 +34,11 @@ class Combat:
 
             if attack:
                 # Adds skill to list of attacks to use against enemies.
-                if attack.game_object_type == 'attribute':
+                if attack.object_type == 'attribute':
                     skills.append(attack)
-                elif attack.game_object_type == 'item':
+                elif attack.object_type == 'item':
                     if attack.item_type == 'Weapon': skills.append(attack)
-                elif attack.game_object_type == 'character': continue
+                elif attack.object_type == 'character': continue
             else: continue
 
         for current_target in self.targeted_mobs:

@@ -67,9 +67,10 @@ class Inventory:
             .add_inventory('hipokte grass')
         """
 
-        item = self.get_object(item, new=True)
+        try:
+            if item.object_type not in ['item', 'character']: return
+        except: item = self.get_object(item, new=True)
         if not item: return False  # Does not have game object to add to inventory.
-        if item.game_object_type not in ['item', 'character']: return
 
         # Adds to item quantity variable if already acquired some.
         if self.check_acquired(item):
@@ -112,7 +113,7 @@ class Inventory:
 
         item = self.get_object(item)
         if not item: return False
-        if item.game_object_type not in ['item', 'character']: return
+        if item.object_type not in ['item', 'character']: return
 
         # Removes x amount of said item.
         if (item.quantity - amount) <= 0 or amount <= 0:
@@ -147,7 +148,7 @@ class Inventory:
 
         item = self.get_object(item, new=True)
         if item is None: return
-        if item.game_object_type != 'item': return
+        if item.object_type != 'item': return
 
 
         # 'craft full potion 2', or 'craft full potion' to show recipe then input amount.
