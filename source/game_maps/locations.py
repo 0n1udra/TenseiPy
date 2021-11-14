@@ -1,4 +1,5 @@
 from game_files.functions import rimuru
+from game_objects.Vendor import Vendor
 
 class subs:
     attack = ['attack']
@@ -21,34 +22,27 @@ class subs:
 class Game_Location:
     __location = ''
 
-
-
 class Shopping_Hub(Game_Location):
     __shops = ''
 
     class go_to:
         def __init__(self): pass
 
-
     class list_shops:
         def __init__(self):
             print(f'    ----- {self.location.upper() + " SHOPS" if self.location else "SHOPS"} -----')
             print(self.shops)
 
-
 class Shop(Game_Location):
     __accept_params = True
-    __description = ''
+    __vendor = Vendor()
 
-    class leave:
-        def __init__(self, _):
-            pass
+    def __init__(self):
 
-
-class dwargon_shops(Shop):
-    __shops = '''
-    Weapons     -- Weapons shop'''
-
+    class shop_page:
+        __subs = ['page']
+        def __init__(self, params):
+            __vendor_ 
 
     class buy:
         def __init__(self, params):
@@ -57,6 +51,19 @@ class dwargon_shops(Shop):
     class sell:
         def __init__(self, params):
             pass
+
+    class leave:
+        def __init__(self, _):
+            pass
+
+
+class dwargon_weapons_shop(Shop):
+    __shops = '''
+    Weapons     -- Weapons shop'''
+
+    def __init__(self):
+        self.set_start_state()
+
 
 class cave_actions:
     class eat_grass:

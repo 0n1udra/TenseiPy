@@ -2,7 +2,12 @@ from character_object.object import Base
 from character_object.inventory import Inventory
 from game_files.output import gprint
 
-class Shops(Base, Inventory):
+class Shop(Base, Inventory):
+    name = ''
+    description = ''
+    initialized = False
+    game_object_type = 'shop'
+
     def __init__(self):
         self.inventory = {'Item': {}, 'Material': {}, 'Consumable': {}, 'Mob': {}, 'Weapon': {}, 'Misc': {}}
         self.services = []
@@ -10,10 +15,10 @@ class Shops(Base, Inventory):
 
 
     def store_page(self):
-        print()
+        self.show_inventory()
 
     def item_info(self, item):
-        print()
+        print(self.info_page)
 
     def buy(self, item, amount):
         pass

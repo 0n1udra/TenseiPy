@@ -72,7 +72,6 @@ class rimuru_art:
     ~`'^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^
     """
 
-
 slime = """
 -++++++++++++++++++++++++++++++++++++ooo++++///////////+++++osooyohhs+soso++++++++++++++++++++++++++
 :yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyso+/:-....................-:/+oshmmNMmNNmdhyyyyyyyyyyyyyyyyyyyyyyy
