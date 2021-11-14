@@ -273,7 +273,7 @@ Item:                       -- Item parent class.
     recipe {}               -- Recipe to craft item {'item_name', quantity}'.
     ingredient_for []       -- Part of other item'ss crafting recipe.
     use_requirements {}     -- Prerequisites to use item {'skill/item', quantity}.
-    game_object_type str    -- Game object type, 'item'.
+    object_type str    -- Game object type, 'item'.
     initialized False       -- If object is initialized.
 
     get_description()       -- Get's item description.
@@ -304,7 +304,7 @@ Skill:
     quantity int            -- Variable for check_acquired function.
     predate_copy True       -- Able to copy with predator skill.
     sub_skills {}           -- Sub skills.
-    game_object_type        -- Game object type, 'attribute'.
+    object_type        -- Game object type, 'attribute'.
     initialized False       -- If object has been initialized.
 
     __str__()               -- Returns lowercase name variable.

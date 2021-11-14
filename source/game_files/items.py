@@ -17,7 +17,7 @@ class Item:
     recipe = {}
     ingredient_for = []
     use_requirements = {}
-    game_object_type = 'item'
+    object_type = 'item'
     initialized = False
 
     def __init__(self, quantity=0):
@@ -165,6 +165,7 @@ class Full_Potion(Item):
     appearance = 'Blue potion in a glass bottle.'
     # One Hipokte Grass makes 10 potions.
     recipe = {'Hipokte Grass': 1}
+
 
 # ========== Weapons ==========
 class Magic_Sword(Item):

@@ -1,4 +1,4 @@
-from character_object.character import Character
+from game_objects.character import Character
 from game_files.output import gprint, print_header
 
 # ========== Characters
@@ -158,11 +158,11 @@ class Rimuru_Tempest(Slime, Character):
             # Check if target has specific game object to be used when using predation.
             #if target[0].predation_return: target = target[0].predation_return
 
-            if target[0].game_object_type == 'item':
+            if target[0].object_type == 'item':
                 self.add_inventory(target[0])
-            elif target[0].game_object_type == 'attribute':
+            elif target[0].object_type == 'attribute':
                 self.add_attribute(target[0])
-            elif target[0].game_object_type == 'character':
+            elif target[0].object_type == 'character':
                 # Can only eat targeted mobs that are dead.
                 if target[0].is_alive is False:
                     self.add_mimic(target[0])
@@ -326,8 +326,6 @@ class Goblin(Character):
         For goblins, deaths are very common, to the point they have evolved to reproduce as much as possible to maintain their population.
         '''
     evolution = 'Goblin > ???'
-
-
 
 class Hobgoblin(Goblin, Character):
     name = 'Hobgoblin'

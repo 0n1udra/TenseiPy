@@ -164,7 +164,7 @@ def set_action_subs(action, action_subs):
 def mob_list_adder(item, input_list, amount_mode=False):
     """
     Special list adder for mob two-dimensional lists.
-    e.g. [[game_character_object, quantity_integer],...]
+    e.g. [[game_game_objects, quantity_integer],...]
 
     Args:
         input_list list: List to add game mob to.
@@ -195,7 +195,6 @@ def parse_input(user_input):
 
     split_data = user_input.split()
     return ' '.join(split_data[:-1]), int(split_data[-1])
-
 
 def tbc():
     """Print part of game/story is in development."""

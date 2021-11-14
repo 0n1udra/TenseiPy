@@ -17,7 +17,7 @@ class Skill:
     quantity = 0
     predate_copy = True  # Able to copy ability by using analysis, predate, etc.
     sub_skills = {}
-    game_object_type = 'attribute'
+    object_type = 'attribute'
     initialized = False
 
     def __init__(self, quantity=0):

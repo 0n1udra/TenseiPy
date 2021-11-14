@@ -1,7 +1,7 @@
 import game_files.functions as game
 import game_files.extra as extra
 from game_files.output import gprint, sprint, siprint, idots, dots, show_art
-from game_maps.game_location import subs
+from game_maps.locations import subs
 
 
 def ch2_goblin_encounter(rimuru):
