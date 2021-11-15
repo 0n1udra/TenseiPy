@@ -75,6 +75,7 @@ class Character(Base, Info, Attributes, Inventory, Combat, Subordinates, Map):
                                    'A-': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'Other': {}}
 
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
+        self.vendors = {}
         self.game_conditions = {}
         self.actions_played = {}
         self.reputations = {}  # Reputation/standing of characters/factions.

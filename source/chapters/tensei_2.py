@@ -477,8 +477,6 @@ def ch2_goblin_encounter(rimuru):
 
             game.actions(self)
 
-
-
     # To jail and then death penalty after murdering bandits.
     class dwargon_jail_murder:
         def __init__(self):
