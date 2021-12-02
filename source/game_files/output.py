@@ -161,7 +161,7 @@ def show_version(game_version, version_date):
     """Shows game version."""
 
     print(f"\n    Version: {game_version} ({version_date})")
-    exit(0)
+    sys.exit()
 
 def show_sysargs():
     """Shows available runtime arguments."""
@@ -176,7 +176,7 @@ def show_sysargs():
     --hardcore  --  Enable Hardcore mode.
     --fastmode  --  Enable Fast mode, goes through storyline actions as quick as possible. Also disables text crawl and ascii art.
     --slime     --  Enables: hud, hints | Disables: textcrawl, art, hardcore""")
-    exit(0)
+    sys.exit()
 
 def show_art(art):
     """

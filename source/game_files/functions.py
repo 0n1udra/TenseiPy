@@ -448,7 +448,7 @@ def game_exit(*args):
     """Saves game using pickle, then exits."""
 
     #save()
-    exit(0)
+    sys.exit()
 
 def restart(*args):
     """Restart game."""
