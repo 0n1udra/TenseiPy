@@ -77,7 +77,7 @@ class Character(Base, Info, Attributes, Inventory, Combat, Subordinates, Map):
         self.data = {'kills': 0}  # Extra data, that I don't feel like need to be variables.
         self.vendors = {}
         self.game_conditions = {}
-        self.actions_played = {}
+        self.actions_played = {}  # {[played_counter, playable_boolean],}
         self.reputations = {}  # Reputation/standing of characters/factions.
         self.initialized = True
         self.set_start_state()
