@@ -1,5 +1,4 @@
 from game_files.functions import rimuru
-from game_objects.Vendor import Vendor
 
 class subs:
     attack = ['attack']

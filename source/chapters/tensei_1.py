@@ -43,6 +43,8 @@ def ch1_cave(rimuru):
                 siprint("I can't seem to speak, wait.....")
                 siprint("I CAN'T FEEL MY MOUTH!")
                 siprint("I. Can't. Feel. ANYTHING! I should check the rest of my body!")
+                print(game.conditions('speak'))
+                print(game.action_played('speak'))
 
         class move:
             __subs = ['move around', 'try to move', 'look around', 'explore']

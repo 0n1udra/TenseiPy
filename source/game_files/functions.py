@@ -151,7 +151,7 @@ def actions(level=None):
                 eval(f"level.{action}(parameters)")
             else: eval(f"level.{action}()")
 
-            # So you can check if action has been played using game.conditions('action_name') function.
+            # Adds counter indicating action has been played, use game.conditions('action_name') function to get data.
             rimuru.add_action_played(action_subs[-1])
 
     actions(level)
@@ -172,17 +172,20 @@ def action_played(match, amount=1):
 
     # Extracts and parses level action name from passed in level object.
     # E.g. Extracts "speak now" from "<class 'chapters.tensei_1.ch1_cave.<locals>.wake_up.speak_now'>"
-    match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
+    if 'class' in str(match):
+        match_action = str(match.__class__).split('.')[-1].replace('_', ' ')[:-2].strip()
+    else: match_action = match
 
     # Checks if action has been played more than once.
-    if conditions(match_action) > amount: return True
+    if conditions(match_action) == amount: return True
 
 def conditions(game_var, new_value=None):
     """
     Set and fetch game variables.
 
     Args:
-        game_var str: Gameplay variable to find and return.
+        game_var str: Gameplay variable to find and return or edit.
+        new_value int/str/etc: Set new value for game condition variable.
 
     Returns:
         str, bool, int, obj: Returns gameplay variable if found or if new one was set.
@@ -220,7 +223,7 @@ def action_playable(match, status=None):
 
             return data[1]
 
-    rimuru.actions_played[match] = [0, status]
+    rimuru.actions_played[match] = [0, status]  # [played_counter, playable_boolean]
     return status
 
 def last_use_skill(skill):
