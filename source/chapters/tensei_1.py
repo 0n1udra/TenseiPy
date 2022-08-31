@@ -4,8 +4,8 @@ import game_files.art as game_art
 from game_files.output import gprint, sprint, siprint, idots, dots, show_art
 # Import the next chapter to continue to.
 from chapters.tensei_2 import ch2_goblin_encounter
-from game_maps.locations import cave_actions, subs
-from game_files.characters import Veldora_Tempest
+from locations.locations import cave_actions, subs
+from game_objects.characters import Veldora_Tempest
 
 def ch1_cave(rimuru):
     class wake_up():

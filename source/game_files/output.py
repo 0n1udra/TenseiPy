@@ -12,7 +12,7 @@ def update_rimuru_output(rimuru_obj):
 
 def parse_name(text):
     """
-    Replaces $NAME$ in storyline text with correct corresponding character's set name that player has given.
+    Replaces $CANON_NAME$ in storyline text with correct corresponding character's set name that player has given.
     e.g. Why $Gobta$?! Why?! > Why Dumbo? Why?!
     """
 
@@ -144,7 +144,7 @@ def print_header(text, multiplier=10, char='-', newline=False):
     E.g. '---------- Inventory ----------'
 
     Args:
-        text str: Title of interface, e.g. 'Inventory', 'Attributes'.
+        text str: Title of interface, e.g. 'Inventory', 'Attribute'.
         multiplier int(10: Number of lines on both sides of text.
         char str('-'): Character to make line from.
         newline bool(False): Add newline under header.

@@ -96,223 +96,186 @@ def ChapterXX():
 > Use class for nesting more paths in, and functions for the end of a path.
 
 
+==================== Files
+File Structure:
+TenseiPy
+    builds                  - Executables for Mac/Win/Linux made with PyInstaller.
+    source
+        base_objects        - Base python classes for game objects. E.g. character, skill, etc...
+        chapters            - Game story. These files are what brings everything together into a text adventure story.
+        game_files          - Backend functions that make the game work.
+        game_objects        - Game objects like items (Magic Sword), skills (Water Blade), characters (Dire Wolf), etc...
+        locations           - Common actions for a game location.
+
 Reading Variable Names:
-    Name []                 -- List
-    Name {}                 -- Dictionary
-    Name ()                 -- Set
-    Name True/False         -- boolean
-    Name()                  -- Function
-    Name:                   -- Class
+Name []                     - List
+Name {}                     - Dictionary
+Name ()                     - Set
+Name True/False             - boolean
+Name()                      - Function
+Name:                       - Class
 
 When I say attribute it means skills and/or resistances.
 In function docstring's Usage section, '>' means example of user input in game.
 
-===== functions.py
-    update_rimuru()         -- Need to update local rimuru object for this file.
-    game_hud()              -- Shows current mimic, targeted and available actions.
-    actions()           -- Takes care of user input and runs corresponding functions, and shows user HUDs.
-    conditions)             -- Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
-    last_use_skill()        -- Check what was the last successfully used skill/item.
-    mobs_add([])            -- Adds new character object to current game level. Must pass in list.
-    mob_status()            -- Returns True if mob is in active_mobs list.
-    mobs_cleared()          -- Returns True if player cleared all mobs. Usually used for to let player continue on or not.
-    mobs_reset()            -- Reset active_mobs and targeted_mobs list.
-    mob_obj()         -- Get object from active_mobs list.
-    continue_to()           -- Saves game and asks if user wants to continue to next section.
-    clear_subs()            -- Clear's action's __subs list.
-
-    game_restart()          -- Restart game.
-    game_exit()             -- Exit game.
-    game_save()             -- Saves game state by pickling Rimuru_Tempest object (the player).
-    game_load()             -- Load user save.
-    game_over()             -- Player dies, invalidates save file before deleting it.
-    set_hud()               -- Show available actions for player (not the hfunc ones).
-    set_art()               -- Enable ASCII art, usually disable for less screen clutter. But they look cool!
-    set_textcrawl           -- Whether or not to have the textcrawl effect. A typewriter like effect where each letter is printed to screen one by one, this does not include game messages like stats, inv, acquired messages, crafting, etc.
-    set_hints()             -- Show game hints.
-    set_hardcore            -- So far only disables action menu and so it can't be turned back on, disable hardcore to enable menu.
-
-    sprint()                -- Delays text, for easier reading if player chooses. Using sys.stdout.write() and sys.stdout.flush().
-    siprint()               -- Indents printout using sprint(). Used for player thoughts, Great Sage or other game messages.
-    iprint()                -- Indented printout with no textcrawl even if enabled.
-    dost()                  -- Loading dot animation.
-    idots()                 -- Loading dot animation with indentation.
-    show_history()          -- Show last x lines from storyline.
-    show_art()              -- Pass in string that matches variable name in game_art.py file, replace _ with spaces when passing in name. E.g. show_art('great sage'). Doesn't work with variables within classes.
-    show_start_banner()     -- Shows game's start banner.
-    show_settings()         -- Shows game setting commands and current states.
-    show_help()             -- Shows help page.
-    show_rank_chart()       -- Show in-universe ranking and levels.
-
-
-===== extra.py
-    get_random()            -- Used for probability.
-    get_any()               -- If input matches anything in a list.
-    on_off()                -- Returns on/off string based in passed in boolean.
-    format_info()           -- Formats info from variables for info_page for game objects.
-    tbc()                   -- Prints out To be continued.
-
-
-===== extra.py
-    get_random()            -- Used for probability.
-    get_any()               -- If input matches anything in a list.
-    on_off()                -- Returns on/off string based in passed in boolean.
-    format_info()           -- Formats info from variables for info_page for game objects.
-    tbc()                   -- Prints out To be continued.
-
-
-===== character.py
-Go to file to read comments for class variables.
-    __str__()               -- Returns lowercase of name variable.
-    set_start_state()       -- Adds starting attributes to character
-    get_object()            -- Returns game corresponding game object, usually used for when inputting with string.
-    check_acquired()        -- Check if passed in list or string for _check_acquired.
-    _check_acquired()       -- Checks if character has object (attribute/item).
-    set_status()         -- Update status variable.
-
-
+========== Base Objects
 ===== attributes.py
-    attribute_generator()   -- Yields all attributes character has access to. Also used for printing out with show_attributes()
-    show_attributes()       -- Shows character's attributes, can also show mimicked character's attributes.
-    add_attribute()         -- Add new attribute.
-    remove_attribute()      -- Remove attribute.
-    upgrade_attribute       -- Upgrade attribute.
-    check_resistance()      -- Checks if have resistance to attack.
-    use()            -- Uses specified skill.
-
+attribute_generator()       - Yields all attributes character has access to. Also used for printing out with show_attributes()
+show_attributes()           - Shows character's attributes, can also show mimicked character's attributes.
+add_attribute()             - Add new attribute.
+remove_attribute()          - Remove attribute.
+upgrade_attribute           - Upgrade attribute.
+check_resistance()          - Checks if have resistance to attack.
+use()                       - Uses specified skill.
 
 ===== combat.py
-    set_targets()           -- Set targets to be focused.
-    attack()                -- Attacks targets (including focused). Also checks resistance to attack.
-
+set_targets()               - Set targets to be focused.
+attack()                    - Attacks targets (including focused). Also checks resistance to attack.
 
 ===== info.py
-    show_info()             -- Shows info page for game objects.
-    update_info()           -- Update character info variable.
-    update_name()           -- Update character's name.
-    update_lname()          -- Update character's family (last) name.
-    update_level()          -- Update character's level, which will also update ranking.
-    add_protection()        -- Add a divine protect (blessing) to character.
-    check_if_player()       -- Check if current object being manipulated is player object (Rimuru_Tempest).
-
+show_info()                 - Shows info page for game objects.
+update_info()               - Update character info variable.
+update_name()               - Update character's name.
+update_lname()              - Update character's family (last) name.
+update_level()              - Update character's level, which will also update ranking.
+add_protection()            - Add a divine protect (blessing) to character.
+check_if_player()           - Check if current object being manipulated is player object (Rimuru_Tempest).
 
 ===== inventory.py
-    inventory_generator()   -- Yields character's inventory objects.
-    update_inv_capacity()   -- Calculates current inventory capacity from all items acquired.
-    show_inventory()        -- Prints out inventory items separated by category.
-    add_inventory()         -- Add item to inventory.
-    remove_inventory()      -- Removes item from inventory.
-    craft_item()            -- Craft game item.
-
-
-===== map.py
-    add_played_action()     -- Adds played actions by user to a set().
-    get_loction_variable()  -- Gets __location variable from action class.
-    get_location()          -- returns current_location from character object.
-    get_map()               --
-    update_location()       -- Update characters current_location variable.
-
+inventory_generator()       - Yields character's inventory objects.
+update_inv_capacity()       - Calculates current inventory capacity from all items acquired.
+show_inventory()            - Prints out inventory items separated by category.
+add_inventory()             - Add item to inventory.
+remove_inventory()          - Removes item from inventory.
+craft_item()                - Craft game item.
 
 ===== map.py
-    add_played_action()     -- Adds played actions by user to a set().
-    get_loction_variable()  -- Gets __location variable from action class.
-    get_location()          -- returns current_location from character object.
-    get_map()               --
-    update_location()       -- Update characters current_location variable.
+add_played_action()         - Adds played actions by user to a set().
+get_loction_variable()      - Gets __location variable from action class.
+get_location()              - returns current_location from character object.
+update_location()           - Update characters current_location variable.
+
+========== Game Files
+Main game files, functions, items, skills, output functions, etc...
+
+===== art.py
+Game ASCII art.
+slime                       - Rimuru.
+great_sage                  - Great Sage.
+magic_sense                 - When acquired and use magic sense.
+cave_veldora                - Veldora introducing himself.
+village_chief               - Rigurd, goblin village chief
+rigur
+gobta
+ranga
 
 
-===== subordinates.py
-    subordinates_generator()-- Yields subordinates character object.
-    add_subordinate()       -- Add new subordinate.
+===== extra.py
+Extra functions that don't have a specific category.
+get_random()                - Used for probability.
+get_any()                   - If input matches anything in a list.
+on_off()                    - Returns on/off string based in passed in boolean.
+format_info()               - Formats info from variables for info_page for game objects.
+tbc()                       - Prints out To be continued.
 
+===== functions.py
+game_hud()                  - Shows current mimic, targeted and available actions.
+actions()                   - Takes care of user input and runs corresponding functions, and shows user HUDs.
+conditions)                 - Set and fetch game variables, variables that effect game mechanics, like if player played a path already, or killed someone, or did/didn't do something that you need to check later for other actions.
+last_use_skill()            - Check what was the last successfully used skill/item.
+mobs_add([])                - Adds new character object to current game level. Must pass in list.
+mob_status()                - Returns True if mob is in active_mobs list.
+mobs_cleared()              - Returns True if player cleared all mobs. Usually used for to let player continue on or not.
+mobs_reset()                - Reset active_mobs and targeted_mobs list.
+mob_obj()                   - Get object from active_mobs list.
+continue_to()               - Saves game and asks if user wants to continue to next section.
+clear_subs()                - Clear's action's __subs list.
 
-===== game_art.py
-    slime                   -- Rimuru.
-    great_sage              -- Great Sage.
-    magic_sense        -- When acquired and use magic sense.
-    cave_veldora            -- Veldora introducing himself.
-
-
-===== characters.py
-    Rimuru_Tempest:         -- Player character.
-        mimic_generator()   -- Yields character object acquired for mimicry.
-        mimic_object()      -- Returns mimic skill object from attributes dictionary.
-        show_mimics()       -- Show acquired mimics.
-        add_mimic()         -- Adds new character object to acquired_mimicries dictionary.
-        use_mimic()         -- Activate mimicry.
-        eat_target()        -- Predates inputted and focused targets. Either adds skill, item, or character.
-
-    Veldora_Tempest:
-    Eren_Grimwold:
-    Kaval:
-    Gido:
-
-    Tempest_Serpent:
-    Giant_Bat:
-    Evil_Centipede:
-    Black_Spider:
-    Direwolf:
-    Goblin:
-    Hobgoblin:
-
+game_restart()              - Restart game.
+game_exit()                 - Exit game.
+game_save()                 - Saves game state by pickling Rimuru_Tempest object (the player).
+game_load()                 - Load user save.
+game_over()                 - Player dies, invalidates save file before deleting it.
+set_hud()                   - Show available actions for player (not the hfunc ones).
+set_art()                   - Enable ASCII art, usually disable for less screen clutter. But they look cool!
+set_textcrawl               - Whether or not to have the textcrawl effect. A typewriter like effect where each letter is printed to screen one by one, this does not include game messages like stats, inv, acquired messages, crafting, etc.
+set_hints()                 - Show game hints.
+set_hardcore                - So far only disables action menu and so it can't be turned back on, disable hardcore to enable menu.
 
 ===== items.py
-Item:                       -- Item parent class.
-    name str                -- Item name.
-    status str              -- Item status, active, passive, etc.
-    item_type str           -- Item type: Items, Materials, Potions, or Misc.
-    damage_type str         -- Damage type for combat mechanics.
-    damage_level int        -- Damage level.
-    quantity 0              -- Total item amount have.
-    quantity_add 1          -- Amount to add at a time.
-    inv_capacity_add 0.1    -- Capacity % to add to total inventory capacity.
-    info_page str           -- Item info, includes: name, usage, and appearance.
-    description str         -- Description of item.
-    usage str               -- Item usages.
-    appearance str          -- Item appearance.
-    recipe {}               -- Recipe to craft item {'item_name', quantity}'.
-    ingredient_for []       -- Part of other item'ss crafting recipe.
-    use_requirements {}     -- Prerequisites to use item {'skill/item', quantity}.
-    object_type str    -- Game object type, 'item'.
-    initialized False       -- If object is initialized.
+name str                    - Item name.
+status str                  - Item status, active, passive, etc.
+item_type str               - Item type: Items, Materials, Potions, or Misc.
+damage_type str             - Damage type for combat mechanics.
+damage_level int            - Damage level.
+quantity 0                  - Total item amount have.
+quantity_add 1              - Amount to add at a time.
+inv_capacity_add 0.1        - Capacity % to add to total inventory capacity.
+info_page str               - Item info, includes: name, usage, and appearance.
+description str             - Description of item.
+usage str                   - Item usages.
+appearance str              - Item appearance.
+recipe {}                   - Recipe to craft item {'item_name', quantity}'.
+ingredient_for []           - Part of other item'ss crafting recipe.
+use_requirements {}         - Prerequisites to use item {'skill/item', quantity}.
+object_type str             - Game object type, 'item'.
+initialized False           - If object is initialized.
 
-    get_description()       -- Get's item description.
-    show_acquired_msg()     -- Prints out item acquired message.
-    update_info()           -- Update item info page.
+get_description()           - Gets item description.
+show_acquired_msg()         - Prints out item acquired message.
+update_info()               - Update item info page.
 
-:Items:
-    Water:
-    Hipokte_Grass:
-    Magic_ore:
-    Magic_Sword:
+Water:
+Hipokte_Grass:
+Magic_ore:
+Magic_Sword:
 
+===== output.py
+Anything related to printing and outputting.
+update_rimuru_object()      - Need to update local rimuru object for this file.
+parse_name()                - Allows use of custom names player set in story. Replaces $CANON_NAME$ with custom name that player set. e.g. $Gobta$
+sprint()                    - Delays text, for easier reading if player chooses. Using sys.stdout.write() and sys.stdout.flush().
+siprint()                   - Indents printout using sprint(). Used for player thoughts, Great Sage or other game messages.
+iprint()                    - Indented printout with no textcrawl even if enabled.
+gprint()                    - Game event messages, also used for in-game event logging.
+dost()                      - Loading dot animation.
+idots()                     - Loading dot animation with indentation.
+print_header()              - Print out header for game menus. e.g. ---------- Inventory ----------
+show_version()              - Show game version.
+show_sysargs()              - Show help page for runtime argument options.
+show_art()                  - Pass in string that matches variable name in game_art.py file, replace _ with spaces when passing in name. E.g. show_art('great sage'). Doesn't work with variables within classes.
+show_history()              - Show last x lines from storyline.
+show_start_banner()         - Shows game's start banner.
+show_settings()             - Shows game setting commands and current states.
+show_help()                 - Shows help page.
+show_rank_chart()           - Show in-universe ranking and levels.
 
 ===== skills.py
 Skill:
-    name str                -- Skill name.
-    type str                -- Skill type, e.g. Activatable Skill, Passive, etc.
-    skill_level str         -- Skill level like: Common Skill, Extra Skill, etc
-    damage_level 1          -- Skill damage level.
-    damage_type str         -- Skill damage types.
-    info_page str           -- Information page for skill.
-    description str         -- Skill description.
-    evolution str           -- Evolution line.
-    abilities str           -- Skill abilities description.
-    acquired_msg str        -- Acquired message.
-    status False            -- Skill active status, active, passive, etc.
-    use_requirements {}     -- Prerequisites to use Skill, items, other skills, etc.
-    quantity int            -- Variable for check_acquired function.
-    predate_copy True       -- Able to copy with predator skill.
-    sub_skills {}           -- Sub skills.
-    object_type        -- Game object type, 'attribute'.
-    initialized False       -- If object has been initialized.
+    name str            - Skill name.
+    type str            - Skill type, e.g. Activatable Skill, Passive, etc.
+    skill_level str     - Skill level like: Common Skill, Extra Skill, etc
+    damage_level 1      - Skill damage level.
+    damage_type str     - Skill damage types.
+    info_page str       - Information page for skill.
+    description str     - Skill description.
+    evolution str       - Evolution line.
+    abilities str       - Skill abilities description.
+    acquired_msg str    - Acquired message.
+    status False        - Skill active status, active, passive, etc.
+    use_requirements {} - Prerequisites to use Skill, items, other skills, etc.
+    quantity int        - Variable for check_acquired function.
+    predate_copy True   - Able to copy with predator skill.
+    sub_skills {}       - Sub skills.
+    object_type         - Game object type, 'attribute'.
+    initialized False   - If object has been initialized.
 
-    __str__()               -- Returns lowercase name variable.
-    use()            -- Use skill, also checks if meets prerequisites.
-    activate_skill()        -- Update skill status variable, by default to 'Active'.
-    deactivate_skill()      -- Resets skill status variable.
-    update_info()           -- Update skill info page.
-    show_acquired_msg()     -- Shows skill acquired message to '' (empty string).
+    __str__()           - Returns lowercase name variable.
+    use()               - Use skill, also checks if meets prerequisites.
+    activate_skill()    - Update skill status variable, by default to 'Active'.
+    deactivate_skill()  - Resets skill status variable.
+    update_info()       - Update skill info page.
+    show_acquired_msg() - Shows skill acquired message to '' (empty string).
 
 Manas:
 Ultimate:
@@ -321,37 +284,68 @@ Extra:
 Common:
 Intrinsic:
 Resistance:
-    resist_types []         -- Resistance types. E.g. Pain, Melee
+    resist_types []         - Resistance types. E.g. Pain, Melee
+Ciel:
+Raphael:
+Mimicry:
+Predator:
+Great_Sage:
+Sage:
+Magic_Perception:
+Water_Manipulation:
+Vampirism:
+Absorb_Dissolve:
+Self_Regeneration:
+Sticky_Thread:
+Steel_Thread:
+Sense_Heat_Source:
+Hydraulic_Propulsion:
+Water_Blade:
+Water_Bullet:
+Poisonous_Breath:
+Paralyzing_Breath:
+Ultrasound_Waves:
+Resist_Pain:
+Resist_Melee:
+Resist_Electricity:
+Resist_Temperature:
+Resist_Poison:
 
-:Skills:
-    Ciel:
 
-    Raphael:
+===== subordinates.py
+subordinates_generator()    - Yields subordinates character object.
+add_subordinate()           - Add new subordinate.
 
-    Mimicry:
-    Predator:
-    Great_Sage:
+===== characters.py
+Rimuru_Tempest:             - Player character.
+    mimic_generator()       - Yields character object acquired for mimicry.
+    mimic_object()          - Returns mimic skill object from attributes dictionary.
+    show_mimics()           - Show acquired mimics.
+    add_mimic()             - Adds new character object to acquired_mimicries dictionary.
+    use_mimic()             - Activate mimicry.
+    eat_target()            - Predates inputted and focused targets. Either adds skill, item, or character.
 
-    Sage:
-    Magic_Perception:
-    Water_Manipulation:
-    Vampirism:
+Veldora_Tempest:
+Eren_Grimwold:
+Kaval:
+Gido:
+Tempest_Serpent:
+Giant_Bat:
+Evil_Centipede:
+Black_Spider:
+Direwolf:
+Goblin:
+Hobgoblin:
 
-    Absorb_Dissolve:
-    Self_Regeneration:
-    Sticky_Thread:
-    Steel_Thread:
-    Sense_Heat_Source:
 
-    Hydraulic_Propulsion:
-    Water_Blade:
-    Water_Bullet:
-    Poisonous_Breath:
-    Paralyzing_Breath:
-    Ultrasound_Waves:
 
-    Resist_Pain:
-    Resist_Melee:
-    Resist_Electricity:
-    Resist_Temperature:
-    Resist_Poison:
+========== Game Objects
+Game objects like skills, characters, items, etc...
+
+===== character.py
+__str__()                   - Returns lowercase of name variable.
+set_start_state()           - Adds starting attributes to character
+get_object()                - Returns game corresponding game object, usually used for when inputting with string.
+check_acquired()            - Check if passed in list or string for _check_acquired.
+_check_acquired()           - Checks if character has object (attribute/item).
+set_status()                - Update status variable.

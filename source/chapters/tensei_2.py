@@ -1,7 +1,7 @@
 import game_files.functions as game
 import game_files.extra as extra
 from game_files.output import gprint, sprint, siprint, idots, dots, show_art
-from game_maps.locations import subs
+from locations.locations import subs
 
 
 def ch2_goblin_encounter(rimuru):
@@ -471,9 +471,9 @@ def ch2_goblin_encounter(rimuru):
                 def __init__(self):
                     sprint("\n.....")
 
-            class hfunc_the_trial:
-                def __init__(self):
-                    sprint('')
+        class hfunc_jail_break:
+            def __init__(self):
+                siprint("Lets break out of here!")
 
             game.actions(self)
 
