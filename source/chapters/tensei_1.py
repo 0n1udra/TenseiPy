@@ -5,7 +5,7 @@ from game_files.output import gprint, sprint, siprint, idots, dots, show_art
 # Import the next chapter to continue to.
 from chapters.tensei_2 import ch2_dwargon
 from game_maps.locations import cave_actions, subs
-from game_files.characters import Veldora_Tempest
+from game_objects.characters import Veldora_Tempest
 
 def ch1_cave(rimuru):
     # Manga Ch.1

@@ -112,6 +112,37 @@ def ch2_dwargon(rimuru):
             sprint("\nYou guys sit tight while we wait to decide what to do with---.")
             sprint("\nCAPTAIN COME QUICK! There was a beast in the Mines! It was delt with, however.")
             sprint("We need to get all the healing potions to help the injured.")
+
+            class _make_potions:
+                def __init__(self):
+                    if rimuru.check_acquired('full potion', 50):
+                        sprint("\nHey, you said you need healing potions?")
+                        sprint("\nShut it, this is important!")
+                        sprint("\nCalm down, I want to help. Here's a barrel of healing potions for ya.")
+                        sprint("\nHmmmm... How can we trust someone behind bars...")
+                        sprint("\nIt sounds like you don't have much of a choice, that is if you want to help your friends...")
+                        sprint("\nFine. Stay here!")
+                        rimuru.remove_inventory('full potion', 50)
+                        game.conditions('helped dwarves', True)
+                        dots(10)
+                        sprint("We're back, and your potions was somethin else!")
+                        sprint("Some of my friends wanted to come by and say thanks to their savior.")
+                        sprint("\nYEAH! If it wasn't for your medicine I would definitely be dead by now!")
+                        sprint("\nThank you! It was even able to regrow my entire arm!")
+                        sprint("\nMmmmmmmhmmmmmmmm")
+                        sprint("\nThanks again slime, my friends and I are indebted to you, if there's anything you need, let me know!")
+                        sprint("Also, we got some good news for you! You guys are free to go.")
+                    else:
+                        siprint("I should make sure I give them enough to help everyone, who knows how many were injured.")
+
+            class _do_nothing:
+                def __init__(self):
+                    sprint("\n.....")
+
+        class hfunc_jail_break:
+            def __init__(self):
+                siprint("Lets break out of here!")
+
             game.actions(self)
 
         class _make_potions:

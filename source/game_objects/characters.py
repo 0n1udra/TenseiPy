@@ -1,4 +1,4 @@
-from game_objects.character import Character
+from base_objects.character import Character
 from game_files.output import gprint, print_header
 
 # ========== Characters

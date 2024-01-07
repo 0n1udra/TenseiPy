@@ -1,6 +1,6 @@
 from game_files.output import gprint, print_header
 
-class Attributes:
+class Attribute:
     def attributes_generator(self, printout_mode=False):
         """
         Yields all the character's attributes (skills/resistances).

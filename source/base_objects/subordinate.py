@@ -1,6 +1,6 @@
 from game_files.output import gprint, print_header
 
-class Subordinates:
+class Subordinate:
     def subordinates_generator(self, output_mode=False):
         """
         Yields the subordinates under specified character.
