@@ -167,7 +167,7 @@ class Inventory:
             try:
                 craft_amount = int(input("Craft > "))
             except ValueError:
-                gprint("< Error: need integer input >")
+                gprint("< Error: Need integer input >")
                 return False
 
         # Let's player enter 0 to cancel.

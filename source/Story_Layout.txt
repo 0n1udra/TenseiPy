@@ -96,14 +96,14 @@ _at_cave_exit
     _leave_cave(cave_actions)
         :Clear All:
         _go_to_veldora ?> friend_veldora / veldora_encounter - Go back to veldora if you haven't acquired him already.
-        _leave > continue_to(ch2_goblin_encounter) Leave cave.
+        _leave > continue_to(ch2_dwargon) Leave cave.
 
 
-ch2_goblin_encounter - Meet goblins, and go to there village to assit them.
+ch2_dwargon - Meet goblins, and go to there village to assit them.
 :Location: Near the Sealed Cave
 :Clear All:
 :Mob Add: 10x goblin
-goblin_encounter - Meet the goblins.
+ch2_dwargon - Meet the goblins.
     _talk_to_goblins
         _be_friendly
         _subjugate_goblins

@@ -117,7 +117,7 @@ def format_info(name, var):
     If an object's variable is empty or has not been set, corresponding field will be hidden in info_page.
 
     Args:
-        name str: Name of field to show. Ex. 'Name:', 'Description:'.
+        name str: Name of field to show. E.g. 'Name:', 'Description:'.
         var var: Variable data to show.
 
     Returns:
